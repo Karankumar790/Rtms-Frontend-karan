@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../Stylesheet/Footer.css'
+// import '../../Stylesheet/Footer.css'
 import { Box, Grid, Typography } from '@mui/material'
 
 function Footer() {
