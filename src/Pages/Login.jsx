@@ -19,7 +19,7 @@ function Login() {
 
             <Header/>
             <div className="login-form " >
-                <div className="form">
+                {/* <div className="form">
                     <form className="form-content" action="/submit" method="POST">
                         <h1 className="form-title">Welcome</h1>
                         <h4 className="form-subtitle">Real-Time Well Monitoring System</h4>
@@ -31,7 +31,7 @@ function Login() {
                             </div>
                             <div className="form-div-input">
                                 <label for="form-input" className="form-label"></label>
-                                {/* <input type="text" className="form-input"> */}
+                                
                                 <input type="text" placeholder='Username' className='form-input' />
                             </div>
                         </div>/
@@ -43,19 +43,17 @@ function Login() {
                             </div>
                             <div className="form-div-input">
                                 <label for="form-input" className="form-label"></label>
-                                {/* <input type="password" className="form-input"> */}
+                               
                                 <input type="password" placeholder='Password' className='form-input' />
                             </div>
                         </div>
                         <a href="/forget" className="form-forgot">Forgot Password?</a>
-                        {/* <input type="submit" className="form-button" value="Login"> */}
                         <input type="submit" className='form-button' value='Login' />
                         <div className="form-dont"><h4>Don't have an account?</h4></div>
-                        {/* <a href="/Signup" className="signup">Sign Up</a> */}
                         <Link to="/Signup" className='signup'>Sign Up</Link>
 
                     </form>
-                </div>
+                </div> */}
                 <Footer  />
             </div>
         </>

@@ -6,7 +6,7 @@ import {BrowserRouter, Routes, Route, useRoutes} from 'react-router-dom'
 // import Login from './components/Login/Login.jsx';
 // import Signup from './components/Signup/Signup.jsx';
 
-// import Login from './Pages/Login/Login';
+
 // import Signup from './Pages/Signup/Signup';
 
 import { lazy } from 'react';
@@ -18,7 +18,9 @@ const Login=lazy(()=>import('./Pages/Login.jsx'))
 
 function App() {
   const route=useRoutes([
-    {path:'/',element:<Login/>}
+    {path:'/',element:<Login/>},
+    {path:'/Signup',element:<Signup/>}
+
   ])
 
   return (

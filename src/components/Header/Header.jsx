@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../Stylesheet/Header.css'
-import logo from '../../assets/logo.svg'
-import mqqt from '../../assets/MQTT1.png'
+import logo from '../../../public/assets/logo.svg'
+import MQTT1 from '../../../public/assets/MQTT1.png'
 
 function Header() {
   return (
@@ -14,7 +14,7 @@ function Header() {
             <h2>Real Time Well Monitoring System</h2>
         </div>
         <div class="icon">
-            <a href="#"><img src={mqqt} alt="" /></a>
+            <a href="#"><img src={MQTT1} alt="" /></a>
             <a href="#">Technical Support</a>
             
             {/* <!-- <a href="#" id="sup"><img src="/asset/mqtt5.png" alt="mqtt" ></a> -->
