@@ -1,61 +1,38 @@
+import { Button, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import Footer from '../components/Footer/Footer'
 import '../Stylesheet/Login.css'
 
-// import Signup from '../Signup/Signup'
-// import './Login.css'
-import { Link } from "react-router-dom";
-// import Footer from '../Footer/Footer';
-// import Styles from './login.module.css'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import HttpsIcon from '@mui/icons-material/Https';
-import { FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
 function Login() {
     return (
-
         <>
-
-            <Header/>
-            <div className="login-form " >
-                {/* <div className="form">
-                    <form className="form-content" action="/submit" method="POST">
-                        <h1 className="form-title">Welcome</h1>
-                        <h4 className="form-subtitle">Real-Time Well Monitoring System</h4>
-                        <div className="form-div form-div-one">
-                            <div className="form-icon">
-                                <i className='bx bx-user-circle'>
-                                    <AccountCircleIcon />
-                                </i>
-                            </div>
-                            <div className="form-div-input">
-                                <label for="form-input" className="form-label"></label>
-                                
-                                <input type="text" placeholder='Username' className='form-input' />
-                            </div>
-                        </div>/
-                        <div className="form-div form-div-second" style={{marginTop:"-35px"}}>
-                            <div className="form-icon">
-                                <i className='bx bx-lock'>
-                                    <HttpsIcon />
-                                </i>
-                            </div>
-                            <div className="form-div-input">
-                                <label for="form-input" className="form-label"></label>
-                               
-                                <input type="password" placeholder='Password' className='form-input' />
-                            </div>
-                        </div>
-                        <a href="/forget" className="form-forgot">Forgot Password?</a>
-                        <input type="submit" className='form-button' value='Login' />
-                        <div className="form-dont"><h4>Don't have an account?</h4></div>
-                        <Link to="/Signup" className='signup'>Sign Up</Link>
-
+        <Grid className='login-form'>
+            <Grid item mt={40} lg={12} md={12} sm={12}>
+                <Grid>
+                    <Grid m='30px'>
+                        <Typography variant='h2'>
+                            Welcome
+                        </Typography>
+                        <Typography variant='h5' color='#800000'>
+                            Real Time Well Monitoring System
+                        </Typography>
+                    </Grid>
+                    <form >
+                        <Grid lg={4} md={4} width='30vw' m='30px' style={{ display: 'flex', flexDirection: 'column' }}>
+                            <TextField variant='standard' size='small' label="E-mail" />
+                            <TextField variant='standard' size='small' label="Password" />
+                        </Grid>
+                        <Grid lg={4} md={4} >
+                            <Typography variant='contained' color='primary' sx={{ margin: '480px' }}>Forget Password</Typography>
+                        </Grid>
+                        <Grid lg={4} md={4} width='30vw' m='30px'>
+                            <Button variant='contained' color='primary' fullWidth type='submit'>Login</Button>
+                        </Grid>
                     </form>
-                </div> */}
-                <Footer  />
-            </div>
+                </Grid>
+            </Grid>
+            <Footer/>
+        </Grid>
         </>
     )
 }
