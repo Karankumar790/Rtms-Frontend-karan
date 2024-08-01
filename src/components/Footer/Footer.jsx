@@ -1,13 +1,17 @@
 import React from 'react'
 import '../../Stylesheet/Footer.css'
+import { Box, Grid, Typography } from '@mui/material'
 
 function Footer() {
   return (
     <>
-        <footer className="footer">
-        <h4>Foxboro Instrument Company: All Right Reserved</h4>&nbsp; &nbsp;
-        <h4>[Best Display Resolution: 1920*1080]</h4>
-        </footer>
+         <Grid container lg={12} md={12} sm={12} xs={12} mt={98.6} height={42} fontWeight={30} sx={{ display:"flex ", justifyContent:"center", background:"black"} } >
+         <Box >
+          <Typography variant='h6' color={'white'}  >
+            Foxboro Instrument company: All Right Reserved Best display resolution
+          </Typography>
+         </Box>
+        </Grid>
     </>
   )
 }
