@@ -1,6 +1,6 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
-import Footer from '../components/Footer/Footer'
+import Footer from '../../components/Footer/Footer'
 import '../Stylesheet/Login.css'
 
 function Login() {
