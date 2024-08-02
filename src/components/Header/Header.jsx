@@ -22,13 +22,14 @@ function Header() {
 
             <img src={logo} style={{objectFit:'cover', width:'76px', height:"70px"}}/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} fontSize={"x-large"}>
           OIL AND NATURAL GAS CORPORATION
-          <Typography>Real Time Well Monitoring System</Typography>
+          <Typography >Real Time Well Monitoring System</Typography>
           </Typography>
             <Hidden smDown>
-           <a href='' alt='contain'><Typography>Technical Support</Typography></a>
-          <a href=''><img src={MQTT1} style={{objectFit:'cover', width:'76px', height:"70px"}}/></a>
+           {/* <a href='' alt='contain' ><Typography style={{textDecoration:'none'}}>Technical Support</Typography></a> */}
+           <Typography variant='h5' m={'5px'}>Technical Support</Typography>
+          <a href=''><img src={MQTT1} style={{objectFit:'cover', width:'151px', height:"90px"}}/></a>
           </Hidden>
         </Toolbar>
       </AppBar>

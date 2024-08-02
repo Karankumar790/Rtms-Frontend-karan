@@ -1,17 +1,17 @@
 import React from 'react'
+// import { Grid, Typography } from '@mui/material'
 // import '../../Stylesheet/Footer.css'
 import { Box, Grid, Typography } from '@mui/material'
-
+// import  from '@mui/material/Box';
 function Footer() {
   return (
     <>
-         <Grid container lg={12} md={12} sm={12} xs={12} mt={98.6} height={42} fontWeight={30} sx={{ display:"flex ", justifyContent:"center", background:"black"} } >
-         <Box >
-          <Typography variant='h6' color={'white'}  >
-            Foxboro Instrument company: All Right Reserved Best display resolution
-          </Typography>
-         </Box>
-        </Grid>
+    <Grid container>
+      <Grid component="div" varient="h6" sx={{ p: 2, border: '1px dashed grey' }}>
+        <Typography>karan</Typography>
+      </Grid>
+      </Grid>
+
     </>
   )
 }
