@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 
 function Login() {
     return (
-        <>
-            <Grid className='login-form'>
-                <Grid item mt={30} lg={12} md={12} sm={12}>
-                    <Grid>
-                        <Grid m='30px'>
+        <div>
+            <Grid container className='login-form'>
+                <Grid container md={5} mt={5} mb={5} p={4} >
+                    <Grid item m={2} >
+                        <Grid item mt={1.5}>
                             <Typography variant='h2'>
                                 Welcome
                             </Typography>
@@ -20,47 +20,50 @@ function Login() {
                                 Real Time Well Monitoring System
                             </Typography>
                         </Grid>
-                        <form >
-                            <Grid lg={4} md={4} width='30vw' m='30px' gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
-                                <Grid >
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                                        <TextField id="input-with-sx" label="Username" variant="standard" />
-                                    </Box>
-                                </Grid>
-                                <Grid>
+                        <Grid item mt={5}>
+                            <form >
+                                <Grid item mt={5} gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <Grid >
+                                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+                                            <TextField id="input-with-sx" label="Username" variant="standard" />
+                                        </Box>
+                                    </Grid>
+                                    <Grid>
 
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                        {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
+                                        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
 
-                                        
-                                            <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }}/>
-                                        
-                                        <TextField id="input-with-sx" label="Password" variant="standard"  />
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                            <Grid item lg={4} md={4} >
 
-                                {/* <Typography variant='contained' color='primary' fullWidth sx={{ placeItems: 'end' }}>Forget Password
+                                            <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
 
-                                </Typography> */}
-                                <Grid item textAlign={'end'} width='19vw' mt={2} xs={2} sm={4}>
-                                    <Link to="" style={{ textDecoration: "none" }}>
-                                        Forgot Password
-                                    </Link>
+                                            <TextField id="input-with-sx" label="Password" variant="standard" />
+                                        </Box>
+                                    </Grid>
                                 </Grid>
-                                <Grid item lg={4} md={4} width='18vw' m='30px'>
-                                    <Button variant='contained' color='primary' fullWidth type='submit'>Login</Button>
+                                <Grid item mt={5} >
+
+                            
+                                    <Grid item textAlign={'end'} >
+                                        <Link to="" style={{ textDecoration: "none" }}>
+                                            Forgot Password
+                                        </Link>
+                                    </Grid>
+                                    <Grid item mt={3}>
+                                        <Button variant='contained' color='primary' fullWidth type='submit'>Login</Button>
+                                    </Grid>
+                                    <Grid item textAlign="center" mt={1.5}>
+                                        <Typography variant='h6'>Don't have an account? <Link to='/Signup' style={{ textDecoration: "none" }}>Sign Up</Link></Typography>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </form>
+                            </form>
+                        </Grid>
                     </Grid>
                 </Grid>
 
             </Grid>
             {/* <Footer/> */}
-        </>
+        </div>
     )
 }
 

@@ -1,128 +1,120 @@
+import { Grid, Typography, TextField, Box } from '@mui/material'
 import React from 'react'
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import HttpsIcon from '@mui/icons-material/Https';
 // import Header from '../components/Header/Header';
 // import Footer from '../components/Footer/Footer';
+import wifi from '../../../public/assets/wifi.png'
+import './Signup.css'
 
 
 function Signup() {
-  return (
-    <>
-       <div className="l-form" >
-       <Header/>
-        <div className="form">
-            <form action="/Next" method="POST" className="form-content">
-                <h1 className="form-title">Registration</h1>
-                <h4 className="form-subtitle">Create New RTMS Account</h4>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className='bx bx-user-circle'></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">Name</label>
-                        {/* <input type="text" className="form-input"> */}
-                        <input type="text" className='form-input'/>
-                    </div>
-                </div>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fa-solid fa-envelope"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">Email</label>
-                        {/* <input type="email" className="form-input"> */}
-                        <input type="email" className='form-input'/>
-                    </div>
-                </div>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fa-solid fa-phone"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">Mobile</label>
-                        {/* <input type="tel" className="form-input"> */}
-                        <input type="tel" className='form-input'/>
-                    </div>
-                </div>
+    return (
+        <div>
 
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fa-solid fa-user"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">ONGC Employee ID</label>
-                        {/* <input type="number" className="form-input"> */}
-                        <input type="number" className="form-input"></input>
-                    </div>
-                </div>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fa-solid fa-user"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">Asset Name</label>
-                        <select className="form-input">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fa-solid fa-user"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">Department</label>
-                        <select className="form-input">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fa-solid fa-user"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="form-input" className="form-label">Role in RTMS</label>
-                        <select className="form-input">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <div className="form-div form-div-one">
-                    <div className="form-icon">
-                        <i className="fas fa-camera"></i>
-                    </div>
-                    <div className="form-div-input">
-                        <label for="profile-pic"  className="form-label">upload</label>
-                        {/* <input type="file" id="profile-pic" className="form-input" name="profile-pic" accept="image/*"> */}
-                        <input type="file" id="profile-pic" className="form-input" name="profile-pic" accept="image/*"></input>
-                        {/* <!-- <input type="submit" value="Upload"> --> */}
-                    </div>
-                </div>
-                
-                {/* <input type="submit" className="form-button" value="Next"> */}
-                <input type="submit" className="form-button" value="Next"></input>
-                  <div className="form-dont"><h4>Already Have Account?</h4></div>
-                  <a href="/" className="signup">Login</a>
-                  <div className="form-dont"><h4>Already Have Registration?</h4></div>
-                  <a href="#" className="signup">Check Status</a>
-            </form>
+            <Grid container  >
+                <Grid item  xs={12} sm={12} md={12} lg={12} sx={{ display: "flex", flexDirection: "column" }}>
+
+                    <Grid item  xs={6} sm={6} md={6} lg={6}  sx={{ border: "2px solid black" , backgroundColor:"pink"}}>
+
+                        <Grid item  >
+                            <Grid item xs={10} sm={10} md={10} lg={10} spacing={2} sx={{ backgroundColor: "red" }} >
+                                <Grid item  >
+                                    <Typography variant='h2'>Registration</Typography>
+                                    <Typography variant='h5'>Create New RTMS Account</Typography>
+                                </Grid>
+                                <Grid>
+                                    <form>
+                                        <Grid item   >
+                                            <Grid item ml={5}>
+                                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                    <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+                                                    <TextField id="input-with-sx" label="Username" variant="standard" />
+                                                </Box>
+                                            </Grid>
+                                            <Grid>
+
+                                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                    {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
+
+
+                                                    <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+
+                                                    <TextField id="input-with-sx" label="Password" variant="standard" />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </form>
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+
+
+                        <Grid item sx={{ backgroundColor: "pink" }}  >
+                            <Grid item sx={{ backgroundColor: "red" }} >
+                                <Grid item  >
+                                    <Typography variant='h2'>Registration</Typography>
+                                    <Typography variant='h5'>Create New RTMS Account</Typography>
+                                </Grid>
+                                <Grid>
+                                    <form>
+                                        <Grid item mt={5} gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <Grid >
+                                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                    <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+                                                    <TextField id="input-with-sx" label="Username" variant="standard" />
+                                                </Box>
+                                            </Grid>
+                                            <Grid>
+
+                                                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                    {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
+
+
+                                                    <HttpsIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+
+                                                    <TextField id="input-with-sx" label="Password" variant="standard" />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </form>
+                                </Grid>
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} sx={{ border: "2px solid black", backgroundColor: "yellow" }} >
+                        <Grid className='.l-form'></Grid>
+                    </Grid>
+                    {/* <Grid item xs={4} sm={4} md={4} lg={4} className='.l-form' sx={{border:"2px solid black"}} >
+                        <Grid className='.l-form'></Grid>
+                    </Grid> */}
+
+                </Grid>
+
+                <Grid container spacing={2}>
+
+                    <Grid container mt={'85px'}>
+                        <Grid item lg={12} md={12} sm={12} xs={12} sx={{ justifyContent: 'center', pl: '200px' }} >
+                            <img src={wifi} alt="" height={'100px'} />
+                        </Grid>
+                        <Grid item lg={12} md={12} sm={12} xs={12} sx={{ pl: '102px' }}>
+
+                            <img src={wifi} alt="" height={'100px'} />
+                            <img src={wifi} alt="" height={'100px'} />
+                            <img src={wifi} alt="" height={'100px'} />
+                        </Grid>
+                        <Grid item lg={12} md={12} sm={12} xs={12} sx={{ pl: '200px' }}>
+                            <img src={wifi} alt="" height={'100px'} />
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
         </div>
-        <Footer  />
-    </div>
-
-    </>
-  )
+    )
 }
 
 export default Signup

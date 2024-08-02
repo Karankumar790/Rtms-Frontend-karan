@@ -5,13 +5,13 @@ import { Box, Grid, Typography } from '@mui/material'
 function Footer() {
   return (
     <>
-         <Grid container   fontWeight={30} sx={{ display:"flex ", justifyContent:"center", background:"#000"} } >
-         <Grid item md={12} sm={12} xs={12}  >
+      <Grid container style={{ display: "grid", placeContent: "center", background: "#000"  }} >
+        <Grid item  >
           <Typography variant='h6' color={'white'}  >
             Foxboro Instrument company: All Right Reserved Best display resolution
           </Typography>
-         </Grid>
         </Grid>
+      </Grid>
     </>
   )
 }
