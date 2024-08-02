@@ -1,12 +1,7 @@
 import React from 'react'
-// import Signupp from './Signupp.module.css'
-// import '../Login/Login.css'
+// import Header from '../components/Header/Header';
+// import Footer from '../components/Footer/Footer';
 
-
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-
-// import '../Stylesheet/Signup.css'
 
 function Signup() {
   return (
