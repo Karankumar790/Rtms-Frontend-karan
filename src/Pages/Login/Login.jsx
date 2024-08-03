@@ -45,7 +45,7 @@ function Login() {
 
                             
                                     <Grid item textAlign={'end'} >
-                                        <Link to="" style={{ textDecoration: "none" }}>
+                                        <Link to="/Forgot" style={{ textDecoration: "none" }}>
                                             Forgot Password
                                         </Link>
                                     </Grid>
