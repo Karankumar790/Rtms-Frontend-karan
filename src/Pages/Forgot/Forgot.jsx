@@ -1,12 +1,12 @@
-import { Grid, Paper, Typography, TextField, Button } from '@mui/material'
+import { Grid, Paper, Typography, TextField, Button, Box } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Forgot() {
     return (
         <>
-            <Grid container sx={{ backgroundColor: '#8590AD', height: '86.68vh' }}>
-                <Grid container sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }} >
+            <Box  bgcolor="#8590AD" display="flex" justifyContent= 'center' alignItems='center' 
+                  height={window?.innerHeight - 128 + 'px'}>
                     <Paper sx={{borderRadius:'20px'}}>
                         <Grid item p={3} >
                             <form>
@@ -29,10 +29,7 @@ export default function Forgot() {
                             </form>
                         </Grid>
                     </Paper>
-                </Grid>
-
-            </Grid>
-
+            </Box>
         </>
     )
 }

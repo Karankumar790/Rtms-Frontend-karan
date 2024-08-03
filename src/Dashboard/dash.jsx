@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Typography,Grid } from '@mui/material'
 import React from 'react'
 
 function Dash() {
@@ -10,17 +10,19 @@ function Dash() {
     {name:"Complaint History",path:"/History"},
     {name:"Notification History",path:"/Notification"},
     {name:"Edit Profile",path:"/Profile"},
-    {name:"Log Out",path:"/Logout"},
+    {name:"Log Out",path:"/Logout"}
   ]
   return (
     <>
             <Grid container sx={{ backgroundColor: '#8590AD', height: '86.68vh' }}>
+              <Typography>hello</Typography>
               <Grid item lg={3} md={3} sm={3} xs={3}>
-                <Grid>
+                <Grid item>
                   {
                    mainuItems.map((v,i)=>(
+
                     <Grid key={i}>
-                      <Typography>{v.name}</Typography>
+                      <Typography>{v?.name}</Typography>
                     </Grid>
                    )) 
                   }
