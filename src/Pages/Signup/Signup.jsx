@@ -4,6 +4,7 @@ import React from 'react'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import HttpsIcon from '@mui/icons-material/Https';
 import EmailIcon from '@mui/icons-material/Email';
+import Layout from '../../components/HOC/Layout';
 
 import CallIcon from '@mui/icons-material/Call';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
@@ -16,9 +17,9 @@ import { Link } from 'react-router-dom';
 
 function Signup() {
     return (
-        <div>
+        <Layout className='bgImg'>
 
-            <Grid container className='s-form'  >
+            <Grid container >
                 <Grid item ml={3} mt={5} >
                     <Grid item>
                         <Typography variant='h2'>Registration</Typography>
@@ -215,7 +216,7 @@ function Signup() {
 
             </Grid>
 
-        </div>
+        </Layout>
     )
 }
 
