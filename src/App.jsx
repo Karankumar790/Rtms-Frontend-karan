@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useRoutes } from 'react-router-dom'
 import { lazy } from 'react';
+// import Signup from './Pages/Signup/Signup.jsx';
 const Login = lazy(() => import('./Pages/Login/Login.jsx'))
 const Signup = lazy(() => import('./Pages/Signup/Signup.jsx'))
 const Dashboard = lazy(() => import('./Pages/Dashboard/dash.jsx'))
