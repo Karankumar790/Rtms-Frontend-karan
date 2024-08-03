@@ -1,7 +1,8 @@
 import React from 'react'
+// import { Grid, Typography } from '@mui/material'
 // import '../../Stylesheet/Footer.css'
 import { Box, Grid, Typography } from '@mui/material'
-
+// import  from '@mui/material/Box';
 function Footer() {
   return (
     <div style={{position: 'absolute', bottom: 0, width: '100%'}}>

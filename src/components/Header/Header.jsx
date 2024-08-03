@@ -9,32 +9,39 @@ import { Height } from '@mui/icons-material';
 
 function Header() {
   return (
-   <>
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar style={{backgroundColor:"#000"}}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}>
-
-            <img src={logo} style={{objectFit:'cover', width:'76px', height:"70px"}}/>
-          </IconButton>
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} fontSize={"x-large"}>
-          OIL AND NATURAL GAS CORPORATION
-          <Typography >Real Time Well Monitoring System</Typography>
-          </Typography>
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar style={{ backgroundColor: "#000" }}>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}>
+              <img src={logo} style={{ objectFit: 'cover', width: '90px', height: "90px" }} />
+            </IconButton>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} fontSize={"x-large"}>
+              OIL AND NATURAL GAS CORPORATION
+              <Typography >Real Time Well Monitoring System</Typography>
+            </Typography>
             <Hidden smDown>
-           {/* <a href='' alt='contain' ><Typography style={{textDecoration:'none'}}>Technical Support</Typography></a> */}
-           <Typography variant='h5' m={'5px'}>Technical Support</Typography>
-          <a href=''><img src={MQTT1} style={{objectFit:'cover', width:'151px', height:"90px"}}/></a>
-          </Hidden>
-        </Toolbar>
-      </AppBar>
-    </Box>
-   </> 
+              <Grid display={'flex'} gap={1}>
+                <Grid mt={2.5}>
+                  <Typography variant='h5'>Technical Support</Typography>
+                </Grid>
+                <Grid>
+                  <img src={MQTT1} style={{ objectFit: 'cover', width: '151px', height: "90px" }} />
+
+                </Grid>
+              </Grid>
+              {/* <a href='' alt='contain' ><Typography style={{textDecoration:'none'}}>Technical Support</Typography></a> */}
+
+            </Hidden>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </>
   )
 }
 
