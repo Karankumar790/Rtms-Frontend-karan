@@ -18,7 +18,7 @@ export default function Forgot() {
                                     <Typography >Please enter the email address you`d like your password reset information sent to</Typography>
                                 </Grid>
                                 <Grid item mt={3}>
-                                    <TextField label="Enter Email Address" variant="outlined" fullWidth />
+                                    <TextField label="Enter Email Address" variant="outlined" size='small' fullWidth />
                                 </Grid>
                                 <Grid item mt={3} >
                                     <Button variant='contained' color='primary' fullWidth type='submit'>Request Reset Password</Button>
