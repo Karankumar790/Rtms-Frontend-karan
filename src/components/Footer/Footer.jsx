@@ -1,14 +1,19 @@
 import React from 'react'
-import '../../Stylesheet/Footer.css'
-
+// import { Grid, Typography } from '@mui/material'
+// import '../../Stylesheet/Footer.css'
+import { Box, Grid, Typography } from '@mui/material'
+// import  from '@mui/material/Box';
 function Footer() {
   return (
-    <>
-        <footer className="footer">
-        <h4>Foxboro Instrument Company: All Right Reserved</h4>&nbsp; &nbsp;
-        <h4>[Best Display Resolution: 1920*1080]</h4>
-        </footer>
-    </>
+    <div style={{position: 'absolute', bottom: 0, width: '100%'}}>
+      <Grid container sx={{ display: "flex", justifyContent: "center", background: "#000", p:0.8  }} >
+        <Grid item  >
+          <Typography variant='h6' color={'white'}  >
+            Foxboro Instrument company: All Right Reserved Best display resolution
+          </Typography>
+        </Grid>
+      </Grid>
+    </div>
   )
 }
 
