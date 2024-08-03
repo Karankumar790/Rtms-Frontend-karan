@@ -6,12 +6,13 @@ import { Box, Grid, Typography } from '@mui/material'
 function Footer() {
   return (
     <>
-    <Grid container>
-      <Grid component="div" varient="h6" sx={{ p: 2, border: '1px dashed grey' }}>
-        <Typography>karan</Typography>
+      <Grid container style={{ display: "grid", placeContent: "center", background: "#000"  }} >
+        <Grid item  >
+          <Typography variant='h6' color={'white'}  >
+            Foxboro Instrument company: All Right Reserved Best display resolution
+          </Typography>
+        </Grid>
       </Grid>
-      </Grid>
-
     </>
   )
 }

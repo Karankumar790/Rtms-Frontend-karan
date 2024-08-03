@@ -1,38 +1,36 @@
 // import * as React from 'react'
 import React, { Suspense } from 'react';
-import {BrowserRouter, Routes, Route, useRoutes} from 'react-router-dom'
-// import { lazy } from 'react';
-import Header from './components/Header/Header.jsx'
-// import Footer from './components/Footer/Footer.jsx'
-// import Navbar from './components/Navbar/Navbar.jsx'
-// import Login from './components/Login/Login.jsx';
-// import Signup from './components/Signup/Signup.jsx';
+import { BrowserRouter, Routes, Route, useRoutes } from 'react-router-dom'
+import { lazy } from 'react';
+import Header from './components/Header/Header.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
+import Signup from './Pages/Signup/Signup.jsx';
+import Reset from './Pages/Reset/Reset.jsx';
+const Login = lazy(() => import('./Pages/Login/Login.jsx'))
 
-// import Signup from './Pages/Signup/Signup';
+// const Header = lazy(() => import('./components/Header/Header.jsx'))
 
-
-// import Signup from './Pages/Signup.jsx';
-// import Header from './components/Header/Header.jsx';
-// import Header from './components/Header/Header.jsx';
-// import Footer from './components/Footer/Footer.jsx';
-// const Login=lazy(()=>import('./Pages/Login.jsx'))
+// const Footer = lazy(() => import('./components/Footer/Footer.jsx'))
 
 function App() {
-  const route=useRoutes([
-    // {path:'/',element:<Login/>}
-    // {path:'/Signup',element:<Signup/>}
+  const route = useRoutes([
+
+    { path: '/', element: <Login /> },
+    { path: '/Signup', element: <Signup /> },
+    { path: '/Reset', element: <Reset /> }
 
   ])
 
   return (
     <>
-    {/* <Suspense fallback={'LOADING......'}> 
-      {route}
-      {Header}
-      {Footer}
-      </Suspense> */}
-       <Header/>
+        <Header />
+      <Suspense fallback={'LOADING......'}>
+
+        {route}
+
+      </Suspense>
+        <Footer />
     </>
   )
 }
