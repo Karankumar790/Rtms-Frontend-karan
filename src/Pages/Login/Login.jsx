@@ -1,6 +1,6 @@
 import { Button, Grid, TextField, Typography, Box } from '@mui/material'
+import Layout from '../../components/HOC/Layout'
 import React from 'react'
-// import Footer from '../../components/Footer/Footer'
 import './Login.css'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import HttpsIcon from '@mui/icons-material/Https';
@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 function Login() {
     return (
-        <div>
-            <Grid container className='login-form'>
+        <Layout  className='login-form'>
+            <Grid container >
                 <Grid container md={5} mt={5} mb={5} p={4} >
                     <Grid item m={2} >
                         <Grid item mt={1.5}>
@@ -63,7 +63,7 @@ function Login() {
 
             </Grid>
             {/* <Footer/> */}
-        </div>
+        </Layout>
     )
 }
 
