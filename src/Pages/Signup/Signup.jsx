@@ -49,36 +49,11 @@ function Signup() {
 
 
                                         <TextField
+                                            className='custom_textfield'
                                             label="Username"
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
                                         />
 
 
@@ -99,32 +74,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
                                     </Box>
 
@@ -140,32 +90,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
                                     </Box>
 
@@ -181,32 +106,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
                                     </Box>
 
@@ -222,32 +122,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
                                     </Box>
 
@@ -263,32 +138,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
                                     </Box>
 
@@ -304,32 +154,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
 
                                     </Box>
@@ -348,9 +173,9 @@ function Signup() {
                                         <Button
                                             variant="outlined"
                                             component="label"
-                                            style={{minWidth:"80px"}}
+                                            style={{ minWidth: "80px" }}
 
-                                            sx={{ backgroundColor: "white", border:"black", height:"30px",  p:"4px", lineHeight:"1"}}
+                                            sx={{ backgroundColor: "white", border: "black", height: "30px", p: "4px", lineHeight: "1" }}
                                         >
                                             Choose file
                                             <input
@@ -365,32 +190,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            sx={{
-                                                "& .MuiInput-root": {
-                                                    color: "#000",
-                                                    // fontFamily: "Arial",
-                                                    fontWeight: "500",
-                                                    // Bottom border
-                                                    "&:before": {
-                                                        borderColor: "black",
-                                                        borderWidth: "2px",
-                                                    },
-                                                    // Border on focus
-                                                    "&:after": {
-                                                        borderColor: "black",
-                                                        // borderWidth: "3px",
-                                                    },
-                                                  
-                                                },
-                                                // Label
-                                                "& .MuiInputLabel-standard": {
-                                                    color: "#2e2e2e",
-                                                    fontWeight: "500",
-                                                    "&.Mui-focused": {
-                                                        color: "black",
-                                                    },
-                                                },
-                                            }}
+                                            className='custom_textfield'
                                         />
 
                                     </Box>
@@ -404,8 +204,8 @@ function Signup() {
                                     </Button>
                                 </Grid>
                                 <Grid item textAlign="left" mt={1.5}>
-                                    <Typography variant='h6'>Already have account? <Link to='/Login' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color:"#3707B0" }}>Login</Link></Typography>
-                                    <Typography variant='h6'>Already have Registration? <Link to='/Login' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color:"#3707B0" }}>Check Status</Link></Typography>
+                                    <Typography variant='h6'>Already have account? <Link to='/Login' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Login</Link></Typography>
+                                    <Typography variant='h6'>Already have Registration? <Link to='/Login' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                 </Grid>
                             </Grid>
                         </form>
