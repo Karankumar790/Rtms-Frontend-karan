@@ -8,7 +8,7 @@ function Footer() {
     <div>
       <Grid container sx={{ display: "flex", justifyContent: "center", background: "#000", p:0.8  }} >
         <Grid item  >
-          <Typography variant='h6' color={'white'}  >
+          <Typography variant='inherit' color={'white'}  >
             Foxboro Instrument company: All Right Reserved Best display resolution
           </Typography>
         </Grid>

@@ -42,7 +42,7 @@ function Signup() {
 
 
                                         <TextField
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                             label="Username"
                                             variant="standard"
                                             color="info"
@@ -67,7 +67,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
                                     </Box>
 
@@ -83,7 +83,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
                                     </Box>
 
@@ -99,7 +99,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
                                     </Box>
 
@@ -115,7 +115,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
                                     </Box>
 
@@ -131,7 +131,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
                                     </Box>
 
@@ -147,7 +147,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
 
                                     </Box>
@@ -183,7 +183,7 @@ function Signup() {
                                             variant="standard"
                                             color="info"
                                             fullWidth
-                                            className='custom_textfield'
+                                            className='custom-textfield'
                                         />
 
                                     </Box>
@@ -192,13 +192,13 @@ function Signup() {
 
 
                                 <Grid item>
-                                    <Button variant="contained" fullWidth href="#contained-buttons" sx={{ backgroundColor: "black", }}>
+                                    <Button variant="contained"  className='btn-primary' fullWidth href="#contained-buttons">
                                         <Typography variant='h6'>Next</Typography>
                                     </Button>
                                 </Grid>
                                 <Grid item textAlign="left" mt={1.5}>
-                                    <Typography variant='h6'>Already have account? <Link to='/Login' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Login</Link></Typography>
-                                    <Typography variant='h6'>Already have Registration? <Link to='/Login' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                    <Typography fontSize={'medium'}>Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Login</Link></Typography>
+                                    <Typography fontSize={'medium'}>Already have Registration? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                 </Grid>
                             </Grid>
                         </form>
