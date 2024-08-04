@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { useRoutes } from 'react-router-dom'
+import AppSk from './components/Skeletons/AppSk.jsx';
 const Login = lazy(() => import('./Pages/Login/Login.jsx'))
 const Signup = lazy(() => import('./Pages/Signup/Signup.jsx'))
 const Dashboard = lazy(() => import('./Pages/Dashboard/index.jsx'))
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={'LOADING......'}>
+      <Suspense fallback={<AppSk/>}>
         {route}
       </Suspense>
     </>

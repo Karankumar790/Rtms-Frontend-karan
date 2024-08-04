@@ -1,6 +1,6 @@
 import React from 'react'
-import logo from '../../../public/assets/logo.svg'
-import MQTT1 from '../../../public/assets/MQTT1.png'
+import logo from '/assets/logo.svg'
+import MQTT1 from '/assets/MQTT1.png'
 import { Grid, Typography, Box } from '@mui/material'
 
 function Header() {

@@ -1,6 +1,6 @@
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
-import account1 from "../../../public/assets/account1.png";
+import account1 from "/assets/account1.png";
 import { Link } from "react-router-dom";
 
 
