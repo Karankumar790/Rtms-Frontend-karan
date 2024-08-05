@@ -1,5 +1,6 @@
 import { Typography,Grid } from '@mui/material'
 import React from 'react'
+import PageContainer from '../../components/HOC/PageContainer'
 
 function Dash() {
   const mainuItems=[
@@ -13,8 +14,8 @@ function Dash() {
     {name:"Log Out",path:"/Logout"}
   ]
   return (
-    <>
-            <Grid container sx={{ backgroundColor: '#8590AD', height: '86.68vh' }}>
+    <PageContainer bgcolor='#8590AD'>
+            <Grid container>
               <Typography>hello</Typography>
               <Grid item lg={3} md={3} sm={3} xs={3}>
                 <Grid item>
@@ -29,7 +30,7 @@ function Dash() {
                 </Grid>
               </Grid>
            </Grid>
-    </>
+    </PageContainer>
   )
 }
 
