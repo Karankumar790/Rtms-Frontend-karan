@@ -5,10 +5,10 @@ import { Box, Grid, Typography } from '@mui/material'
 // import  from '@mui/material/Box';
 function Footer() {
   return (
-    <div style={{position: 'absolute', bottom: 0, width: '100%'}}>
+    <div>
       <Grid container sx={{ display: "flex", justifyContent: "center", background: "#000", p:0.8  }} >
         <Grid item  >
-          <Typography variant='h6' color={'white'}  >
+          <Typography variant='inherit' color={'white'}  >
             Foxboro Instrument company: All Right Reserved Best display resolution
           </Typography>
         </Grid>

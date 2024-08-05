@@ -1,0 +1,70 @@
+import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
+import React from "react";
+import PageContainer from "../../components/HOC/PageContainer";
+import { Link } from "react-router-dom";
+
+
+export default function Forgot() {
+  return (
+    <PageContainer
+      showheader
+      showfooter
+      bgcolor="#8590AD"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+    
+      <Paper sx={{ borderRadius: "20px" }}>
+        <Grid item p={4}>
+          <form>
+            <Grid item mt={2}>
+              <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
+                Please Enter The OTP To Verify Your Account
+              </Typography>
+            </Grid>
+            <Grid item mt={2}>
+              <Typography variant="h5" textAlign="center">
+                OTP has been sent to your registered E-mail & Mobile
+              </Typography>
+            </Grid>
+            {/* Input otp value  */}
+            <Grid item mt={3} display="flex" gap={2} justifyContent="center">
+              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+              
+            </Grid>
+            <Grid
+              item
+              mt={3}
+              justifyContent="center"
+              sx={{ textAlign: "center" }}
+            >
+              <Link to="/">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  sx={{ bgcolor: "#0c113b" }}
+                >
+                  <Typography>Access Dashboard</Typography>
+                </Button>
+              </Link>
+            </Grid>
+            <Grid item mt={2} textAlign="center">
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
+                  Resend One-Time Password
+                </Typography>
+              </Link>
+            </Grid>
+          </form>
+        </Grid>
+      </Paper>
+    </PageContainer>
+  );
+}

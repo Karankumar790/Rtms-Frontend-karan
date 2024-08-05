@@ -1,5 +1,7 @@
 import { Typography,Grid } from '@mui/material'
 import React from 'react'
+import PageContainer from '../../components/HOC/PageContainer'
+import { Link, Outlet } from 'react-router-dom'
 
 function Dash() {
   const mainuItems=[
@@ -13,23 +15,25 @@ function Dash() {
     {name:"Log Out",path:"/Logout"}
   ]
   return (
-    <>
-            <Grid container sx={{ backgroundColor: '#8590AD', height: '86.68vh' }}>
-              <Typography>hello</Typography>
+    <PageContainer bgcolor='#8590AD' showheader showfooter>
+            <Grid container>
               <Grid item lg={3} md={3} sm={3} xs={3}>
                 <Grid item>
                   {
                    mainuItems.map((v,i)=>(
 
                     <Grid key={i}>
-                      <Typography>{v?.name}</Typography>
+                      <Link to={v.path}><button><Typography>{v?.name}</Typography></button></Link>
                     </Grid>
                    )) 
                   }
                 </Grid>
               </Grid>
+              <Grid item lg={9} md={9} sm={9} xs={9}>
+                  <Outlet/>
+              </Grid>
            </Grid>
-    </>
+    </PageContainer>
   )
 }
 
