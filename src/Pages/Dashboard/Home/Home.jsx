@@ -122,7 +122,6 @@ export default function BasicCard() {
               <Typography fontSize='large'>CHP-THP$lt;10KSc</Typography>
             </CardContent>
           </Card>
-
         </Grid>
 
         
