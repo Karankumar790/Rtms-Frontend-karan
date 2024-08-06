@@ -13,6 +13,7 @@ export default function Forgot() {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      className='bgImg'
     >
     
       <Paper sx={{ borderRadius: "20px", px:"5px" }} >

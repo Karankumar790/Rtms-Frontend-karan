@@ -2,15 +2,15 @@ import { Grid, Paper, Typography, TextField, Button, Box } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom';
 import PageContainer from '../../components/HOC/PageContainer'
-import bg from '../../../public/assets/13.png'
 
 export default function Forgot() {
     return (
         <PageContainer
             showheader
             showfooter
-            display="flex" justifyContent='center' alignItems='center'>
+            display="flex" justifyContent='center' alignItems='center'className='bgImg' >
             <Paper sx={{ borderRadius: '20px' }}>
+            
                 <Grid item p={3} >
                     <form>
                         <Grid item mt={2}>
