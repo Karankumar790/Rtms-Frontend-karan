@@ -2,15 +2,18 @@ import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import account1 from "/assets/account1.png";
 import { Link } from "react-router-dom";
+import PageContainer from "../../components/HOC/PageContainer";
 
 
 function Reset() {
   return (
-    <>
-      <Grid container sx={{ backgroundColor: "#646d90 ", height: "82.00vh" }}>
-        <Grid container sx={{justifyContent: "center", alignContent: "center" }}
-        >
-          <Grid item lg={6} md={6} sm={6} xs={6}>
+    <PageContainer
+            showheader
+            showfooter
+            bgcolor="#646d90" display="flex" justifyContent='center' alignItems='center'>
+            <Paper sx={{ borderRadius: '20px' }}></Paper>
+        <Grid container sx={{justifyContent: "center", alignContent: "center" }}>
+          <Grid item lg={4} md={4} sm={4} xs={4}>
             <Paper sx={{ borderRadius: '20px', border: '1px solid #ddd' }}>
               <Grid item>
                 <form>
@@ -55,9 +58,9 @@ function Reset() {
                     />
                   </Grid>
                   <Grid item mt={3} ml={3} mr={3}> 
-                    <Button variant="contained" fullWidth color="primary">
+                    <Link to='/otp'><Button variant="contained" fullWidth color="primary">
                       Reset Password
-                    </Button>
+                    </Button></Link>
                   </Grid>
                   <Grid item mt={2} pb={3} sx={{display:'flex' ,justifyContent:'center'}}>
                     <Typography><Link to="/" style={{textDecoration:'none'}}>Back to Login</Link></Typography>
@@ -67,8 +70,8 @@ function Reset() {
             </Paper>
           </Grid>
         </Grid>
-      </Grid>
-    </>
+      {/* </Grid> */}
+     </PageContainer>
   );
 }
 

@@ -14,7 +14,11 @@ export default function Forgot() {
                     <form>
 
                         <Grid item mt={2}>
+<<<<<<< HEAD
                             <Typography fontSize='medium'>Forgot Your Password?</Typography>
+=======
+                            <Typography fontSize={'xx-large'}>Forgot Your Password?</Typography>
+>>>>>>> 39b26a963521c00ba62d3e6d0a15aed2f3838da5
                         </Grid>
                         <Grid item mt={2}>
                             <Typography fontSize='medium'>Please enter the email address you`d like your password reset information sent to</Typography>
@@ -23,7 +27,7 @@ export default function Forgot() {
                             <TextField label="Enter Email Address" variant="outlined" size='small' fullWidth />
                         </Grid>
                         <Grid item mt={3} >
-                            <Button variant='contained' color='primary' fullWidth type='submit'>Request Reset Password</Button>
+                            <Link to="/Reset"><Button variant='contained' color='primary' fullWidth type='submit'>Request Reset Password</Button></Link>
                         </Grid>
                         <Grid item mt={2} textAlign='center'>
                             <Link to="/" style={{ textDecoration: "none" }}>Back to Login</Link>
