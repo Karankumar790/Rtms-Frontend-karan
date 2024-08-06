@@ -14,7 +14,7 @@ function Dash() {
     {name:"Log Out",path:"/Logout"}
   ]
   return (
-    <PageContainer bgcolor='#8590AD'>
+    <PageContainer bgcolor='#8590AD' showheader showfooter>
             <Grid container>
               <Typography>hello</Typography>
               <Grid item lg={3} md={3} sm={3} xs={3}>
