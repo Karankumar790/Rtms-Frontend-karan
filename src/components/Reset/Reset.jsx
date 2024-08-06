@@ -2,7 +2,8 @@ import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import account1 from "/assets/account1.png";
 import { Link } from "react-router-dom";
-import PageContainer from "../../components/HOC/PageContainer";
+import PageContainer from "../HOC/PageContainer";
+
 
 
 function Reset() {

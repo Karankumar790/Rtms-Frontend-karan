@@ -5,11 +5,11 @@ import Home from './Pages/Dashboard/Home/Home.jsx'
 import SideBar from './Pages/Dashboard/SideBar/SideBar.jsx'
 const Login = lazy(() => import('./Pages/Login/Login.jsx'))
 const Signup = lazy(() => import('./Pages/Signup/Signup.jsx'))
-const Dashboard = lazy(() => import('./Pages/Dashboard/index.jsx'))
+const Dashboard = lazy(() => import('./Pages/Dashboard/Sidebar.jsx'))
 const Forgot = lazy(() => import('./Pages/Forgot/Forgot.jsx'))
-const Reset = lazy(() => import('./Pages/Reset/Reset.jsx'))
+const Reset = lazy(() => import('./components/Reset/Reset.jsx'))
 const Table = lazy(() => import('./Pages/Dashboard/Table/Table.jsx'))
-const Otp = lazy(() => import('./Pages/Otp/Otp.jsx'))
+const Otp = lazy(() => import('./components/Otp/Otp.jsx'))
 
 
 function App() {
