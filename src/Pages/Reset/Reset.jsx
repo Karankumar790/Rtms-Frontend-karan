@@ -58,7 +58,7 @@ function Reset() {
                     />
                   </Grid>
                   <Grid item mt={3} ml={3} mr={3}> 
-                    <Link to='/otp'><Button variant="contained" fullWidth color="primary">
+                    <Link to='/Otp'><Button variant="contained" fullWidth color="primary">
                       Reset Password
                     </Button></Link>
                   </Grid>

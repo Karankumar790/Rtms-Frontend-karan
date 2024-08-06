@@ -15,7 +15,7 @@ export default function Forgot() {
       alignItems="center"
     >
     
-      <Paper sx={{ borderRadius: "20px", px:"5" }} >
+      <Paper sx={{ borderRadius: "20px", px:"5px" }} >
         <Grid item p={4}>
           <form>
             <Grid item mt={2}>
