@@ -1,13 +1,7 @@
-import * as React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
+import  React from 'react';
 import CardContent from '@mui/joy/CardContent';
-import IconButton from '@mui/joy/IconButton';
-import Typography from '@mui/joy/Typography';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
-import { Box, Grid } from '@mui/material'
-import { CenterFocusStrong } from '@mui/icons-material';
+import { Box, Grid, Typography } from '@mui/material'
+import Card from '@mui/joy/Card';
 
 import well from '../../../../public/assets/WELL.png'
 import pressure from '../../../../public/assets/PRESSURE.png'
