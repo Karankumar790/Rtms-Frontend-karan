@@ -60,6 +60,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png'
+import HomeIcon from '@mui/icons-material/Home';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -121,7 +122,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
             </DrawerHeader>
             <Divider />
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Home', 'Well Montior', 'Virtual Flow', 'Crystal Report'].map((text, index) => (
                     <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
@@ -137,7 +138,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                     justifyContent: 'center',
                                 }}
                             >
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {index % 2 === 0 ? <HomeIcon /> : <MailIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
@@ -146,8 +147,8 @@ export default function Sidebar({ open, handleDrawerClose }) {
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                {['Complaint History', 'Notification History', 'Edit Profile','Log Out'].map((text, index) => (
+                    <ListItem key={text} disablePadding sx={{ display: 'block'}}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
