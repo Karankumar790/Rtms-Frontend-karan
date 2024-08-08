@@ -166,9 +166,9 @@ function Signup() {
                                         <Button
                                             variant="outlined"
                                             component="label"
-                                            style={{ minWidth: "80px" }}
+                                            style={{ minWidth: "260px" }}
 
-                                            sx={{ backgroundColor: "white", border: "black", height: "30px", p: "4px", lineHeight: "1" }}
+                                            sx={{ backgroundColor: "lightgray", border: "black", height: "30px", p: "4px", lineHeight: "1" }}
                                         >
                                             Choose file
                                             <input
@@ -178,13 +178,13 @@ function Signup() {
                                         </Button>
                                         {/* <TextField id="input-with-sx" label="Role in RTMS" variant="standard" sx={{ width: "80%" }}></TextField> */}
 
-                                        <TextField
+                                        {/* <TextField
                                             label="No File Choosen"
                                             variant="standard"
                                             color="info"
                                             fullWidth
                                             className='custom-textfield'
-                                        />
+                                        /> */}
 
                                     </Box>
 

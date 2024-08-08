@@ -9,7 +9,7 @@ export default function Forgot() {
     <PageContainer
       showheader
       showfooter
-      bgcolor="#8590AD"
+      className='bgImg'
       display="flex"
       justifyContent="center"
       alignItems="center"

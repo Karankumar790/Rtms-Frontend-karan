@@ -61,6 +61,9 @@ import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png'
 import HomeIcon from '@mui/icons-material/Home';
+import MonitorIcon from '@mui/icons-material/Monitor';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -138,7 +141,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                     justifyContent: 'center',
                                 }}
                             >
-                                {index % 2 === 0 ? <HomeIcon /> : <MailIcon />}
+                                {index % 2 === 0 ? <HomeIcon /> : <MonitorIcon /> }
                             </ListItemIcon>
                             <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>

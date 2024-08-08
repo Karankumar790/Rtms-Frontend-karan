@@ -8,7 +8,7 @@ export default function Forgot() {
         <PageContainer
             showheader
             showfooter
-            bgcolor="#8590AD" display="flex" justifyContent='center' alignItems='center'>
+            className='bgImg' display="flex" justifyContent='center' alignItems='center'>
             <Paper sx={{ borderRadius: '20px' }}>
                 <Grid item p={3} >
                     <form>

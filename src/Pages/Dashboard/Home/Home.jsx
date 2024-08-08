@@ -1,7 +1,7 @@
-import  React from 'react';
-import CardContent from '@mui/joy/CardContent';
+import  React from 'react'
 import { Box, Grid, Typography } from '@mui/material'
-import Card from '@mui/joy/Card';
+import CardContent from '@mui/material/CardContent';
+import {Card} from '@mui/joy'
 
 import well from '../../../../public/assets/WELL.png'
 import pressure from '../../../../public/assets/PRESSURE.png'
@@ -60,15 +60,12 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-
-
-
 export default function BasicCard() {
   return (
     <Grid container gap={6} >
       <Grid container sx={{ display: "flex", justifyContent: "space-between" }} gap={6}>
         <Grid item>
-          <Card sx={{ width: 320 }}>
+          <Card sx={{ width: 250 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -81,7 +78,7 @@ export default function BasicCard() {
         </Grid>
 
         <Grid item>
-          <Card sx={{ width: 320 }}>
+          <Card sx={{ width: 250 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -94,7 +91,7 @@ export default function BasicCard() {
         </Grid>
 
         <Grid item>
-          <Card sx={{ width: 320 }}>
+          <Card sx={{ width: 250 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -107,7 +104,7 @@ export default function BasicCard() {
         </Grid>
 
         <Grid item>
-          <Card sx={{ width: 320 }}>
+          <Card sx={{ width: 250 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -122,7 +119,7 @@ export default function BasicCard() {
         
         {/* <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}> */}
           <Grid item >
-            <Card sx={{ width: 320 }}>
+            <Card sx={{ width: 250 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={battery} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -134,7 +131,7 @@ export default function BasicCard() {
           </Grid>
 
           <Grid item>
-            <Card sx={{ width: 320 }}>
+            <Card sx={{ width: 250 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={solar} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -146,7 +143,7 @@ export default function BasicCard() {
           </Grid>
 
           <Grid item>
-            <Card sx={{ width: 320 }}>
+            <Card sx={{ width: 250 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={network} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -158,7 +155,7 @@ export default function BasicCard() {
           </Grid>
 
           <Grid item>
-            <Card sx={{ width: 320 }}>
+            <Card sx={{ width: 250 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={network} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -174,10 +171,10 @@ export default function BasicCard() {
 
       {/* ---------------code for table------------------------------- */}
 
-      <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}>
+      <Grid container sx={{ display: "flex",justifyContent:'space-evenly'}}>
         <Grid item >
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ minWidth: 600 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Current Notification</StyledTableCell>
@@ -206,7 +203,7 @@ export default function BasicCard() {
 
         <Grid item>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ minWidth: 600 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Dessert (100g serving)</StyledTableCell>
