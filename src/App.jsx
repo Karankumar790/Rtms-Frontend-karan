@@ -20,6 +20,7 @@ const Logout = lazy(() => import('./Pages/Dashboard/Logout/Logout.jsx'))
 
 
 const Otp = lazy(() => import('./components/Otp/Otp.jsx'))
+const NotificationH = lazy(() => import('./Pages/Dashboard/NotificationHistory/NotificationHistory.jsx'))
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
     },
     { path: '/reset', element: <Reset /> },
     { path: '/otp' , element: <Otp />},
-    { path: '/forgot', element: <Forgot /> },
+    { path: '/forgot', element: <Forgot /> }
 
   ])
 
