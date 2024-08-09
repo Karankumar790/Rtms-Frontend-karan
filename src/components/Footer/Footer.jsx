@@ -9,7 +9,7 @@ function Footer() {
       <Grid container sx={{ display: "flex", justifyContent: "center", background: "#000", p:0.8  }} >
         <Grid item  >
           <Typography variant='inherit' color={'white'}  >
-            Foxboro Instrument company: All Right Reserved Best display resolution
+            Foxboro Instrument company: All Right Reserved Best display resolution  [ 1920*1080 ]
           </Typography>
         </Grid>
       </Grid>

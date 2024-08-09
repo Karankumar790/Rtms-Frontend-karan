@@ -50,7 +50,7 @@ function Login() {
                                         </Grid>
                                         <Grid item textAlign="center">
                                             <Typography fontSize="small">Don't have an account?
-                                                <Link to='/signup' style={{ textDecoration: "none" }}>Sign Up</Link>
+                                                <Link to='/signup' style={{ textDecoration: "none", margin:'4px'}}>Sign Up</Link>
                                             </Typography>
                                         </Grid>
                                     </Grid>
