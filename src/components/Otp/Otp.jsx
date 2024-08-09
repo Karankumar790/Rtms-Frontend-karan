@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
 import React from "react";
-import PageContainer from "../../components/HOC/PageContainer";
+import PageContainer from "../HOC/PageContainer";
 import { Link } from "react-router-dom";
 
 
@@ -13,6 +13,7 @@ export default function Forgot() {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      className='bgImg'
     >
     
       <Paper sx={{ borderRadius: "20px", px:"5px" }} >
@@ -29,13 +30,14 @@ export default function Forgot() {
               </Typography>
             </Grid>
             {/* Input otp value  */}
-            <Grid item mt={3} display="flex" gap={2} justifyContent="center">
-              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
-              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
-              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
-              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
-              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
-              <input type="text" className="otp-style" style={{  height:"40px", width:"40px"}} />
+            <Grid item mt={3} display="flex" gap={2} justifyContent="center" justifyItems="center">
+              {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
+              <input type="text" className="otp-style"maxLength={1} style={{ textAlign:"center", height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style"maxLength={1} style={{textAlign:"center",  height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style"maxLength={1} style={{textAlign:"center", height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style"maxLength={1} style={{ textAlign:"center", height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style"maxLength={1} style={{ textAlign:"center", height:"40px", width:"40px"}} />
+              <input type="text" className="otp-style"maxLength={1} style={{ textAlign:"center", height:"40px", width:"40px"}} />
               
             </Grid>
             <Grid

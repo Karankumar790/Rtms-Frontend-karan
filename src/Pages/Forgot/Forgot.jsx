@@ -8,11 +8,11 @@ export default function Forgot() {
         <PageContainer
             showheader
             showfooter
-            className='bgImg' display="flex" justifyContent='center' alignItems='center'>
+            display="flex" justifyContent='center' alignItems='center'className='bgImg' >
             <Paper sx={{ borderRadius: '20px' }}>
+            
                 <Grid item p={3} >
                     <form>
-
                         <Grid item mt={2}>
                             <Typography fontSize='medium'>Forgot Your Password?</Typography>
                         </Grid>

@@ -125,8 +125,9 @@ export default function Sidebar({ open, handleDrawerClose }) {
             </DrawerHeader>
             <Divider />
             <List>
-                {['Home', 'Well Montior', 'Virtual Flow', 'Crystal Report'].map((text, index) => (
+                {['menu', 'Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                        
                         <ListItemButton
                             sx={{
                                 minHeight: 48,

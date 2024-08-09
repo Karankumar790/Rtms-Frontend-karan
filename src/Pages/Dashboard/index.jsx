@@ -189,14 +189,14 @@ import { Outlet } from 'react-router-dom';
 
 export default function Dashboard() {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setOpen(true);
   };
 
   return (

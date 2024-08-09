@@ -2,7 +2,8 @@ import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import account1 from "/assets/account1.png";
 import { Link } from "react-router-dom";
-import PageContainer from "../../components/HOC/PageContainer";
+import PageContainer from "../HOC/PageContainer";
+
 
 
 function Reset() {
@@ -10,7 +11,7 @@ function Reset() {
     <PageContainer
             showheader
             showfooter
-            className='bgImg' display="flex" justifyContent='center' alignItems='center'>
+            bgcolor="#646d90" display="flex" justifyContent='center' alignItems='center' className='bgImg'>
             <Paper sx={{ borderRadius: '20px' }}></Paper>
         <Grid container sx={{justifyContent: "center", alignContent: "center" }}>
           <Grid item lg={4} md={4} sm={4} xs={4}>
