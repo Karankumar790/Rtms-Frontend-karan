@@ -67,7 +67,7 @@ const rows = [
 
 export default function BasicCard() {
 
-  const [showTable1, setShowTable1] = useState(false);
+  const [showTable1, setShowTable1] = useState(true);
   const [showTable2, setShowTable2] = useState(false);
 
   const handleToggle = (table) => {

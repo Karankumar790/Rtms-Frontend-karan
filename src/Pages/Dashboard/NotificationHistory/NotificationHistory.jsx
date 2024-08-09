@@ -55,10 +55,10 @@ function NotificationHistory() {
   return (
     <PageContainer>
       <Grid container  >
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
           <Grid item >
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -96,7 +96,7 @@ function NotificationHistory() {
           </Grid>
           <Grid item>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -116,7 +116,7 @@ function NotificationHistory() {
           </Grid>
           <Grid item>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -134,7 +134,7 @@ function NotificationHistory() {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container  >
+        <Grid container  mt={3}>
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
               <TableHead >
