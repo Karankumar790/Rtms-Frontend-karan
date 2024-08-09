@@ -26,26 +26,26 @@ export default function Table() {
           />
         </Grid>
         <Grid item>
-          <TextField label='Well Installtion'> </TextField>
+          <TextField label='Well Installtion' size='small'> </TextField>
 
         </Grid>
         <Grid item>
-          <TextField label='Well Number'> </TextField>
+          <TextField label='Well Number' size='small'> </TextField>
 
         </Grid>
         <Grid item>
-          <TextField label='Parameters'> </TextField>
+          <TextField label='Parameters' size='small'> </TextField>
 
         </Grid>
 
       </Grid>
       <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} p={3}>
         <Grid item>
-          <TextField label='Parameters'> </TextField>
+          <TextField label='Parameters' size='small'> </TextField>
         </Grid>
         <Grid item>
           <Input
-            type="date"
+            type="date" 
             slotProps={{
               input: {
                 min: '2001-02-16',
@@ -57,6 +57,7 @@ export default function Table() {
         <Grid item>
           <Input
             type="date"
+           
             slotProps={{
               input: {
                 min: '2001-02-16',
@@ -66,7 +67,7 @@ export default function Table() {
           />
         </Grid>
         <Grid item>
-          <TextField label='Resolution'> </TextField>
+          <TextField label='Resolution' size='small'> </TextField>
         </Grid>
       </Grid>
     </PageContainer>
