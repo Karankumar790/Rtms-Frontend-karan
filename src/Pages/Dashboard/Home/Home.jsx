@@ -1,13 +1,7 @@
-import * as React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import IconButton from '@mui/joy/IconButton';
-import Typography from '@mui/joy/Typography';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
-import { Box, Grid } from '@mui/material'
-import { CenterFocusStrong } from '@mui/icons-material';
+import React, { useState } from 'react'
+import { Box, Grid, Typography } from '@mui/material'
+import CardContent from '@mui/material/CardContent';
+import { Card } from '@mui/joy'
 
 import well from '../../../../public/assets/WELL.png'
 import pressure from '../../../../public/assets/PRESSURE.png'
@@ -29,6 +23,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+
+import { shadows } from '@mui/system';
+import './Home.css'
+
 
 
 
@@ -66,41 +64,45 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-
-
-
 export default function BasicCard() {
+  const [showTable,setShowTable] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowTable(!showTable);
+  }
+
+  
   return (
     <Grid container gap={6} >
-      <Grid container sx={{ display: "flex", justifyContent: "space-between" }} gap={6}>
-        <Grid item>
-          <Card sx={{ width: 320 }}>
+      <Grid container sx={{ display: "flex", justifyContent: "space-around" }} gap={6}>
+        <Grid item  >
+
+            <Card className='box-shadow'  sx={{ width: 270 }}>
+              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+                <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
+                <Box fontSize='large'>2122</Box>
+              </Grid>
+              <CardContent orientation="horizontal">
+                <Typography fontSize='large'>Total Wells:</Typography>
+              </CardContent>
+            </Card>
+        </Grid>
+
+        <Grid item >
+          <Card className='box-shadow'  sx={{ width: 270 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
             </Grid>
             <CardContent orientation="horizontal">
-              <Typography fontSize='large'>Total Wells:</Typography>
+              <Typography fontSize='large'>Flowing Wells</Typography>
             </CardContent>
           </Card>
 
         </Grid>
 
-        <Grid item>
-          <Card sx={{ width: 320 }}>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
-              <Box fontSize='large'>2122</Box>
-            </Grid>
-            <CardContent orientation="horizontal">
-              <Typography fontSize='large'>Flowing Wells:</Typography>
-            </CardContent>
-          </Card>
-
-        </Grid>
-
-        <Grid item>
-          <Card sx={{ width: 320 }}>
+        <Grid item >
+          <Card className='box-shadow'  sx={{ width: 270 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -112,77 +114,81 @@ export default function BasicCard() {
 
         </Grid>
 
-        <Grid item>
-          <Card sx={{ width: 320 }}>
+        <Grid item >
+          <Card  className='box-shadow' sx={{ width: 270 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
               <Box fontSize='large'>2122</Box>
             </Grid>
             <CardContent orientation="horizontal">
-              <Typography fontSize='large'>CHP-THP$lt;10KSc</Typography>
+              <Typography fontSize='large'> &lt;CHP-THP10KSc&gt;</Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        
-        {/* <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}> */}
-          <Grid item >
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={battery} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Low Battery</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
 
-          <Grid item>
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={solar} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Low Solar Power</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid container sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Grid item  >
+          <Card className='box-shadow'  sx={{ width: 270 }}>
+            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+              <img src={battery} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
+              <Box fontSize='large'>2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize='large'>Low Battery</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-          <Grid item>
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={network} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Network Error</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid item >
+          <Card className='box-shadow'  sx={{ width: 270 }}>
+            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+              <img src={solar} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
+              <Box fontSize='large'>2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize='large'>Low Solar Power</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-          <Grid item>
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={network} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Network Error</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        {/* </Grid> */}
+        <Grid item >
+          <Card className='box-shadow'  sx={{ width: 270 }}>
+            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+              <img src={network} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
+              <Box fontSize='large'>2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize='large'>Network Error</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item >
+          <Card className='box-shadow' sx={{ width: 270 }}>
+            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+              <img src={network} alt="" srcset="" style={{ width: '5rem', height: '5rem' }} />
+              <Box fontSize='large'>2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize='large'>Network Error</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        </Grid>
       </Grid>
 
 
       {/* ---------------code for table------------------------------- */}
+      
+     <button onClick={handleButtonClick}>
+      {showTable ? 'Hide Current Notification' : 'Show Current Notification'}
+     </button>
 
-      <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}>
+      {showTable && (<Grid container sx={{ display: "flex", justifyContent: 'space-evenly' }}>
         <Grid item >
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ minWidth: 1750 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Current Notification</StyledTableCell>
@@ -208,36 +214,7 @@ export default function BasicCard() {
             </Table>
           </TableContainer>
         </Grid>
-
-        <Grid item>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-      </Grid>
+      </Grid>)}
     </Grid>
 
   );

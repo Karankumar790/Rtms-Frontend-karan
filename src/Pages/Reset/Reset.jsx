@@ -10,7 +10,7 @@ function Reset() {
     <PageContainer
             showheader
             showfooter
-            bgcolor="#646d90" display="flex" justifyContent='center' alignItems='center'>
+            className='bgImg' display="flex" justifyContent='center' alignItems='center'>
             <Paper sx={{ borderRadius: '20px' }}></Paper>
         <Grid container sx={{justifyContent: "center", alignContent: "center" }}>
           <Grid item lg={4} md={4} sm={4} xs={4}>
