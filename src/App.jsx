@@ -29,15 +29,15 @@ function App() {
     {
       path: '/dashboard', element: <Dashboard />,
       children: [
-        { path: "", element: <Home /> },
-        {path:"table",element:<Table/>},
-        {path:"virtual",element:<Virtual/>},
-        {path:"monitor",element:<Monitor/>},
-        {path:"crystal",element:<Crystal/>},
-        {path:"complaint",element:<ComplaintHistory/>},
-        {path:"notification",element:<NotificationHistory/>},
-        {path:"edit",element:<Edit/>},
-        {path:"logout",element:<Logout/>}
+        { path: "/dashboard", element: <Home /> },
+        {path:"/dashboard/table",element:<Table/>},
+        {path:"/dashboard/virtual",element:<Virtual/>},
+        {path:"/dashboard/monitor",element:<Monitor/>},
+        {path:"/dashboard/crystal",element:<Crystal/>},
+        {path:"/dashboard/complaint",element:<ComplaintHistory/>},
+        {path:"/dashboard/notification",element:<NotificationHistory/>},
+        {path:"/dashboard/edit",element:<Edit/>},
+        {path:"/dashboard/logout",element:<Logout/>}
       ]
     },
     { path: '/reset', element: <Reset /> },

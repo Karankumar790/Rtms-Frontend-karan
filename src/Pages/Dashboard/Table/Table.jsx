@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader.jsx'
+import Index from '../index.jsx'
 import { Button, Grid, TextField } from '@mui/material'
 import Input from '@mui/joy/Input';
 import { LocationOn } from '@mui/icons-material';
@@ -11,8 +11,7 @@ export default function Table() {
 
   return (
     <PageContainer>
-      <DashboardHeader />
-      
+     
       <Grid Container sx={{ display: 'flex', justifyContent: 'space-evenly' }} p={3}>
         <Grid item >
           <Input

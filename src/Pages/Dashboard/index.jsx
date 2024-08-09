@@ -196,7 +196,7 @@ export default function Dashboard() {
   };
 
   const handleDrawerClose = () => {
-    setOpen(true);
+    setOpen(false);
   };
 
   return (

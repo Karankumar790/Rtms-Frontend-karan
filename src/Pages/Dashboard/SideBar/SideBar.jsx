@@ -63,6 +63,8 @@ import ongc_logo from '/assets/ongc2.png'
 import HomeIcon from '@mui/icons-material/Home';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { Grid, Typography } from '@mui/material';
+import { Link, Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -113,10 +115,24 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Sidebar({ open, handleDrawerClose }) {
-    const theme = useTheme();
 
+
+    const mainuItems = [
+        { name: "menu", path: "/dashboard" },
+        { name: "Inbox", path: "/dashboard/table" },
+        { name: "Starred", path: "/dashboard/virtual" },
+        { name: "Send email", path: "/dashboard/monitor" },
+        { name: "Drafts", path: "/dashboard/crystal" },
+        { name: "Table", path: "/dashboard/complaint" }
+    ]
+
+
+
+
+
+    const theme = useTheme();
     return (
-        <Drawer variant="permanent" open={open} sx={{backgroundColor:"black"}}>
+        <Drawer variant="permanent" open={open} sx={{ backgroundColor: "black" }}>
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
                 <IconButton onClick={handleDrawerClose}>
@@ -125,9 +141,17 @@ export default function Sidebar({ open, handleDrawerClose }) {
             </DrawerHeader>
             <Divider />
             <List>
-                {['menu', 'Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                {/* {['menu', 'Inbox', 'Starred', 'Send email', 'Drafts'] */}
+                {mainuItems.map((text, index) => (
+                    // <Grid key={index}>
+                    //     <Link to={text.path}>
+                    //     <Typography>{text.name}</Typography>
                         
+                    //     </Link>
+                    // </Grid>
+               <Link to={text.path}>
+                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -142,17 +166,18 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                     justifyContent: 'center',
                                 }}
                             >
-                                {index % 2 === 0 ? <HomeIcon /> : <MonitorIcon /> }
+                                {index % 2 === 0 ? <HomeIcon /> : <MonitorIcon />}
                             </ListItemIcon>
-                            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
+                </Link>
                 ))}
             </List>
             <Divider />
             <List>
-                {['Complaint History', 'Notification History', 'Edit Profile','Log Out'].map((text, index) => (
-                    <ListItem key={text} disablePadding sx={{ display: 'block'}}>
+                {['Complaint History', 'Notification History', 'Edit Profile', 'Log Out'].map((text, index) => (
+                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
