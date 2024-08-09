@@ -14,7 +14,7 @@ export default function Forgot() {
                 <Grid item p={3} >
                     <form>
                         <Grid item mt={2}>
-                            <Typography fontSize='medium'>Forgot Your Password?</Typography>
+                            <Typography variant='h1' fontSize='xx-large'textAlign="center">Forgot Your Password?</Typography>
                         </Grid>
                         <Grid item mt={2}>
                             <Typography fontSize='medium'>Please enter the email address you`d like your password reset information sent to</Typography>

@@ -15,7 +15,7 @@ import CardContent from '@mui/joy/CardContent';
 function Signup() {
     return (
         <PageContainer className='bgImg' showheader showfooter>
-            <Grid container height={'100%'} display={'flex'} justifyContent={'start'} padding={5} alignContent={'center'}>
+            <Grid container height={"100%"} display={'flex'} justifyContent={'start'} padding={5} alignContent={'center'}>
                 <Grid item width={600} >
                     <Card >
                         <CardContent orientation="vertical">

@@ -10,6 +10,7 @@ const Forgot = lazy(() => import('./Pages/Forgot/Forgot.jsx'))
 const Reset = lazy(() => import('./components/Reset/Reset.jsx'))
 const Table = lazy(() => import('./Pages/Dashboard/Table/Table.jsx'))
 const Otp = lazy(() => import('./components/Otp/Otp.jsx'))
+const NotificationH = lazy(() => import('./Pages/Dashboard/NotificationHistory/NotificationHistory.jsx'))
 
 
 function App() {
@@ -25,7 +26,9 @@ function App() {
     },
     { path: '/reset', element: <Reset /> },
     { path: '/otp' , element: <Otp />},
-    { path: '/forgot', element: <Forgot /> }
+    { path: '/forgot', element: <Forgot /> },
+    { path: '/NotificationH', element: <NotificationH /> }
+
 
   ])
 

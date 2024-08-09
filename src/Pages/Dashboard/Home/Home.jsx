@@ -1,38 +1,33 @@
-import * as React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import IconButton from '@mui/joy/IconButton';
-import Typography from '@mui/joy/Typography';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
-import { Box, Grid } from '@mui/material'
-import { CenterFocusStrong } from '@mui/icons-material';
+import * as React from "react";
+import AspectRatio from "@mui/joy/AspectRatio";
+import Button from "@mui/joy/Button";
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import IconButton from "@mui/joy/IconButton";
+import Typography from "@mui/joy/Typography";
+import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
+import { Box, Grid } from "@mui/material";
+import { CenterFocusStrong } from "@mui/icons-material";
 
-import well from '../../../../public/assets/WELL.png'
-import pressure from '../../../../public/assets/PRESSURE.png'
-import battery from '../../../../public/assets/battery.png'
-import solar from '../../../../public/assets/SOLAR1.png'
-import network from '../../../../public/assets/Network.png'
-import { useState } from 'react';
-
-
-
-
-
+import well from "../../../../public/assets/WELL.png";
+import pressure from "../../../../public/assets/PRESSURE.png";
+import battery from "../../../../public/assets/battery.png";
+import solar from "../../../../public/assets/SOLAR1.png";
+import network from "../../../../public/assets/Network.png";
+import { useState } from "react";
 
 // -------------import for table--------------------------------//
 
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
-
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 // ---------FUNCTIONS OF TABLE--------------------------------
 
@@ -47,11 +42,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -61,215 +56,309 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Frozen yoghurt'),
-  createData('Ice cream sandwich'),
-  createData('Eclair'),
-  createData('Cupcake'),
-  createData('Gingerbread'),
+  createData("1"),
+  createData("2"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
 ];
 
-
-
-
 export default function BasicCard() {
-
   const [showTable1, setShowTable1] = useState(false);
   const [showTable2, setShowTable2] = useState(false);
 
   const handleToggle = (table) => {
-    if (table === 'table1') {
+    if (table === "table1") {
       setShowTable1(true);
       setShowTable2(false);
     } else {
       setShowTable1(false);
       setShowTable2(true);
     }
-  }
+  };
   return (
-    <Grid container gap={6} >
-       <Grid container sx={{ display: "flex", justifyContent: "space-between" }} gap={6}>
+    <div>
+      <Grid
+        container
+        sx={{ display: "flex", justifyContent: "space-between" }}
+        gap={6}
+      >
         <Grid item>
           <Card sx={{ width: 320 }}>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-              <Box fontSize='large'>2122</Box>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={well}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
             </Grid>
             <CardContent orientation="horizontal">
-              <Typography fontSize='large'>Total Wells</Typography>
-            </CardContent>
-          </Card>
-
-        </Grid>
-
-        <Grid item>
-          <Card sx={{ width: 320 }}>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-              <Box fontSize='large'>2122</Box>
-            </Grid>
-            <CardContent orientation="horizontal">
-              <Typography fontSize='large'>Flowing Wells</Typography>
-            </CardContent>
-          </Card>
-
-        </Grid>
-
-        <Grid item>
-          <Card sx={{ width: 320 }}>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-              <Box fontSize='large'>2122</Box>
-            </Grid>
-            <CardContent orientation="horizontal">
-              <Typography fontSize='large'>Non Flowing Wells</Typography>
-            </CardContent>
-          </Card>
-
-        </Grid>
-
-        <Grid item>
-          <Card sx={{ width: 320 }}>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={pressure} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-              <Box fontSize='large'>2122</Box>
-            </Grid>
-            <CardContent orientation="horizontal">
-              <Typography fontSize='large'>CHP-THP&lt;10KSc</Typography>
+              <Typography fontSize="large">Total Wells</Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={well}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">Flowing Wells</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={well}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">Non Flowing Wells</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={pressure}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">CHP-THP&lt;10KSc</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
         {/* <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}> */}
-          <Grid item >
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={battery} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Low Battery</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={battery}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">Low Battery</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-          <Grid item>
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={solar} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Low Solar Power</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={solar}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">Low Solar Power</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-          <Grid item>
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={network} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Network Error</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={network}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">Network Error</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-          <Grid item>
-            <Card sx={{ width: 320 }}>
-              <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={network} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
-                <Box fontSize='large'>2122</Box>
-              </Grid>
-              <CardContent orientation="horizontal">
-                <Typography fontSize='large'>Network Error</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+        <Grid item>
+          <Card sx={{ width: 320 }}>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <img
+                src={network}
+                alt=""
+                srcset=""
+                style={{ width: "6rem", height: "6rem" }}
+              />
+              <Box fontSize="large">2122</Box>
+            </Grid>
+            <CardContent orientation="horizontal">
+              <Typography fontSize="large">Network Error</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
         {/* </Grid> */}
       </Grid>
 
-
       {/* ---------------code for table------------------------------- */}
+      <Grid container mt={2}>
+        <Tabs>
+          <TabList>
+            <Tab>
+              <Typography fontSize="small" fontWeight={'bold'}> Current Notification</Typography>
+            </Tab>
+            <Tab>
+              Open Complaint
+                </Tab>
+          </TabList>
 
-
-
-      <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}>
-      {showTable1 && <Grid item >
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 1630 }} aria-label="customized table">
-              <TableHead >
-                {/* <TableRow  >
+          <TabPanel>
+            {/* <Grid item> */}
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 1800 }} aria-label="customized table">
+                <TableHead>
+                  {/* <TableRow  >
                   <StyledTableCell>Current Notification</StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                 </TableRow> */}
-                <TableRow  >
-                  <StyledTableCell>Notification No.</StyledTableCell>
-                  <StyledTableCell align="right">Data/Time</StyledTableCell>
-                  <StyledTableCell align="right">Well Location</StyledTableCell>
-                  <StyledTableCell align="right">Well Installation</StyledTableCell>
-                  <StyledTableCell align="right">Well number</StyledTableCell>
-                  <StyledTableCell align="right">Description</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
+                  <TableRow>
+                    <StyledTableCell>Notification No.</StyledTableCell>
+                    <StyledTableCell align="left" width="10%">
+                      Data/Time
                     </StyledTableCell>
-                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-      }
-        {showTable2 &&<Grid item>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 1630 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
+                    <StyledTableCell align="left" width="20%">
+                      Well Location
                     </StyledTableCell>
-                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-      }
-        </Grid>
-      <Button variant='solid'sx={{width:'150px'}} onClick={() => handleToggle('table1')}>Current Notification</Button>
-      <Button variant='solid' sx={{width:'150px'}} onClick={() => handleToggle('table2')}> Open Complaint </Button>
-
-    </Grid>
-
+                    <StyledTableCell align="left" width="20">
+                      Well Installation
+                    </StyledTableCell>
+                    <StyledTableCell align="left" width="20%">
+                      Well number
+                    </StyledTableCell>
+                    <StyledTableCell align="left" width="30%">
+                      Description
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.calories}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.carbs}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.protein}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.protein}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* </Grid> */}
+          </TabPanel>
+          <TabPanel>
+            {/* <Grid item> */}
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 1800 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                    <StyledTableCell align="right">Calories</StyledTableCell>
+                    <StyledTableCell align="right">
+                      Fat&nbsp;(g)
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      Carbs&nbsp;(g)
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      Protein&nbsp;(g)
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.calories}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.carbs}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.protein}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* </Grid> */}
+          </TabPanel>
+        </Tabs>
+      </Grid>
+    </div>
   );
 }
-
-
