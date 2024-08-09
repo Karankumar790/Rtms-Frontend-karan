@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import CardContent from '@mui/material/CardContent';
 import { Card } from '@mui/joy'
 
@@ -8,7 +8,6 @@ import pressure from '../../../../public/assets/PRESSURE.png'
 import battery from '../../../../public/assets/battery.png'
 import solar from '../../../../public/assets/SOLAR1.png'
 import network from '../../../../public/assets/Network.png'
-import { useState } from 'react';
 
 
 
@@ -59,11 +58,11 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('Frozen yoghurt'),
-  createData('Ice cream sandwich'),
-  createData('Eclair'),
-  createData('Cupcake'),
-  createData('Gingerbread'),
+  createData('1'),
+  createData('2'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
 ];
 
 export default function BasicCard() {
@@ -84,7 +83,7 @@ export default function BasicCard() {
     <Grid container gap={6} >
        <Grid container sx={{ display: "flex", justifyContent: "space-between" }} gap={6}>
         <Grid item>
-          <Card sx={{ width: 320 }}>
+          <Card className='box-shadow' sx={{ width: 320 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -96,8 +95,8 @@ export default function BasicCard() {
 
         </Grid>
 
-        <Grid item>
-          <Card sx={{ width: 320 }}>
+        <Grid  item>
+          <Card className='box-shadow' sx={{ width: 320 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -110,7 +109,7 @@ export default function BasicCard() {
         </Grid>
 
         <Grid item>
-          <Card sx={{ width: 320 }}>
+          <Card className='box-shadow' sx={{ width: 320 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -123,7 +122,7 @@ export default function BasicCard() {
         </Grid>
 
         <Grid item >
-          <Card  className='box-shadow' sx={{ width: 270 }}>
+          <Card  className='box-shadow' sx={{ width: 320 }}>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
               <Box fontSize='large'>2122</Box>
@@ -137,7 +136,7 @@ export default function BasicCard() {
         
         {/* <Grid container sx={{ display: "flex", justifyContent: "space-evenly" }}> */}
           <Grid item >
-            <Card sx={{ width: 320 }}>
+            <Card className='box-shadow' sx={{ width: 320 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={battery} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -149,7 +148,7 @@ export default function BasicCard() {
           </Grid>
 
           <Grid item>
-            <Card sx={{ width: 320 }}>
+            <Card className='box-shadow' sx={{ width: 320 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={solar} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -161,7 +160,7 @@ export default function BasicCard() {
           </Grid>
 
           <Grid item>
-            <Card sx={{ width: 320 }}>
+            <Card className='box-shadow' sx={{ width: 320 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={network} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -173,7 +172,7 @@ export default function BasicCard() {
           </Grid>
 
           <Grid item>
-            <Card sx={{ width: 320 }}>
+            <Card className='box-shadow' sx={{ width: 320 }}>
               <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
                 <img src={network} alt="" srcset="" style={{ width: '6rem', height: '6rem' }} />
                 <Box fontSize='large'>2122</Box>
@@ -189,9 +188,6 @@ export default function BasicCard() {
 
       {/* ---------------code for table------------------------------- */}
       
-     <button onClick={handleButtonClick}>
-      {showTable ? 'Hide Current Notification' : 'Show Current Notification'}
-     </button>
 
 
 
@@ -226,6 +222,8 @@ export default function BasicCard() {
                     <StyledTableCell align="right">{row.fat}</StyledTableCell>
                     <StyledTableCell align="right">{row.carbs}</StyledTableCell>
                     <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+
                   </StyledTableRow>
                 ))}
               </TableBody>
@@ -263,8 +261,8 @@ export default function BasicCard() {
         </Grid>
       }
         </Grid>
-      <Button variant='solid'sx={{width:'150px'}} onClick={() => handleToggle('table1')}>Current Notification</Button>
-      <Button variant='solid' sx={{width:'150px'}} onClick={() => handleToggle('table2')}> Open Complaint </Button>
+      <Button variant='contained'sx={{width:'200px'}} onClick={() => handleToggle('table1')}>Current Notification</Button>
+      <Button variant='contained' sx={{width:'200px'}} onClick={() => handleToggle('table2')}> Open Complaint </Button>
 
     </Grid>
 
