@@ -7,7 +7,6 @@ const Signup = lazy(() => import('./Pages/Signup/Signup.jsx'))
 const Dashboard = lazy(() => import('./Pages/Dashboard/index.jsx'))
 const Forgot = lazy(() => import('./Pages/Forgot/Forgot.jsx'))
 const Reset = lazy(() => import('./components/Reset/Reset.jsx'))
-const Table = lazy(() => import('./Pages/Dashboard/Table/Table.jsx'))
 const Virtual = lazy(() => import('./Pages/Dashboard/Virtual/Virtual.jsx'))
 const Monitor = lazy(() => import('./Pages/Dashboard/Monitor/Monitor.jsx'))
 
@@ -29,21 +28,19 @@ function App() {
     {
       path: '/dashboard', element: <Dashboard />,
       children: [
-        { path: "", element: <Home /> },
-        {path:"table",element:<Table/>},
-        {path:"virtual",element:<Virtual/>},
-        {path:"monitor",element:<Monitor/>},
-        {path:"crystal",element:<Crystal/>},
-        {path:"complaint",element:<ComplaintHistory/>},
-        {path:"notification",element:<NotificationHistory/>},
-        {path:"edit",element:<Edit/>},
-        {path:"logout",element:<Logout/>}
+        { path: "/dashboard", element: <Home /> },
+        {path:"/dashboard/monitor",element:<Monitor/>},
+        {path:"/dashboard/virtual",element:<Virtual/>},
+        {path:"/dashboard/crystal",element:<Crystal/>},
+        {path:"/dashboard/complaint",element:<ComplaintHistory/>},
+        {path:"/dashboard/notification",element:<NotificationHistory/>},
+        {path:"/dashboard/edit",element:<Edit/>},
+        {path:"/dashboard/logout",element:<Logout/>}
       ]
     },
     { path: '/reset', element: <Reset /> },
     { path: '/otp' , element: <Otp />},
-    { path: '/forgot', element: <Forgot /> },
-
+    { path: '/forgot', element: <Forgot /> }
   ])
 
   return (

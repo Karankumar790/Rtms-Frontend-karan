@@ -188,11 +188,13 @@ import { useTheme } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 
 export default function Dashboard() {
+
+
   const theme = useTheme();
   const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen(false);
   };
 
   const handleDrawerClose = () => {
@@ -200,6 +202,7 @@ export default function Dashboard() {
   };
 
   return (
+    
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />

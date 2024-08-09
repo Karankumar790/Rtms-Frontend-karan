@@ -205,11 +205,11 @@ export default function BasicCard() {
                 </TableRow> */}
                 <TableRow  >
                   <StyledTableCell>Notification No.</StyledTableCell>
-                  <StyledTableCell align="right">Data/Time</StyledTableCell>
-                  <StyledTableCell align="right">Well Location</StyledTableCell>
-                  <StyledTableCell align="right">Well Installation</StyledTableCell>
-                  <StyledTableCell align="right">Well number</StyledTableCell>
-                  <StyledTableCell align="right">Description</StyledTableCell>
+                  <StyledTableCell align="left">Data/Time</StyledTableCell>
+                  <StyledTableCell align="left">Well Location</StyledTableCell>
+                  <StyledTableCell align="left">Well Installation</StyledTableCell>
+                  <StyledTableCell align="left">Well number</StyledTableCell>
+                  <StyledTableCell align="left">Description</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -236,11 +236,13 @@ export default function BasicCard() {
             <Table sx={{ minWidth: 1630 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                  <StyledTableCell>Complaint No.</StyledTableCell>
+                  <StyledTableCell align="left">Date/Time</StyledTableCell>
+                  <StyledTableCell align="left">Notification No.</StyledTableCell>
+                  <StyledTableCell align="left">Raiser Name</StyledTableCell>
+                  <StyledTableCell align="left">Taker Name</StyledTableCell>
+                  <StyledTableCell align="left">Description</StyledTableCell>
+
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -249,10 +251,12 @@ export default function BasicCard() {
                     <StyledTableCell component="th" scope="row">
                       {row.name}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="left">{row.calories}</StyledTableCell>
+                    <StyledTableCell align="left">{row.fat}</StyledTableCell>
+                    <StyledTableCell align="left">{row.carbs}</StyledTableCell>
+                    <StyledTableCell align="left">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="left">{row.protein}</StyledTableCell>
+
                   </StyledTableRow>
                 ))}
               </TableBody>
