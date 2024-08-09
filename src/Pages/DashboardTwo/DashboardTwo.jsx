@@ -10,6 +10,7 @@ import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import Home from '../Dashboard/Home/Home.jsx';
 import { pink } from '@mui/material/colors';
 
 function SideBar() {
@@ -27,8 +28,8 @@ function SideBar() {
     return (
         <PageContainer className='bgImg' showfooter showheader>
             <Grid container sx={{height:'100%'}} >
-                <Grid item  style={{backgroundColor:'black' }} >
-                    <Box >
+                <Grid item lg={2} md={2} sm={2} xs={2}  style={{backgroundColor:'black' }} >
+                    <Box>
                         <List >
                             {menuItems.map((item) => (
                                 <Grid color='white'>
@@ -40,6 +41,9 @@ function SideBar() {
                             ))}
                         </List>
                     </Box>
+                </Grid>
+                <Grid item lg={10} md={10} sm={10} xs={10}>
+                 <Home/>
                 </Grid>
             </Grid>
         </PageContainer>
