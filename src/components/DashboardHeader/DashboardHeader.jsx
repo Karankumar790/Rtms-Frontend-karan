@@ -47,7 +47,7 @@ export default function Header({ open, handleDrawerOpen }) {
   };
 
   return (
-    <AppBar position="fixed" open={open} sx={{ backgroundColor: '#8C000B' }}>
+    <AppBar position="fixed" open={open} sx={{ backgroundColor: '#8C000B'}}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -62,7 +62,7 @@ export default function Header({ open, handleDrawerOpen }) {
           <MenuIcon />
         </IconButton>
         <Grid container justifyContent={'space-between'}>
-          <Box>
+          <Box py={1.2}>
             <Typography variant='h5' component="div" >Oil & Natural Gas Corporation</Typography>
             <Typography variant='h6' sx={{ typography: 'body1' }}>Real Time Well Monitoring System</Typography>
           </Box>
