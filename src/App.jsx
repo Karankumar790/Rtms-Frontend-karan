@@ -7,7 +7,6 @@ const Signup = lazy(() => import('./Pages/Signup/Signup.jsx'))
 const Dashboard = lazy(() => import('./Pages/Dashboard/index.jsx'))
 const Forgot = lazy(() => import('./Pages/Forgot/Forgot.jsx'))
 const Reset = lazy(() => import('./components/Reset/Reset.jsx'))
-const Table = lazy(() => import('./Pages/Dashboard/Table/Table.jsx'))
 const Virtual = lazy(() => import('./Pages/Dashboard/Virtual/Virtual.jsx'))
 const Monitor = lazy(() => import('./Pages/Dashboard/Monitor/Monitor.jsx'))
 
@@ -31,9 +30,8 @@ function App() {
       path: '/dashboard', element: <Dashboard />,
       children: [
         { path: "/dashboard", element: <Home /> },
-        {path:"/dashboard/table",element:<Table/>},
-        {path:"/dashboard/virtual",element:<Virtual/>},
         {path:"/dashboard/monitor",element:<Monitor/>},
+        {path:"/dashboard/virtual",element:<Virtual/>},
         {path:"/dashboard/crystal",element:<Crystal/>},
         {path:"/dashboard/complaint",element:<ComplaintHistory/>},
         {path:"/dashboard/notification",element:<NotificationHistory/>},
@@ -44,7 +42,6 @@ function App() {
     { path: '/reset', element: <Reset /> },
     { path: '/otp' , element: <Otp />},
     { path: '/forgot', element: <Forgot /> }
-
   ])
 
   return (

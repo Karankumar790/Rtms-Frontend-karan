@@ -64,7 +64,8 @@ const rows = [
 ];
 
 export default function BasicCard() {
-  const [showTable1, setShowTable1] = useState(false);
+
+  const [showTable1, setShowTable1] = useState(true);
   const [showTable2, setShowTable2] = useState(false);
 
   const handleToggle = (table) => {
@@ -262,7 +263,7 @@ export default function BasicCard() {
             {/* <Grid item> */}
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 1800 }} aria-label="customized table">
-                <TableHead>
+                {/* <TableHead> */}
                   {/* <TableRow  >
                   <StyledTableCell>Current Notification</StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
@@ -270,95 +271,72 @@ export default function BasicCard() {
                   <StyledTableCell align="right"></StyledTableCell>
                   <StyledTableCell align="right"></StyledTableCell>
                 </TableRow> */}
-                  <TableRow>
-                    <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left" width="10%">
-                      Data/Time
-                    </StyledTableCell>
-                    <StyledTableCell align="left" width="20%">
-                      Well Location
-                    </StyledTableCell>
-                    <StyledTableCell align="left" width="20">
-                      Well Installation
-                    </StyledTableCell>
-                    <StyledTableCell align="left" width="20%">
-                      Well number
-                    </StyledTableCell>
-                    <StyledTableCell align="left" width="30%">
-                      Description
-                    </StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.calories}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.carbs}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.protein}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.protein}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
+                <TableRow  >
+                  <StyledTableCell>Notification No.</StyledTableCell>
+                  <StyledTableCell align="left">Data/Time</StyledTableCell>
+                  <StyledTableCell align="left">Well Location</StyledTableCell>
+                  <StyledTableCell align="left">Well Installation</StyledTableCell>
+                  <StyledTableCell align="left">Well number</StyledTableCell>
+                  <StyledTableCell align="left">Description</StyledTableCell>
+                </TableRow>
               </Table>
+              <TableBody>
+                {rows.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+
+                  </StyledTableRow>
+                ))}
+              </TableBody>
             </TableContainer>
-            {/* </Grid> */}
-          </TabPanel>
-          <TabPanel>
-            {/* <Grid item> */}
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 1800 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                    <StyledTableCell align="right">Calories</StyledTableCell>
-                    <StyledTableCell align="right">
-                      Fat&nbsp;(g)
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      Carbs&nbsp;(g)
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      Protein&nbsp;(g)
-                    </StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.calories}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.carbs}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.protein}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            {/* </Grid> */}
           </TabPanel>
         </Tabs>
-      </Grid>
+      
+        {showTable2 &&<Grid item>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 1630 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Complaint No.</StyledTableCell>
+                  <StyledTableCell align="left">Date/Time</StyledTableCell>
+                  <StyledTableCell align="left">Notification No.</StyledTableCell>
+                  <StyledTableCell align="left">Raiser Name</StyledTableCell>
+                  <StyledTableCell align="left">Taker Name</StyledTableCell>
+                  <StyledTableCell align="left">Description</StyledTableCell>
+
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.calories}</StyledTableCell>
+                    <StyledTableCell align="left">{row.fat}</StyledTableCell>
+                    <StyledTableCell align="left">{row.carbs}</StyledTableCell>
+                    <StyledTableCell align="left">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="left">{row.protein}</StyledTableCell>
+
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      }
+        </Grid>
+      <Button variant='contained'sx={{width:'200px'}} onClick={() => handleToggle('table1')}>Current Notification</Button>
+      <Button variant='contained' sx={{width:'200px'}} onClick={() => handleToggle('table2')}> Open Complaint </Button>
+
     </div>
+
   );
 }
