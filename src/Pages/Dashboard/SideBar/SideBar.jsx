@@ -19,8 +19,9 @@ import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
-import ongc_logo from '/assets/ongc2.png'
+import ongc_logo from '/assets/ongc2.png';
 import { Link } from 'react-router-dom';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -70,25 +71,22 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Sidebar({ open, handleDrawerClose }) {
-    const mainuItems = [
-        {
-            name: "Dashboard",
-            icon: <HomeIcon sx={{color:'black'}}/>,
-            path: "/dashboard"
-        },
-        { name: "Well Monitor", icon: <MonitorIcon sx={{color:'black',}}/>, path: "/dashboard/monitor" },
-        { name: "Virtual Flow", icon: <ClearAllIcon sx={{color:'black'}}/>, path: "/dashboard/virtual" },
-        { name: "Crystal Report", icon: <DescriptionIcon sx={{color:'black'}}/>, path: "/dashboard/crystal" },
-        { name: "Complaint History", icon: <HistoryIcon sx={{color:'black'}}/>, path: "/dashboard/complaint" },
-        { name: "Notification History", icon: <NotificationsIcon sx={{color:'black'}}/>, path: "/dashboard/notification" },
-        // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
-        // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
-    ]
     const theme = useTheme();
 
+    // Define menu items with their respective icons and paths
+    const menuItems = [
+        { name: 'Dashboard', icon: <HomeIcon sx={{ color: 'black' }} />, path: '/dashboard' },
+        { name: 'Well Monitor', icon: <MonitorIcon sx={{ color: 'black' }} />, path: '/dashboard/monitor' },
+        { name: 'Virtual Flow', icon: <ClearAllIcon sx={{ color: 'black' }} />, path: '/dashboard/virtual' },
+        { name: 'Crystal Report', icon: <DescriptionIcon sx={{ color: 'black' }} />, path: '/dashboard/crystal' },
+        { name: 'Complaint History', icon: <HistoryIcon sx={{ color: 'black' }} />, path: '/dashboard/complaint' },
+        { name: 'Notification History', icon: <NotificationsIcon sx={{ color: 'black' }} />, path: '/dashboard/notification' },
+        // { name: 'Edit Profile', icon: <EditIcon sx={{ color: 'black' }} />, path: '/dashboard/edit' },
+        // { name: 'Log Out', icon: <LogoutIcon sx={{ color: 'black' }} />, path: '/dashboard/logout' }
+    ];
 
     return (
-        <Drawer variant="permanent" open={open} sx={{ backgroundColor: "black" }}>
+        <Drawer variant="permanent" open={open} sx={{ backgroundColor: 'black' }}>
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
                 <IconButton onClick={handleDrawerClose}>
@@ -98,16 +96,9 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
             <List>
                 <Divider sx={{ mt: 0.5, mb: 0.5 }} />
-                {/* {['Dashboard', 'Well Monitor', 'Virtual Flow', 'Crystal Report', 'Complaint History', 'Notification  History','Edit Profile','Log Out'] */}
-
-
-                {mainuItems?.map((text, index) => (
-                    <Link to={text.path} style={{textDecoration:'none', color:"black"}}>
-                        <ListItem key={text} disablePadding sx={{
-                            display: 'block',  borderBottom: index < 7 ? '1px solid #ddd' : 'none'
-
-                        }}>
-
+                {menuItems.map((item, index) => (
+                    <Link to={item.path} key={item.name} style={{ textDecoration: 'none', color: 'black' }}>
+                        <ListItem disablePadding sx={{ display: 'block', borderBottom: index < menuItems.length - 1 ? '1px solid #ddd' : 'none' }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
@@ -122,17 +113,14 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {text?.icon}
+                                    {item.icon}
                                 </ListItemIcon>
-
-                                <ListItemText   primary={text.name} sx={{ opacity: open ? 1 : 0 ,textDecoration:'none'}} />
+                                <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
-                            <Divider sx={{ mt: 0.5, mb: 0.5 }} />
                         </ListItem>
                     </Link>
                 ))}
             </List>
-
         </Drawer>
     );
 }
