@@ -43,7 +43,7 @@ jobs:
 
       - name: Deploy to Hostinger
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
+          sshpass -p "@#12345Abhishek" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
           echo "Deploying to VPS"
           cd ~/work/Oscars
           
