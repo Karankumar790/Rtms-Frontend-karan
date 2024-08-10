@@ -194,7 +194,7 @@ export default function Dashboard() {
   const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
-    setOpen(false);
+    setOpen(true);
   };
 
   const handleDrawerClose = () => {
@@ -202,14 +202,13 @@ export default function Dashboard() {
   };
 
   return (
-    
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p:2 }}>
         <Box sx={{ ...theme.mixins.toolbar }} />
-        <Outlet/>
+        <Outlet />
       </Box>
     </Box>
   );

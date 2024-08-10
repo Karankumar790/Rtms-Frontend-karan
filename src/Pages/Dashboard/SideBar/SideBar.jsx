@@ -73,14 +73,14 @@ export default function Sidebar({ open, handleDrawerClose }) {
     const mainuItems = [
         {
             name: "Dashboard",
-            icon: <HomeIcon sx={{color:'black'}}/>,
+            icon: <HomeIcon sx={{ color: 'black' }} />,
             path: "/dashboard"
         },
-        { name: "Well Monitor", icon: <MonitorIcon sx={{color:'black',}}/>, path: "/dashboard/monitor" },
-        { name: "Virtual Flow", icon: <ClearAllIcon sx={{color:'black'}}/>, path: "/dashboard/virtual" },
-        { name: "Crystal Report", icon: <DescriptionIcon sx={{color:'black'}}/>, path: "/dashboard/crystal" },
-        { name: "Complaint History", icon: <HistoryIcon sx={{color:'black'}}/>, path: "/dashboard/complaint" },
-        { name: "Notification History", icon: <NotificationsIcon sx={{color:'black'}}/>, path: "/dashboard/notification" },
+        { name: "Well Monitor", icon: <MonitorIcon sx={{ color: 'black', }} />, path: "/dashboard/monitor" },
+        { name: "Virtual Flow", icon: <ClearAllIcon sx={{ color: 'black' }} />, path: "/dashboard/virtual" },
+        { name: "Crystal Report", icon: <DescriptionIcon sx={{ color: 'black' }} />, path: "/dashboard/crystal" },
+        { name: "Complaint History", icon: <HistoryIcon sx={{ color: 'black' }} />, path: "/dashboard/complaint" },
+        { name: "Notification History", icon: <NotificationsIcon sx={{ color: 'black' }} />, path: "/dashboard/notification" },
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
         // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
     ]
@@ -88,7 +88,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
 
     return (
-        <Drawer variant="permanent" open={open} sx={{ backgroundColor: "black" }}>
+        <Drawer variant="permanent" open={open} >
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
                 <IconButton onClick={handleDrawerClose}>
@@ -102,9 +102,9 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
 
                 {mainuItems?.map((text, index) => (
-                    <Link to={text.path} style={{textDecoration:'none', color:"black"}}>
+                    <Link to={text.path} style={{ textDecoration: 'none', color: "black" }}>
                         <ListItem key={text} disablePadding sx={{
-                            display: 'block',  borderBottom: index < 7 ? '1px solid #ddd' : 'none'
+                            display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none'
 
                         }}>
 
@@ -125,7 +125,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                     {text?.icon}
                                 </ListItemIcon>
 
-                                <ListItemText   primary={text.name} sx={{ opacity: open ? 1 : 0 ,textDecoration:'none'}} />
+                                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0, textDecoration: 'none' }} />
                             </ListItemButton>
                             <Divider sx={{ mt: 0.5, mb: 0.5 }} />
                         </ListItem>
