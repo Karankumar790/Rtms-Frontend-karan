@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Grid, TextField } from '@mui/material'
+import { Button, Divider, Grid, TextField } from '@mui/material'
 import Input from '@mui/joy/Input';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -99,6 +99,9 @@ function Monitor() {
     chart: {
       type: 'line'
     },
+    stroke: {
+      width: 2, // Adjust the width here
+    },
     xaxis: {
       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
     }
@@ -194,6 +197,7 @@ function Monitor() {
               </FormControl>
             </Grid>
           </Grid>
+         
           {/* ----------------Input Field 2-------------------- */}
           <Grid container  sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
             <Grid item sm={6} md={4} xs={12} lg={3} >
@@ -261,8 +265,10 @@ function Monitor() {
             </Grid>
           </Grid>
         </Grid>
+
+        <Divider sx={{borderColor: 'lightgray', borderWidth: 1,mt:'30px'}}/>
         {/* ----------------Table--------------------------- */}
-        <Grid container   mt={3}>
+        <Grid container   mt={4} >
           <Grid item xs={12} sm={12} md={6} lg={6}  >
             <TableContainer component={Paper}>
               <Table aria-label="customized table">
@@ -297,7 +303,7 @@ function Monitor() {
             </TableContainer>
           </Grid>
           {/* ---------------chart---------------------------- */}
-          <Grid item xs={12} sm={12} md={6} lg={6} >
+          <Grid item xs={12} sm={12} md={6} lg={6}  >
             <Chart
               options={lineChartOptions}
               series={lineChartSeries}
