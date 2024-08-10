@@ -8,7 +8,7 @@ app.use(cors());
 app.use(Express.static(path.join(__dirname, 'frontend')))
 
 app.get("/api", (req, res) => {
-    res.send({b: 'Mohan Two', c: 6});
+    res.send({b: 4, c: 5});
 })
 
 app.get("*", (req, res) => {
