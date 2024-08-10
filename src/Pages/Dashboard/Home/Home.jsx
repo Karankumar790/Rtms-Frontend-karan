@@ -3,11 +3,11 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import CardContent from '@mui/material/CardContent';
 import { Card } from '@mui/joy'
 
-import well from '../../../../public/assets/WELL.png'
-import pressure from '../../../../public/assets/PRESSURE.png'
-import battery from '../../../../public/assets/battery.png'
-import solar from '../../../../public/assets/SOLAR1.png'
-import network from '../../../../public/assets/Network.png'
+import well from '/assets/WELL.png'
+import pressure from '/assets/PRESSURE.png'
+import battery from '/assets/battery.png'
+import solar from '/assets/SOLAR1.png'
+import network from '/assets/Network.png'
 // -------------import for table--------------------------------//
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
