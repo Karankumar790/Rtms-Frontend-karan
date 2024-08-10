@@ -53,7 +53,7 @@ jobs:
             git pull origin master
           else
             echo "Cloning repository"
-            git clone https://github.com/keshav9761/Oscars.git .
+            git clone https://github.com/Karan1980/RTMS-REACT.git .
           fi
 
           git status
