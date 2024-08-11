@@ -48,19 +48,19 @@ jobs:
           npm install
           npm run build
 
-          # Deploy the build to /var/www/foxboro.in
-          sudo rm -rf /var/www/foxboro.in/*
-          sudo cp -r dist/* /var/www/foxboro.in/
+          # Deploy the build to /var/www/foxboro
+          sudo rm -rf /var/www/foxboro/*
+          sudo cp -r dist/* /var/www/foxboro/
 
-          # Deploy the build to /var/www/ongc.foxboro.in
-          sudo rm -rf /var/www/ongc.foxboro.in/*
-          sudo cp -r dist/* /var/www/ongc.foxboro.in/
+          # Deploy the build to /var/www/ongc.foxboro
+          sudo rm -rf /var/www/ongc.foxboro/*
+          sudo cp -r dist/* /var/www/ongc.foxboro/
 
           # Restart Nginx to apply changes
           sudo systemctl restart nginx
 
           # Cleanup: Remove the ~/work/Oscars directory after deployment
           cd ~
-          # rm -rf ~/work/Oscars
+          rm -rf ~/work/Oscars
 
           EOF
