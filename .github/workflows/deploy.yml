@@ -61,6 +61,6 @@ jobs:
 
           # Cleanup: Remove the ~/work/Oscars directory after deployment
           cd ~
-          rm -rf ~/work/Oscars
+          # rm -rf ~/work/Oscars
 
           EOF
