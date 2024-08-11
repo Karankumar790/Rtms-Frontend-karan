@@ -19,7 +19,7 @@ function Login() {
                         <CardContent orientation="vertical">
                             <Grid item sx={{textAlign:"center"}} md={12} sm={12} xs={12}>
                                 <Typography pt={5} fontSize="xxx-large">
-                                    Welcome Keshav
+                                    Welcome
                                 </Typography>
                                 <Typography fontSize="large" color='#800000'>
                                     Real Time Well Monitoring System
