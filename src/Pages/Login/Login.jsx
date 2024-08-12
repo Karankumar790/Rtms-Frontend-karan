@@ -12,9 +12,7 @@ import CardContent from '@mui/joy/CardContent';
 function Login() {
     return (
         <PageContainer className='login-form-bg-image' showfooter showheader  >
-
             <Grid container height={'100%'} display={'flex'} justifyContent={'start'} padding={5} alignContent={'center'}>
-                <Grid item width={600}>
                     <Card >
                         <CardContent orientation="vertical">
                             <Grid item sx={{textAlign:"center"}} md={12} sm={12} xs={12}>
@@ -25,9 +23,8 @@ function Login() {
                                     Real Time Well Monitoring System
                                 </Typography>
                             </Grid>
-                            <Grid item alignItems={'center'}>
                                 <form>
-                                    <Grid container padding={5} spacing={2}>
+                                    <Grid container padding={1} spacing={1}>
                                         <Grid item sx={{ display: 'flex', alignItems: 'flex-end' }} md={12} sm={12} lg={12} xs={12}>
                                             <AccountCircle sx={{ color: 'action.active', mr: 1 }} fontSize='large' />
                                             <TextField className='custom-textfield' label="Username" variant="standard" fullWidth />
@@ -37,7 +34,7 @@ function Login() {
                                             <TextField className='custom-textfield' label="Password" variant="standard" fullWidth />
                                         </Grid>
                                     </Grid>
-                                    <Grid container padding={5} spacing={2} direction='column' py={2}>
+                                    <Grid container padding={1} spacing={1} direction='column' py={1}>
                                         <Grid item textAlign={'end'} >
                                             <Link to="/forgot" style={{ textDecoration: "none" }}>
                                                 Forgot Password
@@ -50,16 +47,14 @@ function Login() {
                                         </Grid>
                                         <Grid item textAlign="center">
                                             <Typography fontSize="small">Don't have an account?
-                                                <Link to='/signup' style={{ textDecoration: "none", margin:'4px'}}>Sign Up</Link>
+                                                <Link to='/signup' style={{ textDecoration: "none"}}> Sign Up</Link>
                                             </Typography>
                                         </Grid>
                                     </Grid>
                                 </form>
-                            </Grid>
                         </CardContent>
                     </Card>
                 </Grid>
-            </Grid>
         </PageContainer>
     )
 }
