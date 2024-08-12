@@ -48,6 +48,11 @@ const rows = [
   createData('3'),
   createData('4'),
   createData('5'),
+  createData('6'),
+  createData('7'),
+  createData('8'),
+  createData('9'),
+  createData('10'),
 ];
 
 
@@ -58,16 +63,27 @@ const rows = [
 
 function Monitor() {
   const [age, setAge] = React.useState('');
+  const [installation, setInstallation] = React.useState('');
+  const [number, setNumber] = React.useState('');
   
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
+  const handleChangeInstallation = (event) => {
+    setInstallation(event.target.value);
+  };
+
+  const handleChangeNumber = (event) => {
+    setNumber(event.target.value);
+  };
+
+
   return (
     <PageContainer>
-      <Grid Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }} >
-        <Grid item lg={3} md={3} sm={3} xs={3} sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-          <Grid item >
+
+        <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
@@ -86,15 +102,15 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
+                value={installation}
+                label="Well  Installation"
+                onChange={handleChangeInstallation}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -105,15 +121,15 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
+                value={number}
+                label="Well Number"
+                onChange={handleChangeNumber}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -125,7 +141,7 @@ function Monitor() {
             </FormControl>
 
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
@@ -145,79 +161,21 @@ function Monitor() {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid item  lg={3} md={3} sm={3} xs={3} sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-          <Grid item>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item>
-            <Input
-              type="date"
-              slotProps={{
-                input: {
-                  min: '2001-02-16',
-                  max: '2024-08-07',
-                },
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              type="date"
-              slotProps={{
-                input: {
-                  min: '2001-02-16',
-                  max: '2024-08-10',
-                },
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid item mt={2} >
+        <Grid container mt={2} >
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
               <TableHead >
                 <TableRow  >
-                  <StyledTableCell>Notification No.</StyledTableCell>
-                  <StyledTableCell align="left">Data/Time</StyledTableCell>
-                  <StyledTableCell align="left">Well Location</StyledTableCell>
-                  <StyledTableCell align="left">Well Installation</StyledTableCell>
-                  <StyledTableCell align="left">Well number</StyledTableCell>
-                  <StyledTableCell align="left">Description</StyledTableCell>
+                  <StyledTableCell>Well No.</StyledTableCell>
+                  <StyledTableCell align="left">GIP</StyledTableCell>
+                  <StyledTableCell align="left">CHP</StyledTableCell>
+                  <StyledTableCell align="left">THP</StyledTableCell>
+                  <StyledTableCell align="left">Battery %</StyledTableCell>
+                  <StyledTableCell align="left">Solar Power</StyledTableCell>
+                  <StyledTableCell align="left">Communication</StyledTableCell>
+                  <StyledTableCell align="left">Flow Status</StyledTableCell>
+                  <StyledTableCell align="left">Last Update</StyledTableCell>
+                  <StyledTableCell align="left">Alarm</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -231,6 +189,10 @@ function Monitor() {
                     <StyledTableCell align="right">{row.carbs}</StyledTableCell>
                     <StyledTableCell align="right">{row.protein}</StyledTableCell>
                     <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
 
                   </StyledTableRow>
                 ))}
@@ -238,10 +200,8 @@ function Monitor() {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid item lg={3} md={3} sm={3} xs={3}>
        
-        </Grid>
-      </Grid>
+      
     </PageContainer >
   )
 }

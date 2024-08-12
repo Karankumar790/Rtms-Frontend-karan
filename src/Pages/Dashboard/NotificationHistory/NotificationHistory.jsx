@@ -48,23 +48,33 @@ const rows = [
 
 function NotificationHistory() {
   const [age, setAge] = React.useState('');
+  const [notification, setNotification] = React.useState('');
+  const [installation, setInstallation] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const handleChangeNotification = (event) => {
+    setNotification(event.target.value);
+  };
+
+  const handleChangeInstallation = (event) => {
+    setInstallation(event.target.value);
+  };
   return (
     <PageContainer>
-      <Grid container  >
+     
         <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item >
+          <Grid item xs={12} sm={8} md={6} lg={3} >
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={notification}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleChangeNotification}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -75,7 +85,7 @@ function NotificationHistory() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
@@ -94,15 +104,15 @@ function NotificationHistory() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={installation}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleChangeInstallation}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -114,7 +124,7 @@ function NotificationHistory() {
             </FormControl>
 
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
@@ -165,8 +175,6 @@ function NotificationHistory() {
             </Table>
           </TableContainer>
         </Grid>
-
-      </Grid>
 
     </PageContainer>
   )
