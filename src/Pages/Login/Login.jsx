@@ -12,7 +12,7 @@ import CardContent from '@mui/joy/CardContent';
 function Login() {
     return (
         <PageContainer className='login-form-bg-image' showfooter showheader  >
-            <Grid container height={'100%'} display={'flex'} justifyContent={'start'} padding={5} alignContent={'center'}>
+            <Grid container padding={4} display={'flex'} justifyContent={'start'} alignContent={'center'}>
                     <Card >
                         <CardContent orientation="vertical">
                             <Grid item sx={{textAlign:"center"}} md={12} sm={12} xs={12}>
