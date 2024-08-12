@@ -54,7 +54,7 @@ jobs:
 
           # Deploy the build to /var/www/ongc.foxboro
           sudo rm -rf /var/www/ongc.foxboro/*
-          sudo cp -r dist/* /var/www/ongc.foxboro/
+          sudo cp -r dist/* /var/www/ongc.rtms.foxboro/
 
           # Restart Nginx to apply changes
           sudo systemctl restart nginx
