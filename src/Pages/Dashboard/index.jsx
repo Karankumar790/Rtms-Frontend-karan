@@ -188,6 +188,8 @@ import { useTheme } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 
 export default function Dashboard() {
+
+
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -204,9 +206,9 @@ export default function Dashboard() {
       <CssBaseline />
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p:2 }}>
         <Box sx={{ ...theme.mixins.toolbar }} />
-        <Outlet/>
+        <Outlet />
       </Box>
     </Box>
   );

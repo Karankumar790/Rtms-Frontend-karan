@@ -7,19 +7,19 @@ import CallIcon from '@mui/icons-material/Call';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { Link } from 'react-router-dom';
 
-
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
+
 
 
 function Signup() {
     return (
         <PageContainer className='bgImg' showheader showfooter>
-            <Grid container height={"100%"} display={'flex'} justifyContent={'start'} padding={5} alignContent={'center'}>
-                <Grid item width={600} >
-                    <Card >
+            <Grid container  display={'flex'} justifyContent={'start'}  alignContent={'center'}>
+                <Grid item padding={2} width={600} >
+                    <Card>
                         <CardContent orientation="vertical">
-                            <Grid item sx={{ textAlign: "center" }}>
+                            <Grid item pt={1} sx={{ textAlign: "center" }}>
                                 <Typography variant='h2'>Registration</Typography>
                                 <Typography variant='h5' color='#800000'>Create a New RTMS Account</Typography>
                             </Grid>
@@ -112,7 +112,7 @@ function Signup() {
 
                                             </Box>
 
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={2} sx={{ display: 'flex', alignItems: 'flex-end' }}>
 
 
                                                 <CameraAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
@@ -122,7 +122,7 @@ function Signup() {
                                                     component="label"
                                                     style={{ minWidth: "80px" }}
 
-                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" ,margin:'revert-layer' }}
+                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" }}
                                                 >
                                                     Choose file
                                                     <input
@@ -131,14 +131,7 @@ function Signup() {
                                                     />
                                                 </Button>
 
-                                                {/* <TextField
-                                                    label="No File Choosen"
-                                                    variant="standard"
-                                                    color="info"
-                                                    fullWidth
-                                                    className='custom-textfield'
-                                                /> */}
-
+                                               
                                             </Box>
 
                                         </Grid>
@@ -151,7 +144,7 @@ function Signup() {
                                         </Grid>
                                         <Grid item textAlign="center" mt={1.5}>
                                             <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20}  style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
-                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/CheckStatus' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                         </Grid>
                                     </Grid>
                                 </form>

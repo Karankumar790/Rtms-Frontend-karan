@@ -52,7 +52,7 @@ export default function Forgot() {
                   size="small"
                   sx={{ bgcolor: "#0c113b" }}
                 >
-                  <Typography>Access Dashboard</Typography>
+                  <Typography>Reset Password</Typography>
                 </Button>
               </Link>
             </Grid>

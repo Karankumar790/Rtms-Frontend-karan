@@ -1,6 +1,11 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
+import { Button, Grid, TextField } from '@mui/material'
+import Input from '@mui/joy/Input';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+// import { BarChart } from '@mui/x-charts/BarChart';
 
 
 
@@ -46,19 +52,24 @@ const rows = [
 
 
 
-function NotificationHistory() {
-  const [age, setAge] = React.useState('');
 
+
+
+
+function Monitor() {
+  const [age, setAge] = React.useState('');
+  
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
   return (
     <PageContainer>
-      <Grid container  >
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
+      <Grid Container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }} >
+        <Grid item lg={3} md={3} sm={3} xs={3} sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
           <Grid item >
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -96,7 +107,7 @@ function NotificationHistory() {
           </Grid>
           <Grid item>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -116,7 +127,7 @@ function NotificationHistory() {
           </Grid>
           <Grid item>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -134,7 +145,69 @@ function NotificationHistory() {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container  mt={3}>
+        <Grid item  lg={3} md={3} sm={3} xs={3} sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+          <Grid item>
+            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={age}
+                label="Well Location"
+                onChange={handleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>UP</MenuItem>
+                <MenuItem value={20}>MP</MenuItem>
+                <MenuItem value={30}>WB</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <Input
+              type="date"
+              slotProps={{
+                input: {
+                  min: '2001-02-16',
+                  max: '2024-08-07',
+                },
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <Input
+              type="date"
+              slotProps={{
+                input: {
+                  min: '2001-02-16',
+                  max: '2024-08-10',
+                },
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={age}
+                label="Well Location"
+                onChange={handleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>UP</MenuItem>
+                <MenuItem value={20}>MP</MenuItem>
+                <MenuItem value={30}>WB</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid item mt={2} >
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
               <TableHead >
@@ -165,11 +238,12 @@ function NotificationHistory() {
             </Table>
           </TableContainer>
         </Grid>
-
+        <Grid item lg={3} md={3} sm={3} xs={3}>
+       
+        </Grid>
       </Grid>
-
-    </PageContainer>
+    </PageContainer >
   )
 }
 
-export default NotificationHistory
+export default Monitor

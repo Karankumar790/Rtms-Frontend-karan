@@ -46,7 +46,7 @@ const rows = [
 
 
 
-function NotificationHistory() {
+function Virtual() {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -55,10 +55,10 @@ function NotificationHistory() {
   return (
     <PageContainer>
       <Grid container  >
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
+        <Grid container  sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
           <Grid item >
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -96,7 +96,7 @@ function NotificationHistory() {
           </Grid>
           <Grid item>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -116,7 +116,7 @@ function NotificationHistory() {
           </Grid>
           <Grid item>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
+              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
@@ -134,7 +134,7 @@ function NotificationHistory() {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container  mt={3}>
+        <Grid container  >
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
               <TableHead >
@@ -172,4 +172,4 @@ function NotificationHistory() {
   )
 }
 
-export default NotificationHistory
+export default Virtual
