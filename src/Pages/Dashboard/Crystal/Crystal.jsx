@@ -116,10 +116,10 @@ function Monitor() {
 
   return (
     <PageContainer>
-      <Grid Container spacing={2}>
-        <Grid container  sx={{ display: 'flex',flexDirection:'column' }}>
-          <Grid container  sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-            <Grid item sm={6} md={4} xs={12} lg={3}>
+      {/* <Grid Container spacing={2}> */}
+        {/* <Grid container sx={{ display: 'flex', flexDirection: 'column' }}> */}
+          <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+            <Grid item sm={8} md={6} xs={12} lg={3}>
               <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <InputLabel id="demo-select-large-label">Well Location</InputLabel>
                 <Select
@@ -138,7 +138,7 @@ function Monitor() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item sm={6} md={4} xs={12} lg={3}>
+            <Grid item sm={8} md={6} xs={12} lg={3}>
               <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
                 <Select
@@ -157,7 +157,7 @@ function Monitor() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item sm={6} md={4} xs={12} lg={3}>
+            <Grid item sm={8} md={6} xs={12} lg={3}>
               <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <InputLabel id="demo-select-large-label">Well Number</InputLabel>
                 <Select
@@ -177,7 +177,7 @@ function Monitor() {
               </FormControl>
 
             </Grid>
-            <Grid item sm={6} md={4} xs={12} lg={3}>
+            <Grid item sm={8} md={6} xs={12} lg={3}>
               <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <InputLabel id="demo-select-large-label">Parameters</InputLabel>
                 <Select
@@ -197,10 +197,10 @@ function Monitor() {
               </FormControl>
             </Grid>
           </Grid>
-         
+
           {/* ----------------Input Field 2-------------------- */}
-          <Grid container  sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-            <Grid item sm={6} md={4} xs={12} lg={3} >
+          <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+            <Grid item sm={8} md={6} xs={12} lg={3} >
               <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <InputLabel id="demo-select-large-label">Report Type</InputLabel>
                 <Select
@@ -219,10 +219,10 @@ function Monitor() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item sx={{width:"10px"}}sm={6} md={4} xs={12} lg={3} mt={1} pl={1} >
+            <Grid item sx={{ width: "10px" }} sm={8} md={6} xs={12} lg={3} mt={1} pl={1} >
               <Input
                 type="date"
-                sx={{width:'250px',height:'40px'}}
+                sx={{ width: '250px', height: '40px' }}
                 slotProps={{
                   input: {
                     min: '2001-02-16',
@@ -231,10 +231,10 @@ function Monitor() {
                 }}
               />
             </Grid>
-            <Grid item sm={6} md={4} xs={12} lg={3} mt={1} pl={1} >
+            <Grid item sm={8} md={6} xs={12} lg={3} mt={1} pl={1} >
               <Input
                 type="date"
-                sx={{width:'250px',height:'40px' }}
+                sx={{ width: '250px', height: '40px' }}
 
                 slotProps={{
                   input: {
@@ -244,7 +244,7 @@ function Monitor() {
                 }}
               />
             </Grid>
-            <Grid item sm={6} md={4} xs={12} lg={3}>
+            <Grid item sm={8} md={6} xs={12} lg={3}>
               <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <InputLabel id="demo-select-large-label">Resolution</InputLabel>
                 <Select
@@ -264,55 +264,62 @@ function Monitor() {
               </FormControl>
             </Grid>
           </Grid>
-        </Grid>
+        {/* </Grid> */}
 
-        <Divider sx={{borderColor: 'lightgray', borderWidth: 1,mt:'30px'}}/>
+        {/* <Divider sx={{ borderColor: 'lightgray', borderWidth: 1, mt: '30px' }} /> */}
         {/* ----------------Table--------------------------- */}
-        <Grid container   mt={4} >
-          <Grid item xs={12} sm={12} md={6} lg={6}  >
-            <TableContainer component={Paper}>
-              <Table aria-label="customized table">
-                <TableHead >
-                  <TableRow  >
-                    <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left">Data/Time</StyledTableCell>
-                    <StyledTableCell align="left">Well Location</StyledTableCell>
-                    <StyledTableCell align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell align="left">Well number</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="left">1</StyledTableCell>
-                      <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                      <StyledTableCell align="left">gbz</StyledTableCell>
-                      <StyledTableCell align="left">yes</StyledTableCell>
-                      {/* <StyledTableCell align="left">1</StyledTableCell> */}
-                      <StyledTableCell align="left">all good</StyledTableCell>
+        <Paper variant='outlined'>
+          <Grid container mt={4}  gap={3} sx={{display:'flex',justifyContent:'center'}} >
 
 
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <Grid item xs={12} sm={12} md={6} lg={6}  >
+
+              <TableContainer component={Paper}>
+                <Table aria-label="customized table">
+                  <TableHead >
+                    <TableRow  >
+                      <StyledTableCell>Notification No.</StyledTableCell>
+                      <StyledTableCell align="left">Data/Time</StyledTableCell>
+                      <StyledTableCell align="left">Well Location</StyledTableCell>
+                      <StyledTableCell align="left">Well Installation</StyledTableCell>
+                      <StyledTableCell align="left">Well number</StyledTableCell>
+                      <StyledTableCell align="left">Description</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <StyledTableRow key={row.name}>
+                        <StyledTableCell component="th" scope="row">
+                          {row.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="left">1</StyledTableCell>
+                        <StyledTableCell align="left">5/6/2024</StyledTableCell>
+                        <StyledTableCell align="left">gbz</StyledTableCell>
+                        <StyledTableCell align="left">yes</StyledTableCell>
+                        {/* <StyledTableCell align="left">1</StyledTableCell> */}
+                        <StyledTableCell align="left">all good</StyledTableCell>
+
+
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+            {/* ---------------chart---------------------------- */}
+            <Grid item xs={12} sm={12} md={6} lg={5}  >
+              <Paper variant='outlined'>
+                <Chart
+                  options={lineChartOptions}
+                  series={lineChartSeries}
+                  type="line"
+                  height={650}
+                />
+              </Paper>
+            </Grid>
           </Grid>
-          {/* ---------------chart---------------------------- */}
-          <Grid item xs={12} sm={12} md={6} lg={6}  >
-            <Chart
-              options={lineChartOptions}
-              series={lineChartSeries}
-              type="line"
-              height={650}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+        </Paper>
+      {/* </Grid> */}
     </PageContainer >
   )
 }

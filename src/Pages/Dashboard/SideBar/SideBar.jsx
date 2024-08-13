@@ -17,6 +17,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
+import EvStationIcon from '@mui/icons-material/EvStation';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png'
@@ -76,11 +77,37 @@ export default function Sidebar({ open, handleDrawerClose }) {
             icon: <HomeIcon sx={{ color: 'black' }} />,
             path: "/dashboard"
         },
-        { name: "Well Monitor", icon: <MonitorIcon sx={{ color: 'black', }} />, path: "/dashboard/monitor" },
-        { name: "Virtual Flow", icon: <ClearAllIcon sx={{ color: 'black' }} />, path: "/dashboard/virtual" },
-        { name: "Crystal Report", icon: <DescriptionIcon sx={{ color: 'black' }} />, path: "/dashboard/crystal" },
-        { name: "Complaint History", icon: <HistoryIcon sx={{ color: 'black' }} />, path: "/dashboard/complaint" },
-        { name: "Notification History", icon: <NotificationsIcon sx={{ color: 'black' }} />, path: "/dashboard/notification" },
+        {
+            name: "Well Monitor",
+            icon: <MonitorIcon sx={{ color: 'black', }} />,
+            path: "/dashboard/monitor"
+        },
+        {
+            name: "Virtual Flow",
+            icon: <ClearAllIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/virtual"
+        },
+        {
+            name: "Crystal Report",
+            icon: <DescriptionIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/crystal"
+        },
+        {
+            name: "Complaint History",
+            icon: <HistoryIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/complaint"
+        },
+        {
+            name: "Notification History",
+            icon: <NotificationsIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/notification"
+        },
+        {
+            name:"Well Master",
+            icon:<EvStationIcon sx={{color:'black'}}/> ,
+            path:"/dashboard/wellmaster",
+
+        }
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
         // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
     ]
