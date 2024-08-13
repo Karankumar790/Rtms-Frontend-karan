@@ -46,7 +46,7 @@ function Login() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link to="/dashboard">
+                                    <Link to="/otpsignup">
                                         <Button variant='contained' className='btn-primary' fullWidth type='submit'>Login</Button>
                                     </Link>
                                 </Grid>
