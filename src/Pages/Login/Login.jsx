@@ -34,7 +34,7 @@ function Login() {
                                     <TextField className='custom-textfield' label="Password" variant="standard" fullWidth />
                                 </Grid>
                             </Grid>
-<Grid item alignItems={'center'}>
+                            <Grid item alignItems={'center'}>
                                 <form>
                                     <Grid container padding={5} spacing={2}>
                                         <Grid item sx={{ display: 'flex', alignItems: 'flex-end' }} md={12} sm={12} lg={12} xs={12}>
@@ -59,11 +59,12 @@ function Login() {
                                         </Grid>
                                         <Grid item textAlign="center">
                                             <Typography fontSize="small">Don't have an account?
-                                                <Link to='/signup' style={{ textDecoration: "none", margin:'4px'}}>Sign Up</Link>
+                                                <Link to='/signup' style={{ textDecoration: "none", margin: '4px' }}>Sign Up</Link>
                                             </Typography>
                                         </Grid>
                                     </Grid>
                                 </form>
+                            </Grid>
                             <Grid container padding={1} spacing={1} direction='column' py={1}>
                                 <Grid item textAlign={'end'} >
                                     <Link to="/forgot" style={{ textDecoration: "none" }}>
