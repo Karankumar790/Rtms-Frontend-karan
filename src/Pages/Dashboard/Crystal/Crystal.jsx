@@ -17,8 +17,6 @@ import Paper from '@mui/material/Paper';
 import Chart from 'react-apexcharts';
 // import { BarChart } from '@mui/x-charts/BarChart';
 
-
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -52,16 +50,7 @@ const rows = [
   createData('3'),
   createData('4'),
   createData('5'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
 ];
-
-
-
-
-
-
 
 function Monitor() {
   const [age, setAge] = React.useState('');
@@ -115,212 +104,199 @@ function Monitor() {
   ];
 
   return (
-    <PageContainer>
-      {/* <Grid Container spacing={2}> */}
-        {/* <Grid container sx={{ display: 'flex', flexDirection: 'column' }}> */}
-          <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-            <Grid item sm={8} md={6} xs={12} lg={3}>
-              <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-large"
-                  value={age}
-                  label="Well Location"
-                  onChange={handleChange}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>UP</MenuItem>
-                  <MenuItem value={20}>MP</MenuItem>
-                  <MenuItem value={30}>WB</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item sm={8} md={6} xs={12} lg={3}>
-              <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-large"
-                  value={installation}
-                  label="Well Installation"
-                  onChange={handleChangeInstallation}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>UP</MenuItem>
-                  <MenuItem value={20}>MP</MenuItem>
-                  <MenuItem value={30}>WB</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item sm={8} md={6} xs={12} lg={3}>
-              <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                <InputLabel id="demo-select-large-label">Well Number</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-large"
-                  value={number}
-                  label="Well Number"
-                  onChange={handleChangeNumber}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>UP</MenuItem>
-                  <MenuItem value={20}>MP</MenuItem>
-                  <MenuItem value={30}>WB</MenuItem>
-                </Select>
-              </FormControl>
+    <div>
+      <Grid container spacing={3} pt={.5}>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={age}
+              label="Well Location"
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={installation}
+              label="Well Installation"
+              onChange={handleChangeInstallation}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-large-label">Well Number</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={number}
+              label="Well Number"
+              onChange={handleChangeNumber}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-large-label">Parameters</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={parameters}
+              label="Parameters"
+              onChange={handleChangeParameters}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-large-label">Report Type</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={report}
+              label="Report Type"
+              onChange={handleChangeReport}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <TextField
+              type="date"
+              fullWidth
+              slotProps={{
+                input: {
+                  min: '2001-02-16',
+                  max: '2024-08-10',
+                },
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <TextField
+              fullWidth
+              type="date"
+              slotProps={{
+                input: {
+                  min: '2001-02-16',
+                  max: '2024-08-07',
+                },
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-select-large-label">Resolution</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={resolution}
+              label="Resolution"
+              onChange={handleChangeResolution}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
 
-            </Grid>
-            <Grid item sm={8} md={6} xs={12} lg={3}>
-              <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                <InputLabel id="demo-select-large-label">Parameters</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-large"
-                  value={parameters}
-                  label="Parameters"
-                  onChange={handleChangeParameters}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>UP</MenuItem>
-                  <MenuItem value={20}>MP</MenuItem>
-                  <MenuItem value={30}>WB</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-
-          {/* ----------------Input Field 2-------------------- */}
-          <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-            <Grid item sm={8} md={6} xs={12} lg={3} >
-              <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                <InputLabel id="demo-select-large-label">Report Type</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-large"
-                  value={report}
-                  label="Report Type"
-                  onChange={handleChangeReport}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>UP</MenuItem>
-                  <MenuItem value={20}>MP</MenuItem>
-                  <MenuItem value={30}>WB</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item sx={{ width: "10px" }} sm={8} md={6} xs={12} lg={3} mt={1} pl={1} >
-              <Input
-                type="date"
-                sx={{ width: '250px', height: '40px' }}
-                slotProps={{
-                  input: {
-                    min: '2001-02-16',
-                    max: '2024-08-07',
-                  },
-                }}
-              />
-            </Grid>
-            <Grid item sm={8} md={6} xs={12} lg={3} mt={1} pl={1} >
-              <Input
-                type="date"
-                sx={{ width: '250px', height: '40px' }}
-
-                slotProps={{
-                  input: {
-                    min: '2001-02-16',
-                    max: '2024-08-10',
-                  },
-                }}
-              />
-            </Grid>
-            <Grid item sm={8} md={6} xs={12} lg={3}>
-              <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                <InputLabel id="demo-select-large-label">Resolution</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-large"
-                  value={resolution}
-                  label="Resolution"
-                  onChange={handleChangeResolution}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>UP</MenuItem>
-                  <MenuItem value={20}>MP</MenuItem>
-                  <MenuItem value={30}>WB</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-        {/* </Grid> */}
-
-        {/* <Divider sx={{ borderColor: 'lightgray', borderWidth: 1, mt: '30px' }} /> */}
-        {/* ----------------Table--------------------------- */}
-        <Paper variant='outlined'>
-          <Grid container mt={4}  gap={3} sx={{display:'flex',justifyContent:'center'}} >
-
-
-            <Grid item xs={12} sm={12} md={6} lg={6}  >
-
-              <TableContainer component={Paper}>
-                <Table aria-label="customized table">
-                  <TableHead >
-                    <TableRow  >
-                      <StyledTableCell>Notification No.</StyledTableCell>
-                      <StyledTableCell align="left">Data/Time</StyledTableCell>
-                      <StyledTableCell align="left">Well Location</StyledTableCell>
-                      <StyledTableCell align="left">Well Installation</StyledTableCell>
-                      <StyledTableCell align="left">Well number</StyledTableCell>
-                      <StyledTableCell align="left">Description</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <StyledTableRow key={row.name}>
-                        <StyledTableCell component="th" scope="row">
-                          {row.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">1</StyledTableCell>
-                        <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                        <StyledTableCell align="left">gbz</StyledTableCell>
-                        <StyledTableCell align="left">yes</StyledTableCell>
-                        {/* <StyledTableCell align="left">1</StyledTableCell> */}
-                        <StyledTableCell align="left">all good</StyledTableCell>
-
-
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-            {/* ---------------chart---------------------------- */}
-            <Grid item xs={12} sm={12} md={6} lg={5}  >
-              <Paper variant='outlined'>
-                <Chart
-                  options={lineChartOptions}
-                  series={lineChartSeries}
-                  type="line"
-                  height={650}
-                />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Paper>
-      {/* </Grid> */}
-    </PageContainer >
+      {/* ----------------Table--------------------------- */}
+      <Grid container spacing={3} mt={4}>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Paper >
+            <TableContainer>
+              <Table aria-label="customized table">
+                <TableHead >
+                  <TableRow  >
+                    <StyledTableCell>Notification No.</StyledTableCell>
+                    <StyledTableCell align="left">Data/Time</StyledTableCell>
+                    <StyledTableCell align="left">Well Location</StyledTableCell>
+                    <StyledTableCell align="left">Well Installation</StyledTableCell>
+                    <StyledTableCell align="left">Well number</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">1</StyledTableCell>
+                      <StyledTableCell align="left">5/6/2024</StyledTableCell>
+                      <StyledTableCell align="left">gbz</StyledTableCell>
+                      <StyledTableCell align="left">yes</StyledTableCell>
+                      <StyledTableCell align="left">all good</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </Grid>
+        {/* ---------------chart---------------------------- */}
+        <Grid item xs={12} sm={6} md={6} lg={6}  >
+          <Paper>
+            <Chart
+              options={lineChartOptions}
+              series={lineChartSeries}
+              type="line"
+              height={500}
+            />
+          </Paper>
+        </Grid>
+      </Grid>
+    </div >
   )
 }
 
