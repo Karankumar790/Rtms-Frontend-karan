@@ -78,9 +78,9 @@ function ComplaintHistory() {
   };
   return (
     <PageContainer>
-      <Grid container  >
+      
         <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item >
+          <Grid item xs={12} sm={8} md={6} lg={3} >
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel className='custom-textfield' id="demo-select-large-label">Complain No.</InputLabel>
               <Select
@@ -99,7 +99,7 @@ function ComplaintHistory() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Notification no.</InputLabel>
               <Select
@@ -118,7 +118,7 @@ function ComplaintHistory() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Raiser Name</InputLabel>
               <Select
@@ -138,7 +138,7 @@ function ComplaintHistory() {
             </FormControl>
 
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Taker Name</InputLabel>
               <Select
@@ -190,7 +190,7 @@ function ComplaintHistory() {
           </TableContainer>
         </Grid>
 
-      </Grid>
+     
 
     </PageContainer>
   )

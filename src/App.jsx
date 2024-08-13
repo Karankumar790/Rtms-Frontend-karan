@@ -15,10 +15,10 @@ const ComplaintHistory = lazy(() => import('./Pages/Dashboard/ComplaintHistory/C
 const NotificationHistory = lazy(() => import('./Pages/Dashboard/NotificationHistory/NotificationHistory.jsx'))
 const Edit = lazy(() => import('./Pages/Dashboard/Edit/Edit.jsx'))
 const Logout = lazy(() => import('./Pages/Dashboard/Logout/Logout.jsx'))
-
-
-
 const Otp = lazy(() => import('./components/Otp/Otp.jsx'))
+const OtpSignup = lazy(()=> import('./components/Otp/OtpSignup.jsx'))
+const OtpForget = lazy(()=> import('./components/Otp/OtpForget.jsx'))
+const WellMaster = lazy(()=> import('./Pages/WellMaster/WellMaster.jsx'))
 
 
 function App() {
@@ -35,12 +35,15 @@ function App() {
         {path:"/dashboard/complaint",element:<ComplaintHistory/>},
         {path:"/dashboard/notification",element:<NotificationHistory/>},
         {path:"/dashboard/edit",element:<Edit/>},
-        {path:"/dashboard/logout",element:<Logout/>}
+        {path:"/dashboard/logout",element:<Logout/>},
+        {path:'/dashboard/wellmaster',element:<WellMaster/>}
       ]
     },
     { path: '/reset', element: <Reset /> },
     { path: '/otp' , element: <Otp />},
-    { path: '/forgot', element: <Forgot /> }
+    { path: '/forgot', element: <Forgot /> },
+    {path:'/otpsignup',element:<OtpSignup/>},
+    {path:'/otpforget',element:<OtpForget/>}
   ])
 
   return (
