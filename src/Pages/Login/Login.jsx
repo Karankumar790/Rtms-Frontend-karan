@@ -12,19 +12,19 @@ import CardContent from '@mui/joy/CardContent';
 function Login() {
     return (
         <PageContainer className='login-form-bg-image' showfooter showheader  >
-
             <Grid container height={'100%'} display={'flex'} justifyContent={'start'} padding={5} alignContent={'center'}>
-                <Grid item width={600}>
-                    <Card >
-                        <CardContent orientation="vertical">
-                            <Grid item sx={{textAlign:"center"}} md={12} sm={12} xs={12}>
-                                <Typography pt={5} fontSize="xxx-large">
-                                    Welcome
-                                </Typography>
-                                <Typography fontSize="large" color='#800000'>
-                                    Real Time Well Monitoring System
-                                </Typography>
-                            </Grid>
+                <Card >
+                    <CardContent orientation="vertical">
+                        <Grid item sx={{ textAlign: "center" }} md={12} sm={12} xs={12}>
+                            <Typography pt={3} fontSize="xxx-large">
+                                Welcome
+                            </Typography>
+                            <Typography fontSize="large" color='#800000'>
+                                Real Time Well Monitoring System
+                            </Typography>
+                        </Grid>
+                        <form>
+
                             <Grid item alignItems={'center'}>
                                 <form>
                                     <Grid container padding={5} spacing={2}>
@@ -37,28 +37,28 @@ function Login() {
                                             <TextField className='custom-textfield' label="Password" variant="standard" fullWidth />
                                         </Grid>
                                     </Grid>
-                                    <Grid container padding={5} spacing={2} direction='column' py={2}>
-                                        <Grid item textAlign={'end'} >
-                                            <Link to="/forgot" style={{ textDecoration: "none" }}>
-                                                Forgot Password
-                                            </Link>
-                                        </Grid>
-                                        <Grid item>
-                                            <Link to="/dashboard">
-                                                <Button variant='contained' className='btn-primary' fullWidth type='submit'>Login</Button>
-                                            </Link>
-                                        </Grid>
-                                        <Grid item textAlign="center">
-                                            <Typography fontSize="small">Don't have an account?
-                                                <Link to='/signup' style={{ textDecoration: "none", margin:'4px'}}>Sign Up</Link>
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
                                 </form>
                             </Grid>
-                        </CardContent>
-                    </Card>
-                </Grid>
+                            <Grid container padding={1} spacing={1} direction='column' py={1}>
+                                <Grid item textAlign={'end'} >
+                                    <Link to="/forgot" style={{ textDecoration: "none" }}>
+                                        Forgot Password
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link to="/otpsignup">
+                                        <Button variant='contained' className='btn-primary' fullWidth type='submit'>Login</Button>
+                                    </Link>
+                                </Grid>
+                                <Grid item textAlign="center">
+                                    <Typography fontSize="small">Don't have an account?
+                                        <Link to='/signup' style={{ textDecoration: "none" }}> Sign Up</Link>
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </CardContent>
+                </Card>
             </Grid>
         </PageContainer>
     )

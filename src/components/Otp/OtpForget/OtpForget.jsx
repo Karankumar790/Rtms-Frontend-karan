@@ -1,10 +1,10 @@
 import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
 import React from "react";
-import PageContainer from "../HOC/PageContainer";
+import PageContainer from "../../HOC/PageContainer";
 import { Link } from "react-router-dom";
 
 
-export default function Forgot() {
+export default function OtpForget() {
   return (
     <PageContainer
       showheader

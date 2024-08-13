@@ -4,7 +4,7 @@ import PageContainer from "../HOC/PageContainer";
 import { Link } from "react-router-dom";
 
 
-export default function Otpsign() {
+export default function OtpSignup() {
   return (
     <PageContainer
       showheader
@@ -45,14 +45,14 @@ export default function Otpsign() {
               justifyContent="center"
               sx={{ textAlign: "center" }}
             >
-              <Link to="/">
+              <Link to="/dashboard">
                 <Button
                   variant="contained"
                   color="primary"
                   size="small"
                   sx={{ bgcolor: "#0c113b" }}
                 >
-                  <Typography>Login</Typography>
+                  <Typography>DashBoard</Typography>
                 </Button>
               </Link>
             </Grid>

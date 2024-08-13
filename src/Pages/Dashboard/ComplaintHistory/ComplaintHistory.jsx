@@ -36,35 +36,56 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
+  createData('1'),
+  createData('2'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
+  createData('1'),
+  createData('2'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
 ];
 
 function ComplaintHistory() {
-  const [age, setAge] = React.useState("");
+  
+  const [compNo, setCompNo] = React.useState('');
+  const [notification, setNotification] = React.useState('');
+  const [rName, setRName] = React.useState('');
+  const [tName, setTname] = React.useState('');
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleLocation = (event) => {
+    setCompNo(event.target.value);
+  };
+
+  const handleNotification = (event) => {
+    setNotification(event.target.value);
+  };
+
+  const handleRaiserName = (event) => {
+    setRName(event.target.value);
+  };
+
+  const handleTakerName = (event) => {
+    setTname(event.target.value);
   };
   return (
-      <PageContainer style={{ overflowY: "hidden" }}>
-        <Grid
-          container
-          sx={{ display: "flex", justifyContent: "space-between" }}
-          
-        >
-          <Grid item >
+    <PageContainer>
+      
+        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
+          <Grid item xs={12} sm={8} md={6} lg={3} >
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Complain No.</InputLabel>
+              <InputLabel className='custom-textfield' id="demo-select-large-label">Complain No.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={compNo}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleLocation}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -75,7 +96,7 @@ function ComplaintHistory() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">
                 Notification no.
@@ -83,28 +104,28 @@ function ComplaintHistory() {
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={notification}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleNotification}
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
+                <MenuItem value={10}>1</MenuItem>
+                <MenuItem value={20}>2</MenuItem>
+                <MenuItem value={30}>all</MenuItem>
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Raiser Name</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={rName}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleRaiserName}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -115,15 +136,15 @@ function ComplaintHistory() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
             <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
               <InputLabel id="demo-select-large-label">Taker Name</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={tName}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleTakerName}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -135,53 +156,42 @@ function ComplaintHistory() {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container mt={3} sx={{overflowY: "scroll"}}>
-          {/* <div style={{ height: "300px", overflowY: "scroll" }}> */}
-            <TableContainer height={"500px"} component={Paper}>
-              <Table aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Complain No.</StyledTableCell>
-                    <StyledTableCell align="left">Data/Time</StyledTableCell>
-                    <StyledTableCell align="left">
-                      Well Location
+        <Grid container  mt={3}>
+          <TableContainer component={Paper} sx={{overflow:'scroll'}}>
+            <Table aria-label="customized table">
+              <TableHead >
+                <TableRow  >
+                  <StyledTableCell>Complain No.</StyledTableCell>
+                  <StyledTableCell align="left">Data/Time</StyledTableCell>
+                  <StyledTableCell align="left">Well Location</StyledTableCell>
+                  <StyledTableCell align="left">Well Installation</StyledTableCell>
+                  <StyledTableCell align="left">Well number</StyledTableCell>
+                  <StyledTableCell align="left">Description</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.name}
                     </StyledTableCell>
-                    <StyledTableCell align="left">
-                      Well Installation
-                    </StyledTableCell>
-                    <StyledTableCell align="left">Well number</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.calories}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.carbs}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.protein}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.protein}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          {/* </div> */}
+                    <StyledTableCell align="left">5/6/2024</StyledTableCell>
+                    <StyledTableCell align="left">Ghaziabad</StyledTableCell>
+                    <StyledTableCell align="left">Yes</StyledTableCell>
+                    <StyledTableCell align="left">3</StyledTableCell>
+                    <StyledTableCell align="left">good</StyledTableCell>
+
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Grid>
-      </PageContainer>
-   
-  );
+
+     
+
+    </PageContainer>
+  )
 }
 
 export default ComplaintHistory;
