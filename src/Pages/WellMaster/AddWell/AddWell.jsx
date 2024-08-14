@@ -178,7 +178,14 @@ function AddWell() {
             </Table>
           </Grid>
           <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant='contained'> Add Well</Button>
+            <Button variant='contained'
+             sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+              }}> Add Well</Button>
           </Grid>
         </Grid>
       </Paper>

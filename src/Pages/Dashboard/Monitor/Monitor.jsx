@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Grid, TextField } from '@mui/material'
+import { Button, Grid, TextField, Typography } from '@mui/material'
 import Input from '@mui/joy/Input';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -65,7 +65,7 @@ function Monitor() {
   const [age, setAge] = React.useState('');
   const [installation, setInstallation] = React.useState('');
   const [number, setNumber] = React.useState('');
-  
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -81,127 +81,129 @@ function Monitor() {
 
   return (
     <div>
-
-        <Grid container  spacing={3} pt={1} >
-          <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl fullWidth size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl  fullWidth size="small">
-              <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-large"
-                value={installation}
-                label="Well  Installation"
-                onChange={handleChangeInstallation}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl  fullWidth size="small" >
-              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-large"
-                value={number}
-                label="Well Number"
-                onChange={handleChangeNumber}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
-              </Select>
-            </FormControl>
-
-          </Grid>
-          <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl fullWidth size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
+      <Grid container >
+          <Typography variant='h4'>Well Monitor</Typography>
         </Grid>
-        <Grid container mt={2} >
-          <TableContainer component={Paper}>
-            <Table aria-label="customized table">
-              <TableHead >
-                <TableRow  >
-                  <StyledTableCell>Well No.</StyledTableCell>
-                  <StyledTableCell align="left">GIP</StyledTableCell>
-                  <StyledTableCell align="left">CHP</StyledTableCell>
-                  <StyledTableCell align="left">THP</StyledTableCell>
-                  <StyledTableCell align="left">Battery %</StyledTableCell>
-                  <StyledTableCell align="left">Solar Power</StyledTableCell>
-                  <StyledTableCell align="left">Communication</StyledTableCell>
-                  <StyledTableCell align="left">Flow Status</StyledTableCell>
-                  <StyledTableCell align="left">Last Update</StyledTableCell>
-                  <StyledTableCell align="left">Alarm</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+      <Grid container spacing={3} pt={1} >
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={age}
+              label="Well Location"
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-       
-      
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={installation}
+              label="Well  Installation"
+              onChange={handleChangeInstallation}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small" >
+            <InputLabel id="demo-select-large-label">Well Number</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={number}
+              label="Well Number"
+              onChange={handleChangeNumber}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={age}
+              label="Well Location"
+              onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container mt={2} >
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead >
+              <TableRow  >
+                <StyledTableCell sx={{fontSize:'18px'}}>Well No.</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">GIP</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">CHP</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">THP</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Battery %</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Solar Power</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Communication</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Flow Status</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Last Update</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Alarm</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+
+
     </div >
   )
 }

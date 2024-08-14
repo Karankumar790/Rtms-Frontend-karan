@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
+import { FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -66,7 +66,9 @@ function Virtual() {
   };
   return (
     <div>
-      
+      <Grid container  >
+          <Typography variant='h4'>Virtual Flow</Typography>
+        </Grid>
         <Grid container spacing={3} pt={1} >
           <Grid item xs={12} sm={8} md={6} lg={3} >
             <FormControl fullWidth size="small">
@@ -151,12 +153,12 @@ function Virtual() {
             <Table aria-label="customized table">
               <TableHead >
                 <TableRow  >
-                  <StyledTableCell>Notification No.</StyledTableCell>
-                  <StyledTableCell align="left">Data/Time</StyledTableCell>
-                  <StyledTableCell align="left">Well Location</StyledTableCell>
-                  <StyledTableCell align="left">Well Installation</StyledTableCell>
-                  <StyledTableCell align="left">Well number</StyledTableCell>
-                  <StyledTableCell align="left">Description</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Data/Time</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

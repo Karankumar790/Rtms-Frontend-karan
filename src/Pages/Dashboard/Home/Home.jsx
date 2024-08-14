@@ -162,12 +162,12 @@ export default function BasicCard() {
               <Table aria-label="customized table">
                 <TableHead >
                   <TableRow  >
-                    <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left">Date/Time</StyledTableCell>
-                    <StyledTableCell align="left">Well Location</StyledTableCell>
-                    <StyledTableCell align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell align="left">Well number</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'1px'}} align="left">Date/Time</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -188,7 +188,7 @@ export default function BasicCard() {
             <TableContainer>
               <Table aria-label="customized table">
                 <TableHead >
-                  <TableRow  >
+                  <TableRow>
                     <StyledTableCell>Notification No.</StyledTableCell>
                     <StyledTableCell align="left">Data/TIme</StyledTableCell>
                     <StyledTableCell align="left">Well Location</StyledTableCell>

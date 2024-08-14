@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../components/HOC/PageContainer'
-import { Button, Grid, Paper } from '@mui/material'
+import { Button, Grid, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
-import map from '../../../public/assets/map.jpg';
+import well from '/assets/WELL.png'
 import { Link } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -56,16 +56,26 @@ const rows = [
 
 function WellMaster() {
     return (
-        <PageContainer>
+        <div>
+            <Grid container>
+                <Typography variant='h4'>Well Master</Typography>
+            </Grid>
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
                 <Grid item p={1}>
-                    <Box sx={{ height: '100px', width: '100px', border: "2px solid black" }}>
-                        <img src={map} alt='img' height={'100px'} width={'100px'} />
+                    <Box sx={{ height: '100px', width: '100px' }}>
+                        <img src={well} alt='img' height={'100px'} width={'100px'} />
                     </Box>
                 </Grid>
                 <Grid item p={4}>
                     <Link to='/dashboard/addwell'>
-                        <Button variant='contained'>
+                        <Button variant='contained' 
+                          sx={{
+                            backgroundColor: 'green',   // Change button color to green
+                            '&:hover': {
+                                backgroundColor: 'darkgreen', // Optional: Change color on hover
+                            },
+                            fontSize: '16px',
+                            }}>
                             Add New well +
                         </Button>
                     </Link>
@@ -73,16 +83,15 @@ function WellMaster() {
             </Grid>
             {/* ------------------Table--------------------------------- */}
             <Grid container>
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper}  sx={{ maxHeight: 620, overflow: 'auto' }}>
                     <Table aria-label="customized table">
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell>Well Number</StyledTableCell>
-                                <StyledTableCell align="left">Well Location</StyledTableCell>
-                                <StyledTableCell align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell align="left">Latitude</StyledTableCell>
-                                <StyledTableCell align="left">Longitude</StyledTableCell>
-
+                                <StyledTableCell sx={{fontSize:'18px'}}>Well Number</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Latitude</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Longitude</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -105,7 +114,7 @@ function WellMaster() {
                 </TableContainer>
             </Grid>
 
-        </PageContainer>
+        </div>
     )
 }
 
