@@ -63,11 +63,11 @@ function NotificationHistory() {
     setInstallation(event.target.value);
   };
   return (
-    <PageContainer>
+    <div>
      
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
+        <Grid container spacing={3} pt={1} >
           <Grid item xs={12} sm={8} md={6} lg={3} >
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -86,7 +86,7 @@ function NotificationHistory() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -105,7 +105,7 @@ function NotificationHistory() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -125,7 +125,7 @@ function NotificationHistory() {
 
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -175,8 +175,7 @@ function NotificationHistory() {
             </Table>
           </TableContainer>
         </Grid>
-
-    </PageContainer>
+    </div>
   )
 }
 

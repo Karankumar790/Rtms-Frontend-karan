@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
 import map from '../../../public/assets/map.jpg';
+import { Link } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -56,16 +57,18 @@ const rows = [
 function WellMaster() {
     return (
         <PageContainer>
-            <Grid container sx={{display:'flex',justifyContent:'space-between'}} p={2}>
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
                 <Grid item p={1}>
-                    <Box sx={{ height:'100px' ,width:'100px',border:"2px solid black"}}>
-                        <img src={map}  alt='img' height={'100px'} width={'100px'}/>
+                    <Box sx={{ height: '100px', width: '100px', border: "2px solid black" }}>
+                        <img src={map} alt='img' height={'100px'} width={'100px'} />
                     </Box>
                 </Grid>
                 <Grid item p={4}>
-                    <Button variant='contained'>
-                        Add New well +
-                    </Button>
+                    <Link to='/dashboard/addwell'>
+                        <Button variant='contained'>
+                            Add New well +
+                        </Button>
+                    </Link>
                 </Grid>
             </Grid>
             {/* ------------------Table--------------------------------- */}

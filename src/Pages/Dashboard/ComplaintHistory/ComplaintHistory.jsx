@@ -77,11 +77,11 @@ function ComplaintHistory() {
     setTname(event.target.value);
   };
   return (
-    <PageContainer>
+    <div>
       
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
+        <Grid container   spacing={3} pt={1}  >
           <Grid item xs={12} sm={8} md={6} lg={3} >
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel className='custom-textfield' id="demo-select-large-label">Complain No.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -100,7 +100,7 @@ function ComplaintHistory() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Notification no.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -119,7 +119,7 @@ function ComplaintHistory() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Raiser Name</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -139,7 +139,7 @@ function ComplaintHistory() {
 
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Taker Name</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -189,10 +189,7 @@ function ComplaintHistory() {
             </Table>
           </TableContainer>
         </Grid>
-
-     
-
-    </PageContainer>
+    </div>
   )
 }
 

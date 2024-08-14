@@ -80,11 +80,11 @@ function Monitor() {
 
 
   return (
-    <PageContainer>
+    <div>
 
-        <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
+        <Grid container  spacing={3} pt={1} >
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -103,7 +103,7 @@ function Monitor() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl  fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -122,7 +122,7 @@ function Monitor() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl  fullWidth size="small" >
               <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -142,7 +142,7 @@ function Monitor() {
 
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -202,7 +202,7 @@ function Monitor() {
         </Grid>
        
       
-    </PageContainer >
+    </div >
   )
 }
 
