@@ -19,13 +19,15 @@ const NotificationHistory = lazy(() =>
 const Edit = lazy(() => import("./Pages/Dashboard/Edit/Edit.jsx"));
 const Logout = lazy(() => import("./Pages/Dashboard/Logout/Logout.jsx"));
 const CheckStatus = lazy(() =>
-  import("./Pages/Dashboard/CheckStatus/CheckStatus.jsx")
+  import("./CheckStatus/CheckStatus.jsx")
 );
 const Otp = lazy(() => import("./components/Otp/Otp.jsx"));
 const OtpForget = lazy(() =>
   import("./components/Otp/OtpForget/OtpForget.jsx")
 );
 const OtpSignup = lazy(() => import("./components/Otp/OtpSignup.jsx"));
+const OtpSign = lazy(() => import("./components/Otp/Otpsign.jsx"));
+
 const WellMaster = lazy(() => import("./Pages/WellMaster/WellMaster.jsx"));
 const SingleWell = lazy(() =>
   import("./Pages/Dashboard/SingleWell/SingleWell.jsx")
@@ -51,16 +53,19 @@ function App() {
         { path: "/dashboard/notification", element: <NotificationHistory /> },
         { path: "/dashboard/edit", element: <Edit /> },
         { path: "/dashboard/logout", element: <Logout /> },
-        { path: "/dashboard/CheckStatus", element: <CheckStatus /> },
 
         { path: "/dashboard/wellmaster", element: <WellMaster /> },
         { path: "/dashboard/singlewell", element: <SingleWell /> },
       ],
     },
+    { path: "/CheckStatus", element: <CheckStatus /> },
+
     { path: "/reset", element: <Reset /> },
     { path: "/otp", element: <Otp /> },
     { path: "/forgot", element: <Forgot /> },
     { path: "/otpsignup", element: <OtpSignup /> },
+    { path: "/otpsign", element: <OtpSign /> },
+
     { path: "/otpforget", element: <OtpForget /> },
   ]);
 

@@ -20,14 +20,14 @@ export default function OtpSignup() {
           <form>
             <Grid item mt={2}>
               <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
-                Please Enter The OTP To Verify Your Account
+              Enter OTP From E-Mail
               </Typography>
             </Grid>
-            <Grid item mt={2}>
+            {/* <Grid item mt={2}>
               <Typography variant="h5" textAlign="center">
-                OTP has been sent to your registered E-mail & Mobile
+                OTP has been sent to your registered E-mail
               </Typography>
-            </Grid>
+            </Grid> */}
             {/* Input otp value  */}
             <Grid item mt={3} display="flex" gap={2} justifyContent="center" justifyItems="center">
               {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
@@ -52,7 +52,7 @@ export default function OtpSignup() {
                   size="small"
                   sx={{ bgcolor: "#0c113b" }}
                 >
-                  <Typography>DashBoard</Typography>
+                 <Link to='/CheckStatus' style={{textDecoration:'none', color:'white'}}> <Typography>Submit</Typography></Link>
                 </Button>
               </Link>
             </Grid>

@@ -11,6 +11,7 @@ import CardContent from '@mui/joy/CardContent';
 
 
 
+
 function Signup() {
     return (
         <PageContainer className='bgImg' showheader showfooter>
@@ -25,7 +26,7 @@ function Signup() {
                             <Grid item alignItems={'center'}>
                                 <form>
                                     <Grid item gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Grid item padding={5}>
+                                        <Grid item pt={2} pb={4} pl={5} pr={5}>
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
@@ -50,7 +51,7 @@ function Signup() {
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <CallIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
-                                                    label="Contact number"
+                                                    label="Contact Number"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
@@ -61,7 +62,7 @@ function Signup() {
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
-                                                    label="ONGC employee Id"
+                                                    label="Employee ID"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
@@ -121,9 +122,23 @@ function Signup() {
                                                     component="label"
                                                     style={{ minWidth: "80px" }}
 
-                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" }}
+                                                    sx={{ backgroundColor: "#D3D3D3",mr:"2px", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" }}
                                                 >
                                                     Choose file
+                                                    <input
+                                                        type="file"
+                                                        hidden
+                                                    />
+                                                </Button>
+
+                                                <Button
+                                                    variant="outlined"
+                                                    component="label"
+                                                    style={{ minWidth: "80px" }}
+
+                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" }}
+                                                >
+                                                    Upload ID Card
                                                     <input
                                                         type="file"
                                                         hidden
@@ -138,12 +153,12 @@ function Signup() {
 
                                         <Grid item>
                                             <Button variant="contained" className='btn-primary' fullWidth href="#contained-buttons">
-                                                <Typography variant='h6'>Next</Typography>
+                                               <Link to='/Otpsign' style={{ textDecoration: "none", color:'white' }}> <Typography variant='h6'>Next</Typography></Link>
                                             </Button>
                                         </Grid>
                                         <Grid item textAlign="center" mt={1.5}>
                                             <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20}  style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
-                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/Dashboard/CheckStatus' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/CheckStatus' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                         </Grid>
                                     </Grid>
                                 </form>
