@@ -66,10 +66,15 @@ function Virtual() {
   };
   return (
     <div>
-      <Grid container  >
-          <Typography variant='h4'>Virtual Flow</Typography>
-        </Grid>
-        <Grid container spacing={3} pt={1} >
+      <Grid container sx={{
+        display: 'flex',
+        justifyContent: 'center',  // Centers horizontally
+        alignItems: 'center',       // Centers vertically
+        height: '80vh'
+      }} >
+        <Typography variant='h2'>Under Deveploment...... </Typography>
+      </Grid>
+      {/* <Grid container spacing={3} pt={1} >
           <Grid item xs={12} sm={8} md={6} lg={3} >
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
@@ -178,7 +183,7 @@ function Virtual() {
               </TableBody>
             </Table>
           </TableContainer>
-        </Grid>
+        </Grid> */}
     </div>
   )
 }

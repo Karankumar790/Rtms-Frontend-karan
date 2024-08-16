@@ -90,7 +90,7 @@ function AddWell() {
       <Paper>
 
         {/* <Grid item xs={12} sm={6} md={6} lg={6} gap={1} sx={{ display: 'flex', flexDirection: 'column' }} > */}
-        <Typography variant='h4'> Physical Details</Typography>
+        <Typography variant='h4'> Add New Well</Typography>
         <Grid container p={1} sx={{ display: 'flex', justifyContent: 'space-between' }} >
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Well Number" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Well Location" variant="outlined" /></Grid>
@@ -177,7 +177,7 @@ function AddWell() {
               </TableBody>
             </Table>
           </Grid>
-          <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }} gap={2}>
             <Button variant='contained'
              sx={{
               backgroundColor: 'green',   // Change button color to green
@@ -186,6 +186,22 @@ function AddWell() {
               },
               fontSize: '16px',
               }}> Add Well</Button>
+              <Button variant='contained'
+             sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+              }}>Update</Button>
+              <Button variant='contained'
+             sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+              }}> Delete</Button>
           </Grid>
         </Grid>
       </Paper>
