@@ -25,7 +25,7 @@ function Signup() {
                             </Grid>
                             <Grid item alignItems={'center'}>
                                 <form>
-                                    <Grid item gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <Grid item gap='6px' style={{ display: 'flex', flexDirection: 'column' }}>
                                         <Grid item padding={5}>
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />

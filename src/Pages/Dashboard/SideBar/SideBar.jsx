@@ -17,9 +17,11 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
+import EvStationIcon from '@mui/icons-material/EvStation';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png';
+import PreviewIcon from '@mui/icons-material/Preview';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -71,6 +73,58 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Sidebar({ open, handleDrawerClose }) {
+    const mainuItems = [
+        {
+            name: "Dashboard",
+            icon: <HomeIcon sx={{ color: 'black' }} />,
+            path: "/dashboard"
+        },
+        {
+            name: "Manage Asset",
+            icon: <PreviewIcon sx={{ color: 'black', }} />,
+            path: "/dashboard/monitor"
+        },
+        {
+            name: "Well Master",
+            icon: <ClearAllIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/virtual"
+        },
+        {
+            name: "Device Manager",
+            icon: <DescriptionIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/crystal"
+        },
+        {
+            name: "Well Monitor",
+            icon: <HistoryIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/complaint"
+        },
+        {
+            name: "Complaints",
+            icon: <NotificationsIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/notification"
+        },
+        {
+            name:"Notification",
+            icon:< NotificationsIcon sx={{ color: 'black' }}/> ,
+            path:"/dashboard/wellmaster",
+
+        },
+        {
+            name:"Reports Utilite",
+            icon:<EvStationIcon sx={{color:'black'}}/> ,
+            path:"/dashboard/wellmaster",
+
+        },
+        {
+            name:"Virtual Flow",
+            icon:<EvStationIcon sx={{color:'black'}}/> ,
+            path:"/dashboard/wellmaster",
+
+        },
+        // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
+        // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
+    ]
     const theme = useTheme();
 
     // Define menu items with their respective icons and paths
