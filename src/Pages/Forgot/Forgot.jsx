@@ -14,16 +14,16 @@ export default function Forgot() {
                 <Grid item p={3} >
                     <form>
                         <Grid item mt={2}>
-                            <Typography variant='h1' fontSize='xx-large'textAlign="center">Forgot Your Password?</Typography>
+                            <Typography variant='h5' fontSize='x-large'textAlign="center">Forgot Your Password?</Typography>
                         </Grid>
                         <Grid item mt={2}>
-                            <Typography fontSize='medium'>Please enter the email address you`d like your password reset information sent to</Typography>
+                            <Typography fontSize='medium'>Enter your registered email to receive reset instructions and regain account access.</Typography>
                         </Grid>
                         <Grid item mt={3}>
                             <TextField label="Enter Email Address" variant="outlined" size='small' fullWidth />
                         </Grid>
                         <Grid item mt={3} >
-                            <Link to="/Reset"><Button variant='contained' color='primary' fullWidth type='submit'>Request Reset Password</Button></Link>
+                            <Link to="/Reset"><Button variant='contained' color='primary' fullWidth type='submit'>Send Verification Code</Button></Link>
                         </Grid>
                         <Grid item mt={2} textAlign='center'>
                             <Link to="/" style={{ textDecoration: "none" }}>Back to Login</Link>
