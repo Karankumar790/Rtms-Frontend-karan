@@ -20,7 +20,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import EvStationIcon from '@mui/icons-material/EvStation';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
-import ongc_logo from '/assets/ongc2.png'
+import ongc_logo from '/assets/ongc2.png';
+import PreviewIcon from '@mui/icons-material/Preview';
 import { Link } from 'react-router-dom';
 const drawerWidth = 240;
 
@@ -78,36 +79,48 @@ export default function Sidebar({ open, handleDrawerClose }) {
             path: "/dashboard"
         },
         {
-            name: "Well Monitor",
-            icon: <MonitorIcon sx={{ color: 'black', }} />,
+            name: "Manage Asset",
+            icon: <PreviewIcon sx={{ color: 'black', }} />,
             path: "/dashboard/monitor"
         },
         {
-            name: "Virtual Flow",
+            name: "Well Master",
             icon: <ClearAllIcon sx={{ color: 'black' }} />,
             path: "/dashboard/virtual"
         },
         {
-            name: "Crystal Report",
+            name: "Device Manager",
             icon: <DescriptionIcon sx={{ color: 'black' }} />,
             path: "/dashboard/crystal"
         },
         {
-            name: "Complaint History",
+            name: "Well Monitor",
             icon: <HistoryIcon sx={{ color: 'black' }} />,
             path: "/dashboard/complaint"
         },
         {
-            name: "Notification History",
+            name: "Complaints",
             icon: <NotificationsIcon sx={{ color: 'black' }} />,
             path: "/dashboard/notification"
         },
         {
-            name:"Well Master",
+            name:"Notification",
+            icon:< NotificationsIcon sx={{ color: 'black' }}/> ,
+            path:"/dashboard/wellmaster",
+
+        },
+        {
+            name:"Reports Utilite",
             icon:<EvStationIcon sx={{color:'black'}}/> ,
             path:"/dashboard/wellmaster",
 
-        }
+        },
+        {
+            name:"Virtual Flow",
+            icon:<EvStationIcon sx={{color:'black'}}/> ,
+            path:"/dashboard/wellmaster",
+
+        },
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
         // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
     ]

@@ -15,8 +15,9 @@ import {
   Table,
   TableHead,
   TableBody,
+  TextField,
 } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import React from "react";
 
 //----------------import icons ------------------------------------------
@@ -25,49 +26,48 @@ import pressure from "../../../../public/assets/PRESSURE.png";
 import battery from "../../../../public/assets/battery.png";
 import solar from "../../../../public/assets/SOLAR1.png";
 import network from "../../../../public/assets/Network.png";
-import map from "../../../../public/assets/map.jpg";
 
 import Chart from "react-apexcharts";
 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
 }));
 
 function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+  return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-    createData('1'),
-    createData('2'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
+  createData("1"),
+  createData("2"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
 ];
-
-
 
 function SingleWell() {
   const images = [
@@ -137,59 +137,67 @@ function SingleWell() {
           ))}
         </List>
       </Grid>
-      <Grid container sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Grid item xs={12} sm={4} md={3} lg={3} justifyContent={"space-evenly"}>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={6} md={6} lg={6} >
           <Typography variant="h4">Physical Details</Typography>
-          <Box display={"flex"} flexDirection={"row"} >
-            <Box  width={"50%"}>
-              <Typography variant="h6" lineHeight={2.2}>
+          <Grid container spacing={2} >
+            <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Typography variant="h6">Well Number</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Typography variant="h6">Well Location</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Typography variant="h6">Well Installation</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Typography variant="h6">Geolocation Latitude</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Typography variant="h6">Geolocation Longitude</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+          </Grid>
+        </Grid>
+        {/* <Grid item xs={12} sm={6} md={6} lg={6} bgcolor={'pink'}>
+              <Typography variant="h6" >
                 Well number
               </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
+              <TextField variant="outlined" value={"karan"} />
+              <Typography variant="h6" >
                 Well Location
               </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
+              <TextField variant="outlined" value={"karan"} />
+              <Typography variant="h6" >
                 Well installation
               </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
+              <TextField variant="outlined" value={"karan"} />
+              <Typography variant="h6" >
                 Geolocation latitude
               </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
+              <TextField variant="outlined" value={"karan"} />
+              <Typography variant="h6" >
                 Geolocation longitude
               </Typography>
-            </Box>
-            <Box  width={"50%"}>
-              <Typography variant="h6" lineHeight={2.2}>
-                Well number
-              </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
-                Well Location
-              </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
-                Well installation
-              </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
-                Geolocation latitude
-              </Typography>
-              <Typography variant="h6" lineHeight={2.2}>
-                Geolocation longitude
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3} lg={3}  >
-          <img height={'220px'}  src={map} alt="map" />
-        </Grid>
-
-        <Grid item xs={12} sm={4} md={6} lg={5.3}>
-          <Paper>
-            <Chart
-              options={lineChartOptions}
-              series={lineChartSeries}
-              type="line"
-              height={200}
-            />
-          </Paper>
+              <TextField variant="outlined" value={"karan"} />
+            </Grid> */}
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14320.173463053277!2d77.44117713469225!3d28.679632098106314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf1bc3b6220c5%3A0x80c87fb76576da30!2sRDC%2C%20Sector%2015%2C%20Sector%2010%2C%20Raj%20Nagar%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201002!5e0!3m2!1sen!2sin!4v1723781951900!5m2!1sen!2sin"
+              width="100%"
+              height="500"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Maps"
+            ></iframe>
+          </div>
         </Grid>
       </Grid>
       <Grid
@@ -202,7 +210,7 @@ function SingleWell() {
           justifyContent: "center",
         }}
       >
-        <TableContainer component={Paper}>
+        {/* <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                         <TableHead >
                             <TableRow  >
@@ -226,12 +234,11 @@ function SingleWell() {
                                     <StyledTableCell align="left">yes</StyledTableCell>
                                     {/* <StyledTableCell align="left">1</StyledTableCell> */}
 
-
-                                </StyledTableRow>
+        {/* </StyledTableRow>
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer> */}
       </Grid>
     </>
   );

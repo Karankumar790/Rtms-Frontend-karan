@@ -97,6 +97,19 @@ export default function BasicCard() {
             </CardContent>
           </CardWrapper>
         </Grid>
+       
+        <Grid item lg={3} md={3} sm={6} xs={12}>
+          <CardWrapper>
+            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
+              <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }}/>
+              <Box fontSize='large'>2122</Box>
+            </Grid>
+            <CardContent className='card-Content-text' >
+              <Typography fontSize='large'>Well THP=ABP</Typography>
+            </CardContent>
+          </CardWrapper>
+        </Grid>
+
         <Grid item lg={3} md={3} sm={6} xs={12} >
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -109,6 +122,7 @@ export default function BasicCard() {
           </CardWrapper>
         </Grid>
 
+
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -117,18 +131,6 @@ export default function BasicCard() {
             </Grid>
             <CardContent className='card-Content-text' >
               <Typography fontSize='large'>Low Solar Power</Typography>
-            </CardContent>
-          </CardWrapper>
-        </Grid>
-
-        <Grid item lg={3} md={3} sm={6} xs={12}>
-          <CardWrapper>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={network} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
-            </Grid>
-            <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Network Error</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -163,12 +165,12 @@ export default function BasicCard() {
               <Table aria-label="customized table">
                 <TableHead >
                   <TableRow  >
-                    <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left">Date/Time</StyledTableCell>
-                    <StyledTableCell align="left">Well Location</StyledTableCell>
-                    <StyledTableCell align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell align="left">Well number</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'1px'}} align="left">Date/Time</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -190,7 +192,7 @@ export default function BasicCard() {
           border: "1px solid black",height: "400px"}}>
               <Table aria-label="customized table">
                 <TableHead >
-                  <TableRow  >
+                  <TableRow>
                     <StyledTableCell>Notification No.</StyledTableCell>
                     <StyledTableCell align="left">Data/TIme</StyledTableCell>
                     <StyledTableCell align="left">Well Location</StyledTableCell>
