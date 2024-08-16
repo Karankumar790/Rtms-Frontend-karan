@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LogoutIcon from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
+import DeviceManager from '@mui/icons-material/Airplay';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HistoryIcon from '@mui/icons-material/History';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -20,8 +21,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import EvStationIcon from '@mui/icons-material/EvStation';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
-import ongc_logo from '/assets/ongc2.png'
-import { Link } from 'react-router-dom';
+import ongc_logo from '/assets/ongc2.png';
+import PreviewIcon from '@mui/icons-material/Preview';
+import { Link, useLocation } from 'react-router-dom';
+import AssetsMIcon from '@mui/icons-material/HomeWork';
+import WellMasterIcon from '@mui/icons-material/OilBarrel';
+import PrintReportIcon from '@mui/icons-material/Print';
+import DeviceManagerIcon from '@mui/icons-material/Memory';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -71,6 +77,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Sidebar({ open, handleDrawerClose }) {
+    const location = useLocation();
+
     const mainuItems = [
         {
             name: "Dashboard",
@@ -78,36 +86,48 @@ export default function Sidebar({ open, handleDrawerClose }) {
             path: "/dashboard"
         },
         {
+            name: "Manage Asset",
+            icon: <AssetsMIcon sx={{ color: 'black', }} />,
+            path: "/dashboard/ManageAsset"
+        },
+        {
+            name: "Well Master",
+            icon: <WellMasterIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/wellmaster"
+        },
+        {
+            name: "Device Manager",
+            icon: <DeviceManagerIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/DeviceManage"
+        },
+        {
             name: "Well Monitor",
-            icon: <MonitorIcon sx={{ color: 'black', }} />,
+            icon: <MonitorIcon sx={{ color: 'black' }} />,
             path: "/dashboard/monitor"
         },
         {
-            name: "Virtual Flow",
-            icon: <ClearAllIcon sx={{ color: 'black' }} />,
-            path: "/dashboard/virtual"
-        },
-        {
-            name: "Crystal Report",
-            icon: <DescriptionIcon sx={{ color: 'black' }} />,
-            path: "/dashboard/crystal"
-        },
-        {
-            name: "Complaint History",
+            name: "Complaints",
             icon: <HistoryIcon sx={{ color: 'black' }} />,
             path: "/dashboard/complaint"
         },
         {
-            name: "Notification History",
-            icon: <NotificationsIcon sx={{ color: 'black' }} />,
-            path: "/dashboard/notification"
+            name: "Notification",
+            icon: < NotificationsIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/notification",
+
         },
         {
-            name:"Well Master",
-            icon:<EvStationIcon sx={{color:'black'}}/> ,
-            path:"/dashboard/wellmaster",
+            name: "Print Report",
+            icon: <PrintReportIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/crystal",
 
-        }
+        },
+        {
+            name: "Virtual Flow",
+            icon: <ClearAllIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/virtual",
+
+        },
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
         // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
     ]
@@ -131,15 +151,21 @@ export default function Sidebar({ open, handleDrawerClose }) {
                 {mainuItems?.map((text, index) => (
                     <Link to={text.path} style={{ textDecoration: 'none', color: "black" }}>
                         <ListItem key={text} disablePadding sx={{
-                            display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none'
+                            display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
+                           
 
-                        }}>
+                        }} >
 
                             <ListItemButton
+                            
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    backgroundColor: location.pathname === text.path ? 'lightgrey' : 'white',
+                                    '&:hover': {
+                                        backgroundColor:'lightgrey',
+                                    },
                                 }}
                             >
                                 <ListItemIcon
@@ -152,7 +178,10 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                     {text?.icon}
                                 </ListItemIcon>
 
-                                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0, textDecoration: 'none' }} />
+                                <ListItemText primary={text.name} sx={{
+                                    opacity: open ? 1 : 0, textDecoration: 'none',
+                                   
+                                }} />
                             </ListItemButton>
                             <Divider sx={{ mt: 0.5, mb: 0.5 }} />
                         </ListItem>

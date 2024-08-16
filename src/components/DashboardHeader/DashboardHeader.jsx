@@ -83,14 +83,21 @@ export default function Header({ open, handleDrawerOpen }) {
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                    marginLeft:'100px',
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                    marginLeft:'100px',
                   }}
+                  style={{
+                    left: '-60px', // Move menu 150px to the left
+                    top: '10px', // Move menu 50px down from the top
+                  }}
+          
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >

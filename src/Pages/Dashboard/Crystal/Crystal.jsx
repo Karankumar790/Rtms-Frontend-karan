@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Divider, Grid, TextField } from '@mui/material'
+import { Button, Divider, Grid, TextField, Typography } from '@mui/material'
 import Input from '@mui/joy/Input';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Chart from 'react-apexcharts';
+import { Box } from '@mui/system';
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -49,6 +50,7 @@ const rows = [
   createData('5'),
   createData('3'),
   createData('4'),
+  createData('5'),
   createData('5'),
 ];
 
@@ -105,6 +107,9 @@ function Monitor() {
 
   return (
     <div>
+      <Grid container>
+        <Typography variant='h4'>Print Report</Typography>
+      </Grid>
       <Grid container spacing={3} pt={.5}>
         <Grid item sm={6} md={3} xs={12} lg={3}>
           <FormControl fullWidth>
@@ -249,21 +254,30 @@ function Monitor() {
           </FormControl>
         </Grid>
       </Grid>
-
+      <Box>
+        <Divider
+          sx={{
+            borderBottomWidth: 2,
+            borderColor: 'grey.300', 
+            mt:'30px',
+            // Optional: Adjust the width as needed
+          }}
+        />
+      </Box>
       {/* ----------------Table--------------------------- */}
-      <Grid container spacing={3} mt={4}>
+      <Grid container spacing={3} mt={2}>
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <Paper >
-            <TableContainer>
-              <Table aria-label="customized table">
+            <TableContainer sx={{ maxHeight: 600, overflow: 'auto' }}>
+              <Table aria-label="customized table" stickyHeader>
                 <TableHead >
                   <TableRow  >
-                    <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left">Data/Time</StyledTableCell>
-                    <StyledTableCell align="left">Well Location</StyledTableCell>
-                    <StyledTableCell align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell align="left">Well number</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }}>Notification No.</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well number</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Description</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -291,7 +305,7 @@ function Monitor() {
               options={lineChartOptions}
               series={lineChartSeries}
               type="line"
-              height={500}
+              height={515}
             />
           </Paper>
         </Grid>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
+import { FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -48,16 +48,35 @@ const rows = [
 
 function Virtual() {
   const [age, setAge] = React.useState('');
+  const [location, setLocation] = React.useState('');
+  const [installation, setInstallation] = React.useState('');
+  const [number, setNumber] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  const handleChangeLocation = (event) => {
+    setLocation(event.target.value);
+  };
+  const handleChangeInstallation = (event) => {
+    setInstallation(event.target.value);
+  };
+  const handleChangeNumber = (event) => {
+    setNumber(event.target.value);
+  };
   return (
-    <PageContainer>
-      <Grid container  >
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-evenly' }} >
-          <Grid item >
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+    <div>
+      <Grid container sx={{
+        display: 'flex',
+        justifyContent: 'center',  // Centers horizontally
+        alignItems: 'center',       // Centers vertically
+        height: '80vh',
+      }} >
+        <Typography variant='h2'>Under Deveploment...... </Typography>
+      </Grid>
+      {/* <Grid container spacing={3} pt={1} >
+          <Grid item xs={12} sm={8} md={6} lg={3} >
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -75,15 +94,15 @@ function Virtual() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+          <Grid item xs={12} sm={8} md={6} lg={3}>
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Location</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
+                value={location}
                 label="Well Location"
-                onChange={handleChange}
+                onChange={handleChangeLocation}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -94,15 +113,15 @@ function Virtual() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
+                value={installation}
+                label="Well Installation"
+                onChange={handleChangeInstallation}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -114,15 +133,15 @@ function Virtual() {
             </FormControl>
 
           </Grid>
-          <Grid item>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-              <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+          <Grid item xs={12} sm={8} md={6} lg={3}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-large"
-                value={age}
-                label="Well Location"
-                onChange={handleChange}
+                value={number}
+                label="Well Number"
+                onChange={handleChangeNumber}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -134,17 +153,17 @@ function Virtual() {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container  >
+        <Grid container mt={2}  >
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
               <TableHead >
                 <TableRow  >
-                  <StyledTableCell>Notification No.</StyledTableCell>
-                  <StyledTableCell align="left">Data/Time</StyledTableCell>
-                  <StyledTableCell align="left">Well Location</StyledTableCell>
-                  <StyledTableCell align="left">Well Installation</StyledTableCell>
-                  <StyledTableCell align="left">Well number</StyledTableCell>
-                  <StyledTableCell align="left">Description</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Data/Time</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -164,11 +183,8 @@ function Virtual() {
               </TableBody>
             </Table>
           </TableContainer>
-        </Grid>
-
-      </Grid>
-
-    </PageContainer>
+        </Grid> */}
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
+import { FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -23,11 +23,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -52,8 +52,6 @@ const rows = [
   createData('5'),
 ];
 
-
-
 function ComplaintHistory() {
   
   const [compNo, setCompNo] = React.useState('');
@@ -77,11 +75,13 @@ function ComplaintHistory() {
     setTname(event.target.value);
   };
   return (
-    <PageContainer>
-      
-        <Grid container  sx={{ display: 'flex', justifyContent: 'space-between' }} >
+    <div>
+       <Grid container>
+          <Typography variant='h4'>Complaint History</Typography>
+        </Grid>
+        <Grid container   spacing={3} pt={1}  >
           <Grid item xs={12} sm={8} md={6} lg={3} >
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel className='custom-textfield' id="demo-select-large-label">Complain No.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -100,7 +100,7 @@ function ComplaintHistory() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Notification no.</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -119,7 +119,7 @@ function ComplaintHistory() {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Raiser Name</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -136,10 +136,9 @@ function ComplaintHistory() {
                 <MenuItem value={30}>WB</MenuItem>
               </Select>
             </FormControl>
-
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={3}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Taker Name</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -159,16 +158,16 @@ function ComplaintHistory() {
           </Grid>
         </Grid>
         <Grid container  mt={3}>
-          <TableContainer component={Paper} sx={{overflow:'scroll'}}>
+          <TableContainer component={Paper} sx={{ maxHeight: 700, overflow: 'auto' }}>
             <Table aria-label="customized table">
               <TableHead >
                 <TableRow  >
-                  <StyledTableCell>Complain No.</StyledTableCell>
-                  <StyledTableCell align="left">Data/Time</StyledTableCell>
-                  <StyledTableCell align="left">Well Location</StyledTableCell>
-                  <StyledTableCell align="left">Well Installation</StyledTableCell>
-                  <StyledTableCell align="left">Well number</StyledTableCell>
-                  <StyledTableCell align="left">Description</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}}>Complain No.</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Data/Time</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -189,11 +188,8 @@ function ComplaintHistory() {
             </Table>
           </TableContainer>
         </Grid>
-
-     
-
-    </PageContainer>
+    </div>
   )
 }
 
-export default ComplaintHistory
+export default ComplaintHistory;
