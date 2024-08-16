@@ -84,7 +84,7 @@ function WellMaster() {
             {/* ------------------Table--------------------------------- */}
             <Grid container>
                 <TableContainer component={Paper}  sx={{ maxHeight: 620, overflow: 'auto' }}>
-                    <Table aria-label="customized table">
+                    <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
                                 <StyledTableCell sx={{fontSize:'18px'}}>Well Number</StyledTableCell>

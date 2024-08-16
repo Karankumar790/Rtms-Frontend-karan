@@ -268,8 +268,8 @@ function Monitor() {
       <Grid container spacing={3} mt={2}>
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <Paper >
-            <TableContainer>
-              <Table aria-label="customized table">
+            <TableContainer sx={{ maxHeight: 600, overflow: 'auto' }}>
+              <Table aria-label="customized table" stickyHeader>
                 <TableHead >
                   <TableRow  >
                     <StyledTableCell sx={{ fontSize: '18px' }}>Notification No.</StyledTableCell>
@@ -305,7 +305,7 @@ function Monitor() {
               options={lineChartOptions}
               series={lineChartSeries}
               type="line"
-              height={513}
+              height={515}
             />
           </Paper>
         </Grid>
