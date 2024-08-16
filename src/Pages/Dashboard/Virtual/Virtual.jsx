@@ -70,7 +70,7 @@ function Virtual() {
         display: 'flex',
         justifyContent: 'center',  // Centers horizontally
         alignItems: 'center',       // Centers vertically
-        height: '80vh'
+        height: '80vh',
       }} >
         <Typography variant='h2'>Under Deveploment...... </Typography>
       </Grid>

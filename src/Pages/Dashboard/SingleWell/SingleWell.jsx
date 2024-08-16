@@ -42,11 +42,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
+  '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  "&:last-child td, &:last-child th": {
+  '&:last-child td, &:last-child th': {
     border: 0,
   },
 }));
@@ -56,17 +56,17 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
+  createData('1'),
+  createData('2'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
+  createData('3'),
+  createData('4'),
+  createData('5'),
 ];
 
 function SingleWell() {
@@ -102,6 +102,7 @@ function SingleWell() {
 
   return (
     <>
+    {/* -------------Icon-------------------------- */}
       <Grid container>
         <List
           sx={{
@@ -137,6 +138,7 @@ function SingleWell() {
           ))}
         </List>
       </Grid>
+{/* /--------------------------Map and Input---------------------------- */}
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6} md={6} lg={6} >
           <Typography variant="h4">Physical Details</Typography>
@@ -200,6 +202,7 @@ function SingleWell() {
           </div>
         </Grid>
       </Grid>
+{/* ------------------------Table--------------------------------- */}
       <Grid
         container
         sx={{
@@ -220,19 +223,19 @@ function SingleWell() {
                                 <StyledTableCell align="left">Latitude</StyledTableCell>
                                 <StyledTableCell align="left">Longitude</StyledTableCell>
 
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row) => (
-                                <StyledTableRow key={row.name}>
-                                    <StyledTableCell component="th" scope="row">
-                                        {row.name}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="left">1</StyledTableCell>
-                                    <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                                    <StyledTableCell align="left">gbz</StyledTableCell>
-                                    <StyledTableCell align="left">yes</StyledTableCell>
-                                    {/* <StyledTableCell align="left">1</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">1</StyledTableCell>
+                  <StyledTableCell align="left">5/6/2024</StyledTableCell>
+                  <StyledTableCell align="left">gbz</StyledTableCell>
+                  <StyledTableCell align="left">yes</StyledTableCell>
+                  {/* <StyledTableCell align="left">1</StyledTableCell> */}
 
         {/* </StyledTableRow>
                             ))}

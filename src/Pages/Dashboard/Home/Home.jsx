@@ -166,7 +166,7 @@ export default function BasicCard() {
                 <TableHead >
                   <TableRow  >
                     <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'1px'}} align="left">Date/Time</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Date/Time</StyledTableCell>
                     <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
                     <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
                     <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
