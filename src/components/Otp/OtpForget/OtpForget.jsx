@@ -1,10 +1,10 @@
 import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
 import React from "react";
-import PageContainer from "../HOC/PageContainer";
+import PageContainer from "../../HOC/PageContainer";
 import { Link } from "react-router-dom";
 
 
-export default function OtpSignup() {
+export default function OtpForget() {
   return (
     <PageContainer
       showheader
@@ -20,14 +20,14 @@ export default function OtpSignup() {
           <form>
             <Grid item mt={2}>
               <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
-              Enter OTP From E-Mail
+                Please Enter The OTP To Verify Your Account
               </Typography>
             </Grid>
-            {/* <Grid item mt={2}>
+            <Grid item mt={2}>
               <Typography variant="h5" textAlign="center">
-                OTP has been sent to your registered E-mail
+                OTP has been sent to your registered E-mail & Mobile
               </Typography>
-            </Grid> */}
+            </Grid>
             {/* Input otp value  */}
             <Grid item mt={3} display="flex" gap={2} justifyContent="center" justifyItems="center">
               {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
@@ -45,14 +45,14 @@ export default function OtpSignup() {
               justifyContent="center"
               sx={{ textAlign: "center" }}
             >
-              <Link to="/dashboard">
+              <Link to="/">
                 <Button
                   variant="contained"
                   color="primary"
                   size="small"
                   sx={{ bgcolor: "#0c113b" }}
                 >
-                 <Link to='/CheckStatus' style={{textDecoration:'none', color:'white'}}> <Typography>Submit</Typography></Link>
+                  <Typography>Reset Password</Typography>
                 </Button>
               </Link>
             </Grid>

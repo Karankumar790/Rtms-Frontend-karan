@@ -19,12 +19,12 @@ export default function Forgot() {
         <Grid item p={4}>
           <form>
             <Grid item mt={2}>
-              <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
+              <Typography fontSize={"x-large"} sx={{ color: "#0c1352" }}>
                 Please Enter The OTP To Verify Your Account
               </Typography>
             </Grid>
             <Grid item mt={2}>
-              <Typography variant="h5" textAlign="center">
+              <Typography variant="h6" textAlign="center">
                 OTP has been sent to your registered E-mail & Mobile
               </Typography>
             </Grid>
@@ -45,7 +45,7 @@ export default function Forgot() {
               justifyContent="center"
               sx={{ textAlign: "center" }}
             >
-              <Link to="/">
+              <Link to="/dashboard">
                 <Button
                   variant="contained"
                   color="primary"
@@ -57,7 +57,7 @@ export default function Forgot() {
               </Link>
             </Grid>
             <Grid item mt={2} textAlign="center">
-              <Link to="/" style={{ textDecoration: "none" }}>
+              <Link to="" style={{ textDecoration: "none" }}>
                 <Typography sx={{ fontWeight: "bold" }}>
                   Resend One-Time Password
                 </Typography>

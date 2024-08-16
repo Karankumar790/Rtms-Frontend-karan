@@ -35,7 +35,7 @@ function Reset() {
             }}
           >
             <TextField
-              label="Enter The Code"
+              label="Enter The Verification Code"
               variant="outlined"
               fullWidth
             />
@@ -49,9 +49,9 @@ function Reset() {
               variant="outlined"
               fullWidth
             />
-              <Link to='/Otp' >
+              <Link to='/' >
                 <Button variant="contained" sx={{mt:2}}fullWidth color="primary">
-                  Reset Password
+                  Change Password
                 </Button>
               </Link>
             <Typography textAlign={'center'} pt={2}>
