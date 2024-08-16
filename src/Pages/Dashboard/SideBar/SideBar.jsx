@@ -86,7 +86,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
     ];
 
     return (
-        <Drawer variant="permanent" open={open} sx={{ backgroundColor: 'black' }}>
+        <Drawer variant="permanent" open={open}  >
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
                 <IconButton onClick={handleDrawerClose}>

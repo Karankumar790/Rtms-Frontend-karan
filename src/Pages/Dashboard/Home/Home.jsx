@@ -163,7 +163,7 @@ export default function BasicCard() {
                 <TableHead >
                   <TableRow  >
                     <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left">Data</StyledTableCell>
+                    <StyledTableCell align="left">Date/Time</StyledTableCell>
                     <StyledTableCell align="left">Well Location</StyledTableCell>
                     <StyledTableCell align="left">Well Installation</StyledTableCell>
                     <StyledTableCell align="left">Well number</StyledTableCell>

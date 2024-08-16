@@ -2,6 +2,8 @@ import React from 'react'
 import logo from '/assets/logo.svg'
 import MQTT1 from '/assets/MQTT1.png'
 import { Grid, Typography, Box } from '@mui/material'
+import Technical from '../../../public/assets/Technical.png'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
@@ -22,7 +24,7 @@ function Header() {
         <Grid item md={4} lg={4} sm={4} sx={{ display: { sm: 'none', xs: 'none', md: 'block', lg: 'block' } }} >
 
           <Box display='flex' alignItems="center" justifyContent="end" gap={1}>
-            <Box fontSize="medium">Technical Support</Box>
+           <Link to=''> <img src={Technical} style={{ objectFit: 'cover', width: '80px' }} /></Link>
             <img src={MQTT1} style={{ objectFit: 'cover', width: '151px' }} />
           </Box>
 
