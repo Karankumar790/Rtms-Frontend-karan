@@ -272,11 +272,11 @@ function Monitor() {
               <Table aria-label="customized table" stickyHeader>
                 <TableHead >
                   <TableRow  >
-                    <StyledTableCell sx={{ fontSize: '18px' }}>Notification No.</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }}>Notification</StyledTableCell>
                     <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well number</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Location</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installation</StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">number</StyledTableCell>
                     <StyledTableCell sx={{ fontSize: '18px' }} align="left">Description</StyledTableCell>
                   </TableRow>
                 </TableHead>
@@ -300,7 +300,7 @@ function Monitor() {
         </Grid>
         {/* ---------------chart---------------------------- */}
         <Grid item xs={12} sm={6} md={6} lg={6}  >
-          <Paper>
+          <Paper sx={{bgcolor:'#F8F8F8'}}>
             <Chart
               options={lineChartOptions}
               series={lineChartSeries}

@@ -165,28 +165,6 @@ function SingleWell() {
             </Grid>
           </Grid>
         </Grid>
-        {/* <Grid item xs={12} sm={6} md={6} lg={6} bgcolor={'pink'}>
-              <Typography variant="h6" >
-                Well number
-              </Typography>
-              <TextField variant="outlined" value={"karan"} />
-              <Typography variant="h6" >
-                Well Location
-              </Typography>
-              <TextField variant="outlined" value={"karan"} />
-              <Typography variant="h6" >
-                Well installation
-              </Typography>
-              <TextField variant="outlined" value={"karan"} />
-              <Typography variant="h6" >
-                Geolocation latitude
-              </Typography>
-              <TextField variant="outlined" value={"karan"} />
-              <Typography variant="h6" >
-                Geolocation longitude
-              </Typography>
-              <TextField variant="outlined" value={"karan"} />
-            </Grid> */}
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <div>
             <iframe

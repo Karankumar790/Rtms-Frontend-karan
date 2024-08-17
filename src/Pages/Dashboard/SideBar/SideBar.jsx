@@ -9,25 +9,19 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import LogoutIcon from '@mui/icons-material/Logout';
-import EditIcon from '@mui/icons-material/Edit';
-import DeviceManager from '@mui/icons-material/Airplay';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import HistoryIcon from '@mui/icons-material/History';
-import DescriptionIcon from '@mui/icons-material/Description';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
-import EvStationIcon from '@mui/icons-material/EvStation';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png';
-import PreviewIcon from '@mui/icons-material/Preview';
 import { Link, useLocation } from 'react-router-dom';
-import AssetsMIcon from '@mui/icons-material/HomeWork';
 import WellMasterIcon from '@mui/icons-material/OilBarrel';
 import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
+import ComplaintIcon from '@mui/icons-material/AccessAlarm';
+import AssetsIcon from '@mui/icons-material/AccountBalance';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -87,7 +81,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Manage Asset",
-            icon: <AssetsMIcon sx={{ color: 'black', }} />,
+            icon: <AssetsIcon sx={{ color: 'black', }} />,
             path: "/dashboard/ManageAsset"
         },
         {
@@ -107,7 +101,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Complaints",
-            icon: <HistoryIcon sx={{ color: 'black' }} />,
+            icon: <ComplaintIcon sx={{ color: 'black' }} />,
             path: "/dashboard/complaint"
         },
         {
