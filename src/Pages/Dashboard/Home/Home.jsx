@@ -18,12 +18,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import { width } from '@mui/system'
 // ---------FUNCTIONS OF TABLE--------------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    fontSize:18
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -42,7 +44,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const CardWrapper = styled(Card)(() => ({
   boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
   '.card-Content-text': {
-    padding:'0 !important',
+    padding: '0 !important',
   }
 }))
 
@@ -97,11 +99,11 @@ export default function BasicCard() {
             </CardContent>
           </CardWrapper>
         </Grid>
-       
+
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }}/>
+              <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }} />
               <Box fontSize='large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -148,92 +150,73 @@ export default function BasicCard() {
         </Grid>
       </Grid>
       {/* ---------------code for table------------------------------- */}
-      <Grid container mt={1}>
-        <Tabs style={{ width: '100%' }}>
-          <TabList>
-            <Tab>
-              <Typography fontSize={'large'}>Current Notification</Typography>
-            </Tab>
-            <Tab>
-              <Typography fontSize={'large'}> Open Complaint</Typography>
+      <Grid container>
+        <Grid item md={12} lg={12} sm={12} xs={12}>
+          <Tabs>
+            <TabList>
+              <Tab>
+                <Typography fontSize={'large'}>Current Notification</Typography>
+              </Tab>
+              <Tab>
+                <Typography fontSize={'large'}> Open Complaint</Typography>
 
-            </Tab>
-          </TabList>
-          <TabPanel style={{display:'grid', placeContent: 'stretch'}}>
-            <TableContainer sx={{ border: "1px solid black",height: "400px"}}>
-              <Table aria-label="customized table">
-                <TableHead >
-                  <TableRow  >
-                    <StyledTableCell sx={{fontSize:'18px'}} >Notification No.</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}}  align="left">Date/Time</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}}  align="left">Well number</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+              </Tab>
+            </TabList>
+            <TabPanel >
+              <TableContainer sx={{ border: "1px solid black"}} >
+                <Table aria-label="customized table">
+                  <TableHead >
+                    <TableRow  >
+                      <StyledTableCell>Notification No.</StyledTableCell>
+                      <StyledTableCell align="left">Date/Time</StyledTableCell>
+                      <StyledTableCell align="left">Well Location</StyledTableCell>
+                      <StyledTableCell align="left">Well Installation</StyledTableCell>
+                      <StyledTableCell align="left">Well number</StyledTableCell>
+                      <StyledTableCell align="left">Description</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row"> Notification No.</StyledTableCell>
+                      <StyledTableCell>25kalori</StyledTableCell>
+                      <StyledTableCell>shyam</StyledTableCell>
+                      <StyledTableCell>Ramu singh</StyledTableCell>
+                      <StyledTableCell>225</StyledTableCell>
+                      <StyledTableCell>44555</StyledTableCell>
 
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <StyledTableRow>
-                    <StyledTableCell component="th" scope="row"> Notification No.</StyledTableCell>
-                    <StyledTableCell>25kalori</StyledTableCell>
-                    <StyledTableCell>shyam</StyledTableCell>
-                    <StyledTableCell>Ramu singh</StyledTableCell>
-                    <StyledTableCell>225</StyledTableCell>
-                    <StyledTableCell>44555</StyledTableCell>
-
-                  </StyledTableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </TabPanel>
-          <TabPanel style={{display:'grid', placeContent: 'stretch'}}>
-            <TableContainer sx={{
-          border: "1px solid black",height: "400px"}}>
-              <Table aria-label="customized table">
-                <TableHead >
-                  <TableRow>
-                    <StyledTableCell>Notification No.</StyledTableCell>
-                    <StyledTableCell align="left">Data/TIme</StyledTableCell>
-                    <StyledTableCell align="left">Well Location</StyledTableCell>
-                    <StyledTableCell align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell align="left">Well number</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                    <StyledTableCell align="left">Description</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <StyledTableRow>
-                    <StyledTableCell component="th" scope="row"> Notification No.</StyledTableCell>
-                    <StyledTableCell>25kalori</StyledTableCell>
-                    <StyledTableCell>shyam</StyledTableCell>
-                    <StyledTableCell>Ramu singh</StyledTableCell>
-                    <StyledTableCell>225</StyledTableCell>
-                    <StyledTableCell>44555</StyledTableCell>
-                  </StyledTableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </TabPanel>
-        </Tabs>
+                    </StyledTableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </TabPanel>
+            <TabPanel>
+              <TableContainer sx={{ border: "1px solid black" }}>
+                <Table aria-label="customized table" className="responsive-table">
+                  <TableHead >
+                    <TableRow>
+                      <StyledTableCell>Notification No.</StyledTableCell>
+                      <StyledTableCell align="left">Data/TIme</StyledTableCell>
+                      <StyledTableCell align="left">Well Location</StyledTableCell>
+                      <StyledTableCell align="left">Well Installation</StyledTableCell>
+                      <StyledTableCell align="left">Well number</StyledTableCell>
+                      <StyledTableCell align="left">Description</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row"> Notification No.</StyledTableCell>
+                      <StyledTableCell>25kalori</StyledTableCell>
+                      <StyledTableCell>shyam</StyledTableCell>
+                      <StyledTableCell>Ramu singh</StyledTableCell>
+                      <StyledTableCell>225</StyledTableCell>
+                      <StyledTableCell>44555</StyledTableCell>
+                    </StyledTableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </TabPanel>
+          </Tabs>
+        </Grid>
       </Grid>
     </Grid>
   );
