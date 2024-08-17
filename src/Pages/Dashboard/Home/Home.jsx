@@ -49,7 +49,7 @@ const CardWrapper = styled(Card)(() => ({
 export default function BasicCard() {
   return (
     <Grid container>
-      <Grid container spacing={2} mb={3}>
+      <Grid container spacing={2}>
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -148,7 +148,7 @@ export default function BasicCard() {
         </Grid>
       </Grid>
       {/* ---------------code for table------------------------------- */}
-      <Grid container>
+      <Grid container mt={1}>
         <Tabs style={{ width: '100%' }}>
           <TabList>
             <Tab>
@@ -159,18 +159,27 @@ export default function BasicCard() {
 
             </Tab>
           </TabList>
-          <TabPanel>
-            <TableContainer sx={{
-          border: "1px solid black",height: "400px"}}>
+          <TabPanel style={{display:'grid', placeContent: 'stretch'}}>
+            <TableContainer sx={{ border: "1px solid black",height: "400px"}}>
               <Table aria-label="customized table">
                 <TableHead >
                   <TableRow  >
-                    <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Date/Time</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} >Notification No.</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}}  align="left">Date/Time</StyledTableCell>
                     <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
                     <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}}  align="left">Well number</StyledTableCell>
                     <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+                    <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
+
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -187,7 +196,7 @@ export default function BasicCard() {
               </Table>
             </TableContainer>
           </TabPanel>
-          <TabPanel>
+          <TabPanel style={{display:'grid', placeContent: 'stretch'}}>
             <TableContainer sx={{
           border: "1px solid black",height: "400px"}}>
               <Table aria-label="customized table">
@@ -198,6 +207,16 @@ export default function BasicCard() {
                     <StyledTableCell align="left">Well Location</StyledTableCell>
                     <StyledTableCell align="left">Well Installation</StyledTableCell>
                     <StyledTableCell align="left">Well number</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
+                    <StyledTableCell align="left">Description</StyledTableCell>
                     <StyledTableCell align="left">Description</StyledTableCell>
                   </TableRow>
                 </TableHead>

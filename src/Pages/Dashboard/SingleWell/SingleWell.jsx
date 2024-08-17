@@ -171,7 +171,8 @@ function SingleWell() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14320.173463053277!2d77.44117713469225!3d28.679632098106314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf1bc3b6220c5%3A0x80c87fb76576da30!2sRDC%2C%20Sector%2015%2C%20Sector%2010%2C%20Raj%20Nagar%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201002!5e0!3m2!1sen!2sin!4v1723781951900!5m2!1sen!2sin"
               width="100%"
               height="500"
-              style={{ border: 0 }}
+              
+              style={{ border: 0, }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
