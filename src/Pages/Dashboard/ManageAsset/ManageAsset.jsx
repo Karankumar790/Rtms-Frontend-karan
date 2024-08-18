@@ -58,7 +58,7 @@ function ManageAsset() {
   return (
     <div>
       <Paper>
-        <Grid container spacing={1}>
+        <Grid container spacing={2} p={2}>
           {/* -------------Input field------------------ */}
           <Grid item xs={12} sm={6} md={6} lg={6} >
             <Grid item sx={{ display: 'flex', flexDirection: 'row' }} gap={1}>
@@ -116,7 +116,7 @@ function ManageAsset() {
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
-      <Card sx={{ marginBottom: 1, marginTop: 1 }}>
+      <Card sx={{ my: 2 }}>
         <CardContent>
           <Typography variant="h5"> Add Department Information</Typography>
           <Grid container spacing={2} mt={0.1}>
@@ -142,51 +142,52 @@ function ManageAsset() {
       </Card>
       {/* -------------------------Table-------------------------- */}
       <Grid container>
-        <Tabs>
-          <TabList>
-            <Tab>
-              <Typography fontSize={'large'}>Departments</Typography>
-            </Tab>
-            <Tab>
-              <Typography fontSize={'large'}>Permissions</Typography>
+        <Grid item md={12} lg={12} sm={12} xs={12}>
+          <Tabs>
+            <TabList>
+              <Tab>
+                <Typography fontSize={'large'}>Departments</Typography>
+              </Tab>
+              <Tab>
+                <Typography fontSize={'large'}>Permissions</Typography>
 
-            </Tab>
-          </TabList>
-          <TabPanel>
-            <TableContainer sx={{ border: "1px solid black", overflowX: "auto" }}>
-              <Table aria-label="customized table" className="responsive-table" >
-                <TableHead >
-                  <TableRow  >
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Department</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Head Of Department</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Email</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Mobile Number</StyledTableCell>
-                    {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell> */}
-                    {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell> */}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {add.map((row, index) => (
-                    <StyledTableRow key={index}>
-                      <StyledTableCell>
-                        <TextField variant="filled" value={row.department} fullWidth />
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <TextField variant="filled" value={row.head} fullWidth />
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <TextField variant="filled" value={row.email} fullWidth />
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <TextField variant="filled" value={row.phone} fullWidth />
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </TabPanel>
-          <TabPanel>
+              </Tab>
+            </TabList>
+            <TabPanel>
+              <TableContainer sx={{ border: "1px solid black" }}>
+                <Table aria-label="customized table">
+                  <TableHead >
+                    <TableRow  >
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Department</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Head Of Department</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Email</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Mobile Number</StyledTableCell>
+                      {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell> */}
+                      {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell> */}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {add.map((row, index) => (
+                      <StyledTableRow key={`table-header-${index}`}>
+                        <StyledTableCell>
+                          <TextField variant="filled" value={row.department} fullWidth />
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <TextField variant="filled" value={row.head} fullWidth />
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <TextField variant="filled" value={row.email} fullWidth />
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <TextField variant="filled" value={row.phone} fullWidth />
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </TabPanel>
+            <TabPanel>
               <TableContainer sx={{ border: "1px solid black", overflowX: "auto" }}>
                 <Table aria-label="customized table" className="responsive-table">
                   <TableHead >
@@ -211,8 +212,9 @@ function ManageAsset() {
                   </TableBody>
                 </Table>
               </TableContainer>
-          </TabPanel>
-        </Tabs>
+            </TabPanel>
+          </Tabs>
+        </Grid>
       </Grid>
     </div>
   );

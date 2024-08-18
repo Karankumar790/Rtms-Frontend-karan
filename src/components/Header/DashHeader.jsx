@@ -4,12 +4,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import { useTheme } from '@mui/material/styles';
 import { Grid, Box } from '@mui/material';
 
 const AppBar = styled(MuiAppBar, {
@@ -63,8 +58,22 @@ export default function Header({ open, handleDrawerOpen }) {
         </IconButton>
         <Grid container justifyContent={'space-between'} flexWrap={'nowrap'}>
           <Box py={1.2}>
-            <Typography variant='h5' component="div" >Oil & Natural Gas Corporation</Typography>
-            <Typography variant='h6' sx={{ typography: 'body1' }}>Real Time Well Monitoring System</Typography>
+            <Typography sx={{
+            fontSize: {
+              xs: 'small', // small screens
+              sm: 'small', // medium screens
+              md: 'x-large', // large screens
+              lg: 'x-large', // extra-large screens
+            }
+          }}>Oil & Natural Gas Corporation</Typography>
+            <Typography sx={{
+            fontSize: {
+              xs: 'x-small', // small screens
+              sm: 'x-small', // medium screens
+              md: 'large', // large screens
+              lg: 'large', // extra-large screens
+            }
+          }}>Real Time Well Monitoring System</Typography>
           </Box>
           {/* <Box mt={1} >
             {auth && (
