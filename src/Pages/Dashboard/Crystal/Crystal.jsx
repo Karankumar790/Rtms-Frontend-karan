@@ -1,21 +1,21 @@
-import React from 'react'
-import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Divider, Grid, TextField, Typography } from '@mui/material'
-import Input from '@mui/joy/Input';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Chart from 'react-apexcharts';
-import { Box } from '@mui/system';
+import React from "react";
+import PageContainer from "../../../components/HOC/PageContainer";
+import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
+import Input from "@mui/joy/Input";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Chart from "react-apexcharts";
+import { Box } from "@mui/system";
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -29,11 +29,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -43,24 +43,24 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData('1'),
-  createData('2'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
-  createData('5'),
+  createData("1"),
+  createData("2"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
+  createData("5"),
 ];
 
 function Monitor() {
-  const [age, setAge] = React.useState('');
-  const [installation, setInstallation] = React.useState('');
-  const [number, setNumber] = React.useState('');
-  const [parameters, setParameters] = React.useState('');
-  const [report, setReport] = React.useState('');
-  const [resolution, setResolution] = React.useState('');
+  const [age, setAge] = React.useState("");
+  const [installation, setInstallation] = React.useState("");
+  const [number, setNumber] = React.useState("");
+  const [parameters, setParameters] = React.useState("");
+  const [report, setReport] = React.useState("");
+  const [resolution, setResolution] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -85,32 +85,29 @@ function Monitor() {
     setResolution(event.target.value);
   };
 
-
   const lineChartOptions = {
     chart: {
-      type: 'line'
+      type: "line",
     },
     stroke: {
       width: 2, // Adjust the width here
     },
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
-    }
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    },
   };
 
   const lineChartSeries = [
     {
-      name: 'Sales',
-      data: [30, 40, 35, 50, 49, 60, 70]
-    }
+      name: "Sales",
+      data: [30, 40, 35, 50, 49, 60, 70],
+    },
   ];
 
   return (
     <div>
-      <Grid container>
-        <Typography variant='h4'>Print Report</Typography>
-      </Grid>
-      <Grid container spacing={3} pt={.5}>
+      <Typography variant="h4">Print Report</Typography>
+      <Grid container spacing={3}>
         <Grid item sm={6} md={3} xs={12} lg={3}>
           <FormControl fullWidth>
             <InputLabel id="demo-select-large-label">Well Location</InputLabel>
@@ -132,7 +129,9 @@ function Monitor() {
         </Grid>
         <Grid item sm={6} md={3} xs={12} lg={3}>
           <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
+            <InputLabel id="demo-select-large-label">
+              Well Installation
+            </InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-large"
@@ -213,8 +212,8 @@ function Monitor() {
               fullWidth
               slotProps={{
                 input: {
-                  min: '2001-02-16',
-                  max: '2024-08-10',
+                  min: "2001-02-16",
+                  max: "2024-08-10",
                 },
               }}
             />
@@ -227,8 +226,8 @@ function Monitor() {
               type="date"
               slotProps={{
                 input: {
-                  min: '2001-02-16',
-                  max: '2024-08-07',
+                  min: "2001-02-16",
+                  max: "2024-08-07",
                 },
               }}
             />
@@ -258,8 +257,8 @@ function Monitor() {
         <Divider
           sx={{
             borderBottomWidth: 2,
-            borderColor: 'grey.300', 
-            mt:'30px',
+            borderColor: "grey.300",
+            mt: "30px",
             // Optional: Adjust the width as needed
           }}
         />
@@ -267,17 +266,29 @@ function Monitor() {
       {/* ----------------Table--------------------------- */}
       <Grid container spacing={3} mt={2}>
         <Grid item xs={12} sm={6} md={6} lg={6}>
-          <Paper >
-            <TableContainer sx={{ maxHeight: 600, overflow: 'auto' }}>
+          <Paper>
+            <TableContainer sx={{ maxHeight: 600, overflow: "auto" }}>
               <Table aria-label="customized table" stickyHeader>
-                <TableHead >
-                  <TableRow  >
-                    <StyledTableCell sx={{ fontSize: '18px' }}>Notification No.</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well number</StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: '18px' }} align="left">Description</StyledTableCell>
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell sx={{ fontSize: "18px" }}>
+                      Notification
+                    </StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                      Data/Time
+                    </StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                      Location
+                    </StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                      Installation
+                    </StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                      number
+                    </StyledTableCell>
+                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                      Description
+                    </StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -299,19 +310,19 @@ function Monitor() {
           </Paper>
         </Grid>
         {/* ---------------chart---------------------------- */}
-        <Grid item xs={12} sm={6} md={6} lg={6}  >
-          <Paper>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Paper sx={{ bgcolor: "#F8F8F8" }}>
             <Chart
               options={lineChartOptions}
               series={lineChartSeries}
-              type="line"
+              type="bar"
               height={515}
             />
           </Paper>
         </Grid>
       </Grid>
-    </div >
-  )
+    </div>
+  );
 }
 
-export default Monitor
+export default Monitor;

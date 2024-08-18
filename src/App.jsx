@@ -24,6 +24,8 @@ const SingleWell = lazy(() =>import("./Pages/Dashboard/SingleWell/SingleWell.jsx
 const AddWell = lazy(() =>import("./Pages/WellMaster/AddWell/AddWell.jsx"));
 const ManageAsset = lazy(() =>import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx"));
 const DeviceManage = lazy(() =>import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx"));
+const AddDevice = lazy(() =>import("./Pages/Dashboard/DeviceManage/AddDevice/AddDevice.jsx"));
+
 
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
         { path: "/dashboard/singlewell", element: <SingleWell /> },
         { path: "/dashboard/ManageAsset", element: <ManageAsset /> },
         { path: "/dashboard/DeviceManage", element: <DeviceManage /> },
+        { path: "/dashboard/AddDevice", element: <AddDevice /> },
+
       ]
     },
     { path: "/CheckStatus", element: <CheckStatus /> },
