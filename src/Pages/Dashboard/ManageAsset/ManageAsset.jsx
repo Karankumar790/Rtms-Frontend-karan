@@ -169,18 +169,10 @@ function ManageAsset() {
                   <TableBody>
                     {add.map((row, index) => (
                       <StyledTableRow key={`table-header-${index}`}>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.department} fullWidth />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.head} fullWidth />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.email} fullWidth />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.phone} fullWidth />
-                        </StyledTableCell>
+                        <StyledTableCell> {row.department} </StyledTableCell>
+                        <StyledTableCell> {row.head}</StyledTableCell>
+                        <StyledTableCell>{row.email}</StyledTableCell>
+                        <StyledTableCell> {row.phone}</StyledTableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>
