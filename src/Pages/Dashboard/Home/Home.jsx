@@ -51,7 +51,7 @@ const CardWrapper = styled(Card)(() => ({
 export default function BasicCard() {
   return (
     <Grid container>
-      <Grid container spacing={2} mb={3}>
+      <Grid container spacing={2}>
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
