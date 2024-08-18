@@ -58,7 +58,7 @@ function ManageAsset() {
   return (
     <div>
       <Paper>
-        <Grid container spacing={1}>
+        <Grid container spacing={2} p={2}>
           {/* -------------Input field------------------ */}
           <Grid item xs={12} sm={6} md={6} lg={6} >
             <Grid item sx={{ display: 'flex', flexDirection: 'row' }} gap={1}>
@@ -116,7 +116,7 @@ function ManageAsset() {
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
-      <Card sx={{ marginBottom: 1, marginTop: 1 }}>
+      <Card  sx={{ my:2 }}>
         <CardContent>
           <Typography variant="h5"> Add Department Information</Typography>
           <Grid container spacing={2} mt={0.1}>
