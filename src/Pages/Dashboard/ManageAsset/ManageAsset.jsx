@@ -58,67 +58,51 @@ function ManageAsset() {
   return (
     <div>
       <Paper>
-        <Grid container spacing={2} p={2}>
-          {/* -------------Input field------------------ */}
-          <Grid item xs={12} sm={6} md={6} lg={6} >
-            <Grid item sx={{ display: 'flex', flexDirection: 'row' }} gap={1}>
-              <Typography variant="h4">Asset: </Typography>
+        <Grid container gap={3}>
+          <Typography variant="h4">Asset Information </Typography>
+
+          <Grid container spacing={2} p={2}>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Asset </Typography>
               <TextField variant="outlined" fullWidth />
             </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Address 1</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Address 2</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">City</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">State</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Country</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Pin Code</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Phone</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Fax</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Typography variant="h6">Latitude</Typography>
-                <TextField variant="outlined" fullWidth value={""} />
-              </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Address Line 1</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
             </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">City</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">State</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Country</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Pin Code</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Phone</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Fax</Typography>
+              <TextField variant="outlined" fullWidth value={""} />
+            </Grid>
+
           </Grid>
-          {/* /-------------Image-------------------- */}
-          <Grid item xs={12} sm={6} md={6} lg={6}>
-            <img src="https://media.istockphoto.com/id/959381934/photo/sunset-over-pumpjack-silhouette-with-copy-space.jpg?s=612x612&w=0&k=20&c=fcyH9ZVieEwbLHk9LkjxdX7vveS56TFqRbUMV6xpRcA=" alt="photo" style={{
-              width: '100%', // Set the image to take the full width of its container
-              height: 'auto', // Maintain aspect ratio
-              border: '2px solid black',
-              objectFit: 'contain', // Contain the image within its bounds without stretching
-            }} />
-          </Grid>
+
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
       <Card sx={{ my: 2 }}>
         <CardContent>
-          <Typography variant="h5"> Add Department Information</Typography>
+          <Typography variant="h5"> Add Departments Information</Typography>
           <Grid container spacing={2} mt={0.1}>
             <Grid item xs={12} sm={6} md={3}>
               <TextField variant="outlined" label="Department" inputRef={inputRef} fullWidth />
@@ -146,15 +130,15 @@ function ManageAsset() {
           <Tabs>
             <TabList>
               <Tab>
-                <Typography fontSize={'large'}>Departments</Typography>
+                <Typography fontSize={'small'}>Departments</Typography>
               </Tab>
               <Tab>
-                <Typography fontSize={'large'}>Permissions</Typography>
+                <Typography fontSize={'small'}>Permissions</Typography>
 
               </Tab>
             </TabList>
             <TabPanel>
-              <TableContainer sx={{ border: "1px solid black" }}>
+              <TableContainer>
                 <Table aria-label="customized table">
                   <TableHead >
                     <TableRow  >
@@ -168,19 +152,11 @@ function ManageAsset() {
                   </TableHead>
                   <TableBody>
                     {add.map((row, index) => (
-                      <StyledTableRow key={`table-header-${index}`}>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.department} fullWidth />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.head} fullWidth />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.email} fullWidth />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <TextField variant="filled" value={row.phone} fullWidth />
-                        </StyledTableCell>
+                      <StyledTableRow key={`table - header - ${index}`}>
+                        <StyledTableCell> {row.department} </StyledTableCell>
+                        <StyledTableCell> {row.head}</StyledTableCell>
+                        <StyledTableCell>{row.email}</StyledTableCell>
+                        <StyledTableCell> {row.phone}</StyledTableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>
@@ -216,7 +192,7 @@ function ManageAsset() {
           </Tabs>
         </Grid>
       </Grid>
-    </div>
+    </div >
   );
 }
 

@@ -15,7 +15,7 @@ import CardContent from '@mui/joy/CardContent';
 function Signup() {
     return (
         <PageContainer className='bgImg' showheader showfooter>
-            <Grid container  display={'flex'} justifyContent={'start'}  alignContent={'center'}>
+            <Grid container display={'flex'} justifyContent={'start'} alignContent={'center'}>
                 <Grid item padding={2} width={600} >
                     <Card>
                         <CardContent orientation="vertical">
@@ -122,7 +122,7 @@ function Signup() {
                                                     component="label"
                                                     style={{ minWidth: "80px" }}
 
-                                                    sx={{ backgroundColor: "#D3D3D3",mr:"2px", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" }}
+                                                    sx={{ backgroundColor: "#D3D3D3", mr: "2px", border: "black", height: "30px", p: "4px", lineHeight: "1", width: "100%" }}
                                                 >
                                                     Choose file
                                                     <input
@@ -136,7 +136,7 @@ function Signup() {
                                                     component="label"
                                                     style={{ minWidth: "80px" }}
 
-                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1",width:"100%" }}
+                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1", width: "100%" }}
                                                 >
                                                     Upload ID Card
                                                     <input
@@ -145,21 +145,21 @@ function Signup() {
                                                     />
                                                 </Button>
 
-                                               
+
                                             </Box>
 
                                         </Grid>
 
 
                                         <Grid item>
-                                            <Link to='/Otpsign' style={{ textDecoration: "none", color:'white' }}> 
-                                            <Button variant="contained" className='btn-primary' fullWidth href="#contained-buttons">
-                                                <Typography variant='h6'>Next</Typography>
-                                            </Button>
+                                            <Link to='/Otpsign' style={{ textDecoration: "none", color: 'white' }}>
+                                                <Button variant="contained" className='btn-primary' fullWidth href="#contained-buttons">
+                                                    <Typography variant='h6'>Next</Typography>
+                                                </Button>
                                             </Link>
                                         </Grid>
                                         <Grid item textAlign="center" mt={1.5}>
-                                            <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20}  style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
+                                            <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
                                             <Typography fontSize={'medium'}>Already have Registration? <Link to='/CheckStatus' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                         </Grid>
                                     </Grid>
@@ -171,7 +171,7 @@ function Signup() {
 
 
             </Grid>
-        </PageContainer>
+         </PageContainer>
     )
 }
 
