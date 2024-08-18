@@ -2,6 +2,7 @@ import React from "react";
 import { Button,
   FormControlLabel,
   Grid,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -13,16 +14,14 @@ function AddDevice() {
   // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   return (
-    <div>
-      <Grid container px={10} spacing={5} direction="column">
+    <Paper sx={{ p: 2 }}>
+      <Grid container spacing={5} direction="column">
         {/* ---------------MAC Address----------------- */}
         <Grid item lg={12} md={12} sm={12} xs={12} gap={1}>
-          <Box display="flex" justifyContent="space-between">
-            <Box display="flex">
-              <Typography>MAC Address :</Typography>
-              <TextField size="small" />
-            </Box>
-            <Button variant="contained">Read MAC</Button>
+          <Typography sx={{textWrap: 'nowrap'}}>MAC Address :</Typography>
+          <Box display="flex" flexDirection="column" gap={3} alignItems="end">
+              <TextField size="small" fullWidth/>
+              <Button variant="contained">Read MAC</Button>
           </Box>
         </Grid>
         {/* -----------------------Select Well----------------- */}
@@ -57,44 +56,43 @@ function AddDevice() {
 
         {/* -----------------------Parameters----------------- */}
 
-        <Grid item >
+        <Grid item gap={5} >
           <Typography variant="h6">Parameter</Typography>
-          <FormControlLabel
-            control={<Checkbox defaultChecked size="large" />}
-            label="GIP"
-          />
-          <FormControlLabel
-            control={<Checkbox defaultChecked size="large" />}
-            label="THP"
-          />
-          <FormControlLabel
-            control={<Checkbox defaultChecked size="large" />}
-            label="Battery"
-          />
-          <FormControlLabel
-            control={<Checkbox defaultChecked size="large" />}
-            label="Solar Power"
-          />
-          <FormControlLabel
-            control={<Checkbox defaultChecked size="large" />}
-            label="Comunication"
-          />{" "}
-          <FormControlLabel
-            control={<Checkbox defaultChecked size="large" />}
-            label="Cpu temperature"
-          />
-          <Box display={"flex"} justifyContent={'end'} >
-            <Button  sx={{
-                            backgroundColor: 'green',   // Change button color to green
-                            '&:hover': {
-                                backgroundColor: 'darkgreen', // Optional: Change color on hover
-                            },
-                            fontSize: '16px',
-                            }} variant="contained">Submit</Button>
+
+          <Box display='flex' justifyContent='space-between' flexWrap="wrap">
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="large" />}
+              label="GIP"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="large" />}
+              label="THP"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="large" />}
+              label="Battery"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="large" />}
+              label="Solar Power"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="large" />}
+              label="Comunication"
+            />{" "}
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="large" />}
+              label="Cpu temperature"
+            />
           </Box>
+
+          <Box display={"flex"} justifyContent={'end'}>
+            <Button color="success" variant="contained">Submit</Button>
+          </Box>
+
         </Grid>
       </Grid>
-    </div>
+    </Paper>
   );
 }
 
