@@ -137,13 +137,13 @@ export default function Sidebar({ open, handleDrawerClose }) {
                 </IconButton>
             </DrawerHeader>
 
-            <List>
-                <Divider sx={{ mt: 0.5, mb: 0.5 }} />
+            <List sx={{mt:1}}>
+                {/* <Divider sx={{ py: 1 }} /> */}
                 {/* {['Dashboard', 'Well Monitor', 'Virtual Flow', 'Crystal Report', 'Complaint History', 'Notification  History','Edit Profile','Log Out'] */}
 
 
                 {mainuItems?.map((text, index) => (
-                    <Link to={text.path} style={{ textDecoration: 'none', color: "black" }}>
+                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }}>
                         <ListItem key={text} disablePadding sx={{
                             display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
                            

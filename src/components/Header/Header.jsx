@@ -22,9 +22,23 @@ function Header() {
             <img src={logo} style={{ width: "7rem", height: "5rem" }} />
           </Box>
 
-          <Typography fontSize="x-large">
+          <Typography sx={{
+            fontSize: {
+              xs: 'small', // small screens
+              sm: 'small', // medium screens
+              md: 'x-large', // large screens
+              lg: 'x-large', // extra-large screens
+            }
+          }}>
             OIL AND NATURAL GAS CORPORATION
-            <Typography fontSize={"large"}>
+            <Typography sx={{
+              fontSize: {
+                xs: 'x-small', // small screens
+                sm: 'x-small', // medium screens
+                md: 'large', // large screens
+                lg: 'large', // extra-large screens
+              },
+            }}>
               Real Time Well Monitoring System
             </Typography>
           </Typography>
@@ -38,7 +52,7 @@ function Header() {
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
           <Box display="flex" alignItems="center" justifyContent="end" gap={1}>
-            <Link to=''><img src={Technical} style={{ objectFit: "cover", width: "70px", marginRight:"24px"}} /></Link>
+            <Link to=''><img src={Technical} style={{ objectFit: "cover", width: "70px", marginRight: "24px" }} /></Link>
             <img src={MQTT1} style={{ objectFit: "cover", width: "151px" }} />
           </Box>
 
