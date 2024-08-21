@@ -1,5 +1,4 @@
 import React from 'react'
-import PageContainer from '../../components/HOC/PageContainer'
 import { Button, Grid, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -10,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
 import well from '/assets/WELL.png'
+import manage from '../../../../public/assets/Oil.webp'
 import { Link } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -52,22 +52,20 @@ const rows = [
 
 
 
-
-
-function WellMaster() {
+function DeviceManage() {
     return (
         <div>
             <Grid container>
-                <Typography variant='h4'>Well Master</Typography>
+                <Typography variant='h4'>Device Manager</Typography>
             </Grid>
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
                 <Grid item p={1}>
                     <Box sx={{ height: '100px', width: '100px' }}>
-                        <img src={well} alt='img' height={'100px'} width={'100px'} />
+                        <img src={manage} alt='img' height={'100px'} width={'100px'} />
                     </Box>
                 </Grid>
                 <Grid item p={4}>
-                    <Link to='/dashboard/addwell'>
+                    <Link to='/dashboard/AddDevice'>
                         <Button variant='contained' 
                           sx={{
                             backgroundColor: 'green',   // Change button color to green
@@ -76,7 +74,7 @@ function WellMaster() {
                             },
                             fontSize: '16px',
                             }}>
-                            Add New well +
+                            Add Device +
                         </Button>
                     </Link>
                 </Grid>
@@ -118,4 +116,4 @@ function WellMaster() {
     )
 }
 
-export default WellMaster
+export default DeviceManage

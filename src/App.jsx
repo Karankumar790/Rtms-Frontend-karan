@@ -22,6 +22,10 @@ const OtpSign = lazy(() => import("./components/Otp/Otpsign.jsx"));
 const WellMaster = lazy(() => import("./Pages/WellMaster/WellMaster.jsx"));
 const SingleWell = lazy(() =>import("./Pages/Dashboard/SingleWell/SingleWell.jsx"));
 const AddWell = lazy(() =>import("./Pages/WellMaster/AddWell/AddWell.jsx"));
+const ManageAsset = lazy(() =>import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx"));
+const DeviceManage = lazy(() =>import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx"));
+const AddDevice = lazy(() =>import("./Pages/Dashboard/DeviceManage/AddDevice/AddDevice.jsx"));
+
 
 
 function App() {
@@ -44,6 +48,10 @@ function App() {
         { path: '/dashboard/wellmaster', element: <WellMaster /> },
         { path: '/dashboard/addwell', element: <AddWell /> },
         { path: "/dashboard/singlewell", element: <SingleWell /> },
+        { path: "/dashboard/ManageAsset", element: <ManageAsset /> },
+        { path: "/dashboard/DeviceManage", element: <DeviceManage /> },
+        { path: "/dashboard/AddDevice", element: <AddDevice /> },
+
       ]
     },
     { path: "/CheckStatus", element: <CheckStatus /> },

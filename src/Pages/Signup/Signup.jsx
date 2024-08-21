@@ -152,9 +152,11 @@ function Signup() {
 
 
                                         <Grid item>
+                                            <Link to='/Otpsign' style={{ textDecoration: "none", color:'white' }}> 
                                             <Button variant="contained" className='btn-primary' fullWidth href="#contained-buttons">
-                                               <Link to='/Otpsign' style={{ textDecoration: "none", color:'white' }}> <Typography variant='h6'>Next</Typography></Link>
+                                                <Typography variant='h6'>Next</Typography>
                                             </Button>
+                                            </Link>
                                         </Grid>
                                         <Grid item textAlign="center" mt={1.5}>
                                             <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20}  style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
