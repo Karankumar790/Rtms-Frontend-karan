@@ -17,7 +17,7 @@ export default function Forgot() {
                                 <Typography variant='h5' fontSize='x-large' textAlign="center">Forgot Your Password?</Typography>
                             </Grid>
                             <Grid item mt={2}>
-                                <Typography fontSize='large' textAlign="center">Enter your registered email to receive otp. </Typography>
+                                <Typography fontSize='large' textAlign="center">Enter Your Registered Email To Receive OTP. </Typography>
                             </Grid>
                             <Grid item mt={3}>
                                 <TextField justifyContent="center" label="Enter Email Address"  variant="outlined" size='small' fullWidth />
