@@ -40,14 +40,14 @@ function Login() {
         height={"100%"}
         display={"flex"}
         justifyContent={"start"}
-        padding={5}
+        padding='4rem'
         alignContent={"center"}
       >
         <Grid item width={600}>
           <Card>
             <CardContent orientation="vertical">
               <Grid item sx={{ textAlign: "center" }} md={12} sm={12} xs={12}>
-                <Typography pt={5} fontSize="xxx-large">
+                <Typography pt={2} fontSize="xxx-large">
                   Welcome
                 </Typography>
                 <Typography fontSize="large" color="#800000">
@@ -57,15 +57,7 @@ function Login() {
               <Grid item alignItems={"center"}>
                 <form>
                   <Grid container padding={5} spacing={2}>
-                    <Grid
-                      item
-                      sx={{ display: "flex", alignItems: "flex-end" }}
-                      md={12}
-                      sm={12}
-                      lg={12}
-                      xs={12}
-                      
-                    >
+                    <Grid item sx={{ display: "flex", alignItems: "flex-end" }} md={12} sm={12} lg={12} xs={12} >
                       <AccountCircle
                         sx={{ color: "action.active", mr: 1 }}
                         fontSize="large"
@@ -84,7 +76,7 @@ function Login() {
                       sm={12}
                       lg={12}
                       xs={12}
-                      mt={1}
+                      mt='5%'
                     >
                       <HttpsIcon
                         sx={{ color: "action.active", mr: 1 }}
@@ -94,7 +86,8 @@ function Login() {
                         variant="standard"
                         value={password}
                         type={visible ? "text" : "password"}
-                        placeholder="Password"
+                        label="Password"
+                        // placeholder="Password"
                         className="custom-textfield"
                         onChange={(e) => setPassword(e.target.value)}
                         fullWidth

@@ -50,7 +50,7 @@ const CardWrapper = styled(Card)(() => ({
 
 export default function BasicCard() {
   return (
-    <Grid container>
+    <Grid container gap={3}>
       <Grid container spacing={2}>
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
@@ -153,9 +153,9 @@ export default function BasicCard() {
       <Grid container>
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>
-            <TabList>
-              <Tab>
-                <Typography fontSize={'large'}>Current Notification</Typography>
+            <TabList >
+              <Tab style={{whiteSpace:'break-spaces'}}>
+                <Typography  fontSize={'large'}>Current Notification</Typography>
               </Tab>
               <Tab>
                 <Typography fontSize={'large'}> Open Complaint</Typography>
@@ -191,7 +191,7 @@ export default function BasicCard() {
             </TabPanel>
             <TabPanel>
               <TableContainer sx={{ border: "1px solid black" }}>
-                <Table aria-label="customized table" className="responsive-table">
+                <Table aria-label="customized table">
                   <TableHead >
                     <TableRow>
                       <StyledTableCell>Notification No.</StyledTableCell>
