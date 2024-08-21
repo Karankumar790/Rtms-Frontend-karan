@@ -102,7 +102,7 @@ function ManageAsset() {
       {/* ------------Input textfield for table------------------- */}
       <Card sx={{ my: 2 }}>
         <CardContent>
-          <Typography variant="h5"> Add Departments Information</Typography>
+          <Typography variant="h5"> Add Department</Typography>
           <Grid container spacing={2} mt={0.1}>
             <Grid item xs={12} sm={6} md={3}>
               <TextField variant="outlined" label="Department" inputRef={inputRef} fullWidth />
