@@ -1,5 +1,5 @@
 import { Grid, Typography, TextField, Box, Button } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import PageContainer from '../../components/HOC/PageContainer';
@@ -13,6 +13,10 @@ import CardContent from '@mui/joy/CardContent';
 
 
 function Signup() {
+    const [selectedPhoto, setSelectedPhoto] = useState(null);
+    const [IdCard, setIdCard] = useState(null);
+
+
     return (
         <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'}>
             <Grid container >
@@ -113,43 +117,41 @@ function Signup() {
                                             </Box>
 
                                             <Box mt={2} sx={{ display: 'flex', alignItems: 'flex-end' }}>
-
-
                                                 <CameraAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
-
-                                                <Button
-                                                    variant="outlined"
-                                                    component="label"
-                                                    style={{ minWidth: "80px" }}
-
-                                                    sx={{ backgroundColor: "#D3D3D3", mr: "2px", border: "black", height: "30px", p: "4px", lineHeight: "1", width: "100%" }}
-                                                >
-                                                    Choose file
+                                                <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
                                                     <input
                                                         type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => setSelectedPhoto(e.target.files[0])}
                                                         hidden
                                                     />
-                                                </Button>
-
-                                                <Button
-                                                    variant="outlined"
-                                                    component="label"
-                                                    style={{ minWidth: "80px" }}
-
-                                                    sx={{ backgroundColor: "#D3D3D3", border: "black", height: "30px", p: "4px", lineHeight: "1", width: "100%" }}
-                                                >
-                                                    Upload ID Card
-                                                    <input
-                                                        type="file"
-                                                        hidden
-                                                    />
+                                                    {selectedPhoto ? (
+                                                        <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                            {selectedPhoto.name}
+                                                        </Typography>
+                                                    ) : (
+                                                        <Typography>Upload Photo</Typography>
+                                                    )}
                                                 </Button>
 
 
+                                                <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => setIdCard(e.target.files[0])}
+                                                        hidden
+                                                    />
+                                                    {IdCard ? (
+                                                        <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                            {IdCard.name}
+                                                        </Typography>
+                                                    ) : (
+                                                        <Typography>Upload ID Card</Typography>
+                                                    )}
+                                                </Button>
                                             </Box>
-
                                         </Grid>
-
 
                                         <Grid item>
                                             <Link to='/Otpsign' style={{ textDecoration: "none", color: 'white' }}>
@@ -171,7 +173,7 @@ function Signup() {
 
 
             </Grid>
-         </PageContainer>
+        </PageContainer>
     )
 }
 

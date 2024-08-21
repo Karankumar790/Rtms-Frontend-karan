@@ -18,11 +18,21 @@ export default function Otpsign() {
       <Paper sx={{ borderRadius: "20px", px:"5px" }} >
         <Grid item p={4}>
           <form>
+          <Grid item mt={2}>
+              <Typography fontSize={"x-large"} sx={{ color: "#0c1352" }}>
+                Please Enter OTP To Verify Mobile
+              </Typography>
+            </Grid>
             <Grid item mt={2}>
+              <Typography variant="h6" textAlign="center">
+                OTP has been sent to your registered Mobile
+              </Typography>
+            </Grid>
+            {/* <Grid item mt={2}>
               <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
                 Enter OTP From Mobile
               </Typography>
-            </Grid>
+            </Grid> */}
             {/* <Grid item mt={2}>
               <Typography variant="h5" textAlign="center">
                 OTP has been sent to your registered Mobile

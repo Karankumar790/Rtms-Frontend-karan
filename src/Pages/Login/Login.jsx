@@ -132,7 +132,7 @@ function Login() {
                       </Link>
                     </Grid>
                     <Grid item textAlign="center">
-                      <Typography fontSize="small">
+                      <Typography fontSize="large">
                         Don't have an account?
                         <Link
                           to="/signup"
