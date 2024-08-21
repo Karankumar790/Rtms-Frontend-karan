@@ -127,18 +127,6 @@ export default function Sidebar({ open, handleDrawerClose }) {
     ]
     const theme = useTheme();
 
-    // Define menu items with their respective icons and paths
-    const menuItems = [
-        { name: 'Dashboard', icon: <HomeIcon sx={{ color: 'black' }} />, path: '/dashboard' },
-        { name: 'Well Monitor', icon: <MonitorIcon sx={{ color: 'black' }} />, path: '/dashboard/monitor' },
-        { name: 'Virtual Flow', icon: <ClearAllIcon sx={{ color: 'black' }} />, path: '/dashboard/virtual' },
-        { name: 'Crystal Report', icon: <DescriptionIcon sx={{ color: 'black' }} />, path: '/dashboard/crystal' },
-        { name: 'Complaint History', icon: <HistoryIcon sx={{ color: 'black' }} />, path: '/dashboard/complaint' },
-        { name: 'Notification History', icon: <NotificationsIcon sx={{ color: 'black' }} />, path: '/dashboard/notification' },
-        // { name: 'Edit Profile', icon: <EditIcon sx={{ color: 'black' }} />, path: '/dashboard/edit' },
-        // { name: 'Log Out', icon: <LogoutIcon sx={{ color: 'black' }} />, path: '/dashboard/logout' }
-    ];
-
     return (
         <Drawer variant="permanent" open={open}  >
             <DrawerHeader>
@@ -150,9 +138,9 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
             <List>
                 <Divider sx={{ mt: 0.5, mb: 0.5 }} />
-                {menuItems.map((item, index) => (
+                {mainuItems.map((item, index) => (
                     <Link to={item.path} key={item.name} style={{ textDecoration: 'none', color: 'black' }}>
-                        <ListItem disablePadding sx={{ display: 'block', borderBottom: index < menuItems.length - 1 ? '1px solid #ddd' : 'none' }}>
+                        <ListItem disablePadding sx={{ display: 'block', borderBottom: index < mainuItems.length - 1 ? '1px solid #ddd' : 'none' }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
