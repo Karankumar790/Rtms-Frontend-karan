@@ -22,6 +22,7 @@ import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
+import Camera from '@mui/icons-material/PhotoCamera';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -80,7 +81,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
             path: "/dashboard"
         },
         {
-            name: "Manage Asset",
+            name: "Organization",
             icon: <AssetsIcon sx={{ color: 'black', }} />,
             path: "/dashboard/ManageAsset"
         },
@@ -105,7 +106,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
             path: "/dashboard/complaint"
         },
         {
-            name: "Notification",
+            name: "Notifications",
             icon: < NotificationsIcon sx={{ color: 'black' }} />,
             path: "/dashboard/notification",
 
@@ -117,8 +118,8 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
         },
         {
-            name: "Virtual Flow",
-            icon: <ClearAllIcon sx={{ color: 'black' }} />,
+            name: "Live Capture",
+            icon: <Camera sx={{ color: 'black' }} />,
             path: "/dashboard/virtual",
 
         },

@@ -24,10 +24,10 @@ function CheckStatus() {
       <PageContainer showheader showfooter>
         <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100%'}>
           <Grid item lg={8} md={10} sm={10} xs={10}>
-            <Card sx={{bgcolor:"#e8e4d8"}}>
+            <Card >
               <Grid
                 container
-                // p={0}
+                mt={2}
                 sx={{
                   display: "flex",
                   justifyContent: "space-around",
@@ -43,7 +43,7 @@ function CheckStatus() {
                   flexDirection={"column"}
                   gap={1}
                 >
-                  <Typography variant="h4" mt={2}>REGISTRATION ID</Typography>
+                  <Typography variant="h4" >REGISTRATION ID</Typography>
                   <Typography variant="h6">User Name</Typography>
 
                   <Typography variant="h6">Email Address</Typography>

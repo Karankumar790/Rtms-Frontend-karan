@@ -28,6 +28,7 @@ const AddDevice = lazy(() =>import("./Pages/Dashboard/DeviceManage/AddDevice/Add
 
 
 
+
 function App() {
   const route = useRoutes([
     { path: "/", element: <Login /> },
@@ -61,6 +62,7 @@ function App() {
     { path: "/otpsignup", element: <OtpSignup /> },
     { path: "/otpsign", element: <OtpSign /> },
     { path: "/otpforget", element: <OtpForget /> },
+
   ]);
 
   return (
