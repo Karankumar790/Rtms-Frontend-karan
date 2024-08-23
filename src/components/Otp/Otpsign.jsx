@@ -54,17 +54,15 @@ export default function Otpsign() {
               mt={3}
               justifyContent="center"
               sx={{ textAlign: "center" }}
-            >
-              <Link to="/">
+            >   
                 <Button
                   variant="contained"
                   color="primary"
                   size="small"
                   sx={{ bgcolor: "#0c113b" }}
                 >
-                  <Link to='/OtpSignup' style={{textDecoration:'none', color:'white'}}><Typography>Submit</Typography></Link>
+                  <Link to='/OtpSignup' style={{textDecoration:'none', color:'white'}}><Typography variant="h6">Submit</Typography></Link>
                 </Button>
-              </Link>
             </Grid>
             <Grid item mt={2} textAlign="center">
               <Link to="/" style={{ textDecoration: "none" }}>
