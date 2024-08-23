@@ -35,7 +35,7 @@ function Reset() {
             }}
           >
             <TextField
-              label="Enter The Verification Code"
+              label="Enter Verification Code"
               variant="outlined"
               fullWidth
             />
