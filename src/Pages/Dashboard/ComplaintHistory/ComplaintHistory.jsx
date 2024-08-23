@@ -164,9 +164,9 @@ function ComplaintHistory() {
                 <TableRow  >
                   <StyledTableCell sx={{fontSize:'18px'}}>Complain No.</StyledTableCell>
                   <StyledTableCell sx={{fontSize:'18px'}} align="left">Data/Time</StyledTableCell>
-                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
-                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
-                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Notification No.</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Raiser Name</StyledTableCell>
+                  <StyledTableCell sx={{fontSize:'18px'}} align="left">Taker Name</StyledTableCell>
                   <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                 </TableRow>
               </TableHead>

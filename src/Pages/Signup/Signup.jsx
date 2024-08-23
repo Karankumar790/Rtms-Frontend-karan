@@ -10,8 +10,6 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 
 
-
-
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
@@ -55,7 +53,7 @@ function Signup() {
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <CallIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
-                                                    label="Contact Number"
+                                                    label=" Number"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
@@ -77,7 +75,7 @@ function Signup() {
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
-                                                    label="Asset Name"
+                                                    label="Organization"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth

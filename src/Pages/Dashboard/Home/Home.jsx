@@ -194,8 +194,8 @@ export default function BasicCard() {
                 <Table aria-label="customized table">
                   <TableHead >
                     <TableRow>
-                      <StyledTableCell>Notification No.</StyledTableCell>
-                      <StyledTableCell align="left">Data/TIme</StyledTableCell>
+                      <StyledTableCell>Complaint No.</StyledTableCell>
+                      <StyledTableCell  align="left">Data/TIme</StyledTableCell>
                       <StyledTableCell align="left">Well Location</StyledTableCell>
                       <StyledTableCell align="left">Well Installation</StyledTableCell>
                       <StyledTableCell align="left">Well number</StyledTableCell>
@@ -204,12 +204,12 @@ export default function BasicCard() {
                   </TableHead>
                   <TableBody>
                     <StyledTableRow>
-                      <StyledTableCell component="th" scope="row"> Notification No.</StyledTableCell>
-                      <StyledTableCell>25kalori</StyledTableCell>
-                      <StyledTableCell>shyam</StyledTableCell>
-                      <StyledTableCell>Ramu singh</StyledTableCell>
-                      <StyledTableCell>225</StyledTableCell>
-                      <StyledTableCell>44555</StyledTableCell>
+                      <StyledTableCell component="th" scope="row" sx={{ width: '10%' }}> Notification No.</StyledTableCell>
+                      <StyledTableCell sx={{ width: '10%' }}>25kalori</StyledTableCell>
+                      <StyledTableCell sx={{ width: '15%' }}>shyam</StyledTableCell>
+                      <StyledTableCell sx={{ width: '25%' }}>Ramu singh mlmv vposemvpeoa apvmekpavoea ev ekvekv kev k vpkv epaoveoampafo pomvpoemvpomaepovmae</StyledTableCell>
+                      <StyledTableCell sx={{ width: '15%' }}>225</StyledTableCell>
+                      <StyledTableCell sx={{ width: '15%' }}>44555</StyledTableCell>
                     </StyledTableRow>
                   </TableBody>
                 </Table>
