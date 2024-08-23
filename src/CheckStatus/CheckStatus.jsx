@@ -21,16 +21,16 @@ const steps = ["ASSET MANAGER", "DEPARTMENT HEAD", "PASSWORD EMAILED"];
 function CheckStatus() {
   return (
     <>
-      <PageContainer showheader showfooter>
-        <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100%'}>
+      <PageContainer showheader showfooter >
+        <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100%'} bgcolor={"#bef283"}>
           <Grid item lg={8} md={10} sm={10} xs={10}>
             <Card >
               <Grid
                 container
-                mt={2}
+                mt={8}
                 sx={{
                   display: "flex",
-                  justifyContent: "space-around",
+                  justifyContent: "space-evenly",
                 }}
               >
                 <Grid
@@ -43,7 +43,7 @@ function CheckStatus() {
                   flexDirection={"column"}
                   gap={1}
                 >
-                  <Typography variant="h4" >REGISTRATION ID</Typography>
+                  <Typography variant="h5" >REGISTRATION ID</Typography>
                   <Typography variant="h6">User Name</Typography>
 
                   <Typography variant="h6">Email Address</Typography>
@@ -75,15 +75,30 @@ function CheckStatus() {
                 >
                   <img src="" alt="User photo" />
                 </Grid>
+                <Grid
+                  item
+                  lg={2}
+                  md={4}
+                  sm={4}
+                  xs={4}
+                  sx={{
+                    border: "1px solid black",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img src="" alt="User_ID Card" />
+                </Grid>
               </Grid>
 
               <Grid item mt={3}>
-                <Box>
+                <Box >
                   <Stepper
                     activeStep={1}
                     alternativeLabel
                     sx={{
-                      fontSize: "200px",
+                      fontSize: "300px",
                       padding: "50px",
                       "& .MuiStepConnector-line": {
                         marginTop: "12px",
@@ -108,7 +123,7 @@ function CheckStatus() {
                     ))}
                   </Stepper>
                 </Box>
-                <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+                <Grid item mb={2} sx={{ display: "flex", justifyContent: "center"}}>
                   <Box
                     sx={{
                       width: "70%",
@@ -121,7 +136,7 @@ function CheckStatus() {
                       to="/"
                       style={{ textDecoration: "none", color: "white" }}
                     >
-                      <Button variant="contained" color="primary" size="large">
+                      <Button variant="contained" color="primary" size="large" >
                         Close
                       </Button>
                     </Link>

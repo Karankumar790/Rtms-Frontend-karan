@@ -20,7 +20,7 @@ export default function Forgot() {
           <form>
             <Grid item mt={2}>
               <Typography fontSize={"x-large"} sx={{ color: "#0c1352" }}>
-                Please Enter The OTP To Verify Your Account
+                Please Enter OTP To Verify Your Account
               </Typography>
             </Grid>
             <Grid item mt={2}>
