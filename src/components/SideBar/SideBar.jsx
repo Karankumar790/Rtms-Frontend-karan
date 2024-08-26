@@ -128,7 +128,6 @@ export default function Sidebar({ open, handleDrawerClose }) {
     ]
     const theme = useTheme();
 
-
     return (
         <Drawer variant="permanent" open={open}  >
             <DrawerHeader>
@@ -170,7 +169,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {text?.icon}
+                                    {text.icon}
                                 </ListItemIcon>
 
                                 <ListItemText primary={text.name} sx={{
@@ -178,12 +177,10 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                    
                                 }} />
                             </ListItemButton>
-                            <Divider sx={{ mt: 0.5, mb: 0.5 }} />
                         </ListItem>
                     </Link>
                 ))}
             </List>
-
         </Drawer>
     );
 }

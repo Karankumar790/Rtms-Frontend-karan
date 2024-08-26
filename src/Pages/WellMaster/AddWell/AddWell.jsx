@@ -14,56 +14,77 @@ const data = [
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'GIP',
     Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '02',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'CHP',
     Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '03',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'THP',
     Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '04',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'Battery %',
     Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '05',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'Solar Power',
     Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '06',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'Communication',
     Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '07',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'CPU Temperature',
     Condition1: '',
+    Description: '',
+
   },
 ]
 
@@ -108,12 +129,14 @@ function AddWell() {
                   <TableCell sx={{ fontSize: '1.5rem' }}>Parameter</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Normal Alert</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Condition</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}>Description</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Critical Alert</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Condition</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}>Description</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employeeData?.map(({ employeeId, Parameter, NormalAlert, CriticalAlert, Condition, Condition1 }) => (
+                {employeeData?.map(({ employeeId, Parameter, NormalAlert, CriticalAlert, Condition, Condition1,Description }) => (
                   <TableRow key={employeeId}>
                     <TableCell>
                       <Typography>{Parameter}</Typography>
@@ -144,6 +167,17 @@ function AddWell() {
                         </Select>
                       </FormControl>
                     </TableCell>
+
+                    <TableCell>
+                      <TextField
+                        name="Description"
+                        value={Description}
+                        onChange={(e) => onChangeInput(e, employeeId)}
+                        variant="outlined"
+                        size="small"
+                        style={{ width: '200px' }}
+                      />
+                    </TableCell>
                     <TableCell>
                       <TextField
                         name="CriticalAlert"
@@ -168,6 +202,16 @@ function AddWell() {
                           <MenuItem value="Low">Low</MenuItem>
                         </Select>
                       </FormControl>
+                    </TableCell>
+                    <TableCell>
+                      <TextField
+                        name="Description"
+                        value={Description}
+                        onChange={(e) => onChangeInput(e, employeeId)}
+                        variant="outlined"
+                        size="small"
+                        style={{ width: '200px' }}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
