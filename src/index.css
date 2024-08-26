@@ -4,12 +4,11 @@
 * {
     margin: 0;
     padding: 0;
-    --shadow: rgba(255, 255, 255, 0.922) 0px 6px 12px -2px, rgba(255, 255, 255, 0.956) 0px 3px 7px -3px;
-}
-*{
     -ms-overflow-style: none;
     scrollbar-width: none;
+    --shadow: rgba(255, 255, 255, 0.922) 0px 6px 12px -2px, rgba(255, 255, 255, 0.956) 0px 3px 7px -3px;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -95,4 +94,10 @@
 
 .active :hover{
         background-color: 'lightgrey';
+}
+.bg-imgManageAsset {
+    background-image: url("https://media.istockphoto.com/id/959381934/photo/sunset-over-pumpjack-silhouette-with-copy-space.jpg?s=612x612&w=0&k=20&c=fcyH9ZVieEwbLHk9LkjxdX7vveS56TFqRbUMV6xpRcA=");
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
 }

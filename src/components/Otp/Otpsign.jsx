@@ -18,11 +18,21 @@ export default function Otpsign() {
       <Paper sx={{ borderRadius: "20px", px:"5px" }} >
         <Grid item p={4}>
           <form>
+          <Grid item mt={2}>
+              <Typography fontSize={"x-large"} sx={{ color: "#0c1352" }}>
+                Please Enter OTP To Verify Mobile
+              </Typography>
+            </Grid>
             <Grid item mt={2}>
+              <Typography variant="h6" textAlign="center">
+                OTP has been sent to your registered Mobile
+              </Typography>
+            </Grid>
+            {/* <Grid item mt={2}>
               <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
                 Enter OTP From Mobile
               </Typography>
-            </Grid>
+            </Grid> */}
             {/* <Grid item mt={2}>
               <Typography variant="h5" textAlign="center">
                 OTP has been sent to your registered Mobile
@@ -44,17 +54,15 @@ export default function Otpsign() {
               mt={3}
               justifyContent="center"
               sx={{ textAlign: "center" }}
-            >
-              <Link to="/">
+            >   
                 <Button
                   variant="contained"
                   color="primary"
                   size="small"
                   sx={{ bgcolor: "#0c113b" }}
                 >
-                  <Link to='/OtpSignup' style={{textDecoration:'none', color:'white'}}><Typography>Submit</Typography></Link>
+                  <Link to='/OtpSignup' style={{textDecoration:'none', color:'white'}}><Typography variant="h6">Submit</Typography></Link>
                 </Button>
-              </Link>
             </Grid>
             <Grid item mt={2} textAlign="center">
               <Link to="/" style={{ textDecoration: "none" }}>
