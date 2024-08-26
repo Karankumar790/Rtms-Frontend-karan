@@ -168,7 +168,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {item.icon}
+                                    {text.icon}
                                 </ListItemIcon>
 
                                 <ListItemText primary={text.name} sx={{
