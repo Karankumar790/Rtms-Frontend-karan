@@ -120,7 +120,7 @@ function AddWell() {
 
       </Paper>
       <Paper>
-        <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} mt={1} p={1} >
+        <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
           <Typography variant='h4'>Notification Setting</Typography>
           <Grid item>
             <Table>
@@ -175,7 +175,7 @@ function AddWell() {
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        style={{ width: '200px' }}
+                        style={{ width: '450px' }}
                       />
                     </TableCell>
                     <TableCell>
@@ -210,7 +210,7 @@ function AddWell() {
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        style={{ width: '200px' }}
+                        style={{ width: '450px' }}
                       />
                     </TableCell>
                   </TableRow>
