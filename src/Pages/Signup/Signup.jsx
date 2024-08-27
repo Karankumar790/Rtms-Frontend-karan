@@ -1,5 +1,9 @@
 import { Grid, Typography, TextField, Box, Button } from '@mui/material'
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+// import { useDispatch, useSelector } from 'react-redux';
+// import OtpInput from 'react-otp-input';
+// import toast from 'react-hot-toast';
+// import { sendOtpApi, registerApi } from "../../api/Server";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import PageContainer from '../../components/HOC/PageContainer';
@@ -17,7 +21,18 @@ import toast from 'react-hot-toast';
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
-    const [inputValues, setInputValues] = useState(initialValues);
+
+    // const [otp, setOtp] = useState('');
+    // const [register, setRegister] = useState('');
+    // const { signupData, loading } = useSelector((state) => state.Server);
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    const [SubmitLoading, setSubmitlLoading] = useState(false);
+    // const [resendOtpLoading, setResendOtpLoading] = useState(false);
+    // const [email, setEmail] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
+    const [sent, setSent] = useState(false);
+    // const [inputValues, setInputValues] = useState(initialValues);
     const [hasTouchedUsername, setHasTouchedUsername] = useState({
         username: false,
         email: false,
@@ -26,12 +41,62 @@ function Signup() {
         organization: false,
         department: false,
         role: false,
-     }); // New state to track if the username field has been touched
-//---------------------FOR VALIDATION--------------------------------
+    }); // New state to track if the username field has been touched
+    //---------------------FOR VALIDATION--------------------------------
 
-    const initialValues = {username:'', Email:'', mobile:'', employeeId:'', organization:'', department:'',role:''};
+    const initialValues = { username: '', Email: '', mobile: '', employeeId: '', organization: '', department: '', role: '' };
 
-   
+
+
+    // useEffect(() => {
+    //     if (!signupData) {
+    //         navigate("/otp");
+    //     }
+    // }, []);
+
+
+
+    //    ----------------------------------- API fetching---------------------------
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const formData = {
+    //         ...signupData,
+    //         otp,
+    //     };
+
+    //     setSubmitlLoading(true);
+
+    //     const response = await registerApi(formData);
+
+    //     setSubmitlLoading(false);
+    //     if (!response.success) {
+    //         return toast.error(response.message);
+    //     }
+
+    //     toSafeInteger.success(response.message);
+    //     navigate("./CheckStatus");
+    // };
+
+    //recent otp
+
+    // const handleResendOtp = async (e) => {
+    //     const formData = {
+    //         email: signupData.email,
+    //     };
+    //     setResendOtpLoading(true);
+
+    //     const response = await sendOtpApi(formData);
+
+    //     sendResendOtpLoading(false);
+    //     if (!response.success) {
+    //         return toast.error(response.message);
+    //     }
+    //     toast.success(response.message);
+    // };
+    
+
 
     const handleUsernameChange = (e) => {
         const { name, value } = e.target;
@@ -44,64 +109,27 @@ function Signup() {
         setHasTouchedUsername({ ...touchedFields, [name]: true });
     };
 
-    // -----------API fetching -----------
-     
-   const[otp, setOtp]=useState('');
-   const[register, setRegister]=useState('');
-   const{signupData, loading} = useSelector((state)=> state.Server);
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
-   const [submitLoading, setSubmitLoading] = useState(false);
-   const [resendOtpLoading, SetResendOtpLoading] = useState(false);
-    useEffect(()=>{
-
-        if (!signupData){
-            navigate("/Otpsign")
-        }
-
-    },[]);
 
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const formData = {
-            ...signupData,
-            otp,
-        }
-
-        setSubmitLoading(true);
-
-        const response = await registerApi(formData);
-
-        setSubmitLoading(false);
-        if(!response.success){
-            return toast.error(response.message);
-        }
-
-        toast.success(response.message);
-        navigate("/checkStatus")
-    }
+    // const handleSendOtp = async () => {
+    //     try {
+    //         const response = await fetch('https://rtms-backend.onrender.com/api/v1/users/send-otp-register', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ email, contactNumber }),
+    //         });
+    //         const data = await response.json();
+    //         console.log(data);
+    //         setSent(true);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
 
-    const handleResendOtp = async (e) => {
-        const formData = {
-            email:signupData.email,
-    };
-
-    SetResendOtpLoading(true);
-
-    const response = await sendOtpApi(formData);
-   
-    SetResendOtpLoading(false);
-    if(!response.success){
-        return toast.error(response.message);
-    }
-
-    toast.success(response.message);
-   
-};
     return (
         <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'}>
             <Grid container >
@@ -124,11 +152,11 @@ function Signup() {
                                                     variant="standard"
                                                     color="info"
                                                     name="username"
-                                                    value={inputValues.username}
+                                                    // value={inputValues.username}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername && !inputValues.username ? "Username is required" : ''}
-                                                    error={hasTouchedUsername && !inputValues.username}
-                                                    onBlur={handleBlur} 
+                                                    // helperText={hasTouchedUsername && !inputValues.username ? "Username is required" : ''}
+                                                    // error={hasTouchedUsername && !inputValues.username}
+                                                    onBlur={handleBlur}
                                                     fullWidth
                                                 />
                                             </Box>
@@ -141,11 +169,11 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.email}
+                                                    // value={inputValues.email}
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.email && !inputValues.email ? "email is required" : ''}
                                                     error={hasTouchedUsername.email && !inputValues.email}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -158,11 +186,11 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.mobile}
+                                                    // value={inputValues.mobile}
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.mobile && !inputValues.mobile ? "mobile is required" : ''}
                                                     error={hasTouchedUsername.mobile && !inputValues.mobile}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -175,11 +203,11 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.employeeId}
+                                                    // value={inputValues.employeeId}
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.employeeId && !inputValues.employeeId ? "Username is required" : ''}
                                                     error={hasTouchedUsername.employeeId && !inputValues.employeeId}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -192,11 +220,11 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.organization}
+                                                    // value={inputValues.organization}
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.organization && !inputValues.organization ? "Username is required" : ''}
                                                     error={hasTouchedUsername.organization && !inputValues.organization}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -213,11 +241,11 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.department}
+                                                    // value={inputValues.department}
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.department && !inputValues.department ? "department is required" : ''}
                                                     error={hasTouchedUsername.department && !inputValues.department}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -234,11 +262,11 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.role}
+                                                    // value={inputValues.role}
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.role && !inputValues.role ? "Username is required" : ''}
                                                     error={hasTouchedUsername.role && !inputValues.role}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
 
                                             </Box>
@@ -257,7 +285,7 @@ function Signup() {
                                                             {selectedPhoto.name}
                                                         </Typography>
                                                     ) : (
-                                                        <Typography sx={{color:'black'}}>Upload Photo</Typography>
+                                                        <Typography sx={{ color: 'black' }}>Upload Photo</Typography>
                                                     )}
                                                 </Button>
 
@@ -274,7 +302,7 @@ function Signup() {
                                                             {IdCard.name}
                                                         </Typography>
                                                     ) : (
-                                                        <Typography sx={{color:'black'}}>Upload ID Card</Typography>
+                                                        <Typography sx={{ color: 'black' }}>Upload ID Card</Typography>
                                                     )}
                                                 </Button>
                                             </Box>
