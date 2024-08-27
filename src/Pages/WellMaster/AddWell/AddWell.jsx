@@ -14,56 +14,77 @@ const data = [
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'GIP',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '02',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'CHP',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '03',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'THP',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '04',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'Battery %',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '05',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'Solar Power',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '06',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'Communication',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
   {
     employeeId: '07',
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'CPU Temperature',
-    Condition1:'',
+    Condition1: '',
+    Description: '',
+
   },
 ]
 
@@ -88,8 +109,6 @@ function AddWell() {
   return (
     <div>
       <Paper>
-
-        {/* <Grid item xs={12} sm={6} md={6} lg={6} gap={1} sx={{ display: 'flex', flexDirection: 'column' }} > */}
         <Typography variant='h4'> Add New Well</Typography>
         <Grid container p={1} sx={{ display: 'flex', justifyContent: 'space-between' }} >
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Well Number" variant="outlined" /></Grid>
@@ -98,11 +117,10 @@ function AddWell() {
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Latitude" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Longitude" variant="outlined" /></Grid>
         </Grid>
-        {/* </Grid> */}
 
       </Paper>
       <Paper>
-        <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} mt={1} p={1} >
+        <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
           <Typography variant='h4'>Notification Setting</Typography>
           <Grid item>
             <Table>
@@ -111,12 +129,14 @@ function AddWell() {
                   <TableCell sx={{ fontSize: '1.5rem' }}>Parameter</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Normal Alert</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Condition</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}>Description</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Critical Alert</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Condition</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}>Description</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employeeData.map(({ employeeId, Parameter, NormalAlert, CriticalAlert, Condition, Condition1 }) => (
+                {employeeData?.map(({ employeeId, Parameter, NormalAlert, CriticalAlert, Condition, Condition1,Description }) => (
                   <TableRow key={employeeId}>
                     <TableCell>
                       <Typography>{Parameter}</Typography>
@@ -133,7 +153,7 @@ function AddWell() {
                       />
                     </TableCell>
                     <TableCell>
-                    <FormControl variant="outlined" size="small" fullWidth>
+                      <FormControl variant="outlined" size="small" fullWidth>
                         <Select
                           labelId={`condition-label-${employeeId}`}
                           name="Condition1"
@@ -146,6 +166,17 @@ function AddWell() {
                           <MenuItem value="Low">Low</MenuItem>
                         </Select>
                       </FormControl>
+                    </TableCell>
+
+                    <TableCell>
+                      <TextField
+                        name="Description"
+                        value={Description}
+                        onChange={(e) => onChangeInput(e, employeeId)}
+                        variant="outlined"
+                        size="small"
+                        style={{ width: '450px' }}
+                      />
                     </TableCell>
                     <TableCell>
                       <TextField
@@ -172,6 +203,16 @@ function AddWell() {
                         </Select>
                       </FormControl>
                     </TableCell>
+                    <TableCell>
+                      <TextField
+                        name="Description"
+                        value={Description}
+                        onChange={(e) => onChangeInput(e, employeeId)}
+                        variant="outlined"
+                        size="small"
+                        style={{ width: '450px' }}
+                      />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -179,28 +220,28 @@ function AddWell() {
           </Grid>
           <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }} gap={2}>
             <Button variant='contained'
-             sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
-              },
-              fontSize: '16px',
+                },
+                fontSize: '16px',
               }}> Add Well</Button>
-              <Button variant='contained'
-             sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
+            <Button variant='contained'
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
-              },
-              fontSize: '16px',
+                },
+                fontSize: '16px',
               }}>Update</Button>
-              <Button variant='contained'
-             sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
+            <Button variant='contained'
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
-              },
-              fontSize: '16px',
+                },
+                fontSize: '16px',
               }}> Delete</Button>
           </Grid>
         </Grid>

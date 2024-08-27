@@ -318,14 +318,12 @@ function Signup() {
                                         </Grid>
                                     </Grid>
                                 </form>
-                            </Grid>
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-
+                        </Grid>
+                    </CardContent>
+                </Card>
             </Grid>
-        </PageContainer>
+        </Grid>
+        </PageContainer >
     )
 }
 
