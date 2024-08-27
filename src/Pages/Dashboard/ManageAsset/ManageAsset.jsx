@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material";
+import { Button, Card, CardContent, Grid, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 // -------------------Table Function-------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -54,6 +56,8 @@ function ManageAsset() {
     inputRef2.current.value = null;
     inputRef3.current.value = null;
   }
+
+  const steps = ["Head of Department", "Manager", "Team Leader"];
 
   return (
     <div>
@@ -123,6 +127,88 @@ function ManageAsset() {
             </Grid>
           </Grid>
         </CardContent>
+      </Card>
+      {/* ----------------------Postion-------------------------------- */}
+
+      <Card sx={{ my: 2 }}>
+        <CardContent>
+          <Typography variant="h5"> Add Postion</Typography>
+          <Grid container spacing={2} mt={0.1}>
+            <Grid item xs={12} sm={6} md={3}>
+              <TextField variant="outlined" label="Head of Department" fullWidth />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <TextField variant="outlined" label="Manager" fullWidth />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <TextField variant="outlined" label="Team Leader" fullWidth />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <TextField variant="outlined" label="Employee" fullWidth />
+            </Grid>
+            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
+              <Button variant="contained">
+                Postion
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+      {/* -----------------------Approval chain------------------------- */}
+
+      <Card sx={{ my: 2 }} >
+
+        <Grid >
+          <Box >
+            <Stepper
+              activeStep={1}
+              alternativeLabel
+              sx={{
+                fontSize: "500px",
+                padding: "50px",
+                "& .MuiStepConnector-line": {
+                  marginTop: "12px",
+                  marginRight: "10px",
+                  marginLeft: "10px",
+                },
+              }}
+            >
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel
+                    sx={{
+                      "& .MuiStepIcon-root": {
+                        width: 50,
+                        height: 50,
+                      },
+                    }}
+                  >
+                    {label}
+                  </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+          <Grid item mb={2} sx={{ display: "flex", justifyContent: "center" }} >
+            <Box
+              sx={{
+                width: "70%",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="h5">Aproval Status:</Typography>
+              <Link
+                to="/"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button variant="contained" color="primary" size="large" >
+                  Close
+                </Button>
+              </Link>
+            </Box>
+          </Grid>
+        </Grid>
       </Card>
       {/* -------------------------Table-------------------------- */}
       <Grid container>
