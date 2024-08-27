@@ -1,18 +1,130 @@
 import { Grid, Typography, TextField, Box, Button } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+// import { useDispatch, useSelector } from 'react-redux';
+// import OtpInput from 'react-otp-input';
+// import toast from 'react-hot-toast';
+// import { sendOtpApi, registerApi } from "../../api/Server";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import PageContainer from '../../components/HOC/PageContainer';
 import CallIcon from '@mui/icons-material/Call';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
+import { Email } from '@mui/icons-material';
 
 
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
+
+    // const [otp, setOtp] = useState('');
+    // const [register, setRegister] = useState('');
+    // const { signupData, loading } = useSelector((state) => state.Server);
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    const [SubmitLoading, setSubmitlLoading] = useState(false);
+    // const [resendOtpLoading, setResendOtpLoading] = useState(false);
+    // const [email, setEmail] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
+    const [sent, setSent] = useState(false);
+    // const [inputValues, setInputValues] = useState(initialValues);
+    const [hasTouchedUsername, setHasTouchedUsername] = useState({
+        username: false,
+        email: false,
+        mobile: false,
+        employeeId: false,
+        organization: false,
+        department: false,
+        role: false,
+    }); // New state to track if the username field has been touched
+    //---------------------FOR VALIDATION--------------------------------
+
+    const initialValues = { username: '', Email: '', mobile: '', employeeId: '', organization: '', department: '', role: '' };
+
+
+
+    // useEffect(() => {
+    //     if (!signupData) {
+    //         navigate("/otp");
+    //     }
+    // }, []);
+
+
+
+    //    ----------------------------------- API fetching---------------------------
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     const formData = {
+    //         ...signupData,
+    //         otp,
+    //     };
+
+    //     setSubmitlLoading(true);
+
+    //     const response = await registerApi(formData);
+
+    //     setSubmitlLoading(false);
+    //     if (!response.success) {
+    //         return toast.error(response.message);
+    //     }
+
+    //     toSafeInteger.success(response.message);
+    //     navigate("./CheckStatus");
+    // };
+
+    //recent otp
+
+    // const handleResendOtp = async (e) => {
+    //     const formData = {
+    //         email: signupData.email,
+    //     };
+    //     setResendOtpLoading(true);
+
+    //     const response = await sendOtpApi(formData);
+
+    //     sendResendOtpLoading(false);
+    //     if (!response.success) {
+    //         return toast.error(response.message);
+    //     }
+    //     toast.success(response.message);
+    // };
+    
+
+
+    const handleUsernameChange = (e) => {
+        const { name, value } = e.target;
+        setInputValues({ ...inputValues, [name]: value });
+        setHasTouchedUsername({ ...hasTouchedUsername, [name]: false }); // Mark the username field as touched when the user types
+    };
+
+    const handleBlur = (e) => {
+        const { name } = e.target;
+        setHasTouchedUsername({ ...touchedFields, [name]: true });
+    };
+
+
+
+
+    // const handleSendOtp = async () => {
+    //     try {
+    //         const response = await fetch('https://rtms-backend.onrender.com/api/v1/users/send-otp-register', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ email, contactNumber }),
+    //         });
+    //         const data = await response.json();
+    //         console.log(data);
+    //         setSent(true);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
 
     return (
@@ -36,6 +148,12 @@ function Signup() {
                                                     label="Username"
                                                     variant="standard"
                                                     color="info"
+                                                    name="username"
+                                                    // value={inputValues.username}
+                                                    onChange={handleUsernameChange}
+                                                    // helperText={hasTouchedUsername && !inputValues.username ? "Username is required" : ''}
+                                                    // error={hasTouchedUsername && !inputValues.username}
+                                                    onBlur={handleBlur}
                                                     fullWidth
                                                 />
                                             </Box>
@@ -43,21 +161,33 @@ function Signup() {
                                                 <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Email"
+                                                    name="email"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
+                                                    // value={inputValues.email}
+                                                    onChange={handleUsernameChange}
+                                                    helperText={hasTouchedUsername.email && !inputValues.email ? "email is required" : ''}
+                                                    error={hasTouchedUsername.email && !inputValues.email}
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
                                             <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <CallIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
-                                                    label=" Number"
+                                                    label=" Mobile"
+                                                    name="mobile"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
+                                                    // value={inputValues.mobile}
+                                                    onChange={handleUsernameChange}
+                                                    helperText={hasTouchedUsername.mobile && !inputValues.mobile ? "mobile is required" : ''}
+                                                    error={hasTouchedUsername.mobile && !inputValues.mobile}
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -65,10 +195,16 @@ function Signup() {
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Employee ID"
+                                                    name="employeeId"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
+                                                    // value={inputValues.employeeId}
+                                                    onChange={handleUsernameChange}
+                                                    helperText={hasTouchedUsername.employeeId && !inputValues.employeeId ? "Username is required" : ''}
+                                                    error={hasTouchedUsername.employeeId && !inputValues.employeeId}
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -76,10 +212,16 @@ function Signup() {
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Organization"
+                                                    name="organization"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
+                                                    // value={inputValues.organization}
+                                                    onChange={handleUsernameChange}
+                                                    helperText={hasTouchedUsername.organization && !inputValues.organization ? "Username is required" : ''}
+                                                    error={hasTouchedUsername.organization && !inputValues.organization}
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -91,10 +233,16 @@ function Signup() {
 
                                                 <TextField
                                                     label="Department"
+                                                    name="department"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
+                                                    // value={inputValues.department}
+                                                    onChange={handleUsernameChange}
+                                                    helperText={hasTouchedUsername.department && !inputValues.department ? "department is required" : ''}
+                                                    error={hasTouchedUsername.department && !inputValues.department}
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -106,10 +254,16 @@ function Signup() {
 
                                                 <TextField
                                                     label="Role in RTMS"
+                                                    name="role"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
+                                                    // value={inputValues.role}
+                                                    onChange={handleUsernameChange}
+                                                    helperText={hasTouchedUsername.role && !inputValues.role ? "Username is required" : ''}
+                                                    error={hasTouchedUsername.role && !inputValues.role}
+                                                    onBlur={handleBlur}
                                                 />
 
                                             </Box>
@@ -128,7 +282,7 @@ function Signup() {
                                                             {selectedPhoto.name}
                                                         </Typography>
                                                     ) : (
-                                                        <Typography>Upload Photo</Typography>
+                                                        <Typography sx={{ color: 'black' }}>Upload Photo</Typography>
                                                     )}
                                                 </Button>
 
@@ -145,7 +299,7 @@ function Signup() {
                                                             {IdCard.name}
                                                         </Typography>
                                                     ) : (
-                                                        <Typography>Upload ID Card</Typography>
+                                                        <Typography sx={{ color: 'black' }}>Upload ID Card</Typography>
                                                     )}
                                                 </Button>
                                             </Box>
@@ -160,7 +314,7 @@ function Signup() {
                                         </Grid>
                                         <Grid item textAlign="center" mt={1.5}>
                                             <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
-                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/CheckStatus' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                         </Grid>
                                     </Grid>
                                 </form>

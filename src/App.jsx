@@ -14,6 +14,7 @@ const ComplaintHistory = lazy(() => import("./Pages/Dashboard/ComplaintHistory/C
 const NotificationHistory = lazy(() =>import("./Pages/Dashboard/NotificationHistory/NotificationHistory.jsx"));
 const Edit = lazy(() => import("./Pages/Dashboard/Edit/Edit.jsx"));
 const Logout = lazy(() => import("./Pages/Dashboard/Logout/Logout.jsx"));
+const PopUp = lazy(() =>import("./CheckStatus/PopUp.jsx"));
 const CheckStatus = lazy(() =>import("./CheckStatus/CheckStatus.jsx"));
 const Otp = lazy(() => import("./components/Otp/Otp.jsx"));
 const OtpForget = lazy(() =>import("./components/Otp/OtpForget/OtpForget.jsx"));
@@ -56,6 +57,7 @@ function App() {
       ]
     },
     { path: "/CheckStatus", element: <CheckStatus /> },
+    { path: "/popup", element: <PopUp /> },
     { path: "/reset", element: <Reset /> },
     { path: "/otp", element: <Otp /> },
     { path: "/forgot", element: <Forgot /> },

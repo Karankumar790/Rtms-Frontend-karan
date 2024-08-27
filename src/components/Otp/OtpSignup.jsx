@@ -189,7 +189,7 @@ export default function OtpSignup() {
                 sx={{ bgcolor: "#0c113b" }}
                 onClick={handleOpen}
               >
-                submit
+                <Typography variant="h6">Submit</Typography>
               </Button>
             </Grid>
             <Grid item mt={2} textAlign="center">
