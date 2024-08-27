@@ -14,6 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Chart from 'react-apexcharts';
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 // --------------------------Table for Moblie-----------------------
