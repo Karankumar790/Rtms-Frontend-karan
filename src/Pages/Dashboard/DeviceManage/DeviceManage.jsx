@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Paper, Typography } from '@mui/material'
+import { Button, Grid, IconButton, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +11,8 @@ import { Box } from '@mui/system';
 import well from '/assets/WELL.png'
 import manage from '../../../../public/assets/Oil.webp'
 import { Link } from 'react-router-dom';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -85,11 +87,12 @@ function DeviceManage() {
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{fontSize:'18px'}}>Well Number</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}}> Well Number</StyledTableCell>
                                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
                                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Latitude</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Lattitude</StyledTableCell>
                                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Longitude</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -98,11 +101,18 @@ function DeviceManage() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="left">1</StyledTableCell>
+                                    <StyledTableCell align="left">11.171.01.1 </StyledTableCell>
                                     <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                                    <StyledTableCell align="left">gbz</StyledTableCell>
-                                    <StyledTableCell align="left">yes</StyledTableCell>
-                                    {/* <StyledTableCell align="left">1</StyledTableCell> */}
+                                    <StyledTableCell align="left">5886</StyledTableCell>
+                                    <StyledTableCell align="left">12254</StyledTableCell>
+                                    <StyledTableCell align='left'> 
+                                        <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px' }}>
+                                        <DeleteForeverIcon/>
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
+                                         <EditIcon/>
+                                         </IconButton> 
+                                         </StyledTableCell>
 
 
                                 </StyledTableRow>
