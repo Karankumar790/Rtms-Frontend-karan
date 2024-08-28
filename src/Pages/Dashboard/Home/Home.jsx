@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, CardContent, Grid, Typography } from '@mui/material'
+import { Box, Button, CardContent, Grid, IconButton, Typography } from '@mui/material'
 import { Card } from '@mui/joy'
 
 import well from '/assets/WELL.png'
@@ -19,13 +19,15 @@ import Paper from '@mui/material/Paper';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { width } from '@mui/system'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 // ---------FUNCTIONS OF TABLE--------------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
-    fontSize:18
+    fontSize: 18
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -56,46 +58,46 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[100],
- }));
- 
- const StyledContent = styled(Grid)(({ theme }) => ({
+}));
+
+const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: 'white',
- }));
- 
- let data = {
+}));
+
+let data = {
   "Well No": "1",
   "Location": "New York",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
- let Tata = {
+};
+
+let Tata = {
   "Well No": "2",
   "Location": "Delhi",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
- let Mata = {
+};
+
+let Mata = {
   "Well No": "3",
   "Location": "UP",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
- let Sata = {
+};
+
+let Sata = {
   "Well No": "4",
   "Location": "MP",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
+};
+
 
 export default function BasicCard() {
   return (
@@ -105,10 +107,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Box>
             <CardContent className='card-Content-text'>
-              <Typography fontSize='large'>Total Wells</Typography>
+              <Typography fontSize='x-large'>Total Wells</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -117,10 +119,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Flowing Wells</Typography>
+              <Typography fontSize='x-large'>Flowing Wells</Typography>
             </CardContent>
           </CardWrapper>
 
@@ -130,10 +132,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Non Flowing Wells</Typography>
+              <Typography fontSize='x-large'>Non Flowing Wells</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -141,10 +143,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }} />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>CHP-THP&lt;10KSc</Typography>
+              <Typography fontSize='x-large'>CHP-THP&lt;10KSc</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -153,10 +155,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }} />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Well THP=ABP</Typography>
+              <Typography fontSize='x-large'>Well THP=ABP</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -165,10 +167,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={battery} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Low Battery</Typography>
+              <Typography fontSize='x-large'>Low Battery</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -178,10 +180,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={solar} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Low Solar Power</Typography>
+              <Typography fontSize='x-large'>Low Solar Power</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -190,104 +192,106 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={network} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Network Error</Typography>
+              <Typography fontSize='x-large'>Network Error</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
       </Grid>
-{/* -------------------------Table for Moblie----------------------------- */}
+      {/* -------------------------Table for Moblie----------------------------- */}
 
-<Grid container md={12}
-     lg={12}
-     sm={12}
-     xs={12}
-     sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
-    <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-     <Grid container mt={2} direction="column">
-      {Object.keys(data).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{data[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Tata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{Tata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Mata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{Mata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Sata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{Sata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-    </Paper>
-   </Grid>
+      <Grid container md={12}
+        lg={12}
+        sm={12}
+        xs={12}
+        sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
+        <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+          <Grid container mt={2} direction="column">
+            {Object.keys(data).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={4}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={8}>
+                  <Typography variant="body1">{data[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Tata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={4}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={8}>
+                  <Typography variant="body1">{Tata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Mata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={4}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={8}>
+                  <Typography variant="body1">{Mata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Sata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={4}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={8}>
+                  <Typography variant="body1">{Sata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+      </Grid>
 
 
- {/* -------------------------Table for Desktop--------------------------- */}
+      {/* -------------------------Table for Desktop--------------------------- */}
+
+      
       <Grid container>
-        <Grid item  md={12}
-     lg={12}
-     sm={5}
-     xs={4}
-     sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+        <Grid item md={12}
+          lg={12}
+          sm={5}
+          xs={4}
+          sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
           <Tabs>
             <TabList >
-              <Tab style={{whiteSpace:'break-spaces'}}>
-                <Typography  fontSize={'large'}>Current Notification</Typography>
+              <Tab style={{ whiteSpace: 'break-spaces' }}>
+                <Typography fontSize={'large'}>Current Notification</Typography>
               </Tab>
               <Tab>
                 <Typography fontSize={'large'}> Open Complaint</Typography>
@@ -295,7 +299,7 @@ export default function BasicCard() {
               </Tab>
             </TabList>
             <TabPanel >
-              <TableContainer sx={{ border: "1px solid black"}} >
+              <TableContainer sx={{ border: "1px solid black" }} >
                 <Table aria-label="customized table">
                   <TableHead >
                     <TableRow  >
@@ -305,6 +309,7 @@ export default function BasicCard() {
                       <StyledTableCell align="left">Well Installation</StyledTableCell>
                       <StyledTableCell align="left">Well number</StyledTableCell>
                       <StyledTableCell align="left">Description</StyledTableCell>
+                      <StyledTableCell align="left">Actions</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -315,19 +320,29 @@ export default function BasicCard() {
                       <StyledTableCell>Ramu singh</StyledTableCell>
                       <StyledTableCell>225</StyledTableCell>
                       <StyledTableCell>44555</StyledTableCell>
+                      <StyledTableCell>
+                      <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px' }}>
+                                        <DeleteForeverIcon/>
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
+                                         <EditIcon/>
+                                         </IconButton>
+                      </StyledTableCell>
 
                     </StyledTableRow>
                   </TableBody>
                 </Table>
               </TableContainer>
             </TabPanel>
+
+
             <TabPanel>
               <TableContainer sx={{ border: "1px solid black" }}>
                 <Table aria-label="customized table">
                   <TableHead >
                     <TableRow>
                       <StyledTableCell>Complaint No.</StyledTableCell>
-                      <StyledTableCell  align="left">Data/TIme</StyledTableCell>
+                      <StyledTableCell align="left">Data/TIme</StyledTableCell>
                       <StyledTableCell align="left">Well Location</StyledTableCell>
                       <StyledTableCell align="left">Well Installation</StyledTableCell>
                       <StyledTableCell align="left">Well number</StyledTableCell>

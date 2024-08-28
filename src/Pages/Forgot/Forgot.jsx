@@ -10,7 +10,7 @@ export default function Forgot() {
             showfooter
             display="flex"  alignItems='center' className='bgImg' >
             <Grid container  justifyContent='center'>
-                <Paper sx={{ borderRadius: '20px', width: '50rem' }}>
+                <Paper sx={{ borderRadius: '20px', mx:'1rem', width: '45rem' }}>
                     <Grid item p={3} >
                         <form>
                             <Grid item mt={2}>

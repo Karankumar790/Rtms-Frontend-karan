@@ -239,7 +239,7 @@ function ComplaintHistory() {
         lg={12}
         sm={5}
         xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }} mt={1}>
         <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
