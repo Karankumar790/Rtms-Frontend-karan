@@ -1,1 +1,1 @@
-// export const  API_URL ="https://rtms-backend.onrender.com/api/v1/users";
+export const API_URL = rtms-backend.onrender.com/api/v1/users

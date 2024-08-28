@@ -211,6 +211,10 @@ function ManageAsset() {
         </Grid>
       </Card>
       {/* -------------------------Table-------------------------- */}
+
+      <Button variant='contained'>Add</Button>
+      <Button variant='contained'>View</Button>
+      <Button variant='contained'>Update</Button>
       <Grid container>
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>

@@ -34,8 +34,14 @@
     "react-router-dom": "^6.25.1",
     "react-tabs": "^6.0.2",
     "redux": "^5.0.1",
+<<<<<<< HEAD
     "redux-thunk": "^3.1.0",
     "styled-components": "^6.1.12"
+=======
+    "styled-components": "^6.1.12",
+    "toast": "^0.5.4",
+    "toaster": "^0.1.2"
+>>>>>>> 24d00bdb0770a84574ce0f3ffa965c5fb92d7247
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

@@ -1,9 +1,10 @@
-export const catchError = (error) => {
-  const { response } = error;
+export const catchError=(error)=>{
+ const {response}=data;
 
-  if (response?.data) {
-    return response?.data;
-  }
+ if(response?.data){
+  return response?.data;
+ }
 
-  return { error: error.message || error };
+ return {error:error.message|| error};
+
 };
