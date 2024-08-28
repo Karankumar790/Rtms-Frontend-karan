@@ -1,22 +1,25 @@
 import { Grid, Typography, TextField, Box, Button } from '@mui/material'
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import PageContainer from '../../components/HOC/PageContainer';
 import CallIcon from '@mui/icons-material/Call';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import { Email } from '@mui/icons-material';
-import { useDispatch, useSelector} from 'react-redux';
-import OtpInput from 'react-otp-input';
-import { sendOtpApi } from '../../api/Server';
-import toast from 'react-hot-toast';
+
+
+
 
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
+//---------------------FOR VALIDATION--------------------------------
+
+    const initialValues = {username:'', Email:'', mobile:'', employeeId:'', organization:'', department:'',role:''};
+
     const [inputValues, setInputValues] = useState(initialValues);
     const [hasTouchedUsername, setHasTouchedUsername] = useState({
         username: false,
@@ -27,11 +30,6 @@ function Signup() {
         department: false,
         role: false,
      }); // New state to track if the username field has been touched
-//---------------------FOR VALIDATION--------------------------------
-
-    const initialValues = {username:'', Email:'', mobile:'', employeeId:'', organization:'', department:'',role:''};
-
-   
 
     const handleUsernameChange = (e) => {
         const { name, value } = e.target;
@@ -44,64 +42,6 @@ function Signup() {
         setHasTouchedUsername({ ...touchedFields, [name]: true });
     };
 
-    // -----------API fetching -----------
-     
-   const[otp, setOtp]=useState('');
-   const[register, setRegister]=useState('');
-   const{signupData, loading} = useSelector((state)=> state.Server);
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
-   const [submitLoading, setSubmitLoading] = useState(false);
-   const [resendOtpLoading, SetResendOtpLoading] = useState(false);
-    useEffect(()=>{
-
-        if (!signupData){
-            navigate("/Otpsign")
-        }
-
-    },[]);
-
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const formData = {
-            ...signupData,
-            otp,
-        }
-
-        setSubmitLoading(true);
-
-        const response = await registerApi(formData);
-
-        setSubmitLoading(false);
-        if(!response.success){
-            return toast.error(response.message);
-        }
-
-        toast.success(response.message);
-        navigate("/checkStatus")
-    }
-
-
-    const handleResendOtp = async (e) => {
-        const formData = {
-            email:signupData.email,
-    };
-
-    SetResendOtpLoading(true);
-
-    const response = await sendOtpApi(formData);
-   
-    SetResendOtpLoading(false);
-    if(!response.success){
-        return toast.error(response.message);
-    }
-
-    toast.success(response.message);
-   
-};
     return (
         <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'}>
             <Grid container >
