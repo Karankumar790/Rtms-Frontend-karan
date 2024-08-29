@@ -8,7 +8,7 @@ function Reset() {
   return (
     <PageContainer showheader showfooter
       bgcolor="#646d90" display="flex" justifyContent='center' alignItems='center' className='bgImg'>
-      <Grid container sx={{ justifyContent: "center", alignContent: "center" }} lg={4} md={4} sm={6} xs={10}>
+      <Grid container  lg={4} md={4} sm={6} xs={10}>
         <Paper sx={{ borderRadius: '20px', border: '1px solid #ddd', p: 2 }}>
           <Box
             sx={{
