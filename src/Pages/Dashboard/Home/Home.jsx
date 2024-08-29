@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, CardContent, Grid, Typography } from '@mui/material'
+import { Box, Button, CardContent, Grid, IconButton, Typography } from '@mui/material'
 import { Card } from '@mui/joy'
 
 import well from '/assets/WELL.png'
@@ -19,6 +19,8 @@ import Paper from '@mui/material/Paper';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { width } from '@mui/system'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 // ---------FUNCTIONS OF TABLE--------------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -319,9 +321,12 @@ export default function BasicCard() {
                       <StyledTableCell>225</StyledTableCell>
                       <StyledTableCell>44555</StyledTableCell>
                       <StyledTableCell>
-                        <Button variant='outlined'>Add</Button>
-                        <Button variant='outlined'>View</Button>
-                        <Button variant='outlined'>Update</Button>
+                      <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px' }}>
+                                        <DeleteForeverIcon/>
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
+                                         <EditIcon/>
+                                         </IconButton>
                       </StyledTableCell>
 
                     </StyledTableRow>

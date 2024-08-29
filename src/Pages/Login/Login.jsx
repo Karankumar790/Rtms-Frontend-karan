@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Grid,
@@ -14,21 +15,24 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import services from './Services/loginServices'
+
 
 function Login() {
-  const [formValues, setFormValues] = useState({ email: "", password: "" });
+  const [formValues, setFormValues] = useState({ username: "", password: "" });
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate(); // To navigate programmatically
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+  const dispatch = useDispatch();
+  const handleInputs = (e) => {
+    setFormValues((pre) => ({ ...pre, [e.target?.name]: e.target?.value }))
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log('>>>>>>>', formValues)
+    dispatch(services?.authLoginService(formValues))
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
@@ -51,10 +55,10 @@ function Login() {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    if (!values.email) {
-      errors.email = "Email is required";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format";
+    if (!values.username) {
+      errors.username = "username is required";
+    } else if (!regex.test(values.username)) {
+      errors.username = "This is not a valid username format";
     }
 
     if (!values.password) {
@@ -112,7 +116,7 @@ function Login() {
                       name="email"
                       variant="standard"
                       value={formValues.email}
-                      onChange={handleChange}
+                      onChange={handleInputs}
                       fullWidth
                       error={Boolean(formErrors.email)}
                       helperText={formErrors.email}
@@ -138,7 +142,7 @@ function Login() {
                       type={visible ? "text" : "password"}
                       label="Password"
                       value={formValues.password}
-                      onChange={handleChange}
+                      onChange={handleInputs}
                       fullWidth
                       error={Boolean(formErrors.password)}
                       helperText={formErrors.password}
