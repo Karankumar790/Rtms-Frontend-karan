@@ -105,10 +105,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Box>
             <CardContent className='card-Content-text'>
-              <Typography fontSize='large'>Total Wells</Typography>
+              <Typography fontSize='x-large'>Total Wells</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -117,10 +117,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Flowing Wells</Typography>
+              <Typography fontSize='x-large'>Flowing Wells</Typography>
             </CardContent>
           </CardWrapper>
 
@@ -130,10 +130,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Non Flowing Wells</Typography>
+              <Typography fontSize='x-large'>Non Flowing Wells</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -141,10 +141,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }} />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>CHP-THP&lt;10KSc</Typography>
+              <Typography fontSize='x-large'>CHP-THP&lt;10KSc</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -153,10 +153,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={pressure} alt="" style={{ objectFit: 'cover', width: '7rem' }} />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Well THP=ABP</Typography>
+              <Typography fontSize='x-large'>Well THP=ABP</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -165,10 +165,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={battery} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Low Battery</Typography>
+              <Typography fontSize='x-large'>Low Battery</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -178,10 +178,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={solar} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Low Solar Power</Typography>
+              <Typography fontSize='x-large'>Low Solar Power</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>
@@ -190,10 +190,10 @@ export default function BasicCard() {
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={network} alt="" srcset="" />
-              <Box fontSize='large'>2122</Box>
+              <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
-              <Typography fontSize='large'>Network Error</Typography>
+              <Typography fontSize='x-large'>Network Error</Typography>
             </CardContent>
           </CardWrapper>
         </Grid>

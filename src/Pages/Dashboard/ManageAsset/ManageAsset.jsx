@@ -63,7 +63,7 @@ function ManageAsset() {
     <div>
       <Paper>
         <Grid container gap={3}>
-          <Typography variant="h4">Asset Information </Typography>
+          <Typography variant="h4">Organization </Typography>
 
           <Grid container spacing={2} p={2}>
             <Grid item xs={12} sm={3} md={3} lg={3}>
