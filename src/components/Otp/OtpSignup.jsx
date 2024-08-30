@@ -134,7 +134,7 @@ const TriggerButton = styled(Button)(
 );
 
 
-export default function OtpSignup() {
+export default function Otpsignup() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -143,94 +143,86 @@ export default function OtpSignup() {
       showheader
       showfooter
       className='bgImg'
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
+      style={{ display: 'grid', placeContent: 'center' }}
     >
-      <Paper sx={{ borderRadius: "20px", px: "5px" }} >
-        <Grid item p={4}>
-          <form>
-          <Grid item mt={2}>
-              <Typography fontSize={"x-large"} sx={{ color: "#0c1352" }}>
-                Please Enter OTP To Verify E-Mail
-              </Typography>
-            </Grid>
-            <Grid item mt={2}>
-              <Typography variant="h6" textAlign="center">
-                OTP has been sent to your registered Email
-              </Typography>
-            </Grid>
-            {/* <Grid item mt={2}>
-              <Typography fontSize={"xx-large"} sx={{ color: "#0c1352" }}>
-                Enter OTP From E-Mail
-              </Typography>
-            </Grid> */}
-            {/* <Grid item mt={2}>
-              <Typography variant="h5" textAlign="center">
-                OTP has been sent to your registered E-mail
-              </Typography>
-            </Grid> */}
-            {/* Input otp value  */}
-            <Grid item mt={3} display="flex" gap={2} justifyContent="center" justifyItems="center">
-              {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
-              <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "40px", width: "40px" }} />
-              <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "40px", width: "40px" }} />
-              <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "40px", width: "40px" }} />
-              <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "40px", width: "40px" }} />
-              <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "40px", width: "40px" }} />
-              <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "40px", width: "40px" }} />
+      <Grid container m={0}>
+        <Grid item xs={12} md={12} sm={12}>
+          <Paper sx={{ borderRadius: "10px" }} >
+            <Grid item p={2}>
+              <form>
+                <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
+                  <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
+                    Enter OTP To Verify E-Mail
+                  </Typography>
+                </Grid>
 
+                {/* Input otp value  */}
+                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
+                  {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
+                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
+                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
+                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
+                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
+                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
+                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
+
+                </Grid>
+                <Grid
+                  item
+                  xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
+                  <Link to="/Otpsignup">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      sx={{ bgcolor: "#0c113b" }}
+                      onClick={handleOpen}
+                    >
+                      <Typography>Submit</Typography>
+                    </Button>
+                  </Link>
+                </Grid>
+                <Grid item xs={12} md={12} sm={12} lg={12} textAlign="center" py={1}>
+                  <Link to="" style={{ textDecoration: "none" }}>
+                    <Typography >
+                      Resend One-Time Password
+                    </Typography>
+                  </Link>
+                </Grid>
+              </form>
             </Grid>
-            <Grid item mt={3} justifyContent="center" sx={{ textAlign: 'center' }}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                sx={{ bgcolor: "#0c113b" }}
-                onClick={handleOpen}
-              >
-                <Typography variant="h6">Submit</Typography>
-              </Button>
-            </Grid>
-            <Grid item mt={2} textAlign="center">
-              <Link to="/" style={{ textDecoration: "none" }}>
-                <Typography sx={{ fontWeight: "bold" }}>
-                  Resend One-Time Password
-                </Typography>
-              </Link>
-            </Grid>
-          </form>
+          </Paper>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            slots={{ backdrop: StyledBackdrop }}
+          >
+            <Fade in={open}>
+              <ModalContent sx={style}>
+                <h3 id="transition-modal-title" className="modal-title" style={{ color: "green", textAlign: 'center' }} >
+                  Your Registration Have Been Submitted Successfully. Registration Number Has Been Sent To Your Registered E-mail.
+                </h3>
+                <Box display='flex' justifyContent='center'>
+                  <Link to='/signup'>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      // fullWidth
+                      size="medium"
+                      sx={{ bgcolor: "#0c113b" }}
+                    >
+                      Ok
+                    </Button>
+                  </Link>
+                </Box>
+              </ModalContent>
+            </Fade>
+          </Modal>
         </Grid>
-      </Paper>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: StyledBackdrop }}
-      >
-        <Fade in={open}>
-          <ModalContent sx={style}>
-            <h3 id="transition-modal-title" className="modal-title" style={{ color: "green", textAlign: 'center' }} >
-              Your Registration Have Been Submitted Successfully. Registration Number Has Been Sent To Your Registered E-mail.
-            </h3>
-              <Box  display='flex' justifyContent='center'>
-            <Link to='/signup'>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  // fullWidth
-                  size="medium"
-                  sx={{ bgcolor: "#0c113b" }}
-                >
-                 Ok
-                </Button>
-            </Link>
-              </Box>
-          </ModalContent>
-        </Fade>
-      </Modal>
+      </Grid>
     </PageContainer>
   );
 }

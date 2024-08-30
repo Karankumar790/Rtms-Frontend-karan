@@ -8,6 +8,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { Link } from 'react-router-dom';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
+import { styled, useTheme } from "@mui/material/styles";
 import { Email } from '@mui/icons-material';
 
 
@@ -16,9 +17,9 @@ import { Email } from '@mui/icons-material';
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
-//---------------------FOR VALIDATION--------------------------------
+    //---------------------FOR VALIDATION--------------------------------
 
-    const initialValues = {username:'', Email:'', mobile:'', employeeId:'', organization:'', department:'',role:''};
+    const initialValues = { username: '', Email: '', mobile: '', employeeId: '', organization: '', department: '', role: '' };
 
     const [inputValues, setInputValues] = useState(initialValues);
     const [hasTouchedUsername, setHasTouchedUsername] = useState({
@@ -29,8 +30,8 @@ function Signup() {
         organization: false,
         department: false,
         role: false,
-     }); // New state to track if the username field has been touched
-
+    }); // New state to track if the username field has been touched
+   
     const handleUsernameChange = (e) => {
         const { name, value } = e.target;
         setInputValues({ ...inputValues, [name]: value });
@@ -43,20 +44,20 @@ function Signup() {
     };
 
     return (
-        <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'}>
+        <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'} style={{ overflowY: 'auto' }}>
             <Grid container >
-                <Grid item padding={2} width={600} >
+                <Grid item padding={2} width={600} sx={{ height: { xs: 'calc(100vh - 120px)', sm: 'auto', md: 'auto', lg: 'auto' } }} >
                     <Card>
                         <CardContent orientation="vertical">
                             <Grid item pt={1} sx={{ textAlign: "center" }}>
-                                <Typography variant='h2'>Registration</Typography>
-                                <Typography variant='h5' color='#800000'>Create a New RTMS Account</Typography>
+                                <Typography variant='h4'>Registration</Typography>
+                                <Typography variant='h6' color='#800000'>Create a New RTMS Account</Typography>
                             </Grid>
-                            <Grid item alignItems={'center'}>
+                            <Grid item px={4} alignItems={'center'}>
                                 <form>
                                     <Grid item gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <Grid item pt={2} pb={4} pl={5} pr={5}>
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                        <Grid item>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     className='custom-textfield'
@@ -68,11 +69,11 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername && !inputValues.username ? "Username is required" : ''}
                                                     error={hasTouchedUsername && !inputValues.username}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                     fullWidth
                                                 />
                                             </Box>
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Email"
@@ -85,11 +86,11 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.email && !inputValues.email ? "email is required" : ''}
                                                     error={hasTouchedUsername.email && !inputValues.email}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <CallIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label=" Mobile"
@@ -102,11 +103,11 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.mobile && !inputValues.mobile ? "mobile is required" : ''}
                                                     error={hasTouchedUsername.mobile && !inputValues.mobile}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Employee ID"
@@ -119,11 +120,11 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.employeeId && !inputValues.employeeId ? "Username is required" : ''}
                                                     error={hasTouchedUsername.employeeId && !inputValues.employeeId}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Organization"
@@ -136,11 +137,11 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.organization && !inputValues.organization ? "Username is required" : ''}
                                                     error={hasTouchedUsername.organization && !inputValues.organization}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
 
 
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
@@ -157,11 +158,11 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.department && !inputValues.department ? "department is required" : ''}
                                                     error={hasTouchedUsername.department && !inputValues.department}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
-                                            <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                            <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
 
 
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
@@ -178,45 +179,49 @@ function Signup() {
                                                     onChange={handleUsernameChange}
                                                     helperText={hasTouchedUsername.role && !inputValues.role ? "Username is required" : ''}
                                                     error={hasTouchedUsername.role && !inputValues.role}
-                                                    onBlur={handleBlur} 
+                                                    onBlur={handleBlur}
                                                 />
 
                                             </Box>
 
-                                            <Box mt={2} sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                                                <CameraAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
-                                                <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => setSelectedPhoto(e.target.files[0])}
-                                                        hidden
-                                                    />
-                                                    {selectedPhoto ? (
-                                                        <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                                            {selectedPhoto.name}
-                                                        </Typography>
-                                                    ) : (
-                                                        <Typography sx={{color:'black'}}>Upload Photo</Typography>
-                                                    )}
-                                                </Button>
 
-
-                                                <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        onChange={(e) => setIdCard(e.target.files[0])}
-                                                        hidden
-                                                    />
-                                                    {IdCard ? (
-                                                        <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                                            {IdCard.name}
-                                                        </Typography>
-                                                    ) : (
-                                                        <Typography sx={{color:'black'}}>Upload ID Card</Typography>
-                                                    )}
-                                                </Button>
+                                            <Box mt={.5} sx={{ display: 'flex', flexDirection: 'column' }}>
+                                                <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                    <CameraAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+                                                    <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={(e) => setSelectedPhoto(e.target.files[0])}
+                                                            hidden
+                                                        />
+                                                        {selectedPhoto ? (
+                                                            <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                                {selectedPhoto.name}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ color: 'black' }}>Upload Photo</Typography>
+                                                        )}
+                                                    </Button>
+                                                </Box>
+                                                <Box mt={1} sx={{ display: 'flex', alignItems: 'flex-end' }}>
+                                                    <CameraAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
+                                                    <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={(e) => setIdCard(e.target.files[0])}
+                                                            hidden
+                                                        />
+                                                        {IdCard ? (
+                                                            <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                                {IdCard.name}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ color: 'black' }}>Upload ID Card</Typography>
+                                                        )}
+                                                    </Button>
+                                                </Box>
                                             </Box>
                                         </Grid>
 
@@ -227,17 +232,17 @@ function Signup() {
                                                 </Button>
                                             </Link>
                                         </Grid>
-                                        <Grid item textAlign="center" mt={1.5}>
+                                        <Grid item textAlign="center" mt={.5}>
                                             <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
-                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                            <Typography fontSize={'medium'}>Have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                         </Grid>
                                     </Grid>
                                 </form>
-                        </Grid>
-                    </CardContent>
-                </Card>
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                </Grid>
             </Grid>
-        </Grid>
         </PageContainer >
     )
 }

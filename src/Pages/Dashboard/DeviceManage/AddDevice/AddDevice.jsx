@@ -29,9 +29,9 @@ function AddDevice() {
         <Grid item gap={2} lg={12}>
           <Typography variant="h6">Select Well</Typography>
           <Box display="flex" justifyContent="space-between" gap={5}>
-            <TextField size="small" fullWidth />
-            <TextField size="small" fullWidth />
-            <TextField size="small" fullWidth />
+            <TextField size="small" placeholder="Well No." fullWidth />
+            <TextField size="small" placeholder="Installation" fullWidth />
+            <TextField size="small" placeholder="Location" fullWidth />
           </Box>
         </Grid>
 

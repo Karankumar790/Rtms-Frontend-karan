@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import map from '../../../../public/assets/map2.png';
+// import map from '../../../../public/assets/map2.png';
 import { Box } from '@mui/system';
 
 
@@ -234,15 +234,15 @@ function AddWell() {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
                 },
                 fontSize: '16px',
-              }}>Update</Button>
-            <Button variant='contained'
+              }}>Cancel</Button>
+            {/* <Button variant='contained'
               sx={{
                 backgroundColor: 'green',   // Change button color to green
                 '&:hover': {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
                 },
                 fontSize: '16px',
-              }}> Delete</Button>
+              }}> Delete</Button> */}
           </Grid>
         </Grid>
       </Paper>
