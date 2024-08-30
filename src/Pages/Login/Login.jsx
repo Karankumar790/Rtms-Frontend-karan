@@ -39,11 +39,11 @@ function Login() {
 
   return (
     <PageContainer className="login-form-bg-image" showfooter='true' showheader='true' display={"flex"} justifyContent={"start"} alignContent={"center"}>
-     
-      <Grid item  display={'flex'} alignItems={'center'} padding={'5%'}>
+
+      <Grid item display={'flex'} alignItems={'center'} padding={'5%'}>
         <Card sx={{ flexWrap: 'wrap' }}>
           <CardContent orientation="vertical">
-            <Grid item  sx={{ textAlign: "center" }} md={12} sm={12} xs={12}>
+            <Grid item sx={{ textAlign: "center" }} md={12} sm={12} xs={12}>
               <Typography pt={2} fontSize="xx-large">
                 Welcome
               </Typography>
@@ -51,7 +51,7 @@ function Login() {
                 Real Time Well Monitoring System
               </Typography>
             </Grid>
-            <Grid item  alignItems={"center"}>
+            <Grid item alignItems={"center"}>
               <form onSubmit={handleSubmit}>
                 <Grid container padding={'5%'} spacing={2}>
                   <Grid
@@ -74,8 +74,7 @@ function Login() {
                       value={formValues.email}
                       onChange={handleInputs}
                       fullWidth
-                      error={Boolean(formErrors.email)}
-                      helperText={formErrors.email}
+
                     />
                   </Grid>
                   <Grid
@@ -100,8 +99,6 @@ function Login() {
                       value={formValues.password}
                       onChange={handleInputs}
                       fullWidth
-                      error={Boolean(formErrors.password)}
-                      helperText={formErrors.password}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
