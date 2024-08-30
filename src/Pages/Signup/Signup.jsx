@@ -44,9 +44,9 @@ function Signup() {
     };
 
     return (
-        <PageContainer className='bgImg' showheader='true' showfooter='true' display={'flex'} justifyContent={'start'} alignItems={'center'}>
+        <PageContainer className='bgImg' showheader='true' showfooter='true'>
             <Grid container >
-                <Grid item padding={2} width={600} sx={{ height: { xs: 'calc(100vh - 120px)', sm: 'auto', md: 'auto', lg: 'auto' } }} >
+                <Grid item padding={2} width={600} >
                     <Card>
                         <CardContent orientation="vertical">
                             <Grid item pt={1} sx={{ textAlign: "center" }}>
