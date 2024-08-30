@@ -21,131 +21,80 @@ const steps = ["ASSET MANAGER", "DEPARTMENT HEAD", "PASSWORD EMAILED"];
 function CheckStatus() {
   return (
     <>
-      <PageContainer showheader showfooter >
-        <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100%'} bgcolor={"#bef283"}>
-          <Grid item lg={8} md={10} sm={10} xs={10}>
-            <Card >
-              <Grid
-                container
-                mt={8}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                }}
+      <PageContainer showheader='true' showfooter='true'style={{padding:'5%'}}>
+        <Paper elevation={3}>
+        <Grid container  p={5} gap={3} >
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={4} md={4} lg={4} gap={3}>
+              <Typography fontSize="large">REGISTRATION ID</Typography>
+              <Typography fontSize="large">User Name</Typography>
+              <Typography fontSize="large">Email Address</Typography>
+              <Typography fontSize="large">Contact Number</Typography>
+              <Typography fontSize="large">Employee ID</Typography>
+              <Typography fontSize="large">Asset Name</Typography>
+              <Typography fontSize="large">Department</Typography>
+              <Typography fontSize="large">Role in RTMS</Typography>
+            </Grid>
+            <Grid item xs={12} sm={8} md={8} lg={8}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={6} lg={6} >
+                  <Paper elevation={3}>
+                    <img src="https://t4.ftcdn.net/jpg/01/42/20/17/240_F_142201762_qMCuIAolgpz4NbF5T5m66KQJzYzrEbUv.jpg" alt="User_ID Card" style={{ objectFit: 'contain', width:'100%'  }} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={6} >
+                  <Paper elevation={3}>
+                    <img src="https://t3.ftcdn.net/jpg/02/53/98/06/240_F_253980681_a8hAmy7gbe28SjtRPoUo0EShW87oXVTy.jpg" alt="User_ID Card" style={{ objectFit: 'contain', width:'100%', height:'auto' }} />
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid container textAlign='center' gap={2} >
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <Stepper activeStep={1} alternativeLabel sx={{
+                fontSize: "300px",
+                "& .MuiStepConnector-line": {
+                  marginTop: "12px",
+                  marginRight: "10px",
+                  marginLeft: "10px",
+                },
+              }}
               >
-                <Grid
-                  item
-                  lg={3}
-                  md={8}
-                  sm={8}
-                  xs={8}
-                  display={"flex"}
-                  flexDirection={"column"}
-                  gap={1}
-                >
-                  <Typography variant="h5" >REGISTRATION ID</Typography>
-                  <Typography variant="h6">User Name</Typography>
-
-                  <Typography variant="h6">Email Address</Typography>
-
-
-                  <Typography variant="h6">Contact Number</Typography>
-
-                  <Typography variant="h6">Employee ID</Typography>
-
-                  <Typography variant="h6">Asset Name</Typography>
-
-                  <Typography variant="h6">Department</Typography>
-
-                  <Typography variant="h6">Role in RTMS</Typography>
-
-                </Grid>
-                <Grid
-                  item
-                  lg={2}
-                  md={4}
-                  sm={4}
-                  xs={4}
-                  sx={{
-                    border: "1px solid black",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img src="" alt="User photo" />
-                </Grid>
-                <Grid
-                  item
-                  lg={2}
-                  md={4}
-                  sm={4}
-                  xs={4}
-                  sx={{
-                    border: "1px solid black",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img src="" alt="User_ID Card" />
-                </Grid>
-              </Grid>
-
-              <Grid item mt={3}>
-                <Box >
-                  <Stepper
-                    activeStep={1}
-                    alternativeLabel
-                    sx={{
-                      fontSize: "300px",
-                      padding: "50px",
-                      "& .MuiStepConnector-line": {
-                        marginTop: "12px",
-                        marginRight: "10px",
-                        marginLeft: "10px",
-                      },
-                    }}
-                  >
-                    {steps.map((label) => (
-                      <Step key={label}>
-                        <StepLabel
-                          sx={{
-                            "& .MuiStepIcon-root": {
-                              width: 50,
-                              height: 50,
-                            },
-                          }}
-                        >
-                          {label}
-                        </StepLabel>
-                      </Step>
-                    ))}
-                  </Stepper>
-                </Box>
-                <Grid item mb={2} sx={{ display: "flex", justifyContent: "center"}}>
-                  <Box
-                    sx={{
-                      width: "70%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Typography variant="h5">Registration Status:</Typography>
-                    <Link
-                      to="/"
-                      style={{ textDecoration: "none", color: "white" }}
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel
+                      sx={{
+                        "& .MuiStepIcon-root": {
+                          width: 50,
+                          height: 50,
+                        },
+                      }}
                     >
-                      <Button variant="contained" color="primary" size="large" >
-                        Close
-                      </Button>
-                    </Link>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Card>
+                      {label}
+                    </StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Grid>
+          </Grid>
+          <Grid container  gap={2}>
+            <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Typography variant="h5" textAlign='left'>Status:</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={6} textAlign={'center'}>
+              <Link
+                to="/"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button variant="contained" color="primary" size="large" >
+                  Close
+                </Button>
+              </Link>
+            </Grid>
           </Grid>
         </Grid>
+        </Paper>
       </PageContainer>
     </>
   );

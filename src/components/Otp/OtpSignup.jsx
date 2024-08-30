@@ -65,7 +65,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: 270,
 };
 
 const ModalContent = styled('div')(
@@ -203,7 +203,7 @@ export default function Otpsignup() {
             <Fade in={open}>
               <ModalContent sx={style}>
                 <h3 id="transition-modal-title" className="modal-title" style={{ color: "green", textAlign: 'center' }} >
-                  Your Registration Have Been Submitted Successfully. Registration Number Has Been Sent To Your Registered E-mail.
+                  Your Registration Have Been Submitted Successfully. ID Has Been Sent To Your E-mail.
                 </h3>
                 <Box display='flex' justifyContent='center'>
                   <Link to='/signup'>
