@@ -21,16 +21,17 @@ const steps = ["ASSET MANAGER", "DEPARTMENT HEAD", "PASSWORD EMAILED"];
 function CheckStatus() {
   return (
     <>
-      <PageContainer showheader showfooter >
-        <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} height={'100%'} bgcolor={"#bef283"}>
-          <Grid item lg={8} md={10} sm={10} xs={10}>
+      <PageContainer showheader showfooter bgcolor={"#bef283"} >
+        <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} >
+          <Grid item lg={8} md={10} sm={12} xs={12}>
             <Card >
               <Grid
                 container
-                mt={8}
+                mt={6}
                 sx={{
                   display: "flex",
                   justifyContent: "space-evenly",
+                 
                 }}
               >
                 <Grid
@@ -123,7 +124,7 @@ function CheckStatus() {
                     ))}
                   </Stepper>
                 </Box>
-                <Grid item mb={2} sx={{ display: "flex", justifyContent: "center"}}>
+                <Grid item mb={2} sx={{ display: "flex", justifyContent: "center" }}>
                   <Box
                     sx={{
                       width: "70%",

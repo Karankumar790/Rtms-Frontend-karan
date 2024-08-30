@@ -177,7 +177,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={solar} alt="" srcset="" />
+              <img src={solar} alt=""  />
               <Box fontSize='large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -189,7 +189,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={network} alt="" srcset="" />
+              <img src={network} alt=""  />
               <Box fontSize='large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -200,10 +200,8 @@ export default function BasicCard() {
       </Grid>
 {/* -------------------------Table for Moblie----------------------------- */}
 
-<Grid container md={12}
-     lg={12}
-     sm={12}
-     xs={12}
+<Grid container 
+   
      sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
     <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
      <Grid container mt={2} direction="column">
