@@ -11,19 +11,19 @@ function PopUp() {
             showfooter
             display="flex"  alignItems='center' className='bgImg' >
             <Grid container  justifyContent='center'>
-                <Paper sx={{ borderRadius: '20px', width: '50rem' }}>
+                <Paper sx={{ borderRadius: '20px',  }}>
                     <Grid item p={3} >
                         <form>
-                            <Grid item mt={2}>
+                            <Box item mt={2}>
                                 <Typography variant='h5' fontSize='x-large' textAlign="center">Enter Your Registration Number</Typography>
-                            </Grid>
+                            </Box>
     
-                            <Grid item mt={3} sx={{display:"flex",justifyContent:"center"}}>
+                            <Box mt={3} sx={{display:"flex",justifyContent:"center"}}>
                                 <TextField justifyContent="center" label="Enter Registration Number"  variant="outlined" size='small' sx={{width:500}} />
-                            </Grid>
-                            <Grid item mt={3} sx={{display:"flex",justifyContent:"center"}} >
+                            </Box>
+                            <Box mt={3} sx={{display:"flex",justifyContent:"center"}} >
                                 <Link to="/CheckStatus"><Button variant='contained' color='primary' type='submit'>Check Status</Button></Link>
-                            </Grid>
+                            </Box>
                             {/* <Grid item mt={2} textAlign='center'>
                                 <Link to="/" style={{ textDecoration: "none" }}>Back to SignUp</Link>
                             </Grid> */}

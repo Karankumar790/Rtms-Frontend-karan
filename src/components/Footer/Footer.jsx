@@ -14,7 +14,7 @@ function Footer() {
         </Grid>
 
         <Grid item lg={12} md={12} sm={12} xs={12} textAlign='center' sx={{display: { sm: "none", xs: "block", md: "none", lg: "none" }}}>
-          <Typography variant='inherit' color={'white'}  >
+          <Typography fontSize='small' color={'white'}  >
             Foxboro Instrument company: All Right Reserved
           </Typography>
         </Grid>

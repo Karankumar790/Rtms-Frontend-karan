@@ -19,7 +19,7 @@ function Header() {
           alignItems="center"
         >
           <Box>
-            <img src={logo} style={{ width: "7rem", height: "5rem" }} />
+            <img src={logo} style={{ width: "5rem", height: "5rem" }} />
           </Box>
 
           <Typography sx={{
@@ -30,7 +30,7 @@ function Header() {
               lg: 'x-large', // extra-large screens
             }
           }}>
-            OIL AND NATURAL GAS CORPORATION
+            OIL & NATURAL GAS CORPORATION
             <Typography sx={{
               fontSize: {
                 xs: 'small', // small screens

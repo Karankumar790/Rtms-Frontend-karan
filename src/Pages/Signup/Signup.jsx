@@ -44,9 +44,9 @@ function Signup() {
     };
 
     return (
-        <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'}>
-            <Grid container mt={5}>
-                <Grid item padding={2} width={600}  >
+        <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'} style={{ overflowY: 'auto' }}>
+            <Grid container >
+                <Grid item padding={2} width={600} sx={{ height: { xs: 'calc(100vh - 120px)', sm: 'auto', md: 'auto', lg: 'auto' } }} >
                     <Card>
                         <CardContent orientation="vertical">
                             <Grid item pt={1} sx={{ textAlign: "center" }}>
@@ -234,7 +234,7 @@ function Signup() {
                                         </Grid>
                                         <Grid item textAlign="center" mt={.5}>
                                             <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
-                                            <Typography fontSize={'medium'}>Already have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                            <Typography fontSize={'medium'}>Have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
                                         </Grid>
                                     </Grid>
                                 </form>
