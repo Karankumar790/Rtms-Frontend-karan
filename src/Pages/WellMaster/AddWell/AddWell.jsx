@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-// import map from '../../../../public/assets/map2.png';
+// import map from '/assets/map2.png';
 import { Box } from '@mui/system';
 
 

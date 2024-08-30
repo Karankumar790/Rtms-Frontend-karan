@@ -4,21 +4,21 @@ import PageContainer from "../HOC/PageContainer";
 import { Link } from "react-router-dom";
 
 
-export default function Forgot() {
+export default function Otpsign() {
 
 
 
   return (
     <PageContainer
-      showheader
-      showfooter
+      showheader='true'
+      showfooter='true'
       className='bgImg'
       style={{ display: 'grid', placeContent: 'center' }}
     >
       <Grid container m={0}>
         <Grid item xs={12} md={12} sm={12}>
           <Paper sx={{ borderRadius: "10px" }} >
-            <Grid item p={2}>
+            <Grid item  p={2}>
               <form>
                 <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
                   <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
@@ -39,11 +39,7 @@ export default function Forgot() {
                 </Grid>
                 <Grid
                   item
-                  xs={12} md={12} sm={12} lg={12}
-                  mt={3}
-                  justifyContent="center"
-                  sx={{ textAlign: "center" }}
-                >
+                  xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
                   <Link to="/Otpsignup">
                     <Button
                       variant="contained"

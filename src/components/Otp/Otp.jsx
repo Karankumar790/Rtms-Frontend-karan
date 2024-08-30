@@ -9,12 +9,7 @@ export default function Forgot() {
 
 
   return (
-    <PageContainer
-      showheader
-      showfooter
-      className='bgImg'
-      style={{ display: 'grid', placeContent: 'center' }}
-    >
+    <PageContainer showheader='true' showfooter='true' className='bgImg' style={{ display: 'grid', placeContent: 'center' }}>
       <Grid container p={1}>
         <Grid item xs={12} md={12} sm={12}>
           <Paper sx={{ borderRadius: "17px", p: '7px' }} >
