@@ -140,8 +140,8 @@ export default function OtpSignup() {
   const handleClose = () => setOpen(false);
   return (
     <PageContainer
-      showheader
-      showfooter
+      showheader='true'
+      showfooter='true'
       className='bgImg'
       display="flex"
       justifyContent="center"

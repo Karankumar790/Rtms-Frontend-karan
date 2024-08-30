@@ -21,11 +21,11 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 
 //----------------import icons ------------------------------------------
-import well from "../../../../public/assets/WELL.png";
-import pressure from "../../../../public/assets/PRESSURE.png";
-import battery from "../../../../public/assets/battery.png";
-import solar from "../../../../public/assets/SOLAR1.png";
-import network from "../../../../public/assets/Network.png";
+import well from "../../../..custom-textfieldWELL.png";
+import pressure from "../../../..custom-textfieldPRESSURE.png";
+import battery from "../../../..custom-textfieldbattery.png";
+import solar from "../../../..custom-textfieldSOLAR1.png";
+import network from "../../../..custom-textfieldNetwork.png";
 
 import Chart from "react-apexcharts";
 

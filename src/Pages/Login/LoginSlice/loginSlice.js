@@ -1,12 +1,12 @@
 import { createSlice, } from "@reduxjs/toolkit";
 import service from "../Services/loginServices"
 
+const { authLoginService } = service
 
 const initialState = {
   data: [],
   status: null
 };
-const { authLoginService } = service
 
 const authSlice = createSlice({
   name: "auth",
@@ -20,7 +20,7 @@ const authSlice = createSlice({
       })
       .addCase(authLoginService.fulfilled, (state, action) => {
         state.data = action.payload;
-        console.log("first###")
+        // console.log("first###",)
         state.loading = false;
       })
       .addCase(authLoginService.rejected, (state, action) => {

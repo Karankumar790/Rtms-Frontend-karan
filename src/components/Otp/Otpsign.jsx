@@ -127,8 +127,8 @@ export default function Otpsign({ separator, length, value, onChange }) {
   
   return (
     <PageContainer
-      showheader
-      showfooter
+      showheader='true'
+      showfooter='true'
       className='bgImg'
       display="flex"
       justifyContent="center"

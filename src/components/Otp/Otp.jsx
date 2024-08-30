@@ -9,14 +9,7 @@ export default function Forgot() {
 
   
   return (
-    <PageContainer
-      showheader
-      showfooter
-      className='bgImg'
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <PageContainer showheader='true' showfooter='true' className='bgImg' display="flex" justifyContent="center" alignItems="center">
     
       <Paper sx={{ borderRadius: "20px", px:"5px" }} >
         <Grid item p={4}>

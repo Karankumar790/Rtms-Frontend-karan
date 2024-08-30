@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import AppSk from "./components/Skeletons/AppSk.jsx";
 import Home from "./Pages/Dashboard/Home/Home.jsx";
+import { Toaster } from "react-hot-toast";
 const Login = lazy(() => import("./Pages/Login/Login.jsx"));
 const Signup = lazy(() => import("./Pages/Signup/Signup.jsx"));
 const Dashboard = lazy(() => import("./Pages/Dashboard/index.jsx"));
@@ -11,21 +12,21 @@ const Virtual = lazy(() => import("./Pages/Dashboard/Virtual/Virtual.jsx"));
 const Monitor = lazy(() => import("./Pages/Dashboard/Monitor/Monitor.jsx"));
 const Crystal = lazy(() => import("./Pages/Dashboard/Crystal/Crystal.jsx"));
 const ComplaintHistory = lazy(() => import("./Pages/Dashboard/ComplaintHistory/ComplaintHistory.jsx"));
-const NotificationHistory = lazy(() =>import("./Pages/Dashboard/NotificationHistory/NotificationHistory.jsx"));
+const NotificationHistory = lazy(() => import("./Pages/Dashboard/NotificationHistory/NotificationHistory.jsx"));
 const Edit = lazy(() => import("./Pages/Dashboard/Edit/Edit.jsx"));
 const Logout = lazy(() => import("./Pages/Dashboard/Logout/Logout.jsx"));
-const PopUp = lazy(() =>import("./CheckStatus/PopUp.jsx"));
-const CheckStatus = lazy(() =>import("./CheckStatus/CheckStatus.jsx"));
+const PopUp = lazy(() => import("./CheckStatus/PopUp.jsx"));
+const CheckStatus = lazy(() => import("./CheckStatus/CheckStatus.jsx"));
 const Otp = lazy(() => import("./components/Otp/Otp.jsx"));
-const OtpForget = lazy(() =>import("./components/Otp/OtpForget/OtpForget.jsx"));
+const OtpForget = lazy(() => import("./components/Otp/OtpForget/OtpForget.jsx"));
 const OtpSignup = lazy(() => import("./components/Otp/OtpSignup.jsx"));
 const OtpSign = lazy(() => import("./components/Otp/Otpsign.jsx"));
 const WellMaster = lazy(() => import("./Pages/WellMaster/WellMaster.jsx"));
-const SingleWell = lazy(() =>import("./Pages/Dashboard/SingleWell/SingleWell.jsx"));
-const AddWell = lazy(() =>import("./Pages/WellMaster/AddWell/AddWell.jsx"));
-const ManageAsset = lazy(() =>import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx"));
-const DeviceManage = lazy(() =>import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx"));
-const AddDevice = lazy(() =>import("./Pages/Dashboard/DeviceManage/AddDevice/AddDevice.jsx"));
+const SingleWell = lazy(() => import("./Pages/Dashboard/SingleWell/SingleWell.jsx"));
+const AddWell = lazy(() => import("./Pages/WellMaster/AddWell/AddWell.jsx"));
+const ManageAsset = lazy(() => import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx"));
+const DeviceManage = lazy(() => import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx"));
+const AddDevice = lazy(() => import("./Pages/Dashboard/DeviceManage/AddDevice/AddDevice.jsx"));
 
 
 
@@ -69,7 +70,10 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<AppSk />}>{route}</Suspense>
+      <Toaster />
+      <Suspense fallback={<AppSk />}>
+        {route}
+      </Suspense>
     </>
   );
 }

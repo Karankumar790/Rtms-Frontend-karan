@@ -106,7 +106,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" />
+              <img src={well} alt="" />
               <Box fontSize='x-large'>2122</Box>
             </Box>
             <CardContent className='card-Content-text'>
@@ -118,7 +118,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" />
+              <img src={well} alt="" />
               <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -131,7 +131,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={well} alt="" srcset="" />
+              <img src={well} alt="" />
               <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -166,7 +166,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12} >
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={battery} alt="" srcset="" />
+              <img src={battery} alt="" />
               <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -179,7 +179,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={solar} alt="" srcset="" />
+              <img src={solar} alt="" />
               <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -191,7 +191,7 @@ export default function BasicCard() {
         <Grid item lg={3} md={3} sm={6} xs={12}>
           <CardWrapper>
             <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-              <img src={network} alt="" srcset="" />
+              <img src={network} alt="noImg" />
               <Box fontSize='x-large'>2122</Box>
             </Grid>
             <CardContent className='card-Content-text' >
@@ -202,11 +202,7 @@ export default function BasicCard() {
       </Grid>
       {/* -------------------------Table for Moblie----------------------------- */}
 
-      <Grid container md={12}
-        lg={12}
-        sm={12}
-        xs={12}
-        sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
+      <Grid container sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
         <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
           <Grid container mt={2} direction="column">
             {Object.keys(data).map((header, index) => (
@@ -281,12 +277,9 @@ export default function BasicCard() {
 
       {/* -------------------------Table for Desktop--------------------------- */}
 
-      
+
       <Grid container>
-        <Grid item md={12}
-          lg={12}
-          sm={5}
-          xs={4}
+        <Grid item md={12} lg={12} sm={5} xs={4}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
           <Tabs>
             <TabList >
@@ -321,12 +314,12 @@ export default function BasicCard() {
                       <StyledTableCell>225</StyledTableCell>
                       <StyledTableCell>44555</StyledTableCell>
                       <StyledTableCell>
-                      <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px' }}>
-                                        <DeleteForeverIcon/>
-                                        </IconButton>
-                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
-                                         <EditIcon/>
-                                         </IconButton>
+                        <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                          <DeleteForeverIcon />
+                        </IconButton>
+                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                          <EditIcon />
+                        </IconButton>
                       </StyledTableCell>
 
                     </StyledTableRow>

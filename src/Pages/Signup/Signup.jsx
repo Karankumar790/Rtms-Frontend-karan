@@ -43,7 +43,7 @@ function Signup() {
     };
 
     return (
-        <PageContainer className='bgImg' showheader showfooter display={'flex'} justifyContent={'start'} alignItems={'center'}>
+        <PageContainer className='bgImg' showheader='true' showfooter='true' display={'flex'} justifyContent={'start'} alignItems={'center'}>
             <Grid container >
                 <Grid item padding={2} width={600} >
                     <Card>
