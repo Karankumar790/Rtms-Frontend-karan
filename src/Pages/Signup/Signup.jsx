@@ -1,4 +1,4 @@
-import { Grid, Typography, TextField, Box, Button } from '@mui/material'
+import { Grid, Typography, TextField, Box, Button, Paper } from '@mui/material'
 import React, { useState } from 'react'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
@@ -10,9 +10,6 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import { styled, useTheme } from "@mui/material/styles";
 import { Email } from '@mui/icons-material';
-
-
-
 
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -31,7 +28,7 @@ function Signup() {
         department: false,
         role: false,
     }); // New state to track if the username field has been touched
-   
+
     const handleUsernameChange = (e) => {
         const { name, value } = e.target;
         setInputValues({ ...inputValues, [name]: value });
@@ -44,10 +41,12 @@ function Signup() {
     };
 
     return (
+
         <PageContainer className='bgImg' showheader='true' showfooter='true'>
             <Grid container >
                 <Grid item padding={2} width={600} >
                     <Card>
+
                         <CardContent orientation="vertical">
                             <Grid item pt={1} sx={{ textAlign: "center" }}>
                                 <Typography variant='h4'>Registration</Typography>
@@ -240,7 +239,7 @@ function Signup() {
                                 </form>
                             </Grid>
                         </CardContent>
-                    </Card>
+                    </Paper>
                 </Grid>
             </Grid>
         </PageContainer >
