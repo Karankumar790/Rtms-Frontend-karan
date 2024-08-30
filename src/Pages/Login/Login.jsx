@@ -16,8 +16,6 @@ function Login() {
   const [formValues, setFormValues] = useState({ username: "", password: "" });
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
-  const state = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   const handleClickShowPassword = () => {
     setVisible((prev) => !prev);
@@ -31,8 +29,6 @@ function Login() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(services?.authLoginService(formValues))
-    // console.log('>>>>>>>', formValues)
     toast.success('Login Successful')
     navigate('/otp');
   };
