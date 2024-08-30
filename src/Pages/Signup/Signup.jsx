@@ -11,9 +11,6 @@ import CardContent from '@mui/joy/CardContent';
 import { styled, useTheme } from "@mui/material/styles";
 import { Email } from '@mui/icons-material';
 
-
-
-
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
@@ -44,10 +41,12 @@ function Signup() {
     };
 
     return (
-        <PageContainer className='bgImg' showheader='true' showfooter='true' display={'flex'} justifyContent={'start'} alignItems={'center'}>
-            <Grid container>
-                <Grid item padding={2} width={600} sx={{ height: { xs: 'calc(100vh - 120px)', sm: 'auto', md: 'auto', lg: 'auto' } }} >
-                    <Paper>
+
+        <PageContainer className='bgImg' showheader='true' showfooter='true'>
+            <Grid container >
+                <Grid item padding={2} width={600} >
+                    <Card>
+
                         <CardContent orientation="vertical">
                             <Grid item pt={1} sx={{ textAlign: "center" }}>
                                 <Typography variant='h4'>Registration</Typography>
