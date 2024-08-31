@@ -17,7 +17,7 @@ const data = [
     Description: '',
     Parameter: 'GIP',
     Condition1: '',
-    Description: '',
+    // Description: '',
 
   },
   {
@@ -28,7 +28,7 @@ const data = [
     Description: '',
     Parameter: 'CHP',
     Condition1: '',
-    Description: '',
+   
 
   },
   {
@@ -39,7 +39,7 @@ const data = [
     Description: '',
     Parameter: 'THP',
     Condition1: '',
-    Description: '',
+    
 
   },
   {
@@ -50,8 +50,7 @@ const data = [
     Description: '',
     Parameter: 'Battery %',
     Condition1: '',
-    Description: '',
-
+  
   },
   {
     employeeId: '05',
@@ -61,7 +60,7 @@ const data = [
     Description: '',
     Parameter: 'Solar Power',
     Condition1: '',
-    Description: '',
+   
 
   },
   {
@@ -72,7 +71,7 @@ const data = [
     Description: '',
     Parameter: 'Communication',
     Condition1: '',
-    Description: '',
+   
 
   },
   {
@@ -80,10 +79,9 @@ const data = [
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
-    Description: '',
     Parameter: 'CPU Temperature',
     Condition1: '',
-    Description: '',
+ 
 
   },
 ]
