@@ -17,7 +17,7 @@ const data = [
     Description: '',
     Parameter: 'GIP',
     Condition1: '',
-    Description: '',
+    // Description: '',
 
   },
   {
@@ -79,7 +79,6 @@ const data = [
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
-    Description: '',
     Parameter: 'CPU Temperature',
     Condition1: '',
  
