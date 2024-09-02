@@ -10,8 +10,8 @@ export default function Otpsign() {
 
   return (
     <PageContainer
-      showheader
-      showfooter
+      showheader='true'
+      showfooter='true'
       className='bgImg'
       style={{ display: 'grid', placeContent: 'center' }}
     >

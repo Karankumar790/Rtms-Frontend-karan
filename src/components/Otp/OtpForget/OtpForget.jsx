@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 export default function OtpForget() {
   return (
     <PageContainer
-      showheader
-      showfooter
+     showheader='true'
+      showfooter='true'
       className='bgImg'
       display="flex"
       justifyContent="center"
