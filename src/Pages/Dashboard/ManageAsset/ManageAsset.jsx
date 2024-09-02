@@ -60,12 +60,12 @@ function ManageAsset() {
   const steps = ["Head of Department", "Manager", "Team Leader"];
 
   return (
-    <div>
-      <Paper>
-        <Grid container gap={3}>
+    <div className="bg-color">
+      <Paper sx={{bgcolor:'#d1dcf0'}}>
+        <Grid container gap={3} p={2}>
           <Typography variant="h4">Organization </Typography>
 
-          <Grid container spacing={2} p={2}>
+          <Grid container spacing={2} >
             <Grid item xs={12} sm={3} md={3} lg={3}>
               <Typography variant="h6">Asset </Typography>
               <TextField variant="outlined" fullWidth />
@@ -104,7 +104,7 @@ function ManageAsset() {
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
-      <Card sx={{ my: 2 }}>
+      <Card sx={{ my: 2, bgcolor:'#d1dcf0' }}>
         <CardContent>
           <Typography variant="h5"> Add Department</Typography>
           <Grid container spacing={2} mt={0.1}>
@@ -121,7 +121,7 @@ function ManageAsset() {
               <TextField variant="outlined" label="Phone" inputRef={inputRef3} fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
-              <Button variant="contained" onClick={handleAdd}>
+              <Button variant="contained" className="btn-primary " onClick={handleAdd}>
                 Add Department
               </Button>
             </Grid>
@@ -130,7 +130,7 @@ function ManageAsset() {
       </Card>
       {/* ----------------------Postion-------------------------------- */}
 
-      <Card sx={{ my: 2 }}>
+      <Card sx={{ my: 2, bgcolor:'#d1dcf0' }}>
         <CardContent>
           <Typography variant="h5"> Add Postion</Typography>
           <Grid container spacing={2} mt={0.1}>
@@ -147,7 +147,7 @@ function ManageAsset() {
               <TextField variant="outlined" label="Employee" fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
-              <Button variant="contained">
+              <Button variant="contained"  className="btn-primary ">
                 Postion
               </Button>
             </Grid>
@@ -156,16 +156,16 @@ function ManageAsset() {
       </Card>
       {/* -----------------------Approval chain------------------------- */}
 
-      <Card sx={{ my: 2 }} >
+      <Card sx={{ my: 2, bgcolor:'#d1dcf0' }} >
 
-        <Grid >
+        <Grid item xs={12} sm={12} md={12}>
           <Box >
             <Stepper
               activeStep={1}
               alternativeLabel
               sx={{
                 fontSize: "500px",
-                padding: "50px",
+                padding: "10px",
                 "& .MuiStepConnector-line": {
                   marginTop: "12px",
                   marginRight: "10px",
@@ -189,10 +189,11 @@ function ManageAsset() {
               ))}
             </Stepper>
           </Box>
-          <Grid item mb={2} sx={{ display: "flex", justifyContent: "center" }} >
+          <Grid item xs={12} sm={12} md={12} mb={2} sx={{ display: "flex", justifyContent: "center" }} >
             <Box
               sx={{
-                width: "70%",
+                // width: "70%",
+                width:'100%',
                 display: "flex",
                 justifyContent: "space-between",
               }}
@@ -202,7 +203,7 @@ function ManageAsset() {
                 to="/"
                 style={{ textDecoration: "none", color: "white" }}
               >
-                <Button variant="contained" color="primary" size="large" >
+                <Button variant="contained"  className="btn-primary "  >
                   Close
                 </Button>
               </Link>
@@ -211,10 +212,6 @@ function ManageAsset() {
         </Grid>
       </Card>
       {/* -------------------------Table-------------------------- */}
-
-      <Button variant='contained'>Add</Button>
-      <Button variant='contained'>View</Button>
-      <Button variant='contained'>Update</Button>
       <Grid container>
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>
