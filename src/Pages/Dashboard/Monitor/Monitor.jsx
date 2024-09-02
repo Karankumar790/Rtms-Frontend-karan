@@ -205,7 +205,7 @@ function Monitor() {
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <InputLabel id="demo-select-large-label">Parameter</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-large"
@@ -216,9 +216,13 @@ function Monitor() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              <MenuItem value={10}>GIP(kg)</MenuItem>
+              <MenuItem value={20}>CHP(kg)</MenuItem>
+              <MenuItem value={30}>THP(kg)</MenuItem>
+              <MenuItem value={30}>Battery %</MenuItem>
+              <MenuItem value={30}>Solar Power(V)</MenuItem>
+              <MenuItem value={30}>Communication Barrier</MenuItem>
+              <MenuItem value={30}>Not flowing</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -234,12 +238,12 @@ function Monitor() {
             <TableHead >
               <TableRow  >
                 <StyledTableCell sx={{fontSize:'18px'}}>Well No.</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">GIP</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">CHP</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">THP</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">GIP(kg)</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">CHP(kg)</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">THP(kg)</StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Battery %</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Solar Power</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Communication</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Solar Power(V)</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Communication </StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Flow Status</StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Last Update</StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Alarm</StyledTableCell>
