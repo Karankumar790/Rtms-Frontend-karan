@@ -27,6 +27,8 @@ const AddWell = lazy(() => import("./Pages/WellMaster/AddWell/AddWell.jsx"));
 const ManageAsset = lazy(() => import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx"));
 const DeviceManage = lazy(() => import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx"));
 const AddDevice = lazy(() => import("./Pages/Dashboard/DeviceManage/AddDevice/AddDevice.jsx"));
+const Network = lazy(() => import("./Pages/Dashboard/Network/Network.jsx"));
+const AddDevices = lazy(() => import("./Pages/Dashboard/Network/AddNetwork/AddNetwork.jsx"));
 
 
 
@@ -54,6 +56,9 @@ function App() {
         { path: "/dashboard/ManageAsset", element: <ManageAsset /> },
         { path: "/dashboard/DeviceManage", element: <DeviceManage /> },
         { path: "/dashboard/AddDevice", element: <AddDevice /> },
+        { path: "/dashboard/Network", element: <Network /> },
+        { path: "/dashboard/AddDevices", element: <AddDevices /> },
+
 
       ]
     },

@@ -21,6 +21,9 @@ import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
+import Networkicon from '@mui/icons-material/CellTower';
+
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -92,6 +95,11 @@ export default function Sidebar({ open, handleDrawerClose }) {
             name: "Device Manager",
             icon: <DeviceManagerIcon sx={{ color: 'black' }} />,
             path: "/dashboard/DeviceManage"
+        },
+        {
+            name: "Network Manager",
+            icon: <Networkicon sx={{ color: 'black' }} />,
+            path: "/dashboard/Network"
         },
         {
             name: "Well Monitor",
