@@ -46,7 +46,6 @@ function Signup() {
             <Grid container >
                 <Grid item padding={2} width={600} >
                     <Card>
-
                         <CardContent orientation="vertical">
                             <Grid item pt={1} sx={{ textAlign: "center" }}>
                                 <Typography variant='h4'>Registration</Typography>
