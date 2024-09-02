@@ -2,12 +2,17 @@ import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
 import React from "react";
 import PageContainer from "../HOC/PageContainer";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { authAction } from '../../Pages/Login/LoginSlice/loginSlice'
 
 export default function Forgot() {
+  const state = useSelector((state) => state?.auth);
+  const dispatch = useDispatch();
+  const data = JSON.stringify(state?.data);
 
-
-
+  const handleRemoveToken = () => {
+    dispatch(authAction.removeToken())
+  }
   return (
     <PageContainer showheader='true' showfooter='true' className='bgImg' style={{ display: 'grid', placeContent: 'center' }}>
       <Grid container p={1}>
@@ -17,6 +22,9 @@ export default function Forgot() {
               <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
                 <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
                   Please Enter OTP To Verify Your Account
+                  <div>
+                      {data}
+                    </div>
                 </Typography>
               </Grid>
               <Grid item mt={2}>
@@ -54,8 +62,8 @@ export default function Forgot() {
                 </Link>
               </Grid>
               <Grid item xs={12} md={12} sm={12} lg={12} textAlign="center" py={1}>
-                <Link to="" style={{ textDecoration: "none" }}>
-                  <Typography >
+                <Link to="" style={{ textDecoration: "none" }} onClick={handleRemoveToken}>
+                  <Typography>
                     Resend One-Time Password
                   </Typography>
                 </Link>
