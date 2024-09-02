@@ -166,10 +166,13 @@ function WellMaster() {
                                     <StyledTableCell align="left">5/6/2024</StyledTableCell>
                                     <StyledTableCell align="left">gbz</StyledTableCell>
                                     <StyledTableCell align="left">yes</StyledTableCell>
-                                    <StyledTableCell align="left" width={20} padding='none' colSpan={3}>
-                                            <IconButton sx={{ color: 'red' }}><DeleteForeverIcon fontSize='large'/></IconButton>
-                                            <IconButton sx={{ color: 'darkblue' }}><EditIcon fontSize='large' /></IconButton>
-                                            <IconButton sx={{ color: 'black' }}><VisibilityIcon fontSize='large'/></IconButton>
+                                    <StyledTableCell align='left'>
+                                        <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                            <DeleteForeverIcon />
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                            <EditIcon />
+                                        </IconButton>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}

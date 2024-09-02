@@ -84,7 +84,7 @@ function Virtual() {
   return (
     <div>
       <Grid container >
-        <Typography variant='h4'>Live Capture </Typography>
+        <Typography variant='h4'>Geo-Location </Typography>
       </Grid>
       <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
         <Grid item xs={12} sm={8} md={6} lg={3}>

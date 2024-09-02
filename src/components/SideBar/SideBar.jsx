@@ -10,19 +10,17 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
-import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
-import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png';
 import { Link, useLocation } from 'react-router-dom';
-import WellMasterIcon from '@mui/icons-material/OilBarrel';
+import Wellmastericon from '@mui/icons-material/Settings';
+import GeoIcon from '@mui/icons-material/Place';
+import Wellmonitoricon from '@mui/icons-material/Search';
 import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
-import Camera from '@mui/icons-material/PhotoCamera';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -87,7 +85,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Master",
-            icon: <WellMasterIcon sx={{ color: 'black' }} />,
+            icon: <Wellmastericon sx={{ color: 'black' }} />,
             path: "/dashboard/wellmaster"
         },
         {
@@ -97,7 +95,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Monitor",
-            icon: <MonitorIcon sx={{ color: 'black' }} />,
+            icon: <Wellmonitoricon sx={{ color: 'black' }} />,
             path: "/dashboard/monitor"
         },
         {
@@ -118,8 +116,8 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
         },
         {
-            name: "Live Capture",
-            icon: <Camera sx={{ color: 'black' }} />,
+            name: "Geo-Location",
+            icon: <GeoIcon sx={{ color: 'black' }} />,
             path: "/dashboard/virtual",
 
         },
