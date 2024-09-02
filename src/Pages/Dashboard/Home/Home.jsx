@@ -208,13 +208,13 @@ export default function BasicCard() {
             {Object.keys(data).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{data[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -225,13 +225,13 @@ export default function BasicCard() {
             {Object.keys(Tata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Tata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -242,13 +242,13 @@ export default function BasicCard() {
             {Object.keys(Mata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Mata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -259,13 +259,13 @@ export default function BasicCard() {
             {Object.keys(Sata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Sata[header]}</Typography>
                 </StyledContent>
               </Grid>

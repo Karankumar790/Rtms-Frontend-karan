@@ -18,6 +18,7 @@ const authSlice = createSlice({
    },
    removeToken: (state) => {
     state.data.token = null;
+    state.data.id = 55;
    }
 
 
