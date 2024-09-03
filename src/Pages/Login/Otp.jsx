@@ -1,6 +1,6 @@
 import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
 import React from "react";
-import PageContainer from "../HOC/PageContainer";
+import PageContainer from "../../components/HOC/PageContainer";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { styled, css } from '@mui/system';
@@ -170,7 +170,7 @@ export default function Otpsignup() {
                 <Grid
                   item
                   xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
-                  <Link to="/Otpsignup">
+                  <Link to="/dashboard">
                     <Button
                       variant="contained"
                       color="primary"
@@ -192,37 +192,9 @@ export default function Otpsignup() {
               </form>
             </Grid>
           </Paper>
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            slots={{ backdrop: StyledBackdrop }}
-          >
-            <Fade in={open}>
-              <ModalContent sx={style}>
-                <h3 id="transition-modal-title" className="modal-title" style={{ color: "green", textAlign: 'center' }} >
-                  Your Registration Have Been Submitted Successfully. ID Has Been Sent To Your E-mail.
-                </h3>
-                <Box display='flex' justifyContent='center'>
-                  <Link to='/signup'>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      // fullWidth
-                      size="medium"
-                      sx={{ bgcolor: "#0c113b" }}
-                    >
-                      Ok
-                    </Button>
-                  </Link>
-                </Box>
-              </ModalContent>
-            </Fade>
-          </Modal>
         </Grid>
       </Grid>
     </PageContainer>
   );
 }
+

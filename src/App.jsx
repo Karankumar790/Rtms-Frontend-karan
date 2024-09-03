@@ -3,6 +3,9 @@ import { useRoutes } from "react-router-dom";
 import AppSk from "./components/Skeletons/AppSk.jsx";
 import Home from "./Pages/Dashboard/Home/Home.jsx";
 import { Toaster } from "react-hot-toast";
+import { Typography, useMediaQuery } from '@mui/material';
+import { Box } from "@mui/system";
+
 const Login = lazy(() => import("./Pages/Login/Login.jsx"));
 const Signup = lazy(() => import("./Pages/Signup/Signup.jsx"));
 const Dashboard = lazy(() => import("./Pages/Dashboard/index.jsx"));
@@ -17,21 +20,23 @@ const Edit = lazy(() => import("./Pages/Dashboard/Edit/Edit.jsx"));
 const Logout = lazy(() => import("./Pages/Dashboard/Logout/Logout.jsx"));
 const PopUp = lazy(() => import("./CheckStatus/PopUp.jsx"));
 const CheckStatus = lazy(() => import("./CheckStatus/CheckStatus.jsx"));
-const Otp = lazy(() => import("./components/Otp/Otp.jsx"));
-const OtpForget = lazy(() => import("./components/Otp/OtpForget/OtpForget.jsx"));
-const OtpSignup = lazy(() => import("./components/Otp/OtpSignup.jsx"));
-const OtpSign = lazy(() => import("./components/Otp/Otpsign.jsx"));
+const Otp = lazy(() => import("./Pages/Login/Otp.jsx"));
+const OtpForget = lazy(() => import("./Pages/Forgot/OtpForget.jsx"));
+const OtpSignup = lazy(() => import("./Pages/Signup/Otpsignup.jsx"));
+const OtpSign = lazy(() => import("./Pages/Signup/Otpsign.jsx"));
 const WellMaster = lazy(() => import("./Pages/WellMaster/WellMaster.jsx"));
 const SingleWell = lazy(() => import("./Pages/Dashboard/SingleWell/SingleWell.jsx"));
 const AddWell = lazy(() => import("./Pages/WellMaster/AddWell/AddWell.jsx"));
 const ManageAsset = lazy(() => import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx"));
 const DeviceManage = lazy(() => import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx"));
 const AddDevice = lazy(() => import("./Pages/Dashboard/DeviceManage/AddDevice/AddDevice.jsx"));
-
-
+const Network = lazy(() => import("./Pages/Dashboard/Network/Network.jsx"));
+const AddDevices = lazy(() => import("./Pages/Dashboard/Network/AddNetwork/AddNetwork.jsx"));
 
 
 function App() {
+  const isDesktop = useMediaQuery('(min-width:768px)');
+
   const route = useRoutes([
     { path: "/", element: <Login /> },
     { path: "/signup", element: <Signup /> },
@@ -48,12 +53,14 @@ function App() {
         { path: "/dashboard/notification", element: <NotificationHistory /> },
         { path: "/dashboard/edit", element: <Edit /> },
         { path: "/dashboard/logout", element: <Logout /> },
-        { path: '/dashboard/wellmaster', element: <WellMaster /> },
+        { path: '/dashboard/wellmaster', element: isDesktop ? (<WellMaster />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
         { path: '/dashboard/addwell', element: <AddWell /> },
         { path: "/dashboard/singlewell", element: <SingleWell /> },
-        { path: "/dashboard/ManageAsset", element: <ManageAsset /> },
-        { path: "/dashboard/DeviceManage", element: <DeviceManage /> },
+        { path: "/dashboard/ManageAsset", element: isDesktop ? (<ManageAsset />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
+        { path: "/dashboard/DeviceManage", element: isDesktop ? (<DeviceManage />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
         { path: "/dashboard/AddDevice", element: <AddDevice /> },
+        { path: "/dashboard/Network", element: isDesktop ? (<Network />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
+        { path: "/dashboard/AddDevices", element: <AddDevices /> },
 
       ]
     },

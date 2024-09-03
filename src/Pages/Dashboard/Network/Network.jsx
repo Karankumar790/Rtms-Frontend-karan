@@ -8,8 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
-import well from '/assets/WELL.png'
-import manage from '/assets/Oil.webp'
+import Network from '../../../../public/assets/NetworkWire2.jpg'
+
+// import manage from '/assets/Oil.webp'
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
@@ -90,7 +91,12 @@ const rows = [
     createData('3'),
     createData('4'),
     createData('5'),
-  
+    createData('6'),
+    createData('7'),
+    createData('8'),
+    // createData('3'),
+    // createData('4'),
+    // createData('5'),
 ];
 
 
@@ -99,16 +105,16 @@ function DeviceManage() {
     return (
         <div>
             <Grid container>
-                <Typography variant='h4'>Device Manager</Typography>
+                <Typography variant='h4'>Network Manager</Typography>
             </Grid>
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
                 <Grid item p={1}>
                     <Box sx={{ height: '100px', width: '100px' }}>
-                        <img src={manage} alt='img' height={'100px'} width={'100px'} />
+                        <img src={Network} alt='img' height={'100px'} width={'100px'} />
                     </Box>
                 </Grid>
                 <Grid item p={4}>
-                    <Link to='/dashboard/AddDevice'>
+                    <Link to='/dashboard/AddDevices'>
                         <Button variant='contained' 
                           sx={{
                             backgroundColor: 'green',   // Change button color to green
@@ -117,7 +123,7 @@ function DeviceManage() {
                             },
                             fontSize: '16px',
                             }}>
-                            Add Device +
+                            Add Network +
                         </Button>
                     </Link>
                 </Grid>
@@ -137,7 +143,7 @@ function DeviceManage() {
                                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
                                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Lattitude</StyledTableCell>
                                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="center">Action</StyledTableCell>
+                                {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Action</StyledTableCell> */}
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -146,20 +152,18 @@ function DeviceManage() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="left">11.171.01.1 </StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
-                                    <StyledTableCell align='left'   > 
-                                        <Box display={'flex'} justifyContent={"space-evenly"} >
-                                        <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px',  padding: '5px',}}>
-                                        <DeleteForeverIcon fontSize='large' />
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    {/* <StyledTableCell align='left'> 
+                                        <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px' }}>
+                                        <DeleteForeverIcon/>
                                         </IconButton>
                                         <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
-                                         <EditIcon fontSize='large'/>
+                                         <EditIcon/>
                                          </IconButton> 
-                                         </Box>
-                                         </StyledTableCell>
+                                         </StyledTableCell> */}
 
 
                                 </StyledTableRow>
