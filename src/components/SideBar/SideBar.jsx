@@ -10,71 +10,50 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
-import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
-import Divider from '@mui/material/Divider';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png';
 import { Link, useLocation } from 'react-router-dom';
-import WellMasterIcon from '@mui/icons-material/OilBarrel';
+import Wellmastericon from '@mui/icons-material/Settings';
+import GeoIcon from '@mui/icons-material/Place';
+import Wellmonitoricon from '@mui/icons-material/Search';
 import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
-import Camera from '@mui/icons-material/PhotoCamera';
+import Networkicon from '@mui/icons-material/CellTower';
 
-import MuiAppBar from '@mui/material/AppBar';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        variants: [
-            {
-                props: ({ open }) => open,
-                style: {
-                    transition: theme.transitions.create('margin', {
-                        easing: theme.transitions.easing.easeOut,
-                        duration: theme.transitions.duration.enteringScreen,
-                    }),
-                    marginLeft: 0,
-                },
-            },
-        ],
+const openedMixin = (theme) => ({
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
     }),
-);
+    overflowX: 'hidden',
+});
 
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: (prop) => prop !== 'open',
-// })(({ theme }) => ({
-//   transition: theme.transitions.create(['margin', 'width'], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   variants: [
-//     {
-//       props: ({ open }) => open,
-//       style: {
-//         width: `calc(100% - ${drawerWidth}px)`,
-//         marginLeft: `${drawerWidth}px`,
-//         transition: theme.transitions.create(['margin', 'width'], {
-//           easing: theme.transitions.easing.easeOut,
-//           duration: theme.transitions.duration.enteringScreen,
-//         }),
-//       },
-//     },
-//   ],
-// }));
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up('sm')]: {
+        width: `calc(${theme.spacing(8)} + 1px)`,
+    },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+}));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -93,15 +72,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-}));
-
 export default function Sidebar({ open, handleDrawerClose }) {
     const location = useLocation();
 
@@ -118,7 +88,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Master",
-            icon: <WellMasterIcon sx={{ color: 'black' }} />,
+            icon: <Wellmastericon sx={{ color: 'black' }} />,
             path: "/dashboard/wellmaster"
         },
         {
@@ -127,8 +97,13 @@ export default function Sidebar({ open, handleDrawerClose }) {
             path: "/dashboard/DeviceManage"
         },
         {
+            name: "Network Manager",
+            icon: <Networkicon sx={{ color: 'black' }} />,
+            path: "/dashboard/Network"
+        },
+        {
             name: "Well Monitor",
-            icon: <MonitorIcon sx={{ color: 'black' }} />,
+            icon: <Wellmonitoricon sx={{ color: 'black' }} />,
             path: "/dashboard/monitor"
         },
         {
@@ -149,8 +124,8 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
         },
         {
-            name: "Live Capture",
-            icon: <Camera sx={{ color: 'black' }} />,
+            name: "Geo-Location",
+            icon: <GeoIcon sx={{ color: 'black' }} />,
             path: "/dashboard/virtual",
 
         },
@@ -160,19 +135,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
     const theme = useTheme();
 
     return (
-        <Drawer variant='permanent' open={open}
-        // sx={{
-        //     width: drawerWidth,
-        //     flexShrink: 0,
-        //     '& .MuiDrawer-paper': {
-        //       width: drawerWidth,
-        //       boxSizing: 'border-box',
-        //     },
-        //   }}
-        //   variant="persistent"
-        //   anchor="left"
-        //   open={open}
-        >
+        <Drawer variant="permanent" open={open}  >
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
                 <IconButton onClick={handleDrawerClose}>
@@ -180,7 +143,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
                 </IconButton>
             </DrawerHeader>
 
-            <List onClick={handleDrawerClose} sx={{ mt: 1 }}>
+            <List sx={{mt:1}}>
                 {/* <Divider sx={{ py: 1 }} /> */}
                 {/* {['Dashboard', 'Well Monitor', 'Virtual Flow', 'Crystal Report', 'Complaint History', 'Notification  History','Edit Profile','Log Out'] */}
 
@@ -188,20 +151,20 @@ export default function Sidebar({ open, handleDrawerClose }) {
                 {mainuItems?.map((text, index) => (
                     <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }}>
                         <ListItem key={text} disablePadding sx={{
-                            display: 'block', borderBottom: index < 7 ? '1px solid yellow' : '',
-
+                            display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
+                           
 
                         }} >
 
                             <ListItemButton
-
+                            
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
                                     backgroundColor: location.pathname === text.path ? 'lightgrey' : 'white',
                                     '&:hover': {
-                                        backgroundColor: 'lightgrey',
+                                        backgroundColor:'lightgrey',
                                     },
                                 }}
                             >
@@ -217,14 +180,13 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
                                 <ListItemText primary={text.name} sx={{
                                     opacity: open ? 1 : 0, textDecoration: 'none',
-
+                                   
                                 }} />
                             </ListItemButton>
                         </ListItem>
                     </Link>
                 ))}
             </List>
-
         </Drawer>
     );
 }
