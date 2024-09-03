@@ -119,7 +119,7 @@ function WellMaster() {
                         <img src={well} alt='img' height={'100px'} width={'100px'} />
                     </Box>
                 </Grid>
-                <Grid item p={4}>
+                <Grid item p={2} >
                     <Link to='/dashboard/addwell'>
                         <Button variant='contained'
                             sx={{
@@ -145,8 +145,8 @@ function WellMaster() {
                         <TableHead >
                             <TableRow  >
                                 <StyledTableCell sx={{ fontSize: '18px' }}>Well Number</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location </StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
@@ -190,13 +190,13 @@ function WellMaster() {
                         {Object.keys(data).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{data[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -207,13 +207,13 @@ function WellMaster() {
                         {Object.keys(Tata).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{Tata[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -224,13 +224,13 @@ function WellMaster() {
                         {Object.keys(Mata).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{Mata[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -241,13 +241,13 @@ function WellMaster() {
                         {Object.keys(Sata).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{Sata[header]}</Typography>
                                 </StyledContent>
                             </Grid>

@@ -21,7 +21,9 @@ export default function Dashboard() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+};
   const handleDrawerClose = () => {
     setOpen(!open);
   };

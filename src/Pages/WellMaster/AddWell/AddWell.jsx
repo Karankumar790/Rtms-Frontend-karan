@@ -119,8 +119,8 @@ function AddWell() {
         </Grid>
 
       </Paper>
-      <Paper>
-        <Grid container sx={{ display: 'flex', flexDirection: 'column' }} mt={1} >
+      
+        <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
           <Typography variant='h4'>Notification Setting</Typography>
           <Grid item >
             <Table>
@@ -251,7 +251,7 @@ function AddWell() {
               }}> Delete</Button> */}
           </Grid>
         </Grid>
-      </Paper>
+      
 
     </div>
   )

@@ -10,18 +10,21 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import MonitorIcon from '@mui/icons-material/Monitor';
 import HomeIcon from '@mui/icons-material/Home';
+import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png';
 import { Link, useLocation } from 'react-router-dom';
-import Wellmastericon from '@mui/icons-material/Settings';
-import GeoIcon from '@mui/icons-material/Place';
-import Wellmonitoricon from '@mui/icons-material/Search';
+import WellMasterIcon from '@mui/icons-material/OilBarrel';
 import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
 import Networkicon from '@mui/icons-material/CellTower';
+import { useMediaQuery } from '@mui/material';
+import GeoIcon from '@mui/icons-material/Place';
 
 
 const drawerWidth = 240;
@@ -41,10 +44,7 @@ const closedMixin = (theme) => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
+    width: 0,
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -73,7 +73,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Sidebar({ open, handleDrawerClose }) {
+    const theme = useTheme();
     const location = useLocation();
+    const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
     const mainuItems = [
         {
@@ -88,7 +90,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Master",
-            icon: <Wellmastericon sx={{ color: 'black' }} />,
+            icon: <WellMasterIcon sx={{ color: 'black' }} />,
             path: "/dashboard/wellmaster"
         },
         {
@@ -103,7 +105,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Monitor",
-            icon: <Wellmonitoricon sx={{ color: 'black' }} />,
+            icon: <MonitorIcon sx={{ color: 'black' }} />,
             path: "/dashboard/monitor"
         },
         {
@@ -124,7 +126,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
         },
         {
-            name: "Geo-Location",
+            name: "Geo Location",
             icon: <GeoIcon sx={{ color: 'black' }} />,
             path: "/dashboard/virtual",
 
@@ -132,10 +134,9 @@ export default function Sidebar({ open, handleDrawerClose }) {
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
         // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
     ]
-    const theme = useTheme();
 
     return (
-        <Drawer variant="permanent" open={open}  >
+        <Drawer variant="permanent" open={open}>
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
                 <IconButton onClick={handleDrawerClose}>
