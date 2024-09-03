@@ -93,11 +93,7 @@ const rows = [
     createData('4'),
     createData('5'),
     createData('3'),
-    createData('4'),
-    createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
+
 ];
 
 const BodyTableCellWraper = styled(TableCell)(() => ({
@@ -153,7 +149,7 @@ function WellMaster() {
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Action</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -162,14 +158,19 @@ function WellMaster() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="left">1</StyledTableCell>
-                                    <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                                    <StyledTableCell align="left">gbz</StyledTableCell>
-                                    <StyledTableCell align="left">yes</StyledTableCell>
-                                    <StyledTableCell align="left" width={20} padding='none' colSpan={3}>
-                                            <IconButton sx={{ color: 'red' }}><DeleteForeverIcon fontSize='large'/></IconButton>
-                                            <IconButton sx={{ color: 'darkblue' }}><EditIcon fontSize='large' /></IconButton>
-                                            <IconButton sx={{ color: 'black' }}><VisibilityIcon fontSize='large'/></IconButton>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align='left'>
+                                        <Box display={'flex'} justifyContent={'space-evenly'}>
+                                        <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                            <DeleteForeverIcon fontSize='large' />
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                            <EditIcon fontSize='large'/>
+                                        </IconButton>
+                                        </Box>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}

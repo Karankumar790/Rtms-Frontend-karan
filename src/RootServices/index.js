@@ -1,5 +1,6 @@
 import axios from "axios";
-const BASEURL = 'https://rtms-backend.onrender.com/api/v1/users'
+// const BASEURL = 'https://rtms-backend.onrender.com/api/v1/users'
+const BASEURL = 'https://reqres.in/api'
 
 export const getReq = async (url) => {
 

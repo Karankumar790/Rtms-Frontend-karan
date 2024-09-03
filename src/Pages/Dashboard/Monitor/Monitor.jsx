@@ -175,7 +175,7 @@ function Monitor() {
               onChange={handleChangeInstallation}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>All</em>
               </MenuItem>
               <MenuItem value={10}>UP</MenuItem>
               <MenuItem value={20}>MP</MenuItem>
@@ -205,7 +205,7 @@ function Monitor() {
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <InputLabel id="demo-select-large-label">Parameter</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-large"
@@ -214,11 +214,16 @@ function Monitor() {
               onChange={handleChange}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              <MenuItem value={10}>GIP</MenuItem>
+              <MenuItem value={20}>CHP</MenuItem>
+              <MenuItem value={30}>THP</MenuItem>
+              <MenuItem value={10}>Battery</MenuItem>
+              <MenuItem value={20}>Solar Power</MenuItem>
+              <MenuItem value={30}>Communication Barrier</MenuItem>
+              <MenuItem value={10}>Flow Status</MenuItem>
+              <MenuItem value={20}>Not Flow Status </MenuItem>
             </Select>
           </FormControl>
         </Grid>

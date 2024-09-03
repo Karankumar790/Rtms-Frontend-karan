@@ -15,45 +15,45 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[100],
- }));
- 
- const StyledContent = styled(Grid)(({ theme }) => ({
+}));
+
+const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: 'white',
- }));
- 
- let data = {
+}));
+
+let data = {
   "Well No": "1",
   "Location": "New York",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
- let Tata = {
+};
+
+let Tata = {
   "Well No": "2",
   "Location": "Delhi",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
- let Mata = {
+};
+
+let Mata = {
   "Well No": "3",
   "Location": "UP",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
- 
- let Sata = {
+};
+
+let Sata = {
   "Well No": "4",
   "Location": "MP",
   "Installation": "01/01/2021",
   "Latitude": "40.7128 N",
   "Longitude": "74.0060 W"
- };
+};
 // ------------------------Table for Desktop-----------------------------   
 
 
@@ -244,12 +244,12 @@ function ComplaintHistory() {
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }}>Complain No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Notification No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Raiser Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Taker Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Description</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Complain No.</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Data/Time</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Notification No.</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Raiser Name</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Taker Name</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '25%' }} align="center">Description</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -262,7 +262,7 @@ function ComplaintHistory() {
                   <StyledTableCell align="left">5/6/2024</StyledTableCell>
                   <StyledTableCell align="left">gbz</StyledTableCell>
                   <StyledTableCell align="left">yes</StyledTableCell>
-                  {/* <StyledTableCell align="left">1</StyledTableCell> */}
+                  <StyledTableCell align="left"></StyledTableCell>
 
 
                 </StyledTableRow>
