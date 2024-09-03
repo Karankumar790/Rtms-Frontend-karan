@@ -15,7 +15,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'GIP',
+    Parameter: 'GIP(kg)',
     Condition1: '',
     Description1: '',
 
@@ -26,7 +26,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'CHP',
+    Parameter: 'CHP(kg)',
     Condition1: '',
     Description1: '',
 
@@ -37,7 +37,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'THP',
+    Parameter: 'THP(kg)',
     Condition1: '',
     Description1: '',
 
@@ -59,7 +59,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'Solar Power',
+    Parameter: 'Solar Power(V)',
     Condition1: '',
     Description1: '',
 
@@ -112,8 +112,8 @@ function AddWell() {
         <Typography variant='h4'> Add New Well</Typography>
         <Grid container p={1.7} sx={{ display: 'flex', justifyContent: 'space-between' }} >
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Location" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Installation" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Location" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
         </Grid>
