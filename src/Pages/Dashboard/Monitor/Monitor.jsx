@@ -175,7 +175,7 @@ function Monitor() {
               onChange={handleChangeInstallation}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>All</em>
               </MenuItem>
               <MenuItem value={10}>UP</MenuItem>
               <MenuItem value={20}>MP</MenuItem>
@@ -214,15 +214,16 @@ function Monitor() {
               onChange={handleChange}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>GIP(kg)</MenuItem>
-              <MenuItem value={20}>CHP(kg)</MenuItem>
-              <MenuItem value={30}>THP(kg)</MenuItem>
-              <MenuItem value={30}>Battery %</MenuItem>
-              <MenuItem value={30}>Solar Power(V)</MenuItem>
+              <MenuItem value={10}>GIP</MenuItem>
+              <MenuItem value={20}>CHP</MenuItem>
+              <MenuItem value={30}>THP</MenuItem>
+              <MenuItem value={10}>Battery</MenuItem>
+              <MenuItem value={20}>Solar Power</MenuItem>
               <MenuItem value={30}>Communication Barrier</MenuItem>
-              <MenuItem value={30}>Not flowing</MenuItem>
+              <MenuItem value={10}>Flow Status</MenuItem>
+              <MenuItem value={20}>Not Flow Status </MenuItem>
             </Select>
           </FormControl>
         </Grid>

@@ -22,8 +22,8 @@ import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
-import Camera from '@mui/icons-material/PhotoCamera';
-import { useMediaQuery } from '@mui/material';
+import Networkicon from '@mui/icons-material/CellTower';
+
 
 const drawerWidth = 240;
 
@@ -97,6 +97,11 @@ export default function Sidebar({ open, handleDrawerToggle }) {
             path: "/dashboard/DeviceManage"
         },
         {
+            name: "Network Manager",
+            icon: <Networkicon sx={{ color: 'black' }} />,
+            path: "/dashboard/Network"
+        },
+        {
             name: "Well Monitor",
             icon: <MonitorIcon sx={{ color: 'black' }} />,
             path: "/dashboard/monitor"
@@ -136,12 +141,47 @@ export default function Sidebar({ open, handleDrawerToggle }) {
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
             </DrawerHeader>
-            <List>
-                {mainuItems.map((item, index) => (
-                    <Link key={index} to={item.path} style={{ textDecoration: 'none', color: 'black' }} onClick={handleDrawerToggle}>
-                        <ListItem button selected={location.pathname === item.path}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.name} />
+
+            <List sx={{mt:1}}>
+                {/* <Divider sx={{ py: 1 }} /> */}
+                {/* {['Dashboard', 'Well Monitor', 'Virtual Flow', 'Crystal Report', 'Complaint History', 'Notification  History','Edit Profile','Log Out'] */}
+
+
+                {mainuItems?.map((text, index) => (
+                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }} >
+                        <ListItem key={text} disablePadding sx={{
+                            display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
+                           
+
+                        }} >
+
+                            <ListItemButton
+                            
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                    backgroundColor: location.pathname === text.path ? 'lightgrey' : 'white',
+                                    '&:hover': {
+                                        backgroundColor:'lightgrey',
+                                    },
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {text.icon}
+                                </ListItemIcon>
+
+                                <ListItemText primary={text.name} sx={{
+                                    opacity: open ? 1 : 0, textDecoration: 'none',
+                                   
+                                }} />
+                            </ListItemButton>
                         </ListItem>
                     </Link>
                 ))}

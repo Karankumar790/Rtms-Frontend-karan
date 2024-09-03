@@ -201,79 +201,96 @@ export default function BasicCard() {
         </Grid>
       </Grid>
       {/* -------------------------Table for Moblie----------------------------- */}
-
       <Grid container sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
-        <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-          <Grid container mt={2} direction="column">
-            {Object.keys(data).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{data[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-          {/* ----------------------Dreak---------------------------------- */}
-          <Grid container mt={2} direction="column">
-            {Object.keys(Tata).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{Tata[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-          {/* ----------------------Dreak---------------------------------- */}
-          <Grid container mt={2} direction="column">
-            {Object.keys(Mata).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{Mata[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-          {/* ----------------------Dreak---------------------------------- */}
-          <Grid container mt={2} direction="column">
-            {Object.keys(Sata).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{Sata[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-        </Paper>
-      </Grid>
 
+        <Tabs>
+          <TabList >
+            <Tab style={{ whiteSpace: 'break-spaces' }}>
+              <Typography fontSize={'large'}>Notification</Typography>
+            </Tab>
+            <Tab>
+              <Typography fontSize={'large'}> Open Complaints</Typography>
+            </Tab>
+          </TabList>
+          <TabPanel>
+            <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+              <Grid container mt={2} direction="column">
+                {Object.keys(data).map((header, index) => (
+                  <Grid container key={index}>
+                    {/* Header Section */}
+                    <StyledGridItem item xs={4}>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {header}
+                      </Typography>
+                    </StyledGridItem>
+                    {/* Content Section */}
+                    <StyledContent item xs={8}>
+                      <Typography variant="body1">{data[header]}</Typography>
+                    </StyledContent>
+                  </Grid>
+                ))}
+              </Grid>
+              {/* ----------------------Dreak---------------------------------- */}
+              <Grid container mt={2} direction="column">
+                {Object.keys(Tata).map((header, index) => (
+                  <Grid container key={index}>
+                    {/* Header Section */}
+                    <StyledGridItem item xs={4}>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {header}
+                      </Typography>
+                    </StyledGridItem>
+                    {/* Content Section */}
+                    <StyledContent item xs={8}>
+                      <Typography variant="body1">{Tata[header]}</Typography>
+                    </StyledContent>
+                  </Grid>
+                ))}
+              </Grid>
+            </Paper>
+          </TabPanel>
+          {/* ----------------------Dreak---------------------------------- */}
+          <TabPanel>
+            <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+
+              <Grid container mt={2} direction="column">
+                {Object.keys(Mata).map((header, index) => (
+                  <Grid container key={index}>
+                    {/* Header Section */}
+                    <StyledGridItem item xs={4}>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {header}
+                      </Typography>
+                    </StyledGridItem>
+                    {/* Content Section */}
+                    <StyledContent item xs={8}>
+                      <Typography variant="body1">{Mata[header]}</Typography>
+                    </StyledContent>
+                  </Grid>
+                ))}
+              </Grid>
+              {/* ----------------------Dreak---------------------------------- */}
+              <Grid container mt={2} direction="column">
+                {Object.keys(Sata).map((header, index) => (
+                  <Grid container key={index}>
+                    {/* Header Section */}
+                    <StyledGridItem item xs={4}>
+                      <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                        {header}
+                      </Typography>
+                    </StyledGridItem>
+                    {/* Content Section */}
+                    <StyledContent item xs={8}>
+                      <Typography variant="body1">{Sata[header]}</Typography>
+                    </StyledContent>
+                  </Grid>
+                ))}
+              </Grid>
+            </Paper>
+          </TabPanel>
+        </Tabs>
+
+      </Grid>
 
       {/* -------------------------Table for Desktop--------------------------- */}
 
@@ -353,6 +370,6 @@ export default function BasicCard() {
           </Tabs>
         </Grid>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }

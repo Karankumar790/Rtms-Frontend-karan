@@ -93,11 +93,7 @@ const rows = [
     createData('4'),
     createData('5'),
     createData('3'),
-    createData('4'),
-    createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
+
 ];
 
 const BodyTableCellWraper = styled(TableCell)(() => ({
@@ -162,18 +158,18 @@ function WellMaster() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="left">1</StyledTableCell>
-                                    <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                                    <StyledTableCell align="left">gbz</StyledTableCell>
-                                    <StyledTableCell align="left">yes</StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align='left'>
                                         <Box display={'flex'} justifyContent={'space-evenly'}>
-                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
-                                                <DeleteForeverIcon sx={{ fontSize: 30 }} />
-                                            </IconButton>
-                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
-                                                <EditIcon sx={{ fontSize: 30 }} />
-                                            </IconButton>
+                                        <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                            <DeleteForeverIcon fontSize='large' />
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                            <EditIcon fontSize='large'/>
+                                        </IconButton>
                                         </Box>
                                     </StyledTableCell>
                                 </StyledTableRow>

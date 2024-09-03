@@ -90,12 +90,7 @@ const rows = [
     createData('3'),
     createData('4'),
     createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
+  
 ];
 
 
@@ -137,12 +132,12 @@ function DeviceManage() {
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{ fontSize: '18px' }}> Well Number</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Lattitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}}> Well Number</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Lattitude</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Longitude</StyledTableCell>
+                                <StyledTableCell sx={{fontSize:'18px'}} align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -152,19 +147,19 @@ function DeviceManage() {
                                         {row.name}
                                     </StyledTableCell>
                                     <StyledTableCell align="left">11.171.01.1 </StyledTableCell>
-                                    <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                                    <StyledTableCell align="left">5886</StyledTableCell>
-                                    <StyledTableCell align="left">12254</StyledTableCell>
-                                    <StyledTableCell align='left'>
-                                        <Box display={'flex'} justifyContent={'space-evenly'}>
-                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
-                                                <DeleteForeverIcon sx={{ fontSize: 30 }} />
-                                            </IconButton>
-                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
-                                                <EditIcon sx={{ fontSize: 30 }} />
-                                            </IconButton>
-                                        </Box>
-                                    </StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align='left'   > 
+                                        <Box display={'flex'} justifyContent={"space-evenly"} >
+                                        <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px',  padding: '5px',}}>
+                                        <DeleteForeverIcon fontSize='large' />
+                                        </IconButton>
+                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
+                                         <EditIcon fontSize='large'/>
+                                         </IconButton> 
+                                         </Box>
+                                         </StyledTableCell>
 
 
                                 </StyledTableRow>
