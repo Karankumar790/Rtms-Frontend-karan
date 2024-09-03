@@ -131,8 +131,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
             path: "/dashboard/virtual",
 
         },
-        // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
-        // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
+
     ]
 
     return (
