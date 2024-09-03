@@ -23,6 +23,8 @@ import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
 import Camera from '@mui/icons-material/PhotoCamera';
+import { useMediaQuery } from '@mui/material';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -40,10 +42,7 @@ const closedMixin = (theme) => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
+    width: 0,
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -71,8 +70,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function Sidebar({ open, handleDrawerClose }) {
+export default function Sidebar({ open, handleDrawerToggle }) {
+    const theme = useTheme();
     const location = useLocation();
+    const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
     const mainuItems = [
         {
@@ -126,57 +127,21 @@ export default function Sidebar({ open, handleDrawerClose }) {
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
         // { name: "Log Out", icon: <LogoutIcon sx={{color:'black'}}/>, path: "/dashboard/logout" }
     ]
-    const theme = useTheme();
 
     return (
-        <Drawer variant="permanent" open={open}  >
+        <Drawer variant="permanent" open={open}>
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
-                <IconButton onClick={handleDrawerClose}>
+                <IconButton onClick={handleDrawerToggle}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
             </DrawerHeader>
-
-            <List sx={{mt:1}}>
-                {/* <Divider sx={{ py: 1 }} /> */}
-                {/* {['Dashboard', 'Well Monitor', 'Virtual Flow', 'Crystal Report', 'Complaint History', 'Notification  History','Edit Profile','Log Out'] */}
-
-
-                {mainuItems?.map((text, index) => (
-                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }}>
-                        <ListItem key={text} disablePadding sx={{
-                            display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
-                           
-
-                        }} >
-
-                            <ListItemButton
-                            
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                    backgroundColor: location.pathname === text.path ? 'lightgrey' : 'white',
-                                    '&:hover': {
-                                        backgroundColor:'lightgrey',
-                                    },
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {text.icon}
-                                </ListItemIcon>
-
-                                <ListItemText primary={text.name} sx={{
-                                    opacity: open ? 1 : 0, textDecoration: 'none',
-                                   
-                                }} />
-                            </ListItemButton>
+            <List>
+                {mainuItems.map((item, index) => (
+                    <Link key={index} to={item.path} style={{ textDecoration: 'none', color: 'black' }} onClick={handleDrawerToggle}>
+                        <ListItem button selected={location.pathname === item.path}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.name} />
                         </ListItem>
                     </Link>
                 ))}

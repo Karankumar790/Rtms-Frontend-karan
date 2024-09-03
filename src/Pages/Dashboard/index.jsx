@@ -21,7 +21,9 @@ export default function Dashboard() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+};
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -29,8 +31,13 @@ export default function Dashboard() {
   return (
     <Box sx={{ display: "flex"}}>
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ flexGrow: 1, p: 2, overflowY: "auto"}} mt={2}>
+      <Sidebar open={open} handleDrawerToggle={handleDrawerToggle }/>
+      <Box component="main" sx={{ flexGrow: 1, p: 1, overflowY: "auto"}}>
+            <Box
+                component="main"
+                sx={{ flexGrow: 1, p: 1, transition: 'margin 0.3s', marginLeft: open ? 240 : 0 }}
+            >
+              </Box>
         <DrawerHeader />
         <Outlet />
       </Box>

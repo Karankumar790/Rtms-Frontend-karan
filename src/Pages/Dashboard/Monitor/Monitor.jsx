@@ -32,11 +32,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let data = {
  "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -45,11 +45,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let Tata = {
   "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -58,11 +58,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let Mata = {
   "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -71,11 +71,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let Sata = {
   "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",

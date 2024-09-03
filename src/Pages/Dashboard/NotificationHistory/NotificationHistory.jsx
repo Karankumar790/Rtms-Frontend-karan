@@ -223,34 +223,35 @@ function NotificationHistory() {
         </TableContainer>
       </Grid> */}
 
-      <Grid container md={12}
+<Grid container md={12}
         lg={12}
         sm={5}
         xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block"}}} mt={1}>
+        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto'}}>
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }}>Complain No.</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align='left'>Complain No.</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Notification No.</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Raiser Name</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Taker Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Description</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Description</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}> 
                     {row.name}
+                    
                   </StyledTableCell>
-                  <StyledTableCell align="left">1</StyledTableCell>
-                  <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                  <StyledTableCell align="left">gbz</StyledTableCell>
-                  <StyledTableCell align="left">yes</StyledTableCell>
-                  <StyledTableCell align="left">1</StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}>5/6/2024</StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '25%' }}></StyledTableCell>
 
 
                 </StyledTableRow>
