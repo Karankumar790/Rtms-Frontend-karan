@@ -71,7 +71,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function Sidebar({ open, handleDrawerToggle }) {
+export default function Sidebar({ open, handleDrawerClose }) {
     const theme = useTheme();
     const location = useLocation();
     const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -125,9 +125,9 @@ export default function Sidebar({ open, handleDrawerToggle }) {
 
         },
         {
-            name: "Live Capture",
-            icon: <Camera sx={{ color: 'black' }} />,
-            path: "/dashboard/virtual",
+            // name: "Live Capture",
+            // icon: <Camera sx={{ color: 'black' }} />,
+            // path: "/dashboard/virtual",
 
         },
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
@@ -138,7 +138,7 @@ export default function Sidebar({ open, handleDrawerToggle }) {
         <Drawer variant="permanent" open={open}>
             <DrawerHeader>
                 <img src={ongc_logo} alt='logo' width='83%' />
-                <IconButton onClick={handleDrawerToggle}>
+                <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
             </DrawerHeader>
@@ -149,7 +149,7 @@ export default function Sidebar({ open, handleDrawerToggle }) {
 
 
                 {mainuItems?.map((text, index) => (
-                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }} >
+                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }} onClick={handleDrawerClose}>
                         <ListItem key={text} disablePadding sx={{
                             display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
                            
