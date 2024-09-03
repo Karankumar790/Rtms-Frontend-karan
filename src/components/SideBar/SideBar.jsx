@@ -24,6 +24,7 @@ import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
 import Networkicon from '@mui/icons-material/CellTower';
 import { useMediaQuery } from '@mui/material';
+import GeoIcon from '@mui/icons-material/Place';
 
 
 const drawerWidth = 240;
@@ -125,9 +126,9 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
         },
         {
-            // name: "Live Capture",
-            // icon: <Camera sx={{ color: 'black' }} />,
-            // path: "/dashboard/virtual",
+            name: "Geo Location",
+            icon: <GeoIcon sx={{ color: 'black' }} />,
+            path: "/dashboard/virtual",
 
         },
         // { name: "Edit Profile", icon: <EditIcon sx={{color:'black'}}/>, path: "/dashboard/edit" },
