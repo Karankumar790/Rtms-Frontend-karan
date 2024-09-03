@@ -30,7 +30,7 @@ export default function Dashboard() {
     <Box sx={{ display: "flex"}}>
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ flexGrow: 1, p: 2, transition:'margin 0.3s', marginLeft: open ?240 :0}}>
+      <Box component="main" sx={{ flexGrow: 1, p: 2, overflowY:'auto' }} mt={2}>
         <DrawerHeader />
         <Outlet />
       </Box>

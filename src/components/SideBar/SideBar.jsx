@@ -149,7 +149,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
 
 
                 {mainuItems?.map((text, index) => (
-                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }}>
+                    <Link key={`sidemenu-item-${index}`} to={text.path} style={{ textDecoration: 'none', color: "black" }} >
                         <ListItem key={text} disablePadding sx={{
                             display: 'block', borderBottom: index < 7 ? '1px solid #ddd' : 'none',
                            
