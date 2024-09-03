@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Grid,
   List,
@@ -18,15 +19,6 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
-
-//----------------import icons ------------------------------------------
-import well from "../../../..custom-textfieldWELL.png";
-import pressure from "../../../..custom-textfieldPRESSURE.png";
-import battery from "../../../..custom-textfieldbattery.png";
-import solar from "../../../..custom-textfieldSOLAR1.png";
-import network from "../../../..custom-textfieldNetwork.png";
-
 import Chart from "react-apexcharts";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -71,14 +63,14 @@ const rows = [
 
 function SingleWell() {
   const images = [
-    { src: well, name: "Well" },
-    { src: well, name: "Well" },
-    { src: well, name: "Well" },
-    { src: pressure, name: "pressure" },
-    { src: solar, name: "solar" },
-    { src: battery, name: "battery" },
-    { src: network, name: "network" },
-    { src: network, name: "network" },
+    { src: "assets/custom-textfieldWELL.png", name: "Well" },
+    { src: "assets/custom-textfieldWELL.png", name: "Well" },
+    { src: "assets/custom-textfieldWELL.png", name: "Well" },
+    { src: "assets/custom-textfieldPRESSURE.png", name: "pressure" },
+    { src: "assets/custom-textfieldSOLAR1.png", name: "solar" },
+    { src: "assets/custom-textfieldbattery.png", name: "battery" },
+    { src: "assets/custom-textfieldNetwork.png", name: "network" },
+    { src: "assets/custom-textfieldNetwork.png", name: "network" },
   ];
 
   const lineChartOptions = {

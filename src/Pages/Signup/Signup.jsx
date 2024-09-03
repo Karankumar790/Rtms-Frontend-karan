@@ -239,7 +239,7 @@ function Signup() {
                                 </form>
                             </Grid>
                         </CardContent>
-                    </Paper>
+                    </Card>
                 </Grid>
             </Grid>
         </PageContainer >
