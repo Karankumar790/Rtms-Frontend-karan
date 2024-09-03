@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-// import map from '/assets/map2.png';
+// import map from '../../../../public/assets/map2.png';
 import { Box } from '@mui/system';
 
 
@@ -17,7 +17,7 @@ const data = [
     Description: '',
     Parameter: 'GIP',
     Condition1: '',
-    // Description: '',
+    Description1: '',
 
   },
   {
@@ -28,7 +28,7 @@ const data = [
     Description: '',
     Parameter: 'CHP',
     Condition1: '',
-   
+    Description1: '',
 
   },
   {
@@ -39,7 +39,7 @@ const data = [
     Description: '',
     Parameter: 'THP',
     Condition1: '',
-    
+    Description1: '',
 
   },
   {
@@ -50,7 +50,8 @@ const data = [
     Description: '',
     Parameter: 'Battery %',
     Condition1: '',
-  
+    Description1: '',
+
   },
   {
     employeeId: '05',
@@ -60,7 +61,7 @@ const data = [
     Description: '',
     Parameter: 'Solar Power',
     Condition1: '',
-   
+    Description1: '',
 
   },
   {
@@ -71,7 +72,7 @@ const data = [
     Description: '',
     Parameter: 'Communication',
     Condition1: '',
-   
+    Description1: '',
 
   },
   {
@@ -79,9 +80,10 @@ const data = [
     NormalAlert: '',
     CriticalAlert: '',
     Condition: '',
+    Description: '',
     Parameter: 'CPU Temperature',
     Condition1: '',
- 
+    Description1: '',
 
   },
 ]
@@ -108,33 +110,33 @@ function AddWell() {
     <div>
       <Paper>
         <Typography variant='h4'> Add New Well</Typography>
-        <Grid container p={1} sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Well Number" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Well Location" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Well Installation" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Latitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth label="Longitude" variant="outlined" /></Grid>
+        <Grid container p={1.7} sx={{ display: 'flex', justifyContent: 'space-between' }} >
+          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Location" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Well Installation" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={2}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
         </Grid>
 
       </Paper>
       <Paper>
-        <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
+        <Grid container sx={{ display: 'flex', flexDirection: 'column' }} mt={1} >
           <Typography variant='h4'>Notification Setting</Typography>
-          <Grid item>
+          <Grid item >
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Parameter</TableCell>
-                  <TableCell sx={{ fontSize: '1.5rem' }}>Normal Alert</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}align='center'>Normal Alert</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Condition</TableCell>
-                  <TableCell sx={{ fontSize: '1.5rem' }}>Description</TableCell>
-                  <TableCell sx={{ fontSize: '1.5rem' }}>Critical Alert</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}align='center'>Description</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}align='center'>Critical Alert</TableCell>
                   <TableCell sx={{ fontSize: '1.5rem' }}>Condition</TableCell>
-                  <TableCell sx={{ fontSize: '1.5rem' }}>Description</TableCell>
+                  <TableCell sx={{ fontSize: '1.5rem' }}align='center'>Description</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employeeData?.map(({ employeeId, Parameter, NormalAlert, CriticalAlert, Condition, Condition1,Description }) => (
+                {employeeData?.map(({ employeeId, Parameter, NormalAlert, CriticalAlert, Condition, Condition1,Description, Description1 }) => (
                   <TableRow key={employeeId}>
                     <TableCell>
                       <Typography>{Parameter}</Typography>
@@ -147,7 +149,8 @@ function AddWell() {
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        style={{ width: '90px' }}
+                        // style={{ width: '90px' }}
+                        fullWidth
                       />
                     </TableCell>
                     <TableCell>
@@ -158,7 +161,8 @@ function AddWell() {
                           value={Condition1}
                           onChange={(e) => onChangeInput(e, employeeId)}
                           size="small"
-                          style={{ width: '90px' }}
+                          // style={{ width: '90px' }}
+                          fullWidth
                         >
                           <MenuItem value="High">High</MenuItem>
                           <MenuItem value="Low">Low</MenuItem>
@@ -173,7 +177,8 @@ function AddWell() {
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        style={{ width: '450px' }}
+                        // style={{ width: '450px' }}
+                        fullWidth
                       />
                     </TableCell>
                     <TableCell>
@@ -183,7 +188,8 @@ function AddWell() {
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        style={{ width: '90px' }}
+                        // style={{ width: '90px' }}
+                        fullWidth
                       />
                     </TableCell>
                     <TableCell>
@@ -194,7 +200,8 @@ function AddWell() {
                           value={Condition}
                           onChange={(e) => onChangeInput(e, employeeId)}
                           size="small"
-                          style={{ width: '90px' }}
+                          // style={{ width: '90px' }}
+                          fullWidth
                         >
                           <MenuItem value="High">High</MenuItem>
                           <MenuItem value="Low">Low</MenuItem>
@@ -204,11 +211,12 @@ function AddWell() {
                     <TableCell>
                       <TextField
                         name="Description"
-                        value={Description}
+                        value={Description1}
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        style={{ width: '450px' }}
+                        fullWidth
+                        // style={{ width: '350px' }}
                       />
                     </TableCell>
                   </TableRow>

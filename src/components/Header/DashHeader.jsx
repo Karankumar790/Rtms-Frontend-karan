@@ -39,22 +39,22 @@ export default function Header({ open, handleDrawerOpen }) {
             ...(open && { display: 'none' }),
           }}
         >
-          <MenuIcon />
+          <MenuIcon fontSize='large' />
         </IconButton>
         <Grid container justifyContent={'space-between'} flexWrap={'nowrap'}>
           <Box py={1.2}>
             <Typography sx={{
               fontSize: {
-                xs: 'small', // small screens
-                sm: 'small', // medium screens
+                xs: 'large', // small screens
+                sm: 'large', // medium screens
                 md: 'x-large', // large screens
                 lg: 'x-large', // extra-large screens
               }
             }}>Oil & Natural Gas Corporation</Typography>
             <Typography sx={{
               fontSize: {
-                xs: 'x-small', // small screens
-                sm: 'x-small', // medium screens
+                xs: 'medium', // small screens
+                sm: 'medium', // medium screens
                 md: 'large', // large screens
                 lg: 'large', // extra-large screens
               }
