@@ -62,10 +62,10 @@ function ManageAsset() {
   return (
     <div>
       <Paper>
-        <Grid container gap={3}>
+        <Grid container gap={3} p={2}>
           <Typography variant="h4">Organization </Typography>
 
-          <Grid container spacing={2} p={2}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={3} md={3} lg={3}>
               <Typography variant="h6">Asset </Typography>
               <TextField variant="outlined" fullWidth />
@@ -121,7 +121,7 @@ function ManageAsset() {
               <TextField variant="outlined" label="Phone" inputRef={inputRef3} fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
-              <Button variant="contained" onClick={handleAdd}>
+              <Button variant="contained" className="btn-primary" onClick={handleAdd}>
                 Add Department
               </Button>
             </Grid>
@@ -147,7 +147,7 @@ function ManageAsset() {
               <TextField variant="outlined" label="Employee" fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
-              <Button variant="contained">
+              <Button variant="contained" className="btn-primary">
                 Postion
               </Button>
             </Grid>
@@ -165,7 +165,7 @@ function ManageAsset() {
               alternativeLabel
               sx={{
                 fontSize: "500px",
-                padding: "50px",
+                padding: "10px",
                 "& .MuiStepConnector-line": {
                   marginTop: "12px",
                   marginRight: "10px",
@@ -189,10 +189,10 @@ function ManageAsset() {
               ))}
             </Stepper>
           </Box>
-          <Grid item mb={2} sx={{ display: "flex", justifyContent: "center" }} >
+          <Grid item xs={12} sm={12} md={12} lg={12} mb={2} p={2} sx={{ display: "flex", justifyContent: "center" }} >
             <Box
               sx={{
-                width: "70%",
+                width: "100%",
                 display: "flex",
                 justifyContent: "space-between",
               }}
@@ -202,7 +202,7 @@ function ManageAsset() {
                 to="/"
                 style={{ textDecoration: "none", color: "white" }}
               >
-                <Button variant="contained" color="primary" size="large" >
+                <Button variant="contained" className="btn-primary" >
                   Close
                 </Button>
               </Link>
@@ -212,15 +212,16 @@ function ManageAsset() {
       </Card>
       {/* -------------------------Table-------------------------- */}
 
-       <Grid container>
+     
+      <Grid container>
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>
             <TabList>
               <Tab>
-                <Typography fontSize={'large'}>Departments</Typography>
+                <Typography fontSize={'small'}>Departments</Typography>
               </Tab>
               <Tab>
-                <Typography fontSize={'large'}>Permissions</Typography>
+                <Typography fontSize={'small'}>Permissions</Typography>
 
               </Tab>
             </TabList>
@@ -229,10 +230,10 @@ function ManageAsset() {
                 <Table aria-label="customized table">
                   <TableHead >
                     <TableRow  >
-                      <StyledTableCell sx={{ fontSize: '18px', width: '25%'  }} align="left">Department</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px', width: '25%' }} align="left">Head Of Department</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px', width: '25%' }} align="left">Email</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px', width: '25%' }} align="left">Mobile Number</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Department</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Head Of Department</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Email</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Mobile Number</StyledTableCell>
                       {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell> */}
                       {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell> */}
                     </TableRow>
@@ -240,10 +241,10 @@ function ManageAsset() {
                   <TableBody>
                     {add.map((row, index) => (
                       <StyledTableRow key={`table - header - ${index}`}>
-                        <StyledTableCell > {row.department} </StyledTableCell>
-                        <StyledTableCell > {row.head}</StyledTableCell>
-                        <StyledTableCell >{row.email}</StyledTableCell>
-                        <StyledTableCell > {row.phone}</StyledTableCell>
+                        <StyledTableCell> {row.department} </StyledTableCell>
+                        <StyledTableCell> {row.head}</StyledTableCell>
+                        <StyledTableCell>{row.email}</StyledTableCell>
+                        <StyledTableCell> {row.phone}</StyledTableCell>
                       </StyledTableRow>
                     ))}
                   </TableBody>
@@ -255,22 +256,22 @@ function ManageAsset() {
                 <Table aria-label="customized table" className="responsive-table">
                   <TableHead >
                     <TableRow>
-                      <StyledTableCell sx={{ fontSize: '18px' }}>Permission</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/TIme</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well number</StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: '18px' }} align="center">Description</StyledTableCell>
+                      <StyledTableCell>Permission</StyledTableCell>
+                      <StyledTableCell align="left">Data/TIme</StyledTableCell>
+                      <StyledTableCell align="left">Well Location</StyledTableCell>
+                      <StyledTableCell align="left">Well Installation</StyledTableCell>
+                      <StyledTableCell align="left">Well number</StyledTableCell>
+                      <StyledTableCell align="left">Description</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <StyledTableRow>
-                      <StyledTableCell component="th" scope="row" sx={{ width: '10%' }}> Notification No.</StyledTableCell>
-                      <StyledTableCell sx={{ width: '10%' }}></StyledTableCell>
-                      <StyledTableCell sx={{ width: '10%' }}></StyledTableCell>
-                      <StyledTableCell sx={{ width: '10%' }}></StyledTableCell>
-                      <StyledTableCell sx={{ width: '10%' }}></StyledTableCell>
-                      <StyledTableCell sx={{ width: '25%' }}></StyledTableCell>
+                      <StyledTableCell component="th" scope="row"> Notification No.</StyledTableCell>
+                      <StyledTableCell>25kalori</StyledTableCell>
+                      <StyledTableCell>shyam</StyledTableCell>
+                      <StyledTableCell>Ramu singh</StyledTableCell>
+                      <StyledTableCell>225</StyledTableCell>
+                      <StyledTableCell>44555</StyledTableCell>
                     </StyledTableRow>
                   </TableBody>
                 </Table>
