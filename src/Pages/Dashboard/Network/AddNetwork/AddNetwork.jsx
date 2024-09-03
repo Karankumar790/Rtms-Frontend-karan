@@ -5,7 +5,7 @@ import React from 'react'
 function AddNetwork() {
   return (
     <div>
-      <Grid container height={"800px"} justifyContent={"center"} alignItems={"center"} >   
+      <Grid container height={"80vh"} justifyContent={"center"} alignItems={"center"} >   
       <Box fontSize={"30px"}>
       ........UNDER DEVELOPMENT.........
       </Box>
