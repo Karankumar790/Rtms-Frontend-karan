@@ -11,7 +11,17 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+
+   addUser: (state, payload) => {
+    state.userOne = payload;
+   },
+   removeToken: (state) => {
+    state.data.token = null;
+   }
+
+
+  },
   extraReducers: (builder) => {
     builder
       .addCase(authLoginService.pending, (state) => {
@@ -20,7 +30,6 @@ const authSlice = createSlice({
       })
       .addCase(authLoginService.fulfilled, (state, action) => {
         state.data = action.payload;
-        // console.log("first###",)
         state.loading = false;
       })
       .addCase(authLoginService.rejected, (state, action) => {

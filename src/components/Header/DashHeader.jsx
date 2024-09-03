@@ -26,23 +26,8 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function Header({ open, handleDrawerOpen }) {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
-    <AppBar position="fixed" open={open} sx={{ backgroundColor: '#8C000B'}}>
+    <AppBar position="fixed" open={open} sx={{ backgroundColor: '#8C000B' }}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -59,21 +44,21 @@ export default function Header({ open, handleDrawerOpen }) {
         <Grid container justifyContent={'space-between'} flexWrap={'nowrap'}>
           <Box py={1.2}>
             <Typography sx={{
-            fontSize: {
-              xs: 'small', // small screens
-              sm: 'small', // medium screens
-              md: 'x-large', // large screens
-              lg: 'x-large', // extra-large screens
-            }
-          }}>Oil & Natural Gas Corporation</Typography>
+              fontSize: {
+                xs: 'small', // small screens
+                sm: 'small', // medium screens
+                md: 'x-large', // large screens
+                lg: 'x-large', // extra-large screens
+              }
+            }}>Oil & Natural Gas Corporation</Typography>
             <Typography sx={{
-            fontSize: {
-              xs: 'x-small', // small screens
-              sm: 'x-small', // medium screens
-              md: 'large', // large screens
-              lg: 'large', // extra-large screens
-            }
-          }}>Real Time Well Monitoring System</Typography>
+              fontSize: {
+                xs: 'x-small', // small screens
+                sm: 'x-small', // medium screens
+                md: 'large', // large screens
+                lg: 'large', // extra-large screens
+              }
+            }}>Real Time Well Monitoring System</Typography>
           </Box>
           {/* <Box mt={1} >
             {auth && (
