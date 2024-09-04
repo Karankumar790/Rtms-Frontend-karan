@@ -9,21 +9,22 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import ClearAllIcon from '@mui/icons-material/ClearAll';
-import MonitorIcon from '@mui/icons-material/Monitor';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
 import HomeIcon from '@mui/icons-material/Home';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import ongc_logo from '/assets/ongc2.png';
 import { Link, useLocation } from 'react-router-dom';
-import WellMasterIcon from '@mui/icons-material/OilBarrel';
 import PrintReportIcon from '@mui/icons-material/Print';
 import DeviceManagerIcon from '@mui/icons-material/Memory';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
 import AssetsIcon from '@mui/icons-material/AccountBalance';
+import NotificationsIcon from '@mui/icons-material/NotificationsActive';
+
 import Networkicon from '@mui/icons-material/CellTower';
 import { useMediaQuery } from '@mui/material';
+import WellmasterIcon from '@mui/icons-material/Settings';
+import WellmonitorIcon from '@mui/icons-material/Search';
 import GeoIcon from '@mui/icons-material/Place';
 
 
@@ -90,7 +91,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Master",
-            icon: <WellMasterIcon sx={{ color: 'black' }} />,
+            icon: <WellmasterIcon sx={{ color: 'black' }} />,
             path: "/dashboard/wellmaster"
         },
         {
@@ -105,7 +106,7 @@ export default function Sidebar({ open, handleDrawerClose }) {
         },
         {
             name: "Well Monitor",
-            icon: <MonitorIcon sx={{ color: 'black' }} />,
+            icon: <WellmonitorIcon sx={{ color: 'black' }} />,
             path: "/dashboard/monitor"
         },
         {
