@@ -229,11 +229,7 @@ function Monitor() {
         </Grid>
       </Grid>
 {/* -----------------Table for Desktop----------------------------------- */}
-      <Grid container mt={2}  md={12}
-     lg={12}
-     sm={5}
-     xs={4}
-     sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+      <Grid item mt={2}  md={12} lg={12} sm={5} xs={4}sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
@@ -274,10 +270,11 @@ function Monitor() {
       </Grid>
 {/* --------------------Table for Moblie--------------------------------- */}
 
-<Grid container md={12}
+<Grid item md={12}
      lg={12}
      sm={12}
      xs={12}
+     mt={2}
      sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
     <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
      <Grid container mt={2} direction="column">
