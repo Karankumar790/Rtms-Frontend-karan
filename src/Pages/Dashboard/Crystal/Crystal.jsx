@@ -1,6 +1,6 @@
 import React from "react";
 import PageContainer from "../../../components/HOC/PageContainer";
-import { Button, Divider, Grid, TextField, Typography } from "@mui/material";
+import { Button, Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Input from "@mui/joy/Input";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,6 +16,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Chart from "react-apexcharts";
 import { Box } from "@mui/system";
+import PrintReportIcon from '@mui/icons-material/Print';
+
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -172,7 +174,12 @@ function Monitor() {
 
   return (
     <div>
+      <Grid container display={"flex"} >
+      <IconButton>
+          <PrintReportIcon sx={{ fontSize: "25px" }} />
+        </IconButton>
       <Typography variant="h4">Print Report</Typography>
+      </Grid>
       <Grid container spacing={3}>
         <Grid item sm={6} md={3} xs={12} lg={3}>
           <FormControl fullWidth>
@@ -380,7 +387,7 @@ function Monitor() {
           </Paper>
         </Grid>
         {/* ---------------chart---------------------------- */}
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6} mt={2}>
           <Paper sx={{ bgcolor: "#F8F8F8" }}>
             <Chart
               options={lineChartOptions}
@@ -395,6 +402,7 @@ function Monitor() {
      lg={12}
      sm={12}
      xs={12}
+     mt={2}
      sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
     <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
      <Grid container mt={2} direction="column">
