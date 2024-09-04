@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { FormControl, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import SearchIcon from '@mui/icons-material/Search';
 
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -107,88 +108,124 @@ function NotificationHistory() {
   const handleChangeInstallation = (event) => {
     setInstallation(event.target.value);
   };
+
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    console.log('Search button clicked');
+    // Additional logic for search button click can be added here
+  };
+
   return (
     <div>
       <Grid container>
         <Typography variant='h4'>Notification History</Typography>
       </Grid>
       <Grid container spacing={3} pt={1} >
-        <Grid item xs={12} sm={8} md={6} lg={3} >
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={notification}
-              label="Well Location"
-              onChange={handleChangeNotification}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={installation}
-              label="Well Location"
-              onChange={handleChangeInstallation}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
+      <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <TextField
+              fullWidth
+              type="date"
+              size='small'
+              label='Start Date'
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={{
+                // Optional: Customize the TextField styling as needed
+                '.MuiInputBase-root': {
+                  // Optional: Style the input field if needed
+                },
+                '& .MuiInputLabel-root': {
+                  // Optional: Style the label if needed
+                },
+                '& .MuiInputBase-input': {
+                  // Optional: Style the input value if needed
+                }
+              }}
+            />
           </FormControl>
 
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Number</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
+            <TextField
+              fullWidth
+              type="date"
+              size='small'
+              label='End Date'
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={{
+                // Optional: Customize the TextField styling as needed
+                '.MuiInputBase-root': {
+                  // Optional: Style the input field if needed
+                },
+                '& .MuiInputLabel-root': {
+                  // Optional: Style the label if needed
+                },
+                '& .MuiInputBase-input': {
+                  // Optional: Style the input value if needed
+                }
+              }}
+            />
           </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <TextField variant='outlined' size='small' label='Notification No.'/>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <TextField
+              fullWidth
+              label="Search Notifications"
+              variant="outlined"
+              size="small"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Type to search..."
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    color="primary"
+                    aria-label="search"
+                    onClick={handleSearchClick}
+                    fullWidth
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                )
+              }}
+            />
+          </FormControl>
+
         </Grid>
       </Grid>
       {/* <Grid container mt={3}>
