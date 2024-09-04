@@ -16,7 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Chart from "react-apexcharts";
 import { Box } from "@mui/system";
-import PrintReportIcon from '@mui/icons-material/Print';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 // import { BarChart } from '@mui/x-charts/BarChart';
 
@@ -61,85 +61,55 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[100],
- }));
- 
- const StyledContent = styled(Grid)(({ theme }) => ({
+}));
+
+const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: 'white',
- }));
+}));
 
 let data = {
   "Well No": "1",
-  "GIP": "New York",
-  "CHP": "01/01/2021",
-  "THP": "40.7128 N",
-  "Battery%": "74.0060 W",
-  "Solar power": "74.0060 W",
-  "Communication": "74.0060 W",
-  "Flow Status": "74.0060 W",
-  "Last Update": "74.0060 W",
-  "Alarm": "74.0060 W",
-  };
-  
-  let Tata = {
-   "Well No": "1",
-  "GIP": "New York",
-  "CHP": "01/01/2021",
-  "THP": "40.7128 N",
-  "Battery%": "74.0060 W",
-  "Solar power": "74.0060 W",
-  "Communication": "74.0060 W",
-  "Flow Status": "74.0060 W",
-  "Last Update": "74.0060 W",
-  "Alarm": "74.0060 W",
-  };
-  
-  let Mata = {
-   "Well No": "1",
-  "GIP": "New York",
-  "CHP": "01/01/2021",
-  "THP": "40.7128 N",
-  "Battery%": "74.0060 W",
-  "Solar power": "74.0060 W",
-  "Communication": "74.0060 W",
-  "Flow Status": "74.0060 W",
-  "Last Update": "74.0060 W",
-  "Alarm": "74.0060 W",
-  };
-  
-  let Sata = {
-   "Well No": "1",
-  "GIP": "New York",
-  "CHP": "01/01/2021",
-  "THP": "40.7128 N",
-  "Battery%": "74.0060 W",
-  "Solar power": "74.0060 W",
-  "Communication": "74.0060 W",
-  "Flow Status": "74.0060 W",
-  "Last Update": "74.0060 W",
-  "Alarm": "74.0060 W",
-  };
-  
+  "Location": "New York",
+  "Installation": "01/01/2021",
+  "Latitude": "40.7128 N",
+  "Longitude": "74.0060 W"
+};
+
+let Tata = {
+  "Well No": "2",
+  "Location": "Delhi",
+  "Installation": "01/01/2021",
+  "Latitude": "40.7128 N",
+  "Longitude": "74.0060 W"
+};
+
+let Mata = {
+  "Well No": "3",
+  "Location": "UP",
+  "Installation": "01/01/2021",
+  "Latitude": "40.7128 N",
+  "Longitude": "74.0060 W"
+};
+
+let Sata = {
+  "Well No": "4",
+  "Location": "MP",
+  "Installation": "01/01/2021",
+  "Latitude": "40.7128 N",
+  "Longitude": "74.0060 W"
+};
+
 
 function Monitor() {
   const [age, setAge] = React.useState("");
-  const [installation, setInstallation] = React.useState("");
-  const [number, setNumber] = React.useState("");
   const [parameters, setParameters] = React.useState("");
   const [report, setReport] = React.useState("");
   const [resolution, setResolution] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
-  };
-
-  const handleChangeInstallation = (event) => {
-    setInstallation(event.target.value);
-  };
-
-  const handleChangeNumber = (event) => {
-    setNumber(event.target.value);
   };
 
   const handleChangeParameters = (event) => {
@@ -174,33 +144,29 @@ function Monitor() {
 
   return (
     <div>
-      <Grid container display={"flex"} >
-      <IconButton>
-          <PrintReportIcon sx={{ fontSize: "25px" }} />
-        </IconButton>
-      <Typography variant="h4">Print Report</Typography>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
+      <Grid container gap={1}>
+        <Typography variant="h4">Well Report</Typography>
+        <Grid container spacing={2}>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-select-large-label">Well Number</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={age}
+                label="Well Location"
+                onChange={handleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>UP</MenuItem>
+                <MenuItem value={20}>MP</MenuItem>
+                <MenuItem value={30}>WB</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          {/* <Grid item sm={6} md={3} xs={12} lg={3}>
           <FormControl fullWidth>
             <InputLabel id="demo-select-large-label">
               Well Installation
@@ -239,241 +205,276 @@ function Monitor() {
               <MenuItem value={30}>WB</MenuItem>
             </Select>
           </FormControl>
+        </Grid> */}
+
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <TextField
+                type="date"
+                fullWidth
+                slotProps={{
+                  input: {
+                    min: "2001-02-16",
+                    max: "2024-08-10",
+                  },
+                }}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <TextField
+                fullWidth
+                type="date"
+                slotProps={{
+                  input: {
+                    min: "2001-02-16",
+                    max: "2024-08-07",
+                  },
+                }}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-select-large-label">Resolution</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={parameters}
+                label="Parameters"
+                onChange={handleChangeParameters}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>UP</MenuItem>
+                <MenuItem value={20}>MP</MenuItem>
+                <MenuItem value={30}>WB</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">Parameters</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={parameters}
-              label="Parameters"
-              onChange={handleChangeParameters}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
+
+        <Typography variant="h4">Global Report</Typography>
+        <Grid container spacing={3}>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-select-large-label">Parameter</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={report}
+                label="Report Type"
+                onChange={handleChangeReport}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>UP</MenuItem>
+                <MenuItem value={20}>MP</MenuItem>
+                <MenuItem value={30}>WB</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <TextField
+                type="date"
+                fullWidth
+                slotProps={{
+                  input: {
+                    min: "2001-02-16",
+                    max: "2024-08-10",
+                  },
+                }}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <TextField
+                fullWidth
+                type="date"
+                slotProps={{
+                  input: {
+                    min: "2001-02-16",
+                    max: "2024-08-07",
+                  },
+                }}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-select-large-label">Resolution</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={resolution}
+                label="Resolution"
+                onChange={handleChangeResolution}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>UP</MenuItem>
+                <MenuItem value={20}>MP</MenuItem>
+                <MenuItem value={30}>WB</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">Report Type</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={report}
-              label="Report Type"
-              onChange={handleChangeReport}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <TextField
-              type="date"
-              fullWidth
-              slotProps={{
-                input: {
-                  min: "2001-02-16",
-                  max: "2024-08-10",
-                },
-              }}
-            />
-          </FormControl>
-        </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <TextField
-              fullWidth
-              type="date"
-              slotProps={{
-                input: {
-                  min: "2001-02-16",
-                  max: "2024-08-07",
-                },
-              }}
-            />
-          </FormControl>
-        </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">Resolution</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={resolution}
-              label="Resolution"
-              onChange={handleChangeResolution}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+
+        {/* ----------------Table--------------------------- */}
+        <Grid container mt={2}>
+          <Tabs style={{ width: '100%', padding: '.12%' }}>
+            <TabList >
+              <Tab style={{ whiteSpace: 'break-spaces' }}>
+                <Typography fontSize={'large'}> View Table</Typography>
+              </Tab>
+              <Tab>
+                <Typography fontSize={'large'}>View Graph</Typography>
+              </Tab>
+            </TabList>
+            <TabPanel >
+              <Grid container sx={{ display: { sm: "block", xs: "none", md: "block", lg: "block" } }}>
+
+                <TableContainer component={Paper} >
+                  <Table aria-label="customized table" stickyHeader>
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell sx={{ fontSize: "18px" }}>
+                          Notification
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          Data/Time
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          Location
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          Installation
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          number
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          Description
+                        </StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <StyledTableRow key={row.name}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">1</StyledTableCell>
+                          <StyledTableCell align="left">5/6/2024</StyledTableCell>
+                          <StyledTableCell align="left">gbz</StyledTableCell>
+                          <StyledTableCell align="left">yes</StyledTableCell>
+                          <StyledTableCell align="left">all good</StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+              {/* ----------------------Table for Moblie-------------- */}
+              <Grid container md={12}
+        lg={12}
+        sm={12}
+        xs={12}
+        sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" } }}>
+        <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+          <Grid container mt={2} direction="column">
+            {Object.keys(data).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{data[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Tata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{Tata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Mata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{Mata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Sata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{Sata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
       </Grid>
-      <Box>
-        <Divider
-          sx={{
-            borderBottomWidth: 2,
-            borderColor: "grey.300",
-            mt: "30px",
-            // Optional: Adjust the width as needed
-          }}
-        />
-      </Box>
-      {/* ----------------Table--------------------------- */}
-      <Grid container spacing={3} mt={2}>
-        <Grid item  md={6}
-     lg={6}
-     sm={5}
-     xs={4}
-     sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-          <Paper>
-            <TableContainer sx={{ maxHeight: 600, overflow: "auto" }}>
-              <Table aria-label="customized table" stickyHeader>
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell sx={{ fontSize: "18px" }}>
-                      Notification
-                    </StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                      Data/Time
-                    </StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                      Location
-                    </StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                      Installation
-                    </StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                      number
-                    </StyledTableCell>
-                    <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                      Description
-                    </StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="left">1</StyledTableCell>
-                      <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                      <StyledTableCell align="left">gbz</StyledTableCell>
-                      <StyledTableCell align="left">yes</StyledTableCell>
-                      <StyledTableCell align="left">all good</StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+            </TabPanel>
+            {/* ---------------chart---------------------------- */}
+            <TabPanel style={{ width: '100%' }}>
+              <Grid container>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                  <Paper sx={{ bgcolor: "#F8F8F8" }}>
+                    <Chart
+                      options={lineChartOptions}
+                      series={lineChartSeries}
+                      type="bar"
+                      height={515}
+                    />
+                  </Paper>
+                </Grid>
+              </Grid>
+            </TabPanel>
+          </Tabs>
         </Grid>
-        {/* ---------------chart---------------------------- */}
-        <Grid item xs={12} sm={12} md={6} lg={6} mt={2}>
-          <Paper sx={{ bgcolor: "#F8F8F8" }}>
-            <Chart
-              options={lineChartOptions}
-              series={lineChartSeries}
-              type="bar"
-              height={515}
-            />
-          </Paper>
-        </Grid>
-        {/* ----------------------Table for Moblie-------------- */}
-        <Grid container md={12}
-     lg={12}
-     sm={12}
-     xs={12}
-     mt={2}
-     sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
-    <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-     <Grid container mt={2} direction="column">
-      {Object.keys(data).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{data[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2}  direction="column">
-      {Object.keys(Tata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item  xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{Tata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Mata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{Mata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Sata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={4}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={8}>
-         <Typography variant="body1">{Sata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-    </Paper>
-   </Grid>
       </Grid>
     </div>
   );
