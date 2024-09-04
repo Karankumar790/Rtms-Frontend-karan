@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Grid, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
+import { Button, Card, CardContent, Grid, IconButton, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -12,6 +12,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
+import AssetsIcon from '@mui/icons-material/AccountBalance';
+
 
 // -------------------Table Function-------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -63,6 +65,9 @@ function ManageAsset() {
     <div>
       <Paper>
         <Grid container gap={3} p={2}>
+          <IconButton>
+            <AssetsIcon sx={{ fontSize: 25 }} />
+          </IconButton>
           <Typography variant="h4">Organization </Typography>
 
           <Grid container spacing={2}>
@@ -212,7 +217,7 @@ function ManageAsset() {
       </Card>
       {/* -------------------------Table-------------------------- */}
 
-     
+
       <Grid container>
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Divider, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { Button, Divider, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,156 +10,68 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
-
-
-
-// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
-//     backgroundColor: theme.palette.common.black,
-//     color: theme.palette.common.white,
-//   },
-//   [`&.${tableCellClasses.body}`]: {
-//     fontSize: 14,
-//   },
-// }));
-
-// const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//   '&:nth-of-type(odd)': {
-//     backgroundColor: theme.palette.action.hover,
-//   },
-//   // hide last border
-//   '&:last-child td, &:last-child th': {
-//     border: 0,
-//   },
-// }));
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData('1'),
-//   createData('2'),
-//   createData('3'),
-//   createData('4'),
-//   createData('5'),
-// ];
-
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import GeoIcon from '@mui/icons-material/Place';
+import { Textarea } from '@mui/joy';
 
 
 function Virtual() {
-  const [age, setAge] = React.useState('');
-  const [installation, setInstallation] = React.useState('');
-  const [number, setNumber] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const handleChangeInstallation = (event) => {
-    setInstallation(event.target.value);
-  };
-
-  const handleChangeNumber = (event) => {
-    setNumber(event.target.value);
-  };
-
-  //   const [age, setAge] = React.useState('');
-  //   const [location, setLocation] = React.useState('');
-  //   const [installation, setInstallation] = React.useState('');
-  //   const [number, setNumber] = React.useState('');
-
-  //   const handleChange = (event) => {
-  //     setAge(event.target.value);
-  //   };
-  //   const handleChangeLocation = (event) => {
-  //     setLocation(event.target.value);
-  //   };
-  //   const handleChangeInstallation = (event) => {
-  //     setInstallation(event.target.value);
-  //   };
-  //   const handleChangeNumber = (event) => {
-  //     setNumber(event.target.value);
-  //   };
   return (
     <div>
-      <Grid container >
-        <Typography variant='h4'>Geo-Location </Typography>
-      </Grid>
-      <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
+      <Grid container gap={1}>
+        <Box display='flex'>
+          <IconButton>
+            <GeoIcon sx={{ fontSize: 25 }} />
+          </IconButton>
+          <Typography variant='h4'>Geo-Location </Typography>
+        </Box>
+        <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
+          <Grid item xs={12} sm={8} md={6} lg={3} mt={1}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <TextField
+                label="Search"
+                variant="outlined"
+                size="small"
+                fullWidth
+                sx={{ mr: 2 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment>
+                      <Button variant="text" size='medium' ><SearchIcon /></Button>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={8} md={6} lg={3} mr={2}>
+            <Box >
+              <Textarea
+                placeholder='Location Address'
+                rows={2}
+                variant="outlined"
+                fullWidth
+              />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={installation}
-              label="Well  Installation"
-              onChange={handleChangeInstallation}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small" >
-            <InputLabel id="demo-select-large-label">Well Number</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={number}
-              label="Well Number"
-              onChange={handleChangeNumber}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
+        <Grid container textAlign={'center'} mt={2} display={'block'}>
+          <Grid item md={12} border={"1px solid black"}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14320.173463053277!2d77.44117713469225!3d28.679632098106314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf1bc3b6220c5%3A0x80c87fb76576da30!2sRDC%2C%20Sector%2015%2C%20Sector%2010%2C%20Raj%20Nagar%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201002!5e0!3m2!1sen!2sin!4v1723781951900!5m2!1sen!2sin"
+              style={{ border: 0 ,width:"100%",height:"70vh" }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Maps"
+            ></iframe>
+          </Grid>
 
         </Grid>
       </Grid>
-      <Grid container  height={'500px'} mt={4} spacing={1} >
-        <Grid container lg={5} md={6} sm={6} xs={12}  border='1px solid black' sx={{justifyContent:'space-evenly',display:'flex', alignItems:'center'}} mr={1}>
-          
-          <Button variant='contained'>Start</Button>
-          <Button variant='contained'>End</Button>
-          <Button variant='contained'>Capture photo</Button>
-        </Grid>
-        <Grid item lg={6} md={6} sm={6} xs={12}  border='1px solid black' sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-      
-      <Typography variant='h4'> Live photo </Typography>
-  
-        </Grid>
-      </Grid>
-     
+
+
     </div>
   )
 }

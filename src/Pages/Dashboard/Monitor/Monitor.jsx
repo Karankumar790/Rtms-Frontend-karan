@@ -1,6 +1,6 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Grid, TextField, Typography } from '@mui/material'
+import { Button, Grid, IconButton, TextField, Typography } from '@mui/material'
 import Input from '@mui/joy/Input';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,6 +15,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Chart from 'react-apexcharts';
+import WellmonitorIcon from '@mui/icons-material/Search';
+
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 // --------------------------Table for Moblie-----------------------
@@ -142,6 +144,9 @@ function Monitor() {
   return (
     <div>
       <Grid container >
+      <IconButton>
+          <WellmonitorIcon sx={{ fontSize: "25px" }} />
+        </IconButton>
           <Typography variant='h4'>Well Monitor</Typography>
         </Grid>
       <Grid container spacing={3} pt={1} >
@@ -229,11 +234,7 @@ function Monitor() {
         </Grid>
       </Grid>
 {/* -----------------Table for Desktop----------------------------------- */}
-      <Grid container mt={2}  md={12}
-     lg={12}
-     sm={5}
-     xs={4}
-     sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+      <Grid item mt={2}  md={12} lg={12} sm={5} xs={4}sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
@@ -274,10 +275,11 @@ function Monitor() {
       </Grid>
 {/* --------------------Table for Moblie--------------------------------- */}
 
-<Grid container md={12}
+<Grid item md={12}
      lg={12}
      sm={12}
      xs={12}
+     mt={2}
      sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
     <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
      <Grid container mt={2} direction="column">
