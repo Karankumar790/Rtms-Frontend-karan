@@ -3,6 +3,9 @@ import { useRoutes } from "react-router-dom";
 import AppSk from "./components/Skeletons/AppSk.jsx";
 import Home from "./Pages/Dashboard/Home/Home.jsx";
 import { Toaster } from "react-hot-toast";
+import { Typography, useMediaQuery } from '@mui/material';
+import { Box } from "@mui/system";
+
 const Login = lazy(() => import("./Pages/Login/Login.jsx"));
 const Signup = lazy(() => import("./Pages/Signup/Signup.jsx"));
 const Dashboard = lazy(() => import("./Pages/Dashboard/index.jsx"));
@@ -31,9 +34,9 @@ const Network = lazy(() => import("./Pages/Dashboard/Network/Network.jsx"));
 const AddDevices = lazy(() => import("./Pages/Dashboard/Network/AddNetwork/AddNetwork.jsx"));
 
 
-
-
 function App() {
+  const isDesktop = useMediaQuery('(min-width:768px)');
+
   const route = useRoutes([
     { path: "/", element: <Login /> },
     { path: "/signup", element: <Signup /> },
@@ -50,15 +53,14 @@ function App() {
         { path: "/dashboard/notification", element: <NotificationHistory /> },
         { path: "/dashboard/edit", element: <Edit /> },
         { path: "/dashboard/logout", element: <Logout /> },
-        { path: '/dashboard/wellmaster', element: <WellMaster /> },
+        { path: '/dashboard/wellmaster', element: isDesktop ? (<WellMaster />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
         { path: '/dashboard/addwell', element: <AddWell /> },
         { path: "/dashboard/singlewell", element: <SingleWell /> },
-        { path: "/dashboard/ManageAsset", element: <ManageAsset /> },
-        { path: "/dashboard/DeviceManage", element: <DeviceManage /> },
+        { path: "/dashboard/ManageAsset", element: isDesktop ? (<ManageAsset />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
+        { path: "/dashboard/DeviceManage", element: isDesktop ? (<DeviceManage />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
         { path: "/dashboard/AddDevice", element: <AddDevice /> },
-        { path: "/dashboard/Network", element: <Network /> },
+        { path: "/dashboard/Network", element: isDesktop ? (<Network />) : <Typography display={'flex'} fontSize={'large'} justifyContent='center' alignItems='center' height={"80vh"}>View Only In Desktop...</Typography> },
         { path: "/dashboard/AddDevices", element: <AddDevices /> },
-
 
       ]
     },

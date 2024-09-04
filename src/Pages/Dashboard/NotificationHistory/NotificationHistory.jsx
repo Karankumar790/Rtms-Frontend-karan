@@ -260,7 +260,7 @@ function NotificationHistory() {
           </Table>
         </TableContainer>
       </Grid>
-
+{/* ------------------------------Table for Desktop---------------------------- */}
       <Grid container md={12}
         lg={12}
         sm={12}
@@ -271,13 +271,13 @@ function NotificationHistory() {
             {Object.keys(data).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{data[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -288,13 +288,13 @@ function NotificationHistory() {
             {Object.keys(Tata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Tata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -305,13 +305,13 @@ function NotificationHistory() {
             {Object.keys(Mata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Mata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -322,13 +322,13 @@ function NotificationHistory() {
             {Object.keys(Sata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Sata[header]}</Typography>
                 </StyledContent>
               </Grid>

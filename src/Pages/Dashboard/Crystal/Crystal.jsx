@@ -380,7 +380,7 @@ function Monitor() {
           </Paper>
         </Grid>
         {/* ---------------chart---------------------------- */}
-        <Grid item xs={12} sm={6} md={6} lg={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <Paper sx={{ bgcolor: "#F8F8F8" }}>
             <Chart
               options={lineChartOptions}

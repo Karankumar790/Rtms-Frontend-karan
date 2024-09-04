@@ -32,11 +32,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let data = {
  "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -45,11 +45,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let Tata = {
   "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -58,11 +58,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let Mata = {
   "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -71,11 +71,11 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
  
  let Sata = {
   "Well No": "1",
- "GIP": "New York",
- "CHP": "01/01/2021",
- "THP": "40.7128 N",
+ "GIP(kg)": "New York",
+ "CHP(kg)": "01/01/2021",
+ "THP(kg)": "40.7128 N",
  "Battery%": "74.0060 W",
- "Solar power": "74.0060 W",
+ "Solar power(V)": "74.0060 W",
  "Communication": "74.0060 W",
  "Flow Status": "74.0060 W",
  "Last Update": "74.0060 W",
@@ -239,12 +239,12 @@ function Monitor() {
             <TableHead >
               <TableRow  >
                 <StyledTableCell sx={{fontSize:'18px'}}>Well No.</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">GIP</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">CHP</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">THP</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">GIP(kg)</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">CHP(kg)</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">THP(kg)</StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Battery %</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Solar Power</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Communication</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Solar Power(V)</StyledTableCell>
+                <StyledTableCell sx={{fontSize:'18px'}} align="left">Communication </StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Flow Status</StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Last Update</StyledTableCell>
                 <StyledTableCell sx={{fontSize:'18px'}} align="left">Alarm</StyledTableCell>
@@ -284,13 +284,13 @@ function Monitor() {
       {Object.keys(data).map((header, index) => (
        <Grid container key={index}>
         {/* Header Section */}
-        <StyledGridItem item xs={4}>
+        <StyledGridItem item xs={6}>
          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
           {header}
          </Typography>
         </StyledGridItem>
         {/* Content Section */}
-        <StyledContent item xs={8}>
+        <StyledContent item xs={6}>
          <Typography variant="body1">{data[header]}</Typography>
         </StyledContent>
        </Grid>
@@ -301,13 +301,13 @@ function Monitor() {
       {Object.keys(Tata).map((header, index) => (
        <Grid container key={index}>
         {/* Header Section */}
-        <StyledGridItem item  xs={4}>
+        <StyledGridItem item  xs={6}>
          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
           {header}
          </Typography>
         </StyledGridItem>
         {/* Content Section */}
-        <StyledContent item xs={8}>
+        <StyledContent item xs={6}>
          <Typography variant="body1">{Tata[header]}</Typography>
         </StyledContent>
        </Grid>
@@ -318,13 +318,13 @@ function Monitor() {
       {Object.keys(Mata).map((header, index) => (
        <Grid container key={index}>
         {/* Header Section */}
-        <StyledGridItem item xs={4}>
+        <StyledGridItem item xs={6}>
          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
           {header}
          </Typography>
         </StyledGridItem>
         {/* Content Section */}
-        <StyledContent item xs={8}>
+        <StyledContent item xs={6}>
          <Typography variant="body1">{Mata[header]}</Typography>
         </StyledContent>
        </Grid>
@@ -335,13 +335,13 @@ function Monitor() {
       {Object.keys(Sata).map((header, index) => (
        <Grid container key={index}>
         {/* Header Section */}
-        <StyledGridItem item xs={4}>
+        <StyledGridItem item xs={6}>
          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
           {header}
          </Typography>
         </StyledGridItem>
         {/* Content Section */}
-        <StyledContent item xs={8}>
+        <StyledContent item xs={6}>
          <Typography variant="body1">{Sata[header]}</Typography>
         </StyledContent>
        </Grid>
