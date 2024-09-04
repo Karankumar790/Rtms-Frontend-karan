@@ -233,7 +233,7 @@ function Monitor() {
      lg={12}
      sm={5}
      xs={4}
-     sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+     sx={{ display: { sm: "none",  md: "block", lg: "block" } }}>
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
