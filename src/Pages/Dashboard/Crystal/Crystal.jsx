@@ -145,10 +145,10 @@ function Monitor() {
   return (
     <div>
       <Grid container gap={1}>
-        <Typography variant="h4">Well Report</Typography>
+        <Typography fontSize='x-large'>Well Report</Typography>
         <Grid container spacing={2}>
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -208,10 +208,10 @@ function Monitor() {
         </Grid> */}
 
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth >
               <TextField
+                size="small"
                 type="date"
-                fullWidth
                 slotProps={{
                   input: {
                     min: "2001-02-16",
@@ -222,9 +222,9 @@ function Monitor() {
             </FormControl>
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth >
               <TextField
-                fullWidth
+                size="small"
                 type="date"
                 slotProps={{
                   input: {
@@ -236,7 +236,7 @@ function Monitor() {
             </FormControl>
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Resolution</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -256,10 +256,10 @@ function Monitor() {
           </Grid>
         </Grid>
 
-        <Typography variant="h4">Global Report</Typography>
+        <Typography fontSize='x-large'>Global Report</Typography>
         <Grid container spacing={3}>
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Parameter</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -280,8 +280,8 @@ function Monitor() {
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth>
               <TextField
+                size="small"
                 type="date"
-                fullWidth
                 slotProps={{
                   input: {
                     min: "2001-02-16",
@@ -292,9 +292,9 @@ function Monitor() {
             </FormControl>
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth >
               <TextField
-                fullWidth
+                size="small"
                 type="date"
                 slotProps={{
                   input: {
@@ -306,9 +306,10 @@ function Monitor() {
             </FormControl>
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth>
+            <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Resolution</InputLabel>
               <Select
+
                 labelId="demo-select-small-label"
                 id="demo-select-large"
                 value={resolution}
@@ -383,80 +384,80 @@ function Monitor() {
               </Grid>
               {/* ----------------------Table for Moblie-------------- */}
               <Grid container md={12}
-        lg={12}
-        sm={12}
-        xs={12}
-        sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" } }}>
-        <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-          <Grid container mt={2} direction="column">
-            {Object.keys(data).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{data[header]}</Typography>
-                </StyledContent>
+                lg={12}
+                sm={12}
+                xs={12}
+                sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" } }}>
+                <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+                  <Grid container mt={2} direction="column">
+                    {Object.keys(data).map((header, index) => (
+                      <Grid container key={index}>
+                        {/* Header Section */}
+                        <StyledGridItem item xs={6}>
+                          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                            {header}
+                          </Typography>
+                        </StyledGridItem>
+                        {/* Content Section */}
+                        <StyledContent item xs={6}>
+                          <Typography variant="body1">{data[header]}</Typography>
+                        </StyledContent>
+                      </Grid>
+                    ))}
+                  </Grid>
+                  {/* ----------------------Dreak---------------------------------- */}
+                  <Grid container mt={2} direction="column">
+                    {Object.keys(Tata).map((header, index) => (
+                      <Grid container key={index}>
+                        {/* Header Section */}
+                        <StyledGridItem item xs={6}>
+                          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                            {header}
+                          </Typography>
+                        </StyledGridItem>
+                        {/* Content Section */}
+                        <StyledContent item xs={6}>
+                          <Typography variant="body1">{Tata[header]}</Typography>
+                        </StyledContent>
+                      </Grid>
+                    ))}
+                  </Grid>
+                  {/* ----------------------Dreak---------------------------------- */}
+                  <Grid container mt={2} direction="column">
+                    {Object.keys(Mata).map((header, index) => (
+                      <Grid container key={index}>
+                        {/* Header Section */}
+                        <StyledGridItem item xs={6}>
+                          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                            {header}
+                          </Typography>
+                        </StyledGridItem>
+                        {/* Content Section */}
+                        <StyledContent item xs={6}>
+                          <Typography variant="body1">{Mata[header]}</Typography>
+                        </StyledContent>
+                      </Grid>
+                    ))}
+                  </Grid>
+                  {/* ----------------------Dreak---------------------------------- */}
+                  <Grid container mt={2} direction="column">
+                    {Object.keys(Sata).map((header, index) => (
+                      <Grid container key={index}>
+                        {/* Header Section */}
+                        <StyledGridItem item xs={6}>
+                          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                            {header}
+                          </Typography>
+                        </StyledGridItem>
+                        {/* Content Section */}
+                        <StyledContent item xs={6}>
+                          <Typography variant="body1">{Sata[header]}</Typography>
+                        </StyledContent>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Paper>
               </Grid>
-            ))}
-          </Grid>
-          {/* ----------------------Dreak---------------------------------- */}
-          <Grid container mt={2} direction="column">
-            {Object.keys(Tata).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{Tata[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-          {/* ----------------------Dreak---------------------------------- */}
-          <Grid container mt={2} direction="column">
-            {Object.keys(Mata).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{Mata[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-          {/* ----------------------Dreak---------------------------------- */}
-          <Grid container mt={2} direction="column">
-            {Object.keys(Sata).map((header, index) => (
-              <Grid container key={index}>
-                {/* Header Section */}
-                <StyledGridItem item xs={6}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                    {header}
-                  </Typography>
-                </StyledGridItem>
-                {/* Content Section */}
-                <StyledContent item xs={6}>
-                  <Typography variant="body1">{Sata[header]}</Typography>
-                </StyledContent>
-              </Grid>
-            ))}
-          </Grid>
-        </Paper>
-      </Grid>
             </TabPanel>
             {/* ---------------chart---------------------------- */}
             <TabPanel style={{ width: '100%' }}>
