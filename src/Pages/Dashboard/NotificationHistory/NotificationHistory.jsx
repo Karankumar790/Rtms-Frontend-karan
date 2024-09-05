@@ -94,20 +94,7 @@ const rows = [
 
 function NotificationHistory() {
   const [age, setAge] = React.useState('');
-  const [notification, setNotification] = React.useState('');
-  const [installation, setInstallation] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const handleChangeNotification = (event) => {
-    setNotification(event.target.value);
-  };
-
-  const handleChangeInstallation = (event) => {
-    setInstallation(event.target.value);
-  };
+  
 
   const [selectedDate, setSelectedDate] = useState('');
 
