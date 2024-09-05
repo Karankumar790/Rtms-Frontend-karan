@@ -233,14 +233,11 @@ function Monitor() {
                 <em>All</em>
               </MenuItem>
               <MenuItem value={0}>None</MenuItem>
-              <MenuItem value={1}>GIP</MenuItem>
-              <MenuItem value={2}>CHP</MenuItem>
-              <MenuItem value={3}>THP</MenuItem>
-              <MenuItem value={4}>Battery</MenuItem>
-              <MenuItem value={5}>Solar Power</MenuItem>
-              <MenuItem value={6}>Communication Barrier</MenuItem>
-              <MenuItem value={7}>Flow Status</MenuItem>
-              <MenuItem value={8}>Not Flow Status </MenuItem>
+              <MenuItem value={1}>Low Battery</MenuItem>
+              <MenuItem value={2}>Low Solar Power</MenuItem>
+              <MenuItem value={3}>Network Error</MenuItem>
+              <MenuItem value={4}>Flowing Wells</MenuItem>
+              <MenuItem value={5}>Non Flowing Wells</MenuItem>
             </Select>
           </FormControl>
         </Grid>

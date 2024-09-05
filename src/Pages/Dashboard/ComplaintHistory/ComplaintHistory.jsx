@@ -230,14 +230,9 @@ function ComplaintHistory() {
                 <em>All</em>
               </MenuItem>
               <MenuItem value={0}>None</MenuItem>
-              <MenuItem value={1}>Open Notification</MenuItem>
-              <MenuItem value={2}>Close with comment</MenuItem>
-              <MenuItem value={3}>Close with complaint</MenuItem>
-              <MenuItem value={4}>Battery</MenuItem>
-              <MenuItem value={5}>Solar Power</MenuItem>
-              <MenuItem value={6}>Communication Barrier</MenuItem>
-              <MenuItem value={7}>Flow Status</MenuItem>
-              <MenuItem value={8}>Not Flow Status </MenuItem>
+              <MenuItem value={1}>Pending Complaints</MenuItem>
+              <MenuItem value={2}>Resloved Complaints</MenuItem>
+              <MenuItem value={3}>Unsolved Complaints</MenuItem>
             </Select>
           </FormControl>
         </Grid>
