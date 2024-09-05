@@ -1,5 +1,4 @@
 import React from 'react'
-import PageContainer from '../../components/HOC/PageContainer'
 import { Button, Grid, IconButton, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -9,11 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box, color } from '@mui/system';
-import well from '/assets/WELL.png'
+import master from '/assets/wellMaster.png'
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 
 // -------------------------------Table for  Moblie --------------------------
@@ -110,16 +108,16 @@ const BodyTableCellWraper = styled(TableCell)(() => ({
 function WellMaster() {
     return (
         <div>
-            <Grid container>
-                <Typography variant='h4'>Well Master</Typography>
-            </Grid>
-            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
-                <Grid item p={1}>
-                    <Box sx={{ height: '100px', width: '100px' }}>
-                        <img src={well} alt='img' height={'100px'} width={'100px'} />
+              <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={1} paddingBottom={2}>
+                <Grid item  lg={5} md={8} sm={12} xs={12} display={'flex'} gap={1}>
+                    <Box sx={{ height: '50px', width: '50px' }}>
+                        <img src={master} alt='img' height={'50px'} width={'50px'} />
+                    </Box>
+                    <Box >
+                        <Typography variant='h4'>Well Master</Typography>
                     </Box>
                 </Grid>
-                <Grid item p={2} >
+                <Grid item lg={1.3} md={8} sm={12} xs={12} display={'flex'} justifyContent={'end'}>
                     <Link to='/dashboard/addwell'>
                         <Button variant='contained'
                             sx={{
@@ -129,11 +127,12 @@ function WellMaster() {
                                 },
                                 fontSize: '16px',
                             }}>
-                            Add New well +
+                            Add Well +
                         </Button>
                     </Link>
                 </Grid>
             </Grid>
+          
             {/* ------------------Table for Desktop--------------------------------- */}
             <Grid container md={12}
                 lg={12}

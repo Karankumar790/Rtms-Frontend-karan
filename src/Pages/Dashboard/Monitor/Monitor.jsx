@@ -14,7 +14,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import well from '/assets/WELL.png'
 import Chart from 'react-apexcharts';
+import { Box } from '@mui/system';
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 // --------------------------Table for Moblie-----------------------
@@ -22,66 +24,66 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[100],
- }));
- 
- const StyledContent = styled(Grid)(({ theme }) => ({
+}));
+
+const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: 'white',
- }));
- 
- let data = {
- "Well No": "1",
- "GIP(kg)": "New York",
- "CHP(kg)": "01/01/2021",
- "THP(kg)": "40.7128 N",
- "Battery%": "74.0060 W",
- "Solar power(V)": "74.0060 W",
- "Communication": "74.0060 W",
- "Flow Status": "74.0060 W",
- "Last Update": "74.0060 W",
- "Alarm": "74.0060 W",
- };
- 
- let Tata = {
+}));
+
+let data = {
   "Well No": "1",
- "GIP(kg)": "New York",
- "CHP(kg)": "01/01/2021",
- "THP(kg)": "40.7128 N",
- "Battery%": "74.0060 W",
- "Solar power(V)": "74.0060 W",
- "Communication": "74.0060 W",
- "Flow Status": "74.0060 W",
- "Last Update": "74.0060 W",
- "Alarm": "74.0060 W",
- };
- 
- let Mata = {
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
+  "Last Update": "74.0060 W",
+  "Alarm": "74.0060 W",
+};
+
+let Tata = {
   "Well No": "1",
- "GIP(kg)": "New York",
- "CHP(kg)": "01/01/2021",
- "THP(kg)": "40.7128 N",
- "Battery%": "74.0060 W",
- "Solar power(V)": "74.0060 W",
- "Communication": "74.0060 W",
- "Flow Status": "74.0060 W",
- "Last Update": "74.0060 W",
- "Alarm": "74.0060 W",
- };
- 
- let Sata = {
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
+  "Last Update": "74.0060 W",
+  "Alarm": "74.0060 W",
+};
+
+let Mata = {
   "Well No": "1",
- "GIP(kg)": "New York",
- "CHP(kg)": "01/01/2021",
- "THP(kg)": "40.7128 N",
- "Battery%": "74.0060 W",
- "Solar power(V)": "74.0060 W",
- "Communication": "74.0060 W",
- "Flow Status": "74.0060 W",
- "Last Update": "74.0060 W",
- "Alarm": "74.0060 W",
- };
- 
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
+  "Last Update": "74.0060 W",
+  "Alarm": "74.0060 W",
+};
+
+let Sata = {
+  "Well No": "1",
+  "GIP(kg)": "New York",
+  "CHP(kg)": "01/01/2021",
+  "THP(kg)": "40.7128 N",
+  "Battery%": "74.0060 W",
+  "Solar power(V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
+  "Last Update": "74.0060 W",
+  "Alarm": "74.0060 W",
+};
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -123,11 +125,16 @@ const rows = [
 
 function Monitor() {
   const [age, setAge] = React.useState('');
+  const [parameter, setParameter] = React.useState('');
   const [installation, setInstallation] = React.useState('');
   const [number, setNumber] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
+  };
+
+  const handleChangeParameter = (event) => {
+    setParameter(event.target.value);
   };
 
   const handleChangeInstallation = (event) => {
@@ -141,10 +148,19 @@ function Monitor() {
 
   return (
     <div>
-      <Grid container >
-          <Typography variant='h4'>Well Monitor</Typography>
+{/* ------------------------Img and Content-------------------------------------- */}
+      <Grid container>
+        <Grid item display={'flex'} lg={4} md={8} sm={12} xs={12}>
+          <Box sx={{ height: '50px', width: '50px' }}>
+            <img src={well} alt='img' height={'50px'} width={'50px'} />
+          </Box>
+          <Box pt={1}>
+            <Typography variant='h4'>Well Monitor</Typography>
+          </Box>
         </Grid>
-      <Grid container spacing={3} pt={1} >
+      </Grid>
+{/* ------------------------Inputs------------------------------------------------ */}
+      <Grid container spacing={3} pt={3} >
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Well Location</InputLabel>
@@ -209,45 +225,63 @@ function Monitor() {
             <Select
               labelId="demo-select-small-label"
               id="demo-select-large"
-              value={age}
+              value={parameter}
               label="Well Location"
-              onChange={handleChange}
+              onChange={handleChangeParameter}
             >
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>GIP</MenuItem>
-              <MenuItem value={20}>CHP</MenuItem>
-              <MenuItem value={30}>THP</MenuItem>
-              <MenuItem value={10}>Battery</MenuItem>
-              <MenuItem value={20}>Solar Power</MenuItem>
-              <MenuItem value={30}>Communication Barrier</MenuItem>
-              <MenuItem value={10}>Flow Status</MenuItem>
-              <MenuItem value={20}>Not Flow Status </MenuItem>
+              <MenuItem value={0}>None</MenuItem>
+              <MenuItem value={1}>GIP</MenuItem>
+              <MenuItem value={2}>CHP</MenuItem>
+              <MenuItem value={3}>THP</MenuItem>
+              <MenuItem value={4}>Battery</MenuItem>
+              <MenuItem value={5}>Solar Power</MenuItem>
+              <MenuItem value={6}>Communication Barrier</MenuItem>
+              <MenuItem value={7}>Flow Status</MenuItem>
+              <MenuItem value={8}>Not Flow Status </MenuItem>
             </Select>
           </FormControl>
         </Grid>
       </Grid>
-{/* -----------------Table for Desktop----------------------------------- */}
-      <Grid container mt={2}  md={12}
-     lg={12}
-     sm={5}
-     xs={4}
-     sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+{/* ------------------------Button------------------------------------------------ */}
+      <Grid container display={'flex'} justifyContent={'end'} >
+        <Grid item lg={1.3} md={4} sm={8} xs={12} paddingTop={3} paddingBottom={1.4}>
+          <Button variant='contained'
+            sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+
+            }} fullWidth>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+
+      {/* -----------------Table for Desktop----------------------------------- */}
+      <Grid container mt={2} md={12}
+        lg={12}
+        sm={5}
+        xs={4}
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{fontSize:'18px'}}>Well No.</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">GIP(kg)</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">CHP(kg)</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">THP(kg)</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Battery %</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Solar Power(V)</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Communication </StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Flow Status</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Last Update</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Alarm</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }}>Well No.</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">GIP (kg)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">CHP (kg)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">THP (kg)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Battery %</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Solar Power (V)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Communication </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Flow Status</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Last Update</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Alarm</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -272,83 +306,83 @@ function Monitor() {
           </Table>
         </TableContainer>
       </Grid>
-{/* --------------------Table for Moblie--------------------------------- */}
+      {/* --------------------Table for Moblie--------------------------------- */}
 
-<Grid container md={12}
-     lg={12}
-     sm={12}
-     xs={12}
-     sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
-    <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-     <Grid container mt={2} direction="column">
-      {Object.keys(data).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{data[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2}  direction="column">
-      {Object.keys(Tata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item  xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{Tata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Mata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{Mata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Sata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{Sata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-    </Paper>
-   </Grid>
+      <Grid container md={12}
+        lg={12}
+        sm={12}
+        xs={12}
+        sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
+        <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+          <Grid container mt={2} direction="column">
+            {Object.keys(data).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{data[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Tata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{Tata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Mata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{Mata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+          {/* ----------------------Dreak---------------------------------- */}
+          <Grid container mt={2} direction="column">
+            {Object.keys(Sata).map((header, index) => (
+              <Grid container key={index}>
+                {/* Header Section */}
+                <StyledGridItem item xs={6}>
+                  <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                    {header}
+                  </Typography>
+                </StyledGridItem>
+                {/* Content Section */}
+                <StyledContent item xs={6}>
+                  <Typography variant="body1">{Sata[header]}</Typography>
+                </StyledContent>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+      </Grid>
     </div >
   )
 }

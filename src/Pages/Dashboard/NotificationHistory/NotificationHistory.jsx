@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -94,7 +94,7 @@ const rows = [
 
 function NotificationHistory() {
   const [age, setAge] = React.useState('');
-  
+  const [parameter, setParameter] = React.useState('');
 
   const [selectedDate, setSelectedDate] = useState('');
 
@@ -102,16 +102,8 @@ function NotificationHistory() {
     setSelectedDate(event.target.value);
   };
 
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Handle search input change
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchClick = () => {
-    console.log('Search button clicked');
-    // Additional logic for search button click can be added here
+  const handleChangeParameter = (event) => {
+    setParameter(event.target.value);
   };
 
   return (
@@ -119,8 +111,8 @@ function NotificationHistory() {
       <Grid container>
         <Typography variant='h4'>Notification History</Typography>
       </Grid>
-      <Grid container spacing={3} pt={1} >
-      <Grid item sm={6} md={3} xs={12} lg={3}>
+      <Grid container spacing={3} pt={3} >
+        <Grid item sm={6} md={3} xs={12} lg={3}>
           <FormControl fullWidth>
             <TextField
               fullWidth
@@ -185,34 +177,48 @@ function NotificationHistory() {
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <TextField variant='outlined' size='small' label='Notification No.'/>
+            <TextField variant='outlined' size='small' label='Notification No.' />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <TextField
-              fullWidth
-              label="Search Notifications"
-              variant="outlined"
-              size="small"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Type to search..."
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    color="primary"
-                    aria-label="search"
-                    onClick={handleSearchClick}
-                    fullWidth
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                )
-              }}
-            />
+            <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={parameter}
+              label="Well Location"
+              onChange={handleChangeParameter}
+            >
+              <MenuItem value="">
+                <em>All</em>
+              </MenuItem>
+              <MenuItem value={0}>None</MenuItem>
+              <MenuItem value={1}>Open Notification</MenuItem>
+              <MenuItem value={2}>Close with comment </MenuItem>
+              <MenuItem value={3}>Close with complaint</MenuItem>
+              <MenuItem value={4}>Battery</MenuItem>
+              <MenuItem value={5}>Solar Power</MenuItem>
+              <MenuItem value={6}>Communication Barrier</MenuItem>
+              <MenuItem value={7}>Flow Status</MenuItem>
+              <MenuItem value={8}>Not Flow Status </MenuItem>
+            </Select>
           </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container display={'flex'} justifyContent={'end'} >
+        <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>
+          <Button variant='contained'
+            sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
 
+            }} fullWidth>
+            Submit
+          </Button>
         </Grid>
       </Grid>
       {/* <Grid container mt={3}>
@@ -247,12 +253,12 @@ function NotificationHistory() {
         </TableContainer>
       </Grid> */}
 
-<Grid container md={12}
+      <Grid container md={12}
         lg={12}
         sm={5}
         xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block"}}} mt={1}>
-        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto'}}>
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }} mt={1}>
+        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
               <TableRow  >
@@ -267,9 +273,9 @@ function NotificationHistory() {
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}> 
+                  <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}>
                     {row.name}
-                    
+
                   </StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}>5/6/2024</StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
@@ -284,7 +290,7 @@ function NotificationHistory() {
           </Table>
         </TableContainer>
       </Grid>
-{/* ------------------------------Table for Desktop---------------------------- */}
+      {/* ------------------------------Table for Desktop---------------------------- */}
       <Grid container md={12}
         lg={12}
         sm={12}
