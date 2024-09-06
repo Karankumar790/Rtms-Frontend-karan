@@ -22,9 +22,9 @@ function Virtual() {
       <Grid container gap={1}>
         <Box display='flex'>
           <IconButton>
-            <GeoIcon sx={{ fontSize: 25 }} />
+            <GeoIcon sx={{ fontSize: 35, color:"red" }} />
           </IconButton>
-          <Typography variant='h4'>Geo-Location </Typography>
+          <Typography mt={1} variant='h4'>Geo-Location </Typography>
         </Box>
         <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
           <Grid item xs={12} sm={8} md={6} lg={3} mt={1}>
