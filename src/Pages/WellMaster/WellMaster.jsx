@@ -148,6 +148,7 @@ function WellMaster() {
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location </StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Land Mark</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
@@ -157,6 +158,7 @@ function WellMaster() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
