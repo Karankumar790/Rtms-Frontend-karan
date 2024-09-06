@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import Fade from '@mui/material/Fade';
-
+import { useDispatch, useSelector } from "react-redux";
 
 const Backdrop = React.forwardRef((props, ref) => {
   const { open, ...other } = props;
@@ -138,6 +138,7 @@ export default function Otpsignup() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useDispatch()
   return (
     <PageContainer
       showheader='true'
@@ -183,7 +184,7 @@ export default function Otpsignup() {
                   </Link>
                 </Grid>
                 <Grid item xs={12} md={12} sm={12} lg={12} textAlign="center" py={1}>
-                  <Link to="" style={{ textDecoration: "none" }}>
+                  <Link to="" style={{ textDecoration: "none" }} >
                     <Typography >
                       Resend One-Time Password
                     </Typography>

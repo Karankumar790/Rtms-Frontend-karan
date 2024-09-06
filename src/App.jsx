@@ -47,7 +47,7 @@ function App() {
       children: [
         { path: "/dashboard", element: <Home /> },
         { path: "/dashboard/monitor", element: <Monitor /> },
-        { path: "/dashboard/virtual", element: <Virtual /> },
+        { path: "/dashboard/virtual", element: <Virtual/> },
         { path: "/dashboard/crystal", element: <Crystal /> },
         { path: "/dashboard/complaint", element: <ComplaintHistory /> },
         { path: "/dashboard/notification", element: <NotificationHistory /> },
