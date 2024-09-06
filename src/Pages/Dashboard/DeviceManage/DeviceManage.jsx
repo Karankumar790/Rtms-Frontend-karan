@@ -90,7 +90,7 @@ const rows = [
     createData('3'),
     createData('4'),
     createData('5'),
-  
+
 ];
 
 
@@ -98,16 +98,17 @@ const rows = [
 function DeviceManage() {
     return (
         <div>
-            <Grid container>
-                <Typography variant='h4'>Device Manager</Typography>
-            </Grid>
-            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
-                <Grid item p={1}>
-                    <Box sx={{ height: '100px', width: '100px' }}>
-                        <img src={manage} alt='img' height={'100px'} width={'100px'} />
+{/* --------------------------Content and Button--------------------------------- */}
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
+                <Grid item lg={4} md={8} sm={12} xs={12} display={'flex'} gap={1}>
+                    <Box sx={{ height: '50px', width: '50px' }}>
+                        <img src={manage} alt='img' height={'50px'} width={'50px'} />
+                    </Box>
+                    <Box>
+                        <Typography variant='h4'>Device Manager</Typography>
                     </Box>
                 </Grid>
-                <Grid item p={4}>
+                <Grid item  display={'flex'} justifyContent={'end'} lg={2} md={8} sm={12} xs={12}>
                     <Link to='/dashboard/AddDevice'>
                         <Button variant='contained'
                             sx={{
@@ -132,12 +133,12 @@ function DeviceManage() {
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{fontSize:'18px'}}> Well Number</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Lattitude</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{fontSize:'18px'}} align="center">Action</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }}> Well Number</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Lattitude</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -150,16 +151,16 @@ function DeviceManage() {
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
-                                    <StyledTableCell align='left'   > 
+                                    <StyledTableCell align='left'   >
                                         <Box display={'flex'} justifyContent={"space-evenly"} >
-                                        <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px',  padding: '5px',}}>
-                                        <DeleteForeverIcon fontSize='large' />
-                                        </IconButton>
-                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
-                                         <EditIcon fontSize='large'/>
-                                         </IconButton> 
-                                         </Box>
-                                         </StyledTableCell>
+                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px', padding: '5px', }}>
+                                                <DeleteForeverIcon fontSize='large' />
+                                            </IconButton>
+                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                                <EditIcon fontSize='large' />
+                                            </IconButton>
+                                        </Box>
+                                    </StyledTableCell>
 
 
                                 </StyledTableRow>
@@ -169,7 +170,7 @@ function DeviceManage() {
                 </TableContainer>
             </Grid>
 
-            {/* ---------------------------Table for Moblie------------------------------------- */}
+            {/* ---------------------------Table for Moblie-------------------------- */}
 
             <Grid container md={12}
                 lg={12}

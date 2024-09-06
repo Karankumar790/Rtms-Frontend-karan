@@ -70,7 +70,7 @@ function ManageAsset() {
           </IconButton>
           <Typography variant="h4">Organization </Typography>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={2} p={2}>
             <Grid container lg={10} spacing={1} >
               <Grid item xs={12} sm={3} md={3} lg={3}>
                 <Typography variant="h6">Asset </Typography>

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,8 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ComplaintIcon from '@mui/icons-material/AccessAlarm';
-
+import SearchIcon from '@mui/icons-material/Search';
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -120,6 +119,29 @@ function ComplaintHistory() {
   const handleTakerName = (event) => {
     setTname(event.target.value);
   };
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [parameter, setParameter] = React.useState('');
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    console.log('Search button clicked');
+    // Additional logic for search button click can be added here
+  };
+
+  const handleChangeParameter = (event) => {
+    setParameter(event.target.value);
+  };
+
   return (
     <div>
       <Grid container>
@@ -128,117 +150,112 @@ function ComplaintHistory() {
         </IconButton>
         <Typography variant='h4'>Complaint History</Typography>
       </Grid>
-      <Grid container spacing={3} pt={1}  >
-        <Grid item xs={12} sm={8} md={6} lg={3} >
+      <Grid container spacing={3} pt={3}>
+        <Grid item sm={6} md={3} xs={12} lg={3}>
+          <FormControl fullWidth>
+            <TextField
+              fullWidth
+              type="date"
+              size='small'
+              label='Start Date'
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={{
+                // Optional: Customize the TextField styling as needed
+                '.MuiInputBase-root': {
+                  // Optional: Style the input field if needed
+                },
+                '& .MuiInputLabel-root': {
+                  // Optional: Style the label if needed
+                },
+                '& .MuiInputBase-input': {
+                  // Optional: Style the input value if needed
+                }
+              }}
+            />
+          </FormControl>
+
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel className='custom-textfield' id="demo-select-large-label">Complain No.</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={compNo}
-              label="Well Location"
-              onChange={handleLocation}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
+            <TextField
+              fullWidth
+              type="date"
+              size='small'
+              label='End Date'
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={{
+                // Optional: Customize the TextField styling as needed
+                '.MuiInputBase-root': {
+                  // Optional: Style the input field if needed
+                },
+                '& .MuiInputLabel-root': {
+                  // Optional: Style the label if needed
+                },
+                '& .MuiInputBase-input': {
+                  // Optional: Style the input value if needed
+                }
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth>
+           <TextField size="small" label='Complaint No.'/>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Notification no.</InputLabel>
+            <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-large"
-              value={notification}
+              value={parameter}
               label="Well Location"
-              onChange={handleNotification}
+              onChange={handleChangeParameter}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>1</MenuItem>
-              <MenuItem value={20}>2</MenuItem>
-              <MenuItem value={30}>all</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Raiser Name</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={rName}
-              label="Well Location"
-              onChange={handleRaiserName}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Taker Name</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={tName}
-              label="Well Location"
-              onChange={handleTakerName}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              <MenuItem value={0}>None</MenuItem>
+              <MenuItem value={1}>Pending Complaints</MenuItem>
+              <MenuItem value={2}>Resloved Complaints</MenuItem>
+              <MenuItem value={3}>Unsolved Complaints</MenuItem>
             </Select>
           </FormControl>
         </Grid>
       </Grid>
-      {/* --------------------------------table for desktop----------------------- */}
-      {/* <Grid container mt={3}>
-        <TableContainer component={Paper} sx={{ maxHeight: 700, overflow: 'auto' }}>
-          <Table aria-label="customized table">
-            <TableHead >
-              <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }}>Complain No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Notification No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Raiser Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Taker Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Description</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                  <StyledTableCell align="left">Ghaziabad</StyledTableCell>
-                  <StyledTableCell align="left">Yes</StyledTableCell>
-                  <StyledTableCell align="left">3</StyledTableCell>
-                  <StyledTableCell align="left">good</StyledTableCell>
+      <Grid container display={'flex'} justifyContent={'end'} >
+        <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>
+          <Button variant='contained'
+            sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
 
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid> */}
-
+            }} fullWidth>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+{/* -----------------------------------------table for Desktop-------------------------- */}
       <Grid container md={12}
         lg={12}
         sm={5}

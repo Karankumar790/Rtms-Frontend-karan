@@ -23,7 +23,7 @@ export default function Dashboard() {
     setOpen(true);
     setMobileOpen(false);
   };
-
+  
   const handleDrawerClose = () => {
     setOpen(false);
     setMobileOpen(false);
