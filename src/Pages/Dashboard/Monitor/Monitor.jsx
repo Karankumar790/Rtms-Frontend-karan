@@ -16,12 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import well from '/assets/WELL.png'
 import Chart from 'react-apexcharts';
-<<<<<<< HEAD
 import { Box } from '@mui/system';
-=======
-import WellmonitorIcon from '@mui/icons-material/Search';
-
->>>>>>> a04c6df019890923348d7f1c30f96359f8e07f9a
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 // --------------------------Table for Moblie-----------------------
@@ -153,8 +148,7 @@ function Monitor() {
 
   return (
     <div>
-<<<<<<< HEAD
-{/* ------------------------Img and Content-------------------------------------- */}
+      {/* ------------------------Img and Content-------------------------------------- */}
       <Grid container>
         <Grid item display={'flex'} lg={4} md={8} sm={12} xs={12}>
           <Box sx={{ height: '50px', width: '50px' }}>
@@ -163,16 +157,9 @@ function Monitor() {
           <Box pt={1}>
             <Typography variant='h4'>Well Monitor</Typography>
           </Box>
-=======
-      <Grid container >
-      <IconButton>
-          <WellmonitorIcon sx={{ fontSize: "25px" }} />
-        </IconButton>
-          <Typography variant='h4'>Well Monitor</Typography>
->>>>>>> a04c6df019890923348d7f1c30f96359f8e07f9a
         </Grid>
       </Grid>
-{/* ------------------------Inputs------------------------------------------------ */}
+      {/* ------------------------Inputs------------------------------------------------ */}
       <Grid container spacing={3} pt={3} >
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
@@ -255,8 +242,7 @@ function Monitor() {
           </FormControl>
         </Grid>
       </Grid>
-<<<<<<< HEAD
-{/* ------------------------Button------------------------------------------------ */}
+      {/* ------------------------Button------------------------------------------------ */}
       <Grid container display={'flex'} justifyContent={'end'} >
         <Grid item lg={1.3} md={4} sm={8} xs={12} paddingTop={3} paddingBottom={1.4}>
           <Button variant='contained'
@@ -279,10 +265,6 @@ function Monitor() {
         sm={5}
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-=======
-{/* -----------------Table for Desktop----------------------------------- */}
-      <Grid item mt={2}  md={12} lg={12} sm={5} xs={4}sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
->>>>>>> a04c6df019890923348d7f1c30f96359f8e07f9a
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
@@ -323,7 +305,6 @@ function Monitor() {
       </Grid>
       {/* --------------------Table for Moblie--------------------------------- */}
 
-<<<<<<< HEAD
       <Grid container md={12}
         lg={12}
         sm={12}
@@ -399,84 +380,6 @@ function Monitor() {
           </Grid>
         </Paper>
       </Grid>
-=======
-<Grid item md={12}
-     lg={12}
-     sm={12}
-     xs={12}
-     mt={2}
-     sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
-    <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-     <Grid container mt={2} direction="column">
-      {Object.keys(data).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{data[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2}  direction="column">
-      {Object.keys(Tata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item  xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{Tata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Mata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{Mata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-     {/* ----------------------Dreak---------------------------------- */}
-     <Grid container mt={2} direction="column">
-      {Object.keys(Sata).map((header, index) => (
-       <Grid container key={index}>
-        {/* Header Section */}
-        <StyledGridItem item xs={6}>
-         <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-          {header}
-         </Typography>
-        </StyledGridItem>
-        {/* Content Section */}
-        <StyledContent item xs={6}>
-         <Typography variant="body1">{Sata[header]}</Typography>
-        </StyledContent>
-       </Grid>
-      ))}
-     </Grid>
-    </Paper>
-   </Grid>
->>>>>>> a04c6df019890923348d7f1c30f96359f8e07f9a
     </div >
   )
 }
