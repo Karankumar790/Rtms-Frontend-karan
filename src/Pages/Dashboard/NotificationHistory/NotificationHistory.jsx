@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import { FormControl, Grid, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
-
 
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -95,105 +94,129 @@ const rows = [
 
 function NotificationHistory() {
   const [age, setAge] = React.useState('');
-  const [notification, setNotification] = React.useState('');
-  const [installation, setInstallation] = React.useState('');
+  const [parameter, setParameter] = React.useState('');
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
   };
 
-  const handleChangeNotification = (event) => {
-    setNotification(event.target.value);
+  const handleChangeParameter = (event) => {
+    setParameter(event.target.value);
   };
 
-  const handleChangeInstallation = (event) => {
-    setInstallation(event.target.value);
-  };
   return (
     <div>
       <Grid container>
         <IconButton>
-          <NotificationsIcon sx={{fontSize:"25px"}}/>
+          <NotificationsIcon sx={{fontSize:"40px",color:'red'}}/>
         </IconButton>
-        <Typography variant='h4'>Notification History</Typography>
+        <Typography variant='h4'mt={1}>Notification History</Typography>
       </Grid>
-      <Grid container spacing={3} pt={1} >
-        <Grid item xs={12} sm={8} md={6} lg={3} >
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Notification No.</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={notification}
-              label="Well Location"
-              onChange={handleChangeNotification}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+      <Grid container spacing={3} pt={3} >
         <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Installation</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={installation}
-              label="Well Location"
-              onChange={handleChangeInstallation}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
+          <FormControl fullWidth>
+            <TextField
+              fullWidth
+              type="date"
+              size='small'
+              label='Start Date'
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={{
+                // Optional: Customize the TextField styling as needed
+                '.MuiInputBase-root': {
+                  // Optional: Style the input field if needed
+                },
+                '& .MuiInputLabel-root': {
+                  // Optional: Style the label if needed
+                },
+                '& .MuiInputBase-input': {
+                  // Optional: Style the input value if needed
+                }
+              }}
+            />
           </FormControl>
 
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Number</InputLabel>
+            <TextField
+              fullWidth
+              type="date"
+              size='small'
+              label='End Date'
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={{
+                // Optional: Customize the TextField styling as needed
+                '.MuiInputBase-root': {
+                  // Optional: Style the input field if needed
+                },
+                '& .MuiInputLabel-root': {
+                  // Optional: Style the label if needed
+                },
+                '& .MuiInputBase-input': {
+                  // Optional: Style the input value if needed
+                }
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <TextField variant='outlined' size='small' label='Notification No.' />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
             <Select
               labelId="demo-select-small-label"
               id="demo-select-large"
-              value={age}
+              value={parameter}
               label="Well Location"
-              onChange={handleChange}
+              onChange={handleChangeParameter}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              <MenuItem value={0}>None</MenuItem>
+              <MenuItem value={1}>Open Notification</MenuItem>
+              <MenuItem value={2}>Close with comment </MenuItem>
+              <MenuItem value={3}>Conveted to complaint</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container display={'flex'} justifyContent={'end'} >
+        <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>
+          <Button variant='contained'
+            sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+
+            }} fullWidth>
+            Submit
+          </Button>
         </Grid>
       </Grid>
       {/* <Grid container mt={3}>
@@ -228,12 +251,12 @@ function NotificationHistory() {
         </TableContainer>
       </Grid> */}
 
-<Grid container md={12}
+      <Grid container md={12}
         lg={12}
         sm={5}
         xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block"}}} mt={1}>
-        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto'}}>
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }} mt={1}>
+        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
               <TableRow  >
@@ -248,9 +271,9 @@ function NotificationHistory() {
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}> 
+                  <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}>
                     {row.name}
-                    
+
                   </StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}>5/6/2024</StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
@@ -265,7 +288,7 @@ function NotificationHistory() {
           </Table>
         </TableContainer>
       </Grid>
-{/* ------------------------------Table for Desktop---------------------------- */}
+      {/* ------------------------------Table for Desktop---------------------------- */}
       <Grid container md={12}
         lg={12}
         sm={12}

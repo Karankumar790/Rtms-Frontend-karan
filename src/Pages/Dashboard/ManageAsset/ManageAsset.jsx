@@ -13,7 +13,7 @@ import 'react-tabs/style/react-tabs.css';
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AssetsIcon from '@mui/icons-material/AccountBalance';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 // -------------------Table Function-------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -64,46 +64,58 @@ function ManageAsset() {
   return (
     <div>
       <Paper>
-        <Grid container gap={3} p={2}>
+        <Grid container gap={1} p={3}>
           <IconButton>
-            <AssetsIcon sx={{ fontSize: 25 }} />
+            <AssetsIcon sx={{ fontSize: 30, color: "green " }} />
           </IconButton>
-          <Typography variant="h4">Organization </Typography>
+          <Typography variant="h4" mt={1}>Organization </Typography>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">Asset </Typography>
-              <TextField variant="outlined" fullWidth />
+          <Grid container spacing={2} p={2} mt={1}>
+            <Grid container lg={10} spacing={1} >
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">Organization Name </Typography>
+                <TextField variant="outlined" size="small" fullWidth />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">Address</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">City</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">State</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">Country</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">Pin Code</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">Phone</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+              <Grid item xs={12} sm={3} md={3} lg={3}>
+                <Typography variant="h6">Fax</Typography>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">Address Line 1</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
+            <Grid item gap={2} lg={2}  >
+              <Box sx={{
+                backgroundImage: `url(https://wp-itplive.s3.us-east-1.amazonaws.com/cloud/2023/11/21/image-10.png)`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '100%', // Set the height of the box
+                width: '100%', // Set the width of the box
+              }}
+              >
+              </Box>
             </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">City</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">State</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">Country</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">Pin Code</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">Phone</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={3} md={3} lg={3}>
-              <Typography variant="h6">Fax</Typography>
-              <TextField variant="outlined" fullWidth value={""} />
-            </Grid>
-
           </Grid>
 
         </Grid>
@@ -111,12 +123,99 @@ function ManageAsset() {
       {/* ------------Input textfield for table------------------- */}
       <Card sx={{ my: 2 }}>
         <CardContent>
-          <Typography variant="h5"> Add Department</Typography>
           <Grid container spacing={2} mt={0.1}>
-            <Grid item xs={12} sm={6} md={3}>
-              <TextField variant="outlined" label="Department" inputRef={inputRef} fullWidth />
+            <Grid item xs={12} sm={3.5} md={3.5} lg={3.5} gap={1} display='flex' flexDirection={'column'} >
+              <Typography variant="h5"> Add Department</Typography>
+              <Box display='flex' gap={1}>
+                <TextField variant="outlined" size="small" label="Department" inputRef={inputRef} fullWidth />
+                <Button variant="contained" className="btn-primary" onClick={handleAdd}>
+                  Add
+                </Button>
+              </Box>
+              <Grid container height={'400px'} border='1px solid black'>
+                <Grid item lg={10.5} md={10} sm={10} xs={10} p={1}>
+                  {/* <TextField fullWidth size="small" ></TextField> */}
+                </Grid>
+                <Grid item lg={1.5} md={2} sm={2} xs={2} >
+                  <IconButton >
+                    <DeleteIcon sx={{ fontSize: "30px", color: "red" }} />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+
+            <Grid item xs={12} sm={3.5} md={3.5} lg={3.5} gap={1} display='flex' flexDirection={'column'}>
+              <Typography variant="h5"> Add Position</Typography>
+              <Box display='flex' gap={1}>
+                <TextField variant="outlined" size="small" label="Position" inputRef={inputRef} fullWidth />
+                <Button variant="contained" className="btn-primary" size="small" onClick={handleAdd}>
+                  Add
+                </Button>
+              </Box>
+              <Grid container height={'400px'} border='1px solid black'>
+                <Grid item lg={10.5} md={10} sm={10} xs={10} p={1}>
+                  {/* <TextField fullWidth  size="small"></TextField> */}
+                </Grid>
+                <Grid item lg={1.5} md={2} sm={2} xs={2}>
+                  <IconButton>
+                    <DeleteIcon sx={{ fontSize: "30px", color: "red" }} />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
+
+
+            <Grid item xs={12} sm={6} md={5} lg={5} gap={1} display='flex' flexDirection={'column'}>
+              <Typography variant="h5"> Approval Chain</Typography>
+              <Box display='flex' gap={1}>
+                <TextField variant="outlined" label="Action" size="small" fullWidth />
+                <TextField variant="outlined" label="Level-1" size="small" fullWidth />
+                <TextField variant="outlined" label="Level-2" size="small" fullWidth />
+                <Button variant="contained" size="small" className="btn-primary" onClick={handleAdd}>
+                  Add
+                </Button>
+              </Box>
+              <Grid container height={'400px'} border='1px solid black' >
+                <Grid item lg={11} md={11} sm={11} xs={10} p={1}>
+                  {/* <TextField fullWidth ></TextField> */}
+                </Grid>
+                <Grid item lg={1} md={1} sm={1} xs={2}>
+                  <IconButton>
+                    <DeleteIcon sx={{ fontSize: "30px", color: "red" }} />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid container mt={1}  display={"flex"} justifyContent={"end"} gap={1} >
+              <Box >
+            <Button variant='contained'
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+                },
+                fontSize: '16px',
+                width:'160px',
+              }}>
+              SAVE
+            </Button>
+            </Box>
+            <Box>
+            <Button variant='contained'
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+                },
+                fontSize: '16px',
+                width:'160px',
+               
+              }}>
+              EDIT
+            </Button>
+            </Box>
+            </Grid>
+            {/* <Grid item xs={12} sm={6} md={3}>
               <TextField variant="outlined" label="Head of Department" inputRef={inputRef1} fullWidth />
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -124,18 +223,19 @@ function ManageAsset() {
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
               <TextField variant="outlined" label="Phone" inputRef={inputRef3} fullWidth />
-            </Grid>
-            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
+            </Grid> */}
+            {/* <Grid item xs={12} >
               <Button variant="contained" className="btn-primary" onClick={handleAdd}>
                 Add Department
               </Button>
-            </Grid>
+            </Grid> */}
+            {/* </Grid> */}
           </Grid>
         </CardContent>
       </Card>
       {/* ----------------------Postion-------------------------------- */}
 
-      <Card sx={{ my: 2 }}>
+      {/* <Card sx={{ my: 2 }}>
         <CardContent>
           <Typography variant="h5"> Add Postion</Typography>
           <Grid container spacing={2} mt={0.1}>
@@ -158,10 +258,10 @@ function ManageAsset() {
             </Grid>
           </Grid>
         </CardContent>
-      </Card>
+      </Card> */}
       {/* -----------------------Approval chain------------------------- */}
 
-      <Card sx={{ my: 2 }} >
+      {/* <Card sx={{ my: 2 }} >
 
         <Grid >
           <Box >
@@ -214,19 +314,19 @@ function ManageAsset() {
             </Box>
           </Grid>
         </Grid>
-      </Card>
+      </Card> */}
       {/* -------------------------Table-------------------------- */}
 
 
-      <Grid container>
+      {/* <Grid container>
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>
             <TabList>
               <Tab>
-                <Typography fontSize={'small'}>Departments</Typography>
+                <Typography fontSize={'large'}>Departments</Typography>
               </Tab>
               <Tab>
-                <Typography fontSize={'small'}>Permissions</Typography>
+                <Typography fontSize={'large'}>Permissions</Typography>
 
               </Tab>
             </TabList>
@@ -239,8 +339,8 @@ function ManageAsset() {
                       <StyledTableCell sx={{ fontSize: '18px' }} align="left">Head Of Department</StyledTableCell>
                       <StyledTableCell sx={{ fontSize: '18px' }} align="left">Email</StyledTableCell>
                       <StyledTableCell sx={{ fontSize: '18px' }} align="left">Mobile Number</StyledTableCell>
-                      {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell> */}
-                      {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell> */}
+                      <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
+                      <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -261,12 +361,12 @@ function ManageAsset() {
                 <Table aria-label="customized table" className="responsive-table">
                   <TableHead >
                     <TableRow>
-                      <StyledTableCell>Permission</StyledTableCell>
-                      <StyledTableCell align="left">Data/TIme</StyledTableCell>
-                      <StyledTableCell align="left">Well Location</StyledTableCell>
-                      <StyledTableCell align="left">Well Installation</StyledTableCell>
-                      <StyledTableCell align="left">Well number</StyledTableCell>
-                      <StyledTableCell align="left">Description</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }}>Permission</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Data/TIme</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Well Location</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Well Installation</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Well number</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Description</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -284,7 +384,7 @@ function ManageAsset() {
             </TabPanel>
           </Tabs>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div >
   );
 }
