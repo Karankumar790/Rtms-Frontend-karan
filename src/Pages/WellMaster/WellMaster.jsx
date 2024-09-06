@@ -109,7 +109,7 @@ function WellMaster() {
     return (
         <div>
               <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={1} paddingBottom={2}>
-                <Grid item  lg={5} md={8} sm={12} xs={12} display={'flex'} gap={1}>
+                <Grid item lg={6} md={6} sm={6} xs={6} display={'flex'} gap={1}>
                     <Box sx={{ height: '50px', width: '50px' }}>
                         <img src={master} alt='img' height={'50px'} width={'50px'} />
                     </Box>
@@ -117,7 +117,7 @@ function WellMaster() {
                         <Typography variant='h4'>Well Master</Typography>
                     </Box>
                 </Grid>
-                <Grid item lg={1.3} md={8} sm={12} xs={12} display={'flex'} justifyContent={'end'}>
+                <Grid item lg={6} md={6} sm={6} xs={6} display={'flex'} justifyContent={'end'}>
                     <Link to='/dashboard/addwell'>
                         <Button variant='contained'
                             sx={{
