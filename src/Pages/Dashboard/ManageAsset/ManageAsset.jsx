@@ -186,7 +186,7 @@ function ManageAsset() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid container mt={1}  display={"flex"} justifyContent={"end"} gap={1}>
+            <Grid container mt={1}  display={"flex"} justifyContent={"end"} gap={1} >
               <Box >
             <Button variant='contained'
               sx={{
@@ -195,6 +195,7 @@ function ManageAsset() {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
                 },
                 fontSize: '16px',
+                width:'160px',
               }}>
               SAVE
             </Button>
@@ -207,6 +208,8 @@ function ManageAsset() {
                   backgroundColor: 'darkgreen', // Optional: Change color on hover
                 },
                 fontSize: '16px',
+                width:'160px',
+               
               }}>
               EDIT
             </Button>
