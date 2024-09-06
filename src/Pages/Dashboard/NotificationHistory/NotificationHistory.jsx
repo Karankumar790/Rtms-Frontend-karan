@@ -109,6 +109,9 @@ function NotificationHistory() {
   return (
     <div>
       <Grid container>
+        <IconButton>
+          <NotificationsIcon sx={{fontSize:"25px"}}/>
+        </IconButton>
         <Typography variant='h4'>Notification History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3} >
@@ -290,6 +293,7 @@ function NotificationHistory() {
         lg={12}
         sm={12}
         xs={12}
+        mt={2}
         sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
         <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
           <Grid container mt={2} direction="column">

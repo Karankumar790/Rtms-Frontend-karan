@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/plots": "^2.2.8",
+    "@date-io/date-fns": "^3.0.0",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
@@ -23,6 +24,7 @@
     "apexcharts": "^3.52.0",
     "axios": "^1.7.5",
     "boxicons": "^2.1.4",
+    "date-fns": "^3.6.0",
     "google-map-react": "^2.2.1",
     "mui-one-time-password-input": "^2.0.3",
     "react": "^18.3.1",
