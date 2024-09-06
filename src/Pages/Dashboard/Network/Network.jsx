@@ -104,26 +104,26 @@ const rows = [
 function DeviceManage() {
     return (
         <div>
-            <Grid container>
-                <Typography variant='h4'>Network Manager</Typography>
-            </Grid>
-            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
-                <Grid item p={1}>
-                    <Box sx={{ height: '100px', width: '100px' }}>
-                        <img src={Network} alt='img' height={'100px'} width={'100px'} />
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
+                <Grid item lg={4} md={8} sm={12} xs={12} display={'flex'} gap={1}>
+                    <Box sx={{ height: '50px', width: '50px' }}>
+                        <img src={Network} alt='img' height={'50px'} width={'50px'} />
+                    </Box>
+                    <Box>
+                        <Typography variant='h4'>Device Manager</Typography>
                     </Box>
                 </Grid>
-                <Grid item p={4}>
+                <Grid item  display={'flex'} justifyContent={'end'} lg={2} md={8} sm={12} xs={12}>
                     <Link to='/dashboard/AddDevices'>
-                        <Button variant='contained' 
-                          sx={{
-                            backgroundColor: 'green',   // Change button color to green
-                            '&:hover': {
-                                backgroundColor: 'darkgreen', // Optional: Change color on hover
-                            },
-                            fontSize: '16px',
+                        <Button variant='contained'
+                            sx={{
+                                backgroundColor: 'green',   // Change button color to green
+                                '&:hover': {
+                                    backgroundColor: 'darkgreen', // Optional: Change color on hover
+                                },
+                                fontSize: '16px',
                             }}>
-                            Add Network +
+                            Add Device +
                         </Button>
                     </Link>
                 </Grid>
