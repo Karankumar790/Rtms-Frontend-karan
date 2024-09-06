@@ -117,7 +117,7 @@ function DeviceManage() {
                                 },
                                 fontSize: '16px',
                             }}>
-                            Add Device +
+                            Add Device
                         </Button>
                     </Link>
                 </Grid>

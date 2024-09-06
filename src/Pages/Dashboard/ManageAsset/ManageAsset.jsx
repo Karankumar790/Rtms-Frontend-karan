@@ -223,10 +223,10 @@ function ManageAsset() {
           <Tabs>
             <TabList>
               <Tab>
-                <Typography fontSize={'small'}>Departments</Typography>
+                <Typography fontSize={'large'}>Departments</Typography>
               </Tab>
               <Tab>
-                <Typography fontSize={'small'}>Permissions</Typography>
+                <Typography fontSize={'large'}>Permissions</Typography>
 
               </Tab>
             </TabList>
@@ -261,12 +261,12 @@ function ManageAsset() {
                 <Table aria-label="customized table" className="responsive-table">
                   <TableHead >
                     <TableRow>
-                      <StyledTableCell>Permission</StyledTableCell>
-                      <StyledTableCell align="left">Data/TIme</StyledTableCell>
-                      <StyledTableCell align="left">Well Location</StyledTableCell>
-                      <StyledTableCell align="left">Well Installation</StyledTableCell>
-                      <StyledTableCell align="left">Well number</StyledTableCell>
-                      <StyledTableCell align="left">Description</StyledTableCell>
+                      <StyledTableCell sx={{ fontSize: '18px' }}>Permission</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Data/TIme</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Well Location</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Well Installation</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Well number</StyledTableCell>
+                      <StyledTableCell align="left" sx={{ fontSize: '18px' }}>Description</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
