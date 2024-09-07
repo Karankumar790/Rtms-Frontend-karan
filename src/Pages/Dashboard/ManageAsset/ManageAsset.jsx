@@ -106,7 +106,7 @@ function ManageAsset() {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green " }} />
           </IconButton>
-          <Typography variant="h4" mt={1}>Organization </Typography>
+          <Typography variant="h4" mt={1} >Organization </Typography>
 
           <Grid container spacing={2} p={2} mt={1}>
             <Grid container lg={10} spacing={1} >
@@ -170,9 +170,9 @@ function ManageAsset() {
                 <Button variant="contained" className="btn-primary" onClick={handleAdd}>
                   Add
                 </Button>
-                <Button sx={{ minWidth: "0px" }}>
+                {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
-                </Button>
+                </Button> */}
               </Box>
               {/* /-----------------------------------------------Table--------------------------------- */}
               <Grid container>
@@ -211,9 +211,9 @@ function ManageAsset() {
                 <Button variant="contained" className="btn-primary" size="small" onClick={handleAdd}>
                   Add
                 </Button>
-                <Button sx={{ minWidth: "0px" }}>
+                {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
-                </Button>
+                </Button> */}
               </Box>
               {/* -----------------------------------------------Table 2------------------------------------------------------ */}
               <Grid container>
@@ -254,9 +254,9 @@ function ManageAsset() {
                 <Button variant="contained" size="small" className="btn-primary" onClick={handleAdd}>
                   Add
                 </Button>
-                <Button sx={{ minWidth: "0px" }}>
+                {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
-                </Button>
+                </Button> */}
               </Box>
               {/* ----------------------------------------------------Table 3-------------------------------------------------- */}
               <Grid container>

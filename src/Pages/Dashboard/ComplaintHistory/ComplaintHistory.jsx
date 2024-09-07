@@ -236,7 +236,6 @@ function ComplaintHistory() {
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={0}>None</MenuItem>
               <MenuItem value={1}>Pending Complaints</MenuItem>
               <MenuItem value={2}>Resloved Complaints</MenuItem>
               <MenuItem value={3}>Unsolved Complaints</MenuItem>
