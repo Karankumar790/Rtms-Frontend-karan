@@ -105,15 +105,15 @@ function DeviceManage() {
     return (
         <div>
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
-                <Grid item lg={4} md={8} sm={12} xs={12} display={'flex'} gap={1}>
+                <Grid item lg={6} md={6} sm={6} xs={6} display={'flex'} gap={1}>
                     <Box sx={{ height: '50px', width: '50px' }}>
                         <img src={Network} alt='img' height={'50px'} width={'50px'} />
                     </Box>
                     <Box>
-                        <Typography variant='h4'>Device Manager</Typography>
+                        <Typography variant='h4'>Network Manager</Typography>
                     </Box>
                 </Grid>
-                <Grid item  display={'flex'} justifyContent={'end'} lg={2} md={8} sm={12} xs={12}>
+                <Grid item  display={'flex'} justifyContent={'end'} lg={6} md={6} sm={6} xs={6}>
                     <Link to='/dashboard/AddDevices'>
                         <Button variant='contained'
                             sx={{

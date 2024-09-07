@@ -110,12 +110,12 @@ function NotificationHistory() {
     <div>
       <Grid container>
         <IconButton>
-          <NotificationsIcon sx={{fontSize:"25px"}}/>
+          <NotificationsIcon sx={{fontSize:"40px",color:'red'}}/>
         </IconButton>
-        <Typography variant='h4'>Notification History</Typography>
+        <Typography variant='h4'mt={1}>Notification History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3} >
-        <Grid item sm={6} md={3} xs={12} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth>
             <TextField
               fullWidth

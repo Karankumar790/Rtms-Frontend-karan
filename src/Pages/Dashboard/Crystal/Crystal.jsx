@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageContainer from "../../../components/HOC/PageContainer";
 import { Button, Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
 import Input from "@mui/joy/Input";
@@ -17,7 +17,8 @@ import Paper from "@mui/material/Paper";
 import Chart from "react-apexcharts";
 import { Box } from "@mui/system";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import BallotIcon from '@mui/icons-material/Ballot';
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -54,6 +55,8 @@ const rows = [
   createData("4"),
   createData("5"),
   createData("5"),
+  createData("5"),
+  createData("5"),
 ];
 
 
@@ -71,34 +74,46 @@ const StyledContent = styled(Grid)(({ theme }) => ({
 
 let data = {
   "Well No": "1",
-  "Location": "New York",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar Power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
 };
 
 let Tata = {
-  "Well No": "2",
-  "Location": "Delhi",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Well No": "1",
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar Power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
 };
 
 let Mata = {
-  "Well No": "3",
-  "Location": "UP",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Well No": "1",
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar Power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W",
 };
 
 let Sata = {
-  "Well No": "4",
-  "Location": "MP",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Well No": "1",
+  "GIP (kg)": "New York",
+  "CHP (kg)": "01/01/2021",
+  "THP (kg)": "40.7128 N",
+  "Battery %": "74.0060 W",
+  "Solar Power (V)": "74.0060 W",
+  "Communication": "74.0060 W",
+  "Flow Status": "74.0060 W"
 };
 
 
@@ -107,6 +122,7 @@ function Monitor() {
   const [parameters, setParameters] = React.useState("");
   const [report, setReport] = React.useState("");
   const [resolution, setResolution] = React.useState("");
+  const [selectedDate, setSelectedDate] = useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -121,6 +137,10 @@ function Monitor() {
   };
   const handleChangeResolution = (event) => {
     setResolution(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
   };
 
   const lineChartOptions = {
@@ -142,10 +162,18 @@ function Monitor() {
     },
   ];
 
+  const handleDownload = () => {
+    // Logic for downloading table data
+    console.log("Download button clicked");
+  };
+
+
   return (
     <div>
       <Grid container gap={1}>
-        <Typography fontSize='x-large'>Well Report</Typography>
+        {/* ----------------------Icon and Well Report-----------------------------------  */}
+        <Typography fontSize='x-large'> <IconButton><SummarizeIcon sx={{ fontSize: 40, color: 'blue' }} /></IconButton>Well Report</Typography>
+        {/* --------------------------Well Report Inputs Field------------------------------------- */}
         <Grid container spacing={2}>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth size="small">
@@ -166,57 +194,33 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-          {/* <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">
-              Well Installation
-            </InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={installation}
-              label="Well Installation"
-              onChange={handleChangeInstallation}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-select-large-label">Well Number</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={number}
-              label="Well Number"
-              onChange={handleChangeNumber}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid> */}
-
           <Grid item sm={6} md={3} xs={12} lg={3}>
-            <FormControl fullWidth >
+            <FormControl fullWidth>
               <TextField
-                size="small"
+                fullWidth
                 type="date"
-                slotProps={{
-                  input: {
-                    min: "2001-02-16",
-                    max: "2024-08-10",
+                size='small'
+                label='Start Date'
+                value={selectedDate}
+                onChange={handleDateChange}
+                InputLabelProps={{
+                  shrink: true, // Ensures the label is always visible
+                }}
+                inputProps={{
+                  min: "2001-02-16",
+                  max: "2024-08-07",
+                }}
+                sx={{
+                  // Optional: Customize the TextField styling as needed
+                  '.MuiInputBase-root': {
+                    // Optional: Style the input field if needed
                   },
+                  '& .MuiInputLabel-root': {
+                    // Optional: Style the label if needed
+                  },
+                  '& .MuiInputBase-input': {
+                    // Optional: Style the input value if needed
+                  }
                 }}
               />
             </FormControl>
@@ -248,15 +252,18 @@ function Monitor() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
+                <MenuItem value={10}>1 minute</MenuItem>
+                <MenuItem value={20}>1 hour</MenuItem>
+                <MenuItem value={30}>1 day</MenuItem>
+                <MenuItem value={40}>1 week</MenuItem>
+                <MenuItem value={50}>1 month</MenuItem>
               </Select>
             </FormControl>
           </Grid>
         </Grid>
-
-        <Typography fontSize='x-large'>Global Report</Typography>
+        {/* ---------------------Icon and Globle Report------------------------------------ */}
+        <Typography fontSize='x-large'> <IconButton><BallotIcon sx={{ fontSize: 40, color: 'blue' }} /></IconButton>Global Report</Typography>
+        {/* ---------------------Globle Report Iputs Field--------------------------------- */}
         <Grid container spacing={3}>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth size="small">
@@ -271,9 +278,13 @@ function Monitor() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
+                <MenuItem value={10}>Low Bettery</MenuItem>
+                <MenuItem value={20}>Flowing Well</MenuItem>
+                <MenuItem value={30}>Not Flowing Well</MenuItem>
+                <MenuItem value={40}>Low Solar Power</MenuItem>
+                <MenuItem value={50}>Network Error</MenuItem>
+                <MenuItem value={60}>Low Pressure</MenuItem>
+                <MenuItem value={70}>High Pressure</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -319,14 +330,31 @@ function Monitor() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>UP</MenuItem>
-                <MenuItem value={20}>MP</MenuItem>
-                <MenuItem value={30}>WB</MenuItem>
+                <MenuItem value={10}>1 minute</MenuItem>
+                <MenuItem value={20}>1 hour</MenuItem>
+                <MenuItem value={30}>1 day</MenuItem>
+                <MenuItem value={40}>1 week</MenuItem>
+                <MenuItem value={50}>1 month</MenuItem>
               </Select>
             </FormControl>
           </Grid>
         </Grid>
+        {/* ----------------------------Button---------------------------------- */}
+        <Grid container display={'flex'} justifyContent={'end'} >
+          <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>
+            <Button variant='contained'
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+                },
+                fontSize: '16px',
 
+              }} fullWidth>
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
         {/* ----------------Table--------------------------- */}
         <Grid container mt={2}>
           <Tabs style={{ width: '100%', padding: '.12%' }}>
@@ -340,28 +368,33 @@ function Monitor() {
             </TabList>
             <TabPanel >
               <Grid container sx={{ display: { sm: "block", xs: "none", md: "block", lg: "block" } }}>
-
                 <TableContainer component={Paper} >
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead>
                       <TableRow>
                         <StyledTableCell sx={{ fontSize: "18px" }}>
-                          Notification
+                          Well No.
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          Data/Time
+                          GIP (kg)
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          Location
+                          CHP (kg)
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          Installation
+                          THP (kg)
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          number
+                          Battery %
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          Description
+                          Solar Power (V)
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          Communication
+                        </StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                          Flow Status
                         </StyledTableCell>
                       </TableRow>
                     </TableHead>
@@ -376,11 +409,26 @@ function Monitor() {
                           <StyledTableCell align="left">gbz</StyledTableCell>
                           <StyledTableCell align="left">yes</StyledTableCell>
                           <StyledTableCell align="left">all good</StyledTableCell>
+                          <StyledTableCell align="left">Bad</StyledTableCell>
+                          <StyledTableCell align="left">High</StyledTableCell>
                         </StyledTableRow>
                       ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
+                <Grid item display={'flex'} justifyContent={'end'} lg={12} md={12} sm={12} xs={12} mt={2}>
+                  <Button variant='contained'
+                    onClick={handleDownload}
+                    sx={{
+                      backgroundColor: 'green',   // Change button color to green
+                      '&:hover': {
+                        backgroundColor: 'darkgreen', // Optional: Change color on hover
+                      },
+                      fontSize: '16px',
+                    }}>
+                    Download
+                  </Button>
+                </Grid>
               </Grid>
               {/* ----------------------Table for Moblie-------------- */}
               <Grid container md={12}
@@ -457,7 +505,21 @@ function Monitor() {
                     ))}
                   </Grid>
                 </Paper>
+                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2} sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" }, display:'flex', justifyContent:'end' }}>
+                  <Button variant='contained'
+                    onClick={handleDownload}
+                    sx={{
+                      backgroundColor: 'green',   // Change button color to green
+                      '&:hover': {
+                        backgroundColor: 'darkgreen', // Optional: Change color on hover
+                      },
+                      fontSize: '16px',
+                    }}>
+                    Download
+                  </Button>
+                </Grid>
               </Grid>
+
             </TabPanel>
             {/* ---------------chart---------------------------- */}
             <TabPanel style={{ width: '100%' }}>

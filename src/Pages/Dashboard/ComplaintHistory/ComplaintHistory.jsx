@@ -146,9 +146,9 @@ function ComplaintHistory() {
     <div>
       <Grid container>
         <IconButton>
-          <ComplaintIcon sx={{ fontSize: "25px" }} />
+          <ComplaintIcon sx={{ fontSize: "40px",color:'red' }} />
         </IconButton>
-        <Typography variant='h4'>Complaint History</Typography>
+        <Typography variant='h4'mt={1}>Complaint History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3}>
         <Grid item sm={6} md={3} xs={12} lg={3}>
