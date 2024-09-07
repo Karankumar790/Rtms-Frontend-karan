@@ -10,35 +10,70 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import { styled, useTheme } from "@mui/material/styles";
 import { Email } from '@mui/icons-material';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast'
 
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
-    //---------------------FOR VALIDATION--------------------------------
+    const navigate = useNavigate()
+    const [inputValues, setInputValues] = useState({
+        username: '',
+        email: '',
+        contactNumber: '',
+        employeeID: '',
+        assetName: '',
+        department: '',
+        roleInRTMS: '',
+        idCardPhoto: null,
+        passportPhoto: null,
+        emailOtp: '',
+        contactOtp: '',
+    });
 
-    const initialValues = { username: '', Email: '', mobile: '', employeeId: '', organization: '', department: '', role: '' };
-
-    const [inputValues, setInputValues] = useState(initialValues);
-    const [hasTouchedUsername, setHasTouchedUsername] = useState({
-        username: false,
-        email: false,
-        mobile: false,
-        employeeId: false,
-        organization: false,
-        department: false,
-        role: false,
-    }); // New state to track if the username field has been touched
 
     const handleUsernameChange = (e) => {
-        const { name, value } = e.target;
-        setInputValues({ ...inputValues, [name]: value });
-        setHasTouchedUsername({ ...hasTouchedUsername, [name]: false }); // Mark the username field as touched when the user types
+        const { name, value, files, type } = e.target;
+        setInputValues((pre) => ({ ...pre, [name]: type === 'file' ? files[0] : value }));
+        console.log(value)
     };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // console.log("====Submit========", inputValues)
+        // const formData = new FormData();
+        // formData.append('username', inputValues.username);
+        // formData.append('email', inputValues.email);
+        // formData.append('contactNumber', inputValues.contactNumber);
+        // formData.append('employeeID', inputValues.employeeID);
+        // formData.append('assetName', inputValues.assetName);
+        // formData.append('department', inputValues.department);
+        // formData.append('roleInRTMS', inputValues.roleInRTMS);
+        // formData.append('idCardPhoto', inputValues.idCardPhoto);
+        // formData.append('passportPhoto', inputValues.passportPhoto);
+        // formData.append('emailOtp', inputValues.emailOtp);
+        // formData.append('contactOtp', inputValues.contactOtp);
+        try {
+            // Send the formData using Axios
+            const response = await axios.post('https://rtms-backend.onrender.com/api/v1/users/send-otp-register', inputValues,
+                // {
+                //     headers: {
+                //         'Content-Type': 'multipart/form-data',  // Important for file upload
+                //     },
+                // }
+            );
+            // Handle success response
+            const { message } = response.data;
+            console.log('Success:', response.data);
+            toast?.success(message)
+            navigate('/otpsign')
 
-    const handleBlur = (e) => {
-        const { name } = e.target;
-        setHasTouchedUsername({ ...touchedFields, [name]: true });
-    };
+        } catch (error) {
+            // Handle error
+            console.error('Error uploading file:', error);
+        }
+
+    }
 
     return (
 
@@ -58,17 +93,14 @@ function Signup() {
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
+                                                    fullWidth
                                                     className='custom-textfield'
                                                     label="Username"
                                                     variant="standard"
                                                     color="info"
                                                     name="username"
-                                                    value={inputValues.username}
+                                                    value={inputValues?.username}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername && !inputValues.username ? "Username is required" : ''}
-                                                    error={hasTouchedUsername && !inputValues.username}
-                                                    onBlur={handleBlur}
-                                                    fullWidth
                                                 />
                                             </Box>
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -80,28 +112,22 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.email}
+                                                    value={inputValues?.email}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername.email && !inputValues.email ? "email is required" : ''}
-                                                    error={hasTouchedUsername.email && !inputValues.email}
-                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <CallIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
+                                                    fullWidth
                                                     label=" Mobile"
-                                                    name="mobile"
+                                                    name="contactNumber"
                                                     variant="standard"
                                                     color="info"
-                                                    fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.mobile}
+                                                    value={inputValues?.contactNumber}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername.mobile && !inputValues.mobile ? "mobile is required" : ''}
-                                                    error={hasTouchedUsername.mobile && !inputValues.mobile}
-                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -109,16 +135,13 @@ function Signup() {
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Employee ID"
-                                                    name="employeeId"
+                                                    name="employeeID"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.employeeId}
+                                                    value={inputValues?.employeeID}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername.employeeId && !inputValues.employeeId ? "Username is required" : ''}
-                                                    error={hasTouchedUsername.employeeId && !inputValues.employeeId}
-                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
@@ -126,25 +149,18 @@ function Signup() {
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                 <TextField
                                                     label="Organization"
-                                                    name="organization"
+                                                    name="assetName"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.organization}
+                                                    value={inputValues?.assetName}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername.organization && !inputValues.organization ? "Username is required" : ''}
-                                                    error={hasTouchedUsername.organization && !inputValues.organization}
-                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
-
-
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
-
-
                                                 <TextField
                                                     label="Department"
                                                     name="department"
@@ -152,32 +168,22 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.department}
+                                                    value={inputValues?.department}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername.department && !inputValues.department ? "department is required" : ''}
-                                                    error={hasTouchedUsername.department && !inputValues.department}
-                                                    onBlur={handleBlur}
                                                 />
                                             </Box>
 
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
-
-
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
-
-
                                                 <TextField
                                                     label="Role in RTMS"
-                                                    name="role"
+                                                    name="roleInRTMS"
                                                     variant="standard"
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues.role}
+                                                    value={inputValues?.roleInRTMS}
                                                     onChange={handleUsernameChange}
-                                                    helperText={hasTouchedUsername.role && !inputValues.role ? "Username is required" : ''}
-                                                    error={hasTouchedUsername.role && !inputValues.role}
-                                                    onBlur={handleBlur}
                                                 />
 
                                             </Box>
@@ -190,7 +196,8 @@ function Signup() {
                                                         <input
                                                             type="file"
                                                             accept="image/*"
-                                                            onChange={(e) => setSelectedPhoto(e.target.files[0])}
+                                                            name='passportPhoto'
+                                                            onChange={handleUsernameChange}
                                                             hidden
                                                         />
                                                         {selectedPhoto ? (
@@ -206,10 +213,11 @@ function Signup() {
                                                     <CameraAltIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
                                                     <Button variant="outlined" sx={{ minWidth: "80px", backgroundColor: "#D3D3D3", marginRight: "2px", border: "black", height: "30px", padding: "4px", width: "100%", cursor: "pointer", overflow: "scroll" }} component="label" >
                                                         <input
+                                                            hidden
                                                             type="file"
                                                             accept="image/*"
-                                                            onChange={(e) => setIdCard(e.target.files[0])}
-                                                            hidden
+                                                            name='idCardPhoto'
+                                                            onChange={handleUsernameChange}
                                                         />
                                                         {IdCard ? (
                                                             <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -224,18 +232,19 @@ function Signup() {
                                         </Grid>
 
                                         <Grid item>
-                                            <Link to='/Otpsign' style={{ textDecoration: "none", color: 'white' }}>
-                                                <Button variant="contained" className='btn-primary' fullWidth href="#contained-buttons">
+                                            <Link style={{ textDecoration: "none", color: 'white' }}>
+                                                <Button variant="contained" className='btn-primary' fullWidth href="#contained-buttons" onClick={handleSubmit}>
                                                     <Typography variant='h6'>Next</Typography>
                                                 </Button>
                                             </Link>
                                         </Grid>
-                                        <Grid item textAlign="center" mt={.5}>
-                                            <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
-                                            <Typography fontSize={'medium'}>Have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
-                                        </Grid>
+
                                     </Grid>
                                 </form>
+                                <Grid item textAlign="center" mt={.5}>
+                                    <Typography fontSize={'medium'} >Already have account? <Link to='/' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}> Login</Link></Typography>
+                                    <Typography fontSize={'medium'}>Have Registration? <Link to='/Popup' fontWeight={500} fontSize={20} style={{ textDecoration: "none", color: "#3707B0" }}>Check Status</Link></Typography>
+                                </Grid>
                             </Grid>
                         </CardContent>
                     </Card>
