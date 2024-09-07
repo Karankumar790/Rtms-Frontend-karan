@@ -2,19 +2,21 @@ import axios from "axios";
 const BASEURL = 'https://rtms-backend.onrender.com/api/v1'
 
 const initialition = () => {
+
   axios.interceptors.request.use((req) => {
     req.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
     return req
   })
+
   axios.interceptors.response.use((res) => {
     if (res.status == 403) {
-      if(localStorage.getItem('token')){
-        location.href='/dashboard'
+      if (localStorage.getItem('token')) {
+        location.href = '/dashboard'
       }
-      else{
-        location.href='/'
+      else {
+        location.href = '/'
       }
-      
+
     }
     return res
   })
