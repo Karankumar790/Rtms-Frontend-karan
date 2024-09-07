@@ -25,35 +25,38 @@ const StyledContent = styled(Grid)(({ theme }) => ({
 }));
 
 let data = {
-  "Well No": "1",
-  "Location": "New York",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 
 let Tata = {
-  "Well No": "2",
-  "Location": "Delhi",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+ "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
-
 let Mata = {
-  "Well No": "3",
-  "Location": "UP",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+"Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 
 let Sata = {
-  "Well No": "4",
-  "Location": "MP",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+ "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 // ------------------------Table for Desktop-----------------------------   
 
@@ -196,7 +199,6 @@ function NotificationHistory() {
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={0}>None</MenuItem>
               <MenuItem value={1}>Open Notification</MenuItem>
               <MenuItem value={2}>Close with comment </MenuItem>
               <MenuItem value={3}>Conveted to complaint</MenuItem>
@@ -219,38 +221,6 @@ function NotificationHistory() {
           </Button>
         </Grid>
       </Grid>
-      {/* <Grid container mt={3}>
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead >
-              <TableRow  >
-                <StyledTableCell sx={{fontSize:'18px'}}>Notification No.</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Data/Time</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Location</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well Installation</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Well number</StyledTableCell>
-                <StyledTableCell sx={{fontSize:'18px'}} align="left">Description</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid> */}
-
       <Grid container md={12}
         lg={12}
         sm={5}

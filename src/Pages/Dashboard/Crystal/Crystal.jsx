@@ -186,7 +186,6 @@ function Monitor() {
                 onChange={handleChange}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>UP</MenuItem>
                 <MenuItem value={20}>MP</MenuItem>
@@ -210,31 +209,24 @@ function Monitor() {
                   min: "2001-02-16",
                   max: "2024-08-07",
                 }}
-                sx={{
-                  // Optional: Customize the TextField styling as needed
-                  '.MuiInputBase-root': {
-                    // Optional: Style the input field if needed
-                  },
-                  '& .MuiInputLabel-root': {
-                    // Optional: Style the label if needed
-                  },
-                  '& .MuiInputBase-input': {
-                    // Optional: Style the input value if needed
-                  }
-                }}
               />
             </FormControl>
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth >
-              <TextField
-                size="small"
+            <TextField
+                fullWidth
                 type="date"
-                slotProps={{
-                  input: {
-                    min: "2001-02-16",
-                    max: "2024-08-07",
-                  },
+                size='small'
+                label='End Date'
+                value={selectedDate}
+                onChange={handleDateChange}
+                InputLabelProps={{
+                  shrink: true, // Ensures the label is always visible
+                }}
+                inputProps={{
+                  min: "2001-02-16",
+                  max: "2024-08-07",
                 }}
               />
             </FormControl>
@@ -250,7 +242,6 @@ function Monitor() {
                 onChange={handleChangeParameters}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>1 minute</MenuItem>
                 <MenuItem value={20}>1 hour</MenuItem>
@@ -276,7 +267,6 @@ function Monitor() {
                 onChange={handleChangeReport}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>Low Bettery</MenuItem>
                 <MenuItem value={20}>Flowing Well</MenuItem>
@@ -290,28 +280,38 @@ function Monitor() {
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth>
-              <TextField
-                size="small"
+            <TextField
+                fullWidth
                 type="date"
-                slotProps={{
-                  input: {
-                    min: "2001-02-16",
-                    max: "2024-08-10",
-                  },
+                size='small'
+                label='Start Date'
+                value={selectedDate}
+                onChange={handleDateChange}
+                InputLabelProps={{
+                  shrink: true, // Ensures the label is always visible
+                }}
+                inputProps={{
+                  min: "2001-02-16",
+                  max: "2024-08-07",
                 }}
               />
             </FormControl>
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth >
-              <TextField
-                size="small"
+            <TextField
+                fullWidth
                 type="date"
-                slotProps={{
-                  input: {
-                    min: "2001-02-16",
-                    max: "2024-08-07",
-                  },
+                size='small'
+                label='End Date'
+                value={selectedDate}
+                onChange={handleDateChange}
+                InputLabelProps={{
+                  shrink: true, // Ensures the label is always visible
+                }}
+                inputProps={{
+                  min: "2001-02-16",
+                  max: "2024-08-07",
                 }}
               />
             </FormControl>
@@ -328,7 +328,6 @@ function Monitor() {
                 onChange={handleChangeResolution}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>1 minute</MenuItem>
                 <MenuItem value={20}>1 hour</MenuItem>
@@ -505,7 +504,8 @@ function Monitor() {
                     ))}
                   </Grid>
                 </Paper>
-                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2} sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" }}}>
+                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2}  >
+                  <Box textAlign='end'>
                   <Button variant='contained'
                     onClick={handleDownload}
                     sx={{
@@ -517,6 +517,7 @@ function Monitor() {
                     }}>
                     Download
                   </Button>
+                  </Box>
                 </Grid>
               </Grid>
 
@@ -533,6 +534,21 @@ function Monitor() {
                       height={515}
                     />
                   </Paper>
+                </Grid>
+                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2}  >
+                  <Box textAlign='end'>
+                  <Button variant='contained'
+                    onClick={handleDownload}
+                    sx={{
+                      backgroundColor: 'green',   // Change button color to green
+                      '&:hover': {
+                        backgroundColor: 'darkgreen', // Optional: Change color on hover
+                      },
+                      fontSize: '16px',
+                    }}>
+                    Download
+                  </Button>
+                  </Box>
                 </Grid>
               </Grid>
             </TabPanel>

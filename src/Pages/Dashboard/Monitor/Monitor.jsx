@@ -171,9 +171,6 @@ function Monitor() {
               label="Well Location"
               onChange={handleChange}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
               <MenuItem value={10}>UP</MenuItem>
               <MenuItem value={20}>MP</MenuItem>
               <MenuItem value={30}>WB</MenuItem>
@@ -209,9 +206,7 @@ function Monitor() {
               label="Well Number"
               onChange={handleChangeNumber}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+              
               <MenuItem value={10}>UP</MenuItem>
               <MenuItem value={20}>MP</MenuItem>
               <MenuItem value={30}>WB</MenuItem>
@@ -232,7 +227,6 @@ function Monitor() {
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={0}>None</MenuItem>
               <MenuItem value={1}>Low Battery</MenuItem>
               <MenuItem value={2}>Low Solar Power</MenuItem>
               <MenuItem value={3}>Network Error</MenuItem>
