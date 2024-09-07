@@ -26,7 +26,6 @@
     "boxicons": "^2.1.4",
     "date-fns": "^3.6.0",
     "google-map-react": "^2.2.1",
-    "mui-one-time-password-input": "^2.0.3",
     "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
     "react-datepicker": "^7.3.0",
