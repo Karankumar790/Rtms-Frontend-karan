@@ -31,7 +31,7 @@ function Login() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(services.authLoginService(formValues))
+    dispatch(services.authSendOtpLoginServices(formValues))
     dispatch(authAction.addUser(formValues))
     toast.success('Login Successful')
     navigate('/otp');
@@ -68,10 +68,10 @@ function Login() {
                     />
                     <TextField
                       className="custom-textfield"
-                      label="Email"
-                      name="email"
+                      label="Username"
+                      name="username"
                       variant="standard"
-                      value={formValues.email}
+                      value={formValues?.username}
                       onChange={handleInputs}
                       fullWidth
 

@@ -1,11 +1,24 @@
 import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import PageContainer from "../../components/HOC/PageContainer";
 import { Link } from "react-router-dom";
-
+import OTPInput from "react-otp-input";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Otpsign() {
+  const navigate = useNavigate();
+  const [otp, setOtp] = useState('');
 
+  const handleOtpSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(">>>>>>>>>>>>>>>>>keshav")
+    const response = await axios.post('https://rtms-backend.onrender.com/api/v1/users/register', otp);
+    // console.log('Succes>>>>>>>>>:', response.data);
+    alert(response.data.message)
+    // navigate('/dashboard')
+  }
 
 
   return (
@@ -18,30 +31,31 @@ export default function Otpsign() {
       <Grid container m={0}>
         <Grid item xs={12} md={12} sm={12}>
           <Paper sx={{ borderRadius: "10px" }} >
-            <Grid item  p={2}>
+            <Grid item p={2}>
               <form>
                 <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
                   <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
-                    Enter OTP To Verify Mobile 
+                    Enter OTP To Verify Mobile
                   </Typography>
                 </Grid>
 
                 {/* Input otp value  */}
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
-                  {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-
+                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display='flex' justifyContent={'center'}>
+                  <OTPInput
+                    // style={{ width: '2em', height: '4vh', textAlign: 'center',bgcolor:'red' }}
+                    value={otp}
+                    onChange={setOtp}
+                    numInputs={6}
+                    renderSeparator={<span>&nbsp; &nbsp; </span>}
+                    renderInput={(props) => <input {...props} />}
+                  />
                 </Grid>
                 <Grid
                   item
                   xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
-                  <Link to="/Otpsignup">
+                  <Link>
                     <Button
+                      onClick={handleOtpSubmit}
                       variant="contained"
                       color="primary"
                       size="small"
