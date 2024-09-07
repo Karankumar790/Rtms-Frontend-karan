@@ -74,7 +74,7 @@ export default function OtpLogin() {
                 <Grid
                   item
                   xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
-                  <Button
+                 <Link to="/dashboard"> <Button
                     variant="contained"
                     color="primary"
                     size="small"
@@ -83,6 +83,7 @@ export default function OtpLogin() {
                   >
                     <Typography>Submit</Typography>
                   </Button>
+                  </Link>
                 </Grid>
                 <Grid item xs={12} md={12} sm={12} lg={12} textAlign="center" py={1}>
                   <Link to="" style={{ textDecoration: "none" }} >

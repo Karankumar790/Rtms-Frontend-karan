@@ -24,35 +24,39 @@ const StyledContent = styled(Grid)(({ theme }) => ({
 }));
 
 let data = {
-  "Well No": "1",
-  "Location": "New York",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 
 let Tata = {
-  "Well No": "2",
-  "Location": "Delhi",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 
 let Mata = {
-  "Well No": "3",
-  "Location": "UP",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 
 let Sata = {
-  "Well No": "4",
-  "Location": "MP",
-  "Installation": "01/01/2021",
-  "Latitude": "40.7128 N",
-  "Longitude": "74.0060 W"
+  "Complain No.": "1",
+  "Data/Time": "New York",
+  "Notification No.": "01/01/2021",
+  "Raiser Name": "40.7128 N",
+  "Taker Name": "74.0060 W",
+  "Description":"All Good"
 };
 // ------------------------Table for Desktop-----------------------------   
 
@@ -232,7 +236,6 @@ function ComplaintHistory() {
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={0}>None</MenuItem>
               <MenuItem value={1}>Pending Complaints</MenuItem>
               <MenuItem value={2}>Resloved Complaints</MenuItem>
               <MenuItem value={3}>Unsolved Complaints</MenuItem>
@@ -284,8 +287,6 @@ function ComplaintHistory() {
                   <StyledTableCell align="left">gbz</StyledTableCell>
                   <StyledTableCell align="left">yes</StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
-
-
                 </StyledTableRow>
               ))}
             </TableBody>

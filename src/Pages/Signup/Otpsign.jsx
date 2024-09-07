@@ -17,7 +17,7 @@ export default function Otpsign() {
 
     console.log(">>>>>>>>>>>>>>>>>keshav")
     const response = await axios.post('https://rtms-backend.onrender.com/api/v1/users/register', otp);
-    console.log('Succes>>>>>>>>>:', response.data);
+    // console.log('Succes>>>>>>>>>:', response.data);
     alert(response.data.message)
   }
 
