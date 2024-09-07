@@ -100,7 +100,7 @@ function DeviceManage() {
         <div>
 {/* --------------------------Content and Button--------------------------------- */}
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
-                <Grid item lg={6} md={6} sm={6} xs={6} display={'flex'} gap={1}>
+                <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
                     <Box sx={{ height: '50px', width: '50px' }}>
                         <img src={manage} alt='img' height={'50px'} width={'50px'} />
                     </Box>
@@ -117,6 +117,11 @@ function DeviceManage() {
                                     backgroundColor: 'darkgreen', // Optional: Change color on hover
                                 },
                                 fontSize: '16px',
+                                // Hide button on small screens
+                                display: {
+                                    xs: 'none', // Hide on extra small screens (mobile)
+                                    sm: 'block', // Show on small screens and above
+                                }
                             }}>
                             Add Device
                         </Button>

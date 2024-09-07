@@ -61,6 +61,44 @@ function ManageAsset() {
 
   const steps = ["Head of Department", "Manager", "Team Leader"];
 
+  // -------------------------------------Table--------------------------------------------
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+      padding: '16px', // Increase padding
+      height: '30px',  // Set a specific height
+      fontSize: '16px', // Optionally adjust font size for header
+      lineHeight: '1.5', // Adjust line height if needed
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
+
+  function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+  }
+
+  const rows = [
+    createData('1'),
+    createData('2'),
+    createData('3'),
+    createData('4'),
+
+
+  ]
   return (
     <div>
       <Paper>
@@ -105,15 +143,15 @@ function ManageAsset() {
                 <TextField variant="outlined" size="small" fullWidth value={""} />
               </Grid>
             </Grid>
-            <Grid item gap={2} lg={2}  >
+            <Grid item gap={2} lg={2} sx={{border:'2px solid black'}}  >
               <Box sx={{
-                backgroundImage: `url(https://wp-itplive.s3.us-east-1.amazonaws.com/cloud/2023/11/21/image-10.png)`,
-                backgroundSize: 'cover',
+               
                 backgroundPosition: 'center',
                 height: '100%', // Set the height of the box
                 width: '100%', // Set the width of the box
               }}
               >
+                image
               </Box>
             </Grid>
           </Grid>
@@ -124,6 +162,7 @@ function ManageAsset() {
       <Card sx={{ my: 2 }}>
         <CardContent>
           <Grid container spacing={2} mt={0.1}>
+            {/* ------------------------ADD DEPARTMENT------------------------------ */}
             <Grid item xs={12} sm={3.5} md={3.5} lg={3.5} gap={1} display='flex' flexDirection={'column'} >
               <Typography variant="h5"> Add Department</Typography>
               <Box display='flex' gap={1}>
@@ -131,19 +170,40 @@ function ManageAsset() {
                 <Button variant="contained" className="btn-primary" onClick={handleAdd}>
                   Add
                 </Button>
+                <Button sx={{ minWidth: "0px" }}>
+                  <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
+                </Button>
               </Box>
-              <Grid container height={'400px'} border='1px solid black'>
-                <Grid item lg={10.5} md={10} sm={10} xs={10} p={1}>
-                  {/* <TextField fullWidth size="small" ></TextField> */}
-                </Grid>
-                <Grid item lg={1.5} md={2} sm={2} xs={2} >
-                  <IconButton >
-                    <DeleteIcon sx={{ fontSize: "30px", color: "red" }} />
-                  </IconButton>
-                </Grid>
+              {/* /-----------------------------------------------Table--------------------------------- */}
+              <Grid container>
+                <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                  <Table aria-label="customized table" stickyHeader>
+                    <TableHead >
+                      <TableRow  >
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <StyledTableRow key={row.name}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">1</StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Grid>
             </Grid>
 
+            {/* ------------------------ADD POSITION------------------------------ */}
             <Grid item xs={12} sm={3.5} md={3.5} lg={3.5} gap={1} display='flex' flexDirection={'column'}>
               <Typography variant="h5"> Add Position</Typography>
               <Box display='flex' gap={1}>
@@ -151,21 +211,41 @@ function ManageAsset() {
                 <Button variant="contained" className="btn-primary" size="small" onClick={handleAdd}>
                   Add
                 </Button>
+                <Button sx={{ minWidth: "0px" }}>
+                  <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
+                </Button>
               </Box>
-              <Grid container height={'400px'} border='1px solid black'>
-                <Grid item lg={10.5} md={10} sm={10} xs={10} p={1}>
-                  {/* <TextField fullWidth  size="small"></TextField> */}
-                </Grid>
-                <Grid item lg={1.5} md={2} sm={2} xs={2}>
-                  <IconButton>
-                    <DeleteIcon sx={{ fontSize: "30px", color: "red" }} />
-                  </IconButton>
-                </Grid>
+              {/* -----------------------------------------------Table 2------------------------------------------------------ */}
+              <Grid container>
+                <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                  <Table aria-label="customized table" stickyHeader>
+                    <TableHead >
+                      <TableRow  >
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <StyledTableRow key={row.name}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">1</StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Grid>
             </Grid>
+            {/* ------------------------APPROVAL CHAIN------------------------------ */}
 
-
-            <Grid item xs={12} sm={6} md={5} lg={5} gap={1} display='flex' flexDirection={'column'}>
+            <Grid item xs={12} sm={5} md={5} lg={5} gap={1} display='flex' flexDirection={'column'}>
               <Typography variant="h5"> Approval Chain</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" label="Action" size="small" fullWidth />
@@ -174,46 +254,69 @@ function ManageAsset() {
                 <Button variant="contained" size="small" className="btn-primary" onClick={handleAdd}>
                   Add
                 </Button>
+                <Button sx={{ minWidth: "0px" }}>
+                  <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
+                </Button>
               </Box>
-              <Grid container height={'400px'} border='1px solid black' >
-                <Grid item lg={11} md={11} sm={11} xs={10} p={1}>
-                  {/* <TextField fullWidth ></TextField> */}
-                </Grid>
-                <Grid item lg={1} md={1} sm={1} xs={2}>
-                  <IconButton>
-                    <DeleteIcon sx={{ fontSize: "30px", color: "red" }} />
-                  </IconButton>
-                </Grid>
+              {/* ----------------------------------------------------Table 3-------------------------------------------------- */}
+              <Grid container>
+                <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                  <Table aria-label="customized table" stickyHeader>
+                    <TableHead >
+                      <TableRow  >
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <StyledTableRow key={row.name}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">1</StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Grid>
             </Grid>
-            <Grid container mt={1}  display={"flex"} justifyContent={"end"} gap={1} >
+
+            {/* ------------------------BUTTON BOX------------------------------ */}
+
+            <Grid container mt={1} display={"flex"} justifyContent={"end"} gap={1} flexDirection={{ xs: 'row' }} >
               <Box >
-            <Button variant='contained'
-              sx={{
-                backgroundColor: 'green',   // Change button color to green
-                '&:hover': {
-                  backgroundColor: 'darkgreen', // Optional: Change color on hover
-                },
-                fontSize: '16px',
-                width:'160px',
-              }}>
-              SAVE
-            </Button>
-            </Box>
-            <Box>
-            <Button variant='contained'
-              sx={{
-                backgroundColor: 'green',   // Change button color to green
-                '&:hover': {
-                  backgroundColor: 'darkgreen', // Optional: Change color on hover
-                },
-                fontSize: '16px',
-                width:'160px',
-               
-              }}>
-              EDIT
-            </Button>
-            </Box>
+                <Button variant='contained'
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                    fontSize: '16px',
+                    width: '150px',
+                  }}>
+                  SAVE
+                </Button>
+              </Box>
+              <Box>
+                <Button variant='contained'
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                    fontSize: '16px',
+                    width: '150px',
+
+                  }}>
+                  EDIT
+                </Button>
+              </Box>
             </Grid>
             {/* <Grid item xs={12} sm={6} md={3}>
               <TextField variant="outlined" label="Head of Department" inputRef={inputRef1} fullWidth />
