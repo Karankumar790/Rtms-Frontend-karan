@@ -505,7 +505,7 @@ function Monitor() {
                     ))}
                   </Grid>
                 </Paper>
-                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2} sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" }, display:'flex', justifyContent:'end' }}>
+                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2} sx={{ display: { sm: "none", xs: "block", md: "none", lg: "none" }}}>
                   <Button variant='contained'
                     onClick={handleDownload}
                     sx={{
