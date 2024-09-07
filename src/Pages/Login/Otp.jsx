@@ -33,12 +33,13 @@ export default function OtpLogin() {
 
   const handleSubmit = (e) => {
     dispatch(services.authLoginService(otp))
+    navigate('/dashboard');
 
   }
 
   useEffect(() => {
     if (state && state?.token) {
-      navigate('/dashboard')
+      // navigate('/dashboard');
     }
   }, [])
   return (
@@ -55,7 +56,7 @@ export default function OtpLogin() {
               <form>
                 <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
                   <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
-                    Enter OTP To Verify E-Mail KKKK
+                    Enter OTP To Verify E-Mail
                   </Typography>
                 </Grid>
 
