@@ -32,6 +32,7 @@ export default function OtpLogin() {
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
+    navigate('/dashboard')
     dispatch(services.authLoginService(otp))
     navigate('/dashboard');
 
@@ -39,7 +40,7 @@ export default function OtpLogin() {
 
   useEffect(() => {
     if (state && state?.token) {
-      // navigate('/dashboard');
+      // navigate('/dashboard')
     }
   }, [])
   return (

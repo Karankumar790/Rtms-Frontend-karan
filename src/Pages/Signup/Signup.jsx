@@ -40,6 +40,8 @@ function Signup() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        navigate('/otpsign')
+
         // console.log("====Submit========", inputValues)
         // const formData = new FormData();
         // formData.append('username', inputValues.username);
@@ -66,7 +68,6 @@ function Signup() {
             const { message } = response.data;
             console.log('Success:', response.data);
             toast?.success(message)
-            navigate('/otpsign')
 
         } catch (error) {
             // Handle error
