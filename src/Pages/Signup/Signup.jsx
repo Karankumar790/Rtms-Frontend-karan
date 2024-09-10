@@ -26,8 +26,7 @@ function Signup() {
         roleInRTMS: '',
         idCardPhoto: null,
         passportPhoto: null,
-        emailOtp: '',
-        contactOtp: '',
+       
     });
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -39,7 +38,7 @@ function Signup() {
         setInputValues((pre) => ({ ...pre, [name]: type === 'file' ? files[0] : value }));
         console.log(value)
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => { 
         e.preventDefault();
         // navigate('/otpsign')
         // console.log("====Submit========", inputValues)
@@ -53,9 +52,11 @@ function Signup() {
         formData.append('roleInRTMS', inputValues.roleInRTMS);
         formData.append('idCardPhoto', inputValues.idCardPhoto);
         formData.append('passportPhoto', inputValues.passportPhoto);
-        formData.append('emailOtp', inputValues.emailOtp);
-        formData.append('contactOtp', inputValues.contactOtp);
+       
         dispatch(services?.authRegisterOtp(formData))
+
+        
+        console.log(formData);
 
     }
 
