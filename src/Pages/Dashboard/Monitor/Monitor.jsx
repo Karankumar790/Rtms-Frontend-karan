@@ -89,6 +89,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    padding: '10px', // Increase padding
+    height: '20px',  // Set a specific height
+    fontSize: '16px', // Optionally adjust font size for header
+    lineHeight: '1.5', // Adjust line height if needed
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -206,7 +210,7 @@ function Monitor() {
               label="Well Number"
               onChange={handleChangeNumber}
             >
-              
+
               <MenuItem value={10}>UP</MenuItem>
               <MenuItem value={20}>MP</MenuItem>
               <MenuItem value={30}>WB</MenuItem>

@@ -8,7 +8,7 @@ const initialState = {
   status: null
 };
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -25,21 +25,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(authLoginService.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(authLoginService.fulfilled, (state, action) => {
-        state.data.login = action.payload;
-        state.loading = false;
-      })
-      .addCase(authLoginService.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
-  extraReducers: (builder) => {
-    builder
+
       .addCase(authSendOtpLoginServices.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -51,7 +37,24 @@ const authSlice = createSlice({
       .addCase(authSendOtpLoginServices.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      });
+      })
+      // Handle authLoginService cases
+
+      .addCase(authLoginService.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(authLoginService.fulfilled, (state, action) => {
+        state.data.login = action.payload;
+        console.log(">>>>>>>payy",action.payload)
+        state.loading = false;
+      })
+      .addCase(authLoginService.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+
   }
 })
 

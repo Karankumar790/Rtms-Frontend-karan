@@ -8,3 +8,12 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([thunk, logger])
 })
+
+
+
+// import { configureStore } from '@reduxjs/toolkit'
+// import SignupSlice from '../Pages/Signup/SignupSlice/signupSlice'
+
+// export const store = configureStore({
+//   reducer: SignupSlice,
+// })
