@@ -24,7 +24,6 @@ import WellmasterIcon from '@mui/icons-material/Settings';
 import WellmonitorIcon from '@mui/icons-material/Search';
 import GeoIcon from '@mui/icons-material/Place';
 import ongc_logo from '/assets/ongc2.png';
-import { Box } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -81,8 +80,8 @@ export default function Sidebar({ open, mobileOpen, handleDrawerClose, handleDra
         { name: "Dashboard", icon: <HomeIcon sx={{ color: 'black' }} />, path: "/dashboard" },
         { name: "Organization", icon: <AssetsIcon sx={{ color: 'black' }} />, path: "/dashboard/ManageAsset" },
         { name: "Well Master", icon: <WellmasterIcon sx={{ color: 'black' }} />, path: "/dashboard/wellmaster" },
-        { name: "Device Manager", icon: <DeviceManagerIcon sx={{ color: 'black' }} />, path: "/dashboard/DeviceManage" },
-        { name: "Manager Gateway", icon: <Networkicon sx={{ color: 'black' }} />, path: "/dashboard/Network" },
+        { name: "Manage Node", icon: <DeviceManagerIcon sx={{ color: 'black' }} />, path: "/dashboard/DeviceManage" },
+        { name: "Manage Gateway", icon: <Networkicon sx={{ color: 'black' }} />, path: "/dashboard/Network" },
         { name: "Well Monitor", icon: <WellmonitorIcon sx={{ color: 'black' }} />, path: "/dashboard/monitor" },
         { name: "Complaints", icon: <ComplaintIcon sx={{ color: 'black' }} />, path: "/dashboard/complaint" },
         { name: "Notifications", icon: <NotificationsIcon sx={{ color: 'black' }} />, path: "/dashboard/notification" },

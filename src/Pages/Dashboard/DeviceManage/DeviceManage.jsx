@@ -105,11 +105,11 @@ function DeviceManage() {
                         <img src={manage} alt='img' height={'50px'} width={'50px'} />
                     </Box>
                     <Box>
-                        <Typography variant='h4'>Device Manager</Typography>
+                        <Typography variant='h4'>Manage Node</Typography>
                     </Box>
                 </Grid>
                 <Grid item  display={'flex'} justifyContent={'end'} lg={6} md={6} sm={6} xs={6}>
-                    <Link to='/dashboard/AddDevice'>
+                    <Link to='/dashboard/AddDevice' style={{ textDecoration: 'none' }}>
                         <Button variant='contained'
                             sx={{
                                 backgroundColor: 'green',   // Change button color to green
@@ -122,6 +122,7 @@ function DeviceManage() {
                                     xs: 'none', // Hide on extra small screens (mobile)
                                     sm: 'block', // Show on small screens and above
                                 }
+                                
                             }}>
                             Add Device
                         </Button>
