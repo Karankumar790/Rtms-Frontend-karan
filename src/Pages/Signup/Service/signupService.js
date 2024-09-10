@@ -12,7 +12,7 @@ const authRegisterOtp = createAsyncThunk('auth/registerOtp', async (payload) => 
 
 const authRegister = createAsyncThunk('auth/register', async (payload) => {
   // console.log('payyyy', payload)
-  const response = await postReq(REGISTER, payload);
+    const response = await postReq(REGISTER, payload);
   return response?.data
 })
 

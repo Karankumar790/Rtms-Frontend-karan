@@ -3,22 +3,26 @@ import React, { useState } from "react";
 import PageContainer from "../../components/HOC/PageContainer";
 import { Link } from "react-router-dom";
 import OTPInput from "react-otp-input";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import services from "../Signup/Service/signupService";
+
 
 export default function Otpsign() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState('');
+
+  const state = useSelector((state) => state.signup.signupUsers) || {};
+  console.log("otppp", state)
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    navigate('/dashboard')
+    dispatch(services.authRegister(state))
+    // navigate('/dashboard')
 
-    console.log(">>>>>>>>>>>>>>>>>keshav")
-    const response = await axios.post('https://rtms-backend.onrender.com/api/v1/users/register', otp);
-    // console.log('Succes>>>>>>>>>:', response.data);
-    alert(response.data.message)
+
   }
 
 

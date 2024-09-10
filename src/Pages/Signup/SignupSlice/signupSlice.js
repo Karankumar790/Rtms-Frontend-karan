@@ -1,6 +1,5 @@
 import { createSlice, } from "@reduxjs/toolkit";
 import Services from '../Service/signupService';
-
 const { authRegisterOtp, authRegister } = Services;
 
 const initialState = {
@@ -13,13 +12,14 @@ const initialState = {
   status: 'idle',   // Tracks request status ('idle', 'loading', 'succeeded', 'failed')
 };
 
-const SignupSlice = createSlice({
+export const SignupSlice = createSlice({
   name: "signup",
   initialState,
   reducers: {
     registerUser: (state, { payload }) => {
+      // Store the form data (formObject) in signupUsers
       state.signupUsers = payload;
-      console.log("reducer>>>>", payload)
+      console.log("registerUser reducer - payload:", payload);
     },
   },
   extraReducers: (builder) => {
@@ -55,3 +55,4 @@ const SignupSlice = createSlice({
 })
 export const authSignupAction = SignupSlice.actions;
 export default SignupSlice.reducer;
+
