@@ -1,11 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import AppSk from "./components/Skeletons/AppSk.jsx";
-import Home from "./Pages/Dashboard/Home/Home.jsx";
 import { Toaster } from "react-hot-toast";
-import { Typography, useMediaQuery } from '@mui/material';
-import { Box } from "@mui/system";
 
+import OtpSignUp from './Pages/Signup/OtpSignup.jsx'
+const Home = lazy(() => import('./Pages/Dashboard/Home/Home.jsx'))
 const Login = lazy(() => import("./Pages/Login/Login.jsx"));
 const Signup = lazy(() => import("./Pages/Signup/Signup.jsx"));
 const Dashboard = lazy(() => import("./Pages/Dashboard/index.jsx"));
@@ -22,7 +21,7 @@ const PopUp = lazy(() => import("./CheckStatus/PopUp.jsx"));
 const CheckStatus = lazy(() => import("./CheckStatus/CheckStatus.jsx"));
 const Otp = lazy(() => import("./Pages/Login/Otp.jsx"));
 const OtpForget = lazy(() => import("./Pages/Forgot/OtpForget.jsx"));
-const OtpSignup = lazy(() => import("./Pages/Signup/Otpsignup.jsx"));
+// const OtpSignup = lazy(() => import("./Pages/Signup/Otpsignup.jsx"));
 const OtpSign = lazy(() => import("./Pages/Signup/Otpsign.jsx"));
 const WellMaster = lazy(() => import("./Pages/WellMaster/WellMaster.jsx"));
 const SingleWell = lazy(() => import("./Pages/Dashboard/SingleWell/SingleWell.jsx"));
@@ -45,22 +44,22 @@ function App() {
       element: <Dashboard />,
 
       children: [
-        { path: "/dashboard", element: <Home /> },
-        { path: "/dashboard/monitor", element: <Monitor /> },
-        { path: "/dashboard/virtual", element: <Virtual/> },
-        { path: "/dashboard/crystal", element: <Crystal /> },
-        { path: "/dashboard/complaint", element: <ComplaintHistory /> },
-        { path: "/dashboard/notification", element: <NotificationHistory /> },
-        { path: "/dashboard/edit", element: <Edit /> },
-        { path: "/dashboard/logout", element: <Logout /> },
-        { path: '/dashboard/wellmaster', element: <WellMaster /> },
-        { path: '/dashboard/addwell', element: <AddWell /> },
-        { path: "/dashboard/singlewell", element: <SingleWell /> },
-        { path: "/dashboard/ManageAsset", element: <ManageAsset /> },
-        { path: "/dashboard/DeviceManage", element: <DeviceManage /> },
-        { path: "/dashboard/AddDevice", element: <AddDevice /> },
-        { path: "/dashboard/Network", element: <Network /> },
-        { path: "/dashboard/AddDevices", element: <AddDevices /> },
+        { path: "", element: <Home /> },
+        { path: "monitor", element: <Monitor /> },
+        { path: "virtual", element: <Virtual /> },
+        { path: "crystal", element: <Crystal /> },
+        { path: "complaint", element: <ComplaintHistory /> },
+        { path: "notification", element: <NotificationHistory /> },
+        { path: "edit", element: <Edit /> },
+        { path: "logout", element: <Logout /> },
+        { path: 'wellmaster', element: <WellMaster /> },
+        { path: 'addwell', element: <AddWell /> },
+        { path: "singlewell", element: <SingleWell /> },
+        { path: "ManageAsset", element: <ManageAsset /> },
+        { path: "DeviceManage", element: <DeviceManage /> },
+        { path: "AddDevice", element: <AddDevice /> },
+        { path: "Network", element: <Network /> },
+        { path: "AddDevices", element: <AddDevices /> },
 
       ]
     },
@@ -69,7 +68,7 @@ function App() {
     { path: "/reset", element: <Reset /> },
     { path: "/otp", element: <Otp /> },
     { path: "/forgot", element: <Forgot /> },
-    { path: "/otpsignup", element: <OtpSignup /> },
+    { path: "/otpsignup", element: <OtpSignUp /> },
     { path: "/otpsign", element: <OtpSign /> },
     { path: "/otpforget", element: <OtpForget /> },
 

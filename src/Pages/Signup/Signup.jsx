@@ -1,5 +1,6 @@
-import { Grid, Typography, TextField, Box, Button, Paper } from '@mui/material'
 import React, { useState } from 'react'
+import { Grid, Typography, TextField, Box, Button, Paper } from '@mui/material'
+import { useDispatch, useSelector } from "react-redux";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import PageContainer from '../../components/HOC/PageContainer';
@@ -8,16 +9,13 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { Link } from 'react-router-dom';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
-import { styled, useTheme } from "@mui/material/styles";
-import { Email } from '@mui/icons-material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast'
+import services from './Service/signupService'
 
 function Signup() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [IdCard, setIdCard] = useState(null);
-    const navigate = useNavigate()
     const [inputValues, setInputValues] = useState({
         username: '',
         email: '',
@@ -31,6 +29,9 @@ function Signup() {
         emailOtp: '',
         contactOtp: '',
     });
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+
 
 
     const handleUsernameChange = (e) => {
@@ -40,43 +41,26 @@ function Signup() {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // navigate('/otpsign')
         // console.log("====Submit========", inputValues)
-        // const formData = new FormData();
-        // formData.append('username', inputValues.username);
-        // formData.append('email', inputValues.email);
-        // formData.append('contactNumber', inputValues.contactNumber);
-        // formData.append('employeeID', inputValues.employeeID);
-        // formData.append('assetName', inputValues.assetName);
-        // formData.append('department', inputValues.department);
-        // formData.append('roleInRTMS', inputValues.roleInRTMS);
-        // formData.append('idCardPhoto', inputValues.idCardPhoto);
-        // formData.append('passportPhoto', inputValues.passportPhoto);
-        // formData.append('emailOtp', inputValues.emailOtp);
-        // formData.append('contactOtp', inputValues.contactOtp);
-        try {
-            // Send the formData using Axios
-            const response = await axios.post('https://rtms-backend.onrender.com/api/v1/users/send-otp-register', inputValues,
-                // {
-                //     headers: {
-                //         'Content-Type': 'multipart/form-data',  // Important for file upload
-                //     },
-                // }
-            );
-            // Handle success response
-            const { message } = response.data;
-            console.log('Success:', response.data);
-            toast?.success(message)
-            navigate('/otpsign')
-
-        } catch (error) {
-            // Handle error
-            console.error('Error uploading file:', error);
-        }
+        const formData = new FormData();
+        formData.append('username', inputValues.username);
+        formData.append('email', inputValues.email);
+        formData.append('contactNumber', inputValues.contactNumber);
+        formData.append('employeeID', inputValues.employeeID);
+        formData.append('assetName', inputValues.assetName);
+        formData.append('department', inputValues.department);
+        formData.append('roleInRTMS', inputValues.roleInRTMS);
+        formData.append('idCardPhoto', inputValues.idCardPhoto);
+        formData.append('passportPhoto', inputValues.passportPhoto);
+        formData.append('emailOtp', inputValues.emailOtp);
+        formData.append('contactOtp', inputValues.contactOtp);
+        dispatch(services?.authRegisterOtp(formData))
 
     }
 
     return (
-        
+
 
         <PageContainer className='bgImg' showheader='true' showfooter='true'>
             <Grid container >

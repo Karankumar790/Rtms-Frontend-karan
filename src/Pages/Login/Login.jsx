@@ -33,7 +33,7 @@ function Login() {
     e.preventDefault();
     dispatch(services.authSendOtpLoginServices(formValues))
     dispatch(authAction.addUser(formValues))
-    toast.success('Login Successful')
+    
     navigate('/otp');
   };
 
