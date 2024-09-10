@@ -21,7 +21,6 @@ const PopUp = lazy(() => import("./CheckStatus/PopUp.jsx"));
 const CheckStatus = lazy(() => import("./CheckStatus/CheckStatus.jsx"));
 const Otp = lazy(() => import("./Pages/Login/Otp.jsx"));
 const OtpForget = lazy(() => import("./Pages/Forgot/OtpForget.jsx"));
-// const OtpSignup = lazy(() => import("./Pages/Signup/Otpsignup.jsx"));
 const OtpSign = lazy(() => import("./Pages/Signup/Otpsign.jsx"));
 const WellMaster = lazy(() => import("./Pages/WellMaster/WellMaster.jsx"));
 const SingleWell = lazy(() => import("./Pages/Dashboard/SingleWell/SingleWell.jsx"));
@@ -60,7 +59,6 @@ function App() {
         { path: "AddDevice", element: <AddDevice /> },
         { path: "Network", element: <Network /> },
         { path: "AddDevices", element: <AddDevices /> },
-
       ]
     },
     { path: "/CheckStatus", element: <CheckStatus /> },
