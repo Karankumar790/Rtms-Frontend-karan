@@ -65,8 +65,8 @@ function ManageAsset() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor:'blue',
-      color: theme.palette.common.black,
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
       padding: '10px', // Increase padding
       height: '20px',  // Set a specific height
       fontSize: '16px', // Optionally adjust font size for header
@@ -171,8 +171,14 @@ function ManageAsset() {
               <Typography variant="h5"> Add Department</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" size="small" label="Department" inputRef={inputRef} fullWidth />
-                <Button variant="contained" className="btn-primary" onClick={handleAdd} >
-                  Add
+                <Button variant='contained' onClick={handleAdd} size="small"
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                  }}>
+                  ADD
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
@@ -212,8 +218,14 @@ function ManageAsset() {
               <Typography variant="h5"> Add Position</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" size="small" label="Position" inputRef={inputRef} fullWidth />
-                <Button variant="contained" className="btn-primary" size="small" onClick={handleAdd}>
-                  Add
+                <Button variant='contained' onClick={handleAdd} size="small"
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                  }}>
+                  ADD
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
@@ -255,8 +267,14 @@ function ManageAsset() {
                 <TextField variant="outlined" label="Action" size="small" fullWidth />
                 <TextField variant="outlined" label="Level-1" size="small" fullWidth />
                 <TextField variant="outlined" label="Level-2" size="small" fullWidth />
-                <Button variant="contained" size="small" className="btn-primary" onClick={handleAdd}>
-                  Add
+                <Button variant='contained' onClick={handleAdd} size="small"
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                  }}>
+                  ADD
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />

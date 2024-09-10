@@ -155,7 +155,7 @@ function DeviceManage() {
                     {/* Increase the icon size */}
                     <NetworkIcon sx={{ color: 'black', fontSize: 40 }} />
                     <Box>
-                        <Typography variant='h4'>Manager Gateway</Typography>
+                        <Typography variant='h4'>Manage Gateway</Typography>
                     </Box>
                 </Grid>
             </Grid>
@@ -264,9 +264,9 @@ function DeviceManage() {
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{ fontSize: '18px' }}>Sim No.</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left"> Geo Location</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">UID</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }}>Sim</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Location</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">New ID</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installation</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Password</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Protocol</StyledTableCell>
