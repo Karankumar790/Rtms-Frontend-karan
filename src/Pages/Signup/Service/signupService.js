@@ -16,4 +16,4 @@ const authRegister = createAsyncThunk('auth/register', async (payload) => {
   return response?.data
 })
 
-export default { authRegisterOtp, authRegister }
+ export default { authRegisterOtp, authRegister }

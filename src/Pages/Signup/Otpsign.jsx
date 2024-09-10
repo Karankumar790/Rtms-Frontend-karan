@@ -14,12 +14,12 @@ export default function Otpsign() {
   const dispatch = useDispatch();
   const [otp, setOtp] = useState('');
 
-  const state = useSelector((state) => state.signup.signupUsers) || {};
-  console.log("otppp", state)
+  const state = useSelector((state) => state.signup.signupUsers ) || {};
+  console.log("otppp", state.username, state.email, otp)
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    dispatch(services.authRegister(state))
+    dispatch(services.authRegister(state.username, state.email, otp))
     // navigate('/dashboard')
 
 

@@ -30,33 +30,33 @@ let data = {
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 
 let Tata = {
- "Complain No.": "1",
+  "Complain No.": "1",
   "Data/Time": "New York",
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 let Mata = {
-"Complain No.": "1",
+  "Complain No.": "1",
   "Data/Time": "New York",
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 
 let Sata = {
- "Complain No.": "1",
+  "Complain No.": "1",
   "Data/Time": "New York",
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 // ------------------------Table for Desktop-----------------------------   
 
@@ -65,6 +65,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    padding: '10px', // Increase padding
+    height: '20px',  // Set a specific height
+    fontSize: '16px', // Optionally adjust font size for header
+    lineHeight: '1.5', // Adjust line height if needed
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -113,9 +117,9 @@ function NotificationHistory() {
     <div>
       <Grid container>
         <IconButton>
-          <NotificationsIcon sx={{fontSize:"40px",color:'red'}}/>
+          <NotificationsIcon sx={{ fontSize: "40px", color: 'red' }} />
         </IconButton>
-        <Typography variant='h4'mt={1}>Notification History</Typography>
+        <Typography variant='h4' mt={1}>Notification History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3} >
         <Grid item xs={12} sm={8} md={6} lg={3}>
