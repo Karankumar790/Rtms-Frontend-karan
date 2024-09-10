@@ -225,7 +225,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Position</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
@@ -268,7 +268,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Approval Chain</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>

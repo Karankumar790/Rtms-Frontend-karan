@@ -29,7 +29,7 @@ let data = {
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 
 let Tata = {
@@ -38,7 +38,7 @@ let Tata = {
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 
 let Mata = {
@@ -47,7 +47,7 @@ let Mata = {
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 
 let Sata = {
@@ -56,7 +56,7 @@ let Sata = {
   "Notification No.": "01/01/2021",
   "Raiser Name": "40.7128 N",
   "Taker Name": "74.0060 W",
-  "Description":"All Good"
+  "Description": "All Good"
 };
 // ------------------------Table for Desktop-----------------------------   
 
@@ -65,6 +65,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    padding: '10px', // Increase padding
+    height: '20px',  // Set a specific height
+    fontSize: '16px', // Optionally adjust font size for header
+    lineHeight: '1.5', // Adjust line height if needed
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -150,9 +154,9 @@ function ComplaintHistory() {
     <div>
       <Grid container>
         <IconButton>
-          <ComplaintIcon sx={{ fontSize: "40px",color:'red' }} />
+          <ComplaintIcon sx={{ fontSize: "40px", color: 'red' }} />
         </IconButton>
-        <Typography variant='h4'mt={1}>Complaint History</Typography>
+        <Typography variant='h4' mt={1}>Complaint History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3}>
         <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -220,7 +224,7 @@ function ComplaintHistory() {
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth>
-           <TextField size="small" label='Complaint No.'/>
+            <TextField size="small" label='Complaint No.' />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
@@ -258,7 +262,7 @@ function ComplaintHistory() {
           </Button>
         </Grid>
       </Grid>
-{/* -----------------------------------------table for Desktop-------------------------- */}
+      {/* -----------------------------------------table for Desktop-------------------------- */}
       <Grid container md={12}
         lg={12}
         sm={5}

@@ -64,6 +64,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
+        padding: '10px', // Increase padding
+        height: '20px',  // Set a specific height
+        fontSize: '16px', // Optionally adjust font size for header
+        lineHeight: '1.5', // Adjust line height if needed
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -98,7 +102,7 @@ const rows = [
 function DeviceManage() {
     return (
         <div>
-{/* --------------------------Content and Button--------------------------------- */}
+            {/* --------------------------Content and Button--------------------------------- */}
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
                 <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
                     <Box sx={{ height: '50px', width: '50px' }}>
@@ -108,7 +112,7 @@ function DeviceManage() {
                         <Typography variant='h4'>Device Manager</Typography>
                     </Box>
                 </Grid>
-                <Grid item  display={'flex'} justifyContent={'end'} lg={6} md={6} sm={6} xs={6}>
+                <Grid item display={'flex'} justifyContent={'end'} lg={6} md={6} sm={6} xs={6}>
                     <Link to='/dashboard/AddDevice'>
                         <Button variant='contained'
                             sx={{
