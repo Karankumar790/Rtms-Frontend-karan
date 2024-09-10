@@ -65,8 +65,8 @@ function ManageAsset() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor:'blue',
+      color: theme.palette.common.black,
       padding: '10px', // Increase padding
       height: '20px',  // Set a specific height
       fontSize: '16px', // Optionally adjust font size for header
@@ -109,7 +109,7 @@ function ManageAsset() {
           <Typography variant="h4" mt={1} >Organization </Typography>
 
           <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={10}>
+            <Grid item md={10} sm={10} xs={12} lg={12}>
               <Grid container spacing={1} >
                 <Grid item xs={12} sm={3} md={3} lg={3}>
                   <Typography variant="h6">Organization Name </Typography>
@@ -145,7 +145,7 @@ function ManageAsset() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item md={2} sm={2} xs={12} lg={2} >
+            {/* <Grid item md={2} sm={2} xs={12} lg={2} >
               <Box sx={{
                 height: '100%', // Set the height of the box
                 width: '100%', // Set the width of the box
@@ -157,7 +157,7 @@ function ManageAsset() {
               >
                 <Typography>image</Typography>
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
 
         </Grid>
@@ -171,7 +171,7 @@ function ManageAsset() {
               <Typography variant="h5"> Add Department</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" size="small" label="Department" inputRef={inputRef} fullWidth />
-                <Button variant="contained" className="btn-primary" onClick={handleAdd}>
+                <Button variant="contained" className="btn-primary" onClick={handleAdd} >
                   Add
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
@@ -184,7 +184,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Add Department</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
@@ -225,7 +225,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Position</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Add Position</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
@@ -268,7 +268,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Approval Chain</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '20%' }}>Approval Chain</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
