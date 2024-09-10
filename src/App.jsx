@@ -59,7 +59,6 @@ function App() {
         { path: "AddDevice", element: <AddDevice /> },
         { path: "Network", element: <Network /> },
         { path: "AddDevices", element: <AddDevices /> },
-
       ]
     },
     { path: "/CheckStatus", element: <CheckStatus /> },

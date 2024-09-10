@@ -16,6 +16,7 @@ import Chart from "react-apexcharts";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import BallotIcon from '@mui/icons-material/Ballot';
+import { Box } from "@mui/system";
 // import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -183,7 +184,6 @@ function Monitor() {
                 onChange={handleChange}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>UP</MenuItem>
                 <MenuItem value={20}>MP</MenuItem>
@@ -240,7 +240,6 @@ function Monitor() {
                 onChange={handleChangeParameters}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>1 minute</MenuItem>
                 <MenuItem value={20}>1 hour</MenuItem>
@@ -266,7 +265,6 @@ function Monitor() {
                 onChange={handleChangeReport}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>Low Bettery</MenuItem>
                 <MenuItem value={20}>Flowing Well</MenuItem>
@@ -328,7 +326,6 @@ function Monitor() {
                 onChange={handleChangeResolution}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>1 minute</MenuItem>
                 <MenuItem value={20}>1 hour</MenuItem>
