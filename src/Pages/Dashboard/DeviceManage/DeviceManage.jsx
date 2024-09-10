@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, IconButton, Paper, Typography } from '@mui/material'
+import { Button, Grid, IconButton, Paper, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,11 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
-import well from '/assets/WELL.png'
-import manage from '/assets/Oil.webp'
-import { Link } from 'react-router-dom';
+import Network from '../../../../public/assets/NetworkWire2.jpg'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
 
 // ----------------------Table for Moblie------------------------------
 
@@ -94,60 +93,200 @@ const rows = [
     createData('3'),
     createData('4'),
     createData('5'),
-
+    createData('6'),
+    createData('7'),
+    createData('8'),
+    // createData('3'),
+    // createData('4'),
+    // createData('5'),
 ];
 
+// -------------------------New Born Table--------------------------------------------
 
+const StyleTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyleTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+        border: 0,
+    },
+}));
+
+function CreateData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+}
+
+const row = [
+    CreateData('1'),
+    CreateData('2'),
+    CreateData('3'),
+    CreateData('4'),
+    
+];
 
 function DeviceManage() {
     return (
         <div>
-            {/* --------------------------Content and Button--------------------------------- */}
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
                 <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
                     <Box sx={{ height: '50px', width: '50px' }}>
-                        <img src={manage} alt='img' height={'50px'} width={'50px'} />
+                        <img src={Network} alt='img' height={'50px'} width={'50px'} />
                     </Box>
                     <Box>
-                        <Typography variant='h4'>Device Manager</Typography>
+                        <Typography variant='h4'>Manage Nodes</Typography>
                     </Box>
                 </Grid>
-                <Grid item display={'flex'} justifyContent={'end'} lg={6} md={6} sm={6} xs={6}>
-                    <Link to='/dashboard/AddDevice'>
-                        <Button variant='contained'
-                            sx={{
-                                backgroundColor: 'green',   // Change button color to green
-                                '&:hover': {
-                                    backgroundColor: 'darkgreen', // Optional: Change color on hover
-                                },
-                                fontSize: '16px',
-                                // Hide button on small screens
-                                display: {
-                                    xs: 'none', // Hide on extra small screens (mobile)
-                                    sm: 'block', // Show on small screens and above
-                                }
-                            }}>
-                            Add Device
-                        </Button>
-                    </Link>
+            </Grid>
+            {/* ----------------------------------Table and Inputs Field-------------------------------- */}
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                {/* ------------------------------Table--------------------------------------------- */}
+                <Grid item lg={1.6} md={6} sm={8} xs={12} sx={{ border: '1px solid black' }} >
+                    <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                        <Table aria-label="customized table" stickyHeader>
+                            <TableHead >
+                                <TableRow  >
+                                    <StyleTableCell sx={{ fontSize: '18px' }}>MAC Address</StyleTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {row.map((row) => (
+                                    <StyleTableRow key={row.name}>
+                                        <StyleTableCell component="th" scope="row">
+                                            {row.name}
+                                        </StyleTableCell>                                        
+                                    </StyleTableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Grid>
+                {/* ------------------------------Inputs-------------------------------------------- */}
+                <Grid item lg={10.2} md={6} sm={8} xs={12} sx={{ border: '1px solid black' }}>
+                    <Grid container spacing={3} p={1}>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">MAC Address</Typography>
+                            <TextField variant="outlined" size="small" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Node ID</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Well No</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Port Name</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Min. Value</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Full Value</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Gateway-1</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Password</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Gateway-3</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Password</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Gateway-3</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Password</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
+            {/* --------------------------------Button--------------------------------------------- */}
+            <Grid container mt={2} display={"flex"} justifyContent={"end"} gap={1} flexDirection={{ xs: 'row' }} >
+                <Box >
+                <Link to='/dashboard/AddDevice'>
+                    <Button variant='contained'
+                        sx={{
+                            backgroundColor: 'green',   // Change button color to green
+                            '&:hover': {
+                                backgroundColor: 'darkgreen', // Optional: Change color on hover
+                            },
+                            fontSize: '16px',
+                            width: '150px',
+                        }}>
+                        Add Device
+                    </Button>
+                </Link>
+                </Box>
+                <Box>
+                    <Button variant='contained'
+                        sx={{
+                            backgroundColor: 'green',   // Change button color to green
+                            '&:hover': {
+                                backgroundColor: 'darkgreen', // Optional: Change color on hover
+                            },
+                            fontSize: '16px',
+                            width: '150px',
+
+                        }}>
+                        Submit
+                    </Button>
+                </Box>
+                <Box>
+                    <Button variant='contained'
+                        sx={{
+                            backgroundColor: 'green',   // Change button color to green
+                            '&:hover': {
+                                backgroundColor: 'darkgreen', // Optional: Change color on hover
+                            },
+                            fontSize: '16px',
+                            width: '150px',
+
+                        }}>
+                        Cancel
+                    </Button>
+                </Box>
+            </Grid>
+
             {/* ------------------Table for Desktop--------------------------------- */}
-            <Grid container md={12}
-                lg={12}
-                sm={5}
-                xs={4}
-                sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+            <Grid container mt={2} md={12} lg={12} sm={5} xs={4} sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
                 <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{ fontSize: '18px' }}> Well Number</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Lattitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align='left'>Node ID</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">MAC Address</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well No.</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Port Name </StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Min. Value</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Full Value</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Gateway-1</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Gateway-2</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Gateway-3</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -156,22 +295,14 @@ function DeviceManage() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="left">11.171.01.1 </StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
-                                    <StyledTableCell align='left'   >
-                                        <Box display={'flex'} justifyContent={"space-evenly"} >
-                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px', padding: '5px', }}>
-                                                <DeleteForeverIcon fontSize='large' />
-                                            </IconButton>
-                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
-                                                <EditIcon fontSize='large' />
-                                            </IconButton>
-                                        </Box>
-                                    </StyledTableCell>
-
-
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align='left'></StyledTableCell>
+                                    <StyledTableCell align='left'></StyledTableCell>
+                                    <StyledTableCell align='left'></StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>
@@ -179,7 +310,7 @@ function DeviceManage() {
                 </TableContainer>
             </Grid>
 
-            {/* ---------------------------Table for Moblie-------------------------- */}
+            {/* ---------------------------Table for Moblie------------------------------------- */}
 
             <Grid container md={12}
                 lg={12}

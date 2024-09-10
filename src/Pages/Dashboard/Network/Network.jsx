@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, IconButton, Paper, Typography } from '@mui/material'
+import { Button, Grid, IconButton, Paper, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,9 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
 import Network from '../../../../public/assets/NetworkWire2.jpg'
-
-// import manage from '/assets/Oil.webp'
-import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -103,7 +100,37 @@ const rows = [
     // createData('5'),
 ];
 
+// -------------------------New Born Table--------------------------------------------
 
+const StyleTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyleTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+        border: 0,
+    },
+}));
+
+function CreateData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+}
+
+const row = [
+    CreateData('1'),
+    CreateData('2'),
+    CreateData('3'),
+];
 
 function DeviceManage() {
     return (
@@ -114,44 +141,111 @@ function DeviceManage() {
                         <img src={Network} alt='img' height={'50px'} width={'50px'} />
                     </Box>
                     <Box>
-                        <Typography variant='h4'>Network Manager</Typography>
+                        <Typography variant='h4'>Manage Gateway</Typography>
                     </Box>
                 </Grid>
-                <Grid item display={'flex'} justifyContent={'end'} lg={6} md={6} sm={6} xs={6}>
-                    <Link to='/dashboard/AddDevices'>
-                        <Button variant='contained'
-                            sx={{
-                                backgroundColor: 'green',   // Change button color to green
-                                '&:hover': {
-                                    backgroundColor: 'darkgreen', // Optional: Change color on hover
-                                },
-                                fontSize: '16px',
-                                // Hide button on small screens
-                                display: {
-                                    xs: 'none', // Hide on extra small screens (mobile)
-                                    sm: 'block', // Show on small screens and above
-                                }
-                            }}>
-                            Add Device +
-                        </Button>
-                    </Link>
+            </Grid>
+            {/* ----------------------------------Table and Inputs Field-------------------------------- */}
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                {/* ------------------------------Table--------------------------------------------- */}
+                <Grid item lg={4.5} md={6} sm={8} xs={12}>
+                    <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                        <Table aria-label="customized table" stickyHeader>
+                            <TableHead >
+                                <TableRow  >
+                                    <StyleTableCell sx={{ fontSize: '18px' }}>Sim</StyleTableCell>
+                                    <StyleTableCell sx={{ fontSize: '18px' }} align="left">Location</StyleTableCell>
+                                    <StyleTableCell sx={{ fontSize: '18px' }} align="left">Configuration</StyleTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {row.map((row) => (
+                                    <StyleTableRow key={row.name}>
+                                        <StyleTableCell component="th" scope="row">
+                                            {row.name}
+                                        </StyleTableCell>
+                                        <StyleTableCell align="left">2</StyleTableCell>
+                                        <StyleTableCell align="left">3</StyleTableCell>
+                                    </StyleTableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Grid>
+                {/* ------------------------------Inputs-------------------------------------------- */}
+                <Grid item lg={7} md={6} sm={8} xs={12} sx={{ border: '2px solid black' }}>
+                    <Grid container spacing={3} p={3}>
+                        <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <Typography variant="h6">Sim</Typography>
+                            <TextField variant="outlined" size="small" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <Typography variant="h6">Location</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <Typography variant="h6">New ID</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <Typography variant="h6">Installation</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <Typography variant="h6">Password</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <Typography variant="h6">Protocol</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
+            {/* --------------------------------Button--------------------------------------------- */}
+            <Grid container mt={2} display={"flex"} justifyContent={"end"} gap={1} flexDirection={{ xs: 'row' }} >
+                <Box >
+                    <Button variant='contained'
+                        sx={{
+                            backgroundColor: 'green',   // Change button color to green
+                            '&:hover': {
+                                backgroundColor: 'darkgreen', // Optional: Change color on hover
+                            },
+                            fontSize: '16px',
+                            width: '150px',
+                        }}>
+                        Add Device
+                    </Button>
+                </Box>
+                <Box>
+                    <Button variant='contained'
+                        sx={{
+                            backgroundColor: 'green',   // Change button color to green
+                            '&:hover': {
+                                backgroundColor: 'darkgreen', // Optional: Change color on hover
+                            },
+                            fontSize: '16px',
+                            width: '150px',
+
+                        }}>
+                        Cancel
+                    </Button>
+                </Box>
+            </Grid>
+
             {/* ------------------Table for Desktop--------------------------------- */}
-            <Grid container md={12}
-                lg={12}
-                sm={5}
-                xs={4}
-                sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+            <Grid container mt={2} md={12} lg={12} sm={5} xs={4} sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
                 <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{ fontSize: '18px' }}> Well Number</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Lattitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }}>Sim</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Location</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">New ID</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Password</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Protocol</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
                                 {/* <StyledTableCell sx={{fontSize:'18px'}} align="left">Action</StyledTableCell> */}
                             </TableRow>
                         </TableHead>
@@ -165,16 +259,17 @@ function DeviceManage() {
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
                                     <StyledTableCell align="left"></StyledTableCell>
-                                    {/* <StyledTableCell align='left'> 
-                                        <IconButton  sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight:'5px' }}>
-                                        <DeleteForeverIcon/>
-                                        </IconButton>
-                                        <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black'}}}>
-                                         <EditIcon/>
-                                         </IconButton> 
-                                         </StyledTableCell> */}
-
-
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align='left'>
+                                        <Box display={'flex'} justifyContent={'space-evenly'}>
+                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                                <DeleteForeverIcon fontSize='large' />
+                                            </IconButton>
+                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                                <EditIcon fontSize='large' />
+                                            </IconButton>
+                                        </Box>
+                                    </StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>
