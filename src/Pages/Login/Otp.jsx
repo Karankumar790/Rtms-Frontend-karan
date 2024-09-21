@@ -9,6 +9,7 @@ import Fade from '@mui/material/Fade';
 import { useDispatch, useSelector } from "react-redux";
 import OTPInput from "react-otp-input";
 import services from "./Services/loginServices";
+import toast from "react-hot-toast";
 
 const Backdrop = React.forwardRef((props, ref) => {
   const { open, ...other } = props;
@@ -26,23 +27,27 @@ Backdrop.propTypes = {
 
 export default function OtpLogin() {
   const state = useSelector((state) => state)
-  const [otp, setOtp] = useState('');
+  const [otpValue, setOtpValue] = useState('');
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
-    navigate('/dashboard')
-    dispatch(services.authLoginService(otp))
-    navigate('/dashboard');
+    e.preventDefault()
+   
+    dispatch(services.authLoginService(otpValue))
+    dispatch(services.authLoginService(state))
 
+    navigate('/dashboard')
+    toast.success('Login Successful')
   }
 
-  useEffect(() => {
-    if (state && state?.token) {
-      // navigate('/dashboard')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (state && state?.token) {
+  //     navigate('/dashboard')
+
+  //   }
+  // }, [])
   return (
     <PageContainer
       showheader='true'
@@ -53,7 +58,7 @@ export default function OtpLogin() {
       <Grid container m={0}>
         <Grid item xs={12} md={12} sm={12}>
           <Paper sx={{ borderRadius: "10px" }} >
-            <Grid item p={2}>
+            <Grid container p={2}>
               <form>
                 <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
                   <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
@@ -61,12 +66,12 @@ export default function OtpLogin() {
                   </Typography>
                 </Grid>
 
-                {/* Input otp value  */}
+              
                 <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
                   <OTPInput
-                    // style={{ width: '2em', height: '4vh', textAlign: 'center',bgcolor:'red' }}
-                    value={otp}
-                    onChange={setOtp}
+                    inputStyle={{ width: '2rem', height: '4vh', fontSize: '18px' }}
+                    value={otpValue?.otp}
+                    onChange={(e) => setOtpValue((pre) => ({ ...pre, otp: e }))}
                     numInputs={6}
                     renderSeparator={<span> &nbsp; &nbsp; </span>}
                     renderInput={(props) => <input {...props} />}
@@ -76,6 +81,7 @@ export default function OtpLogin() {
                   item
                   xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
                   <Button
+
                     variant="contained"
                     color="primary"
                     size="small"
@@ -100,4 +106,5 @@ export default function OtpLogin() {
     </PageContainer>
   );
 }
+
 

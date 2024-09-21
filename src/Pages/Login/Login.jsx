@@ -10,7 +10,6 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import services from './Services/loginServices'
-import { authAction } from './LoginSlice/loginSlice'
 
 
 function Login() {
@@ -33,7 +32,7 @@ function Login() {
     e.preventDefault();
     dispatch(services.authSendOtpLoginServices(formValues))
     dispatch(authAction.addUser(formValues))
-    toast.success('Login Successful')
+    console.log('........form value',formValues);
     navigate('/otp');
   };
 

@@ -186,7 +186,6 @@ function Monitor() {
                 onChange={handleChange}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>UP</MenuItem>
                 <MenuItem value={20}>MP</MenuItem>
@@ -243,7 +242,6 @@ function Monitor() {
                 onChange={handleChangeParameters}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>1 minute</MenuItem>
                 <MenuItem value={20}>1 hour</MenuItem>
@@ -269,7 +267,6 @@ function Monitor() {
                 onChange={handleChangeReport}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>Low Bettery</MenuItem>
                 <MenuItem value={20}>Flowing Well</MenuItem>
@@ -331,7 +328,6 @@ function Monitor() {
                 onChange={handleChangeResolution}
               >
                 <MenuItem value="">
-                  <em>None</em>
                 </MenuItem>
                 <MenuItem value={10}>1 minute</MenuItem>
                 <MenuItem value={20}>1 hour</MenuItem>
