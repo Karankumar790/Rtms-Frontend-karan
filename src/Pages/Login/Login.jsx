@@ -1,38 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, Grid, TextField, Typography, IconButton, InputAdornment } from "@mui/material";
-import { toast } from 'react-hot-toast'
+//Api Integration Using Store In Redux
+import React, { useState } from "react";
+import {
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  IconButton,
+  InputAdornment,
+  Card,
+  CardContent,
+} from "@mui/material";
 import PageContainer from "../../components/HOC/PageContainer";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { setLoginDetails } from "../../apis/authSlice";
+import { sendOtpLogin } from "../../apis/Service";
 import HttpsIcon from "@mui/icons-material/Https";
-import { Link, useNavigate } from "react-router-dom";
-import Card from "@mui/joy/Card";
-import CardContent from "@mui/joy/CardContent";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import services from './Services/loginServices'
-
+import { toast } from "react-toastify";
+import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Login() {
   const [formValues, setFormValues] = useState({ username: "", password: "" });
   const [visible, setVisible] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setVisible((prev) => !prev);
   };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   const handleInputs = (e) => {
-    setFormValues((pre) => ({ ...pre, [e.target?.name]: e.target?.value }))
+    setFormValues((pre) => ({ ...pre, [e.target?.name]: e.target?.value }));
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch(services.login(formValues))
-    toast.success('Login Successful')
-    navigate('/otp');
+
+    //Integaration
+    try {
+      const response = await sendOtpLogin(formValues);
+      if (response.success) {
+        // Store data in Redux store
+        dispatch(
+          setLoginDetails({
+            username: formValues.username,
+            password: formValues.password,
+          })
+        );
+
+        toast.success("OTP sent successfully!");
+        navigate("/otp");
+      } else {
+        toast.error("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Login failed.");
+    }
   };
 
   return (
@@ -51,7 +79,7 @@ function Login() {
             </Grid>
             <Grid item alignItems={"center"}>
               <form onSubmit={handleSubmit}>
-                <Grid container padding={'5%'} spacing={2}>
+                <Grid container padding={"5%"} spacing={2}>
                   <Grid
                     item
                     sx={{ display: "flex", alignItems: "flex-end" }}
@@ -66,13 +94,12 @@ function Login() {
                     />
                     <TextField
                       className="custom-textfield"
-                      label="Email"
-                      name="email"
+                      label="Username"
+                      name="username"
                       variant="standard"
-                      value={formValues.email}
+                      value={formValues?.username}
                       onChange={handleInputs}
                       fullWidth
-
                     />
                   </Grid>
                   <Grid
@@ -105,11 +132,7 @@ function Login() {
                               onMouseDown={handleMouseDownPassword}
                               edge="end"
                             >
-                              {visible ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
+                              {visible ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                           </InputAdornment>
                         ),
@@ -125,7 +148,10 @@ function Login() {
                   py={2}
                 >
                   <Grid item textAlign={"end"}>
-                    <Link to="/forgot" style={{ textDecoration: "none" }}>
+                    <Link
+                      to="/forgot"
+                      style={{ textDecoration: "none", cursor: "pointer" }}
+                    >
                       Forgot Password
                     </Link>
                   </Grid>
@@ -144,7 +170,11 @@ function Login() {
                       Don't have an account?
                       <Link
                         to="/signup"
-                        style={{ textDecoration: "none", margin: "4px" }}
+                        style={{
+                          textDecoration: "none",
+                          margin: "4px",
+                          cursor: "pointer",
+                        }}
                       >
                         Sign Up
                       </Link>

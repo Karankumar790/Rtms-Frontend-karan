@@ -1,5 +1,4 @@
 import React from 'react'
-import PageContainer from '../../components/HOC/PageContainer'
 import { Button, Grid, IconButton, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -9,11 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box, color } from '@mui/system';
-import well from '/assets/WELL.png'
+import master from '/assets/wellMaster.png'
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 
 // -------------------------------Table for  Moblie --------------------------
@@ -34,7 +32,9 @@ let data = {
     "Location": "New York",
     "Installation": "01/01/2021",
     "Latitude": "40.7128 N",
-    "Longitude": "74.0060 W"
+    "Longitude": "74.0060 W",
+    "Landmark": "Temple"
+
 };
 
 let Tata = {
@@ -42,7 +42,8 @@ let Tata = {
     "Location": "Delhi",
     "Installation": "01/01/2021",
     "Latitude": "40.7128 N",
-    "Longitude": "74.0060 W"
+    "Longitude": "74.0060 W",
+    "Landmark": "Temple",
 };
 
 let Mata = {
@@ -50,7 +51,8 @@ let Mata = {
     "Location": "UP",
     "Installation": "01/01/2021",
     "Latitude": "40.7128 N",
-    "Longitude": "74.0060 W"
+    "Longitude": "74.0060 W",
+    "Landmark": "Temple",
 };
 
 let Sata = {
@@ -58,7 +60,8 @@ let Sata = {
     "Location": "MP",
     "Installation": "01/01/2021",
     "Latitude": "40.7128 N",
-    "Longitude": "74.0060 W"
+    "Longitude": "74.0060 W",
+    "Landmark": "Temple",
 };
 // ------------------------Table for Desktop-----------------------------   
 
@@ -66,6 +69,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
+        padding: '10px', // Increase padding
+        height: '20px',  // Set a specific height
+        fontSize: '16px', // Optionally adjust font size for header
+        lineHeight: '1.5', // Adjust line height if needed
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -93,11 +100,7 @@ const rows = [
     createData('4'),
     createData('5'),
     createData('3'),
-    createData('4'),
-    createData('5'),
-    createData('3'),
-    createData('4'),
-    createData('5'),
+
 ];
 
 const BodyTableCellWraper = styled(TableCell)(() => ({
@@ -114,17 +117,17 @@ const BodyTableCellWraper = styled(TableCell)(() => ({
 function WellMaster() {
     return (
         <div>
-            <Grid container>
-                <Typography variant='h4'>Well Master</Typography>
-            </Grid>
-            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} p={2}>
-                <Grid item p={1}>
-                    <Box sx={{ height: '100px', width: '100px' }}>
-                        <img src={well} alt='img' height={'100px'} width={'100px'} />
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={1} paddingBottom={2}>
+                <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
+                    <Box sx={{ height: '50px', width: '50px' }}>
+                        <img src={master} alt='img' height={'50px'} width={'50px'} />
+                    </Box>
+                    <Box >
+                        <Typography variant='h4'>Well Master</Typography>
                     </Box>
                 </Grid>
-                <Grid item p={4}>
-                    <Link to='/dashboard/addwell'>
+                <Grid item lg={6} md={6} sm={6} xs={6} display={'flex'} justifyContent={'end'}>
+                    <Link to='/dashboard/addwell' style={{ textDecoration: 'none' }}>
                         <Button variant='contained'
                             sx={{
                                 backgroundColor: 'green',   // Change button color to green
@@ -132,12 +135,18 @@ function WellMaster() {
                                     backgroundColor: 'darkgreen', // Optional: Change color on hover
                                 },
                                 fontSize: '16px',
-                            }}>
-                            Add New well +
+                                // Hide button on small screens
+                                display: {
+                                    xs: 'none', // Hide on extra small screens (mobile)
+                                    sm: 'block', // Show on small screens and above
+                                }
+                            }} >
+                            Add Well +
                         </Button>
                     </Link>
                 </Grid>
             </Grid>
+
             {/* ------------------Table for Desktop--------------------------------- */}
             <Grid container md={12}
                 lg={12}
@@ -149,11 +158,12 @@ function WellMaster() {
                         <TableHead >
                             <TableRow  >
                                 <StyledTableCell sx={{ fontSize: '18px' }}>Well Number</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location </StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Action</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">LandMark</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -162,14 +172,20 @@ function WellMaster() {
                                     <StyledTableCell component="th" scope="row">
                                         {row.name}
                                     </StyledTableCell>
-                                    <StyledTableCell align="left">1</StyledTableCell>
-                                    <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                                    <StyledTableCell align="left">gbz</StyledTableCell>
-                                    <StyledTableCell align="left">yes</StyledTableCell>
-                                    <StyledTableCell align="left" width={20} padding='none' colSpan={3}>
-                                            <IconButton sx={{ color: 'red' }}><DeleteForeverIcon fontSize='large'/></IconButton>
-                                            <IconButton sx={{ color: 'darkblue' }}><EditIcon fontSize='large' /></IconButton>
-                                            <IconButton sx={{ color: 'black' }}><VisibilityIcon fontSize='large'/></IconButton>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align='left'>
+                                        <Box display={'flex'} justifyContent={'space-evenly'}>
+                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                                <DeleteForeverIcon fontSize='large' />
+                                            </IconButton>
+                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                                <EditIcon fontSize='large' />
+                                            </IconButton>
+                                        </Box>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}
@@ -189,13 +205,13 @@ function WellMaster() {
                         {Object.keys(data).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{data[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -206,13 +222,13 @@ function WellMaster() {
                         {Object.keys(Tata).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{Tata[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -223,13 +239,13 @@ function WellMaster() {
                         {Object.keys(Mata).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{Mata[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -240,13 +256,13 @@ function WellMaster() {
                         {Object.keys(Sata).map((header, index) => (
                             <Grid container key={index}>
                                 {/* Header Section */}
-                                <StyledGridItem item xs={4}>
+                                <StyledGridItem item xs={6}>
                                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                                         {header}
                                     </Typography>
                                 </StyledGridItem>
                                 {/* Content Section */}
-                                <StyledContent item xs={8}>
+                                <StyledContent item xs={6}>
                                     <Typography variant="body1">{Sata[header]}</Typography>
                                 </StyledContent>
                             </Grid>
@@ -255,7 +271,7 @@ function WellMaster() {
                 </Paper>
             </Grid>
 
-        </div>
+        </div >
     )
 }
 
