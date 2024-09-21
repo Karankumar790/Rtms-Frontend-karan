@@ -100,6 +100,17 @@ function ManageAsset() {
 
   ]
   return (
+<<<<<<< HEAD
+    <div className="bg-color">
+      <Paper sx={{bgcolor:'#d1dcf0'}}>
+        <Grid container gap={3} p={2}>
+          <Typography variant="h4">Organization </Typography>
+
+          <Grid container spacing={2} >
+            <Grid item xs={12} sm={3} md={3} lg={3}>
+              <Typography variant="h6">Asset </Typography>
+              <TextField variant="outlined" fullWidth />
+=======
     <div>
       <Paper>
         <Grid container gap={1} p={3}>
@@ -144,6 +155,7 @@ function ManageAsset() {
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
               </Grid>
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
             </Grid>
             {/* <Grid item md={2} sm={2} xs={12} lg={2} >
               <Box sx={{
@@ -163,7 +175,7 @@ function ManageAsset() {
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
-      <Card sx={{ my: 2 }}>
+      <Card sx={{ my: 2, bgcolor:'#d1dcf0' }}>
         <CardContent>
           <Grid container spacing={2} mt={0.1}>
             {/* ------------------------ADD DEPARTMENT------------------------------ */}
@@ -348,9 +360,15 @@ function ManageAsset() {
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
               <TextField variant="outlined" label="Phone" inputRef={inputRef3} fullWidth />
+<<<<<<< HEAD
+            </Grid>
+            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
+              <Button variant="contained" className="btn-primary " onClick={handleAdd}>
+=======
             </Grid> */}
             {/* <Grid item xs={12} >
               <Button variant="contained" className="btn-primary" onClick={handleAdd}>
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
                 Add Department
               </Button>
             </Grid> */}
@@ -360,7 +378,11 @@ function ManageAsset() {
       </Card>
       {/* ----------------------Postion-------------------------------- */}
 
+<<<<<<< HEAD
+      <Card sx={{ my: 2, bgcolor:'#d1dcf0' }}>
+=======
       {/* <Card sx={{ my: 2 }}>
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
         <CardContent>
           <Typography variant="h5"> Add Postion</Typography>
           <Grid container spacing={2} mt={0.1}>
@@ -377,7 +399,11 @@ function ManageAsset() {
               <TextField variant="outlined" label="Employee" fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'end' }}>
+<<<<<<< HEAD
+              <Button variant="contained"  className="btn-primary ">
+=======
               <Button variant="contained" className="btn-primary">
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
                 Postion
               </Button>
             </Grid>
@@ -386,9 +412,13 @@ function ManageAsset() {
       </Card> */}
       {/* -----------------------Approval chain------------------------- */}
 
+<<<<<<< HEAD
+      <Card sx={{ my: 2, bgcolor:'#d1dcf0' }} >
+=======
       {/* <Card sx={{ my: 2 }} >
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
 
-        <Grid >
+        <Grid item xs={12} sm={12} md={12}>
           <Box >
             <Stepper
               activeStep={1}
@@ -419,10 +449,18 @@ function ManageAsset() {
               ))}
             </Stepper>
           </Box>
+<<<<<<< HEAD
+          <Grid item xs={12} sm={12} md={12} mb={2} sx={{ display: "flex", justifyContent: "center" }} >
+            <Box
+              sx={{
+                // width: "70%",
+                width:'100%',
+=======
           <Grid item xs={12} sm={12} md={12} lg={12} mb={2} p={2} sx={{ display: "flex", justifyContent: "center" }} >
             <Box
               sx={{
                 width: "100%",
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
                 display: "flex",
                 justifyContent: "space-between",
               }}
@@ -432,7 +470,11 @@ function ManageAsset() {
                 to="/"
                 style={{ textDecoration: "none", color: "white" }}
               >
+<<<<<<< HEAD
+                <Button variant="contained"  className="btn-primary "  >
+=======
                 <Button variant="contained" className="btn-primary" >
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
                   Close
                 </Button>
               </Link>
@@ -441,9 +483,13 @@ function ManageAsset() {
         </Grid>
       </Card> */}
       {/* -------------------------Table-------------------------- */}
+<<<<<<< HEAD
+      <Grid container>
+=======
 
 
       {/* <Grid container>
+>>>>>>> bc2f17d51f69b3d6e0cf9f03d95d706df8a3cb0f
         <Grid item md={12} lg={12} sm={12} xs={12}>
           <Tabs>
             <TabList>

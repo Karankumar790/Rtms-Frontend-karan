@@ -228,6 +228,7 @@ function DeviceManage() {
             {/* --------------------------------Button--------------------------------------------- */}
             <Grid container mt={2} display={"flex"} justifyContent={"end"} gap={1} flexDirection={{ xs: 'row' }} >
                 <Box >
+                <Link to='/dashboard/AddDevice' style={{textDecoration:'none'}}>
                     <Button variant='contained'
                         sx={{
                             backgroundColor: 'green',   // Change button color to green
@@ -239,6 +240,7 @@ function DeviceManage() {
                         }}>
                         Add Device
                     </Button>
+                    </Link>
                 </Box>
                 <Box>
                     <Button variant='contained'

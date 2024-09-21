@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Grid, IconButton, Paper, TextField, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +11,7 @@ import { Box } from '@mui/system';
 import Network from '../../../../public/assets/NetworkWire2.jpg'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import NetworkIcon from '@mui/icons-material/CellTower';
 
 // ----------------------Table for Moblie------------------------------
 
@@ -127,19 +128,32 @@ function CreateData(name, calories, fat, carbs, protein) {
 }
 
 const row = [
-    CreateData('1'),
-    CreateData('2'),
-    CreateData('3'),
+    CreateData('001'),
+    CreateData(''),
+    CreateData(''),
 ];
 
+// const [parameter, setParameter] = useState('');
+
+//     const handleChangeParameter = (event) => {
+//     setParameter(event.target.value);
+// };
+
+
+
 function DeviceManage() {
+
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     return (
         <div>
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={2} paddingBottom={2}>
-                <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
-                    <Box sx={{ height: '50px', width: '50px' }}>
-                        <img src={Network} alt='img' height={'50px'} width={'50px'} />
-                    </Box>
+                <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1} alignItems={'center'}>
+                    {/* Increase the icon size */}
+                    <NetworkIcon sx={{ color: 'black', fontSize: 40 }} />
                     <Box>
                         <Typography variant='h4'>Manage Gateway</Typography>
                     </Box>
@@ -153,19 +167,19 @@ function DeviceManage() {
                         <Table aria-label="customized table" stickyHeader>
                             <TableHead >
                                 <TableRow  >
-                                    <StyleTableCell sx={{ fontSize: '18px' }}>Sim</StyleTableCell>
-                                    <StyleTableCell sx={{ fontSize: '18px' }} align="left">Location</StyleTableCell>
-                                    <StyleTableCell sx={{ fontSize: '18px' }} align="left">Configuration</StyleTableCell>
+                                    <StyleTableCell sx={{ fontSize: '18px' }} align="center">Sim No.</StyleTableCell>
+                                    <StyleTableCell sx={{ fontSize: '18px' }} align="center">Geo Location</StyleTableCell>
+                                    <StyleTableCell sx={{ fontSize: '18px' }} align="center">Configuration</StyleTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {row.map((row) => (
                                     <StyleTableRow key={row.name}>
-                                        <StyleTableCell component="th" scope="row">
+                                        <StyleTableCell component="th" scope="row" align="center">
                                             {row.name}
                                         </StyleTableCell>
-                                        <StyleTableCell align="left">2</StyleTableCell>
-                                        <StyleTableCell align="left">3</StyleTableCell>
+                                        <StyleTableCell align="center"></StyleTableCell>
+                                        <StyleTableCell align="center"></StyleTableCell>
                                     </StyleTableRow>
                                 ))}
                             </TableBody>
@@ -173,18 +187,18 @@ function DeviceManage() {
                     </TableContainer>
                 </Grid>
                 {/* ------------------------------Inputs-------------------------------------------- */}
-                <Grid item lg={7} md={6} sm={8} xs={12} sx={{ border: '2px solid black' }}>
+                <Grid item lg={7} md={6} sm={8} xs={12} sx={{ border: '1px solid black' }}>
                     <Grid container spacing={3} p={3}>
                         <Grid item xs={12} sm={6} md={6} lg={4}>
-                            <Typography variant="h6">Sim</Typography>
+                            <Typography variant="h6">Sim No.</Typography>
                             <TextField variant="outlined" size="small" fullWidth />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={4}>
-                            <Typography variant="h6">Location</Typography>
+                            <Typography variant="h6">UID</Typography>
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={4}>
-                            <Typography variant="h6">New ID</Typography>
+                            <Typography variant="h6">Location</Typography>
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={4}>
@@ -196,8 +210,19 @@ function DeviceManage() {
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={4}>
+                            <FormControl fullWidth size="small">
                             <Typography variant="h6">Protocol</Typography>
-                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                                <Select
+                                    labelId="demo-select-small-label"
+                                    id="demo-select-large"
+                                    value={age}
+                                    onChange={handleChange}
+                                >
+                                    <MenuItem value={10}>UP</MenuItem>
+                                    <MenuItem value={20}>MP</MenuItem>
+                                    <MenuItem value={30}>WB</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
                     </Grid>
                 </Grid>
