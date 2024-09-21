@@ -127,7 +127,7 @@ function WellMaster() {
                     </Box>
                 </Grid>
                 <Grid item lg={6} md={6} sm={6} xs={6} display={'flex'} justifyContent={'end'}>
-                    <Link to='/dashboard/addwell'>
+                    <Link to='/dashboard/addwell' style={{ textDecoration: 'none' }}>
                         <Button variant='contained'
                             sx={{
                                 backgroundColor: 'green',   // Change button color to green
