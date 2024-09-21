@@ -67,8 +67,8 @@ function ManageAsset() {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
-      padding: '16px', // Increase padding
-      height: '30px',  // Set a specific height
+      padding: '10px', // Increase padding
+      height: '20px',  // Set a specific height
       fontSize: '16px', // Optionally adjust font size for header
       lineHeight: '1.5', // Adjust line height if needed
     },
@@ -108,52 +108,56 @@ function ManageAsset() {
           </IconButton>
           <Typography variant="h4" mt={1} >Organization </Typography>
 
-          <Grid container spacing={2} p={2} mt={1}>
-            <Grid container lg={10} spacing={1} >
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">Organization Name </Typography>
-                <TextField variant="outlined" size="small" fullWidth />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">Address</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">City</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">State</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">Country</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">Pin Code</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">Phone</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-              <Grid item xs={12} sm={3} md={3} lg={3}>
-                <Typography variant="h6">Fax</Typography>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
+          <Grid container spacing={3}>
+            <Grid item md={10} sm={10} xs={12} lg={12}>
+              <Grid container spacing={1} >
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">Organization Name </Typography>
+                  <TextField variant="outlined" size="small" fullWidth />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">Address</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">City</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">State</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">Country</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">Pin Code</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">Phone</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
+                  <Typography variant="h6">Fax</Typography>
+                  <TextField variant="outlined" size="small" fullWidth value={""} />
+                </Grid>
               </Grid>
             </Grid>
-            <Grid item gap={2} lg={2} sx={{border:'2px solid black'}}  >
+            {/* <Grid item md={2} sm={2} xs={12} lg={2} >
               <Box sx={{
-               
-                backgroundPosition: 'center',
                 height: '100%', // Set the height of the box
                 width: '100%', // Set the width of the box
+                border: '1px solid black',
+                display:'flex',
+                alignItems: 'center',
+                justifyContent:'center'
               }}
               >
-                image
+                <Typography>image</Typography>
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
 
         </Grid>
@@ -167,8 +171,14 @@ function ManageAsset() {
               <Typography variant="h5"> Add Department</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" size="small" label="Department" inputRef={inputRef} fullWidth />
-                <Button variant="contained" className="btn-primary" onClick={handleAdd}>
-                  Add
+                <Button variant='contained' onClick={handleAdd} size="small"
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                  }}>
+                  ADD
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
@@ -180,7 +190,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Add Department</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
@@ -208,8 +218,14 @@ function ManageAsset() {
               <Typography variant="h5"> Add Position</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" size="small" label="Position" inputRef={inputRef} fullWidth />
-                <Button variant="contained" className="btn-primary" size="small" onClick={handleAdd}>
-                  Add
+                <Button variant='contained' onClick={handleAdd} size="small"
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                  }}>
+                  ADD
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
@@ -221,7 +237,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Add Position</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
@@ -251,8 +267,14 @@ function ManageAsset() {
                 <TextField variant="outlined" label="Action" size="small" fullWidth />
                 <TextField variant="outlined" label="Level-1" size="small" fullWidth />
                 <TextField variant="outlined" label="Level-2" size="small" fullWidth />
-                <Button variant="contained" size="small" className="btn-primary" onClick={handleAdd}>
-                  Add
+                <Button variant='contained' onClick={handleAdd} size="small"
+                  sx={{
+                    backgroundColor: 'green',   // Change button color to green
+                    '&:hover': {
+                      backgroundColor: 'darkgreen', // Optional: Change color on hover
+                    },
+                  }}>
+                  ADD
                 </Button>
                 {/* <Button sx={{ minWidth: "0px" }}>
                   <DeleteIcon sx={{ fontSize: "1.7rem", color: "red" }} />
@@ -264,7 +286,7 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Add Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '20%' }}>Approval Chain</StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
                         <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>

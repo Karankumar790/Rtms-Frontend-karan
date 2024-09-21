@@ -5,7 +5,8 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Grid, Box } from '@mui/material';
+import { Grid, Box, useMediaQuery } from '@mui/material';
+import { useTheme } from '@emotion/react';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -25,9 +26,10 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function Header({ open, handleDrawerOpen }) {
+export default function Header({ open, handleDrawerOpen}) {
+
   return (
-    <AppBar position="fixed" open={open} sx={{ backgroundColor: '#8C000B' }}>
+    <AppBar position="fixed" open={open}  sx={{ backgroundColor: '#8C000B' }}>
       <Toolbar>
         <IconButton
           color="inherit"

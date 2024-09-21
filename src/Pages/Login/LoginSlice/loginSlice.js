@@ -120,3 +120,4 @@ const authSlice = createSlice({
 
 export const { addUser, removeUser } = authSlice.actions;
 export default authSlice.reducer;
+
