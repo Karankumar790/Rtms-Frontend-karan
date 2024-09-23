@@ -13,7 +13,6 @@ import 'react-tabs/style/react-tabs.css';
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import AssetsIcon from '@mui/icons-material/AccountBalance';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 // -------------------Table Function-------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -107,7 +106,6 @@ function ManageAsset() {
             <AssetsIcon sx={{ fontSize: 30, color: "green " }} />
           </IconButton>
           <Typography variant="h4" mt={1} >Organization </Typography>
-
           <Grid container spacing={2} p={2} mt={1}>
             <Grid container lg={10} spacing={1} >
               <Grid item xs={12} sm={3} md={3} lg={3}>

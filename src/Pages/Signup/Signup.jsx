@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, TextField, Box, Button, Paper } from '@mui/material'
+import { Grid, Typography, TextField, Box, Button, Paper, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
@@ -10,54 +10,93 @@ import { Link } from 'react-router-dom';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast'
-import services from './Service/signupService'
+import { sendOtpRegister } from "../../apis/Service";
+import { toast } from "react-toastify";
+import { setRegisterDetails } from "../../apis/authSlice";
+
 
 function Signup() {
-    const [selectedPhoto, setSelectedPhoto] = useState(null);
-    const [IdCard, setIdCard] = useState(null);
-    const [inputValues, setInputValues] = useState({
-        username: '',
-        email: '',
-        contactNumber: '',
-        employeeID: '',
-        assetName: '',
-        department: '',
-        roleInRTMS: '',
-        idCardPhoto: null,
-        passportPhoto: null,
-        emailOtp: '',
-        contactOtp: '',
+    const [selectedPhotoName, setSelectedPhotoName] = useState(null); // To store the passport photo name
+    const [idCardName, setIdCardName] = useState(null); // To store the ID card photo name
+    const [formValues, setFormValues] = useState({
+        username: "",
+        email: "",
+        contactNumber: "",
+        employeeID: "",
+        assetName: "",
+        department: "",
+        roleInRTMS: "",
+        idCardPhoto: "", //this is Image Uploaded by User
+        passportPhoto: "", //this is Image Uploaded by User
     });
-    const navigate = useNavigate()
+
     const dispatch = useDispatch();
-
-
+    const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
         const { name, value, files, type } = e.target;
-        setInputValues((pre) => ({ ...pre, [name]: type === 'file' ? files[0] : value }));
-        console.log(value)
+
+        if (type === "file") {
+            setFormValues((prev) => ({
+                ...prev,
+                [name]: files[0], // Store the actual file object
+            }));
+
+            // Update file name for preview
+            if (name === "passportPhoto") {
+                setSelectedPhotoName(files[0].name);
+            } else if (name === "idCardPhoto") {
+                setIdCardName(files[0].name);
+            }
+        } else {
+            setFormValues((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
+        }
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // navigate('/otpsign')
-        // console.log("====Submit========", inputValues)
-        const formData = new FormData();
-        formData.append('username', inputValues.username);
-        formData.append('email', inputValues.email);
-        formData.append('contactNumber', inputValues.contactNumber);
-        formData.append('employeeID', inputValues.employeeID);
-        formData.append('assetName', inputValues.assetName);
-        formData.append('department', inputValues.department);
-        formData.append('roleInRTMS', inputValues.roleInRTMS);
-        formData.append('idCardPhoto', inputValues.idCardPhoto);
-        formData.append('passportPhoto', inputValues.passportPhoto);
-        formData.append('emailOtp', inputValues.emailOtp);
-        formData.append('contactOtp', inputValues.contactOtp);
-        dispatch(services?.authRegisterOtp(formData))
 
-    }
+        const formData = new FormData();
+        Object.entries(formValues).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+
+        // Integration
+        try {
+            const response = await sendOtpRegister(formData); // Ensure that sendOtpRegister can handle FormData
+            // console.log("OTP Response:", response);
+            if (response?.success) {
+                // Store data in Redux Store
+                const passportPhotoURL = response?.passportPhoto;
+                const idCardPhotoURL = response?.idCardPhoto;
+                dispatch(
+                    setRegisterDetails({
+                        username: formValues.username,
+                        email: formValues.email,
+                        contactNumber: formValues.contactNumber,
+                        employeeID: formValues.employeeID,
+                        assetName: formValues.assetName,
+                        department: formValues.department,
+                        roleInRTMS: formValues.roleInRTMS,
+                        passportPhoto: passportPhotoURL || formValues.passportPhoto, // Store the image URL
+                        idCardPhoto: idCardPhotoURL || formValues.idCardPhoto, // Store the image URL
+                    })
+                );
+
+                toast.success("OTP Sent Successfully!");
+                // console.log("OTP sent, about to navigate...",response?.message);
+                navigate("/otpsignup");
+            } else {
+                toast.error("Invalid Provided Details");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Signup Failed");
+        }
+    };
 
     return (
 
@@ -72,7 +111,7 @@ function Signup() {
                                 <Typography variant='h6' color='#800000'>Create a New RTMS Account</Typography>
                             </Grid>
                             <Grid item px={4} alignItems={'center'}>
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <Grid item gap='9px' style={{ display: 'flex', flexDirection: 'column' }}>
                                         <Grid item>
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -84,7 +123,7 @@ function Signup() {
                                                     variant="standard"
                                                     color="info"
                                                     name="username"
-                                                    value={inputValues?.username}
+                                                    value={formValues.username}
                                                     onChange={handleUsernameChange}
                                                 />
                                             </Box>
@@ -97,7 +136,7 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues?.email}
+                                                    value={formValues?.email}
                                                     onChange={handleUsernameChange}
                                                 />
                                             </Box>
@@ -111,8 +150,23 @@ function Signup() {
                                                     variant="standard"
                                                     color="info"
                                                     className='custom-textfield'
-                                                    value={inputValues?.contactNumber}
-                                                    onChange={handleUsernameChange}
+                                                    value={formValues?.contactNumber}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        // Ensure the value starts with '+91'
+                                                        if (value.startsWith("+91")) {
+                                                            setFormValues((prev) => ({
+                                                                ...prev,
+                                                                contactNumber: value,
+                                                            }));
+                                                        } else {
+                                                            setFormValues((prev) => ({
+                                                                ...prev,
+                                                                contactNumber: `+91${value}`,
+                                                            }));
+                                                        }
+                                                    }}
+                                                    placeholder="+91 (Mobile Number)"
                                                 />
                                             </Box>
 
@@ -125,7 +179,7 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues?.employeeID}
+                                                    value={formValues?.employeeID}
                                                     onChange={handleUsernameChange}
                                                 />
                                             </Box>
@@ -139,7 +193,7 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues?.assetName}
+                                                    value={formValues?.assetName}
                                                     onChange={handleUsernameChange}
                                                 />
                                             </Box>
@@ -153,23 +207,25 @@ function Signup() {
                                                     color="info"
                                                     fullWidth
                                                     className='custom-textfield'
-                                                    value={inputValues?.department}
+                                                    value={formValues?.department}
                                                     onChange={handleUsernameChange}
                                                 />
                                             </Box>
 
                                             <Box mt={.5} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                                 <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize='large' />
-                                                <TextField
-                                                    label="Role in RTMS"
-                                                    name="roleInRTMS"
-                                                    variant="standard"
-                                                    color="info"
-                                                    fullWidth
-                                                    className='custom-textfield'
-                                                    value={inputValues?.roleInRTMS}
-                                                    onChange={handleUsernameChange}
-                                                />
+                                                <FormControl fullWidth variant="standard">
+                                                    <InputLabel>Role in RTMS</InputLabel>
+                                                    <Select
+                                                        name="roleInRTMS"
+                                                        value={formValues.roleInRTMS}
+                                                        onChange={handleUsernameChange}
+                                                        label="Role in RTMS"
+                                                    >
+                                                        <MenuItem value="manager">Manager</MenuItem>
+                                                        <MenuItem value="employee">Employee</MenuItem>
+                                                    </Select>
+                                                </FormControl>
 
                                             </Box>
 
@@ -185,12 +241,12 @@ function Signup() {
                                                             onChange={handleUsernameChange}
                                                             hidden
                                                         />
-                                                        {selectedPhoto ? (
-                                                            <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                                                {selectedPhoto.name}
-                                                            </Typography>
+                                                        {!selectedPhotoName ? (
+                                                            <Typography>Upload photo</Typography>
                                                         ) : (
-                                                            <Typography sx={{ color: 'black' }}>Upload Photo</Typography>
+                                                            <Typography variant="body2" color="textSecondary">
+                                                                {selectedPhotoName}
+                                                            </Typography>
                                                         )}
                                                     </Button>
                                                 </Box>
@@ -204,12 +260,12 @@ function Signup() {
                                                             name='idCardPhoto'
                                                             onChange={handleUsernameChange}
                                                         />
-                                                        {IdCard ? (
-                                                            <Typography sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                                                {IdCard.name}
-                                                            </Typography>
+                                                        {!idCardName ? (
+                                                            <Typography>Upload ID Card</Typography>
                                                         ) : (
-                                                            <Typography sx={{ color: 'black' }}>Upload ID Card</Typography>
+                                                            <Typography variant="body2" color="textSecondary">
+                                                                {idCardName}
+                                                            </Typography>
                                                         )}
                                                     </Button>
                                                 </Box>

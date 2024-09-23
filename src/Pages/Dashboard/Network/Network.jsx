@@ -129,13 +129,6 @@ const row = [
     CreateData(''),
 ];
 
-// const [parameter, setParameter] = useState('');
-
-//     const handleChangeParameter = (event) => {
-//     setParameter(event.target.value);
-// };
-
-
 
 function DeviceManage() {
 
@@ -158,7 +151,8 @@ function DeviceManage() {
             {/* ----------------------------------Table and Inputs Field-------------------------------- */}
             <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 {/* ------------------------------Table--------------------------------------------- */}
-                <Grid item lg={4.5} md={6} sm={8} xs={12}>
+                <Grid item lg={4.5} md={6} sm={6} xs={12}>
+                    <Typography variant='h4'>New Born</Typography>
                     <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
                         <Table aria-label="customized table" stickyHeader>
                             <TableHead >
@@ -171,10 +165,10 @@ function DeviceManage() {
                             <TableBody>
                                 {row.map((row) => (
                                     <StyleTableRow key={row.name}>
-                                        <StyleTableCell component="th" scope="row" align="center">
-                                            {row.name}
+                                        <StyleTableCell align="center">
+                                            011
                                         </StyleTableCell>
-                                        <StyleTableCell align="center"></StyleTableCell>
+                                        <StyleTableCell align="center">001</StyleTableCell>
                                         <StyleTableCell align="center"></StyleTableCell>
                                     </StyleTableRow>
                                 ))}
@@ -183,8 +177,9 @@ function DeviceManage() {
                     </TableContainer>
                 </Grid>
                 {/* ------------------------------Inputs-------------------------------------------- */}
-                <Grid item lg={7} md={6} sm={8} xs={12} sx={{ border: '1px solid black' }}>
-                    <Grid container spacing={3} p={3}>
+                <Grid item lg={7} md={6} sm={6} xs={12}>
+                    <Typography variant='h4'>Configuration</Typography>
+                    <Grid container  p={3} spacing={2} mt={0.2} sx={{ border: '1px solid black' }} >
                         <Grid item xs={12} sm={6} md={6} lg={4}>
                             <Typography variant="h6">Sim No.</Typography>
                             <TextField variant="outlined" size="small" fullWidth />
@@ -207,7 +202,7 @@ function DeviceManage() {
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={4}>
                             <FormControl fullWidth size="small">
-                            <Typography variant="h6">Protocol</Typography>
+                                <Typography variant="h6">Protocol</Typography>
                                 <Select
                                     labelId="demo-select-small-label"
                                     id="demo-select-large"

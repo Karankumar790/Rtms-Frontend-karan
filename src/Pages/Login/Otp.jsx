@@ -1,119 +1,125 @@
-import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+//Api Integration Using Store In Redux
+import React, { useState } from "react";
+import { Grid, Paper, Typography, Button, Link } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 import PageContainer from "../../components/HOC/PageContainer";
-import { Link, useNavigate } from "react-router-dom";
-import PropTypes from 'prop-types';
-import { styled, css } from '@mui/system';
-import { Modal as BaseModal } from '@mui/base/Modal';
-import Fade from '@mui/material/Fade';
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import OTPInput from "react-otp-input";
-import services from "./Services/loginServices";
-import toast from "react-hot-toast";
-
-const Backdrop = React.forwardRef((props, ref) => {
-  const { open, ...other } = props;
-  return (
-    <Fade in={open}>
-      <div ref={ref} {...other} />
-    </Fade>
-  );
-});
-
-Backdrop.propTypes = {
-  open: PropTypes.bool,
-};
-
+import { login, sendOtpLogin } from "../../apis/Service"; // Import login and sendOtpLogin APIs
+import {
+  setOtp,
+  setAuthenticated,
+  clearAuth,
+  setAuthToken,
+  setRole,
+} from "../../apis/authSlice";
+import { toast } from "react-toastify";
 
 export default function OtpLogin() {
-  const state = useSelector((state) => state)
-  const [otpValue, setOtpValue] = useState('');
+  const [otpValue, setOtpValue] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const { username, password } = useSelector((state) => state.auth); // Get username and password from Redux store
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(services.authLoginService(otpValue))
-    navigate('/dashboard')
-    toast.success('Login Successful')
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // useEffect(() => {
-  //   if (state && state?.token) {
-  //     navigate('/dashboard')
+    const formData = { username, password, otp: otpValue };
 
-  //   }
-  // }, [])
+    try {
+      const response = await login(formData);
+
+      console.log(response);
+      if (response.success) {
+        dispatch(setOtp(otpValue)); // Store OTP in Redux
+        dispatch(setAuthenticated(true)); // Set authenticated state to true
+        dispatch(setAuthToken(response.token)); // Store auth token
+        dispatch(setRole(response.role)); // Store user role
+
+        toast.success("Login successful!");
+
+        navigate("/dashboard");
+
+        // dispatch(clearAuth()); // Clear auth data after login success
+      } else {
+        toast.error("OTP does not match.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("OTP verification failed.");
+    }
+  };
+
+  const handleResendOtp = async () => {
+    try {
+      const response = await sendOtpLogin({ username, password }); // Call API to resend OTP
+      if (response.success) {
+        toast.success("OTP resent successfully!");
+      } else {
+        toast.error("Failed to resend OTP.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error resending OTP.");
+    }
+  };
+
   return (
     <PageContainer
-      showheader='true'
-      showfooter='true'
-      className='bgImg'
-      style={{ display: 'grid', placeContent: 'center' }}
+      showheader
+      showfooter
+      className="bgImg"
+      style={{ display: "grid", placeContent: "center" }}
     >
       <Grid container m={0}>
         <Grid item xs={12} md={12} sm={12}>
-          <Paper sx={{ borderRadius: "10px" }} >
+          <Paper sx={{ borderRadius: "10px" }}>
             <Grid container p={2}>
-              <form>
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
-                  <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
+              <form onSubmit={handleSubmit}>
+                <Grid item  xs={12} md={12} sm={12} lg={12}  mt={2}>
+                  <Typography
+                    fontSize="x-large"
+                    sx={{ color: "#0c1352", textAlign: "center" }}
+                  >
                     Enter OTP To Verify E-Mail
                   </Typography>
                 </Grid>
-
-                {/* Input otp value  */}
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
-                  <TextField
-                    className="custom-textfield"
-                    label="Username"
-                    name="username"
-                    variant="standard"
-                    value={otpValue?.username}
-                    onChange={(e) => setOtpValue((pre) => ({ ...pre, username: e.target.value }))}
-                    fullWidth
-
-                  />
-                </Grid>
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
-                  <TextField
-                    className="custom-textfield"
-                    label="password"
-                    name="password"
-                    variant="standard"
-                    value={otpValue.password}
-                    onChange={(e) => setOtpValue((pre) => ({ ...pre, password: e.target.value }))}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
+                <Grid item xs={12} md={12} sm={12} lg={12} mt={3}
+                  display="flex"
+                  justifyContent="center"
+                >
                   <OTPInput
-                    inputStyle={{ width: '2rem', height: '4vh', fontSize: '18px' }}
-                    value={otpValue?.otp}
-                    onChange={(e) => setOtpValue((pre) => ({ ...pre, otp: e }))}
+                    inputStyle={{
+                      width: "2rem",
+                      height: "4vh",
+                      fontSize: "18px",
+                    }}
+                    value={otpValue}
+                    onChange={setOtpValue}
                     numInputs={6}
                     renderSeparator={<span> &nbsp; &nbsp; </span>}
                     renderInput={(props) => <input {...props} />}
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
+                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} textAlign="center">
                   <Button
-
                     variant="contained"
                     color="primary"
                     size="small"
                     sx={{ bgcolor: "#0c113b" }}
-                    onClick={handleSubmit}
+                    type="submit"
                   >
                     <Typography>Submit</Typography>
                   </Button>
                 </Grid>
-                <Grid item xs={12} md={12} sm={12} lg={12} textAlign="center" py={1}>
-                  <Link to="" style={{ textDecoration: "none" }} >
-                    <Typography >
+                <Grid item xs={12} textAlign="center" py={1}>
+                  <Link
+                    to="#"
+                    style={{ textDecoration: "none" }}
+                    onClick={handleResendOtp}
+                  >
+                    <Typography style={{ cursor: "pointer" }}>
                       Resend One-Time Password
                     </Typography>
                   </Link>
