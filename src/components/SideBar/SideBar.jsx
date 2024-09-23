@@ -85,6 +85,12 @@ export default function Sidebar({
   // Define your menu items here
   const menuItems = [
     {
+      name: "Super Admin",
+      icon: <ForwardToInboxIcon sx={{ color: "black" }} />,
+      path: "/dashboard/SuperAdmin",
+      roles: ["owner"],
+    },
+    {
       name: "Dashboard",
       icon: <HomeIcon sx={{ color: "black" }} />,
       path: "/dashboard",
@@ -150,6 +156,7 @@ export default function Sidebar({
       path: "/dashboard/message",
       roles: ["owner", "manager"],
     },
+   
   ];
 
   // Filter menu items based on the user's role
