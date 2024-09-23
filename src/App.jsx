@@ -51,6 +51,9 @@ const Approval = lazy(() =>
   import("./Pages/Dashboard/MessageBox/Approval.jsx")
 );
 
+const SuperAdmin = lazy(() =>
+  import("./Pages/Admin/SuperAdmin.jsx")
+);
 function App() {
   // Fetch the role from Redux
   const role = useSelector((state) => state.auth.role);
@@ -79,7 +82,8 @@ function App() {
     // Owner sees all routes including ManageAsset and message
     commonRoutes.push(
       { path: "ManageAsset", element: <ManageAsset /> },
-      { path: "message", element: <Approval /> }
+      { path: "message", element: <Approval /> },
+      { path: "SuperAdmin", element: <SuperAdmin /> }
     );
   } else if (role === "manager") {
     // Manager sees all routes except "ManageAsset"

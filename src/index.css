@@ -110,3 +110,10 @@
 .bg-color{
     background-color: #d1dcf0;
 }
+
+.admin-bg-image{
+    background-image: url("https://geekflare.com/cdn-cgi/image/width=1200,height=630,fit=crop,quality=90,format=auto,onerror=redirect,metadata=none/wp-content/uploads/2022/09/IoT-devices-1.jpg");
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+}
