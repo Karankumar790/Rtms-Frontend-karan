@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import PageContainer from "../HOC/PageContainer";
 
 function Reset() {
+
+  
   return (
     <PageContainer showheader showfooter
       bgcolor="#646d90" display="flex" justifyContent='center' alignItems='center' className='bgImg'>
