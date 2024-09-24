@@ -63,6 +63,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
+        padding: '10px', // Increase padding
+        height: '20px',  // Set a specific height
+        fontSize: '16px', // Optionally adjust font size for header
+        lineHeight: '1.5', // Adjust line height if needed
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -144,7 +148,7 @@ function DeviceManage() {
                     {/* Increase the icon size */}
                     <NetworkIcon sx={{ color: 'black', fontSize: 40 }} />
                     <Box>
-                        <Typography variant='h4'>Manager Gateway</Typography>
+                        <Typography variant='h4'>Manage Gateway</Typography>
                     </Box>
                 </Grid>
             </Grid>
@@ -255,9 +259,9 @@ function DeviceManage() {
                     <Table aria-label="customized table" stickyHeader>
                         <TableHead >
                             <TableRow  >
-                                <StyledTableCell sx={{ fontSize: '18px' }}>Sim No.</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left"> Geo Location</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">UID</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }}>Sim</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Location</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">New ID</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installation</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Password</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Protocol</StyledTableCell>

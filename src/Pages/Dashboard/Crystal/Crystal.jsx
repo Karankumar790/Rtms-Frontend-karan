@@ -23,6 +23,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    padding: '10px', // Increase padding
+    height: '20px',  // Set a specific height
+    fontSize: '16px', // Optionally adjust font size for header
+    lineHeight: '1.5', // Adjust line height if needed
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -212,7 +216,7 @@ function Monitor() {
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth >
-            <TextField
+              <TextField
                 fullWidth
                 type="date"
                 size='small'
@@ -278,7 +282,7 @@ function Monitor() {
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth>
-            <TextField
+              <TextField
                 fullWidth
                 type="date"
                 size='small'
@@ -297,7 +301,7 @@ function Monitor() {
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth >
-            <TextField
+              <TextField
                 fullWidth
                 type="date"
                 size='small'
@@ -502,19 +506,19 @@ function Monitor() {
                     ))}
                   </Grid>
                 </Paper>
-                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2}  >
+                <Grid item lg={12} md={12} sm={12} xs={12} mt={2}  >
                   <Box textAlign='end'>
-                  <Button variant='contained'
-                    onClick={handleDownload}
-                    sx={{
-                      backgroundColor: 'green',   // Change button color to green
-                      '&:hover': {
-                        backgroundColor: 'darkgreen', // Optional: Change color on hover
-                      },
-                      fontSize: '16px',
-                    }}>
-                    Download
-                  </Button>
+                    <Button variant='contained'
+                      onClick={handleDownload}
+                      sx={{
+                        backgroundColor: 'green',   // Change button color to green
+                        '&:hover': {
+                          backgroundColor: 'darkgreen', // Optional: Change color on hover
+                        },
+                        fontSize: '16px',
+                      }}>
+                      Download
+                    </Button>
                   </Box>
                 </Grid>
               </Grid>
@@ -533,19 +537,19 @@ function Monitor() {
                     />
                   </Paper>
                 </Grid>
-                <Grid item  lg={12} md={12} sm={12} xs={12} mt={2}  >
+                <Grid item lg={12} md={12} sm={12} xs={12} mt={2}  >
                   <Box textAlign='end'>
-                  <Button variant='contained'
-                    onClick={handleDownload}
-                    sx={{
-                      backgroundColor: 'green',   // Change button color to green
-                      '&:hover': {
-                        backgroundColor: 'darkgreen', // Optional: Change color on hover
-                      },
-                      fontSize: '16px',
-                    }}>
-                    Download
-                  </Button>
+                    <Button variant='contained'
+                      onClick={handleDownload}
+                      sx={{
+                        backgroundColor: 'green',   // Change button color to green
+                        '&:hover': {
+                          backgroundColor: 'darkgreen', // Optional: Change color on hover
+                        },
+                        fontSize: '16px',
+                      }}>
+                      Download
+                    </Button>
                   </Box>
                 </Grid>
               </Grid>

@@ -47,10 +47,13 @@ const Network = lazy(() => import("./Pages/Dashboard/Network/Network.jsx"));
 const AddDevices = lazy(() =>
   import("./Pages/Dashboard/Network/AddNetwork/AddNetwork.jsx")
 );
-// const Approval = lazy(() =>
-//   import("./Pages/Dashboard/MessageBox/Approval.jsx")
-// );
+const Approval = lazy(() =>
+  import("./Pages/Dashboard/MessageBox/Approval.jsx")
+);
 
+const SuperAdmin = lazy(() =>
+  import("./Pages/Admin/SuperAdmin.jsx")
+);
 function App() {
   // Fetch the role from Redux
   const role = useSelector((state) => state.auth.role);
@@ -79,7 +82,7 @@ function App() {
     // Owner sees all routes including ManageAsset and message
     commonRoutes.push(
       { path: "ManageAsset", element: <ManageAsset /> },
-      // { path: "message", element: <Approval /> }
+      { path: "message", element: <Approval /> },
     );
   } else if (role === "manager") {
     // Manager sees all routes except "ManageAsset"
@@ -101,6 +104,8 @@ function App() {
     { path: "/reset", element: <Reset /> },
     { path: "/popup", element: <PopUp /> },
     { path: "/CheckStatus", element: <CheckStatus /> },
+    { path: "/superAdmin", element: <SuperAdmin /> },
+
     {
       path: "/dashboard",
       element: <PrivateRoute />, // Protect the dashboard route

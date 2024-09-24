@@ -69,6 +69,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
+        padding: '10px', // Increase padding
+        height: '20px',  // Set a specific height
+        fontSize: '16px', // Optionally adjust font size for header
+        lineHeight: '1.5', // Adjust line height if needed
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -137,135 +141,135 @@ function WellMaster() {
                                     sm: 'block', // Show on small screens and above
                                 }
                             }} >
-                                Add Well +
-                    </Button>
-                </Link>
+                            Add Well +
+                        </Button>
+                    </Link>
+                </Grid>
             </Grid>
-        </Grid>
-          
-            {/* ------------------Table for Desktop--------------------------------- */ }
-    <Grid container md={12}
-        lg={12}
-        sm={5}
-        xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
-            <Table aria-label="customized table" stickyHeader>
-                <TableHead >
-                    <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px' }}>Well Number</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location </StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px' }} align="left">LandMark</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
-                            </StyledTableCell>
-                            <StyledTableCell align="left"></StyledTableCell>
-                            <StyledTableCell align="left"></StyledTableCell>
-                            <StyledTableCell align="left"></StyledTableCell>
-                            <StyledTableCell align="left"></StyledTableCell>
-                            <StyledTableCell align="left"></StyledTableCell>
-                            <StyledTableCell align='left'>
-                                <Box display={'flex'} justifyContent={'space-evenly'}>
-                                    <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
-                                        <DeleteForeverIcon fontSize='large' />
-                                    </IconButton>
-                                    <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
-                                        <EditIcon fontSize='large' />
-                                    </IconButton>
-                                </Box>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    </Grid>
-    {/* ---------------------------Table for Moblie------------------------------------- */ }
 
-    <Grid container md={12}
-        lg={12}
-        sm={12}
-        xs={12}
-        sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
-        <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-            <Grid container mt={2} direction="column">
-                {Object.keys(data).map((header, index) => (
-                    <Grid container key={index}>
-                        {/* Header Section */}
-                        <StyledGridItem item xs={6}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                                {header}
-                            </Typography>
-                        </StyledGridItem>
-                        {/* Content Section */}
-                        <StyledContent item xs={6}>
-                            <Typography variant="body1">{data[header]}</Typography>
-                        </StyledContent>
-                    </Grid>
-                ))}
+            {/* ------------------Table for Desktop--------------------------------- */}
+            <Grid container md={12}
+                lg={12}
+                sm={5}
+                xs={4}
+                sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+                <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                    <Table aria-label="customized table" stickyHeader>
+                        <TableHead >
+                            <TableRow  >
+                                <StyledTableCell sx={{ fontSize: '18px' }}>Well Number</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location </StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">LandMark</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <StyledTableRow key={row.name}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align="left"></StyledTableCell>
+                                    <StyledTableCell align='left'>
+                                        <Box display={'flex'} justifyContent={'space-evenly'}>
+                                            <IconButton sx={{ color: 'red', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                                <DeleteForeverIcon fontSize='large' />
+                                            </IconButton>
+                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                                <EditIcon fontSize='large' />
+                                            </IconButton>
+                                        </Box>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Grid>
-            {/* ----------------------Dreak---------------------------------- */}
-            <Grid container mt={2} direction="column">
-                {Object.keys(Tata).map((header, index) => (
-                    <Grid container key={index}>
-                        {/* Header Section */}
-                        <StyledGridItem item xs={6}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                                {header}
-                            </Typography>
-                        </StyledGridItem>
-                        {/* Content Section */}
-                        <StyledContent item xs={6}>
-                            <Typography variant="body1">{Tata[header]}</Typography>
-                        </StyledContent>
+            {/* ---------------------------Table for Moblie------------------------------------- */}
+
+            <Grid container md={12}
+                lg={12}
+                sm={12}
+                xs={12}
+                sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}>
+                <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
+                    <Grid container mt={2} direction="column">
+                        {Object.keys(data).map((header, index) => (
+                            <Grid container key={index}>
+                                {/* Header Section */}
+                                <StyledGridItem item xs={6}>
+                                    <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                                        {header}
+                                    </Typography>
+                                </StyledGridItem>
+                                {/* Content Section */}
+                                <StyledContent item xs={6}>
+                                    <Typography variant="body1">{data[header]}</Typography>
+                                </StyledContent>
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
-            </Grid>
-            {/* ----------------------Dreak---------------------------------- */}
-            <Grid container mt={2} direction="column">
-                {Object.keys(Mata).map((header, index) => (
-                    <Grid container key={index}>
-                        {/* Header Section */}
-                        <StyledGridItem item xs={6}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                                {header}
-                            </Typography>
-                        </StyledGridItem>
-                        {/* Content Section */}
-                        <StyledContent item xs={6}>
-                            <Typography variant="body1">{Mata[header]}</Typography>
-                        </StyledContent>
+                    {/* ----------------------Dreak---------------------------------- */}
+                    <Grid container mt={2} direction="column">
+                        {Object.keys(Tata).map((header, index) => (
+                            <Grid container key={index}>
+                                {/* Header Section */}
+                                <StyledGridItem item xs={6}>
+                                    <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                                        {header}
+                                    </Typography>
+                                </StyledGridItem>
+                                {/* Content Section */}
+                                <StyledContent item xs={6}>
+                                    <Typography variant="body1">{Tata[header]}</Typography>
+                                </StyledContent>
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
-            </Grid>
-            {/* ----------------------Dreak---------------------------------- */}
-            <Grid container mt={2} direction="column">
-                {Object.keys(Sata).map((header, index) => (
-                    <Grid container key={index}>
-                        {/* Header Section */}
-                        <StyledGridItem item xs={6}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                                {header}
-                            </Typography>
-                        </StyledGridItem>
-                        {/* Content Section */}
-                        <StyledContent item xs={6}>
-                            <Typography variant="body1">{Sata[header]}</Typography>
-                        </StyledContent>
+                    {/* ----------------------Dreak---------------------------------- */}
+                    <Grid container mt={2} direction="column">
+                        {Object.keys(Mata).map((header, index) => (
+                            <Grid container key={index}>
+                                {/* Header Section */}
+                                <StyledGridItem item xs={6}>
+                                    <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                                        {header}
+                                    </Typography>
+                                </StyledGridItem>
+                                {/* Content Section */}
+                                <StyledContent item xs={6}>
+                                    <Typography variant="body1">{Mata[header]}</Typography>
+                                </StyledContent>
+                            </Grid>
+                        ))}
                     </Grid>
-                ))}
+                    {/* ----------------------Dreak---------------------------------- */}
+                    <Grid container mt={2} direction="column">
+                        {Object.keys(Sata).map((header, index) => (
+                            <Grid container key={index}>
+                                {/* Header Section */}
+                                <StyledGridItem item xs={6}>
+                                    <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                                        {header}
+                                    </Typography>
+                                </StyledGridItem>
+                                {/* Content Section */}
+                                <StyledContent item xs={6}>
+                                    <Typography variant="body1">{Sata[header]}</Typography>
+                                </StyledContent>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Paper>
             </Grid>
-        </Paper>
-    </Grid>
 
         </div >
     )
