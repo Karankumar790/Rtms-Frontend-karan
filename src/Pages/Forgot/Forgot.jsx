@@ -11,9 +11,11 @@ export default function Forgot() {
                     <Grid item p={3} >
                         <form>
                             <Grid item mt={2}>
+
                                 <Typography variant='h5' fontSize='x-large' textAlign="center">Forgot Your Password?</Typography>
                             </Grid>
                             <Grid item mt={2}>
+                                
                                 <Typography fontSize='large' textAlign="center">Enter Your Registered Email. </Typography>
                             </Grid>
                             <Grid item mt={3}>

@@ -1,66 +1,3 @@
-# name: CI/CD Pipeline
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-
-#       - name: Start SSH agent
-#         uses: webfactory/ssh-agent@v0.5.3
-#         with:
-#           ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-
-#       - name: Deploy, build, and clean up on server
-#         run: |
-#           # sudo apt-get update && sudo apt-get install -y sshpass
-
-#           # SSH into the server and deploy
-#           sshpass -p "${{ secrets.VPS_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
-#           echo "Deploying the project"
-
-#           # Create the directory if it doesn't exist
-#           mkdir -p ~/work/Oscars
-
-#           # Navigate to the directory
-#           cd ~/work/Oscars
-
-#           # If the repository exists, pull the latest changes; otherwise, clone it
-#           if [ -d ".git" ]; then
-#             git pull origin master
-#           else
-#             git clone https://github.com/Karan1980/RTMS-Frontend.git .
-#           fi
-
-#           # Install dependencies and build the project
-#           npm install
-#           npm run build
-
-#           # Deploy the build to /var/www/foxboro
-#           sudo rm -rf /var/www/foxboro/*
-#           sudo cp -r dist/* /var/www/foxboro/
-
-#           # Deploy the build to /var/www/ongc.foxboro
-#           sudo rm -rf /var/www/ongc.foxboro/*
-#           sudo cp -r dist/* /var/www/ongc.rtms.foxboro/
-
-#           # Restart Nginx to apply changes
-#           sudo systemctl restart nginx
-
-#           # Cleanup: Remove the ~/work/Oscars directory after deployment
-#           cd ~
-#           rm -rf ~/work/Oscars
-
-#           EOF
-
-
 name: CI/CD Pipeline
 
 on:
@@ -76,7 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Start SSH agent using SSH key (remove sshpass)
       - name: Start SSH agent
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -86,53 +22,42 @@ jobs:
         run: |
           echo "Starting deployment..."
 
-          # SSH into the server and execute commands
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
-          set -e  # Exit if any command fails
+          # sudo apt-get update && sudo apt-get install -y sshpass
 
-          echo "Connected to the server. Starting deployment..."
+          # SSH into the server and deploy
+          sshpass -p "${{ secrets.VPS_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
+          echo "Deploying the project"
 
-          # Define deployment directory
-          DEPLOY_DIR=~/work/Oscars
-
-          # Ensure the directory exists
-          mkdir -p $DEPLOY_DIR
+          # Create the directory if it doesn't exist
+          mkdir -p ~/work/Oscars
 
           # Navigate to the directory
-          cd $DEPLOY_DIR
+          cd ~/work/Oscars
 
-          echo "Pulling or cloning the project repository..."
-          # Pull the latest changes if repo exists, else clone it
+          # If the repository exists, pull the latest changes; otherwise, clone it
           if [ -d ".git" ]; then
-            git reset --hard  # Reset any local changes
             git pull origin master
           else
-            git clone https://github.com/Karan1980/RTMS-REACT.git .
+            git clone https://github.com/Karan1980/RTMS-Frontend.git .
           fi
 
-          echo "Installing dependencies and building the project..."
           # Install dependencies and build the project
           npm install
           npm run build
 
-          # Deploy to two different locations
-          echo "Deploying to /var/www/foxboro and /var/www/ongc.rtms.foxboro..."
-
+          # Deploy the build to /var/www/foxboro
           sudo rm -rf /var/www/foxboro/*
           sudo cp -r dist/* /var/www/foxboro/
 
+          # Deploy the build to /var/www/ongc.foxboro
           sudo rm -rf /var/www/ongc.foxboro/*
           sudo cp -r dist/* /var/www/ongc.rtms.foxboro/
 
-          # Restart Nginx service to apply the changes
-          echo "Restarting Nginx service..."
+          # Restart Nginx to apply changes
           sudo systemctl restart nginx
 
-          echo "Cleaning up deployment directory..."
           # Cleanup: Remove the ~/work/Oscars directory after deployment
           cd ~
-          rm -rf $DEPLOY_DIR
+          rm -rf ~/work/Oscars
 
-          echo "Deployment complete!"
           EOF
-
