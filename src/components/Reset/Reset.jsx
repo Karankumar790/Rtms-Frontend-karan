@@ -23,7 +23,6 @@ import { toast } from "react-toastify";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Reset() {
-
   const [forgotOtp, setForgotOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -69,7 +68,6 @@ function Reset() {
   const handleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
   
- 
   return (
     <PageContainer
       showheader
