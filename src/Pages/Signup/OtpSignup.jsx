@@ -1,190 +1,156 @@
-import { Grid, Paper, Typography, TextField, Button, Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+// import { toast } from "react-hot-toast";
 import PageContainer from "../../components/HOC/PageContainer";
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
-import { styled, css } from '@mui/system';
-import { Modal as BaseModal } from '@mui/base/Modal';
-import Fade from '@mui/material/Fade';
+import { Button, Grid, Paper, Typography } from "@mui/material";
+import OTPInput from "react-otp-input";
+import { useDispatch, useSelector } from "react-redux";
+import { register, sendOtpRegister } from "../../apis/Service";
+import { toast } from "react-toastify";
+import {
+  clearRegisterAuth,
+  setRegisterAuthenticated,
+} from "../../apis/authSlice";
 
+export default function Otpsign() {
+  const [emailOtpValue, setEmailOtpValue] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    username,
+    email,
+    contactNumber,
+    employeeID,
+    assetName,
+    department,
+    roleInRTMS,
+    idCardPhoto,
+    passportPhoto,
+  } = useSelector((state) => state.registerAuth);
 
-const Backdrop = React.forwardRef((props, ref) => {
-  const { open, ...other } = props;
-  return (
-    <Fade in={open}>
-      <div ref={ref} {...other} />
-    </Fade>
+  console.log(
+    "form value",
+    username,
+    email,
+    contactNumber,
+    employeeID,
+    assetName,
+    department,
+    roleInRTMS,
+    idCardPhoto,
+    passportPhoto
   );
-});
 
-Backdrop.propTypes = {
-  open: PropTypes.bool,
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
-};
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("contactNumber", contactNumber);
+    formData.append("employeeID", employeeID);
+    formData.append("assetName", assetName);
+    formData.append("department", department);
+    formData.append("roleInRTMS", roleInRTMS);
+    formData.append("emailOtp", emailOtpValue);
+    // Append the files from Redux (ensure they are File objects)
+    if (passportPhoto instanceof File)
+      formData.append("passportPhoto", passportPhoto);
+    if (idCardPhoto instanceof File)
+      formData.append("idCardPhoto", idCardPhoto);
 
-const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
-};
+    // // Debugging: Log formData fields to verify they're populated correctly
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0], pair[1], "formdata print1");
+    // }
 
-const Modal = styled(BaseModal)`
-  position: fixed;
-  z-index: 1300;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+    try {
+      const response = await register(formData); // Verify OTP
+      if (response.success) {
+        dispatch(setRegisterAuthenticated(true)); // Set authorized state to true
+        toast.success(
+          "Signup successful! Please wait for approval and check your status here."
+        );
 
-const StyledBackdrop = styled(Backdrop)`
-  z-index: -1;
-  position: fixed;
-  inset: 0;
-  background-color: rgb(0 0 0 / 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
+        navigate("/popup");
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 270,
-};
-
-const ModalContent = styled('div')(
-  ({ theme }) => css`
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 500;
-    text-align: start;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow: hidden;
-    background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-    border-radius: 8px;
-    border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-    box-shadow: 0 4px 12px
-      ${theme.palette.mode === 'dark' ? 'rgb(0 0 0 / 0.5)' : 'rgb(0 0 0 / 0.2)'};
-    padding: 24px;
-    color: ${theme.palette.mode === 'dark' ? grey[50] : grey[900]};
-
-    .modal-title {
-      margin: 0;
-      line-height: 1.5rem;
-      margin-bottom: 8px;
+        dispatch(clearRegisterAuth()); // Clear auth data after login success
+      } else {
+        toast.error("OTP Does Not Match");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("OTP Verification Failed");
     }
+  };
 
-    .modal-description {
-      margin: 0;
-      line-height: 1.5rem;
-      font-weight: 400;
-      color: ${theme.palette.mode === 'dark' ? grey[400] : grey[800]};
-      margin-bottom: 4px;
+  const handleResendOtp = async () => {
+    try {
+      const response = await sendOtpRegister({ email, contactNumber }); // Resend OTP API call
+      if (response.success) {
+        toast.success("OTP Resent Successfully!");
+      } else {
+        toast.error("Failed to Resend OTP");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error Resending OTP");
     }
-  `
-);
+  };
 
-const TriggerButton = styled(Button)(
-  ({ theme }) => css`
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 600;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: all 150ms ease;
-    cursor: pointer;
-    background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-    border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-    color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-
-    &:hover {
-      background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-      border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
-    }
-
-    &:active {
-      background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
-    }
-
-    &:focus-visible {
-      box-shadow: 0 0 0 4px ${theme.palette.mode === 'dark' ? blue[300] : blue[200]};
-      outline: none;
-    }
-  `
-);
-
-
-export default function Otpsignup() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   return (
     <PageContainer
-      showheader='true'
-      showfooter='true'
-      className='bgImg'
-      style={{ display: 'grid', placeContent: 'center' }}
+      showheader="true"
+      showfooter="true"
+      className="bgImg"
+      style={{ display: "grid", placeContent: "center" }}
     >
       <Grid container m={0}>
-        <Grid item xs={12} md={12} sm={12}>
-          <Paper sx={{ borderRadius: "10px" }} >
+        <Grid item xs={12}>
+          <Paper sx={{ borderRadius: "10px" }}>
             <Grid item p={2}>
-              <form>
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={2}>
-                  <Typography fontSize={"x-large"} sx={{ color: "#0c1352", textAlign: 'center' }}>
-                    Enter OTP To Verify E-Mail
+              <form onSubmit={handleSubmit}>
+                <Grid item xs={12} mt={2}>
+                  <Typography
+                    fontSize={"x-large"}
+                    sx={{ color: "#0c1352", textAlign: "center" }}
+                  >
+                    Enter OTP To Verify Email
                   </Typography>
-                </Grid>
-
-                {/* Input otp value  */}
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} display="flex" gap={1} justifyContent="center" justifyItems="center">
-                  {/* < input type="number" inputProps={{ maxLength: 5 }}  style={{textAlign:"center"}}></input> */}
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-                  <input type="text" className="otp-style" maxLength={1} style={{ textAlign: "center", height: "35px", width: "35px" }} />
-
                 </Grid>
                 <Grid
                   item
-                  xs={12} md={12} sm={12} lg={12} mt={3} justifyContent="center" sx={{ textAlign: "center" }}>
-                  <Link to="/Otpsignup">
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      sx={{ bgcolor: "#0c113b" }}
-                      onClick={handleOpen}
-                    >
-                      <Typography>Submit</Typography>
-                    </Button>
-                  </Link>
+                  xs={12}
+                  mt={3}
+                  display="flex"
+                  justifyContent="center"
+                >
+                  <OTPInput
+                    value={emailOtpValue}
+                    onChange={setEmailOtpValue}
+                    numInputs={6}
+                    renderSeparator={<span>&nbsp; &nbsp;</span>}
+                    renderInput={(props) => <input {...props} />}
+                  />
                 </Grid>
-                <Grid item xs={12} md={12} sm={12} lg={12} textAlign="center" py={1}>
-                  <Link to="" style={{ textDecoration: "none" }}>
-                    <Typography >
+                <Grid item xs={12} mt={3} textAlign="center">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    sx={{ bgcolor: "#0c113b" }}
+                    type="submit" // Changed to type="submit"
+                  >
+                    <Typography>Submit</Typography>
+                  </Button>
+                </Grid>
+                <Grid item xs={12} textAlign="center" py={1}>
+                  <Link
+                    to="#"
+                    style={{ textDecoration: "none" }}
+                    onClick={handleResendOtp}
+                  >
+                    <Typography style={{ cursor: "pointer" }}>
                       Resend One-Time Password
                     </Typography>
                   </Link>
@@ -192,35 +158,6 @@ export default function Otpsignup() {
               </form>
             </Grid>
           </Paper>
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            slots={{ backdrop: StyledBackdrop }}
-          >
-            <Fade in={open}>
-              <ModalContent sx={style}>
-                <h3 id="transition-modal-title" className="modal-title" style={{ color: "green", textAlign: 'center' }} >
-                  Your Registration Have Been Submitted Successfully. ID Has Been Sent To Your E-mail.
-                </h3>
-                <Box display='flex' justifyContent='center'>
-                  <Link to='/signup'>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      // fullWidth
-                      size="medium"
-                      sx={{ bgcolor: "#0c113b" }}
-                    >
-                      Ok
-                    </Button>
-                  </Link>
-                </Box>
-              </ModalContent>
-            </Fade>
-          </Modal>
         </Grid>
       </Grid>
     </PageContainer>

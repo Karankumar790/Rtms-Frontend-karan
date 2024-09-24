@@ -203,7 +203,15 @@ function DeviceManage() {
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={3}>
-                            <Typography variant="h6">Password</Typography>
+                            <Typography variant="h6"> Gateway-1 Password</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Gateway-2</Typography>
+                            <TextField variant="outlined" size="small" fullWidth value={""} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={6} lg={3}>
+                            <Typography variant="h6">Gateway-2 Password</Typography>
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={3}>
@@ -211,15 +219,7 @@ function DeviceManage() {
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={3}>
-                            <Typography variant="h6">Password</Typography>
-                            <TextField variant="outlined" size="small" fullWidth value={""} />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={3}>
-                            <Typography variant="h6">Gateway-3</Typography>
-                            <TextField variant="outlined" size="small" fullWidth value={""} />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={3}>
-                            <Typography variant="h6">Password</Typography>
+                            <Typography variant="h6">Gateway-3 Password</Typography>
                             <TextField variant="outlined" size="small" fullWidth value={""} />
                         </Grid>
                     </Grid>
@@ -240,7 +240,7 @@ function DeviceManage() {
                         }}>
                         Add Device
                     </Button>
-                </Link>
+                    </Link>
                 </Box>
                 <Box>
                     <Button variant='contained'
