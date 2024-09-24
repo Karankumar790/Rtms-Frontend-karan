@@ -10,10 +10,12 @@ const authLoginService = createAsyncThunk('auth/login', async (payload) => {
   return response?.data
 })
 
+
 const authSendOtpLoginServices = createAsyncThunk('auth/sendOtpLogin', async (payload) => {
-  // console.log('payyyy', payload)
+  console.log('payyyy', payload)
   const response = await postReq(SEND_OTP_LOGIN, payload);
   return response?.data
 })
 
 export default { authLoginService, authSendOtpLoginServices }
+
