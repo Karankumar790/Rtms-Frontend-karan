@@ -12,50 +12,49 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+  
       - name: Start SSH agent
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{secrets.VPS_SSH_PRIVATE_KEY}}
 
       - name: Deploy, build, and clean up on server
         run: |
-          # sudo apt-get update && sudo apt-get install -y sshpass
+          sudo apt-get update && sudo apt-get install -y sshpass
 
-          # SSH into the server and deploy
-          sshpass -p "${{ secrets.VPS_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << 'EOF'
-          echo "Deploying the project"
+          # SSH into the server and execute the deployment steps
+          sshpass -p "${{secrets.VPS_SSH_PASSWORD}}" ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} << EOF
+            echo "Deploying the project"
 
-          # Create the directory if it doesn't exist
-          mkdir -p ~/work/Oscars
+            # Create the directory if it doesn't exist
+            mkdir -p ~/work/Oscars
 
-          # Navigate to the directory
-          cd ~/work/Oscars
+            # Navigate to the directory
+            cd ~/work/Oscars
 
-          # If the repository exists, pull the latest changes; otherwise, clone it
-          if [ -d ".git" ]; then
-            git pull origin master
-          else
-            git clone https://github.com/Karan1980/RTMS-Frontend.git .
-          fi
+            # If the repository exists, pull the latest changes; otherwise, clone it
+            if [ -d ".git" ]; then
+              git pull origin master
+            else
+              git clone https://github.com/Karan1980/RTMS-REACT.git .
+            fi
 
-          # Install dependencies and build the project
-          npm install
-          npm run build
+            # Install dependencies and build the project
+            npm install
+            npm run build
 
-          # Deploy the build to /var/www/foxboro
-          sudo rm -rf /var/www/foxboro/*
-          sudo cp -r dist/* /var/www/foxboro/
+            # Deploy the build to /var/www/foxboro
+            sudo rm -rf /var/www/foxboro/*
+            sudo cp -r dist/* /var/www/foxboro/
 
-          # Deploy the build to /var/www/ongc.foxboro
-          sudo rm -rf /var/www/ongc.foxboro/*
-          sudo cp -r dist/* /var/www/ongc.rtms.foxboro/
+            # Deploy the build to /var/www/ongc.foxboro
+            sudo rm -rf /var/www/ongc.foxboro/*
+            sudo cp -r dist/* /var/www/ongc.rtms.foxboro/
 
-          # Restart Nginx to apply changes
-          sudo systemctl restart nginx
+            # Restart Nginx to apply changes
+            sudo systemctl restart nginx
 
-          # Cleanup: Remove the ~/work/Oscars directory after deployment
-          cd ~
-          rm -rf ~/work/Oscars
-
+            # Cleanup: Remove the ~/work/Oscars directory after deployment
+            cd ~
+            rm -rf ~/work/Oscars
           EOF
