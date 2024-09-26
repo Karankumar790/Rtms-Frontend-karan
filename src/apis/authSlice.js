@@ -16,7 +16,7 @@ const registerInitialState = {
   email: "",
   contactNumber: "",
   employeeID: "",
-  assetName: "",
+  organizationName: "",
   department: "",
   roleInRTMS: "",
   idCardPhoto: "", // this is Image Upload by the user
@@ -32,7 +32,7 @@ const checkInitialState = {
     email: "",
     contactNumber: "",
     employeeID: "",
-    assetName: "",
+    organizationName: "",
     department: "",
     roleInRTMS: "",
     idCardPhoto: "", //here ftech image URL
@@ -48,6 +48,17 @@ const forgotInitialState = {
   confirmPassword: "",
   otp: "",
   isAuthenticated: false,
+};
+// oragnization
+const oragnizationInitialState = {
+  organizationName: "",
+  username: "",
+  password: "",
+  email: "",
+  contactNumber: "",
+  emailOtp: "",
+  isAuthenticated: false,
+
 };
 
 //for login
@@ -92,7 +103,7 @@ const registerAuthSlice = createSlice({
       state.email = action.payload.email;
       state.contactNumber = action.payload.contactNumber;
       state.employeeID = action.payload.employeeID;
-      state.assetName = action.payload.assetName;
+      state.organizationName = action.payload.organizationName;
       state.department = action.payload.department;
       state.roleInRTMS = action.payload.roleInRTMS;
       state.idCardPhoto = action.payload.idCardPhoto; // this is Image Upload by the user
@@ -109,7 +120,7 @@ const registerAuthSlice = createSlice({
       state.email = "";
       state.contactNumber = "";
       state.employeeID = "";
-      state.assetName = "";
+      state.organizationName = "";
       state.department = "";
       state.roleInRTMS = "";
       state.idCardPhoto = ""; // this is Image Upload by the user
@@ -161,6 +172,36 @@ const forgotAuthSlice = createSlice({
   },
 });
 
+
+
+// send -to-organization
+const oragnizationAuthSlice = createSlice({
+  name: "oragnizationAuth",
+  initialState: oragnizationInitialState,
+  reducers: {
+    setOragnizationDetails: (state, action) => {
+      state.organizationName = action.payload.organizationName;
+      state.username = action.payload.username;
+      state.password = action.payload.password;
+      state.email = action.payload.email;
+      state.contactNumber = action.payload.contactNumber;
+    },
+    setEmailOrgOtp: (state, action) => {
+      state.emailOtp = action.payload;
+    },
+    setOragnizationAuthenticated: (state, action) => {
+      state.isAuthenticated = action.payload;
+    },
+    clearOragnizationAuth: (state) => {
+      state.organizationName = "";
+      state.username = "";
+      state.password = "";
+      state.email = "";
+      state.contactNumber = "";
+    },
+  },
+});
+
 // Export actions
 export const {
   setLoginDetails,
@@ -186,8 +227,17 @@ export const {
   clearForgotAuth,
 } = forgotAuthSlice.actions;
 
+export const {
+  setOragnizationDetails,
+  setEmailOrgOtp,
+  setOragnizationAuthenticated,
+  clearOragnizationAuth,
+} = oragnizationAuthSlice.actions;
+
+
 // Export reducers with unique names
 export const authReducer = authSlice.reducer;
 export const registerAuthReducer = registerAuthSlice.reducer;
 export const checkAuthReducer = checkAuthSlice.reducer;
 export const forgotAuthReducer = forgotAuthSlice.reducer;
+export const oragnizationAuthReducer = oragnizationAuthSlice.reducer;

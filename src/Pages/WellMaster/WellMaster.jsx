@@ -158,11 +158,11 @@ function WellMaster() {
                         <TableHead >
                             <TableRow  >
                                 <StyledTableCell sx={{ fontSize: '18px' }}>Well Number</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Installation</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Location </StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Latitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Longitude</StyledTableCell>
-                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">LandMark</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Type</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Loaction</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Landmark</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Geolocation</StyledTableCell>
                                 <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
                             </TableRow>
                         </TableHead>

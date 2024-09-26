@@ -180,3 +180,13 @@ export const rejectByOwner = async (formData, authToken) => {
     return catchError(error);
   }
 };
+
+// generate-otp-oragnization
+export const generateOtpOragnization = async (formData) => {
+  try {
+    const response = await axios.post(`${USER_API}/organization/generate-otp-oragnization`, formData);
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};

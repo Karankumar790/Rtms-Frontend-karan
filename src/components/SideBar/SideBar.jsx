@@ -160,9 +160,7 @@ export default function Sidebar({
   );
 
   const handleListItemClick = () => {
-    if (isMobile) {
-      handleDrawerClose();
-    }
+    if (isMobile)  handleDrawerClose(); 
   };
 
   return (
