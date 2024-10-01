@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-// import map from '../../../../public/assets/map2.png';
 import { Box } from '@mui/system';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
@@ -18,7 +17,6 @@ const data = [
     Description: '',
     Parameter: 'GIP(kg)',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -29,7 +27,6 @@ const data = [
     Description: '',
     Parameter: 'CHP(kg)',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -40,7 +37,6 @@ const data = [
     Description: '',
     Parameter: 'THP(kg)',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -51,7 +47,6 @@ const data = [
     Description: '',
     Parameter: 'Battery %',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -62,7 +57,6 @@ const data = [
     Description: '',
     Parameter: 'Solar Power(V)',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -71,9 +65,8 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'Communication',
+    Parameter: '',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -82,9 +75,8 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'CPU Temperature',
+    Parameter: '',
     Condition1: '',
-    Description1: '',
 
   },
 ]
@@ -116,16 +108,24 @@ function AddWell() {
           </IconButton>
           <Typography variant='h4' mt={1}>Add New Well</Typography>
         </Grid>
-        <Grid container p={1.7} sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Well Installation" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Well Location" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Land Mark" variant="outlined" /></Grid>
+        <Grid container p={1.7} spacing={2} sx={{ display: 'flex', justifyContent: 'space-between' }} >
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Type" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Installation" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Location" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Landmark" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
+            sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+            }}>Submit</Button></Grid>
         </Grid>
       </Paper>
-
       <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
         <Grid container>
           <IconButton>
@@ -252,14 +252,6 @@ function AddWell() {
               },
               fontSize: '16px',
             }}>Cancel</Button>
-          {/* <Button variant='contained'
-              sx={{
-                backgroundColor: 'green',   // Change button color to green
-                '&:hover': {
-                  backgroundColor: 'darkgreen', // Optional: Change color on hover
-                },
-                fontSize: '16px',
-              }}> Delete</Button> */}
         </Grid>
       </Grid>
 

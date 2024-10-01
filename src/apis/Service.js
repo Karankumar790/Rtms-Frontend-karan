@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_API } from "../apis/Client";
+import { ORGANIZATION_API, USER_API } from "../apis/Client";
 import { catchError } from "../helper/helper";
 
 // Function to send OTP for login
@@ -174,6 +174,145 @@ export const rejectByOwner = async (formData, authToken) => {
           Authorization: `Bearer ${authToken}`, // Include Bearer token
         },
       }
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// generate otp for Organization api
+export const genrateOtpOrg = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/generate-otp-oragnization`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// create Organization api
+export const createOrg = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}//create-organization`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//organization dropdown in signuppage
+export const organizationDropDown = async () => {
+  try {
+    const response = await axios.get(
+      `${ORGANIZATION_API}/organization-drop-down`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//Post Api department-base-org-name-dropdown
+export const departmentDropdown = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/department-base-org-name-dropdown`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//add department by owner
+export const addDepartment = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/add-department`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//Add Position on the basic of department
+export const addPosition = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/add-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// https://rtms-backend.onrender.com/api/v1/organization/get-positions?organizationName=Foxboro.in.co&departmentName=Finance
+export const getPosition = async (organizationName, departmentName) => {
+  try {
+    const response = await axios.get(
+      `${ORGANIZATION_API}/get-positions?organizationName=${organizationName}&departmentName=${departmentName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//Add Approval Chain on the basic of department
+export const addApprovalChain = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/add-approval-chain`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
+export const getApprovalChain = async (organizationName, departmentName) => {
+  try {
+    const response = await axios.get(
+      `${ORGANIZATION_API}/get-approval-chain?organizationName=${organizationName}&departmentName=${departmentName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//organization-add-data
+export const organizationAddData = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/organization-add-data`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// https://rtms-backend.onrender.com/api/v1/organization/organization-get-data?organizationName=Foxboro.in.co
+export const getOrganizationData = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${ORGANIZATION_API}/organization-get-data?organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {

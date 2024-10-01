@@ -23,7 +23,7 @@ function Header() {
           <Box>
             <img src={logo} style={{ width: "5rem", height: "5rem" }} />
           </Box>
-{/* Foxboro */}
+
           <Typography sx={{
             fontSize: {
               xs: '110%', // small screens
@@ -54,9 +54,6 @@ function Header() {
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
           <Box display="flex" alignItems="center" justifyContent="end" gap={1}>
-            {/* <Link to=''><img src={Technical} style={{ objectFit: "cover", width: "70px", marginRight: "24px" }} /></Link> */}
-            {/* <img src={MQTT1} style={{ objectFit: "cover", width: "151px" }} /> */}
-
             <Box p={2}>
               <AccountCircleIcon sx={{ color: 'white', fontSize: '300%' }} />
             </Box>
