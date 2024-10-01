@@ -1,10 +1,23 @@
 name: Push Docker Image to Google Cloud Artifact Registry
+
 on:
   push:
-    branches: [ master ]  # Adjust as needed   # Replace with your GCR repository
+    branches: [ master ]
+
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Trigger Build
-      run: curl "http://89.116.33.204:8010?key=77827384hj23jh4324hk2348923u4jk23489234ho2342834uo&service=ongc.rtms.foxboro.in"
+      - name: Check Server Connection
+        run: |
+          for i in {1..3}; do
+            if curl -v --max-time 10 "http://89.116.33.204:8010?key=77827384hj23jh4324hk2348923u4jk23489234ho2342834uo&service=ongc.rtms.foxboro.in"; then
+              echo "Connection successful."
+              break
+            else
+              echo "Attempt $i failed. Retrying in 5 seconds..."
+              sleep 5
+            fi
+          done
+        continue-on-error: true
