@@ -6,6 +6,12 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     steps:
-    - name: Trigger Build
-      run: curl "http://89.116.33.204:8010?key=77827384hj23jh4324hk2348923u4jk23489234ho2342834uo&service=ongc.rtms.foxboro.in"
+    - name: Trigger Build with Retry
+      run: |
+          for i in {1..5}; do
+               curl "http://89.116.33.204:8010?key=YOUR_KEY&service=ongc.rtms.foxboro.in" && break || sleep 15;
+          done
+
+
+
 
