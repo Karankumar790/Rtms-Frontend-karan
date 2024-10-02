@@ -33,7 +33,7 @@ function Signup() {
     email: "",
     contactNumber: "",
     employeeID: "",
-    assetName: "",
+    organizationName: "",
     department: "",
     roleInRTMS: "",
     idCardPhoto: "", //this is Image Uploaded by User
@@ -88,7 +88,7 @@ function Signup() {
             email: formValues.email,
             contactNumber: formValues.contactNumber,
             employeeID: formValues.employeeID,
-            assetName: formValues.assetName,
+            organizationName: formValues.organizationName,
             department: formValues.department,
             roleInRTMS: formValues.roleInRTMS,
             passportPhoto: passportPhotoURL || formValues.passportPhoto, // Store the image URL
@@ -116,6 +116,10 @@ function Signup() {
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
+
+               <Typography variant="h4">Registrationallllll</Typography>
+                <Typography variant="h4">Registrations</Typography>
+
                 <Typography variant="h6" color="#800000">
                   Create a New RTMS Account
                 </Typography>
@@ -232,12 +236,12 @@ function Signup() {
                         />
                         <TextField
                           label="Organization"
-                          name="assetName"
+                          name="organizationName"
                           variant="standard"
                           color="info"
                           fullWidth
                           className="custom-textfield"
-                          value={formValues?.assetName}
+                          value={formValues?.organizationName}
                           onChange={handleUsernameChange}
                         />
                       </Box>

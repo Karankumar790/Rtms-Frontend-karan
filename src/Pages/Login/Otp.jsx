@@ -12,6 +12,7 @@ import {
   clearAuth,
   setAuthToken,
   setRole,
+  setOrganizationName,
 } from "../../apis/authSlice";
 import { toast } from "react-toastify";
 
@@ -30,16 +31,27 @@ export default function OtpLogin() {
     try {
       const response = await login(formData);
 
+      // console.log("Login Response:", response);  // Log the full response
+      // console.log("orgnzaition anme", response.data.organization);
+
       console.log(response);
       if (response.success) {
         dispatch(setOtp(otpValue)); // Store OTP in Redux
         dispatch(setAuthenticated(true)); // Set authenticated state to true
         dispatch(setAuthToken(response.token)); // Store auth token
-        dispatch(setRole(response.role)); // Store user role
+        dispatch(setRole(response.data.role)); // Store user role
+        dispatch(setOrganizationName(response.data.organization)) //store organization role
 
         toast.success("Login successful!");
 
-        navigate("/dashboard");
+        // navigate("/dashboard");
+
+        // Conditionally navigate based on role
+        if (response.data.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
 
         // dispatch(clearAuth()); // Clear auth data after login success
       } else {
@@ -73,11 +85,11 @@ export default function OtpLogin() {
       style={{ display: "grid", placeContent: "center" }}
     >
       <Grid container m={0}>
-        <Grid item xs={12} md={12} sm={12}>
+        <Grid item xs={12}>
           <Paper sx={{ borderRadius: "10px" }}>
             <Grid container p={2}>
               <form onSubmit={handleSubmit}>
-                <Grid item  xs={12} md={12} sm={12} lg={12}  mt={2}>
+                <Grid item xs={12} mt={2}>
                   <Typography
                     fontSize="x-large"
                     sx={{ color: "#0c1352", textAlign: "center" }}
@@ -85,7 +97,10 @@ export default function OtpLogin() {
                     Enter OTP To Verify E-Mail
                   </Typography>
                 </Grid>
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3}
+                <Grid
+                  item
+                  xs={12}
+                  mt={3}
                   display="flex"
                   justifyContent="center"
                 >
@@ -102,7 +117,7 @@ export default function OtpLogin() {
                     renderInput={(props) => <input {...props} />}
                   />
                 </Grid>
-                <Grid item xs={12} md={12} sm={12} lg={12} mt={3} textAlign="center">
+                <Grid item xs={12} mt={3} textAlign="center">
                   <Button
                     variant="contained"
                     color="primary"
@@ -110,7 +125,7 @@ export default function OtpLogin() {
                     sx={{ bgcolor: "#0c113b" }}
                     type="submit"
                   >
-                    <Typography>Submit</Typography>
+                    Submit
                   </Button>
                 </Grid>
                 <Grid item xs={12} textAlign="center" py={1}>
@@ -133,4 +148,103 @@ export default function OtpLogin() {
   );
 }
 
+// // //local storage storing data integration
+// import React, { useState } from "react";
+// import { Grid, Paper, Typography, Button, Link } from "@mui/material";
+// import PageContainer from "../../components/HOC/PageContainer";
+// import { useNavigate } from "react-router-dom";
+// import OTPInput from "react-otp-input";
+// import { login } from "../../apis/Service"; // Import the login service
 
+// export default function OtpLogin() {
+//   const [otpValue, setOtpValue] = useState("");
+//   const navigate = useNavigate();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // Retrieve username and password from localStorage
+//     const username = localStorage.getItem("username");
+//     const password = localStorage.getItem("password");
+
+//     const formData = { username, password, otp: otpValue };
+
+//     try {
+//       const response = await login(formData);
+//       if (response.success) {
+//         // Clear localStorage after login success
+//         localStorage.removeItem("username");
+//         localStorage.removeItem("password");
+
+//         navigate("/dashboard");
+//         // You can use a toast or any other notification here
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <PageContainer
+//       showheader
+//       showfooter
+//       className="bgImg"
+//       style={{ display: "grid", placeContent: "center" }}
+//     >
+//       <Grid container m={0}>
+//         <Grid item xs={12}>
+//           <Paper sx={{ borderRadius: "10px" }}>
+//             <Grid container p={2}>
+//               <form onSubmit={handleSubmit}>
+//                 <Grid item xs={12} mt={2}>
+//                   <Typography
+//                     fontSize="x-large"
+//                     sx={{ color: "#0c1352", textAlign: "center" }}
+//                   >
+//                     Enter OTP To Verify E-Mail
+//                   </Typography>
+//                 </Grid>
+//                 <Grid
+//                   item
+//                   xs={12}
+//                   mt={3}
+//                   display="flex"
+//                   justifyContent="center"
+//                 >
+//                   <OTPInput
+//                     inputStyle={{
+//                       width: "2rem",
+//                       height: "4vh",
+//                       fontSize: "18px",
+//                     }}
+//                     value={otpValue}
+//                     onChange={setOtpValue}
+//                     numInputs={6}
+//                     renderSeparator={<span> &nbsp; &nbsp; </span>}
+//                     renderInput={(props) => <input {...props} />}
+//                   />
+//                 </Grid>
+//                 <Grid item xs={12} mt={3} textAlign="center">
+//                   <Button
+//                     variant="contained"
+//                     color="primary"
+//                     size="small"
+//                     sx={{ bgcolor: "#0c113b" }}
+//                     type="submit"
+//                   >
+//                     Submit
+//                   </Button>
+//                 </Grid>
+//                 <Grid item xs={12} textAlign="center" py={1}>
+//                   <Link to="#" style={{ textDecoration: "none" }}>
+//                     <Typography>Resend One-Time Password</Typography>
+//                   </Link>
+//                 </Grid>
+//               </form>
+//             </Grid>
+//           </Paper>
+//         </Grid>
+//       </Grid>
+//     </PageContainer>
+//   );
+// }
