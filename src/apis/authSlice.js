@@ -58,7 +58,6 @@ const oragnizationInitialState = {
   contactNumber: "",
   emailOtp: "",
   isAuthenticated: false,
-
 };
 
 //for login

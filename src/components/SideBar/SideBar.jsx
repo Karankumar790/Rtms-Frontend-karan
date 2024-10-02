@@ -23,6 +23,8 @@ import WellmasterIcon from "@mui/icons-material/Settings";
 import WellmonitorIcon from "@mui/icons-material/Search";
 import GeoIcon from "@mui/icons-material/Place";
 import ongc_logo from "/assets/ongc2.png";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import { useSelector } from "react-redux";
 
@@ -83,8 +85,14 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role);
 
   // Define your menu items here
-  const menuItems = [
-    
+   // Define your menu items here
+   const menuItems = [
+    {
+      name: "Admin",
+      icon: <AdminPanelSettingsIcon sx={{ color: "black" }} />,
+      path: "/dashboard",
+      roles: ["admin"],
+    },
     {
       name: "Dashboard",
       icon: <HomeIcon sx={{ color: "black" }} />,
@@ -104,14 +112,14 @@ export default function Sidebar({
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Manage Node",
-      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
+      name: "Node Manager",
+      icon: <Networkicon sx={{ color: "black" }} />,
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Manage Gateway",
-      icon: <Networkicon sx={{ color: "black" }} />,
+      name: "Device Manager",
+      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
       path: "/dashboard/Network",
       roles: ["owner", "manager", "employee"],
     },
@@ -139,19 +147,24 @@ export default function Sidebar({
       path: "/dashboard/crystal",
       roles: ["owner", "manager", "employee"],
     },
-    {
-      name: "Geo Location",
-      icon: <GeoIcon sx={{ color: "black" }} />,
-      path: "/dashboard/virtual",
-      roles: ["owner", "manager", "employee"],
-    },
+    // {
+    //   name: "Geo Location",
+    //   icon: <GeoIcon sx={{ color: "black" }} />,
+    //   path: "/dashboard/virtual",
+    //   roles: ["owner", "manager", "employee"],
+    // },
     {
       name: "Message Box",
       icon: <ForwardToInboxIcon sx={{ color: "black" }} />,
       path: "/dashboard/message",
       roles: ["owner", "manager"],
     },
-   
+    {
+      name: "Technical Support",
+      icon: <SupportAgentIcon sx={{ color: "black" }} />,
+      path: "/dashboard/technicalSupport",
+      roles: ["owner", "manager", "employee"],
+    },
   ];
 
   // Filter menu items based on the user's role
@@ -160,7 +173,9 @@ export default function Sidebar({
   );
 
   const handleListItemClick = () => {
-    if (isMobile)  handleDrawerClose(); 
+    if (isMobile) {
+      handleDrawerClose();
+    }
   };
 
   return (
