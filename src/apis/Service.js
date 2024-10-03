@@ -245,6 +245,19 @@ export const addDepartment = async (formData) => {
   }
 };
 
+//update department
+export const UpdateDepartment = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-department`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
   try {
@@ -270,16 +283,6 @@ export const getPosition = async (organizationName, departmentName) => {
   }
 };
 
-export const updatePosition = async (organizationName, departmentName) => {
-  try {
-    const response = await axios.get(
-      `${ORGANIZATION_API}/update-position?organizationName=${organizationName}&departmentName=${departmentName}`
-    );
-    return response.data;
-  } catch (error) {
-    return catchError(error);
-  }
-};
 //Add Approval Chain on the basic of department
 export const addApprovalChain = async (formData) => {
   try {
