@@ -271,6 +271,33 @@ export const addPosition = async (formData) => {
   }
 };
 
+// update position
+export const UpdatePosition = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// delete Department
+//delete department
+export const DeleteDepartment = async (formData) => {
+  try {
+    const response = await axios.delete(
+      `${ORGANIZATION_API}/delete-department`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
 // https://rtms-backend.onrender.com/api/v1/organization/get-positions?organizationName=Foxboro.in.co&departmentName=Finance
 export const getPosition = async (organizationName, departmentName) => {
   try {

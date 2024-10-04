@@ -38,10 +38,22 @@ import {
   organizationAddData,
   getOrganizationData,
   UpdateDepartment,
+  // deleteDepartment,
+  deletePosition,
+  updatePosition,
+  updateApprovalChain,
+  DeleteDepartment,
 } from "../../../apis/Service";
 
 function ManageAsset() {
   const organizationName = useSelector((state) => state.auth.organization);
+
+  // const [position, setPosition] = useState(""); // Stores the current position input
+  const [isEditingPosition, setIsEditingPosition] = useState(false); // Tracks if editing mode is active
+  const [oldPosition, setOldPosition] = useState(null); // Tracks the old position being edited
+  // const [departments, setDepartments] = useState([]); // Departments list
+  // const [organizationName, setOrganizationName] = useState(""); // Organization name
+
   const inputRefDepartment = useRef(null);
   const [DepartmentLoading, setDepartmentLoading] = useState(true);
   const [departments, setDepartments] = useState([]);
@@ -60,6 +72,51 @@ function ManageAsset() {
   const [approvalChainRows, setApprovalChainRows] = useState([]);
   const [selectedApprovalDepartment, setSelectedApprovalDepartment] =
     useState("");
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleApprovalChainSubmit = async () => {
+    const formData = {
+      organizationName: organizationName, // Can dynamically set based on user input
+      departmentName: selectedApprovalDepartment,
+      action: approvalChains,
+      level1,
+      level2,
+    };
+
+    try {
+      if (isEditMode) {
+        // Update approval chain
+        const result = await updateApprovalChain(formData);
+        console.log("Update Approval Chain Result:", result);
+      } else {
+        // Add approval chain
+        const result = await addApprovalChain(formData);
+        console.log("Add Approval Chain Result:", result);
+      }
+
+      // Reset the form after submission
+      setSelectedApprovalDepartment("");
+      setApprovalChains("");
+      setLevel1("");
+      setLevel2("");
+      setIsEditMode(false); // Switch back to add mode after update
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleApprovalChainEdit = (index) => {
+    const approvalChainToEdit = approvalChainRows[index];
+    setSelectedApprovalDepartment(approvalChainToEdit.departmentName);
+    setApprovalChains(approvalChainToEdit.approvalChains.action);
+    setLevel1(approvalChainToEdit.approvalChains.level1);
+    setLevel2(approvalChainToEdit.approvalChains.level2);
+
+    setIsEditMode(true);
+    setEditIndex(index);
+  };
   //organization Data Add
   const [formData, setFormData] = useState({
     address: "",
@@ -74,44 +131,7 @@ function ManageAsset() {
   const [loading, setLoading] = useState(false);
   const [organiatioLoading, setOrganiationLoading] = useState(false);
 
-  //integration for add department
-  const handleAddDepartment = async () => {
-    const inputValue = inputRefDepartment.current
-      ? inputRefDepartment.current.value
-      : "";
-    const value = inputValue.trim();
-
-    if (!organizationName) {
-      toast.error("Organization name is missing");
-      return;
-    }
-    if (value) {
-      try {
-        const formData = {
-          organizationName: organizationName, // Use dynamic organization name
-          departmentName: value,
-        };
-        const result = await addDepartment(formData);
-        if (result && result.success) {
-          setDepartments((prevDepartments) => [...prevDepartments, value]);
-          inputRefDepartment.current.value = ""; // Clear input
-          toast.success(result.message || "Department added successfully");
-        } else {
-          toast.error(result.message || "Failed to add department");
-        }
-      } catch (error) {
-        console.error("API call error: ", error.response || error.message);
-        toast.error(
-          "Error adding department: " +
-            (error.response?.data?.message || error.message)
-        );
-      }
-    } else {
-      toast.error("Department name cannot be empty");
-    }
-  };
-
-  // Function to initiate editing
+  // Function to initiate editing department
   const handleEditClick = (index) => {
     setNewDepartmentName(departments[index]); // Set current department name to input
     setIsEditing(true); // Set editing mode
@@ -172,84 +192,295 @@ function ManageAsset() {
     }
   };
 
-  //ADD position from api on the base of department
-  const handlePositionSubmit = async (event) => {
-    event.preventDefault();
-    if (!organizationName) {
-      toast.error("Organization name is required.");
-      return;
-    }
-    // Check if department and position are selected
+  const handlePositionSubmit = async () => {
     if (!selectedPositionDepartment || !position) {
-      toast.error("Please select a department and enter a position.");
+      toast.error("Department and position are required");
       return;
     }
-    const formData = {
-      organizationName,
-      departmentName: selectedPositionDepartment,
-      positions: [position],
-    };
+
     try {
-      const response = await addPosition(formData);
-      if (response.data.success) {
-        toast.message(response.data.message);
-        setPositionRows((prevRows) => [
-          ...prevRows,
-          { name: selectedPositionDepartment, position },
-        ]);
-        toast.success(response.message || "Position Add Successfully");
-        setPosition("");
+      let result;
+      if (isEditingPosition) {
+        // Update position
+        const formData = {
+          organizationName: organizationName,
+          departmentName: selectedPositionDepartment,
+          oldPositionName: oldPosition, // oldPosition is set during editing
+          newPositionName: position,
+        };
+        result = await updatePosition(formData);
       } else {
-        toast.success(response.message || "Position Add Successfully");
+        // Add new position
+        const formData = {
+          organizationName: organizationName,
+          departmentName: selectedPositionDepartment,
+          positions: [position],
+        };
+        result = await addPosition(formData);
+      }
+
+      if (result && result.success) {
+        toast.success(
+          result.message ||
+            (isEditingPosition
+              ? "Position updated successfully"
+              : "Position added successfully")
+        );
+
+        // Refresh the positions table (you can refetch or update locally)
+        // fetchPositions();
+
+        // Reset form inputs
+        setPosition("");
+        setSelectedPositionDepartment("");
+        setIsEditingPosition(false);
+        setOldPosition(null);
+      } else {
+        toast.error(result.message || "Failed to submit position");
       }
     } catch (error) {
-      console.error("Error adding position:", error.message);
+      toast.error("Error: " + (error.response?.data?.message || error.message));
     }
   };
 
-  //ADD approval chain from api on the base of department
-  const handleApprovalChainSubmit = async (event) => {
-    event.preventDefault();
-    // Check if all fields are filled out
-    if (!organizationName) {
-      toast.error("Organization Name is required");
+  const handleEditPosition = (departmentName, positionName) => {
+    setSelectedPositionDepartment(departmentName);
+    setPosition(positionName);
+    setOldPosition(positionName); // Store old position for update
+    setIsEditingPosition(true); // Set edit mode
+  };
+
+  // const fetchPositions = async () => {
+  //   try {
+  //     // Fetch positions based on selected department or all departments
+  //     const result = await fetchDepartmentPositions();
+  //     setPositionRows(result.data); // Update the positionRows state with the fetched data
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Failed to fetch positions");
+  //   }
+  // };
+
+  // Delete logic (if needed) would go here as well
+
+  //delete department
+  const handleDeleteClick = async (departmentName) => {
+    if (!organizationName || !departmentName) {
+      toast.error("Organization name and department name are required");
       return;
     }
-    if (!selectedApprovalDepartment) {
-      toast.error("Please select a department");
-      return;
-    }
-    if (!approvalChains || !level1 || !level2) {
-      toast.error("Please fill out Action, Level-1, and Level-2");
-      return;
-    }
-    const formData = {
-      organizationName,
-      departmentName: selectedApprovalDepartment,
-      action: approvalChains, // Flattened
-      level1, // Flattened
-      level2, // Flattened
-    };
     try {
-      const response = await addApprovalChain(formData);
-      if (response.data.success) {
-        // toast.message(response.data.message);
-        setApprovalChainRows((prevRows) => [
-          ...prevRows,
-          { name: selectedApprovalDepartment, approvalChains, level1, level2 },
-        ]);
-        setApprovalChains("");
-        setLevel1("");
-        setLevel2("");
-        toast.success(response.message || "Approval Chain added successfully");
-      } else {
-        toast.success(
-          response.data.message || "Approval Chain added successfully"
+      const response = await DeleteDepartment({
+        organizationName,
+        departmentName,
+      });
+      if (response && response.data.success) {
+        setDepartments((prevDepartments) =>
+          prevDepartments.filter((dep) => dep !== departmentName)
         );
+        toast.error(response.data.message || "Failed to delete department");
+      } else {
+        toast.success(`Department "${departmentName}"deleted successfully`);
       }
     } catch (error) {
-      console.error("Error adding approval chain:", error.message);
-      toast.error("An error occurred while adding the approval chain");
+      console.error(
+        "Error deleting department: ",
+        error.response || error.message
+      );
+      toast.error("Error: " + (error.response?.data?.message || error.message));
+    }
+  };
+
+  //Delete Position
+  const handleDeletePosition = async (departmentName, positionName) => {
+    const formData = {
+      organizationName: organizationName, // Replace with the actual organization name
+      departmentName: departmentName, // Include the department name
+      positionName: positionName, // Position to delete
+    };
+
+    try {
+      // Call the delete API
+      const response = await deletePosition(formData);
+
+      if (response.success) {
+        // Optionally update state or UI after successful deletion
+        alert(`${positionName} has been deleted from ${departmentName}.`);
+      } else {
+        // Handle the case where the API indicates failure
+        alert(response.message || "Failed to delete position.");
+      }
+    } catch (error) {
+      // Handle error (show error message or similar)
+      alert("Failed to delete position.");
+    }
+  };
+
+  //ADD position from api on the base of department
+  // const handlePositionSubmit = async (event) => {
+  //   event.preventDefault();
+  //   if (!organizationName) {
+  //     toast.error("Organization name is required.");
+  //     return;
+  //   }
+  //   // Check if department and position are selected
+  //   if (!selectedPositionDepartment || !position) {
+  //     toast.error("Please select a department and enter a position.");
+  //     return;
+  //   }
+  //   const formData = {
+  //     organizationName,
+  //     departmentName: selectedPositionDepartment,
+  //     positions: [position],
+  //   };
+  //   try {
+  //     const response = await addPosition(formData);
+  //     if (response.data.success) {
+  //       toast.message(response.data.message);
+  //       setPositionRows((prevRows) => [
+  //         ...prevRows,
+  //         { name: selectedPositionDepartment, position },
+  //       ]);
+  //       toast.success(response.message || "Position Add Successfully");
+  //       setPosition("");
+  //     } else {
+  //       toast.success(response.message || "Position Add Successfully");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding position:", error.message);
+  //   }
+  // };
+
+  //ADD approval chain from api on the base of department
+  // const handleApprovalChainSubmit = async (event) => {
+  //   event.preventDefault();
+  //   // Check if all fields are filled out
+  //   if (!organizationName) {
+  //     toast.error("Organization Name is required");
+  //     return;
+  //   }
+  //   if (!selectedApprovalDepartment) {
+  //     toast.error("Please select a department");
+  //     return;
+  //   }
+  //   if (!approvalChains || !level1 || !level2) {
+  //     toast.error("Please fill out Action, Level-1, and Level-2");
+  //     return;
+  //   }
+  //   const formData = {
+  //     organizationName,
+  //     departmentName: selectedApprovalDepartment,
+  //     action: approvalChains, // Flattened
+  //     level1, // Flattened
+  //     level2, // Flattened
+  //   };
+  //   try {
+  //     const response = await addApprovalChain(formData);
+  //     if (response.data.success) {
+  //       // toast.message(response.data.message);
+  //       setApprovalChainRows((prevRows) => [
+  //         ...prevRows,
+  //         { name: selectedApprovalDepartment, approvalChains, level1, level2 },
+  //       ]);
+  //       setApprovalChains("");
+  //       setLevel1("");
+  //       setLevel2("");
+  //       toast.success(response.message || "Approval Chain added successfully");
+  //     } else {
+  //       toast.success(
+  //         response.data.message || "Approval Chain added successfully"
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding approval chain:", error.message);
+  //     toast.error("An error occurred while adding the approval chain");
+  //   }
+  // };
+
+  // Handle the form submission for adding an approval chain
+  // Function to handle adding a new approval chain
+  // const handleApprovalChainSubmit = async () => {
+  //   if (!selectedApprovalDepartment || !approvalChains || !level1 || !level2) {
+  //     toast.error("Please fill in all fields");
+  //     return;
+  //   }
+
+  //   const formData = {
+  //     organizationName: organizationName, // replace with the actual organization name
+  //     departmentName: selectedApprovalDepartment,
+  //     action: approvalChains,
+  //     level1: level1,
+  //     level2: level2,
+  //   };
+
+  //   try {
+  //     const response = await addApprovalChain(formData);
+  //     if (response.success) {
+  //       toast.success("Approval chain added successfully");
+  //       fetchApprovalChains(); // Fetch the updated list after adding
+  //     } else {
+  //       toast.error("Failed to add approval chain");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Error adding approval chain");
+  //   }
+  // };
+
+  // Function to handle updating an approval chain
+  const handleUpdateApprovalChain = async (department, action, lvl1, lvl2) => {
+    const formData = {
+      organizationName: organizationName, // replace with the actual organization name
+      departmentName: department,
+      action: action,
+      level1: lvl1,
+      level2: lvl2,
+    };
+
+    try {
+      const response = await updateApprovalChain(formData);
+      if (response.success) {
+        toast.success("Approval chain updated successfully");
+        fetchApprovalChains(); // Refresh list after update
+      } else {
+        toast.error("Failed to update approval chain");
+      }
+    } catch (error) {
+      toast.error("Error updating approval chain");
+    }
+  };
+
+  // New function to handle editing the approval chain
+  const handleEditApprovalChain = (department, action, lvl1, lvl2) => {
+    setSelectedApprovalDepartment(department);
+    setApprovalChains(action);
+    setLevel1(lvl1);
+    setLevel2(lvl2);
+    handleUpdateApprovalChain(department, action, lvl1, lvl2); // Call update function
+  };
+
+  // Handle the form submission for updating an approval chain
+  const handleApprovalChainUpdate = async () => {
+    const formData = {
+      organizationName: "Foxboro.in.co", // Replace with dynamic organization if needed
+      departmentName: selectedApprovalDepartment,
+      action: approvalChains,
+      level1,
+      level2,
+    };
+
+    try {
+      const response = await updateApprovalChain(formData);
+      if (response.success) {
+        toast.success(
+          `Approval chain updated for ${selectedApprovalDepartment}`
+        );
+        // fetchApprovalChains(); // Fetch and refresh the approval chains after successful update
+        setIsEditing(false); // Reset the edit mode
+      } else {
+        toast.error("Failed to update approval chain");
+      }
+    } catch (error) {
+      toast.error("Error occurred while updating approval chain");
     }
   };
 
@@ -546,12 +777,12 @@ function ManageAsset() {
                   size="small"
                   label="Department"
                   value={newDepartmentName} // Bind value to newDepartmentName state
-                  onChange={(e) => setNewDepartmentName(e.target.value)} // Update state on change
+                  onChange={(e) => setNewDepartmentName(e.target.value)}
                   fullWidth
                 />
                 <Button
                   variant="contained"
-                  onClick={handleAddOrUpdateDepartment} // Use combined function for both adding and updating
+                  onClick={handleAddOrUpdateDepartment}
                   size="small"
                   sx={{
                     backgroundColor: "green",
@@ -561,10 +792,8 @@ function ManageAsset() {
                   }}
                 >
                   {isEditing ? "UPDATE" : "ADD"}{" "}
-                  {/* Change button label based on mode */}
                 </Button>
               </Box>
-
               <Grid container>
                 <TableContainer
                   component={Paper}
@@ -590,26 +819,25 @@ function ManageAsset() {
                       ) : departments && departments.length > 0 ? (
                         departments.map((departmentName, index) => (
                           <TableRow key={index}>
-                            {/* Numbering and Department Name */}
                             <StyledTableCell>
                               <Box
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                {/* Department Name with Numbering */}
                                 <span>
                                   {index + 1}. {departmentName}
                                 </span>
-
-                                {/* Icon Buttons */}
                                 <Box display="flex">
                                   <IconButton
                                     sx={{
                                       color: "red",
                                       "&:hover": { color: "darkred" },
-                                      marginRight: "8px", // Add some spacing between buttons
+                                      marginRight: "8px",
                                     }}
+                                    onClick={() =>
+                                      handleDeleteClick(departmentName)
+                                    }
                                   >
                                     <DeleteForeverIcon fontSize="medium" />
                                   </IconButton>
@@ -617,20 +845,8 @@ function ManageAsset() {
                                     onClick={() => handleEditClick(index)}
                                   >
                                     {" "}
-                                    {/* Update edit button */}
                                     <EditIcon fontSize="medium" />
-                                  </IconButton>
-                                  {/* <IconButton
-                                    sx={{
-                                      color: "darkblue",
-                                      "&:hover": { color: "black" },
-                                    }}
-                                    onClick={() =>
-                                      handleUpdateDepartment(index)
-                                    } // Trigger PUT API on Edit click
-                                  >
-                                    <EditIcon fontSize="medium" />
-                                  </IconButton> */}
+                                  </IconButton>{" "}
                                 </Box>
                               </Box>
                             </StyledTableCell>
@@ -660,7 +876,7 @@ function ManageAsset() {
               display="flex"
               flexDirection={"column"}
             >
-              <Typography variant="h5"> Add Position</Typography>
+              <Typography variant="h5">Add Position</Typography>
               <Box display="flex" gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   {DepartmentLoading ? (
@@ -673,7 +889,7 @@ function ManageAsset() {
                       <Select
                         labelId="demo-select-small-label"
                         id="demo-select-large"
-                        label="Well Location"
+                        label="Department"
                         value={selectedPositionDepartment}
                         onChange={(e) =>
                           setSelectedPositionDepartment(e.target.value)
@@ -700,6 +916,7 @@ function ManageAsset() {
                     </FormControl>
                   )}
                 </Grid>
+
                 <TextField
                   variant="outlined"
                   size="small"
@@ -708,21 +925,25 @@ function ManageAsset() {
                   onChange={(e) => setPosition(e.target.value)}
                   fullWidth
                 />
+
                 <Button
                   variant="contained"
                   onClick={handlePositionSubmit}
                   size="small"
                   sx={{
-                    backgroundColor: "green", // Change button color to green
+                    backgroundColor: isEditingPosition ? "blue" : "green",
                     "&:hover": {
-                      backgroundColor: "darkgreen", // Optional: Change color on hover
+                      backgroundColor: isEditingPosition
+                        ? "darkblue"
+                        : "darkgreen",
                     },
                   }}
                 >
-                  ADD
+                  {isEditingPosition ? "Update" : "Add"}
                 </Button>
               </Box>
-              {/* -------------------Table 2-------------------------- */}
+
+              {/* Position Table */}
               <Grid container>
                 <TableContainer
                   component={Paper}
@@ -732,12 +953,12 @@ function ManageAsset() {
                     <TableHead>
                       <TableRow>
                         <StyledTableCell
-                          sx={{ fontSize: "18px", width: "25%" }}
+                          sx={{ fontSize: "18px", width: "15%" }}
                         >
                           Department
                         </StyledTableCell>
                         <StyledTableCell
-                          sx={{ fontSize: "18px", width: "25%" }}
+                          sx={{ fontSize: "18px", width: "15%" }}
                         >
                           Position
                         </StyledTableCell>
@@ -753,18 +974,64 @@ function ManageAsset() {
                       ) : departments && departments.length > 0 ? (
                         positionRows.map((row, index) => (
                           <StyledTableRow key={index}>
-                            {/* Department column */}
                             <StyledTableCell component="th" scope="row">
-                              {index + 1}. {row.departmentName}
-                              {/* Department with numbering */}
+                              <Box
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="space-between"
+                              >
+                                <span>
+                                  {index + 1}. {row.departmentName}
+                                </span>
+                              </Box>
                             </StyledTableCell>
-                            {/* Positions column */}
                             <StyledTableCell align="left">
                               {row.positions.length > 0
                                 ? row.positions.map((position, posIndex) => (
-                                    <div key={posIndex}>
+                                    <div
+                                      key={posIndex}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                      }}
+                                    >
                                       {posIndex + 1}. {position}
-                                      {/* Position with numbering */}
+                                      <Box display="flex">
+                                        <IconButton
+                                          aria-label="edit"
+                                          size="small"
+                                          sx={{
+                                            color: "darkblue",
+                                            "&:hover": { color: "black" },
+                                          }}
+                                          onClick={() =>
+                                            handleEditPosition(
+                                              row.departmentName,
+                                              position
+                                            )
+                                          }
+                                        >
+                                          <EditIcon fontSize="small" />
+                                        </IconButton>
+                                        <IconButton
+                                          aria-label="delete"
+                                          size="small"
+                                          sx={{
+                                            color: "red",
+                                            "&:hover": { color: "darkred" },
+                                            marginRight: "8px",
+                                          }}
+                                          onClick={() =>
+                                            handleDeletePosition(
+                                              row.departmentName,
+                                              position
+                                            )
+                                          }
+                                        >
+                                          <DeleteForeverIcon fontSize="small" />
+                                        </IconButton>
+                                      </Box>
                                     </div>
                                   ))
                                 : "No positions available"}
@@ -783,6 +1050,7 @@ function ManageAsset() {
                 </TableContainer>
               </Grid>
             </Grid>
+
             {/* ------------------------APPROVAL CHAIN------------------------------ */}
             <Grid
               item
@@ -794,46 +1062,38 @@ function ManageAsset() {
               display="flex"
               flexDirection={"column"}
             >
-              <Typography variant="h5"> Approval Chain</Typography>
+              <Typography variant="h5">Approval Chain</Typography>
               <Box display="flex" gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
-                  {DepartmentLoading ? (
-                    <div>Loading...</div>
-                  ) : (
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="demo-select-large-label">
-                        Department
-                      </InputLabel>
-                      <Select
-                        labelId="demo-select-small-label"
-                        id="demo-select-large"
-                        label="Department"
-                        value={selectedApprovalDepartment}
-                        onChange={(e) =>
-                          setSelectedApprovalDepartment(e.target.value)
-                        }
-                      >
-                        <MenuItem value="" disabled>
-                          Select a department
-                        </MenuItem>
-                        {departments && departments.length > 0 ? (
-                          departments.map((departmentName, index) => (
-                            <MenuItem
-                              key={departmentName}
-                              value={departmentName}
-                            >
-                              {index + 1}. {departmentName}
-                            </MenuItem>
-                          ))
-                        ) : (
-                          <MenuItem value="" disabled>
-                            No departments available
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="department-label">Department</InputLabel>
+                    <Select
+                      labelId="department-label"
+                      id="department-select"
+                      label="Department"
+                      value={selectedApprovalDepartment}
+                      onChange={(e) =>
+                        setSelectedApprovalDepartment(e.target.value)
+                      }
+                    >
+                      <MenuItem value="" disabled>
+                        Select a department
+                      </MenuItem>
+                      {departments && departments.length > 0 ? (
+                        departments.map((departmentName, index) => (
+                          <MenuItem key={index} value={departmentName}>
+                            {index + 1}. {departmentName}
                           </MenuItem>
-                        )}
-                      </Select>
-                    </FormControl>
-                  )}
+                        ))
+                      ) : (
+                        <MenuItem value="" disabled>
+                          No departments available
+                        </MenuItem>
+                      )}
+                    </Select>
+                  </FormControl>
                 </Grid>
+
                 <TextField
                   variant="outlined"
                   label="Action"
@@ -858,21 +1118,23 @@ function ManageAsset() {
                   onChange={(e) => setLevel2(e.target.value)}
                   fullWidth
                 />
+
                 <Button
                   variant="contained"
                   onClick={handleApprovalChainSubmit}
                   size="small"
                   sx={{
-                    backgroundColor: "green", // Change button color to green
+                    backgroundColor: isEditMode ? "orange" : "green",
                     "&:hover": {
-                      backgroundColor: "darkgreen", // Optional: Change color on hover
+                      backgroundColor: isEditMode ? "darkorange" : "darkgreen",
                     },
                   }}
                 >
-                  ADD
+                  {isEditMode ? "Update" : "Add"}
                 </Button>
               </Box>
-              {/* --------------------------Table----------------------------- */}
+
+              {/* ------------Table----------------------------- */}
               <Grid container>
                 <TableContainer
                   component={Paper}
@@ -913,21 +1175,34 @@ function ManageAsset() {
                       ) : approvalChainRows && approvalChainRows.length > 0 ? (
                         approvalChainRows.map((row, index) => (
                           <StyledTableRow key={index}>
-                            {/* Department column */}
                             <StyledTableCell component="th" scope="row">
                               {index + 1}. {row.departmentName}
                             </StyledTableCell>
-                            {/* Action column */}
-                            <StyledTableCell align="left" scope="row">
+                            <StyledTableCell align="left">
                               {index + 1}. {row.approvalChains.action || "N/A"}
                             </StyledTableCell>
-                            {/* Level-1 column */}
-                            <StyledTableCell align="left" scope="row">
+                            <StyledTableCell align="left">
                               {index + 1}. {row.approvalChains.level1 || "N/A"}
                             </StyledTableCell>
-                            {/* Level-2 column */}
-                            <StyledTableCell align="left" scope="row">
+                            <StyledTableCell align="left">
                               {index + 1}. {row.approvalChains.level2 || "N/A"}
+                              <Box display="flex">
+                                <IconButton
+                                  onClick={() => handleApprovalChainEdit(index)}
+                                >
+                                  <EditIcon fontSize="medium" />
+                                </IconButton>
+                                <IconButton
+                                  sx={{
+                                    color: "red",
+                                    "&:hover": { color: "darkred" },
+                                    marginRight: "8px",
+                                  }}
+                                 
+                                >
+                                  <DeleteForeverIcon fontSize="medium" />
+                                </IconButton>
+                              </Box>
                             </StyledTableCell>
                           </StyledTableRow>
                         ))
