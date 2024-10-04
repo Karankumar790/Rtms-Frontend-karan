@@ -258,11 +258,49 @@ export const UpdateDepartment = async (formData) => {
   }
 };
 
+//delete department
+export const deleteDepartment = async (formData) => {
+  try {
+    const response = await axios.delete(`${ORGANIZATION_API}/delete-department`, {
+      data: formData, // Use the data field to send the request body with DELETE
+    });
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//Delete Position
+export const deletePosition = async (formData) => {
+  try {
+    const response = await axios.delete(`${ORGANIZATION_API}/delete-position`, {
+      data: formData, // Use the data field to send the request body with DELETE
+    });
+    return response.data;
+  } catch (error) {
+    return catchError(error); // Ensure you handle the error appropriately
+  }
+};
+
+
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//update Position
+export const updatePosition = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-position`,
       formData
     );
     return response.data;
@@ -288,6 +326,19 @@ export const addApprovalChain = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-approval-chain`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//update approval Chain
+export const updateApprovalChain = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-approval-chain`,
       formData
     );
     return response.data;
