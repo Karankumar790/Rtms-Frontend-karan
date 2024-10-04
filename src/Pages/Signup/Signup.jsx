@@ -1,33 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Typography,
   TextField,
   Box,
   Button,
-  Paper,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import PageContainer from "../../components/HOC/PageContainer";
 import CallIcon from "@mui/icons-material/Call";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
-import { useNavigate } from "react-router-dom";
-import { sendOtpRegister } from "../../apis/Service";
-import { toast } from "react-toastify";
 import { setRegisterDetails } from "../../apis/authSlice";
+import { toast } from "react-toastify";
+import {
+  departmentDropdown,
+  organizationDropDown,
+  sendOtpRegister,
+} from "../../apis/Service";
 
 function Signup() {
-  const [selectedPhotoName, setSelectedPhotoName] = useState(null); // To store the passport photo name
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [selectedPhotoName, setSelectedPhotoName] = useState(null);
   const [idCardName, setIdCardName] = useState(null); // To store the ID card photo name
+  const [organizations, setOrganizations] = useState([]);
+  const [departments, setDepartments] = useState("");
   const [formValues, setFormValues] = useState({
     username: "",
     email: "",
@@ -39,9 +45,6 @@ function Signup() {
     idCardPhoto: "", //this is Image Uploaded by User
     passportPhoto: "", //this is Image Uploaded by User
   });
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     const { name, value, files, type } = e.target;
@@ -66,18 +69,15 @@ function Signup() {
     }
   };
 
+  // Integration for registration page
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     Object.entries(formValues).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
-    // Integration
     try {
-      const response = await sendOtpRegister(formData); // Ensure that sendOtpRegister can handle FormData
-      // console.log("OTP Response:", response);
+      const response = await sendOtpRegister(formData);
       if (response?.success) {
         // Store data in Redux Store
         const passportPhotoURL = response?.passportPhoto;
@@ -91,22 +91,78 @@ function Signup() {
             organizationName: formValues.organizationName,
             department: formValues.department,
             roleInRTMS: formValues.roleInRTMS,
-            passportPhoto: passportPhotoURL || formValues.passportPhoto, // Store the image URL
-            idCardPhoto: idCardPhotoURL || formValues.idCardPhoto, // Store the image URL
+            passportPhoto: passportPhotoURL || formValues.passportPhoto,
+            idCardPhoto: idCardPhotoURL || formValues.idCardPhoto, // Store the image URL
           })
         );
-
-        toast.success("OTP Sent Successfully!");
+        toast.success(response.message);
         // console.log("OTP sent, about to navigate...",response?.message);
         navigate("/otpsignup");
       } else {
-        toast.error("Invalid Provided Details");
+        toast.error(response.message);
       }
     } catch (error) {
       console.error(error);
       toast.error("Signup Failed");
     }
   };
+
+  // Fetch organizations only
+  const fetchData = async () => {
+    try {
+      const orgResponse = await organizationDropDown();
+      if (orgResponse.success && Array.isArray(orgResponse.data)) {
+        setOrganizations(orgResponse.data);
+        const selectedOrgId = formValues.organizationName;
+        if (selectedOrgId) {
+          fetchDepartmentsForOrg(selectedOrgId);
+        }
+      } else {
+        toast.error("Invalid organization data format");
+      }
+    } catch (error) {
+      toast.error("Failed to load organizations");
+    }
+  };
+
+  //show department dropdown on the organization select
+  const fetchDepartmentsForOrg = async (orgId) => {
+    try {
+      const formData = { organizationName: orgId };
+      const depResponse = await departmentDropdown(formData);
+      if (depResponse.success && Array.isArray(depResponse.data)) {
+        if (depResponse.data.length === 0) {
+          toast.info("No departments found for the selected organization");
+        } else {
+          // console.log("Departments data:", depResponse.data[0].departments);
+          setDepartments(depResponse.data[0].departments);
+        }
+      } else {
+        console.error("Expected array but got:", depResponse);
+        toast.error("Invalid department data format");
+      }
+    } catch (error) {
+      console.error("Error fetching departments:", error);
+      toast.error("Failed to load departments");
+    }
+  };
+
+  const handleOrganizationChange = (event) => {
+    const orgId = event.target.value;
+    setFormValues((prev) => ({
+      ...prev,
+      organizationName: orgId,
+    }));
+
+    // Fetch departments for the selected organization
+    if (orgId) {
+      fetchDepartmentsForOrg(orgId);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <PageContainer className="bgImg" showheader="true" showfooter="true">
@@ -131,273 +187,216 @@ function Signup() {
                     gap="9px"
                     style={{ display: "flex", flexDirection: "column" }}
                   >
-                    <Grid item>
-                      <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                      >
-                        <AccountCircle
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <TextField
-                          fullWidth
-                          className="custom-textfield"
-                          label="Username"
-                          variant="standard"
-                          color="info"
-                          name="username"
-                          value={formValues.username}
-                          onChange={handleUsernameChange}
-                        />
-                      </Box>
-                      <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                      >
-                        <EmailIcon
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <TextField
-                          label="Email"
-                          name="email"
-                          variant="standard"
-                          color="info"
-                          fullWidth
-                          className="custom-textfield"
-                          value={formValues?.email}
-                          onChange={handleUsernameChange}
-                        />
-                      </Box>
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
+                      <TextField
+                        label="Username"
+                        variant="standard"
+                        name="username"
+                        value={formValues.username}
+                        onChange={handleUsernameChange}
+                        fullWidth
+                      />
+                    </Box>
 
-                      <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                      >
-                        <CallIcon
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <TextField
-                          fullWidth
-                          label=" Mobile"
-                          name="contactNumber"
-                          variant="standard"
-                          color="info"
-                          className="custom-textfield"
-                          value={formValues?.contactNumber}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            // Ensure the value starts with '+91'
-                            if (value.startsWith("+91")) {
-                              setFormValues((prev) => ({
-                                ...prev,
-                                contactNumber: value,
-                              }));
-                            } else {
-                              setFormValues((prev) => ({
-                                ...prev,
-                                contactNumber: `+91${value}`,
-                              }));
-                            }
-                          }}
-                          placeholder="+91 (Mobile Number)"
-                        />
-                      </Box>
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <EmailIcon sx={{ mr: 1 }} fontSize="large" />
+                      <TextField
+                        fullWidth
+                        label="Email"
+                        variant="standard"
+                        name="email"
+                        value={formValues.email}
+                        onChange={handleUsernameChange}
+                      />
+                    </Box>
 
-                      <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                      >
-                        <AccountCircle
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <TextField
-                          label="Employee ID"
-                          name="employeeID"
-                          variant="standard"
-                          color="info"
-                          fullWidth
-                          className="custom-textfield"
-                          value={formValues?.employeeID}
-                          onChange={handleUsernameChange}
-                        />
-                      </Box>
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <CallIcon sx={{ mr: 1 }} fontSize="large" />
+                      <TextField
+                        fullWidth
+                        label="Mobile"
+                        name="contactNumber"
+                        variant="standard"
+                        value={formValues.contactNumber}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          // Ensure the value starts with '+91'
+                          if (value.startsWith("+91")) {
+                            setFormValues((prev) => ({
+                              ...prev,
+                              contactNumber: value,
+                            }));
+                          } else {
+                            setFormValues((prev) => ({
+                              ...prev,
+                              contactNumber: `+91${value}`,
+                            }));
+                          }
+                        }}
+                        placeholder="+91 (Mobile Number)"
+                      />
+                    </Box>
 
-                      <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                      >
-                        <AccountCircle
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <TextField
-                          label="Organization"
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
+                      <TextField
+                        fullWidth
+                        label="Employee ID"
+                        name="employeeID"
+                        variant="standard"
+                        value={formValues.employeeID}
+                        onChange={handleUsernameChange}
+                      />
+                    </Box>
+
+                    {/* Organization Dropdown */}
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel id="organization-label">
+                          Organization
+                        </InputLabel>
+                        <Select
+                          labelId="organization-label"
                           name="organizationName"
-                          variant="standard"
-                          color="info"
-                          fullWidth
-                          className="custom-textfield"
-                          value={formValues?.organizationName}
-                          onChange={handleUsernameChange}
-                        />
-                      </Box>
+                          value={formValues.organizationName}
+                          onChange={handleOrganizationChange}
+                          label="Organization"
+                        >
+                          {Array.isArray(organizations) &&
+                          organizations.length > 0 ? (
+                            organizations.map((org) => (
+                              <MenuItem
+                                key={org._id}
+                                value={org.organizationName}
+                              >
+                                {org.organizationName}
+                              </MenuItem>
+                            ))
+                          ) : (
+                            <MenuItem value="">
+                              No organizations available
+                            </MenuItem>
+                          )}
+                        </Select>
+                      </FormControl>
+                    </Box>
 
-                      <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
-                      >
-                        <AccountCircle
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <TextField
-                          label="Department"
+                    {/* Department Dropdown */}
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel id="department-label">
+                          Department
+                        </InputLabel>
+                        <Select
+                          labelId="department-label"
                           name="department"
-                          variant="standard"
-                          color="info"
-                          fullWidth
-                          className="custom-textfield"
-                          value={formValues?.department}
+                          value={formValues.department}
+                          onChange={(event) => {
+                            const selectedDept = event.target.value;
+                            setFormValues((prev) => ({
+                              ...prev,
+                              department: selectedDept,
+                            }));
+                          }}
+                          label="Department"
+                        >
+                          {departments.length > 0 ? (
+                            departments.map((dept) => (
+                              <MenuItem
+                                key={dept._id}
+                                value={dept.departmentName}
+                              >
+                                {dept.departmentName}
+                              </MenuItem>
+                            ))
+                          ) : (
+                            <MenuItem value="">
+                              No departments available
+                            </MenuItem>
+                          )}
+                        </Select>
+                      </FormControl>
+                    </Box>
+
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Role in RTMS</InputLabel>
+                        <Select
+                          name="roleInRTMS"
+                          value={formValues.roleInRTMS}
                           onChange={handleUsernameChange}
-                        />
-                      </Box>
+                          label="Role in RTMS"
+                        >
+                          <MenuItem value="manager">Manager</MenuItem>
+                          <MenuItem value="employee">Employee</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
 
+                    <Box
+                      sx={{ display: "flex", flexDirection: "column", mb: 2 }}
+                    >
                       <Box
-                        mt={0.5}
-                        sx={{ display: "flex", alignItems: "flex-end" }}
+                        sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}
                       >
-                        <AccountCircle
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                          fontSize="large"
-                        />
-                        <FormControl fullWidth variant="standard">
-                          <InputLabel>Role in RTMS</InputLabel>
-                          <Select
-                            name="roleInRTMS"
-                            value={formValues.roleInRTMS}
+                        <CameraAltIcon sx={{ mr: 1 }} fontSize="large" />
+                        <Button variant="outlined" component="label" fullWidth>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            name="passportPhoto"
                             onChange={handleUsernameChange}
-                            label="Role in RTMS"
-                          >
-                            <MenuItem value="manager">Manager</MenuItem>
-                            <MenuItem value="employee">Employee</MenuItem>
-                          </Select>
-                        </FormControl>
+                            hidden
+                          />
+                          {!selectedPhotoName ? (
+                            <Typography>Update Photo</Typography>
+                          ) : (
+                            <Typography variant="body2" color="textSecondary">
+                              {selectedPhotoName}
+                            </Typography>
+                          )}
+                        </Button>
                       </Box>
 
                       <Box
-                        mt={0.5}
-                        sx={{ display: "flex", flexDirection: "column" }}
+                        sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}
                       >
-                        <Box
-                          mt={1}
-                          sx={{ display: "flex", alignItems: "flex-end" }}
-                        >
-                          <CameraAltIcon
-                            sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                            fontSize="large"
+                        <CameraAltIcon sx={{ mr: 1 }} fontSize="large" />
+                        <Button variant="outlined" component="label" fullWidth>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            name="idCardPhoto"
+                            onChange={handleUsernameChange}
+                            hidden
                           />
-                          <Button
-                            variant="outlined"
-                            sx={{
-                              minWidth: "80px",
-                              backgroundColor: "#D3D3D3",
-                              marginRight: "2px",
-                              border: "black",
-                              height: "30px",
-                              padding: "4px",
-                              width: "100%",
-                              cursor: "pointer",
-                              overflow: "scroll",
-                            }}
-                            component="label"
-                          >
-                            <input
-                              type="file"
-                              accept="image/*"
-                              name="passportPhoto"
-                              onChange={handleUsernameChange}
-                              hidden
-                            />
-                            {!selectedPhotoName ? (
-                              <Typography>Upload photo</Typography>
-                            ) : (
-                              <Typography variant="body2" color="textSecondary">
-                                {selectedPhotoName}
-                              </Typography>
-                            )}
-                          </Button>
-                        </Box>
-                        <Box
-                          mt={1}
-                          sx={{ display: "flex", alignItems: "flex-end" }}
-                        >
-                          <CameraAltIcon
-                            sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                            fontSize="large"
-                          />
-                          <Button
-                            variant="outlined"
-                            sx={{
-                              minWidth: "80px",
-                              backgroundColor: "#D3D3D3",
-                              marginRight: "2px",
-                              border: "black",
-                              height: "30px",
-                              padding: "4px",
-                              width: "100%",
-                              cursor: "pointer",
-                              overflow: "scroll",
-                            }}
-                            component="label"
-                          >
-                            <input
-                              hidden
-                              type="file"
-                              accept="image/*"
-                              name="idCardPhoto"
-                              onChange={handleUsernameChange}
-                            />
-                            {!idCardName ? (
-                              <Typography>Upload ID Card</Typography>
-                            ) : (
-                              <Typography variant="body2" color="textSecondary">
-                                {idCardName}
-                              </Typography>
-                            )}
-                          </Button>
-                        </Box>
-                      </Box>
-                    </Grid>
-
-                    <Grid item>
-                      <Link style={{ textDecoration: "none", color: "white" }}>
-                        <Button
-                          variant="contained"
-                          className="btn-primary"
-                          fullWidth
-                          href="#contained-buttons"
-                          onClick={handleSubmit}
-                        >
-                          <Typography variant="h6">Next</Typography>
+                          {!idCardName ? (
+                            <Typography>Upload ID Card</Typography>
+                          ) : (
+                            <Typography variant="body2" color="textSecondary">
+                              {idCardName}
+                            </Typography>
+                          )}
                         </Button>
-                      </Link>
-                    </Grid>
+                      </Box>
+                    </Box>
+
+                    <Button variant="contained" fullWidth type="submit">
+                      Next
+                    </Button>
                   </Grid>
                 </form>
                 <Grid item textAlign="center" mt={0.5}>
                   <Typography fontSize={"medium"}>
-                    Already have account?{" "}
+                    Already have an account?{" "}
                     <Link
                       to="/"
-                      fontWeight={500}
-                      fontSize={20}
-                      style={{ textDecoration: "none", color: "#3707B0" }}
+                      style={{ textDecoration: "none", cursor: "pointer" }}
                     >
-                      {" "}
                       Login
                     </Link>
                   </Typography>
@@ -405,9 +404,7 @@ function Signup() {
                     Have Registration?{" "}
                     <Link
                       to="/Popup"
-                      fontWeight={500}
-                      fontSize={20}
-                      style={{ textDecoration: "none", color: "#3707B0" }}
+                      style={{ textDecoration: "none", cursor: "pointer" }}
                     >
                       Check Status
                     </Link>

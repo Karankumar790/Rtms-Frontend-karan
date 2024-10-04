@@ -51,11 +51,12 @@ const Approval = lazy(() =>
   import("./Pages/Dashboard/MessageBox/Approval.jsx")
 );
 const SuperAdmin = lazy(() =>
-  import("./Pages/Dashboard/SuperAdmin/SuperAdmin.jsx")
+
+  import("./Pages/Dashboard/Admin/SuperAdmin.jsx")
 );
-const TechnicalSupport = lazy(() =>
-  import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
-);
+// const TechnicalSupport = lazy(() =>
+//   import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
+// );
 
 function App() {
   // Fetch the role from Redux
@@ -79,8 +80,8 @@ function App() {
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
     { path: "Admin", element: <SuperAdmin /> },
-    { path: "technicalSupport", element: <TechnicalSupport /> },
-  ];
+
+    // { path: "technicalSupport", element: <TechnicalSupport /> },
 
   // Add role-specific routes
   if (role === "owner") {
@@ -132,5 +133,4 @@ function App() {
     </>
   );
 }
-
 export default App;
