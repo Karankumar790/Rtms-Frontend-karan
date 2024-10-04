@@ -26,7 +26,7 @@ function Virtual() {
           </IconButton>
           <Typography mt={1} variant='h4'>Geo-Location </Typography>
         </Box>
-        <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
+        {/* <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
           <Grid item xs={12} sm={8} md={6} lg={3} mt={1}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <TextField
@@ -55,7 +55,7 @@ function Virtual() {
               />
             </Box>
           </Grid>
-        </Grid>
+        </Grid> */}
         <Grid container textAlign={'center'} mt={2} display={'block'}>
           <Grid item md={12} border={"1px solid black"}>
             <iframe

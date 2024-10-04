@@ -23,8 +23,10 @@ import WellmasterIcon from "@mui/icons-material/Settings";
 import WellmonitorIcon from "@mui/icons-material/Search";
 import GeoIcon from "@mui/icons-material/Place";
 import ongc_logo from "/assets/ongc2.png";
+
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import { useSelector } from "react-redux";
 
@@ -85,7 +87,9 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role);
 
   // Define your menu items here
+
   const menuItems = [
+
     {
       name: "Admin",
       icon: <AdminPanelSettingsIcon sx={{ color: "black" }} />,
@@ -111,14 +115,14 @@ export default function Sidebar({
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Manage Node",
-      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
+      name: "Node Manager",
+      icon: <Networkicon sx={{ color: "black" }} />,
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Manage Gateway",
-      icon: <Networkicon sx={{ color: "black" }} />,
+      name: "Device Manager",
+      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
       path: "/dashboard/Network",
       roles: ["owner", "manager", "employee"],
     },
@@ -146,12 +150,12 @@ export default function Sidebar({
       path: "/dashboard/crystal",
       roles: ["owner", "manager", "employee"],
     },
-    {
-      name: "Geo Location",
-      icon: <GeoIcon sx={{ color: "black" }} />,
-      path: "/dashboard/virtual",
-      roles: ["owner", "manager", "employee"],
-    },
+    // {
+    //   name: "Geo Location",
+    //   icon: <GeoIcon sx={{ color: "black" }} />,
+    //   path: "/dashboard/virtual",
+    //   roles: ["owner", "manager", "employee"],
+    // },
     {
       name: "Message Box",
       icon: <ForwardToInboxIcon sx={{ color: "black" }} />,
@@ -161,7 +165,7 @@ export default function Sidebar({
     {
       name: "Technical Support",
       icon: <SupportAgentIcon sx={{ color: "black" }} />,
-      path: "/dashboard/technicalSupport",
+      path: "/dashboard/TechnicalSupport",
       roles: ["owner", "manager", "employee"],
     },
   ];
