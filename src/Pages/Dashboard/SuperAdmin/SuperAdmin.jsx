@@ -8,7 +8,6 @@ import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
 import StoreIcon from '@mui/icons-material/Store';
-import PageContainer from '../../components/HOC/PageContainer';
 import PropTypes from 'prop-types';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
@@ -96,7 +95,6 @@ export default function SuperAdmin() {
   const handleClose = () => setOpen(false);
 
   return (
-    <PageContainer className="admin-bg-image" showheader="true" showfooter="true">
       <Grid container display={'flex'} justifyContent={'start'} height="100%" alignItems={'center'} p='5%'>
         <Grid item padding={2} width={550}>
           <Card>
@@ -177,7 +175,6 @@ export default function SuperAdmin() {
           </Fade>
         </Modal>
       </Grid>
-    </PageContainer>
   );
 }
 
