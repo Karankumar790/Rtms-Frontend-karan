@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ORGANIZATION_API, USER_API } from "../apis/Client";
-import { ORGANIZATION_API, USER_API } from "../apis/Client";
 import { catchError } from "../helper/helper";
 
 // Function to send OTP for login
