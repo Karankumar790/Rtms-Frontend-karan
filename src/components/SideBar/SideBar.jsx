@@ -18,13 +18,15 @@ import ComplaintIcon from "@mui/icons-material/AccessAlarm";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Networkicon from "@mui/icons-material/CellTower";
-import { useMediaQuery } from "@mui/material";
+import { patch, useMediaQuery } from "@mui/material";
 import WellmasterIcon from "@mui/icons-material/Settings";
 import WellmonitorIcon from "@mui/icons-material/Search";
 import GeoIcon from "@mui/icons-material/Place";
 import ongc_logo from "/assets/ongc2.png";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import { useSelector } from "react-redux";
 
@@ -85,8 +87,9 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role);
 
   // Define your menu items here
-   // Define your menu items here
-   const menuItems = [
+
+  const menuItems = [
+
     {
       name: "Admin",
       icon: <AdminPanelSettingsIcon sx={{ color: "black" }} />,

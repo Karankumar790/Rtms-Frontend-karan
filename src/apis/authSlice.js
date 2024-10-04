@@ -8,6 +8,7 @@ const initialState = {
   isAuthenticated: false,
   authToken: null,  // Store authToken in Redux
   role: "employee",  // Store role in Redux (default to employee)
+  organization: "",
 };
 
 // initial state for Signup
@@ -49,6 +50,7 @@ const forgotInitialState = {
   otp: "",
   isAuthenticated: false,
 };
+
 // oragnization
 const oragnizationInitialState = {
   organizationName: "",
@@ -59,6 +61,7 @@ const oragnizationInitialState = {
   emailOtp: "",
   isAuthenticated: false,
 };
+
 
 //for login
 const authSlice = createSlice({
@@ -81,6 +84,9 @@ const authSlice = createSlice({
     setRole: (state, action) => {
       state.role = action.payload; // Store the role in Redux
     },
+    setOrganizationName: (state, action) => {
+      state.organization = action.payload;
+    },
     clearAuth: (state) => {
       state.username = "";
       state.password = "";
@@ -88,6 +94,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.authToken = null; // Clear the token
       state.role = "employee"; // Clear the role
+      state.organization = ""; // clear organization name
     },
   },
 });
@@ -171,36 +178,6 @@ const forgotAuthSlice = createSlice({
   },
 });
 
-
-
-// send -to-organization
-const oragnizationAuthSlice = createSlice({
-  name: "oragnizationAuth",
-  initialState: oragnizationInitialState,
-  reducers: {
-    setOragnizationDetails: (state, action) => {
-      state.organizationName = action.payload.organizationName;
-      state.username = action.payload.username;
-      state.password = action.payload.password;
-      state.email = action.payload.email;
-      state.contactNumber = action.payload.contactNumber;
-    },
-    setEmailOrgOtp: (state, action) => {
-      state.emailOtp = action.payload;
-    },
-    setOragnizationAuthenticated: (state, action) => {
-      state.isAuthenticated = action.payload;
-    },
-    clearOragnizationAuth: (state) => {
-      state.organizationName = "";
-      state.username = "";
-      state.password = "";
-      state.email = "";
-      state.contactNumber = "";
-    },
-  },
-});
-
 // Export actions
 export const {
   setLoginDetails,
@@ -208,6 +185,7 @@ export const {
   setAuthenticated,
   setAuthToken,
   setRole,
+  setOrganizationName,
   clearAuth,
 } = authSlice.actions;
 export const {
@@ -226,17 +204,8 @@ export const {
   clearForgotAuth,
 } = forgotAuthSlice.actions;
 
-export const {
-  setOragnizationDetails,
-  setEmailOrgOtp,
-  setOragnizationAuthenticated,
-  clearOragnizationAuth,
-} = oragnizationAuthSlice.actions;
-
-
 // Export reducers with unique names
 export const authReducer = authSlice.reducer;
 export const registerAuthReducer = registerAuthSlice.reducer;
 export const checkAuthReducer = checkAuthSlice.reducer;
 export const forgotAuthReducer = forgotAuthSlice.reducer;
-export const oragnizationAuthReducer = oragnizationAuthSlice.reducer;

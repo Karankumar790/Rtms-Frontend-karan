@@ -67,7 +67,7 @@ function Reset() {
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
   const handleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
-
+  
   return (
     <PageContainer
       showheader
