@@ -259,6 +259,42 @@ function Signup() {
                         </InputLabel>
                         <Select
                           labelId="organization-label"
+
+                          name="organizationName"
+                          value={formValues.organizationName}
+                          onChange={handleOrganizationChange}
+                          label="Organization"
+
+                        >
+                          {Array.isArray(organizations) &&
+                          organizations.length > 0 ? (
+                            organizations.map((org) => (
+                              <MenuItem
+                                key={org._id}
+                                value={org.organizationName}
+                              >
+                                {org.organizationName}
+                              </MenuItem>
+                            ))
+                          ) : (
+                            <MenuItem value="">
+                              No organizations available
+                            </MenuItem>
+                          )}
+                        </Select>
+                      </FormControl>
+                    </Box>
+
+                          name="organizationName"
+                          variant="standard"
+                          color="info"
+                          fullWidth
+                          className="custom-textfield"
+                          value={formValues?.organizationName}
+                          onChange={handleUsernameChange}
+                        />
+                      </Box>
+
                           name="organizationName"
                           value={formValues.organizationName}
                           onChange={handleOrganizationChange}
@@ -282,6 +318,7 @@ function Signup() {
                         </Select>
                       </FormControl>
                     </Box>
+
 
                     {/* Department Dropdown */}
                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>

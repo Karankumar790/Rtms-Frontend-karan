@@ -34,7 +34,7 @@ const SingleWell = lazy(() =>
 );
 const AddWell = lazy(() => import("./Pages/WellMaster/AddWell/AddWell.jsx"));
 const ManageAsset = lazy(() =>
-  import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx")
+  import("./Pages/Dashboard/ManageAsset.jsx/ManageAsset.jsx")
 );
 const DeviceManage = lazy(() =>
   import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx")

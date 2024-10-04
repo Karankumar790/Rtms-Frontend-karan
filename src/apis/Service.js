@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ORGANIZATION_API, USER_API } from "../apis/Client";
+import { ORGANIZATION_API, USER_API } from "../apis/Client";
 import { catchError } from "../helper/helper";
 
 // Function to send OTP for login
@@ -77,7 +78,7 @@ export const forgotPassword = async (formData) => {
   }
 };
 
-//reset password Api
+//reset password Apis
 export const resetPassword = async (formData) => {
   try {
     const response = await axios.post(`${USER_API}/reset-password`, formData);
@@ -245,11 +246,63 @@ export const addDepartment = async (formData) => {
   }
 };
 
+//update department
+export const UpdateDepartment = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-department`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//delete department
+export const DeleteDepartment = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/delete-department`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//Delete Position
+export const deletePosition = async (formData) => {
+  try {
+    const response = await axios.delete(`${ORGANIZATION_API}/delete-position`, {
+      data: formData, // Use the data field to send the request body with DELETE
+    });
+    return response.data;
+  } catch (error) {
+    return catchError(error); // Ensure you handle the error appropriately
+  }
+};
+
+
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//update Position
+export const updatePosition = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-position`,
       formData
     );
     return response.data;
@@ -275,6 +328,19 @@ export const addApprovalChain = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-approval-chain`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//update approval Chain
+export const updateApprovalChain = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-approval-chain`,
       formData
     );
     return response.data;
