@@ -6,6 +6,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import { Box } from '@mui/system';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
+import { Link } from 'react-router-dom';
 
 
 const data = [
@@ -15,8 +16,9 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'GIP(kg)',
+    Parameter: 'GIP (kg/Cm²)',
     Condition1: '',
+    Description1: '',
 
   },
   {
@@ -25,7 +27,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'CHP(kg)',
+    Parameter: 'CHP (kg/Cm²)',
     Condition1: '',
 
   },
@@ -35,7 +37,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'THP(kg)',
+    Parameter: 'THP (kg/Cm²)',
     Condition1: '',
 
   },
@@ -45,7 +47,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'Battery %',
+    Parameter: ' Low Battery',
     Condition1: '',
 
   },
@@ -55,30 +57,11 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'Solar Power(V)',
+    Parameter: 'Solar Voltage',
     Condition1: '',
 
   },
-  {
-    employeeId: '06',
-    NormalAlert: '',
-    CriticalAlert: '',
-    Condition: '',
-    Description: '',
-    Parameter: '',
-    Condition1: '',
 
-  },
-  {
-    employeeId: '07',
-    NormalAlert: '',
-    CriticalAlert: '',
-    Condition: '',
-    Description: '',
-    Parameter: '',
-    Condition1: '',
-
-  },
 ]
 
 function AddWell() {
@@ -102,17 +85,17 @@ function AddWell() {
   return (
     <div>
       <Paper>
-      <Grid container>
+        <Grid container>
           <IconButton>
             <Brightness5Icon sx={{ fontSize: "40px", color: 'red' }} />
           </IconButton>
           <Typography variant='h4' mt={1}>Add New Well</Typography>
         </Grid>
         <Grid container p={1.7} spacing={2} sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Type" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Installation" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Location" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Installation" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Type" variant="outlined" /></Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Landmark" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
@@ -131,7 +114,7 @@ function AddWell() {
           <IconButton>
             <NotificationsIcon sx={{ fontSize: "40px", color: 'red' }} />
           </IconButton>
-          <Typography variant='h4' mt={1}>Notification History</Typography>
+          <Typography variant='h4' mt={1}>Alarm Setting</Typography>
         </Grid>
         <Grid item >
           <Table>
@@ -221,7 +204,7 @@ function AddWell() {
                   </TableCell>
                   <TableCell>
                     <TextField
-                      name="Description"
+                      name="Description1"
                       value={Description1}
                       onChange={(e) => onChangeInput(e, employeeId)}
                       variant="outlined"
@@ -243,15 +226,17 @@ function AddWell() {
                 backgroundColor: 'darkgreen', // Optional: Change color on hover
               },
               fontSize: '16px',
-            }}> Add Well</Button>
-          <Button variant='contained'
-            sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
-                backgroundColor: 'darkgreen', // Optional: Change color on hover
-              },
-              fontSize: '16px',
-            }}>Cancel</Button>
+            }}>Update</Button>
+          <Link to='/dashboard/wellmaster'>
+            <Button variant='contained'
+              sx={{
+                backgroundColor: 'green',   // Change button color to green
+                '&:hover': {
+                  backgroundColor: 'darkgreen', // Optional: Change color on hover
+                },
+                fontSize: '16px',
+              }}>Cancel</Button>
+          </Link>
         </Grid>
       </Grid>
 

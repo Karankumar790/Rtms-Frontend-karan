@@ -7,15 +7,21 @@ import {
   InputAdornment,
   TextField,
   Typography,
-<<<<<<< HEAD
 } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { Box, height } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Button, Card, CardContent, Grid, InputAdornment, TextField, Typography } from '@mui/material';
+import { IconButton } from "@mui/material";
+import { Box } from '@mui/system';
+import { Link, useNavigate } from 'react-router-dom';
+
 import HttpsIcon from "@mui/icons-material/Https";
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
+
 import StoreIcon from "@mui/icons-material/Store";
 import FoxboroHeader from "../../../components/Header/FoxboroHeader";
 import FoxboroFooter from "../../../components/Footer/FoxboroFooter";
@@ -23,10 +29,7 @@ import PropTypes from "prop-types";
 import { styled, css } from "@mui/system";
 import { Modal as BaseModal } from "@mui/base/Modal";
 import Fade from "@mui/material/Fade";
-=======
-  IconButton,
-  Box,
-} from "@mui/material";
+
 import { Link } from "react-router-dom";
 import {
   Https as HttpsIcon,
@@ -39,41 +42,54 @@ import {
 } from "@mui/icons-material";
 import { styled, css } from "@mui/system";
 import { Modal as BaseModal, Fade } from "@mui/material";
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
 import OTPInput from "react-otp-input";
 import { createOrg, genrateOtpOrg } from "../../../apis/Service";
 import { toast } from "react-toastify";
 import PageContainer from "../../../components/HOC/PageContainer";
-<<<<<<< HEAD
-=======
+
 // import FoxboroFooter from "../../../components/Footer/FoxboroFooter"; // Fix this path if necessary
 import FoxboroHeader from "../../../components/Header/FoxboroHeader"; 
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
+import StoreIcon from '@mui/icons-material/Store';
+import PropTypes from 'prop-types';
+import { styled, css } from '@mui/system';
+import { Modal as BaseModal } from '@mui/base/Modal';
+import Fade from '@mui/material/Fade';
+import OTPInput from 'react-otp-input';
+import { useDispatch } from 'react-redux';
+import { createOrg, generateOtpOragnization } from '../../apis/Service';
+import { setEmailOrgOtp, setOragnizationAuthenticated, setOragnizationDetails } from '../../apis/authSlice';
+import { toast } from 'react-toastify';
 
 export default function SuperAdmin() {
+  const [visible, setVisible] = useState(false);
   const [formValues, setFormValues] = useState({
     organizationName: "",
     username: "",
     password: "",
     email: "",
     contactNumber: "",
-    emailOtp: "",
+    emailOtp: ""
   });
   const [visible, setVisible] = useState(false);
-<<<<<<< HEAD
   const [open, setOpen] = React.useState(false);
-=======
+
   const [open, setOpen] = useState(false);
 
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleClickShowPassword = () => {
-    setVisible((prev) => !prev);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleClickShowPassword = () => setVisible(prev => !prev);
+  const handleMouseDownPassword = (event) => event.preventDefault();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({ ...prev, [name]: value }));
   };
 
-<<<<<<< HEAD
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -104,30 +120,43 @@ export default function SuperAdmin() {
       if (response?.success) {
         toast.success(response.message);
         setOpen(true);
-=======
+
   const handleInputs = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Handle OTP change
+  const [emailOtp, setEmailOtp] = useState("");
+
   const handleOtpChange = (otp) => {
-    setFormValues((prev) => ({ ...prev, emailOtp: otp }));
+    setEmailOtp(otp);
+    setFormValues(prev => ({ ...prev, emailOtp: otp }));
   };
 
-  // Handle form submission for OTP generation
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    Object.entries(formValues).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
     try {
+
       const response = await genrateOtpOrg(formValues);
       if (response?.success) {
         toast.success(response.message);
         setOpen(true); // Open OTP modal
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
+      const response = await generateOtpOragnization(formData);
+      if (response && response.success) {
+        dispatch(setOragnizationDetails(formValues));
+        toast.success("OTP Sent Successfully!");
+        setOpen(true);
+
       } else {
-        toast.error(response?.message);
+        toast.error(response?.message || "Invalid Provided Details");
       }
     } catch (error) {
-<<<<<<< HEAD
+
       toast.error(error.message);
     }
   };
@@ -143,23 +172,26 @@ export default function SuperAdmin() {
       contactNumber,
       emailOtp,
     } = formValues;
-=======
+
       toast.error("OTP generation failed. Try again.");
+
+      toast.error("Organization failed due to a network error.");
+
     }
   };
 
-  // Create Organization after OTP verification
-  const createOrganization = async (e) => {
+  const handleOtp = async (e) => {
     e.preventDefault();
+
     const { organizationName, username, password, email, contactNumber, emailOtp } = formValues;
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
     try {
       const response = await createOrg({
         organizationName,
         username,
         password,
         email,
-<<<<<<< HEAD
+
         emailOtp,
         contactNumber,
       });
@@ -167,28 +199,49 @@ export default function SuperAdmin() {
       if (response?.success) {
         toast.success(response.message);
         setOpen(false);
-=======
+
         contactNumber,
         emailOtp,
       });
       if (response?.success) {
         toast.success("Organization created successfully!");
         setOpen(false); // Close OTP modal after success
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
+    const formData = new FormData();
+    Object.entries(formValues).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    formData.append('emailOtp', formValues.emailOtp);
+
+    try {
+      const response = await createOrg(formData);
+      if (response?.success) {
+        dispatch(setEmailOrgOtp(formData));
+        dispatch(setOragnizationAuthenticated(true));
+        toast.success("Successfully created Organization!");
+        navigate('/');
+
       } else {
-        toast.error(response?.message);
+        toast.error("Invalid Provided Details");
       }
     } catch (error) {
-<<<<<<< HEAD
+
+
       toast.error(error.message);
-=======
+
       toast.error("Organization creation failed. Try again.");
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
+      toast.error("Organization failed");
+
     }
   };
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-<<<<<<< HEAD
+
     <div>
       <PageContainer className="admin-bg-image ">
         <FoxboroHeader />
@@ -508,7 +561,6 @@ const StyledBackdrop = styled(Backdrop)`
   // background-color: rgb(87 89 88 / 0.5);
   background-color: rgb(0 0 0 / 0.8);
   -webkit-tap-highlight-color: transparent;
-=======
     <PageContainer className="admin-bg-image">
       <FoxboroHeader />
       <Grid
@@ -519,108 +571,50 @@ const StyledBackdrop = styled(Backdrop)`
         alignItems="center"
         pl="5%"
       >
+      <Grid container display={'flex'} justifyContent={'start'} height="100%" alignItems={'center'} p='5%'>
+
         <Grid item padding={2} width={550}>
           <Card>
-            <CardContent orientation="vertical">
+            <CardContent>
               <Grid item sx={{ textAlign: "center" }}>
-                <Typography variant="h4" color="green">
-                  NEW CUSTOMER
-                </Typography>
+                <Typography variant="h4" color='green'>NEW CUSTOMER</Typography>
               </Grid>
-              <Grid item px={4} alignItems="center">
+              <Grid item px={4} alignItems={"center"}>
                 <form onSubmit={handleSubmit}>
                   <Grid item gap="9px" style={{ display: "flex", flexDirection: "column" }}>
-                    {/* Organization Name Field */}
                     <Box mt={0.5} sx={{ display: "flex", alignItems: "flex-end" }}>
                       <StoreIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} fontSize="large" />
-                      <TextField
-                        fullWidth
-                        label="Organization"
-                        variant="standard"
-                        color="info"
-                        name="organizationName"
-                        value={formValues.organizationName}
-                        onChange={handleInputs}
-                      />
+                      <TextField fullWidth label="Organization" variant="standard" color="info" name="organizationName" value={formValues.organizationName} onChange={handleInputChange} />
                     </Box>
-
-                    {/* Username Field */}
                     <Box mt={0.5} sx={{ display: "flex", alignItems: "flex-end" }}>
                       <AccountCircle sx={{ color: "action.active", mr: 1, my: 0.5 }} fontSize="large" />
-                      <TextField
-                        label="Username"
-                        variant="standard"
-                        color="info"
-                        fullWidth
-                        name="username"
-                        value={formValues.username}
-                        onChange={handleInputs}
-                      />
+                      <TextField label="Username" variant="standard" color="info" fullWidth name="username" value={formValues.username} onChange={handleInputChange} />
                     </Box>
-
-                    {/* Password Field */}
                     <Box mt={0.5} sx={{ display: "flex", alignItems: "flex-end" }}>
                       <HttpsIcon sx={{ color: "action.active", mr: 1 }} fontSize="large" />
-                      <TextField
-                        variant="standard"
-                        type={visible ? "text" : "password"}
-                        label="Password"
-                        name="password"
-                        value={formValues.password}
-                        onChange={handleInputs}
-                        fullWidth
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton onClick={handleClickShowPassword} edge="end">
-                                {visible ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                      <TextField variant="standard" type={visible ? "text" : "password"} label="Password" name="password" value={formValues.password} onChange={handleInputChange} fullWidth InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
+                              {visible ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }} />
                     </Box>
-
-                    {/* Email Field */}
                     <Box mt={0.5} sx={{ display: "flex", alignItems: "flex-end" }}>
                       <EmailIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} fontSize="large" />
-                      <TextField
-                        label="Email"
-                        name="email"
-                        variant="standard"
-                        color="info"
-                        fullWidth
-                        value={formValues.email}
-                        onChange={handleInputs}
-                      />
+                      <TextField label="Email" name="email" variant="standard" color="info" fullWidth value={formValues.email} onChange={handleInputChange} />
                     </Box>
-
-                    {/* Contact Number Field */}
                     <Box mt={0.5} sx={{ display: "flex", alignItems: "flex-end" }}>
                       <CallIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} fontSize="large" />
-                      <TextField
-                        fullWidth
-                        label="Mobile"
-                        name="contactNumber"
-                        variant="standard"
-                        color="info"
-                        value={formValues.contactNumber}
-                        onChange={(e) => {
-                          const value = e.target.value.startsWith("+91")
-                            ? e.target.value
-                            : `+91${e.target.value}`;
-                          setFormValues((prev) => ({ ...prev, contactNumber: value }));
-                        }}
-                        placeholder="+91 (Mobile Number)"
-                      />
+                      <TextField fullWidth label="Mobile" name="contactNumber" variant="standard" color="info" value={formValues.contactNumber} onChange={handleInputChange} />
                     </Box>
-                  </Grid>
-
-                  {/* Submit Button */}
-                  <Grid item mt={2}>
-                    <Button variant="contained" className="btn-primary" fullWidth type="submit">
-                      Create A New Customer
-                    </Button>
+                    <Grid item mt={2}>
+                      <Button variant="contained" className="btn-primary" fullWidth type="submit">
+                        Create A New Customer
+                      </Button>
+                    </Grid>
                   </Grid>
                 </form>
               </Grid>
@@ -629,45 +623,27 @@ const StyledBackdrop = styled(Backdrop)`
         </Grid>
       </Grid>
 
-      {/* OTP Modal */}
       <Grid container>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          slots={{ backdrop: StyledBackdrop }}
-        >
+        <Modal aria-labelledby="transition-modal-title" aria-describedby="transition-modal-description" open={open} onClose={handleClose} closeAfterTransition>
           <Fade in={open}>
             <ModalContent sx={style}>
               <Grid container>
-                <form onSubmit={createOrganization}>
+                <form>
                   <Grid item xs={12} mt={2}>
                     <Typography fontSize="x-large" sx={{ color: "#0c1352", textAlign: "center" }}>
                       Enter OTP To Verify E-Mail
                     </Typography>
                   </Grid>
                   <Grid item xs={12} mt={3} display="flex" justifyContent="center">
-                    <OTPInput
-                      inputStyle={{ width: "2rem", height: "4vh", fontSize: "18px" }}
-                      name="emailOtp"
-                      value={formValues.emailOtp}
-                      onChange={handleOtpChange}
-                      numInputs={6}
-                      renderSeparator={<span> &nbsp; &nbsp; </span>}
-                    />
+                    <OTPInput inputStyle={{
+                      width: "2rem",
+                      height: "4vh",
+                      fontSize: "18px",
+                    }} value={emailOtp} onChange={handleOtpChange} numInputs={6} renderSeparator={<span> &nbsp; &nbsp; </span>} renderInput={(props) => <input {...props} />} />
                   </Grid>
                   <Grid item xs={12} mt={3} textAlign="center">
-                    <Button variant="contained" color="primary" type="submit">
-                      Submit
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} textAlign="center" py={1}>
-                    <Button onClick={handleSubmit}>
-                      <Typography style={{ cursor: "pointer", color: "blue" }}>
-                        Resend OTP
-                      </Typography>
+                    <Button variant="contained" color="primary" onClick={handleOtp}>
+                      Submit OTP
                     </Button>
                   </Grid>
                 </form>
@@ -676,12 +652,9 @@ const StyledBackdrop = styled(Backdrop)`
           </Fade>
         </Modal>
       </Grid>
-
-      {/* Uncomment and fix the path if necessary */}
-      {/* <FoxboroFooter /> */}
-    </PageContainer>
   );
 }
+
 
 // Styling and Modal components
 const StyledBackdrop = styled("div")`
@@ -695,7 +668,7 @@ const ModalContent = styled("div")`
   padding: 16px;
   width: 400px;
   margin: auto;
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
 `;
 
 const style = {
@@ -703,7 +676,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-<<<<<<< HEAD
   width: 300,
 };
 
@@ -740,10 +712,13 @@ const ModalContent = styled("div")(
     }
   `
 );
-=======
+
   width: 400,
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
+SuperAdmin.propTypes = {
+  setOpen: PropTypes.func,
+  setEmailOtp: PropTypes.func,
 };
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+

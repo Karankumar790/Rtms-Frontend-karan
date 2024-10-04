@@ -259,11 +259,12 @@ function Signup() {
                         </InputLabel>
                         <Select
                           labelId="organization-label"
+
                           name="organizationName"
                           value={formValues.organizationName}
                           onChange={handleOrganizationChange}
                           label="Organization"
-<<<<<<< HEAD
+
                         >
                           {Array.isArray(organizations) &&
                           organizations.length > 0 ? (
@@ -283,7 +284,7 @@ function Signup() {
                         </Select>
                       </FormControl>
                     </Box>
-=======
+
                           name="organizationName"
                           variant="standard"
                           color="info"
@@ -293,7 +294,31 @@ function Signup() {
                           onChange={handleUsernameChange}
                         />
                       </Box>
->>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
+
+                          name="organizationName"
+                          value={formValues.organizationName}
+                          onChange={handleOrganizationChange}
+                          label="Organization"
+                        >
+                          {Array.isArray(organizations) &&
+                          organizations.length > 0 ? (
+                            organizations.map((org) => (
+                              <MenuItem
+                                key={org._id}
+                                value={org.organizationName}
+                              >
+                                {org.organizationName}
+                              </MenuItem>
+                            ))
+                          ) : (
+                            <MenuItem value="">
+                              No organizations available
+                            </MenuItem>
+                          )}
+                        </Select>
+                      </FormControl>
+                    </Box>
+
 
                     {/* Department Dropdown */}
                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
