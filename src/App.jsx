@@ -50,7 +50,7 @@ const Approval = lazy(() =>
   import("./Pages/Dashboard/MessageBox/Approval.jsx")
 );
 const SuperAdmin = lazy(() =>
-  import("./Pages/Dashboard/Admin/SuperAdmin.jsx")
+  import("./Pages/Dashboard/SuperAdmin/SuperAdmin.jsx")
 );
 
 const TechnicalSupport = lazy(() =>
