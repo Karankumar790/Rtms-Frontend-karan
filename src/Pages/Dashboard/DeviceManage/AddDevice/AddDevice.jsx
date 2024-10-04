@@ -18,7 +18,7 @@ function AddDevice() {
       <Grid container spacing={5} direction="column">
         {/* ---------------MAC Address----------------- */}
         <Grid item lg={12} md={12} sm={12} xs={12} gap={1}>
-          <Typography sx={{textWrap: 'nowrap'}}>MAC Address :</Typography>
+          <Typography sx={{textWrap: 'nowrap'}}>Device Name :</Typography>
           <Box display="flex" flexDirection="column" gap={3} alignItems="end">
               <TextField size="small" fullWidth/>
               <Button variant="contained">Read MAC</Button>

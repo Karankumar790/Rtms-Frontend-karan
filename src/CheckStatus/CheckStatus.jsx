@@ -24,7 +24,11 @@ function CheckStatus() {
     email,
     contactNumber,
     employeeID,
+<<<<<<< HEAD
     organization,
+=======
+    organizationName,
+>>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
     department,
     roleInRTMS,
     idCardPhoto,
@@ -80,7 +84,11 @@ function CheckStatus() {
               <Typography fontSize="large">
                 Employee ID: {employeeID}
               </Typography>
+<<<<<<< HEAD
               <Typography fontSize="large">Asset Name: {organization}</Typography>
+=======
+              <Typography fontSize="large">Asset Name: {organizationName}</Typography>
+>>>>>>> 15ece0c2a235bff6b7d94f809914e2a0d356c26d
               <Typography fontSize="large">Department: {department}</Typography>
               <Typography fontSize="large">
                 Role in RTMS: {roleInRTMS}

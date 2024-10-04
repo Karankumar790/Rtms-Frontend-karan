@@ -18,9 +18,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { width } from '@mui/system'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
+
 // ---------FUNCTIONS OF TABLE--------------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

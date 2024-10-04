@@ -4,11 +4,13 @@ import MQTT1 from "/assets/MQTT1.png";
 import { Grid, Typography, Box } from "@mui/material";
 import Technical from "/assets/Technical.png";
 import { Link } from "react-router-dom";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 function Header() {
   return (
     <>
-      <Grid container bgcolor="black" color="#fff" p={1}>
+      <Grid container bgcolor="#023861" color="#fff" p={1}>
         <Grid
           item
           md={8}
@@ -30,7 +32,7 @@ function Header() {
               lg: 'x-large', // extra-large screens
             }
           }}>
-            OIL & NATURAL GAS CORPORATION
+            Foxboro Instrument Company
             <Typography sx={{
               fontSize: {
                 xs: 'small', // small screens
@@ -52,11 +54,14 @@ function Header() {
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
           <Box display="flex" alignItems="center" justifyContent="end" gap={1}>
-            <Link to=''><img src={Technical} style={{ objectFit: "cover", width: "70px", marginRight: "24px" }} /></Link>
-            <img src={MQTT1} style={{ objectFit: "cover", width: "151px" }} />
+            {/* <Link to=''><img src={Technical} style={{ objectFit: "cover", width: "70px", marginRight: "24px" }} /></Link> */}
+            {/* <img src={MQTT1} style={{ objectFit: "cover", width: "151px" }} /> */}
+
+            <Box p={2}>
+              <AccountCircleIcon sx={{ color: 'white', fontSize: '300%' }} />
+            </Box>
           </Box>
 
-          {/* <a href='' alt='contain' ><Typography style={{textDecoration:'none'}}>Technical Support</Typography></a> */}
         </Grid>
       </Grid>
     </>
