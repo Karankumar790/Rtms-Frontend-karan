@@ -38,10 +38,11 @@ import {
   organizationAddData,
   getOrganizationData,
   UpdateDepartment,
-  deleteDepartment,
+  // deleteDepartment,
   deletePosition,
   updatePosition,
   updateApprovalChain,
+  DeleteDepartment,
 } from "../../../apis/Service";
 
 function ManageAsset() {
@@ -262,46 +263,31 @@ function ManageAsset() {
 
   // Delete logic (if needed) would go here as well
 
-  // update position
-  // const handleAddOrUpdatePosition = async () => {
-  //   const value1 = newDepartmentName.trim();
-
-  //   if (!organizationName) {
-  //     toast.error("Organization name is missing");
-  //     return;
-  //   }
-
-  //   if(value1){
-
-  //   }
-  // }
-
-  // DELETE DEPARTMENT
+  //delete department
   const handleDeleteClick = async (departmentName) => {
-    const formData = {
-      organizationName: organizationName, // replace with the actual organization name
-      departmentName: departmentName, // department to delete
-    };
-
+    if (!organizationName || !departmentName) {
+      toast.error("Organization name and department name are required");
+      return;
+    }
     try {
-      // Call the delete API
-      const response = await deleteDepartment(formData);
-
-      if (response.success) {
-        // Update the departments state
+      const response = await DeleteDepartment({
+        organizationName,
+        departmentName,
+      });
+      if (response && response.data.success) {
         setDepartments((prevDepartments) =>
-          prevDepartments.filter((dept) => dept !== departmentName)
+          prevDepartments.filter((dep) => dep !== departmentName)
         );
-
-        // Optionally, show a success message
-        alert(`${departmentName} has been deleted.`);
+        toast.error(response.data.message || "Failed to delete department");
       } else {
-        // Handle the case where the API indicates failure
-        alert(response.message || "Failed to delete department.");
+        toast.success(`Department "${departmentName}" deleted successfully`);
       }
     } catch (error) {
-      // Handle error (show error message or similar)
-      alert("Failed to delete department.");
+      console.error(
+        "Error deleting department: ",
+        error.response || error.message
+      );
+      toast.error("Error: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -791,12 +777,12 @@ function ManageAsset() {
                   size="small"
                   label="Department"
                   value={newDepartmentName} // Bind value to newDepartmentName state
-                  onChange={(e) => setNewDepartmentName(e.target.value)} // Update state on change
+                  onChange={(e) => setNewDepartmentName(e.target.value)}
                   fullWidth
                 />
                 <Button
                   variant="contained"
-                  onClick={handleAddOrUpdateDepartment} // Use combined function for both adding and updating
+                  onClick={handleAddOrUpdateDepartment}
                   size="small"
                   sx={{
                     backgroundColor: "green",
@@ -806,10 +792,8 @@ function ManageAsset() {
                   }}
                 >
                   {isEditing ? "UPDATE" : "ADD"}{" "}
-                  {/* Change button label based on mode */}
                 </Button>
               </Box>
-
               <Grid container>
                 <TableContainer
                   component={Paper}
@@ -835,32 +819,27 @@ function ManageAsset() {
                       ) : departments && departments.length > 0 ? (
                         departments.map((departmentName, index) => (
                           <TableRow key={index}>
-                            {/* Numbering and Department Name */}
                             <StyledTableCell>
                               <Box
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                {/* Department Name with Numbering */}
                                 <span>
                                   {index + 1}. {departmentName}
                                 </span>
-
-                                {/* Icon Buttons */}
                                 <Box display="flex">
                                   <IconButton
                                     onClick={() => handleEditClick(index)}
                                   >
                                     {" "}
-                                    {/* Update edit button */}
                                     <EditIcon fontSize="medium" />
-                                  </IconButton>
+                                  </IconButton>{" "}
                                   <IconButton
                                     sx={{
                                       color: "red",
                                       "&:hover": { color: "darkred" },
-                                      marginRight: "8px", // Add some spacing between buttons
+                                      marginRight: "8px",
                                     }}
                                     onClick={() =>
                                       handleDeleteClick(departmentName)
@@ -1219,9 +1198,6 @@ function ManageAsset() {
                                     "&:hover": { color: "darkred" },
                                     marginRight: "8px",
                                   }}
-                                  onClick={() =>
-                                    handleDeleteClick(row.departmentName)
-                                  }
                                 >
                                   <DeleteForeverIcon fontSize="medium" />
                                 </IconButton>
