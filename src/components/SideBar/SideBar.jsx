@@ -165,7 +165,7 @@ export default function Sidebar({
     {
       name: "Technical Support",
       icon: <SupportAgentIcon sx={{ color: "black" }} />,
-      path: "/dashboard/technicalSupport",
+      path: "/dashboard/TechnicalSupport",
       roles: ["owner", "manager", "employee"],
     },
   ];

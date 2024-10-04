@@ -34,7 +34,7 @@ const SingleWell = lazy(() =>
 );
 const AddWell = lazy(() => import("./Pages/WellMaster/AddWell/AddWell.jsx"));
 const ManageAsset = lazy(() =>
-  import("./Pages/Dashboard/ManageAsset.jsx/ManageAsset.jsx")
+  import("./Pages/Dashboard/ManageAsset/ManageAsset.jsx")
 );
 const DeviceManage = lazy(() =>
   import("./Pages/Dashboard/DeviceManage/DeviceManage.jsx")
@@ -51,6 +51,10 @@ const Approval = lazy(() =>
 );
 const SuperAdmin = lazy(() =>
   import("./Pages/Dashboard/Admin/SuperAdmin.jsx")
+);
+
+const TechnicalSupport = lazy(() =>
+  import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
 );
 
 function App() {
@@ -74,6 +78,7 @@ function App() {
     { path: "AddDevice", element: <AddDevice /> },
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
+    { path: "TechnicalSupport", element: <TechnicalSupport /> },
   ];
 
   // Add role-specific routes

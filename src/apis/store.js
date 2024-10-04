@@ -4,7 +4,6 @@ import {
   checkAuthReducer,
   forgotAuthReducer,
   registerAuthReducer,
-  oragnizationAuthReducer,
 } from "./authSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -22,7 +21,6 @@ const store = configureStore({
     registerAuth: registerAuthReducer,
     checkStatusAuth: checkAuthReducer,
     forgotAuth: forgotAuthReducer,
-    oragnizationAuth: oragnizationAuthReducer,
   },
 });
 

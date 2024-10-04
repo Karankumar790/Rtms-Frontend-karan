@@ -172,10 +172,6 @@ function Signup() {
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
-
-               <Typography variant="h4">Registrationallllll</Typography>
-                <Typography variant="h4">Registrations</Typography>
-
                 <Typography variant="h6" color="#800000">
                   Create a New RTMS Account
                 </Typography>
@@ -264,7 +260,6 @@ function Signup() {
                           value={formValues.organizationName}
                           onChange={handleOrganizationChange}
                           label="Organization"
-
                         >
                           {Array.isArray(organizations) &&
                           organizations.length > 0 ? (
@@ -284,41 +279,6 @@ function Signup() {
                         </Select>
                       </FormControl>
                     </Box>
-
-                          name="organizationName"
-                          variant="standard"
-                          color="info"
-                          fullWidth
-                          className="custom-textfield"
-                          value={formValues?.organizationName}
-                          onChange={handleUsernameChange}
-                        />
-                      </Box>
-
-                          name="organizationName"
-                          value={formValues.organizationName}
-                          onChange={handleOrganizationChange}
-                          label="Organization"
-                        >
-                          {Array.isArray(organizations) &&
-                          organizations.length > 0 ? (
-                            organizations.map((org) => (
-                              <MenuItem
-                                key={org._id}
-                                value={org.organizationName}
-                              >
-                                {org.organizationName}
-                              </MenuItem>
-                            ))
-                          ) : (
-                            <MenuItem value="">
-                              No organizations available
-                            </MenuItem>
-                          )}
-                        </Select>
-                      </FormControl>
-                    </Box>
-
 
                     {/* Department Dropdown */}
                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
