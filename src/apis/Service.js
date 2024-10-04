@@ -77,7 +77,7 @@ export const forgotPassword = async (formData) => {
   }
 };
 
-//reset password Api
+//reset password Apis
 export const resetPassword = async (formData) => {
   try {
     const response = await axios.post(`${USER_API}/reset-password`, formData);
