@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./apis/PrivateRoutes.jsx";
 
-// Lazy loaded components
+// Lazy loaded componentes in lazy
 const Home = lazy(() => import("./Pages/Dashboard/Home/Home.jsx"));
 const Login = lazy(() => import("./Pages/Login/Login.jsx"));
 const Signup = lazy(() => import("./Pages/Signup/Signup.jsx"));
