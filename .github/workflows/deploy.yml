@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Trigger Build
-      run: curl "http://89.116.33.204:8010?key=77827384hj23jh4324hk2348923u4jk23489234ho2342834uo&service=ongc.rtms.foxboro.in"
+      run: curl "http://89.116.33.204:8010?key=77827384h00000j23jh4324hk2348923u4jk23489234ho2342834uo&service=ongc.rtms.foxboro.in"

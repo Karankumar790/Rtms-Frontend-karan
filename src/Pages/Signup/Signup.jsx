@@ -172,10 +172,6 @@ function Signup() {
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
-
-               <Typography variant="h4">Registrationallllll</Typography>
-                <Typography variant="h4">Registrations</Typography>
-
                 <Typography variant="h6" color="#800000">
                   Create a New RTMS Account
                 </Typography>
@@ -259,6 +255,8 @@ function Signup() {
                         </InputLabel>
                         <Select
                           labelId="organization-label"
+
+
                           name="organizationName"
                           value={formValues.organizationName}
                           onChange={handleOrganizationChange}
