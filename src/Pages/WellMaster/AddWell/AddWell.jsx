@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import Input from '@mui/joy/Input';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-// import map from '../../../../public/assets/map2.png';
 import { Box } from '@mui/system';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
+import { Link } from 'react-router-dom';
 
 
 const data = [
@@ -16,7 +16,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'GIP(kg)',
+    Parameter: 'GIP (kg/Cm²)',
     Condition1: '',
     Description1: '',
 
@@ -27,9 +27,8 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'CHP(kg)',
+    Parameter: 'CHP (kg/Cm²)',
     Condition1: '',
-    Description1: '',
 
   },
   {
@@ -38,20 +37,8 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'THP(kg)',
+    Parameter: 'THP (kg/Cm²)',
     Condition1: '',
-    Description1: '',
-
-  },
-  {
-    employeeId: '04',
-    NormalAlert: '',
-    CriticalAlert: '',
-    Condition: '',
-    Description: '',
-    Parameter: 'Battery %',
-    Condition1: '',
-    Description1: '',
 
   },
   {
@@ -60,33 +47,11 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'Solar Power(V)',
+    Parameter: 'Solar Voltage',
     Condition1: '',
-    Description1: '',
 
   },
-  {
-    employeeId: '06',
-    NormalAlert: '',
-    CriticalAlert: '',
-    Condition: '',
-    Description: '',
-    Parameter: 'Communication',
-    Condition1: '',
-    Description1: '',
 
-  },
-  {
-    employeeId: '07',
-    NormalAlert: '',
-    CriticalAlert: '',
-    Condition: '',
-    Description: '',
-    Parameter: 'CPU Temperature',
-    Condition1: '',
-    Description1: '',
-
-  },
 ]
 
 function AddWell() {
@@ -103,35 +68,134 @@ function AddWell() {
     )
 
     console.log('editData', editData)
-
     setEmployeeData(editData)
+  }
+
+  const [formValues, setFormValues] = useState({
+    parameter1: "",
+    parameter2: "",
+    parameter3: "",
+    parameter4: "",
+    parameter5: "",
+    parameter6: "",
+  })
+
+  const handleChangeParameter = (event) => {
+    const { name, value } = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: value
+    })
   }
 
   return (
     <div>
       <Paper>
-      <Grid container>
+        <Grid container>
           <IconButton>
-            <Brightness5Icon sx={{ fontSize: "40px", color: 'red' }} />
+            <Brightness5Icon sx={{ fontSize: "40px", color: "red" }} />
           </IconButton>
-          <Typography variant='h4' mt={1}>Add New Well</Typography>
+          <Typography variant="h4" mt={1}>
+            Add New Well
+          </Typography>
         </Grid>
-        <Grid container p={1.7} sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Well Installation" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Well Location" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.8}><TextField fullWidth size='small' label="Land Mark" variant="outlined" /></Grid>
+        <Grid
+          container
+          p={1.7}
+          spacing={2}
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Location"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Installation"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Well Type"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Well Number"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Landmark"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Latitude"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Longitude"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Description"
+              variant="outlined"
+            />
+          </Grid>
+          {/* <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
+            sx={{
+              backgroundColor: 'green',   // Change button color to green
+              '&:hover': {
+                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              },
+              fontSize: '16px',
+            }}>Submit</Button></Grid> */}
         </Grid>
       </Paper>
 
-      <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
-        <Grid container>
+
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+        }}
+        mt={1}
+        p={1}
+      >
+      <Grid container>
           <IconButton>
             <NotificationsIcon sx={{ fontSize: "40px", color: 'red' }} />
           </IconButton>
-          <Typography variant='h4' mt={1}>Notification History</Typography>
+          <Typography variant='h4' mt={1}>Alarm Setting</Typography>
         </Grid>
         <Grid item >
           <Table>
@@ -180,7 +244,6 @@ function AddWell() {
                       </Select>
                     </FormControl>
                   </TableCell>
-
                   <TableCell>
                     <TextField
                       name="Description"
@@ -221,7 +284,7 @@ function AddWell() {
                   </TableCell>
                   <TableCell>
                     <TextField
-                      name="Description"
+                      name="Description1"
                       value={Description1}
                       onChange={(e) => onChangeInput(e, employeeId)}
                       variant="outlined"
@@ -235,23 +298,206 @@ function AddWell() {
             </TableBody>
           </Table>
         </Grid>
-        <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }} gap={2}>
-          <Button variant='contained'
+        <Paper sx={{ mt: '1' }}>
+          <Grid container spacing={0.8} p={2}>
+            <Grid container display={'flex'} gap={2.5} p={2}>
+              {/* Row 1: Flowing */}
+              <Grid item lg={1} >
+                <Typography mt={2}>Flowing</Typography>
+              </Grid>
+              <Grid item lg={9} display={'flex'} gap={3}>
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small" variant="outlined">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter1"
+                      value={formValues.parameter1}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={3}>GIP</MenuItem>
+                      <MenuItem value={1}>THP</MenuItem>
+                      <MenuItem value={2}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">comparison</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter3"
+                      value={formValues.parameter3}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1} sx={{ fontSize: "20px" }}>
+                        &gt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        &lt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        =
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter2"
+                      value={formValues.parameter2}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1}>GIP</MenuItem>
+                      <MenuItem value={2}>THP</MenuItem>
+                      <MenuItem value={3}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Typography>Tolerance(%)</Typography>
+                  <TextField variant='outlined' size="small" fullWidth />
+                </Grid>
+              </Grid>
+            </Grid>
+            {/* Row 2: Not Flowing */}
+
+            <Grid container display={'flex'} gap={2.5} p={2}>
+              <Grid item lg={1}>
+                <Typography mt={2}>Not Flowing</Typography>
+              </Grid>
+              <Grid item lg={9} display={'flex'} gap={3}>
+
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter4"
+                      value={formValues.parameter4}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1}>GIP</MenuItem>
+                      <MenuItem value={2}>THP</MenuItem>
+                      <MenuItem value={3}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">comparison</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter5"
+                      value={formValues.parameter5}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1} sx={{ fontSize: "20px" }}>
+                        &gt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        &lt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        =
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter6"
+                      value={formValues.parameter6}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1}>GIP</MenuItem>
+                      <MenuItem value={2}>THP</MenuItem>
+                      <MenuItem value={3}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Typography>Tolerance(%)</Typography>
+                  <TextField variant='outlined' size="small" fullWidth />
+                </Grid>
+              </Grid>
+
+            </Grid>
+          </Grid>
+        </Paper>
+        <Grid
+          item
+          p={2}
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+          gap={2}
+        >
+          <Button
+            variant="contained"
             sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
-                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              backgroundColor: "green", // Change button color to green
+              "&:hover": {
+                backgroundColor: "darkgreen", // Optional: Change color on hover
               },
-              fontSize: '16px',
-            }}> Add Well</Button>
-          <Button variant='contained'
+              fontSize: "16px",
+            }}
+          >
+            {" "}
+            Add Well
+          </Button>
+          <Button
+            variant="contained"
             sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
-                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              backgroundColor: "green", // Change button color to green
+              "&:hover": {
+                backgroundColor: "darkgreen", // Optional: Change color on hover
               },
-              fontSize: '16px',
-            }}>Cancel</Button>
+              fontSize: "16px",
+            }}
+          >
+            Cancel
+          </Button>
           {/* <Button variant='contained'
               sx={{
                 backgroundColor: 'green',   // Change button color to green
@@ -262,10 +508,8 @@ function AddWell() {
               }}> Delete</Button> */}
         </Grid>
       </Grid>
-
-
     </div>
-  )
+  );
 }
 
-export default AddWell
+export default AddWell;

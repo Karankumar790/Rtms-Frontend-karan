@@ -56,7 +56,7 @@ function PopUp() {
                         <form onSubmit={handleSubmit}>
                             <Box item mt={2}>
                                 <Typography variant="h5" fontSize="x-large" textAlign="center">
-                                    Enter Employee ID.
+                                    Enter Your Employee ID.
                                 </Typography>
                             </Box>
 
@@ -70,6 +70,7 @@ function PopUp() {
                                     variant="outlined"
                                     size="medium"
                                     fullWidth
+                                    required
                                 />
                             </Box>
                             <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
