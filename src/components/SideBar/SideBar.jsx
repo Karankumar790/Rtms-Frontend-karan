@@ -255,10 +255,8 @@ import WellmasterIcon from "@mui/icons-material/Settings";
 import WellmonitorIcon from "@mui/icons-material/Search";
 import GeoIcon from "@mui/icons-material/Place";
 import ongc_logo from "/assets/ongc2.png";
-
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import { useSelector } from "react-redux";
 
@@ -319,7 +317,6 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role || "guest");
 
   const menuItems = [
-
     {
       name: "Admin",
       icon: <AdminPanelSettingsIcon sx={{ color: "black" }} />,
@@ -345,14 +342,14 @@ export default function Sidebar({
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Node Manager",
-      icon: <Networkicon sx={{ color: "black" }} />,
+      name: "Manage Node",
+      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Device Manager",
-      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
+      name: "Manage Gateway",
+      icon: <Networkicon sx={{ color: "black" }} />,
       path: "/dashboard/Network",
       roles: ["owner", "manager", "employee"],
     },
@@ -398,6 +395,7 @@ export default function Sidebar({
       path: "/dashboard/message",
       roles: ["owner", "manager"],
     },
+
   ];
 
   const filteredMenuItems = menuItems.filter((item) =>

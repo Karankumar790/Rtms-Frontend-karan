@@ -172,6 +172,7 @@ function Signup() {
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
+
                 <Typography variant="h6" color="darkgreen">
                   Create a New RTMS Account
                 </Typography>
