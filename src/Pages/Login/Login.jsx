@@ -65,7 +65,6 @@ function Login() {
 
   return (
     <PageContainer className="login-form-bg-image" showfooter='true' showheader='true' >
-
       <Grid item display={'flex'} alignItems={'center'} height="100%" padding={'5%'}>
         <Card style={{backgroundColor:'#e9f4f7'}}>
           <CardContent  orientation="vertical">
@@ -193,4 +192,3 @@ function Login() {
 }
 
 export default Login;
-

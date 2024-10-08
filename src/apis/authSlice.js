@@ -51,6 +51,18 @@ const forgotInitialState = {
   isAuthenticated: false,
 };
 
+// oragnization
+const oragnizationInitialState = {
+  organizationName: "",
+  username: "",
+  password: "",
+  email: "",
+  contactNumber: "",
+  emailOtp: "",
+  isAuthenticated: false,
+};
+
+
 //for login
 const authSlice = createSlice({
   name: "auth",

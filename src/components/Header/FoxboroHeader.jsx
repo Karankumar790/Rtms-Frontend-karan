@@ -1,13 +1,16 @@
 import React from "react";
 import logo from "/assets/logo.svg";
+import MQTT1 from "/assets/MQTT1.png";
 import { Grid, Typography, Box } from "@mui/material";
+import Technical from "/assets/Technical.png";
+import { Link } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function Header() {
   return (
     <>
-      <Grid container bgcolor="#023861" color="#fff" p={0.5}>
+      <Grid container bgcolor="#023861" color="#fff" p={1}>
         <Grid
           item
           md={8}
@@ -18,9 +21,9 @@ function Header() {
           alignItems="center"
         >
           <Box>
-            <img src={logo} style={{ width: "6rem", height: "6rem" }} />
+            <img src={logo} style={{ width: "5rem", height: "5rem" }} />
           </Box>
-{/* Foxboro */}
+
           <Typography sx={{
             fontSize: {
               xs: '110%', // small screens
@@ -29,7 +32,7 @@ function Header() {
               lg: 'x-large', // extra-large screens
             }
           }}>
-            Oil and Natrual Gas Corporation Limited
+            Foxboro Instrument Company
             <Typography sx={{
               fontSize: {
                 xs: 'small', // small screens
@@ -43,7 +46,7 @@ function Header() {
           </Typography>
         </Grid>
 
-        {/* <Grid
+        <Grid
           item
           md={4}
           lg={4}
@@ -55,7 +58,8 @@ function Header() {
               <AccountCircleIcon sx={{ color: 'white', fontSize: '300%' }} />
             </Box>
           </Box>
-        </Grid> */}
+
+        </Grid>
       </Grid>
     </>
   );
