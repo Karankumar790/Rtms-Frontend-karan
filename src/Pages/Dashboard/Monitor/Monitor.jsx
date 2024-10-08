@@ -267,16 +267,15 @@ function Monitor() {
           <Table aria-label="customized table">
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }}>Well No.</StyledTableCell>
+              <StyledTableCell sx={{ fontSize: '18px' }}>Well No.</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">GIP (kg)</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">CHP (kg)</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">THP (kg)</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Battery %</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Solar Power (V)</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Communication </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Flow Status</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Sensor Battery</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Solar Voltage</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Communication </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Last Update</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Alarm</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -293,8 +292,6 @@ function Monitor() {
                   <StyledTableCell align="right">{row.protein}</StyledTableCell>
                   <StyledTableCell align="right">{row.protein}</StyledTableCell>
                   <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-
                 </StyledTableRow>
               ))}
             </TableBody>

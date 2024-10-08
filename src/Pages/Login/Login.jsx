@@ -67,13 +67,13 @@ function Login() {
   return (
     <PageContainer className="login-form-bg-image" showfooter='true' showheader='true' >
       <Grid item display={'flex'} alignItems={'center'} height="100%" padding={'5%'}>
-        <Card >
+        <Card style={{backgroundColor:'#e9f4f7'}}>
           <CardContent orientation="vertical">
             <Grid item sx={{ textAlign: "center" }} md={12} sm={12} xs={12}>
               <Typography pt={2}  sx={{fontSize:{xs :'xx-large', sm:'xxx-large', md:'xxx-large', lg:'xxx-large'}}} >
                 Welcome
               </Typography>
-              <Typography fontSize="medium" sx={{fontSize:{xs :'medium', sm:'large', md:'large', lg:'large'}}} color="#800000">
+              <Typography fontSize="medium" sx={{fontSize:{xs :'medium', sm:'large', md:'large', lg:'large'}}} color="darkgreen">
                 Real Time Well Monitoring System
               </Typography>
             </Grid>
@@ -99,7 +99,9 @@ function Login() {
                       variant="standard"
                       value={formValues?.username}
                       onChange={handleInputs}
+                      required
                       fullWidth
+                      required
                     />
                   </Grid>
                   <Grid
@@ -123,7 +125,9 @@ function Login() {
                       label="Password"
                       value={formValues.password}
                       onChange={handleInputs}
+                      required
                       fullWidth
+                      required
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
