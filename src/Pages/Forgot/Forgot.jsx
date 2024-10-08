@@ -8,22 +8,24 @@ import { setForgotDetails } from "../../apis/authSlice";
 import { toast } from "react-toastify";
 
 export default function Forgot() {
+  // State for form inputs
   const [formValues, setFormValues] = useState({ email: "" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Handle input changes
   const handleInputs = (e) => {
-    setFormValues((pre) => ({ ...pre, [e.target?.name]: e.target?.value }));
+    setFormValues((prev) => ({ ...prev, [e.target?.name]: e.target?.value }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //integration
     try {
       const response = await forgotPassword(formValues);
       if (response.success) {
-        //store data in redux store
+        // Store data in redux
         dispatch(
           setForgotDetails({
             email: formValues.email,
@@ -93,4 +95,4 @@ export default function Forgot() {
       </Paper>
     </PageContainer>
   );
-};
+}

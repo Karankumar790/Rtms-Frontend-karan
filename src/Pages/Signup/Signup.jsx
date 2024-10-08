@@ -259,6 +259,7 @@ function Signup() {
                         </InputLabel>
                         <Select
                           labelId="organization-label"
+
                           name="organizationName"
                           required
                           value={formValues.organizationName}
