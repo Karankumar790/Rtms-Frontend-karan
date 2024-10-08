@@ -11,20 +11,20 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PrintReportIcon from "@mui/icons-material/Print";
 import DeviceManagerIcon from "@mui/icons-material/Memory";
 import ComplaintIcon from "@mui/icons-material/AccessAlarm";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Networkicon from "@mui/icons-material/CellTower";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, Box } from "@mui/material"; // Import Box
 import WellmasterIcon from "@mui/icons-material/Settings";
 import WellmonitorIcon from "@mui/icons-material/Search";
 import GeoIcon from "@mui/icons-material/Place";
 import ongc_logo from "/assets/ongc2.png";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import { useSelector } from "react-redux";
 
@@ -82,11 +82,9 @@ export default function Sidebar({
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const role = useSelector((state) => state.auth.role);
+  const role = useSelector((state) => state.auth.role || "guest");
 
-  // Define your menu items here
-   // Define your menu items here
-   const menuItems = [
+  const menuItems = [
     {
       name: "Admin",
       icon: <AdminPanelSettingsIcon sx={{ color: "black" }} />,
@@ -112,14 +110,14 @@ export default function Sidebar({
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Node Manager",
-      icon: <Networkicon sx={{ color: "black" }} />,
+      name: "Manage Node",
+      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Device Manager",
-      icon: <DeviceManagerIcon sx={{ color: "black" }} />,
+      name: "Manage Gateway",
+      icon: <Networkicon sx={{ color: "black" }} />,
       path: "/dashboard/Network",
       roles: ["owner", "manager", "employee"],
     },
@@ -159,17 +157,10 @@ export default function Sidebar({
       path: "/dashboard/message",
       roles: ["owner", "manager"],
     },
-    {
-      name: "Technical Support",
-      icon: <SupportAgentIcon sx={{ color: "black" }} />,
-      path: "/dashboard/technicalSupport",
-      roles: ["owner", "manager", "employee"],
-    },
   ];
 
-  // Filter menu items based on the user's role
   const filteredMenuItems = menuItems.filter((item) =>
-    item.roles?.includes(role)
+    item.roles.includes(role)
   );
 
   const handleListItemClick = () => {
@@ -178,16 +169,13 @@ export default function Sidebar({
     }
   };
 
+
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
         <img src={ongc_logo} alt="logo" width="83%" />
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
+          {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
       <Divider />
@@ -198,35 +186,71 @@ export default function Sidebar({
           </ListItem>
         ) : (
           filteredMenuItems.map((item, index) => (
-            <Link
-              key={index}
-              to={item.path}
-              style={{ textDecoration: "none", color: "black" }}
-              onClick={handleListItemClick}
-            >
-              <ListItem disablePadding>
-                <ListItemButton
-                  sx={{ justifyContent: open ? "initial" : "center" }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
+            <React.Fragment key={index}>
+              <Link
+                to={item.path}
+                style={{ textDecoration: "none", color: "black" }}
+                onClick={handleListItemClick}
+              >
+                <ListItem disablePadding>
+                  <ListItemButton
+                    sx={{ justifyContent: open ? "initial" : "center" }}
                   >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.name}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </Link>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.name}
+                      sx={{ opacity: open ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+              {/* Add a divider after certain items */}
+              {["Dashboard", "Manage Gateway", "Print Report"].includes(item.name) && <Divider />}
+            </React.Fragment>
           ))
         )}
       </List>
+
+      {/* Box to push the Technical Support to the bottom */}
+      <Box sx={{ flexGrow: 1 }} />
+      <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
+        <Divider />
+        <List>
+          <Link
+            to="/dashboard/technicalSupport"
+            style={{ textDecoration: "none", color: "black" }}
+            onClick={handleListItemClick}
+          >
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{ justifyContent: open ? "initial" : "center" }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <SupportAgentIcon sx={{ color: "black" }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Technical Support"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        </List>
+      </Box>
     </Drawer>
   );
 }

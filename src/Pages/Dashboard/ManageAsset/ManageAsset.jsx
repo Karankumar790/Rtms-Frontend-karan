@@ -111,43 +111,92 @@ function ManageAsset() {
             <AssetsIcon sx={{ fontSize: 30, color: "green " }} />
           </IconButton>
           <Typography variant="h4" mt={1} >Organization </Typography>
+          <Grid container spacing={2} padding={2}>
+            {/* Organization Name Section */}
+            <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
+              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                Display Organization Name
+              </Typography>
+              <Grid item xs={12} sm={6} md={4} lg={4} >
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+            </Grid>
 
-          <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={12}>
-              <Grid container spacing={1} >
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">Address</Typography>
+            {/* Subtitle Name Section */}
+            <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
+              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                Display Subtitle Name
+              </Typography>
+              <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
+                <TextField variant="outlined" size="small" fullWidth value={""} />
+              </Grid>
+            </Grid>
+
+            {/* Logo Upload Section */}
+            <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
+              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                Upload Logo
+              </Typography>
+              <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={2}>
+                <Button variant="outlined" size="small" component="label" fullWidth>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    name="idCardPhoto"
+                    hidden
+
+                  />
+                  Upload Logo
+                </Button>
+              </Grid>
+
+            </Grid>
+          </Grid>
+
+          {/* Address Details Section */}
+          <Grid container spacing={3} padding={2}>
+            <Grid item xs={12}>
+              <Grid container spacing={1}>
+                {/* Address Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>Address</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">City</Typography>
+                {/* City Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>City</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">State</Typography>
+                {/* State Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>State</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">Country</Typography>
+                {/* Country Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>Country</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">Pin Code</Typography>
+                {/* Pin Code Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>Pin Code</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">Phone</Typography>
+                {/* Phone Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>Phone</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">Fax</Typography>
+                {/* Fax Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>Fax</Typography>
                   <TextField variant="outlined" size="small" fullWidth value={""} />
                 </Grid>
-                <Grid item xs={12} sm={3} md={3} lg={3}>
-                  <Typography variant="h6">Email </Typography>
+                {/* Email Field */}
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>Email</Typography>
                   <TextField variant="outlined" size="small" fullWidth />
                 </Grid>
-
               </Grid>
             </Grid>
           </Grid>
@@ -157,9 +206,9 @@ function ManageAsset() {
       {/* ------------Input textfield for table------------------- */}
       <Card sx={{ my: 2 }}>
         <CardContent>
-          <Grid container spacing={2} mt={0.1}>
+          <Grid container spacing={2} gap={4} mt={0.1}>
             {/* ------------------------ADD DEPARTMENT------------------------------ */}
-            <Grid item xs={12} sm={3.5} md={3.5} lg={2.5} gap={1} display='flex' flexDirection={'column'} >
+            <Grid item xs={12} sm={3.5} md={3.5} lg={12} gap={1} display='flex' flexDirection={'column'} >
               <Typography variant="h5"> Add Department</Typography>
               <Box display='flex' gap={1}>
                 <TextField variant="outlined" size="small" label="Department" inputRef={inputRef} fullWidth />
@@ -177,10 +226,10 @@ function ManageAsset() {
               <Grid container>
                 <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
                   <Table aria-label="customized table" stickyHeader>
-                    <TableHead >
-                      <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Department</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
+                    <TableHead sx={{ backgroundColor: '#8C000B' }}>
+                      <TableRow sx={{ backgroundColor: '#8C000B' }}>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '15%', backgroundColor: '#8C000B' }}>Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '10%', backgroundColor: '#8C000B' }}></StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -199,7 +248,7 @@ function ManageAsset() {
             </Grid>
 
             {/* ------------------------ADD POSITION------------------------------ */}
-            <Grid item xs={12} sm={3.5} md={3.5} lg={3.5} gap={1} display='flex' flexDirection={'column'}>
+            <Grid item xs={12} sm={3.5} md={3.5} lg={12} gap={1} display='flex' flexDirection={'column'}>
               <Typography variant="h5"> Add Position</Typography>
               <Box display='flex' gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -238,8 +287,8 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '25%' }}>Department</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '25%' }}>Position</StyledTableCell>
+                        {/* <StyledTableCell sx={{ fontSize: '18px', width: '25%' }}>Department</StyledTableCell>
+                        <StyledTableCell sx={{ fontSize: '18px', width: '25%' }}>Position</StyledTableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -259,7 +308,7 @@ function ManageAsset() {
             </Grid>
             {/* ------------------------APPROVAL CHAIN------------------------------ */}
 
-            <Grid item xs={12} sm={5} md={5} lg={6} gap={1} display='flex' flexDirection={'column'}>
+            <Grid item xs={12} sm={5} md={5} lg={12} gap={1} display='flex' flexDirection={'column'}>
               <Typography variant="h5"> Approval Chain</Typography>
               <Box display='flex' gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -300,10 +349,10 @@ function ManageAsset() {
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead >
                       <TableRow  >
-                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Department</StyledTableCell>
+                        {/* <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Department</StyledTableCell>
                         <StyledTableCell align="left" sx={{  width: '15%' }}>Action</StyledTableCell>
                         <StyledTableCell align="left" sx={{ fontSize: '18px', width: '15%' }}>Level-1</StyledTableCell>
-                        <StyledTableCell align="left" sx={{ fontSize: '18px', width: '15%' }}>Level-2</StyledTableCell>
+                        <StyledTableCell align="left" sx={{ fontSize: '18px', width: '15%' }}>Level-2</StyledTableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -354,11 +403,11 @@ function ManageAsset() {
                 </Button>
               </Box>
             </Grid>
-          
+
           </Grid>
         </CardContent>
       </Card>
-         </div >
+    </div >
   );
 }
 

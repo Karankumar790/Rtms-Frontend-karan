@@ -121,8 +121,8 @@ function NotificationHistory() {
         </IconButton>
         <Typography variant='h4' mt={1}>Notification History</Typography>
       </Grid>
-      <Grid container spacing={3} pt={3} >
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+      <Grid container spacing={3} pt={3} >     
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth>
             <TextField
               fullWidth
@@ -154,7 +154,7 @@ function NotificationHistory() {
           </FormControl>
 
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth size="small">
             <TextField
               fullWidth
@@ -185,12 +185,17 @@ function NotificationHistory() {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth size="small">
             <TextField variant='outlined' size='small' label='Notification No.' />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
+          <FormControl fullWidth size="small">
+            <TextField variant='outlined' size='small' label='Well Number' />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
             <Select
@@ -209,9 +214,7 @@ function NotificationHistory() {
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
-      <Grid container display={'flex'} justifyContent={'end'} >
-        <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>
+        <Grid item lg={2} md={3} sm={6} xs={12}>
           <Button variant='contained'
             sx={{
               backgroundColor: 'green',   // Change button color to green
@@ -225,6 +228,9 @@ function NotificationHistory() {
           </Button>
         </Grid>
       </Grid>
+      <Grid container display={'flex'} pt={1} py={1}>
+          <Typography variant='h4' mt={1}  sx={{color:'darkgrey'}}>Records Found:</Typography>
+      </Grid>
       <Grid container md={12}
         lg={12}
         sm={5}
@@ -234,12 +240,13 @@ function NotificationHistory() {
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }} align='left'>Complain No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="left">Notification No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Raiser Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Taker Name</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align='left'>Location</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installtion</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Number</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px' }} align="center">Description</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Status</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -254,6 +261,7 @@ function NotificationHistory() {
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '25%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '25%' }}></StyledTableCell>  
 
 
                 </StyledTableRow>

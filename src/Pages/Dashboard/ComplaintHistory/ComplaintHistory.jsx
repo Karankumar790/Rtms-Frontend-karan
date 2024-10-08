@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ComplaintIcon from '@mui/icons-material/AccessAlarm';
+
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -159,7 +160,7 @@ function ComplaintHistory() {
         <Typography variant='h4' mt={1}>Complaint History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3}>
-        <Grid item sm={6} md={3} xs={12} lg={3}>
+        <Grid item sm={6} md={6} xs={12} lg={2}>
           <FormControl fullWidth>
             <TextField
               fullWidth
@@ -191,7 +192,7 @@ function ComplaintHistory() {
           </FormControl>
 
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth size="small">
             <TextField
               fullWidth
@@ -222,12 +223,17 @@ function ComplaintHistory() {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth>
             <TextField size="small" label='Complaint No.' />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={3}>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
+          <FormControl fullWidth>
+            <TextField size="small" label='Well Number' />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={2}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
             <Select
@@ -246,9 +252,7 @@ function ComplaintHistory() {
             </Select>
           </FormControl>
         </Grid>
-      </Grid>
-      <Grid container display={'flex'} justifyContent={'end'} >
-        <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>
+        <Grid item lg={2} md={6} sm={6} xs={12}>
           <Button variant='contained'
             sx={{
               backgroundColor: 'green',   // Change button color to green
@@ -262,6 +266,9 @@ function ComplaintHistory() {
           </Button>
         </Grid>
       </Grid>
+      <Grid container display={'flex'} pt={1} py={1}>
+        <Typography variant='h4' mt={1} sx={{color:'darkgrey'}}>Records Found:</Typography>
+      </Grid>
       {/* -----------------------------------------table for Desktop-------------------------- */}
       <Grid container md={12}
         lg={12}
@@ -274,10 +281,12 @@ function ComplaintHistory() {
               <TableRow  >
                 <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Complain No.</StyledTableCell>
                 <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Data/Time</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Notification No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Raiser Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Taker Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '25%' }} align="center">Description</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Sender Name</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Department</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Receiver Name</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Department</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="center">Description</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="center">Status</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -290,6 +299,8 @@ function ComplaintHistory() {
                   <StyledTableCell align="left">5/6/2024</StyledTableCell>
                   <StyledTableCell align="left">gbz</StyledTableCell>
                   <StyledTableCell align="left">yes</StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                 </StyledTableRow>
               ))}

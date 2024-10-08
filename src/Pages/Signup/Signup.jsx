@@ -166,13 +166,13 @@ function Signup() {
 
   return (
     <PageContainer className="bgImg" showheader="true" showfooter="true">
-      <Grid container>
+      <Grid container  display={'flex'} alignContent={'center'} height={'100%'}>
         <Grid item padding={2} width={600}>
           <Card>
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
-                <Typography variant="h6" color="#800000">
+                <Typography variant="h6" color="darkgreen">
                   Create a New RTMS Account
                 </Typography>
               </Grid>

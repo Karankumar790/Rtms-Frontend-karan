@@ -42,16 +42,6 @@ const data = [
 
   },
   {
-    employeeId: '04',
-    NormalAlert: '',
-    CriticalAlert: '',
-    Condition: '',
-    Description: '',
-    Parameter: ' Low Battery',
-    Condition1: '',
-
-  },
-  {
     employeeId: '05',
     NormalAlert: '',
     CriticalAlert: '',
@@ -78,9 +68,27 @@ function AddWell() {
     )
 
     console.log('editData', editData)
-
     setEmployeeData(editData)
   }
+
+  const [formValues, setFormValues] = useState({
+    parameter1: "",
+    parameter2: "",
+    parameter3: "",
+    parameter4: "",
+    parameter5: "",
+    parameter6: "",
+  })
+
+  const handleChangeParameter = (event) => {
+    const { name, value } = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: value
+    })
+  }
+
+
 
   return (
     <div>
@@ -99,14 +107,15 @@ function AddWell() {
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Landmark" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Description" variant="outlined" /></Grid>
+          {/* <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
             sx={{
               backgroundColor: 'green',   // Change button color to green
               '&:hover': {
                 backgroundColor: 'darkgreen', // Optional: Change color on hover
               },
               fontSize: '16px',
-            }}>Submit</Button></Grid>
+            }}>Submit</Button></Grid> */}
         </Grid>
       </Paper>
       <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
@@ -163,7 +172,6 @@ function AddWell() {
                       </Select>
                     </FormControl>
                   </TableCell>
-
                   <TableCell>
                     <TextField
                       name="Description"
@@ -218,6 +226,175 @@ function AddWell() {
             </TableBody>
           </Table>
         </Grid>
+        <Paper sx={{ mt: '1' }}>
+          <Grid container spacing={0.8} p={2}>
+            <Grid container display={'flex'} gap={2.5} p={2}>
+              {/* Row 1: Flowing */}
+              <Grid item lg={1} >
+                <Typography mt={2}>Flowing</Typography>
+              </Grid>
+              <Grid item lg={9} display={'flex'} gap={3}>
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small" variant="outlined">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter1"
+                      value={formValues.parameter1}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={3}>GIP</MenuItem>
+                      <MenuItem value={1}>THP</MenuItem>
+                      <MenuItem value={2}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">comparison</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter3"
+                      value={formValues.parameter3}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1} sx={{ fontSize: "20px" }}>
+                        &gt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        &lt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        =
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter2"
+                      value={formValues.parameter2}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1}>GIP</MenuItem>
+                      <MenuItem value={2}>THP</MenuItem>
+                      <MenuItem value={3}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Typography>Tolerance(%)</Typography>
+                  <TextField variant='outlined' size="small" fullWidth />
+                </Grid>
+              </Grid>
+            </Grid>
+            {/* Row 2: Not Flowing */}
+
+            <Grid container display={'flex'} gap={2.5} p={2}>
+              <Grid item lg={1}>
+                <Typography mt={2}>Not Flowing</Typography>
+              </Grid>
+              <Grid item lg={9} display={'flex'} gap={3}>
+
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter4"
+                      value={formValues.parameter4}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1}>GIP</MenuItem>
+                      <MenuItem value={2}>THP</MenuItem>
+                      <MenuItem value={3}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">comparison</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter5"
+                      value={formValues.parameter5}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1} sx={{ fontSize: "20px" }}>
+                        &gt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        &lt;
+                      </MenuItem>
+                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
+                        =
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="pressure-label">Pressure</InputLabel>
+                    <Select
+                      labelId="pressure-label"
+                      id="pressure-select"
+                      name="parameter6"
+                      value={formValues.parameter6}
+                      onChange={handleChangeParameter}
+                      size="small"
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={1}>GIP</MenuItem>
+                      <MenuItem value={2}>THP</MenuItem>
+                      <MenuItem value={3}>CHP</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Typography>Tolerance(%)</Typography>
+                  <TextField variant='outlined' size="small" fullWidth />
+                </Grid>
+              </Grid>
+
+            </Grid>
+          </Grid>
+        </Paper>
         <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }} gap={2}>
           <Button variant='contained'
             sx={{

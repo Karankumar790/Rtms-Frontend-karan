@@ -51,14 +51,13 @@ const Approval = lazy(() =>
   import("./Pages/Dashboard/MessageBox/Approval.jsx")
 );
 const SuperAdmin = lazy(() =>
-  import("./Pages/Dashboard/Admin/SuperAdmin.jsx")
+  import("./Pages/Dashboard/SuperAdmin/SuperAdmin.jsx")
 );
-// const TechnicalSupport = lazy(() =>
-//   import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
-// );
+const TechnicalSupport = lazy(() =>
+  import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
+);
 
 function App() {
-  // Fetch the role from Redux
   const role = useSelector((state) => state.auth.role);
 
   // Define common routes (visible to everyone)
@@ -79,26 +78,23 @@ function App() {
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
     { path: "Admin", element: <SuperAdmin /> },
-    // { path: "technicalSupport", element: <TechnicalSupport /> },
+    { path: "technicalSupport", element: <TechnicalSupport /> },
   ];
 
   // Add role-specific routes
   if (role === "owner") {
-    // Owner sees all routes including ManageAsset and message
     commonRoutes.push(
       { path: "ManageAsset", element: <ManageAsset /> },
       { path: "message", element: <Approval /> }
     );
   } else if (role === "manager") {
-    // Manager sees all routes except "ManageAsset"
     commonRoutes.push({ path: "message", element: <Approval /> });
     // } else if (role === "admin") {
     //   // Admin sees only the admin route
     //   // commonRoutes.length = 0; // Clear the commonRoutes
     //   // commonRoutes.push({ path: "", element: <SuperAdmin /> }); // Only admin route
   } else if (role === "employee") {
-    // Employee does not see "ManageAsset" and "message"
-    // All other routes are already visible
+    // Employee does not see "ManageAsset" and "message" amd "Super Admin"
   }
 
   // Configure the routes with children under "/dashboard"
@@ -114,7 +110,7 @@ function App() {
     { path: "/CheckStatus", element: <CheckStatus /> },
     {
       path: "/dashboard",
-      element: <PrivateRoute />, // Protect the dashboard route
+      element: <PrivateRoute />,
       children: [
         {
           path: "",
@@ -132,71 +128,5 @@ function App() {
     </>
   );
 }
-
-// function App() {
-//   // Fetch the role from Redux
-//   const role = useSelector((state) => state.auth.role);
-
-//   // Define common routes (visible to all roles)
-//   const commonRoutes = [
-//     { path: "", element: <Home /> },
-//     { path: "monitor", element: <Monitor /> },
-//     { path: "virtual", element: <Virtual /> },
-//     { path: "crystal", element: <Crystal /> },
-//     { path: "complaint", element: <ComplaintHistory /> },
-//     { path: "notification", element: <NotificationHistory /> },
-//     { path: "edit", element: <Edit /> },
-//     { path: "logout", element: <Logout /> },
-//     { path: "wellmaster", element: <WellMaster /> },
-//     { path: "addwell", element: <AddWell /> },
-//     { path: "singlewell", element: <SingleWell /> },
-//     { path: "DeviceManage", element: <DeviceManage /> },
-//     { path: "AddDevice", element: <AddDevice /> },
-//     { path: "Network", element: <Network /> },
-//     { path: "AddDevices", element: <AddDevices /> },
-//     { path: "technicalSupport", element: <TechnicalSupport /> },
-//   ];
-
-//   // Add role-specific routes
-//   if (role === "owner") {
-//     // Owner sees all routes including ManageAsset and message
-//     commonRoutes.push(
-//       { path: "ManageAsset", element: <ManageAsset /> },
-//       { path: "message", element: <Approval /> }
-//     );
-//   } else if (role === "manager") {
-//     // Manager sees all routes except "ManageAsset"
-//     commonRoutes.push({ path: "message", element: <Approval /> });
-//   } else if (role === "admin") {
-//     // Admin is redirected to a dedicated admin page
-//     return useRoutes([
-//       { path: "/", element: <Navigate to="/admin" /> },
-//       { path: "/admin", element: <SuperAdmin /> },
-//     ]);
-//   }
-
-//   // Configure routes for all other roles (e.g., employee, owner, etc.)
-//   return useRoutes([
-//     { path: "/", element: <Login /> },
-//     { path: "/otp", element: <Otp /> },
-//     { path: "/signup", element: <Signup /> },
-//     { path: "/otpsignup", element: <OtpSignUp /> },
-//     { path: "/forgot", element: <Forgot /> },
-//     { path: "/reset", element: <Reset /> },
-//     { path: "/popup", element: <PopUp /> },
-//     { path: "/CheckStatus", element: <CheckStatus /> },
-//     {
-//       path: "/dashboard",
-//       element: <PrivateRoute />, // Protect the dashboard route
-//       children: [
-//         {
-//           path: "",
-//           element: <Dashboard />,
-//           children: commonRoutes,
-//         },
-//       ],
-//     },
-//   ]);
-// }
 
 export default App;
