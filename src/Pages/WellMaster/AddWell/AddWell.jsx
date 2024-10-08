@@ -416,8 +416,6 @@ function AddWell() {
           </Link>
         </Grid>
       </Grid>
-
-
     </div>
   )
 }

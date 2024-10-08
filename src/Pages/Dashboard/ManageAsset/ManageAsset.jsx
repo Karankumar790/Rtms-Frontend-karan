@@ -519,8 +519,8 @@ function ManageAsset() {
             <Grid item xs={12} sm={3.5} md={3.5} lg={12} gap={1} display='flex' flexDirection={'column'} >
               <Typography variant="h5"> Add Department</Typography>
               <Box display='flex' gap={1}>
-                <TextField variant="outlined" size="small" label="Department" inputRef={inputRef} fullWidth />
-                <Button variant='contained' onClick={handleAdd} size="small"
+                <TextField variant="outlined" size="small" label="Department" fullWidth />
+                <Button variant='contained'  size="small"
                   sx={{
                     backgroundColor: "green",
                     "&:hover": {

@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "/assets/logo.svg";
 import { Grid, Typography, Box } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function Header() {
@@ -42,20 +41,6 @@ function Header() {
             </Typography>
           </Typography>
         </Grid>
-
-        {/* <Grid
-          item
-          md={4}
-          lg={4}
-          // sm={4}
-          sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
-        >
-          <Box display="flex" alignItems="center" justifyContent="end" gap={1}>
-            <Box p={2}>
-              <AccountCircleIcon sx={{ color: 'white', fontSize: '300%' }} />
-            </Box>
-          </Box>
-        </Grid> */}
       </Grid>
     </>
   );
