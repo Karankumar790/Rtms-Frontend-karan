@@ -422,15 +422,7 @@ function AddWell() {
               },
               fontSize: '16px',
             }}>Cancel</Button>
-          {/* <Button variant='contained'
-              sx={{
-                backgroundColor: 'green',   // Change button color to green
-                '&:hover': {
-                  backgroundColor: 'darkgreen', // Optional: Change color on hover
-                },
-                fontSize: '16px',
-              }}>Cancel</Button>
-          </Link>
+        
         </Grid>
       </Grid>
     </div>
