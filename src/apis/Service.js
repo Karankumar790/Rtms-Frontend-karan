@@ -271,11 +271,38 @@ export const DeleteDepartment = async (formData) => {
   }
 };
 
+//Delete Position
+export const deletePosition = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${ORGANIZATION_API}/delete-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//update Position
+export const updatePosition = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-position`,
       formData
     );
     return response.data;
@@ -296,19 +323,6 @@ export const getPosition = async (organizationName, departmentName) => {
   }
 };
 
-//update department
-export const updatPosition = async (formData) => {
-  try {
-    const response = await axios.put(
-      `${ORGANIZATION_API}/update-position`,
-      formData
-    );
-    return response.data;
-  } catch (error) {
-    return catchError(error);
-  }
-};
-
 //Add Approval Chain on the basic of department
 export const addApprovalChain = async (formData) => {
   try {
@@ -319,6 +333,28 @@ export const addApprovalChain = async (formData) => {
     return response.data;
   } catch (error) {
     return catchError(error);
+  }
+};
+
+//update approval Chain
+export const updateApprovalChain = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-approval-chain`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const deleteApprovalChain = async (formData) => {
+  try {
+    const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
+    return response.data;
+  } catch (error) {
+    return catchError(error); // Handle errors appropriately
   }
 };
 
@@ -359,15 +395,15 @@ export const getOrganizationData = async (organizationName) => {
   }
 };
 
-
-export const deleteApprovalChain = async (approvalchain) => {
-  try{
-    const response = await axios.delete(
-      `${ORGANIZATION_API}/delete-approval-chain`
+//Update Organization
+export const updateOrganizationData = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/organization-update-data`,
+      formData
     );
-    return response.data
+    return response.data;
   } catch (error) {
-    return catchError(error)
+    return catchError(error);
   }
-}
-
+};

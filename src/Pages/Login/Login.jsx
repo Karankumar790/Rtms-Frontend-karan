@@ -67,7 +67,7 @@ function Login() {
     <PageContainer className="login-form-bg-image" showfooter='true' showheader='true' >
       <Grid item display={'flex'} alignItems={'center'} height="100%" padding={'5%'}>
         <Card style={{backgroundColor:'#e9f4f7'}}>
-          <CardContent  orientation="vertical">
+          <CardContent orientation="vertical">
             <Grid item sx={{ textAlign: "center" }} md={12} sm={12} xs={12}>
               <Typography pt={2}  sx={{fontSize:{xs :'xx-large', sm:'xxx-large', md:'xxx-large', lg:'xxx-large'}}} >
                 Welcome
@@ -98,6 +98,7 @@ function Login() {
                       variant="standard"
                       value={formValues?.username}
                       onChange={handleInputs}
+                      required
                       fullWidth
                       required
                     />
@@ -123,6 +124,7 @@ function Login() {
                       label="Password"
                       value={formValues.password}
                       onChange={handleInputs}
+                      required
                       fullWidth
                       required
                       InputProps={{

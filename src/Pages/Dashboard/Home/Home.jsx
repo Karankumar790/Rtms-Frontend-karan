@@ -7,8 +7,8 @@ import pressure from '/assets/PRESSURE.png'
 import battery from '/assets/battery.png'
 import solar from '/assets/SOLAR1.png'
 import network from '/assets/Network.png'
-import notifications from '/assets/n.png'
-import complaints from '/assets/com.png'
+import notifications from '../../../../public/assets/n.jpg'
+import complaints from '../../../../public/assets/com.jpg'
 // -------------import for table--------------------------------//
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';

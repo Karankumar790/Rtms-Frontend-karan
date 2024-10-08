@@ -88,26 +88,87 @@ function AddWell() {
     })
   }
 
-
-
   return (
     <div>
       <Paper>
         <Grid container>
           <IconButton>
-            <Brightness5Icon sx={{ fontSize: "40px", color: 'red' }} />
+            <Brightness5Icon sx={{ fontSize: "40px", color: "red" }} />
           </IconButton>
-          <Typography variant='h4' mt={1}>Add New Well</Typography>
+          <Typography variant="h4" mt={1}>
+            Add New Well
+          </Typography>
         </Grid>
-        <Grid container p={1.7} spacing={2} sx={{ display: 'flex', justifyContent: 'space-between' }} >
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Location" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Installation" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Type" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}><TextField fullWidth size='small' label="Well Number" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Landmark" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Latitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Longitude" variant="outlined" /></Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}><TextField fullWidth size='small' label="Description" variant="outlined" /></Grid>
+        <Grid
+          container
+          p={1.7}
+          spacing={2}
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Location"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Installation"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Well Type"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Well Number"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Landmark"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Latitude"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Longitude"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+            <TextField
+              fullWidth
+              size="small"
+              label="Description"
+              variant="outlined"
+            />
+          </Grid>
           {/* <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
             sx={{
               backgroundColor: 'green',   // Change button color to green
@@ -118,8 +179,19 @@ function AddWell() {
             }}>Submit</Button></Grid> */}
         </Grid>
       </Paper>
-      <Grid container sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', }} mt={1} p={1} >
-        <Grid container>
+
+
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+        }}
+        mt={1}
+        p={1}
+      >
+      <Grid container>
           <IconButton>
             <NotificationsIcon sx={{ fontSize: "40px", color: 'red' }} />
           </IconButton>
@@ -395,17 +467,38 @@ function AddWell() {
             </Grid>
           </Grid>
         </Paper>
-        <Grid item p={2} sx={{ display: 'flex', justifyContent: 'flex-end' }} gap={2}>
-          <Button variant='contained'
+        <Grid
+          item
+          p={2}
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+          gap={2}
+        >
+          <Button
+            variant="contained"
             sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
-                backgroundColor: 'darkgreen', // Optional: Change color on hover
+              backgroundColor: "green", // Change button color to green
+              "&:hover": {
+                backgroundColor: "darkgreen", // Optional: Change color on hover
               },
-              fontSize: '16px',
-            }}>Update</Button>
-          <Link to='/dashboard/wellmaster'>
-            <Button variant='contained'
+              fontSize: "16px",
+            }}
+          >
+            {" "}
+            Add Well
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "green", // Change button color to green
+              "&:hover": {
+                backgroundColor: "darkgreen", // Optional: Change color on hover
+              },
+              fontSize: "16px",
+            }}
+          >
+            Cancel
+          </Button>
+          {/* <Button variant='contained'
               sx={{
                 backgroundColor: 'green',   // Change button color to green
                 '&:hover': {
@@ -413,11 +506,11 @@ function AddWell() {
                 },
                 fontSize: '16px',
               }}>Cancel</Button>
-          </Link>
+          </Link>*/}
         </Grid>
       </Grid>
     </div>
-  )
+  );
 }
 
-export default AddWell
+export default AddWell;

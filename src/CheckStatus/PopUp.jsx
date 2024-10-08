@@ -15,11 +15,23 @@ function PopUp() {
                     <Grid item p={3} >
                         <form>
                             <Box item mt={2}>
-                                <Typography variant='h5' fontSize='x-large' textAlign="center">Enter Your Registration ID.</Typography>
+                                <Typography variant="h5" fontSize="x-large" textAlign="center">
+                                    Enter Your Employee ID.
+                                </Typography>
                             </Box>
-    
-                            <Box mt={3} sx={{display:"flex",justifyContent:"center"}}>
-                                <TextField justifyContent="center" label="Enter Registration Number"  variant="outlined" size='medium' fullWidth  />
+
+                            <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
+                                <TextField
+                                    justifyContent="center"
+                                    label="Enter Employee ID"
+                                    name="employeeId"
+                                    value={employeeId}
+                                    onChange={handleInputChange}
+                                    variant="outlined"
+                                    size="medium"
+                                    fullWidth
+                                    required
+                                />
                             </Box>
                             <Box mt={3} sx={{display:"flex",justifyContent:"center"}} >
                                 <Link to="/CheckStatus"><Button variant='contained' color='primary' fullWidth size='medium' type='submit'>Check Status</Button></Link>
