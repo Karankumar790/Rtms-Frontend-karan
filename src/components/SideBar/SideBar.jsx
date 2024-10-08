@@ -389,6 +389,7 @@ export default function Sidebar({
       path: "/dashboard/message",
       roles: ["owner", "manager"],
     },
+
   ];
 
   const filteredMenuItems = menuItems.filter((item) =>

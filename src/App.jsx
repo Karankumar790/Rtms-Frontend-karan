@@ -1,4 +1,3 @@
-//this is add role to pass token and access
 import React, { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import AppSk from "./components/Skeletons/AppSk.jsx";
@@ -8,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./apis/PrivateRoutes.jsx";
 
-// Lazy loaded components
+// Lazy loaded componentes in lazy
 const Home = lazy(() => import("./Pages/Dashboard/Home/Home.jsx"));
 const Login = lazy(() => import("./Pages/Login/Login.jsx"));
 const Signup = lazy(() => import("./Pages/Signup/Signup.jsx"));
@@ -53,6 +52,7 @@ const Approval = lazy(() =>
 const SuperAdmin = lazy(() =>
   import("./Pages/Dashboard/SuperAdmin/SuperAdmin.jsx")
 );
+
 const TechnicalSupport = lazy(() =>
   import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
 );
@@ -77,8 +77,10 @@ function App() {
     { path: "AddDevice", element: <AddDevice /> },
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
+
     { path: "Admin", element: <SuperAdmin /> },
     { path: "technicalSupport", element: <TechnicalSupport /> },
+
   ];
 
   // Add role-specific routes
@@ -88,14 +90,15 @@ function App() {
       { path: "message", element: <Approval /> }
     );
   } else if (role === "manager") {
-    // Manager sees all routes except "ManageAsset"
     commonRoutes.push({ path: "message", element: <Approval /> });
+
     // } else if (role === "admin") {
     //   // Admin sees only the admin route
     //   // commonRoutes.length = 0; // Clear the commonRoutes
     //   // commonRoutes.push({ path: "", element: <SuperAdmin /> }); // Only admin route
   } else if (role === "employee") {
     // Employee does not see "ManageAsset" and "message" amd "Super Admin"
+
   }
 
   // Configure the routes with children under "/dashboard"
@@ -129,6 +132,7 @@ function App() {
     </>
   );
 }
+
 
 // function App() {
 //   // Fetch the role from Redux
@@ -195,5 +199,6 @@ function App() {
 //     },
 //   ]);
 // }
+
 
 export default App;

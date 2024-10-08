@@ -77,7 +77,7 @@ export const forgotPassword = async (formData) => {
   }
 };
 
-//reset password Api
+//reset password Apis
 export const resetPassword = async (formData) => {
   try {
     const response = await axios.post(`${USER_API}/reset-password`, formData);
@@ -274,6 +274,7 @@ export const DeleteDepartment = async (formData) => {
 //Delete Position
 export const deletePosition = async (formData) => {
   try {
+
     const response = await axios.post(
       `${ORGANIZATION_API}/delete-position`,
       formData
@@ -281,6 +282,7 @@ export const deletePosition = async (formData) => {
     return response.data;
   } catch (error) {
     return catchError(error);
+
   }
 };
 
@@ -349,6 +351,7 @@ export const updateApprovalChain = async (formData) => {
   }
 };
 
+
 export const deleteApprovalChain = async (formData) => {
   try {
     const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
@@ -357,6 +360,7 @@ export const deleteApprovalChain = async (formData) => {
     return catchError(error); // Handle errors appropriately
   }
 };
+
 
 // https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
 export const getApprovalChain = async (organizationName, departmentName) => {
