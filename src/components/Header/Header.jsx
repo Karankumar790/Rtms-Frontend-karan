@@ -20,6 +20,7 @@ function Header() {
             <img src={logo} style={{ width: "6rem", height: "6rem" }} />
           </Box>
 {/* Foxboro */}
+{/* Foxboro */}
           <Typography sx={{
             fontSize: {
               xs: '110%', // small screens

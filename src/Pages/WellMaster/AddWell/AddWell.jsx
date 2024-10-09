@@ -7,6 +7,7 @@ import { Box } from '@mui/system';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
 import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const data = [
@@ -16,6 +17,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
+    Parameter: 'GIP (kg/Cm²)',
     Parameter: 'GIP (kg/Cm²)',
     Condition1: '',
     Description1: '',
@@ -37,7 +39,7 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'THP (kg/Cm²)',
+    Parameter: 'THP(kg)',
     Condition1: '',
 
   },

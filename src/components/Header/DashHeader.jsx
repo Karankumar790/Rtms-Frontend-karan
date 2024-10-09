@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Grid, Box, useMediaQuery, Menu, MenuItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles'; // Correct import for useTheme
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240; // Define drawerWidth
 
@@ -32,6 +33,11 @@ const AppBar = styled(MuiAppBar, {
 export default function Header({ open, handleDrawerOpen }) {
   const theme = useTheme(); // Correct theme hook import
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const organizationName = useSelector((state) => state.auth.organization);
+
+  // Retrieve values from localStorage
+  const organizationLogo = localStorage.getItem("organizationLogo");
+  const subtitlename = localStorage.getItem("subtitlename");
 
   // State for managing menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -74,7 +80,7 @@ export default function Header({ open, handleDrawerOpen }) {
                 lg: 'x-large', // Larger screen size
               },
             }}>
-              Oil & Natural Gas Corporation
+              {organizationName || "OIL & NATURAL GAS CORPORATION"}
             </Typography>
             <Typography sx={{
               fontSize: {
@@ -84,7 +90,7 @@ export default function Header({ open, handleDrawerOpen }) {
                 lg: 'large', // Larger screen size
               },
             }}>
-              Real Time Well Monitoring System
+              {subtitlename || "Real Time Well Monitoring System"}
             </Typography>
           </Box>
 
