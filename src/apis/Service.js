@@ -274,12 +274,15 @@ export const DeleteDepartment = async (formData) => {
 //Delete Position
 export const deletePosition = async (formData) => {
   try {
-    const response = await axios.delete(`${ORGANIZATION_API}/delete-position`, {
-      data: formData, // Use the data field to send the request body with DELETE
-    });
+
+    const response = await axios.post(
+      `${ORGANIZATION_API}/delete-position`,
+      formData
+    );
     return response.data;
   } catch (error) {
-    return catchError(error); // Ensure you handle the error appropriately
+    return catchError(error);
+
   }
 };
 
@@ -348,6 +351,17 @@ export const updateApprovalChain = async (formData) => {
   }
 };
 
+
+export const deleteApprovalChain = async (formData) => {
+  try {
+    const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
+    return response.data;
+  } catch (error) {
+    return catchError(error); // Handle errors appropriately
+  }
+};
+
+
 // https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
 export const getApprovalChain = async (organizationName, departmentName) => {
   try {
@@ -365,7 +379,12 @@ export const organizationAddData = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/organization-add-data`,
-      formData
+      formData,
+      {
+        headers: {
+          "content-Type": "multipart/form-data",
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -373,11 +392,24 @@ export const organizationAddData = async (formData) => {
   }
 };
 
-// https://rtms-backend.onrender.com/api/v1/organization/organization-get-data?organizationName=Foxboro.in.co
+//http://localhost:5000/api/v1/organization/organization-get-data?organizationName=india.in.co
 export const getOrganizationData = async (organizationName) => {
   try {
     const response = await axios.get(
       `${ORGANIZATION_API}/organization-get-data?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// Update Organization
+export const updateOrganizationData = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/organization-update-data`,
+      formData
     );
     return response.data;
   } catch (error) {

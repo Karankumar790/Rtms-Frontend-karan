@@ -41,10 +41,18 @@ function OtherTable() {
   const inputRef2 = useRef();
   const inputRef3 = useRef();
   const [add, setAdd] = useState([]);
-  const [parameter, setParameter] = useState(""); // Added parameter state
+  const [formValues, setFormValues] = useState({
+    parameter1: '',
+    parameter2: '',
+    parameter3: ''
+  });
 
   const handleChangeParameter = (event) => {
-    setParameter(event.target.value);
+    const { name, value } = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: value
+    });
   };
 
   const handleAdd = () => {
@@ -69,13 +77,13 @@ function OtherTable() {
   ];
 
   return (
-    <div style={{height:'100%',width:'100%'}}>
+    <div style={{ height: '100%', width: '100%' }}>
       <Card sx={{ my: 1 }}>
         <CardContent>
           <Grid container spacing={2}>
             {/* ------------------------ADD DEPARTMENT------------------------------ */}
-            <Grid item xs={12} sm={3.5} md={3.5} lg={2.5} gap={1} display='flex' flexDirection={'column'}>
-              <Box display='flex' gap={1}>
+            <Grid item xs={12} sm={6} md={6} lg={2.5} gap={1} display='flex' flexDirection={'column'}>
+              <Box display='flex'flexDirection={{ xs: 'column', sm: 'row' }} gap={1}>
                 <TextField variant="outlined" size="small" label="Add Location" inputRef={inputRef} fullWidth />
                 <Button variant='contained' onClick={handleAdd} size="small"
                   sx={{
@@ -85,41 +93,19 @@ function OtherTable() {
                   ADD
                 </Button>
               </Box>
-              {/* -------------------------------Table-------------------------------- */}
-              {/* <Grid container>
-                <TableContainer component={Paper} sx={{ maxHeight: 300, overflow: 'auto' }}>
-                  <Table stickyHeader aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Locations</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}></StyledTableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                          <StyledTableCell component="th" scope="row">
-                            {row.name}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">1</StyledTableCell>
-                        </StyledTableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid> */}
             </Grid>
 
             {/* ------------------------ADD POSITION------------------------------ */}
-            <Grid item xs={12} sm={3.5} md={3.5} lg={3.5} gap={1} display='flex' flexDirection={'column'}>
-              <Box display='flex' gap={1}>
+            <Grid item xs={12} sm={6} md={6} lg={3.5} gap={1} display='flex' flexDirection={'column'}>
+              <Box display='flex' flexDirection={{ xs: 'column', sm: 'row' }} gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   <FormControl fullWidth size="small">
                     <InputLabel id="demo-select-large-label">Locations</InputLabel>
                     <Select
                       labelId="demo-select-small-label"
                       id="demo-select-large"
-                      value={parameter}
+                      name="parameter1"
+                      value={formValues.parameter1}
                       label="Department"
                       onChange={handleChangeParameter}
                     >
@@ -138,41 +124,19 @@ function OtherTable() {
                   ADD
                 </Button>
               </Box>
-              {/* ----------------------------------Table 2---------------------------------- */}
-              {/* <Grid container>
-                <TableContainer component={Paper} sx={{ maxHeight: 300, overflow: 'auto' }}>
-                  <Table stickyHeader aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '25%' }}>Locations</StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '25%' }}>Installation</StyledTableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                          <StyledTableCell component="th" scope="row">
-                            {row.name}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">1</StyledTableCell>
-                        </StyledTableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid> */}
             </Grid>
 
             {/* ------------------------APPROVAL CHAIN------------------------------ */}
-            <Grid item xs={12} sm={5} md={5} lg={6} gap={1} display='flex' flexDirection={'column'}>
-              <Box display='flex' gap={1}>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid item xs={12} sm={12} md={12} lg={6} gap={1} display='flex' flexDirection={'column'}>
+              <Box display='flex' flexDirection={{ xs: 'column', sm: 'row' }}  gap={1}>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
                   <FormControl fullWidth size="small">
                     <InputLabel id="demo-select-large-label">Locations</InputLabel>
                     <Select
                       labelId="demo-select-small-label"
                       id="demo-select-large"
-                      value={parameter}
+                      name="parameter2"
+                      value={formValues.parameter2}
                       label="Department"
                       onChange={handleChangeParameter}
                     >
@@ -182,13 +146,17 @@ function OtherTable() {
                     </Select>
                   </FormControl>
                 </Grid>
-                <TextField variant="outlined" label="Installation" size="small" fullWidth />
-                <FormControl fullWidth size="small">
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <TextField variant="outlined" label="Installation" size="small" fullWidth />
+                </Grid>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
                     <InputLabel id="demo-select-large-label">Well Type</InputLabel>
                     <Select
                       labelId="demo-select-small-label"
                       id="demo-select-large"
-                      value={parameter}
+                      name="parameter3"
+                      value={formValues.parameter3}
                       label="Department"
                       onChange={handleChangeParameter}
                     >
@@ -197,70 +165,21 @@ function OtherTable() {
                       <MenuItem value={2}>pugger well</MenuItem>
                     </Select>
                   </FormControl>
-                <TextField variant="outlined" label="Well Number" size="small" fullWidth />
-                <Button variant='contained' onClick={handleAdd} size="small"
-                  sx={{
-                    backgroundColor: 'green',
-                    '&:hover': { backgroundColor: 'darkgreen' },
-                  }}>
-                  ADD
-                </Button>
+                </Grid>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <TextField variant="outlined" label="Well Number" size="small" fullWidth />
+                </Grid>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Button variant='contained' onClick={handleAdd} fullWidth 
+                    sx={{
+                      backgroundColor: 'green',
+                      '&:hover': { backgroundColor: 'darkgreen' },
+                    }}>
+                    ADD
+                  </Button>
+                </Grid>
               </Box>
-
-              {/* ----------------------------------Table 3---------------------------------- */}
-              {/* <Grid container>
-                <TableContainer component={Paper} sx={{ maxHeight: 300, overflow: 'auto' }}>
-                  <Table stickyHeader aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell sx={{ fontSize: '18px', width: '15%' }}>Location</StyledTableCell>
-                        <StyledTableCell align="left" sx={{ width: '15%' }}>Installation</StyledTableCell>
-                        <StyledTableCell align="left" sx={{ fontSize: '18px', width: '15%' }}>Well Type</StyledTableCell>
-                        <StyledTableCell align="left" sx={{ fontSize: '18px', width: '15%' }}>Well Number</StyledTableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                          <StyledTableCell component="th" scope="row">
-                            {row.name}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">1</StyledTableCell>
-                          <StyledTableCell align="left"></StyledTableCell>
-                          <StyledTableCell align="left"></StyledTableCell>
-                        </StyledTableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid> */}
             </Grid>
-
-            {/* ------------------------BUTTON BOX------------------------------ */}
-            {/* <Grid container mt={2} display={"flex"} justifyContent={"end"} gap={1} flexDirection={{ xs: 'row' }}>
-              <Box>
-                <Button variant='contained'
-                  sx={{
-                    backgroundColor: 'green',
-                    '&:hover': { backgroundColor: 'darkgreen' },
-                    fontSize: '16px',
-                    width: '150px',
-                  }}>
-                  SAVE
-                </Button>
-              </Box>
-              <Box>
-                <Button variant='contained'
-                  sx={{
-                    backgroundColor: 'green',
-                    '&:hover': { backgroundColor: 'darkgreen' },
-                    fontSize: '16px',
-                    width: '150px',
-                  }}>
-                  EDIT
-                </Button>
-              </Box>
-            </Grid> */}
           </Grid>
         </CardContent>
       </Card>
