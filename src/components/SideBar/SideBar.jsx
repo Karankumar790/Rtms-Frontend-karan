@@ -314,7 +314,8 @@ export default function Sidebar({
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const role = useSelector((state) => state.auth.role || "guest");
+  const role = useSelector((state) => state.auth.role);
+  const organizationLogo = localStorage.getItem("organizationLogo");
 
   const menuItems = [
     {
@@ -383,13 +384,18 @@ export default function Sidebar({
     //   path: "/dashboard/virtual",
     //   roles: ["owner", "manager", "employee"],
     // },
+    // {
+    //   name: "Geo Location",
+    //   icon: <GeoIcon sx={{ color: "black" }} />,
+    //   path: "/dashboard/virtual",
+    //   roles: ["owner", "manager", "employee"],
+    // },
     {
       name: "Message Box",
       icon: <ForwardToInboxIcon sx={{ color: "black" }} />,
       path: "/dashboard/message",
       roles: ["owner", "manager"],
     },
-
   ];
 
   const filteredMenuItems = menuItems.filter((item) =>
@@ -402,13 +408,24 @@ export default function Sidebar({
     }
   };
 
-
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
-        <img src={ongc_logo} alt="logo" width="83%" />
+        {/* <img src={ongc_logo} alt="logo" width="83%" /> */}
+          {/* Display the organization logo if available */}
+          {organizationLogo && (
+          <img
+            src={organizationLogo}
+            alt="Organization Logo"
+            style={{ width: "100%", height: 40, marginLeft: 8 }}
+          />
+        )}
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronLeftIcon />}
+          {theme.direction === "rtl" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronLeftIcon />
+          )}
         </IconButton>
       </DrawerHeader>
       <Divider />
@@ -446,7 +463,9 @@ export default function Sidebar({
                 </ListItem>
               </Link>
               {/* Add a divider after certain items */}
-              {["Dashboard", "Manage Gateway", "Print Report"].includes(item.name) && <Divider />}
+              {["Dashboard", "Manage Gateway", "Print Report"].includes(
+                item.name
+              ) && <Divider />}
             </React.Fragment>
           ))
         )}
@@ -454,7 +473,7 @@ export default function Sidebar({
 
       {/* Box to push the Technical Support to the bottom */}
       <Box sx={{ flexGrow: 1 }} />
-      <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
+      <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>
         <Divider />
         <List>
           <Link

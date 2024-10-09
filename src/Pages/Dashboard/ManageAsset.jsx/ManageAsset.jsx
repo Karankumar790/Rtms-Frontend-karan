@@ -78,6 +78,9 @@ function ManageAsset() {
   
   //organization Data Add
   const [formData, setFormData] = useState({
+    OrganizationName: "",
+    organizationlogo: "",
+    subtitlename: "",
     address: "",
     city: "",
     state: "",
@@ -87,9 +90,14 @@ function ManageAsset() {
     fax: "",
     email: "",
   });
+
+   //storeg in local storage to use
+   localStorage.setItem("organizationLogo", formData.organizationlogo); // Save the logo
+   localStorage.setItem("subtitlename", formData.subtitlename); // Save the subtitle
   const [loading, setLoading] = useState(false);
   const [isEditOrganization, setIsEditOrganization] = useState(false);
   const [organiatioLoading, setOrganiationLoading] = useState(false);
+  const [file, setFile] = useState(null);
 
   // Function to initiate Updating department
   const handleEditClick = (index) => {
@@ -694,41 +702,68 @@ const handleDeleteDepartment = async (departmentName) => {
     });
   };
 
-  //add organization data to save
+  //upload logo of organization
+  const handleLogoUpload = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      organizationlogo: file,
+    });
+  };
+
+  // Save organization data
   const handleSave = async () => {
     try {
       setLoading(true);
-      const updatedFormData = {
-        ...formData,
-        organizationName: organizationName,
-      };
+      const updatedFormData = { ...formData };
       const response = await organizationAddData(updatedFormData);
-      setIsEditOrganization(true);
-      if (response.status === 200) {
-        toast.success("Data saved successfully:", response.message);
+      // console.log("jhdvchjdfjc", response);
+      if (response.success) {
+        toast.success(response.message || "Data saved successfully");
+        setIsEditOrganization(true); // Switch to Update mode after saving
+        localStorage.setItem("organizationSaved", true); 
       } else {
-        toast.success("Data saved successfully", response.message);
+        // console.log("sssss", "Essslse ");
+        toast.error(response.message || "Data not saved");
       }
     } catch (error) {
       console.error("Error saving data:", error);
     } finally {
-      setLoading(false); // End loading state
+      setLoading(false);
     }
   };
 
-  // Handle Cancel Clear form fields
+  // Cancel update
   const handleCancel = () => {
-    setFormData({
-      address: "",
-      city: "",
-      state: "",
-      country: "",
-      pinCode: "",
-      phone: "",
-      fax: "",
-      email: "",
-    });
+    setIsEditOrganization(true);
   };
+
+  // Check if data is saved in localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("organizationSaved");
+    if (saved) {
+      setIsEditOrganization(true);
+      const savedLogo = localStorage.getItem("organizationLogo");
+      if (savedLogo) {
+        setFormData((prev) => ({ ...prev, organizationlogo: savedLogo }));
+      }
+    }
+  }, []);
+
+
+  // // Handle Cancel Clear form fields
+  // const handleCancel = () => {
+  //   setFormData({
+  //     address: "",
+  //     city: "",
+  //     state: "",
+  //     country: "",
+  //     pinCode: "",
+  //     phone: "",
+  //     fax: "",
+  //     email: "",
+  //   });
+  // };
 
   //HAndle Update Organization
   const handleUpdate = async () => {
@@ -748,28 +783,59 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
-  //fetch organization data based on Organization Name\
-  const fetchOrganization = async () => {
-    setOrganiationLoading(true);
-    try {
-      const response = await getOrganizationData(organizationName);
-      setFormData({
-        address: response.data.address || "",
-        city: response.data.city || "",
-        state: response.data.state || "",
-        country: response.data.country || "",
-        pinCode: response.data.pinCode || "",
-        phone: response.data.phone || "",
-        fax: response.data.fax || "",
-        email: response.data.email || "",
-      });
-      // console.log("organization", response.data);
-    } catch (error) {
-      console.error("Error fetching organization data:", error);
-    } finally {
-      setOrganiationLoading(false);
-    }
-  };
+  // //fetch organization data based on Organization Name\
+  // const fetchOrganization = async () => {
+  //   setOrganiationLoading(true);
+  //   try {
+  //     const response = await getOrganizationData(organizationName);
+  //     setFormData({
+  //       address: response.data.address || "",
+  //       city: response.data.city || "",
+  //       state: response.data.state || "",
+  //       country: response.data.country || "",
+  //       pinCode: response.data.pinCode || "",
+  //       phone: response.data.phone || "",
+  //       fax: response.data.fax || "",
+  //       email: response.data.email || "",
+  //     });
+  //     // console.log("organization", response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching organization data:", error);
+  //   } finally {
+  //     setOrganiationLoading(false);
+  //   }
+  // };
+
+    //fetch organization data based on Organization Name\
+    const fetchOrganization = async () => {
+      setOrganiationLoading(true);
+      try {
+        const response = await getOrganizationData(organizationName);
+        setFormData({
+          organizationName: response.data.organizationName || "",
+          organizationlogo: response.data.organizationlogo || "",
+          subtitlename: response.data.subtitlename || "",
+          address: response.data.address || "",
+          city: response.data.city || "",
+          state: response.data.state || "",
+          country: response.data.country || "",
+          pinCode: response.data.pinCode || "",
+          phone: response.data.phone || "",
+          fax: response.data.fax || "",
+          email: response.data.email || "",
+        });
+        if (organizationlogo instanceof File) {
+          formDataToUpdate.organizationlogo = organizationlogo;
+        }
+        setFormData(formDataToUpdate);
+        // console.log("hgdvdhc", data.organizationlogo);
+        // console.log("organization", response.data);
+      } catch (error) {
+        console.error("Error fetching organization data:", error);
+      } finally {
+        setOrganiationLoading(false);
+      }
+    };
 
   // -------------------Table------------------------
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -808,88 +874,116 @@ const handleDeleteDepartment = async (departmentName) => {
 
   return (
     <div>
-      <Paper>
+     <Paper>
         <Grid container gap={1} p={3}>
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
           <Typography variant="h4" mt={1}>
-             {organizationName ? organizationName : "N/A"}
+            Organization: [ {organizationName ? organizationName : "N/A"} ]
           </Typography>
-          <Grid container spacing={2} padding={2}>
-            {/* Organization Name Section */}
-            <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
-              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-                Display Organization Name
-              </Typography>
-              <Grid item xs={12} sm={6} md={4} lg={4} >
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
+
+          
+          {/* Organization Logo (Top of Organization Name) */}
+          {isEditOrganization && formData.organizationlogo && (
+            <Grid
+              container
+              justifyContent="flex-start"
+              alignItems="center"
+              marginTop={4}
+            >
+              <span
+                style={{
+                  marginRight: "50px",
+                  fontSize: "1.5rem",
+                }}
+              >
+                Organization Logo:
+              </span>
+              <img
+                src={formData.organizationlogo}
+                alt="Organization Logo"
+                style={{
+                  width: "250px",
+                  height: "100px",
+                  objectFit: "contain", // Use 'contain' to preserve the aspect ratio
+                  borderRadius: "5px", // Optional: added to make the image look better
+                }}
+              />
             </Grid>
-
-            {/* Subtitle Name Section */}
-            <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
-              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-                Display Subtitle Name
-              </Typography>
-              <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
-                <TextField variant="outlined" size="small" fullWidth value={""} />
-              </Grid>
-            </Grid>
-
-            {/* Logo Upload Section */}
-            <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={1}>
-              <Typography variant="h6" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-                Upload Logo
-              </Typography>
-              <Grid item xs={12} sm={6} md={4} lg={4} display={'flex'} gap={2}>
-                <Button variant="outlined" size="small" component="label" fullWidth>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    name="idCardPhoto"
-                    hidden
-
-                  />
-                  Upload Logo
-                </Button>
-              </Grid>
-
-            </Grid>
-          </Grid>
+          )}
           <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={12}>
+            <Grid item md={10} sm={10} xs={12} lg={12} marginTop={4}>
               <Grid container spacing={1}>
+                {/* Organization Logo Upload (Show only in Save mode) */}
+                {!isEditOrganization && (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    <span>
+                      <Typography variant="h6">Organization Logo</Typography>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ cursor: "pointer", marginLeft: "1rem" }}
+                        onChange={handleLogoUpload}
+                      />
+                    </span>
+                    {file && (
+                      <img
+                        src={file}
+                        alt="Organization Logo Preview"
+                        style={{
+                          width: "250px",
+                          height: "100px",
+                          objectFit: "contain",
+                          marginLeft: "1.5rem",
+                        }}
+                      />
+                    )}
+                  </Grid>
+                )}
                 {[
-                  "address",
-                  "city",
-                  "state",
-                  "country",
-                  "pinCode",
-                  "phone",
-                  "fax",
-                  "email",
+                  { name: "organizationName", label: "Organization Name" },
+                  { name: "subtitlename", label: "Sub Organization Name" },
+                  { name: "address", label: "Address" },
+                  { name: "city", label: "City" },
+                  { name: "state", label: "State" },
+                  { name: "country", label: "Country" },
+                  { name: "pinCode", label: "Pin Code" },
+                  { name: "phone", label: "Phone" },
+                  { name: "fax", label: "Fax" },
+                  { name: "email", label: "Email" },
                 ].map((field) => (
-                  <Grid item xs={12} sm={3} md={3} lg={3} key={field}>
-                    <Typography variant="h6">
-                      {field.charAt(0).toUpperCase() + field.slice(1)}
-                    </Typography>
-                    <TextField
-                      type="text"
-                      variant="outlined"
-                      size="small"
-                      fullWidth
-                      name={field}
-                      value={formData[field]}
-                      onChange={handleInputChange}
-                      disabled={isEditOrganization}
-                    />
+                  <Grid item xs={12} sm={3} md={3} lg={3} key={field.name}>
+                    <Typography variant="h6">{field.label}</Typography>
+                    {field.name === "organizationName" ? (
+                      // Display organizationName as text instead of an input
+                      <Typography variant="body1">
+                        {formData[field.name]}
+                      </Typography>
+                    ) : (
+                      <TextField
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleInputChange}
+                        disabled={isEditOrganization} // Disable fields when editing
+                      />
+                    )}
                   </Grid>
                 ))}
               </Grid>
             </Grid>
           </Grid>
-          {/* Button Section */}
           <Grid
             container
             mt={2}
@@ -903,9 +997,7 @@ const handleDeleteDepartment = async (departmentName) => {
                   variant="contained"
                   sx={{
                     backgroundColor: "blue",
-                    "&:hover": {
-                      backgroundColor: "darkblue",
-                    },
+                    "&:hover": { backgroundColor: "darkblue" },
                     fontSize: "16px",
                     width: "150px",
                   }}
@@ -915,14 +1007,12 @@ const handleDeleteDepartment = async (departmentName) => {
                   {loading ? "UPDATING..." : "UPDATE"}
                 </Button>
               ) : (
-                <>
+                <div style={{ display: "flex", gap: "2rem" }}>
                   <Button
                     variant="contained"
                     sx={{
                       backgroundColor: "green",
-                      "&:hover": {
-                        backgroundColor: "darkgreen",
-                      },
+                      "&:hover": { backgroundColor: "darkgreen" },
                       fontSize: "16px",
                       width: "150px",
                     }}
@@ -934,10 +1024,8 @@ const handleDeleteDepartment = async (departmentName) => {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: "gray",
-                      "&:hover": {
-                        backgroundColor: "darkgray",
-                      },
+                      backgroundColor: "red",
+                      "&:hover": { backgroundColor: "darkred" },
                       fontSize: "16px",
                       width: "150px",
                     }}
@@ -945,7 +1033,7 @@ const handleDeleteDepartment = async (departmentName) => {
                   >
                     CANCEL
                   </Button>
-                </>
+                </div>
               )}
             </Box>
           </Grid>

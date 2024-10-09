@@ -379,7 +379,12 @@ export const organizationAddData = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/organization-add-data`,
-      formData
+      formData,
+      {
+        headers: {
+          "content-Type": "multipart/form-data",
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -387,7 +392,7 @@ export const organizationAddData = async (formData) => {
   }
 };
 
-// https://rtms-backend.onrender.com/api/v1/organization/organization-get-data?organizationName=Foxboro.in.co
+//http://localhost:5000/api/v1/organization/organization-get-data?organizationName=india.in.co
 export const getOrganizationData = async (organizationName) => {
   try {
     const response = await axios.get(
@@ -399,7 +404,7 @@ export const getOrganizationData = async (organizationName) => {
   }
 };
 
-//Update Organization
+// Update Organization
 export const updateOrganizationData = async (formData) => {
   try {
     const response = await axios.put(
