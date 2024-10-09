@@ -56,6 +56,9 @@ const SuperAdmin = lazy(() =>
 const TechnicalSupport = lazy(() =>
   import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
 );
+const Lora = lazy(() =>
+  import("./Pages/Dashboard/DeviceManage/Lora.jsx")
+);
 
 function App() {
   const role = useSelector((state) => state.auth.role);
@@ -75,6 +78,7 @@ function App() {
     { path: "singlewell", element: <SingleWell /> },
     { path: "DeviceManage", element: <DeviceManage /> },
     { path: "AddDevice", element: <AddDevice /> },
+    { path: "Lora", element: <Lora /> },
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
     { path: "Admin", element: <SuperAdmin /> },
