@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Button,  Grid, IconButton, TextField, Typography } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -17,7 +17,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import BallotIcon from '@mui/icons-material/Ballot';
 import { Box } from "@mui/system";
-// import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

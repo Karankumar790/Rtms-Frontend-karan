@@ -1,9 +1,6 @@
 import React from "react";
 import logo from "/assets/logo.svg";
-import MQTT1 from "/assets/MQTT1.png";
 import { Grid, Typography, Box } from "@mui/material";
-import Technical from "/assets/Technical.png";
-import { Link } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 

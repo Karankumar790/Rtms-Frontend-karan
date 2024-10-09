@@ -1,19 +1,8 @@
 import React from 'react'
-import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Divider, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {  Grid,  Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import GeoIcon from '@mui/icons-material/Place';
-import { Textarea } from '@mui/joy';
 
 
 function Virtual() {
@@ -26,36 +15,7 @@ function Virtual() {
           </IconButton>
           <Typography mt={1} variant='h4'>Geo-Location </Typography>
         </Box>
-        {/* <Grid container spacing={3} pt={1} justifyContent={'space-between'} >
-          <Grid item xs={12} sm={8} md={6} lg={3} mt={1}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <TextField
-                label="Search"
-                variant="outlined"
-                size="small"
-                fullWidth
-                sx={{ mr: 2 }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment>
-                      <Button variant="text" size='medium' ><SearchIcon /></Button>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={8} md={6} lg={3} mr={2}>
-            <Box >
-              <Textarea
-                placeholder='Location Address'
-                rows={2}
-                variant="outlined"
-                fullWidth
-              />
-            </Box>
-          </Grid>
-        </Grid> */}
+       
         <Grid container textAlign={'center'} mt={2} display={'block'}>
           <Grid item md={12} border={"1px solid black"}>
             <iframe

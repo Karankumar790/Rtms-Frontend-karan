@@ -3,7 +3,6 @@ import PageContainer from "../components/HOC/PageContainer";
 import { Paper, Typography, TextField, Button, Box, Grid } from "@mui/material";
 import { checkStatus } from "../apis/Service";
 import {
-  clearCheckAuth,
   setCheckAuthenticated,
   setCheckDetails,
 } from "../apis/authSlice";

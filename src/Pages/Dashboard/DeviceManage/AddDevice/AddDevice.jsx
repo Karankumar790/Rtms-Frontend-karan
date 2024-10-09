@@ -7,11 +7,8 @@ import { Button,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import FormGroup from "@mui/material/FormGroup";
-// import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from "@mui/material/Checkbox";
 function AddDevice() {
-  // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   return (
     <Paper sx={{ p: 2 }}>
