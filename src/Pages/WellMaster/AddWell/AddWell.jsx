@@ -6,8 +6,6 @@ import FormLabel from '@mui/joy/FormLabel';
 import { Box } from '@mui/system';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
-import { Link } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 
 const data = [
@@ -17,7 +15,6 @@ const data = [
     CriticalAlert: '',
     Condition: '',
     Description: '',
-    Parameter: 'GIP (kg/Cm²)',
     Parameter: 'GIP (kg/Cm²)',
     Condition1: '',
     Description1: '',
@@ -171,14 +168,7 @@ function AddWell() {
               variant="outlined"
             />
           </Grid>
-          {/* <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
-            sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
-                backgroundColor: 'darkgreen', // Optional: Change color on hover
-              },
-              fontSize: '16px',
-            }}>Submit</Button></Grid> */}
+         
         </Grid>
       </Paper>
 
@@ -500,15 +490,7 @@ function AddWell() {
           >
             Cancel
           </Button>
-          {/* <Button variant='contained'
-              sx={{
-                backgroundColor: 'green',   // Change button color to green
-                '&:hover': {
-                  backgroundColor: 'darkgreen', // Optional: Change color on hover
-                },
-                fontSize: '16px',
-              }}>Cancel</Button>
-          </Link>*/}
+         
         </Grid>
       </Grid>
     </div>
