@@ -16,7 +16,6 @@ const data = [
     Condition: '',
     Description: '',
     Parameter: 'GIP (kg/Cm²)',
-    Parameter: 'GIP (kg/Cm²)',
     Condition1: '',
     Description1: '',
 
