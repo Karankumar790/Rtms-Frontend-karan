@@ -16,10 +16,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 import Network from "../../../../public/assets/NetworkWire2.jpg";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
-
+import SettingsIcon from '@mui/icons-material/Settings';
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import StoreIcon from '@mui/icons-material/Store';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 // ----------------------Table for Moblie------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -108,38 +112,7 @@ const rows = [
   // createData('5'),
 ];
 
-// -------------------------New Born Table--------------------------------------------
 
-const StyleTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyleTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-
-function CreateData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const row = [
-  CreateData("1"),
-  CreateData("2"),
-  CreateData("3"),
-  CreateData("4"),
-];
 
 function DeviceManage() {
   return (
@@ -155,152 +128,30 @@ function DeviceManage() {
             <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Node Master</Typography>
+            <Typography variant="h4">Node Manager</Typography>
           </Box>
         </Grid>
       </Grid>
-      {/* ----------------------------------Table and Inputs Field-------------------------------- */}
-      <Grid container sx={{ display: "flex", justifyContent: "space-between" }}>
-        {/* ------------------------------Table--------------------------------------------- */}
-        <Grid
-          item
-          lg={1.6}
-          md={6}
-          sm={8}
-          xs={12}
-          sx={{ border: "1px solid black" }}
-        >
-          <TableContainer
-            component={Paper}
-            sx={{ maxHeight: 620, overflow: "auto" }}
-          >
-            <Table aria-label="customized table" stickyHeader>
-              <TableHead>
-                <TableRow>
-                  <StyleTableCell sx={{ fontSize: "18px" }}>
-                    Device Name
-                  </StyleTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {row.map((row) => (
-                  <StyleTableRow key={row.name}>
-                    <StyleTableCell component="th" scope="row">
-                      {row.name}
-                    </StyleTableCell>
-                  </StyleTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-        {/* ------------------------------Inputs-------------------------------------------- */}
-        <Grid
-          item
-          lg={10.2}
-          md={6}
-          sm={8}
-          xs={12}
-          sx={{ border: "1px solid black" }}
-        >
-          <Grid container spacing={3} p={1}>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Device Name</Typography>
-              <TextField variant="outlined" size="small" fullWidth />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Cloud ID</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">LoRa ID</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Landmark</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Lattitude</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Longitude</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Scan Timer</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Publish Code</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-            <Grid item xs={12} sm={4} md={6} lg={4}>
-              <Typography variant="h6">Subscribe Code</Typography>
-              <TextField variant="outlined" size="small" fullWidth value={""} />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-      {/* --------------------------------Button--------------------------------------------- */}
-      <Grid
-        container
-        mt={2}
-        display={"flex"}
-        justifyContent={"end"}
-        gap={1}
-        flexDirection={{ xs: "row" }}
-      >
-        <Box>
-          <Link to="/dashboard/AddDevice" style={{ textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "green", // Change button color to green
-                "&:hover": {
-                  backgroundColor: "darkgreen", // Optional: Change color on hover
-                },
-                fontSize: "16px",
-                width: "150px",
-              }}
-            >
-              Add Device
-            </Button>
-          </Link>
-        </Box>
-        <Box>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "green", // Change button color to green
-              "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
-              },
-              fontSize: "16px",
-              width: "150px",
-            }}
-          >
-            Submit
-          </Button>
-        </Box>
-        <Box>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "green", // Change button color to green
-              "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
-              },
-              fontSize: "16px",
-              width: "150px",
-            }}
-          >
-            Cancel
-          </Button>
-        </Box>
-      </Grid>
+   
+   <Grid container display={'flex'} gap={9}>
+    <Box display={'flex'} gap={1}>
+      <TravelExploreIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography variant="h5">Browser</Typography>
+    </Box>
+    <Box display={'flex'} gap={1}>
+      <CloudUploadIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography  variant="h5">Upload</Typography>
+    </Box>
+    <Box display={'flex'} gap={1}>
+      <DownloadForOfflineIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography  variant="h5">Download</Typography>
+    </Box>
+    <Box display={'flex'} gap={1}>
+      <StoreIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography  variant="h5">Firmware</Typography>
+    </Box>
 
+   </Grid>
       {/* ------------------Table for Desktop--------------------------------- */}
       <Grid
         container
@@ -322,7 +173,7 @@ function DeviceManage() {
                   Sr No.
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Device Name 
+                  Device Name
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Cloud ID
@@ -335,6 +186,9 @@ function DeviceManage() {
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Geolocation
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Action
                 </StyledTableCell>
               </TableRow>
             </TableHead>
@@ -349,6 +203,13 @@ function DeviceManage() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left">
+                    <Link to="/dashboard/Lora">
+                      <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                      <SettingsIcon fontSize='large' />
+                      </IconButton>
+                    </Link>
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

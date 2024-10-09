@@ -70,6 +70,7 @@ function PopUp() {
                   variant="outlined"
                   size="medium"
                   fullWidth
+                  required
                 />
               </Box>
               <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
