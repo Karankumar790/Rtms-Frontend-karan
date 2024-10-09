@@ -166,17 +166,14 @@ function Signup() {
 
   return (
     <PageContainer className="bgImg" showheader="true" showfooter="true">
-      <Grid container>
+      <Grid container display='flex' alignContent='center' height='100%'>
         <Grid item padding={2} width={600}>
-          <Card>
+          <Card style={{backgroundColor:'#e9f4f7'}}>
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
 
-               <Typography variant="h4">Registrationallllll</Typography>
-                <Typography variant="h4">Registrations</Typography>
-
-                <Typography variant="h6" color="#800000">
+                <Typography variant="h6" color="darkgreen">
                   Create a New RTMS Account
                 </Typography>
               </Grid>
@@ -195,6 +192,7 @@ function Signup() {
                         name="username"
                         value={formValues.username}
                         onChange={handleUsernameChange}
+                        required
                         fullWidth
                       />
                     </Box>
@@ -208,6 +206,7 @@ function Signup() {
                         name="email"
                         value={formValues.email}
                         onChange={handleUsernameChange}
+                        required
                       />
                     </Box>
 
@@ -219,6 +218,7 @@ function Signup() {
                         name="contactNumber"
                         variant="standard"
                         value={formValues.contactNumber}
+                        required
                         onChange={(e) => {
                           const value = e.target.value;
                           // Ensure the value starts with '+91'
@@ -247,6 +247,7 @@ function Signup() {
                         variant="standard"
                         value={formValues.employeeID}
                         onChange={handleUsernameChange}
+                        required
                       />
                     </Box>
 
@@ -259,7 +260,9 @@ function Signup() {
                         </InputLabel>
                         <Select
                           labelId="organization-label"
+
                           name="organizationName"
+                          required
                           value={formValues.organizationName}
                           onChange={handleOrganizationChange}
                           label="Organization"
@@ -291,6 +294,7 @@ function Signup() {
                           Department
                         </InputLabel>
                         <Select
+                          required
                           labelId="department-label"
                           name="department"
                           value={formValues.department}
@@ -326,6 +330,7 @@ function Signup() {
                       <FormControl fullWidth variant="standard">
                         <InputLabel>Role in RTMS</InputLabel>
                         <Select
+                          required
                           name="roleInRTMS"
                           value={formValues.roleInRTMS}
                           onChange={handleUsernameChange}
@@ -346,6 +351,7 @@ function Signup() {
                         <CameraAltIcon sx={{ mr: 1 }} fontSize="large" />
                         <Button variant="outlined" component="label" fullWidth>
                           <input
+                            required
                             type="file"
                             accept="image/*"
                             name="passportPhoto"
@@ -368,6 +374,7 @@ function Signup() {
                         <CameraAltIcon sx={{ mr: 1 }} fontSize="large" />
                         <Button variant="outlined" component="label" fullWidth>
                           <input
+                            required
                             type="file"
                             accept="image/*"
                             name="idCardPhoto"

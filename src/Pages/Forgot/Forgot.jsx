@@ -23,6 +23,7 @@ export default function Forgot() {
     e.preventDefault();
 
     try {
+      
       const response = await forgotPassword(formValues);
       if (response.success) {
         // Store data in redux
@@ -51,7 +52,7 @@ export default function Forgot() {
       className="bgImg"
       justifyContent="center"
     >
-      <Paper sx={{ borderRadius: "20px", mx: "5%", width: "45rem" }}>
+      <Paper sx={{ borderRadius: "20px", mx: "5%", width: "45rem", backgroundColor:'#e9f4f7'}}>
         <Grid item p={3}>
           <form onSubmit={handleSubmit}>
             <Grid item mt={2}>
