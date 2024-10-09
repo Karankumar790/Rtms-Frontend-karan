@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  Button,
   Grid,
   IconButton,
   Paper,
-  TextField,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -18,8 +16,6 @@ import { Box } from "@mui/system";
 import Network from "../../../../public/assets/NetworkWire2.jpg";
 import { Link } from "react-router-dom";
 import SettingsIcon from '@mui/icons-material/Settings';
-import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import StoreIcon from '@mui/icons-material/Store';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
