@@ -13,7 +13,6 @@ const data = [
     Condition: '',
     Description: '',
     Parameter: 'GIP (kg/Cm²)',
-    Parameter: 'GIP (kg/Cm²)',
     Condition1: '',
     Description1: '',
 
@@ -166,14 +165,7 @@ function AddWell() {
               variant="outlined"
             />
           </Grid>
-          {/* <Grid item sm={6} md={3} xs={12} lg={3} mt={1}> <Button variant='contained' fullWidth size='small'
-            sx={{
-              backgroundColor: 'green',   // Change button color to green
-              '&:hover': {
-                backgroundColor: 'darkgreen', // Optional: Change color on hover
-              },
-              fontSize: '16px',
-            }}>Submit</Button></Grid> */}
+         
         </Grid>
       </Paper>
 
@@ -495,15 +487,7 @@ function AddWell() {
           >
             Cancel
           </Button>
-          {/* <Button variant='contained'
-              sx={{
-                backgroundColor: 'green',   // Change button color to green
-                '&:hover': {
-                  backgroundColor: 'darkgreen', // Optional: Change color on hover
-                },
-                fontSize: '16px',
-              }}>Cancel</Button>
-          </Link>*/}
+         
         </Grid>
       </Grid>
     </div>

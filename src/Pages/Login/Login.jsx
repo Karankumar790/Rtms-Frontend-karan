@@ -100,7 +100,6 @@ function Login() {
                       onChange={handleInputs}
                       required
                       fullWidth
-                      
                     />
                   </Grid>
                   <Grid
@@ -126,7 +125,6 @@ function Login() {
                       onChange={handleInputs}
                       required
                       fullWidth
-                     
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
