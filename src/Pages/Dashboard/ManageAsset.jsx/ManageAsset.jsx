@@ -45,7 +45,7 @@ import {
   deleteApprovalChain,
   updateOrganizationData,
 } from "../../../apis/Service";
-import OrgMessageForward from "../OrgMessageForward";
+import OrgMessageForward from "../ManageAsset.jsx/OrgMessageForward";
 
 function ManageAsset() {
   const organizationName = useSelector((state) => state.auth.organization);
