@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import NotificationsIcon from '@mui/icons-material/NotificationsActive';
+import { width } from '@mui/system';
 
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -62,12 +63,16 @@ let Sata = {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    padding: '10px', // Increase padding
-    height: '20px',  // Set a specific height
-    fontSize: '16px', // Optionally adjust font size for header
-    lineHeight: '1.5', // Adjust line height if needed
+    backgroundColor: '#8C000B', // Customize background color
+    color: theme.palette.common.white, // Text color
+    padding: '10px', // Custom padding
+    height: '20px',  // Specific height for the header row
+    fontSize: '16px', // Font size for the header
+    textAlign: 'left', // Center-align header content (optional)
+    // lineHeight: '1.5', // Adjust line height
+    // borderBottom: `2px solid ${theme.palette.secondary.main}`, // Add border
+    position: 'sticky', // Sticky positioning
+    zIndex: 1, // Ensure it stays above the rows
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -91,9 +96,7 @@ function createData(name, calories, fat, carbs, protein) {
 const rows = [
   createData('1'),
   createData('2'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
+ 
 ];
 
 
@@ -120,8 +123,8 @@ function NotificationHistory() {
         </IconButton>
         <Typography variant='h4' mt={1}>Notification History</Typography>
       </Grid>
-      <Grid container spacing={3} pt={3} >     
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+      <Grid container spacing={3} pt={3} >
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth>
             <TextField
               fullWidth
@@ -153,7 +156,7 @@ function NotificationHistory() {
           </FormControl>
 
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <TextField
               fullWidth
@@ -184,17 +187,17 @@ function NotificationHistory() {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <TextField variant='outlined' size='small' label='Notification No.' />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <TextField variant='outlined' size='small' label='Well Number' />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
             <Select
@@ -204,7 +207,7 @@ function NotificationHistory() {
               label="Well Location"
               onChange={handleChangeParameter}
             >
-              <MenuItem value="">
+              <MenuItem value={0}>
                 <em>All</em>
               </MenuItem>
               <MenuItem value={1}>Open Notification</MenuItem>
@@ -213,7 +216,9 @@ function NotificationHistory() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item lg={2} md={3} sm={6} xs={12}>
+      </Grid>
+      <Grid container display={'flex'} justifyContent={'end'}  pt={2}>
+        <Grid item lg={1.3} md={3} sm={6} xs={12}>
           <Button variant='contained'
             sx={{
               backgroundColor: 'green',   // Change button color to green
@@ -227,25 +232,33 @@ function NotificationHistory() {
           </Button>
         </Grid>
       </Grid>
-      <Grid container display={'flex'} pt={1} py={1}>
-          <Typography variant='h4' mt={1}  sx={{color:'darkgrey'}}>Records Found:</Typography>
+      <Grid container display={'flex'} >
+        <Typography variant='h5' mt={2} sx={{ color: 'darkgrey' }}>Records Found:</Typography>
       </Grid>
       <Grid container md={12}
         lg={12}
         sm={5}
         xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }} mt={1}>
-        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
-          <Table aria-label="customized table" stickyHeader>
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" }, height: '100%' }} mt={1}>
+        <TableContainer component={Paper} sx={{
+          maxHeight:620,
+          height:1000,
+          overflowY: 'auto',
+        }}>
+          <Table aria-label="customized table" stickyHeader sx={{
+            minWidth: '800px',  // Set minimum width for horizontal scrolling
+          }}>
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Notification No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Data/Time</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align='left'>Location</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Installtion</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Well Number</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Description</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Status</StyledTableCell>
+                <StyledTableCell >Notification</StyledTableCell>
+                <StyledTableCell >Data/Time</StyledTableCell>
+                <StyledTableCell >Device ID</StyledTableCell>
+                <StyledTableCell >Location</StyledTableCell>
+                <StyledTableCell >Installation</StyledTableCell>
+                <StyledTableCell >Well Number</StyledTableCell>
+                <StyledTableCell >Well Port</StyledTableCell>
+                <StyledTableCell >Status</StyledTableCell>
+                <StyledTableCell >Description</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -253,16 +266,15 @@ function NotificationHistory() {
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}>
                     {row.name}
-
                   </StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}>5/6/2024</StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
-                  <StyledTableCell align="left" sx={{ width: '25%' }}></StyledTableCell>
-                  <StyledTableCell align="left" sx={{ width: '25%' }}></StyledTableCell>  
-
-
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

@@ -160,9 +160,8 @@ function OtherTable() {
                       label="Department"
                       onChange={handleChangeParameter}
                     >
-                      <MenuItem value=""><em>All</em></MenuItem>
                       <MenuItem value={1}>Self-flowing</MenuItem>
-                      <MenuItem value={2}>pugger well</MenuItem>
+                      <MenuItem value={2}>Plunger Pump</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
