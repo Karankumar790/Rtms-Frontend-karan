@@ -1048,7 +1048,7 @@ const handleDeleteDepartment = async (departmentName) => {
               xs={12}
               sm={3.5}
               md={3.5}
-              lg={3}
+              lg={2.5}
               gap={1}
               display="flex"
               flexDirection={"column"}
@@ -1154,7 +1154,7 @@ const handleDeleteDepartment = async (departmentName) => {
               xs={12}
               sm={3.5}
               md={3.5}
-              lg={4}
+              lg={3.5}
               gap={1}
               display="flex"
               flexDirection={"column"}
