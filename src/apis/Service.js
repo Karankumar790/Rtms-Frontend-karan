@@ -321,18 +321,6 @@ export const updatePosition = async (formData) => {
   }
 };
 
-//Delete Position
-export const deletePosition = async (formData) => {
-  try {
-    const response = await axios.post(
-      `${ORGANIZATION_API}/delete-position`,
-      formData
-    );
-    return response.data;
-  } catch (error) {
-    return catchError(error);
-  }
-};
 
 //Add Approval Chain on the basic of department
 export const addApprovalChain = async (formData) => {
