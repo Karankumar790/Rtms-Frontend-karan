@@ -271,6 +271,17 @@ export const DeleteDepartment = async (formData) => {
   }
 };
 
+//Delete Position
+export const deletePosition = async (formData) => {
+  try {
+    const response = await axios.delete(`${ORGANIZATION_API}/delete-position`, {
+      data: formData, // Use the data field to send the request body with DELETE
+    });
+    return response.data;
+  } catch (error) {
+    return catchError(error); // Ensure you handle the error appropriately
+  }
+};
 
 //Add Position on the basic of department
 export const addPosition = async (formData) => {

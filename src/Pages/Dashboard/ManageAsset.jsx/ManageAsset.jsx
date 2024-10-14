@@ -72,42 +72,25 @@ function ManageAsset() {
   const [approvalChainRows, setApprovalChainRows] = useState([]);
   const [selectedApprovalDepartment, setSelectedApprovalDepartment] =
     useState("");
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [editIndex, setEditIndex] = useState(null);
 
   // New state variables for old values
   const [oldAction, setOldAction] = useState("");
   const [oldLevel1, setOldLevel1] = useState("");
   const [oldLevel2, setOldLevel2] = useState("");
 
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
   //organization Data Add
-  const [formData, setFormData] = useState({
-    OrganizationName: "",
-    organizationlogo: "",
-    subtitlename: "",
-    address: "",
-    city: "",
-    state: "",
-    country: "",
-    pinCode: "",
-    phone: "",
-    fax: "",
-    email: "",
-  });
-
-  //storeg in local storage to use
-  localStorage.setItem("organizationLogo", formData.organizationlogo); // Save the logo
-  localStorage.setItem("subtitlename", formData.subtitlename); // Save the subtitle
+  const [formData, setFormData] = useState({OrganizationName: "",address: "",city: "",state: "",country: "", pinCode: "",phone: "",fax: "",email: "",});
   const [loading, setLoading] = useState(false);
   const [isEditOrganization, setIsEditOrganization] = useState(false);
   const [organiatioLoading, setOrganiationLoading] = useState(false);
-  const [file, setFile] = useState(null);
 
   // Function to initiate Updating department
   const handleEditClick = (index) => {
-    setNewDepartmentName(departments[index]); // Set current department name to input
-    setIsEditing(true); // Set editing mode
-    setEditingIndex(index); // Set index of the department being edited
+    setNewDepartmentName(departments[index]);
+    setIsEditing(true);
+    setEditingIndex(index);
   };
 
   //integration for add department and Update department
@@ -161,118 +144,69 @@ function ManageAsset() {
     }
   };
 
-
-  // Delete Department
+  //delete department
   const handleDeleteDepartment = async (departmentName) => {
     if (!organizationName || !departmentName) {
       toast.error("Organization name and department name are required");
       return;
     }
-
     try {
       const response = await DeleteDepartment({
         organizationName,
         departmentName,
       });
-
-      // Log the response for debugging
-      console.log("Delete Department Response:", response);
-
-      if (response && response.success) {
-        // Update the UI to remove the deleted department
+      if (response && response.data.success) {
         setDepartments((prevDepartments) =>
           prevDepartments.filter((dep) => dep !== departmentName)
         );
-
-        // Optionally, also remove positions associated with this department from state
-        setPositionRows((prevRows) =>
-          prevRows.filter((row) => row.departmentName !== departmentName)
-        );
-
-        toast.success(`Department "${departmentName}" deleted successfully`);
-      } else {
         toast.error(response.data.message || "Failed to delete department");
+      } else {
+        toast.success(`Department "${departmentName}" deleted successfully`);
       }
     } catch (error) {
-      console.error("Error deleting department: ", error);
+      console.error(
+        "Error deleting department: ",
+        error.response || error.message
+      );
       toast.error("Error: " + (error.response?.data?.message || error.message));
     }
   };
 
-
+  //ADD And Update position on the base of department
   const handlePositionSubmit = async () => {
     if (!selectedPositionDepartment || !position) {
       toast.error("Department and position are required");
       return;
     }
-
     try {
       let result;
-      const formData = {
-        organizationName: organizationName,
-        departmentName: selectedPositionDepartment,
-        ...(isEditingPosition
-          ? { oldPositionName: oldPosition, newPositionName: position }
-          : { positions: [position] }),
-      };
-
       if (isEditingPosition) {
+        const formData = {
+          organizationName: organizationName,
+          departmentName: selectedPositionDepartment,
+          oldPositionName: oldPosition,
+          newPositionName: position,
+        };
         result = await updatePosition(formData);
-        // Update the position in positionRows
-        setPositionRows((prevRows) =>
-          prevRows.map((row) => {
-            if (row.departmentName === selectedPositionDepartment) {
-              return {
-                ...row,
-                positions: row.positions.map((pos) =>
-                  pos === oldPosition ? position : pos
-                ),
-              };
-            }
-            return row;
-          })
-        );
       } else {
+        const formData = {
+          organizationName: organizationName,
+          departmentName: selectedPositionDepartment,
+          positions: [position],
+        };
         result = await addPosition(formData);
-        // Add the new position to positionRows
-        setPositionRows((prevRows) => {
-          const departmentExists = prevRows.some(
-            (row) => row.departmentName === selectedPositionDepartment
-          );
-
-          if (departmentExists) {
-            return prevRows.map((row) => {
-              if (row.departmentName === selectedPositionDepartment) {
-                return {
-                  ...row,
-                  positions: [...row.positions, position],
-                };
-              }
-              return row;
-            });
-          } else {
-            return [
-              ...prevRows,
-              {
-                departmentName: selectedPositionDepartment,
-                positions: [position],
-              },
-            ];
-          }
-        });
       }
-
       if (result && result.success) {
         toast.success(
           result.message ||
-          (isEditingPosition
-            ? "Position updated successfully"
-            : "Position added successfully")
+            (isEditingPosition
+              ? "Position updated successfully"
+              : "Position added successfully")
         );
-        setPosition(""); // Clear position input
-        setSelectedPositionDepartment(""); // Clear department selection
-        setIsEditingPosition(false); // Reset edit state
-        setOldPosition(null); // Clear old position reference
+        setPosition("");
+        setSelectedPositionDepartment("");
+        setIsEditingPosition(false);
+        setOldPosition(null);
       } else {
         toast.error(result.message || "Failed to submit position");
       }
@@ -280,57 +214,47 @@ function ManageAsset() {
       toast.error("Error: " + (error.response?.data?.message || error.message));
     }
   };
-
+  //Edit State for edit position
   const handleEditPosition = (departmentName, positionName) => {
     setSelectedPositionDepartment(departmentName);
     setPosition(positionName);
-    setOldPosition(positionName); // Store old position for update
-    setIsEditingPosition(true); // Set edit mode
+    setOldPosition(positionName);
+    setIsEditingPosition(true);
   };
 
-  // delete position
+  //Delete Position
   const handleDeletePosition = async (departmentName, positionName) => {
     if (!organizationName || !departmentName || !positionName) {
       toast.error(
-        "Organization Name, Department Name, and Position Name are required"
+        "organization Name, Department Name and Position Name are required"
       );
       return;
     }
-
     try {
-      // Call the deletePosition API
       const deletePositionResponse = await deletePosition({
         organizationName,
         departmentName,
         positionName,
       });
-
-      if (deletePositionResponse && deletePositionResponse.success) {
-        // Update the UI to remove the deleted position
-        setPositionRows((prevRows) =>
-          prevRows.map((row) => {
-            if (row.departmentName === departmentName) {
-              return {
-                ...row,
-                positions: row.positions.filter((pos) => pos !== positionName),
-              };
-            }
-            return row;
-          })
+      if (deletePositionResponse && deletePositionResponse.data.success) {
+        setPosition((prevPosition) =>
+          prevPosition.filter((pos) => pos !== positionName)
         );
-
-        toast.success(`Position "${positionName}" deleted successfully`);
-      } else {
         toast.error(
-          deletePositionResponse.message || "Failed to delete position"
+          deletePositionResponse.data.message || "Failed to delete position"
         );
+      } else {
+        toast.success(`Position "${positionName}" Delete Successfully`);
       }
     } catch (error) {
       console.error(
         "Error Deleting Position: ",
-        error.response?.data || error.message
+        error.deletePositionResponse || error.message
       );
-      toast.error("Error: " + (error.response?.data?.message || error.message));
+      toast.error(
+        "Error: " +
+          (error.deletePositionResponse?.data?.message || error.message)
+      );
     }
   };
 
@@ -341,13 +265,13 @@ function ManageAsset() {
       toast.error("All fields are required.");
       return;
     }
-
-    // Construct formData based on mode
+  
+    // Construct formData based on mode (edit or add)
     const formData = {
       organizationName,
       departmentName: selectedApprovalDepartment,
     };
-
+  
     if (isEditMode) {
       formData.oldAction = oldAction;
       formData.oldLevel1 = oldLevel1;
@@ -360,19 +284,44 @@ function ManageAsset() {
       formData.level1 = level1;
       formData.level2 = level2;
     }
-
+  
     try {
       let result;
       if (isEditMode) {
+        // Call the update API
         result = await updateApprovalChain(formData);
-        console.log("Update Approval Chain Result:", result);
         toast.success("Approval chain updated successfully!");
+  
+        // State ko bina refresh kiye update karo
+        const updatedApprovalChainRows = approvalChainRows.map((row, idx) => {
+          if (idx === editIndex) {
+            return {
+              ...row,
+              approvalChains: row.approvalChains.map((chain, chainIdx) =>
+                chainIdx === chainIndex
+                  ? { action: approvalChains, level1, level2 } // Updated values
+                  : chain
+              ),
+            };
+          }
+          return row;
+        });
+  
+        setApprovalChainRows(updatedApprovalChainRows); // Update the state
       } else {
+        // Call the add API
         result = await addApprovalChain(formData);
-        console.log("Add Approval Chain Result:", result);
         toast.success("Approval chain added successfully!");
+  
+        // Nayi approval chain ko state mein add karo bina refresh kiye
+        const newApprovalChain = {
+          departmentName: selectedApprovalDepartment,
+          approvalChains: [{ action: approvalChains, level1, level2 }],
+        };
+  
+        setApprovalChainRows([...approvalChainRows, newApprovalChain]); // Update the state
       }
-
+  
       // Reset the form after submission
       setSelectedApprovalDepartment("");
       setApprovalChains("");
@@ -383,45 +332,53 @@ function ManageAsset() {
       setOldLevel1("");
       setOldLevel2("");
     } catch (error) {
-      console.error("Error:", error);
-      toast.error(
-        "An error occurred while processing the request. Please try again."
-      );
+      toast.error("An error occurred while processing the request. Please try again.");
     }
   };
+  
 
   //update approvalchain
   const handleApprovalChainEdit = (index, chainIndex) => {
     try {
       const approvalChainToEdit = approvalChainRows[index];
       const chain = approvalChainToEdit.approvalChains[chainIndex];
-
-      // Set new values in the form fields
+  
+      // Form fields ko editing ke liye populate karo
       setSelectedApprovalDepartment(approvalChainToEdit.departmentName);
       setApprovalChains(chain.action || "");
       setLevel1(chain.level1 || "");
       setLevel2(chain.level2 || "");
-
-      // Set old values for the API
+  
+      // Store old values for comparison during update
       setOldAction(chain.action || "");
       setOldLevel1(chain.level1 || "");
       setOldLevel2(chain.level2 || "");
-
+  
+      // Edit mode enable karo
       setIsEditMode(true);
-      setEditIndex(index);
+      setEditIndex(index);   // Store the index for future updates
+      setChainIndex(chainIndex); // Store the chain index
+  
       toast.info("Editing approval chain entry.");
     } catch (error) {
-      console.error("Error during edit:", error);
-      toast.error(
-        "An error occurred while trying to edit the approval chain. Please try again."
-      );
+      toast.error("An error occurred while trying to edit the approval chain. Please try again.");
     }
   };
-
+  
+  
 
   //Delete Approval chain
   const handleDeleteApprovalChain = async (index) => {
     const approvalChainToDelete = approvalChainRows[index];
+    // Check if approval chain exists
+    if (
+      !approvalChainToDelete ||
+      !approvalChainToDelete.approvalChains.length
+    ) {
+      console.error("No approval chain found at the specified index.");
+      toast.error("No approval chain found at the specified index.");
+      return;
+    }
     // Create the form data for deletion
     const formData = {
       organizationName,
@@ -539,6 +496,10 @@ function ManageAsset() {
             };
           })
         );
+        // console.log(
+        //   "Approval Chain Data:",
+        //   JSON.stringify(allApprovalChain, null, 2)
+        // );
         setApprovalChainRows(allApprovalChain);
       } else {
         console.warn("No Departments Found");
@@ -559,26 +520,15 @@ function ManageAsset() {
     });
   };
 
-  //upload logo of organization
-  const handleLogoUpload = (e) => {
-    const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      organizationlogo: file,
-    });
-  };
-
-  // Save organization data
+  //add organization data to save
   const handleSave = async () => {
     try {
       setLoading(true);
       const updatedFormData = { ...formData };
       const response = await organizationAddData(updatedFormData);
-      // console.log("jhdvchjdfjc", response);
-      if (response.success) {
-        toast.success(response.message || "Data saved successfully");
-        setIsEditOrganization(true); // Switch to Update mode after saving
-        localStorage.setItem("organizationSaved", true);
+      setIsEditOrganization(true);
+      if (response.status === 200) {
+        toast.error("Data Not saved ", response.message);
       } else {
         // console.log("sssss", "Essslse ");
         toast.error(response.message || "Data not saved");
@@ -592,22 +542,18 @@ function ManageAsset() {
 
   // Cancel update
   const handleCancel = () => {
-    setIsEditOrganization(true);
+    setFormData({
+      organizationName: "",
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+      pinCode: "",
+      phone: "",
+      fax: "",
+      email: "",
+    });
   };
-
-  // Check if data is saved in localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("organizationSaved");
-    if (saved) {
-      setIsEditOrganization(true);
-      const savedLogo = localStorage.getItem("organizationLogo");
-      if (savedLogo) {
-        setFormData((prev) => ({ ...prev, organizationlogo: savedLogo }));
-      }
-    }
-  }, []);
-
-
   //HAndle Update Organization
   const handleUpdate = async () => {
     setLoading(true);
@@ -633,8 +579,6 @@ function ManageAsset() {
       const response = await getOrganizationData(organizationName);
       setFormData({
         organizationName: response.data.organizationName || "",
-        organizationlogo: response.data.organizationlogo || "",
-        subtitlename: response.data.subtitlename || "",
         address: response.data.address || "",
         city: response.data.city || "",
         state: response.data.state || "",
@@ -644,11 +588,6 @@ function ManageAsset() {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
-      if (organizationlogo instanceof File) {
-        formDataToUpdate.organizationlogo = organizationlogo;
-      }
-      setFormData(formDataToUpdate);
-      // console.log("hgdvdhc", data.organizationlogo);
       // console.log("organization", response.data);
     } catch (error) {
       console.error("Error fetching organization data:", error);
@@ -699,105 +638,57 @@ function ManageAsset() {
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
           <Typography variant="h4" mt={1}>
-            Organization: [ {organizationName ? organizationName : "N/A"} ]
+            Organization : [ {organizationName ? organizationName : "N/A"} ]
           </Typography>
-
-
-          {/* Organization Logo (Top of Organization Name) */}
-          {isEditOrganization && formData.organizationlogo && (
-            <Grid
-              container
-              justifyContent="flex-start"
-              alignItems="center"
-              marginTop={4}
-            >
-              <span
-                style={{
-                  marginRight: "50px",
-                  fontSize: "1.5rem",
-                }}
+          <Grid container spacing={2} padding={4} paddingLeft={0}>
+            <Grid item xs={12} sm={6} md={4} lg={4} display={"flex"} gap={1}>
+              <Typography
+                variant="h6"
+                sx={{ fontSize: { xs: "1rem", sm: "1.25rem" } }}
               >
-                Organization Logo:
-              </span>
-              <img
-                src={formData.organizationlogo}
-                alt="Organization Logo"
-                style={{
-                  width: "250px",
-                  height: "100px",
-                  objectFit: "contain", // Use 'contain' to preserve the aspect ratio
-                  borderRadius: "5px", // Optional: added to make the image look better
-                }}
-              />
+                Upload Logo
+              </Typography>
+              <Grid item xs={12} sm={6} md={4} lg={7} display={"flex"} gap={2}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  component="label"
+                  fullWidth
+                >
+                  Upload Logo
+                </Button>
+              </Grid>
             </Grid>
-          )}
+          </Grid>
           <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={12} marginTop={4}>
-              <Grid container spacing={3}>
-                {/* Organization Logo Upload (Show only in Save mode) */}
-                {!isEditOrganization && (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    sx={{ display: 'flex' }}
-                  >
-                    <Typography variant="h6">Organization Logo</Typography>
-                    <span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        style={{ cursor: "pointer", marginLeft: "1rem" }}
-                        onChange={handleLogoUpload}
-                      />
-                    </span>
-                    {file && (
-                      <img
-                        src={file}
-                        alt="Organization Logo Preview"
-                        style={{
-                          width: "250px",
-                          height: "100px",
-                          objectFit: "contain",
-                          marginLeft: "1.5rem",
-                        }}
-                      />
-                    )}
-                  </Grid>
-                )}
+            <Grid item md={10} sm={10} xs={12} lg={12}>
+              <Grid container spacing={1}>
                 {[
-                  { name: "organizationName", label: "Organization Display Name" },
-                  { name: "subtitlename", label: "Portal Display Name" },
-                  { name: "address", label: "Address" },
-                  { name: "city", label: "City" },
-                  { name: "state", label: "State" },
-                  { name: "country", label: "Country" },
-                  { name: "pinCode", label: "Pin Code" },
-                  { name: "phone", label: "Phone" },
-                  { name: "fax", label: "Fax" },
-                  { name: "email", label: "Email" },
+                  "organizationName",
+                  "Display Subtitle Name",
+                  "address",
+                  "city",
+                  "state",
+                  "country",
+                  "pinCode",
+                  "phone",
+                  "fax",
+                  "email",
                 ].map((field) => (
-                  <Grid item xs={12} sm={3} md={3} lg={12} key={field.name} spacing={3} sx={{ display: 'flex' }} gap={2}>
-                    <Typography variant="h6" sx={{ flexShrink: 0, width: '250px' }}>{field.label}</Typography>
-                    {field.name === "organizationName" ? (
-                      // Display organizationName as text instead of an input
-                      <Typography sx={{ flexShrink: 0, width: '250px', fontSize: '24px', fontWeight: 'bold' }}>
-                        {formData[field.name]}
-                      </Typography>
-                    ) : (
-                      <TextField
-                        type="text"
-                        variant="outlined"
-                        size="small"
-                        sx={{ height: '50%', width: '30%' }}
-                        name={field.name}
-                        value={formData[field.name]}
-                        onChange={handleInputChange}
-                        disabled={isEditOrganization} // Disable fields when editing
-                      />
-                    )}
+                  <Grid item xs={12} sm={3} md={3} lg={3} key={field}>
+                    <Typography variant="h6">
+                      {field.charAt(0).toUpperCase() + field.slice(1)}
+                    </Typography>
+                    <TextField
+                      type="text"
+                      variant="outlined"
+                      size="small"
+                      fullWidth
+                      name={field}
+                      value={formData[field]}
+                      onChange={handleInputChange}
+                      disabled={isEditOrganization}
+                    />
                   </Grid>
                 ))}
               </Grid>
@@ -816,7 +707,9 @@ function ManageAsset() {
                   variant="contained"
                   sx={{
                     backgroundColor: "blue",
-                    "&:hover": { backgroundColor: "darkblue" },
+                    "&:hover": {
+                      backgroundColor: "darkblue",
+                    },
                     fontSize: "16px",
                     width: "150px",
                   }}
@@ -826,12 +719,14 @@ function ManageAsset() {
                   {loading ? "UPDATING..." : "UPDATE"}
                 </Button>
               ) : (
-                <div style={{ display: "flex", gap: "2rem" }}>
+                <>
                   <Button
                     variant="contained"
                     sx={{
                       backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
+                      "&:hover": {
+                        backgroundColor: "darkgreen",
+                      },
                       fontSize: "16px",
                       width: "150px",
                     }}
@@ -843,8 +738,10 @@ function ManageAsset() {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: "red",
-                      "&:hover": { backgroundColor: "darkred" },
+                      backgroundColor: "gray",
+                      "&:hover": {
+                        backgroundColor: "darkgray",
+                      },
                       fontSize: "16px",
                       width: "150px",
                     }}
@@ -852,7 +749,7 @@ function ManageAsset() {
                   >
                     CANCEL
                   </Button>
-                </div>
+                </>
               )}
             </Box>
           </Grid>
@@ -866,9 +763,9 @@ function ManageAsset() {
             <Grid
               item
               xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+              sm={3.5}
+              md={3.5}
+              lg={3}
               gap={1}
               display="flex"
               flexDirection={"column"}
@@ -880,7 +777,7 @@ function ManageAsset() {
                   variant="outlined"
                   size="small"
                   label="Department"
-                  value={newDepartmentName} // Bind value to newDepartmentName state
+                  value={newDepartmentName}
                   onChange={(e) => setNewDepartmentName(e.target.value)}
                   fullWidth
                 />
@@ -934,12 +831,6 @@ function ManageAsset() {
                                 </span>
                                 <Box display="flex">
                                   <IconButton
-                                    onClick={() => handleEditClick(index)}
-                                  >
-                                    {" "}
-                                    <EditIcon fontSize="medium" />
-                                  </IconButton>{" "}
-                                  <IconButton
                                     sx={{
                                       color: "red",
                                       "&:hover": { color: "darkred" },
@@ -951,6 +842,12 @@ function ManageAsset() {
                                   >
                                     <DeleteForeverIcon fontSize="medium" />
                                   </IconButton>
+                                  <IconButton
+                                    onClick={() => handleEditClick(index)}
+                                  >
+                                    {" "}
+                                    <EditIcon fontSize="medium" />
+                                  </IconButton>{" "}
                                 </Box>
                               </Box>
                             </StyledTableCell>
@@ -972,9 +869,9 @@ function ManageAsset() {
             <Grid
               item
               xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+              sm={3.5}
+              md={3.5}
+              lg={4}
               gap={1}
               mt={2}
               display="flex"
@@ -1093,52 +990,52 @@ function ManageAsset() {
                             <StyledTableCell align="left">
                               {row.positions.length > 0
                                 ? row.positions.map((position, posIndex) => (
-                                  <div
-                                    key={posIndex}
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "space-between",
-                                    }}
-                                  >
-                                    {posIndex + 1}. {position}
-                                    <Box display="flex">
-                                      <IconButton
-                                        aria-label="edit"
-                                        size="small"
-                                        sx={{
-                                          color: "darkblue",
-                                          "&:hover": { color: "black" },
-                                        }}
-                                        onClick={() =>
-                                          handleEditPosition(
-                                            row.departmentName,
-                                            position
-                                          )
-                                        }
-                                      >
-                                        <EditIcon fontSize="small" />
-                                      </IconButton>
-                                      <IconButton
-                                        aria-label="delete"
-                                        size="small"
-                                        sx={{
-                                          color: "red",
-                                          "&:hover": { color: "darkred" },
-                                          marginRight: "8px",
-                                        }}
-                                        onClick={() =>
-                                          handleDeletePosition(
-                                            row.departmentName,
-                                            position
-                                          )
-                                        }
-                                      >
-                                        <DeleteForeverIcon fontSize="small" />
-                                      </IconButton>
-                                    </Box>
-                                  </div>
-                                ))
+                                    <div
+                                      key={posIndex}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                      }}
+                                    >
+                                      {posIndex + 1}. {position}
+                                      <Box display="flex">
+                                        <IconButton
+                                          aria-label="edit"
+                                          size="small"
+                                          sx={{
+                                            color: "darkblue",
+                                            "&:hover": { color: "black" },
+                                          }}
+                                          onClick={() =>
+                                            handleEditPosition(
+                                              row.departmentName,
+                                              position
+                                            )
+                                          }
+                                        >
+                                          <EditIcon fontSize="small" />
+                                        </IconButton>
+                                        <IconButton
+                                          aria-label="delete"
+                                          size="small"
+                                          sx={{
+                                            color: "red",
+                                            "&:hover": { color: "darkred" },
+                                            marginRight: "8px",
+                                          }}
+                                          onClick={() =>
+                                            handleDeletePosition(
+                                              row.departmentName,
+                                              position
+                                            )
+                                          }
+                                        >
+                                          <DeleteForeverIcon fontSize="small" />
+                                        </IconButton>
+                                      </Box>
+                                    </div>
+                                  ))
                                 : "No positions available"}
                             </StyledTableCell>
                           </StyledTableRow>
@@ -1159,9 +1056,9 @@ function ManageAsset() {
             <Grid
               item
               xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+              sm={3.5}
+              md={3.5}
+              lg={5}
               gap={1}
               mt={2}
               display="flex"
