@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  FormControl,
   Grid,
   IconButton,
+  InputLabel,
+  MenuItem,
   Paper,
   Typography,
 } from "@mui/material";
@@ -13,14 +16,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
-import Network from "../../../../public/assets/NetworkWire2.jpg";
-import { Link } from "react-router-dom";
-import SettingsIcon from '@mui/icons-material/Settings';
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import StoreIcon from '@mui/icons-material/Store';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Network from "../../../public/assets/NetworkWire2.jpg";
+import SettingsIcon from "@mui/icons-material/Settings";
+import MessageIcon from "@mui/icons-material/Message";
+import { Select } from "flowbite-react";
 
 // ----------------------Table for Moblie------------------------------
 
@@ -110,9 +109,7 @@ const rows = [
   // createData('5'),
 ];
 
-
-
-function DeviceManage() {
+function MessageForwarding() {
   return (
     <div>
       <Grid
@@ -123,33 +120,20 @@ function DeviceManage() {
       >
         <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
           <Box sx={{ height: "50px", width: "50px" }}>
-            <img src={Network} alt="img" height={"50px"} width={"50px"} />
+            <img
+              src="https://static.thenounproject.com/png/401262-200.png"
+              alt="Img"
+              height={"50px"}
+              width={"50px"}
+            />
           </Box>
           <Box>
-            <Typography variant="h4">Node Manager</Typography>
+            <Typography variant="h4">Message User</Typography>
           </Box>
         </Grid>
+        
       </Grid>
-   
-   <Grid container display={'flex'} gap={9}>
-    <Box display={'flex'} gap={1}>
-      <TravelExploreIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography variant="h5">Browser</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <CloudUploadIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Upload</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <DownloadForOfflineIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Download</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <StoreIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Firmware</Typography>
-    </Box>
-
-   </Grid>
+     
       {/* ------------------Table for Desktop--------------------------------- */}
       <Grid
         container
@@ -168,22 +152,25 @@ function DeviceManage() {
             <TableHead>
               <TableRow>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Sr No.
+                  Sr. No
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Device Name
+                  UserName
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Cloud ID
+                  Email
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  LoRa ID
+                  Department
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Landmark
+                  Employee ID
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Geolocation
+                  Phone
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Status
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Action
@@ -200,25 +187,18 @@ function DeviceManage() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
-                  <Link to="/dashboard/virtual">
-                      <IconButton
-                        sx={{
-                          color: "grey",
-                          "&:hover": { color: "darkred" },
-                          marginRight: "5px",
-                        }}
-                      >
-                        <LocationOnIcon fontSize="large" />
-                      </IconButton>
-                    </Link>
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    <Link to="/dashboard/Lora">
-                      <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
-                      <SettingsIcon fontSize='large' />
-                      </IconButton>
-                    </Link>
+                    <IconButton
+                      sx={{
+                        color: "grey",
+                        "&:hover": { color: "darkred" },
+                        marginRight: "5px",
+                      }}
+                    >
+                      <SettingsIcon fontSize="large" />
+                    </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -311,4 +291,4 @@ function DeviceManage() {
   );
 }
 
-export default DeviceManage;
+export default MessageForwarding;

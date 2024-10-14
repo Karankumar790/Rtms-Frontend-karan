@@ -286,51 +286,12 @@ function OtherTable() {
 
                 {/* Installation Dropdown */}
                 <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="installation-label">
-                      Installation
-                    </InputLabel>
-                    <Select
-                      labelId="installation-label"
-                      id="installation"
-                      name="installation"
-                      value={formValues.installation}
-                      label="Installation"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value="New Installation ghaziabad1">
-                        New Installation ghaziabad1
-                      </MenuItem>
-                      <MenuItem value="New Installation Karnatak">
-                        New Installation Karnatak
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
+                  <TextField variant="outlined" label="Installation" size="small" fullWidth />
                 </Grid>
 
                 {/* Well Type Input */}
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="wellType-label">Well Type</InputLabel>
-                    <Select
-                      labelId="wellType-label"
-                      id="wellType"
-                      name="wellType"
-                      value={formValues.wellType}
-                      label="Well Type"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value="Self-Flowing">Self-Flowing</MenuItem>
-                      <MenuItem value="Plunger Well">Plunger Well</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
+        
+        
 
                 {/* Well Number Input */}
                 <Grid item lg={3} md={6} sm={6} xs={12}>

@@ -6,20 +6,12 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  Box,
-  Paper,
-  Divider,
   TableCell,
   tableCellClasses,
   TableRow,
-  TableContainer,
-  Table,
-  TableHead,
-  TableBody,
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Chart from "react-apexcharts";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 

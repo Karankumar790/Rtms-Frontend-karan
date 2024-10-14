@@ -1,23 +1,20 @@
-import React from "react";
-import { Button, Grid, IconButton, Paper, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Box, color } from "@mui/system";
-import master from "/assets/wellMaster.png";
-import { Link } from "react-router-dom";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Othertable from "../Dashboard/OtherTable.jsx";
-import Pagination from "@mui/material/Pagination";
-import PaginationItem from "@mui/material/PaginationItem";
-import Stack from "@mui/material/Stack";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import React from 'react'
+import { Grid, IconButton, Pagination, PaginationItem, Paper, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Box, color, Stack } from '@mui/system';
+import master from '/assets/wellMaster.png'
+import { Link } from 'react-router-dom';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Othertable from '../Dashboard/OtherTable.jsx';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -70,17 +67,17 @@ let Sata = {
 // ------------------------Table for Desktop-----------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    padding: "10px", // Increase padding
-    height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
-    lineHeight: "1.5", // Adjust line height if needed
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: "#8C000B",
+        color: theme.palette.common.white,
+        padding: '10px', // Increase padding
+        height: '20px',  // Set a specific height
+        fontSize: '16px', // Optionally adjust font size for header
+        lineHeight: '1.5', // Adjust line height if needed
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -115,23 +112,18 @@ const BodyTableCellWraper = styled(TableCell)(() => ({
 }));
 
 function WellMaster() {
-  return (
-    <div>
-      <Grid
-        container
-        sx={{ display: "flex", justifyContent: "space-between" }}
-        pt={1}
-        paddingBottom={2}
-      >
-        <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
-          <Box sx={{ height: "50px", width: "50px" }}>
-            <img src={master} alt="img" height={"50px"} width={"50px"} />
-          </Box>
-          <Box>
-            <Typography variant="h4">Well Master</Typography>
-          </Box>
-        </Grid>
-      </Grid>
+    return (
+        <div>
+            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={1} paddingBottom={2}>
+                <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
+                    <Box sx={{ height: '50px', width: '50px' }}>
+                        <img src={master} alt='img' height={'50px'} width={'50px'} />
+                    </Box>
+                    <Box >
+                        <Typography variant='h4'>Well Manager</Typography>
+                    </Box>
+                </Grid>
+            </Grid>
 
       <Grid container>
         <Othertable />

@@ -9,7 +9,6 @@ import { login, sendOtpLogin } from "../../apis/Service"; // Import login and se
 import {
   setOtp,
   setAuthenticated,
-  clearAuth,
   setAuthToken,
   setRole,
   setOrganizationName,
