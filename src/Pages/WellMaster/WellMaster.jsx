@@ -67,7 +67,7 @@ let Sata = {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#8C000B",
         color: theme.palette.common.white,
         padding: '10px', // Increase padding
         height: '20px',  // Set a specific height
@@ -123,7 +123,7 @@ function WellMaster() {
                         <img src={master} alt='img' height={'50px'} width={'50px'} />
                     </Box>
                     <Box >
-                        <Typography variant='h4'>Well Master</Typography>
+                        <Typography variant='h4'>Well Manager</Typography>
                     </Box>
                 </Grid>
             </Grid>

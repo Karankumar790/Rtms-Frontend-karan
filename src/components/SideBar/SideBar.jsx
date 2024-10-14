@@ -24,6 +24,7 @@ import WellmonitorIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import PersonIcon from '@mui/icons-material/Person';
 import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
@@ -103,19 +104,19 @@ export default function Sidebar({
       roles: ["owner"],
     },
     {
-      name: "Well Master",
+      name: "Well Manager",
       icon: <WellmasterIcon sx={{ color: "black" }} />,
       path: "/dashboard/wellmaster",
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Manage Node",
+      name: "Node Manager",
       icon: <DeviceManagerIcon sx={{ color: "black" }} />,
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Manage Gateway",
+      name: "IoT Gateway",
       icon: <Networkicon sx={{ color: "black" }} />,
       path: "/dashboard/Network",
       roles: ["owner", "manager", "employee"],
@@ -160,6 +161,12 @@ export default function Sidebar({
       name: "Message Box",
       icon: <ForwardToInboxIcon sx={{ color: "black" }} />,
       path: "/dashboard/message",
+      roles: ["owner", "manager"],
+    },
+    {
+      name: "Manage Users",
+      icon: <PersonIcon sx={{ color: "black" }} />,
+      path: "/dashboard/MesaageForwarding",
       roles: ["owner", "manager"],
     },
   ];

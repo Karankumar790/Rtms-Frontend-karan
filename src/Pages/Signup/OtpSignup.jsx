@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { toast } from "react-hot-toast";
 import PageContainer from "../../components/HOC/PageContainer";
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import OTPInput from "react-otp-input";

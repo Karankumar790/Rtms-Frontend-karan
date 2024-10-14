@@ -63,12 +63,13 @@ let Sata = {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    padding: '10px', // Increase padding
-    height: '20px',  // Set a specific height
-    fontSize: '16px', // Optionally adjust font size for header
-    lineHeight: '1.5', // Adjust line height if needed
+    backgroundColor: '#8C000B', // Customize background color
+    color: theme.palette.common.white, // Text color
+    padding: '10px', // Custom padding
+    height: '20px',  // Specific height for the header row
+    fontSize: '16px', // Font size for the header
+    position: 'sticky', // Sticky positioning
+    zIndex: 1, // Ensure it stays above the rows
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -91,18 +92,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData('1'),
-  createData('2'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
-  createData('1'),
-  createData('2'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
-  createData('3'),
-  createData('4'),
-  createData('5'),
+ 
 ];
 
 function ComplaintHistory() {
@@ -159,7 +149,7 @@ function ComplaintHistory() {
         <Typography variant='h4' mt={1}>Complaint History</Typography>
       </Grid>
       <Grid container spacing={3} pt={3}>
-        <Grid item sm={6} md={6} xs={12} lg={2}>
+        <Grid item sm={6} md={6} xs={12} lg={2.4}>
           <FormControl fullWidth>
             <TextField
               fullWidth
@@ -191,7 +181,7 @@ function ComplaintHistory() {
           </FormControl>
 
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <TextField
               fullWidth
@@ -222,17 +212,17 @@ function ComplaintHistory() {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth>
             <TextField size="small" label='Complaint No.' />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth>
             <TextField size="small" label='Well Number' />
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
             <Select
@@ -242,7 +232,7 @@ function ComplaintHistory() {
               label="Well Location"
               onChange={handleChangeParameter}
             >
-              <MenuItem value="">
+              <MenuItem value={0}>
                 <em>All</em>
               </MenuItem>
               <MenuItem value={1}>Pending Complaints</MenuItem>
@@ -251,7 +241,9 @@ function ComplaintHistory() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item lg={2} md={6} sm={6} xs={12}>
+      </Grid>
+      <Grid container display={'flex'} justifyContent={'end'} pt={2}>
+        <Grid item lg={1.3} md={6} sm={6} xs={12}>
           <Button variant='contained'
             sx={{
               backgroundColor: 'green',   // Change button color to green
@@ -265,8 +257,8 @@ function ComplaintHistory() {
           </Button>
         </Grid>
       </Grid>
-      <Grid container display={'flex'} pt={1} py={1}>
-        <Typography variant='h4' mt={1} sx={{color:'darkgrey'}}>Records Found:</Typography>
+      <Grid container display={'flex'}  >
+        <Typography variant='h5' mt={2} sx={{ color: 'darkgrey' }}>Records Found:</Typography>
       </Grid>
       {/* -----------------------------------------table for Desktop-------------------------- */}
       <Grid container md={12}
@@ -274,18 +266,18 @@ function ComplaintHistory() {
         sm={5}
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }} mt={1}>
-        <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+        <TableContainer component={Paper} sx={{ maxHeight: 620,height:1000 }}>
           <Table aria-label="customized table" stickyHeader>
             <TableHead >
               <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }}>Complain No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Data/Time</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Sender Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Department</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Receiver Name</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="left">Department</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="center">Description</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px', width: '10%' }} align="center">Status</StyledTableCell>
+                <StyledTableCell align='left'>Complain No.</StyledTableCell>
+                <StyledTableCell align='left'>Data/Time</StyledTableCell>
+                <StyledTableCell align='left'>Sender Name</StyledTableCell>
+                <StyledTableCell align='left'>Department</StyledTableCell>
+                <StyledTableCell align='left'>Receiver Name</StyledTableCell>
+                <StyledTableCell align='left'>Department</StyledTableCell>
+                <StyledTableCell align='left'>Status</StyledTableCell>
+                <StyledTableCell align='center'>Description</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

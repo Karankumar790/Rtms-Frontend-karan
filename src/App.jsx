@@ -60,6 +60,10 @@ const Lora = lazy(() =>
   import("./Pages/Dashboard/DeviceManage/Lora.jsx")
 );
 
+const MesaageForwarding = lazy(() =>
+  import("./Pages/Dashboard/MessageForwarding.jsx")
+);
+
 function App() {
   const role = useSelector((state) => state.auth.role);
 
@@ -84,6 +88,7 @@ function App() {
 
     { path: "Admin", element: <SuperAdmin /> },
     { path: "technicalSupport", element: <TechnicalSupport /> },
+    { path: "MesaageForwarding", element: <MesaageForwarding /> },
 
   ];
 
