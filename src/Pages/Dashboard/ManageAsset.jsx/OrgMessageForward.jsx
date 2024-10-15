@@ -163,12 +163,12 @@ function OrgMessageForward() {
                 <TableRow  >
                   <StyledTableCell align='left'>Activite</StyledTableCell>
                   <StyledTableCell align='left'>Department</StyledTableCell>
-                  <StyledTableCell align='left'>Time</StyledTableCell>
                   <StyledTableCell align='left'>Level 1</StyledTableCell>
-                  <StyledTableCell align='left'>Time</StyledTableCell>
+                  <StyledTableCell align='left'>Delay</StyledTableCell>
                   <StyledTableCell align='left'>Level 2</StyledTableCell>
-                  <StyledTableCell align='left'>Time</StyledTableCell>
+                  <StyledTableCell align='left'>Delay</StyledTableCell>
                   <StyledTableCell align='center'>Level 3</StyledTableCell>
+                  <StyledTableCell align='left'>Delay</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
