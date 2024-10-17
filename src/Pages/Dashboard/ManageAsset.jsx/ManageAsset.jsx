@@ -20,7 +20,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box } from "@mui/system";
+import { Box, padding } from "@mui/system";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
 import { useSelector } from "react-redux";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -798,11 +798,11 @@ function ManageAsset() {
               <Grid container>
                 <TableContainer
                   component={Paper}
-                  sx={{ maxHeight: 220, height: 400, overflow: "auto" }}
+                  sx={{ maxHeight: 320, height: 600, overflowY: "auto"  }}
                 >
                   <Table aria-label="customized table" stickyHeader >
                     <TableHead>
-                      <TableRow>
+                      <TableRow sx={{msOverflowY:'scroll'}}>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "15%" }}
                         >
@@ -948,11 +948,11 @@ function ManageAsset() {
               <Grid container>
                 <TableContainer
                   component={Paper}
-                  sx={{ maxHeight: 220, height: 400, overflow: "auto" }}
+                  sx={{ maxHeight: 320, height: 400, overflowY: 'scroll' }}
                 >
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead>
-                      <TableRow>
+                      <TableRow sx={{overflowY: 'scroll' }}>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "15%" }}
                         >
@@ -1170,7 +1170,7 @@ function ManageAsset() {
               <Grid container>
                 <TableContainer
                   component={Paper}
-                  sx={{ maxHeight: 220, height: 400, overflow: "auto" }}
+                  sx={{ maxHeight: 320, height: 400, overflow: "auto" }}
                 >
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead>

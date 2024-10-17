@@ -520,7 +520,7 @@ function Monitor() {
             <TabPanel style={{ width: '100%' }}>
               <Grid container>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <Paper sx={{ bgcolor: "#F8F8F8" }}>
+                  <Paper sx={{ bgcolor: "lightgrey" }}>
                     <Chart
                       options={lineChartOptions}
                       series={lineChartSeries}

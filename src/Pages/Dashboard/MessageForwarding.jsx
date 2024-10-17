@@ -78,6 +78,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    padding: "3px",
   },
 }));
 
@@ -89,7 +90,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
+  padding: "5px",
 }));
+
+
+
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -146,7 +151,7 @@ function MessageForwarding() {
       >
         <TableContainer
           component={Paper}
-          sx={{ maxHeight: 620, overflow: "auto" }}
+          sx={{ maxHeight: 320,height:600, overflow: "auto" }}
         >
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
