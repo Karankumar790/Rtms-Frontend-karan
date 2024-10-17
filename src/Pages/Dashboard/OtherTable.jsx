@@ -1,179 +1,477 @@
-import React, { useRef, useState } from 'react';
-import { Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Box } from "@mui/system";
-
-// -------------------Styled Components-------------------------
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    padding: '10px',
-    height: '20px',
-    fontSize: '16px',
-    lineHeight: '1.5',
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+import { toast } from "react-toastify";
+import {
+  addInstallation,
+  addLocation,
+  addWellNum,
+  getAllInstallation,
+  getLocation,
+} from "../../apis/wellService";
+import { useSelector } from "react-redux";
 
 // -------------------Main Component-------------------------
 function OtherTable() {
-  const inputRef = useRef();
-  const inputRef1 = useRef();
-  const inputRef2 = useRef();
-  const inputRef3 = useRef();
-  const [add, setAdd] = useState([]);
-  const [formValues, setFormValues] = useState({
-    parameter1: '',
-    parameter2: '',
-    parameter3: ''
-  });
+  const [selectedLocation, setSelectedLocation] = useState(""); // State for selected location
+  const [location, setLocation] = useState("");
+  // State to store fetched locations
+  const [locations, setLocations] = useState([]);
 
-  const handleChangeParameter = (event) => {
+  //state for well
+  const [installations, setInstallations] = useState([]);
+  const organizationName = useSelector((state) => state.auth.organization);
+  const [selectedInstallation, setSelectedInstallation] = useState("");
+  const [allSelectedInstallation, setAllSelectedInstallation] = useState("");
+  const [locate, setLocate] = useState(""); // To track the selected location
+  const [formValues, setFormValues] = useState({
+    wellType: "",
+    wellNumber: "",
+    // selectedInstallation,
+    // locate
+  });
+  console.log(formValues, "......../////");
+  const handleChangeWell = (event) => {
     const { name, value } = event.target;
     setFormValues({
       ...formValues,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleAdd = () => {
-    const value = inputRef?.current.value;
-    const value1 = inputRef1?.current.value;
-    const value2 = inputRef2?.current.value;
-    const value3 = inputRef3?.current.value;
-
-    setAdd([...add, { department: value, head: value1, email: value2, phone: value3 }]);
-
-    inputRef.current.value = null;
-    inputRef1.current.value = null;
-    inputRef2.current.value = null;
-    inputRef3.current.value = null;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
   };
 
-  const rows = [
-    { name: '1' },
-    { name: '2' },
-    { name: '3' },
-    { name: '4' },
-  ];
+  // ----------------- ADD LOCATION -------------------------------
+  // const handleAddLocation = async () => {
+  //   if (!location) {
+  //     toast.error("Location is requirred");
+  //     return;
+  //   }
+  //   try {
+  //     const formData = {
+  //       location: location,
+  //       organizationName,
+  //     };
+  //     const response = await addLocation(formData);
+  //     if (response) {
+  //       toast.success(response.message);
+  //       setLocation("");
+  //     } else {
+  //       toast.error(response.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error("something went wrong");
+  //   }
+  // };
+  const handleAddLocation = async () => {
+    if (!location) {
+      toast.error("Location is required");
+      return;
+    }
+    try {
+      const formData = {
+        location: location,
+        organizationName,
+      };
+      const response = await addLocation(formData);
+      if (response) {
+        toast.success(response.message);
+        setLocation(""); // Clear the input field
+        
+        // Update the locations state to add the new location without page refresh
+        setLocations((prevLocations) => [...prevLocations, formData.location]);
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const fetchLocations = async () => {
+    try {
+      const result = await getLocation(organizationName);
+      if (result && result.data) {
+        setLocations(result.data); // Assuming setLocations is used in the component to update state
+        // Store the locations in localStorage
+        localStorage.setItem("locations", JSON.stringify(result.data));
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+  
+  const [ins, setIns] = useState([]);
+
+  // Fetch installations function
+  const locatechange = (e) => {
+    setLocate(e.target.value);
+  };
+  const fetchInstallations = async () => {
+    try {
+      const response = await getAllInstallation(locate, organizationName); // Assuming locate is a valid location variable
+
+      // Correct the condition to properly check for installations
+      if (response && response.data) {
+        const installationNames = response.data.map(
+          (installation) => installation.name
+        );
+        setIns(installationNames); // Set the installation names in state
+        toast.success("Installations fetched successfully");
+      } else {
+        toast.error("No installations found");
+      }
+    } catch (error) {
+      toast.error(error.message || "Failed to fetch installations");
+    }
+  };
+  // --------------to add well num type
+  const addWell = async () => {
+    const formData = {
+      location: locate,
+      organizationName,
+      installation: selectedInstallation,
+      wellType: formValues.wellType,
+      wellNumber: formValues.wellNumber,
+    };
+  
+    // Proper validation for each required field
+    if (!formData.location || !formData.installation || !formData.wellType || !formData.wellNumber) {
+      toast.error("All fields are required");
+      return;
+    }
+  
+    try {
+      const response = await addWellNum(formData);
+      if (response) {
+        toast.success(response.message || "Well added successfully");
+        // Reset form or do any further actions here if needed
+      }
+    } catch (error) {
+      toast.error(error.message || "Failed to add well");
+    }
+  };
+  
+
+  useEffect(() => {
+    if (locate) {
+      fetchInstallations(locate, organizationName); // Only fetch installations if a location is selected
+    }
+  }, [locate]);
+  // Fetch locations on component mount
+  useEffect(() => {
+    fetchLocations();
+    // fetchInstallations()
+  }, []);
+
+  // Handle location selection change
+  const handleAllLocationChange = (event) => {
+    setAllSelectedInstallation(event.target.value); // Update selected location
+  };
+
+  //---------------------- ADDING INSTALLATION-----------------------
+  const handleAddInstallation = async () => {
+    const formData = {
+      location: allSelectedInstallation,
+      installation: formValues.installation,
+      organizationName,
+    };
+    if (!formData.location || !formData.installation) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await addInstallation(formData);
+      if (response) {
+        toast.success(response.message);
+        setFormValues({
+          location: "",
+          installation: "",
+        });
+      } else {
+        toast.error("Failed to install");
+      }
+    } catch (error) {
+      toast.error("Failed to add installation");
+    }
+  };
+
+  // Handle selection change
+  const handleChangeIns = (event) => {
+    setSelectedInstallation(event.target.value);
+  };
 
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <Card sx={{ my: 1 }}>
         <CardContent>
           <Grid container spacing={2}>
-            {/* ------------------------ADD DEPARTMENT------------------------------ */}
-            <Grid item xs={12} sm={6} md={6} lg={2.5} gap={1} display='flex' flexDirection={'column'}>
-              <Box display='flex'flexDirection={{ xs: 'column', sm: 'row' }} gap={1}>
-                <TextField variant="outlined" size="small" label="Add Location" inputRef={inputRef} fullWidth />
-                <Button variant='contained' onClick={handleAdd} size="small"
+            {/* ------------------------ADD LOCATION------------------------------ */}
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={2.5}
+              gap={1}
+              display="flex"
+              flexDirection={"column"}
+            >
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", sm: "row" }}
+                gap={1}
+              >
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Add Location"
+                  // inputRef={inputRef}
+                  value={location}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                  fullWidth
+                />
+                <Button
+                  variant="contained"
+                  // onClick={handleAdd}
+                  onClick={handleAddLocation}
+                  size="small"
                   sx={{
-                    backgroundColor: 'green',
-                    '&:hover': { backgroundColor: 'darkgreen' },
-                  }}>
+                    backgroundColor: "green",
+                    "&:hover": { backgroundColor: "darkgreen" },
+                  }}
+                >
                   ADD
                 </Button>
               </Box>
             </Grid>
 
             {/* ------------------------ADD POSITION------------------------------ */}
-            <Grid item xs={12} sm={6} md={6} lg={3.5} gap={1} display='flex' flexDirection={'column'}>
-              <Box display='flex' flexDirection={{ xs: 'column', sm: 'row' }} gap={1}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3.5}
+              gap={1}
+              display="flex"
+              flexDirection="column"
+            >
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", sm: "row" }}
+                gap={1}
+              >
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   <FormControl fullWidth size="small">
-                    <InputLabel id="demo-select-large-label">Locations</InputLabel>
+                    <InputLabel id="location-label">Locations</InputLabel>
                     <Select
-                      labelId="demo-select-small-label"
-                      id="demo-select-large"
-                      name="parameter1"
-                      value={formValues.parameter1}
-                      label="Department"
-                      onChange={handleChangeParameter}
+                      labelId="location-label"
+                      id="location-select"
+                      value={allSelectedInstallation}
+                      label="Location"
+                      onChange={handleAllLocationChange}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 300, 
+                            overflowY:'scroll'
+                          },
+                        },
+                      }}
                     >
-                      <MenuItem value=""><em>All</em></MenuItem>
-                      <MenuItem value={1}>Software</MenuItem>
-                      <MenuItem value={2}>Hardware</MenuItem>
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      {locations.map((loc, index) => (
+                        <MenuItem key={index} value={loc}>
+                          {loc}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </Grid>
-                <TextField variant="outlined" size="small" label=" Add Installation" inputRef={inputRef} fullWidth />
-                <Button variant='contained' onClick={handleAdd} size="small"
+
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Add Installation"
+                  fullWidth
+                  name="installation"
+                  value={formValues.installation}
+                  onChange={handleChange}
+                />
+
+                <Button
+                  variant="contained"
+                  size="small"
                   sx={{
-                    backgroundColor: 'green',
-                    '&:hover': { backgroundColor: 'darkgreen' },
-                  }}>
+                    backgroundColor: "green",
+                    "&:hover": { backgroundColor: "darkgreen" },
+                  }}
+                  onClick={handleAddInstallation}
+                >
                   ADD
                 </Button>
               </Box>
             </Grid>
 
-            {/* ------------------------APPROVAL CHAIN------------------------------ */}
-            <Grid item xs={12} sm={12} md={12} lg={6} gap={1} display='flex' flexDirection={'column'}>
-              <Box display='flex' flexDirection={{ xs: 'column', sm: 'row' }}  gap={1}>
+            {/* ------------------------Add Well ------------------------------ */}
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              gap={1}
+              display="flex"
+              flexDirection={"column"}
+            >
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", sm: "row" }}
+                gap={1}
+              >
                 <Grid item lg={3} md={6} sm={6} xs={12}>
                   <FormControl fullWidth size="small">
-                    <InputLabel id="demo-select-large-label">Locations</InputLabel>
-                    <Select
-                      labelId="demo-select-small-label"
-                      id="demo-select-large"
-                      name="parameter2"
-                      value={formValues.parameter2}
-                      label="Department"
-                      onChange={handleChangeParameter}
+                    <InputLabel id="location-label">Locations</InputLabel>
+                    {/* <Select
+                      labelId="location-label"
+                      id="location-select"
+                      value={locate}
+                      label="Location"
+                      onChange={(e) => {
+                        locatechange(setLocate(e.target.value));
+                        fetchInstallations(); // Fetch installations when location changes
+                      }}
                     >
-                      <MenuItem value=""><em>All</em></MenuItem>
-                      <MenuItem value={1}>Software</MenuItem>
-                      <MenuItem value={2}>Hardware</MenuItem>
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      {locations.map((loc, index) => (
+                        <MenuItem key={index} value={loc}>
+                          {loc}
+                        </MenuItem>
+                      ))}
+                    </Select> */}
+                    <Select
+                      labelId="location-label"
+                      id="location-select"
+                      value={locate}
+                      label="Location"
+                      onChange={locatechange}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 300, 
+                            overflowY:'scroll'
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      {locations.map((loc, index) => (
+                        <MenuItem key={index} value={loc}>
+                          {loc}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </Grid>
                 <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <TextField variant="outlined" label="Installation" size="small" fullWidth />
-                </Grid>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
                   <FormControl fullWidth size="small">
-                    <InputLabel id="demo-select-large-label">Well Type</InputLabel>
+                    <InputLabel id="installation-label">
+                      Installation
+                    </InputLabel>
                     <Select
-                      labelId="demo-select-small-label"
-                      id="demo-select-large"
-                      name="parameter3"
-                      value={formValues.parameter3}
-                      label="Department"
-                      onChange={handleChangeParameter}
+                      labelId="installation-label"
+                      id="installation-select"
+                      value={selectedInstallation} 
+                      label="Installation"
+                      onChange={handleChangeIns} 
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 300, 
+                            overflowY:'scroll'
+                          },
+                        },
+                      }}
                     >
-                      <MenuItem value={1}>Self-flowing</MenuItem>
-                      <MenuItem value={2}>Plunger Pump</MenuItem>
+                      {ins.length > 0 ? (
+                        ins.map((installation, index) => (
+                          <MenuItem key={index} value={installation}>
+                            {installation}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <MenuItem disabled>No Installations Available</MenuItem>
+                      )}
                     </Select>
                   </FormControl>
                 </Grid>
                 <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <TextField variant="outlined" label="Well Number" size="small" fullWidth />
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="demo-select-large-label">
+                      Well Type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-select-small-label"
+                      id="demo-select-large"
+                      name="wellType"
+                      value={formValues.wellType}
+                      label="Department"
+                      onChange={handleChangeWell}
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value="self-flowing">self-flowing</MenuItem>
+                      <MenuItem value="pugger well">pugger well</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <Button variant='contained' onClick={handleAdd} fullWidth 
+                  <TextField
+                    variant="outlined"
+                    label="Well Number"
+                    size="small"
+                    name="wellNumber"
+                    value={formValues.wellNumber}
+                    onChange={handleChangeWell}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Button
+                    variant="contained"
+                    onClick={addWell}
+                    fullWidth
                     sx={{
-                      backgroundColor: 'green',
-                      '&:hover': { backgroundColor: 'darkgreen' },
-                    }}>
+                      backgroundColor: "green",
+                      "&:hover": { backgroundColor: "darkgreen" },
+                    }}
+                  >
                     ADD
                   </Button>
                 </Grid>
