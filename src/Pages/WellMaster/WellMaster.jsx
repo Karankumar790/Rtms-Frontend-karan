@@ -163,10 +163,9 @@ function WellMaster() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {locations.map((location, index) => (
-                                <StyledTableRow key={index}>
+                                <StyledTableRow >
                                     <StyledTableCell align="center" component="th" scope="row">
-                                        {location} {/* Display the location name */}
+      
                                     </StyledTableCell>
                                     <StyledTableCell align="center"></StyledTableCell>
                                     <StyledTableCell align="center"></StyledTableCell>
@@ -198,7 +197,6 @@ function WellMaster() {
                                         </Link>
                                     </StyledTableCell>
                                 </StyledTableRow>
-                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

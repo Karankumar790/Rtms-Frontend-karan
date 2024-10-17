@@ -40,7 +40,6 @@ function OtherTable() {
     // selectedInstallation,
     // locate
   });
-  console.log(formValues, "......../////");
   const handleChangeWell = (event) => {
     const { name, value } = event.target;
     setFormValues({
@@ -110,7 +109,7 @@ function OtherTable() {
       if (result && result.data) {
         setLocations(result.data); // Assuming setLocations is used in the component to update state
         // Store the locations in localStorage
-        localStorage.setItem("locations", JSON.stringify(result.data));
+        // localStorage.setItem("locations", JSON.stringify(result.data));
       }
     } catch (error) {
       toast.error(error);
