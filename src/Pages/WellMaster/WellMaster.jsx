@@ -14,7 +14,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Othertable from "../Dashboard/OtherTable.jsx";
 
-// -------------------------------Table for  Moblie --------------------------
+// -----------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
     padding: theme.spacing(2),
     borderBottom: ` 1px solid ${theme.palette.divider}`,
@@ -287,4 +287,6 @@ function WellMaster() {
     );
 }
 
+
 export default WellMaster;
+
