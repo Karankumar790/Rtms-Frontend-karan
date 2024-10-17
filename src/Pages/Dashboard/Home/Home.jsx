@@ -25,7 +25,7 @@ import 'react-tabs/style/react-tabs.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#8C000B',
     color: theme.palette.common.white,
     padding: '10px', // Increase padding
     height: '20px',  // Set a specific height
