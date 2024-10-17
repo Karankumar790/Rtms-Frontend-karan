@@ -1,20 +1,18 @@
-import React from 'react'
-import { Grid, IconButton, Pagination, PaginationItem, Paper, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { Box, color, Stack } from '@mui/system';
-import master from '/assets/wellMaster.png'
-import { Link } from 'react-router-dom';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Othertable from '../Dashboard/OtherTable.jsx';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import React, { useEffect, useState } from "react";
+import { Button, Grid, IconButton, Paper, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Box, color } from "@mui/system";
+import master from "/assets/wellMaster.png";
+import { Link } from "react-router-dom";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Othertable from "../Dashboard/OtherTable.jsx";
 
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -25,7 +23,7 @@ const StyledGridItem = styled(Grid)(({ theme }) => ({
 
 const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: `1px solid ${theme.palette.divider}`,
+  borderBottom:` 1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
 
@@ -67,17 +65,17 @@ let Sata = {
 // ------------------------Table for Desktop-----------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: "#8C000B",
-        color: theme.palette.common.white,
-        padding: '10px', // Increase padding
-        height: '20px',  // Set a specific height
-        fontSize: '16px', // Optionally adjust font size for header
-        lineHeight: '1.5', // Adjust line height if needed
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+    padding: "10px", // Increase padding
+    height: "20px", // Set a specific height
+    fontSize: "16px", // Optionally adjust font size for header
+    lineHeight: "1.5", // Adjust line height if needed
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -94,36 +92,33 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("3"),
-];
-
-const BodyTableCellWraper = styled(TableCell)(() => ({
-  textAlign: "center",
-  fontWeight: 500,
-  fontSize: "15.65px",
-  lineHeight: " 20px",
-  color: "#000000",
-}));
-
 function WellMaster() {
-    return (
-        <div>
-            <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }} pt={1} paddingBottom={2}>
-                <Grid item lg={6} md={6} sm={6} xs={12} display={'flex'} gap={1}>
-                    <Box sx={{ height: '50px', width: '50px' }}>
-                        <img src={master} alt='img' height={'50px'} width={'50px'} />
-                    </Box>
-                    <Box >
-                        <Typography variant='h4'>Well Manager</Typography>
-                    </Box>
-                </Grid>
-            </Grid>
+  const [locations, setLocations] = useState([]);
+
+  // Get locations from localStorage when the component mounts
+  useEffect(() => {
+    const storedLocations = localStorage.getItem("locations");
+    if (storedLocations) {
+      setLocations(JSON.parse(storedLocations));
+    }
+  }, []);
+  return (
+    <div>
+      <Grid
+        container
+        sx={{ display: "flex", justifyContent: "space-between" }}
+        pt={1}
+        paddingBottom={2}
+      >
+        <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
+          <Box sx={{ height: "50px", width: "50px" }}>
+            <img src={master} alt="img" height={"50px"} width={"50px"} />
+          </Box>
+          <Box>
+            <Typography variant="h4">Well Master</Typography>
+          </Box>
+        </Grid>
+      </Grid>
 
       <Grid container>
         <Othertable />
@@ -137,6 +132,48 @@ function WellMaster() {
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
       >
+        {/* <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
+                    <Table aria-label="customized table" stickyHeader>
+                        <TableHead >
+                            <TableRow  >
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Loaction</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Installation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Well Type</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Well Number</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Landmark</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="right">Geolocation</StyledTableCell>
+                                <StyledTableCell sx={{ fontSize: '18px' }} align="center">Action</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <StyledTableRow key={row.name}>
+                                    <StyledTableCell align="center" component="th" scope="row">
+                                        {row.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center"></StyledTableCell>
+                                    <StyledTableCell align="center"></StyledTableCell>
+                                    <StyledTableCell align="center"></StyledTableCell>
+                                    <StyledTableCell align="center"></StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <Link to="/dashboard/virtual">
+                                            <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                                                <LocationOnIcon fontSize='large' />
+                                            </IconButton>
+                                        </Link>
+                                    </StyledTableCell>
+                                    <StyledTableCell align='center'>
+                                        <Link to="/dashboard/addwell">
+                                            <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                                                <SettingsIcon fontSize='large' />
+                                            </IconButton>
+                                        </Link>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer> */}
         <TableContainer
           component={Paper}
           sx={{ maxHeight: 620, overflow: "auto" }}
@@ -145,7 +182,7 @@ function WellMaster() {
             <TableHead>
               <TableRow>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="center">
-                  Loaction
+                  Location
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="center">
                   Installation
@@ -168,10 +205,10 @@ function WellMaster() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
+              {locations.map((location, index) => (
+                <StyledTableRow key={index}>
                   <StyledTableCell align="center" component="th" scope="row">
-                    {row.name}
+                    {location} {/* Display the location name */}
                   </StyledTableCell>
                   <StyledTableCell align="center"></StyledTableCell>
                   <StyledTableCell align="center"></StyledTableCell>
@@ -207,21 +244,7 @@ function WellMaster() {
             </TableBody>
           </Table>
         </TableContainer>
-        <Box display={"flex"} justifyContent={"end"}>
-          <Stack spacing={2}>
-            <Pagination
-              count={10}
-              renderItem={(item) => (
-                <PaginationItem
-                  slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                  {...item}
-                />
-              )}
-            />
-          </Stack>
-        </Box>
       </Grid>
-
       {/* ---------------------------Table for Moblie------------------------------------- */}
 
       <Grid

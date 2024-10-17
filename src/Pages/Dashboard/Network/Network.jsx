@@ -105,9 +105,6 @@ const rows = [
   createData("6"),
   createData("7"),
   createData("8"),
-  // createData('3'),
-  // createData('4'),
-  // createData('5'),
 ];
 
 
