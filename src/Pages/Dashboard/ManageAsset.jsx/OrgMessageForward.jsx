@@ -72,7 +72,7 @@ function OrgMessageForward() {
             <Typography variant='h5' sx={{ p: 2 }}>Message Forwarding</Typography>
           </Box>
           <Grid container spacing={2} gap={4}>
-            <Grid item xs={12} sm={4} lg={3.5}>
+            <Grid item xs={12} sm={6} md={6} lg={3.5}>
               <Box display="flex" alignItems="center" gap={1}>
                 <WorkOutlineIcon />
                 <TextField variant='outlined' size='small' fullWidth label="Department" />
@@ -104,7 +104,7 @@ function OrgMessageForward() {
           {/** Add spacing here for levels **/}
           {[1, 2, 3].map(level => (
             <Grid container spacing={2} key={level} sx={{ mt: 1 }}> {/* Add margin top here */}
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6} md={6} lg={4}>
                 <Box display="flex" alignItems="center" gap={1}>
                   <AccessAlarmIcon />
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
