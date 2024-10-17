@@ -70,7 +70,7 @@ function CheckStatus() {
           <Grid container spacing={4}>
             <Grid item xs={12} sm={4} md={4} lg={4} gap={3}>
               <Typography fontSize="large">REGISTRATION DETAILS :-</Typography>
-              <Typography fontSize="large">User Name: {username}</Typography>
+              <Typography fontSize="large">User Names: {username}</Typography>
               <Typography fontSize="large">Email Address: {email}</Typography>
               <Typography fontSize="large">
                 Contact Number: {contactNumber}
@@ -78,8 +78,8 @@ function CheckStatus() {
               <Typography fontSize="large">
                 Employee ID: {employeeID}
               </Typography>
-              <Typography fontSize="large">Asset Name: {organizationName}</Typography>
-              <Typography fontSize="large">Department: {department}</Typography>
+              <Typography fontSize="large">Asset Names: {organizationName}</Typography>
+              <Typography fontSize="large">Departments: {department}</Typography>
               <Typography fontSize="large">
                 Role in RTMS: {roleInRTMS}
               </Typography>
