@@ -89,7 +89,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+  return { name, calories, fat, carbs, protein };
 }
 
 function WellMaster() {
@@ -163,10 +163,9 @@ function WellMaster() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {locations.map((location, index) => (
-                                <StyledTableRow key={index}>
+                                <StyledTableRow >
                                     <StyledTableCell align="center" component="th" scope="row">
-                                        {location} {/* Display the location name */}
+      
                                     </StyledTableCell>
                                     <StyledTableCell align="center"></StyledTableCell>
                                     <StyledTableCell align="center"></StyledTableCell>
@@ -198,7 +197,6 @@ function WellMaster() {
                                         </Link>
                                     </StyledTableCell>
                                 </StyledTableRow>
-                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

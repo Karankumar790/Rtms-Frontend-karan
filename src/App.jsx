@@ -142,7 +142,6 @@ function App() {
   );
 }
 
-
 // function App() {
 //   // Fetch the role from Redux
 //   const role = useSelector((state) => state.auth.role);
@@ -208,6 +207,5 @@ function App() {
 //     },
 //   ]);
 // }
-
 
 export default App;

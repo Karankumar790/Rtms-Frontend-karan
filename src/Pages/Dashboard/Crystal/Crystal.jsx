@@ -51,13 +51,6 @@ const rows = [
   createData("2"),
   createData("3"),
   createData("4"),
-  createData("5"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("5"),
-  createData("5"),
-  createData("5"),
 ];
 
 
@@ -373,15 +366,15 @@ function Monitor() {
                     <TableHead>
                       <TableRow>
                         <StyledTableCell sx={{ fontSize: "18px" }}>
-                          Well No.
+                         Parameter
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          GIP (kg)
+                          Date
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          CHP (kg)
+                         Time
                         </StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                        {/* <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                           THP (kg)
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
@@ -395,7 +388,7 @@ function Monitor() {
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                           Flow Status
-                        </StyledTableCell>
+                        </StyledTableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -404,13 +397,13 @@ function Monitor() {
                           <StyledTableCell component="th" scope="row">
                             {row.name}
                           </StyledTableCell>
-                          <StyledTableCell align="left">1</StyledTableCell>
-                          <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                          <StyledTableCell align="left">gbz</StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          {/* <StyledTableCell align="left">gbz</StyledTableCell>
                           <StyledTableCell align="left">yes</StyledTableCell>
                           <StyledTableCell align="left">all good</StyledTableCell>
                           <StyledTableCell align="left">Bad</StyledTableCell>
-                          <StyledTableCell align="left">High</StyledTableCell>
+                          <StyledTableCell align="left">High</StyledTableCell> */}
                         </StyledTableRow>
                       ))}
                     </TableBody>

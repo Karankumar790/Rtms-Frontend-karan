@@ -129,6 +129,9 @@ export default function SuperAdmin() {
           p="5%"
 
         >
+
+          p="5%"
+
           <Grid item padding={2} width={550} >
             <Card>
               <CardContent orientation="vertical">
