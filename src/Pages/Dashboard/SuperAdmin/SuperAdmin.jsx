@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { IconButton } from "@mui/material";
-import { Box,  } from "@mui/system";
-import { Link,  } from "react-router-dom";
+import { Box, } from "@mui/system";
+import { Link, } from "react-router-dom";
 import HttpsIcon from "@mui/icons-material/Https";
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import EmailIcon from "@mui/icons-material/Email";
@@ -291,6 +291,12 @@ export default function SuperAdmin() {
                         >
                           Create A New Customer
                         </Button>
+                      </Grid>
+
+                      <Grid item mt={2} display={'flex'} justifyContent={'center'}>
+                        <Link to={'/checkOrganization'} style={{ textDecoration: 'none' }}>
+                          <Typography variant="h5" >Check Organization</Typography>
+                        </Link>
                       </Grid>
                     </Grid>
                   </form>

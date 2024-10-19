@@ -13,7 +13,7 @@
     "@ant-design/plots": "^1.2.6",
     "@antv/g2plot": "^2.3.32",
     "@date-io/date-fns": "^3.0.0",
-    "@emotion/react": "^11.13.0",
+    "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/base": "^5.0.0-beta.59",
     "@mui/icons-material": "^5.16.7",

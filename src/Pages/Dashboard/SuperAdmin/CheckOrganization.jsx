@@ -18,6 +18,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 // ----------------------Table for Mobile------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -104,7 +105,7 @@ const rows = [
   createData("8"),
 ];
 
-function MessageForwarding() {
+function CheckOrganization() {
   const [selectedValue, setSelectedValue] = useState('');
 
   const handleChange = (event) => {
@@ -120,31 +121,26 @@ function MessageForwarding() {
         paddingBottom={2}
       >
         <Grid item lg={6} md={6} sm={6} xs={12}>
-          <Box display={"flex"} gap={1}>
-            <img
-              src="https://static.thenounproject.com/png/401262-200.png"
-              alt="Img"
-              height={"50px"}
-              width={"50px"}
-            />
-            <Typography variant="h4">Message User</Typography>
+          <Box display={"flex"} gap={1} p={2}>
+            <AccountBalanceIcon sx={{height:'37px', width:'40px'}}/>
+            <Typography variant="h4">Customers</Typography>
           </Box>
         </Grid>
 
         {/* Dropdown */}
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={3} md={6} sm={6} xs={12}  p={2}>
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel id="dropdown-label">Customers</InputLabel>
             <Select
               labelId="dropdown-label"
               value={selectedValue}
               onChange={handleChange}
-              label="Select an Option"
+              label="Customers"
               fullWidth
               size="small"
             >
-              <MenuItem value={10}>Option 1</MenuItem>
-              <MenuItem value={20}>Option 2</MenuItem>
+              <MenuItem value={10}>Active Customer</MenuItem>
+              <MenuItem value={20}>IN Active Customer</MenuItem>
               <MenuItem value={30}>Option 3</MenuItem>
             </Select>
           </FormControl>
@@ -168,12 +164,11 @@ function MessageForwarding() {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <TableRow>
+                <StyledTableCell align="left">Organization</StyledTableCell>
                 <StyledTableCell align="left">User Name</StyledTableCell>
-                <StyledTableCell align="left">Department</StyledTableCell>
-                <StyledTableCell align="left">Employee ID</StyledTableCell>
-                <StyledTableCell align="left">Email Add</StyledTableCell>
-                <StyledTableCell align="left">Contact No.</StyledTableCell>
-                <StyledTableCell align="left">User Status</StyledTableCell>
+                <StyledTableCell align="left">Email</StyledTableCell>
+                <StyledTableCell align="left">Mobile</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
                 <StyledTableCell align="center">View</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -186,8 +181,7 @@ function MessageForwarding() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="right"></StyledTableCell>
-                  <StyledTableCell align="right"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="center">
                     <IconButton
                       sx={{
@@ -242,4 +236,4 @@ function MessageForwarding() {
   );
 }
 
-export default MessageForwarding;
+export default CheckOrganization;

@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Button, Grid, IconButton, Paper, Typography } from "@mui/material";
+import React from "react";
+import {
+  Grid,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,25 +12,25 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Box, color } from "@mui/system";
-import master from "/assets/wellMaster.png";
+import { Box } from "@mui/system";
+import Network from "../../../../public/assets/NetworkWire2.jpg";
 import { Link } from "react-router-dom";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Othertable from "../Dashboard/OtherTable.jsx";
-import { getAllInstallation, getLocation } from "../../apis/wellService.js";
-import { useSelector } from "react-redux";
+import SettingsIcon from '@mui/icons-material/Settings';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import StoreIcon from '@mui/icons-material/Store';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+// ----------------------Table for Moblie------------------------------
 
-// -----------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: ` 1px solid ${theme.palette.divider}`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[100],
 }));
 
 const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: ` 1px solid ${theme.palette.divider}`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
 
@@ -35,7 +40,6 @@ let data = {
   Installation: "01/01/2021",
   Latitude: "40.7128 N",
   Longitude: "74.0060 W",
-  Landmark: "Temple",
 };
 
 let Tata = {
@@ -44,7 +48,6 @@ let Tata = {
   Installation: "01/01/2021",
   Latitude: "40.7128 N",
   Longitude: "74.0060 W",
-  Landmark: "Temple",
 };
 
 let Mata = {
@@ -53,7 +56,6 @@ let Mata = {
   Installation: "01/01/2021",
   Latitude: "40.7128 N",
   Longitude: "74.0060 W",
-  Landmark: "Temple",
 };
 
 let Sata = {
@@ -62,9 +64,7 @@ let Sata = {
   Installation: "01/01/2021",
   Latitude: "40.7128 N",
   Longitude: "74.0060 W",
-  Landmark: "Temple",
 };
-// ------------------------Table for Desktop-----------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -94,125 +94,125 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-function WellMaster() {
-  const [locations, setLocations] = useState([]);
-  const [installations, setInstallations] = useState([]);
-  const organizationName = useSelector((state) => state.auth.organization);
+const rows = [
+  createData("1"),
+  createData("2"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
+  createData("6"),
+  createData("7"),
+  createData("8"),
+  // createData('3'),
+  // createData('4'),
+  // createData('5'),
+];
 
-  useEffect(() => {
-    const fetchLocations = async () => {
-      const locationData = await getLocation(organizationName);
-      setLocations(locationData.data);
-    };
-    fetchLocations();
-  }, [organizationName]);
 
-  // Fetch installations for each location
-  useEffect(() => {
-    const fetchInstallationsForLocations = async () => {
-      const newInstallations = {};
-      for (const location of locations) {
-        const installationData = await getAllInstallation(
-          location,
-          organizationName
-        );
-        newInstallations[location] = installationData.data;
-      }
-      setInstallations(newInstallations);
-    };
 
-    if (locations.length > 0) {
-      fetchInstallationsForLocations();
-    }
-  }, [locations, organizationName]);
+function DeviceManage() {
   return (
     <div>
       <Grid
         container
         sx={{ display: "flex", justifyContent: "space-between" }}
-        pt={1}
+        pt={2}
         paddingBottom={2}
       >
         <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
           <Box sx={{ height: "50px", width: "50px" }}>
-            <img src={master} alt="img" height={"50px"} width={"50px"} />
+            <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Well Master</Typography>
+            <Typography variant="h4">Node Manager</Typography>
           </Box>
         </Grid>
       </Grid>
+   
+   <Grid container display={'flex'} gap={9}>
+    <Box display={'flex'} gap={1}>
+      <TravelExploreIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography variant="h5">Browser</Typography>
+    </Box>
+    <Box display={'flex'} gap={1}>
+      <CloudUploadIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography  variant="h5">Upload</Typography>
+    </Box>
+    <Box display={'flex'} gap={1}>
+      <DownloadForOfflineIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography  variant="h5">Download</Typography>
+    </Box>
+    <Box display={'flex'} gap={1}>
+      <StoreIcon sx={{ color: 'black', fontSize: 30 }} />
+      <Typography  variant="h5">Firmware</Typography>
+    </Box>
 
-      <Grid container>
-        <Othertable />
-      </Grid>
+   </Grid>
       {/* ------------------Table for Desktop--------------------------------- */}
       <Grid
         container
+        mt={2}
         md={12}
         lg={12}
         sm={5}
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
       >
-         <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
-      <Table aria-label="customized table" stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Location</TableCell>
-            <TableCell align="center">Installations</TableCell>
-            <TableCell align="center">Well Types</TableCell>
-            <TableCell align="center">Well Numbers</TableCell>
-            <TableCell align="center">Landmark</TableCell>
-            <TableCell align="right">Geolocation</TableCell>
-            <TableCell align="center">Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {locations.map((location) => {
-            const locationInstallations = installations[location] || [];
-
-            // Create installation names with line breaks and horizontal lines
-            const installationDisplay = locationInstallations.map((inst, index) => (
-              <div key={inst._id}>
-                {inst.name}
-                {index < locationInstallations.length - 1 && <hr />} {/* Add horizontal line except after the last item */}
-              </div>
-            ));
-
-            const wellTypes = locationInstallations.flatMap(inst => inst.wellTypes.map(well => well.wellType)).join(', ') || "N/A";
-            const wellNumbers = locationInstallations.flatMap(inst => inst.wellTypes.flatMap(well => well.wellNumbers)).join(', ') || "N/A";
-
-            return (
-              <TableRow key={location}>
-                <TableCell align="center">{location}</TableCell>
-                <TableCell align="center" style={{ whiteSpace: 'pre-line' }}>
-                  {installationDisplay}
-                </TableCell>
-                <TableCell align="center">{wellTypes}</TableCell>
-                <TableCell align="center">{wellNumbers}</TableCell>
-                <TableCell align="center"></TableCell> {/* Landmark placeholder */}
-                <TableCell align="right">
-                  <Link to="/dashboard/virtual">
-                    <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
-                      <LocationOnIcon fontSize="large" />
-                    </IconButton>
-                  </Link>
-                </TableCell>
-                <TableCell align="center">
-                  <Link to="/dashboard/addwell">
-                    <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
-                      <SettingsIcon fontSize="large" />
-                    </IconButton>
-                  </Link>
-                </TableCell>
+        <TableContainer
+          component={Paper}
+          sx={{ maxHeight: 620, overflow: "auto" }}
+        >
+          <Table aria-label="customized table" stickyHeader>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Sr No.
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Device Name
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Cloud ID
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  LoRa ID
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Landmark
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Geolocation
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Action
+                </StyledTableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left">
+                    <Link to="/dashboard/Lora">
+                      <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                      <SettingsIcon fontSize='large' />
+                      </IconButton>
+                    </Link>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
+
       {/* ---------------------------Table for Moblie------------------------------------- */}
 
       <Grid
@@ -228,13 +228,13 @@ function WellMaster() {
             {Object.keys(data).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={6}>
+                <StyledGridItem item xs={4}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={6}>
+                <StyledContent item xs={8}>
                   <Typography variant="body1">{data[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -245,13 +245,13 @@ function WellMaster() {
             {Object.keys(Tata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={6}>
+                <StyledGridItem item xs={4}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={6}>
+                <StyledContent item xs={8}>
                   <Typography variant="body1">{Tata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -262,13 +262,13 @@ function WellMaster() {
             {Object.keys(Mata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={6}>
+                <StyledGridItem item xs={4}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={6}>
+                <StyledContent item xs={8}>
                   <Typography variant="body1">{Mata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -279,13 +279,13 @@ function WellMaster() {
             {Object.keys(Sata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={6}>
+                <StyledGridItem item xs={4}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={6}>
+                <StyledContent item xs={8}>
                   <Typography variant="body1">{Sata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -297,4 +297,4 @@ function WellMaster() {
   );
 }
 
-export default WellMaster;
+export default DeviceManage;
