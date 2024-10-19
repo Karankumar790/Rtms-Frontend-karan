@@ -20,6 +20,7 @@ import {
   getAllInstallation,
   getLocation,
 } from "../../apis/wellService";
+
 import { useSelector } from "react-redux";
 
 // -------------------Main Component-------------------------
@@ -41,7 +42,8 @@ function OtherTable() {
     // selectedInstallation,
     // locate
   });
-  console.log(formValues, "......../////");
+
+
   const handleChangeWell = (event) => {
     const { name, value } = event.target;
     setFormValues({
@@ -57,7 +59,6 @@ function OtherTable() {
       [name]: value,
     });
   };
-
   // ----------------- ADD LOCATION -------------------------------
   // const handleAddLocation = async () => {
   //   if (!location) {
@@ -214,7 +215,11 @@ function OtherTable() {
   // Handle location selection change
   const handleAllLocationChange = (event) => {
     setAllSelectedInstallation(event.target.value); // Update selected location
+
   };
+  
+  const [ins, setIns] = useState([]);
+
 
   //---------------------- ADDING INSTALLATION-----------------------
   const handleAddInstallation = async () => {

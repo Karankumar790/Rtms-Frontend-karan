@@ -3,7 +3,6 @@ import PageContainer from "../components/HOC/PageContainer";
 import { Paper, Typography, TextField, Button, Box, Grid } from "@mui/material";
 import { checkStatus } from "../apis/Service";
 import {
-  clearCheckAuth,
   setCheckAuthenticated,
   setCheckDetails,
 } from "../apis/authSlice";
@@ -70,6 +69,7 @@ function PopUp() {
                   variant="outlined"
                   size="medium"
                   fullWidth
+                  required
                 />
               </Box>
               <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>

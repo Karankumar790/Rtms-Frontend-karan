@@ -16,10 +16,12 @@ import Othertable from "../Dashboard/OtherTable.jsx";
 import { getAllInstallation, getLocation } from "../../apis/wellService.js";
 import { useSelector } from "react-redux";
 
-// -------------------------------Table for  Moblie --------------------------
+// -----------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
+
   borderBottom: `1px solid ${theme.palette.divider}`,
+
   backgroundColor: theme.palette.grey[100],
 }));
 
@@ -66,10 +68,10 @@ let Sata = {
 };
 // ------------------------Table for Desktop-----------------------------
 
+
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
-
 const rows = [
   createData("1"),
   createData("2"),

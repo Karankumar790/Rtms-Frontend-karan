@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Button,  Grid, IconButton, TextField, Typography } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -17,7 +17,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import BallotIcon from '@mui/icons-material/Ballot';
 import { Box } from "@mui/system";
-// import { BarChart } from '@mui/x-charts/BarChart';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,13 +51,6 @@ const rows = [
   createData("2"),
   createData("3"),
   createData("4"),
-  createData("5"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("5"),
-  createData("5"),
-  createData("5"),
 ];
 
 
@@ -374,15 +366,15 @@ function Monitor() {
                     <TableHead>
                       <TableRow>
                         <StyledTableCell sx={{ fontSize: "18px" }}>
-                          Well No.
+                         Parameter
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          GIP (kg)
+                          Date
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                          CHP (kg)
+                         Time
                         </StyledTableCell>
-                        <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                        {/* <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                           THP (kg)
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
@@ -396,7 +388,7 @@ function Monitor() {
                         </StyledTableCell>
                         <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                           Flow Status
-                        </StyledTableCell>
+                        </StyledTableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -405,13 +397,13 @@ function Monitor() {
                           <StyledTableCell component="th" scope="row">
                             {row.name}
                           </StyledTableCell>
-                          <StyledTableCell align="left">1</StyledTableCell>
-                          <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                          <StyledTableCell align="left">gbz</StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          <StyledTableCell align="left"></StyledTableCell>
+                          {/* <StyledTableCell align="left">gbz</StyledTableCell>
                           <StyledTableCell align="left">yes</StyledTableCell>
                           <StyledTableCell align="left">all good</StyledTableCell>
                           <StyledTableCell align="left">Bad</StyledTableCell>
-                          <StyledTableCell align="left">High</StyledTableCell>
+                          <StyledTableCell align="left">High</StyledTableCell> */}
                         </StyledTableRow>
                       ))}
                     </TableBody>
@@ -528,11 +520,11 @@ function Monitor() {
             <TabPanel style={{ width: '100%' }}>
               <Grid container>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <Paper sx={{ bgcolor: "#F8F8F8" }}>
+                  <Paper sx={{ bgcolor: "lightgrey" }}>
                     <Chart
                       options={lineChartOptions}
                       series={lineChartSeries}
-                      type="bar"
+                      type="line"
                       height={515}
                     />
                   </Paper>

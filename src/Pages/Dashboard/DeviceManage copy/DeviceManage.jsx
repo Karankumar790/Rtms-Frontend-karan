@@ -20,8 +20,6 @@ import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import StoreIcon from '@mui/icons-material/Store';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-
 // ----------------------Table for Moblie------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -200,19 +198,7 @@ function DeviceManage() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left">
-                  <Link to="/dashboard/virtual">
-                      <IconButton
-                        sx={{
-                          color: "grey",
-                          "&:hover": { color: "darkred" },
-                          marginRight: "5px",
-                        }}
-                      >
-                        <LocationOnIcon fontSize="large" />
-                      </IconButton>
-                    </Link>
-                  </StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
                     <Link to="/dashboard/Lora">
                       <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>

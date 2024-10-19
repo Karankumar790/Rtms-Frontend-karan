@@ -13,6 +13,7 @@ export default function Forgot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  
   // Handle input changes
   const handleInputs = (e) => {
     setFormValues((prev) => ({ ...prev, [e.target?.name]: e.target?.value }));
