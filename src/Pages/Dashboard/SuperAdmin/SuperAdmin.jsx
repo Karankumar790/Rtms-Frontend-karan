@@ -125,13 +125,8 @@ export default function SuperAdmin() {
           justifyContent={"start"}
           height="85%"
           alignItems={"center"}
-
           p="5%"
-
         >
-
-          p="5%"
-
           <Grid item padding={2} width={550} >
             <Card>
               <CardContent orientation="vertical">
