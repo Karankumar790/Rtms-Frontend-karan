@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/plots": "^2.2.8",
+    "@ant-design/plots": "^1.2.6",
     "@date-io/date-fns": "^3.0.0",
-    "@emotion/react": "^11.13.0",
+    "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
     "@mui/joy": "^5.0.0-beta.48",

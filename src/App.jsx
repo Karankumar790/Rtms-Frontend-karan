@@ -64,6 +64,10 @@ const MesaageForwarding = lazy(() =>
   import("./Pages/Dashboard/MessageForwarding.jsx")
 );
 
+const CheckOrganization = lazy(() =>
+  import("./Pages/Dashboard/SuperAdmin/CheckOrganization.jsx")
+);
+
 function App() {
   const role = useSelector((state) => state.auth.role);
 
@@ -121,6 +125,7 @@ function App() {
     { path: "/reset", element: <Reset /> },
     { path: "/popup", element: <PopUp /> },
     { path: "/CheckStatus", element: <CheckStatus /> },
+    { path: "/checkOrganization", element: <CheckOrganization /> },
     {
       path: "/dashboard",
       element: <PrivateRoute />,

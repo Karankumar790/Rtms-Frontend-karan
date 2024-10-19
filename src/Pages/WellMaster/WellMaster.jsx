@@ -72,19 +72,23 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         height: "20px", // Set a specific height
         fontSize: "16px", // Optionally adjust font size for header
         lineHeight: "1.5", // Adjust line height if needed
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
+        boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.05)",
     },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(odd)": {
         backgroundColor: theme.palette.action.hover,
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     },
     // hide last border
     "&:last-child td, &:last-child th": {
         border: 0,
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     },
 }));
 
