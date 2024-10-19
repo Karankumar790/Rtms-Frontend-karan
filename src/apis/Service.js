@@ -286,7 +286,6 @@ export const deletePosition = async (formData) => {
   }
 };
 
-
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
   try {
@@ -351,7 +350,6 @@ export const updateApprovalChain = async (formData) => {
   }
 };
 
-
 export const deleteApprovalChain = async (formData) => {
   try {
     const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
@@ -360,7 +358,6 @@ export const deleteApprovalChain = async (formData) => {
     return catchError(error); // Handle errors appropriately
   }
 };
-
 
 // https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
 export const getApprovalChain = async (organizationName, departmentName) => {

@@ -157,34 +157,6 @@ function ManageAsset() {
     }
   };
 
-  // //delete department
-  // const handleDeleteDepartment = async (departmentName) => {
-  //   if (!organizationName || !departmentName) {
-  //     toast.error("Organization name and department name are required");
-  //     return;
-  //   }
-  //   try {
-  //     const response = await DeleteDepartment({
-  //       organizationName,
-  //       departmentName,
-  //     });
-  //     if (response && response.data.success) {
-  //       setDepartments((prevDepartments) =>
-  //         prevDepartments.filter((dep) => dep !== departmentName)
-  //       );
-  //       toast.error(response.data.message || "Failed to delete department");
-  //     } else {
-  //       toast.success(`Department "${departmentName}" deleted successfully`);
-  //     }
-  //   } catch (error) {
-  //     console.error(
-  //       "Error deleting department: ",
-  //       error.response || error.message
-  //     );
-  //     toast.error("Error: " + (error.response?.data?.message || error.message));
-  //   }
-  // };
-
 // Delete Department
 const handleDeleteDepartment = async (departmentName) => {
   if (!organizationName || !departmentName) {
