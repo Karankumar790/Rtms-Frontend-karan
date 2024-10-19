@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/plots": "^1.2.6",
+    "@antv/g2plot": "^2.3.32",
     "@date-io/date-fns": "^3.0.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -21,7 +22,7 @@
     "@mui/system": "^5.16.7",
     "@mui/x-date-pickers": "^7.20.0",
     "@reduxjs/toolkit": "^2.2.7",
-    "apexcharts": "^3.52.0",
+    "apexcharts": "^3.54.0",
     "axios": "^1.7.5",
     "boxicons": "^2.1.4",
     "date-fns": "^3.6.0",
@@ -45,6 +46,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
+    "rollup": "^4.24.0",
     "styled-components": "^6.1.12",
     "toast": "^0.5.4",
     "toaster": "^0.1.2"

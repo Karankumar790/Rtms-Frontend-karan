@@ -274,37 +274,20 @@ export const DeleteDepartment = async (formData) => {
 //Delete Position
 export const deletePosition = async (formData) => {
   try {
-
-    const response = await axios.post(
-      `${ORGANIZATION_API}/delete-position`,
-      formData
-    );
+    const response = await axios.delete(`${ORGANIZATION_API}/delete-position`, {
+      data: formData, // Use the data field to send the request body with DELETE
+    });
     return response.data;
   } catch (error) {
-    return catchError(error);
-
+    return catchError(error); // Ensure you handle the error appropriately
   }
 };
-
 
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-position`,
-      formData
-    );
-    return response.data;
-  } catch (error) {
-    return catchError(error);
-  }
-};
-
-//update Position
-export const updatePosition = async (formData) => {
-  try {
-    const response = await axios.put(
-      `${ORGANIZATION_API}/update-position`,
       formData
     );
     return response.data;
@@ -325,12 +308,39 @@ export const getPosition = async (organizationName, departmentName) => {
   }
 };
 
+//update department
+export const updatePosition = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${ORGANIZATION_API}/update-position`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+
 //Add Approval Chain on the basic of department
 export const addApprovalChain = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-approval-chain`,
       formData
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+
+// https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
+export const getApprovalChain = async (organizationName, departmentName) => {
+  try {
+    const response = await axios.get(
+      `${ORGANIZATION_API}/get-approval-chain?organizationName=${organizationName}&departmentName=${departmentName}`
     );
     return response.data;
   } catch (error) {
@@ -352,21 +362,12 @@ export const updateApprovalChain = async (formData) => {
 };
 
 
+//delete Approval chain
 export const deleteApprovalChain = async (formData) => {
   try {
-    const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
-    return response.data;
-  } catch (error) {
-    return catchError(error); // Handle errors appropriately
-  }
-};
-
-
-// https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
-export const getApprovalChain = async (organizationName, departmentName) => {
-  try {
-    const response = await axios.get(
-      `${ORGANIZATION_API}/get-approval-chain?organizationName=${organizationName}&departmentName=${departmentName}`
+    const response = await axios.post(
+      `${ORGANIZATION_API}/delete-approval-chain`,
+      formData
     );
     return response.data;
   } catch (error) {
