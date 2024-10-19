@@ -1,6 +1,5 @@
 import React from 'react'
 import PageContainer from '../../../components/HOC/PageContainer'
-import Index from '../index.jsx'
 import { Button, Grid, TextField } from '@mui/material'
 import Input from '@mui/joy/Input';
 import { LocationOn } from '@mui/icons-material';

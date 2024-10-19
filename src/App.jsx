@@ -56,6 +56,17 @@ const SuperAdmin = lazy(() =>
 const TechnicalSupport = lazy(() =>
   import("./Pages/Dashboard/TechnicalSupport/TechnicalSupport.jsx")
 );
+const Lora = lazy(() =>
+  import("./Pages/Dashboard/DeviceManage/Lora.jsx")
+);
+
+const MesaageForwarding = lazy(() =>
+  import("./Pages/Dashboard/MessageForwarding.jsx")
+);
+
+const CheckOrganization = lazy(() =>
+  import("./Pages/Dashboard/SuperAdmin/CheckOrganization.jsx")
+);
 
 function App() {
   const role = useSelector((state) => state.auth.role);
@@ -75,11 +86,13 @@ function App() {
     { path: "singlewell", element: <SingleWell /> },
     { path: "DeviceManage", element: <DeviceManage /> },
     { path: "AddDevice", element: <AddDevice /> },
+    { path: "Lora", element: <Lora /> },
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
 
     { path: "Admin", element: <SuperAdmin /> },
     { path: "technicalSupport", element: <TechnicalSupport /> },
+    { path: "MesaageForwarding", element: <MesaageForwarding /> },
 
   ];
 
@@ -112,6 +125,7 @@ function App() {
     { path: "/reset", element: <Reset /> },
     { path: "/popup", element: <PopUp /> },
     { path: "/CheckStatus", element: <CheckStatus /> },
+    { path: "/checkOrganization", element: <CheckOrganization /> },
     {
       path: "/dashboard",
       element: <PrivateRoute />,
@@ -132,7 +146,6 @@ function App() {
     </>
   );
 }
-
 
 // function App() {
 //   // Fetch the role from Redux
@@ -199,6 +212,5 @@ function App() {
 //     },
 //   ]);
 // }
-
 
 export default App;

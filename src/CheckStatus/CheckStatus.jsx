@@ -1,7 +1,5 @@
 import {
   Button,
-  Card,
-  CardContent,
   Grid,
   Paper,
   Step,
@@ -72,7 +70,7 @@ function CheckStatus() {
           <Grid container spacing={4}>
             <Grid item xs={12} sm={4} md={4} lg={4} gap={3}>
               <Typography fontSize="large">REGISTRATION DETAILS :-</Typography>
-              <Typography fontSize="large">User Name: {username}</Typography>
+              <Typography fontSize="large">User Names: {username}</Typography>
               <Typography fontSize="large">Email Address: {email}</Typography>
               <Typography fontSize="large">
                 Contact Number: {contactNumber}

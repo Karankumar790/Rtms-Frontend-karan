@@ -1,7 +1,5 @@
 import React from 'react'
-import PageContainer from '../../../components/HOC/PageContainer'
-import { Button, Grid, IconButton, TextField, Typography } from '@mui/material'
-import Input from '@mui/joy/Input';
+import { Button, Grid,  Typography } from '@mui/material'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -15,9 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import well from '/assets/WELL.png'
-import Chart from 'react-apexcharts';
 import { Box } from '@mui/system';
-// import { BarChart } from '@mui/x-charts/BarChart';
 
 // --------------------------Table for Moblie-----------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -87,7 +83,7 @@ let Sata = {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#8C000B",
     color: theme.palette.common.white,
     padding: '10px', // Increase padding
     height: '20px',  // Set a specific height
