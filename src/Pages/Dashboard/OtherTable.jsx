@@ -18,7 +18,7 @@ import {
   addWellNum,
   getAllInstallation,
   getLocation,
-} from "../../apis/wellService";
+} from "../../apis/WellService";
 import { useSelector } from "react-redux";
 
 // -------------------Main Component-------------------------
