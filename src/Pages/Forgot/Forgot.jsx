@@ -23,6 +23,7 @@ export default function Forgot() {
     e.preventDefault();
 
     try {
+      
       const response = await forgotPassword(formValues);
       if (response.success) {
         // Store data in redux
