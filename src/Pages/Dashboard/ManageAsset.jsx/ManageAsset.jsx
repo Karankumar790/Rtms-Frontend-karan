@@ -159,9 +159,10 @@ function ManageAsset() {
   };
 
 
-  // Delete Department
-  const handleDeleteDepartment = async (departmentName) => {
-    if (!organizationName || !departmentName) {
+// Delete Department
+const handleDeleteDepartment = async (departmentName) => {
+  if (!organizationName || !departmentName) {
+
       toast.error("Organization name and department name are required");
       return;
     }

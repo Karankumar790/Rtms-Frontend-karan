@@ -348,8 +348,8 @@ export const getApprovalChain = async (organizationName, departmentName) => {
   }
 };
 
-//update approval Chain
-export const updateApprovalChain = async (formData) => {
+
+export const deleteApprovalChain = async (formData) => {
   try {
     const response = await axios.put(
       `${ORGANIZATION_API}/update-approval-chain`,
@@ -362,8 +362,9 @@ export const updateApprovalChain = async (formData) => {
 };
 
 
-//delete Approval chain
-export const deleteApprovalChain = async (formData) => {
+// https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
+export const getApprovalChain = async (organizationName, departmentName) => {
+
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/delete-approval-chain`,
@@ -417,5 +418,4 @@ export const updateOrganizationData = async (formData) => {
     return catchError(error);
   }
 };
-
 

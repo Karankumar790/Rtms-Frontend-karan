@@ -19,13 +19,15 @@ import { useSelector } from "react-redux";
 // -----------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: ` 1px solid ${theme.palette.divider}`,
+
+  borderBottom: `1px solid ${theme.palette.divider}`,
+
   backgroundColor: theme.palette.grey[100],
 }));
 
 const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: ` 1px solid ${theme.palette.divider}`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
 
@@ -66,65 +68,137 @@ let Sata = {
 };
 // ------------------------Table for Desktop-----------------------------
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#8C000B",
-    color: theme.palette.common.white,
-    padding: "10px", // Increase padding
-    height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
-    lineHeight: "1.5", // Adjust line height if needed
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
+const rows = [
+  createData("1"),
+  createData("2"),
+  createData("3"),
+  createData("4"),
+  createData("5"),
+  createData("3"),
+];
+
+const BodyTableCellWraper = styled(TableCell)(() => ({
+  textAlign: "center",
+  fontWeight: 500,
+  fontSize: "15.65px",
+  lineHeight: " 20px",
+  color: "#000000",
+}));
 
 function WellMaster() {
   const [locations, setLocations] = useState([]);
-  const [installations, setInstallations] = useState([]);
+  const [installations, setInstallations] = useState({}); // To hold installations by location
+  const [loading, setLoading] = useState(true);
   const organizationName = useSelector((state) => state.auth.organization);
+
+  // Fetch all locations
+  // const fetchLocations = async () => {
+  //   try {
+  //     const result = await getLocation(organizationName);
+  //     if (result && result.data) {
+  //       setLocations(result.data); // Assuming setLocations is used in the component to update state
+  //       // Store the locations in localStorage
+  //       localStorage.setItem("locations", JSON.stringify(result.data));
+  //     }
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
+
+  // // Fetch installations for each location
+  // const fetchInstallations = async () => {
+  //   try {
+  //     const response = await getAllInstallation(locate, organizationName); // Assuming locate is a valid location variable
+
+  //     // Correct the condition to properly check for installations
+  //     if (response && response.data) {
+  //       const installationNames = response.data.map(
+  //         (installation) => installation.name
+  //       );
+  //       setIns(installationNames); // Set the installation names in state
+  //       toast.success("Installations fetched successfully");
+  //     } else {
+  //       toast.error("No installations found");
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message || "Failed to fetch installations");
+  //   }
+  // };
+
+  // // Effect to fetch data on component mount
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     await fetchLocations();
+  //     setLoading(false);
+  //   };
+  //   loadData();
+  // }, [organizationName]);
+
+  // // Effect to fetch installations after locations are fetched
+  // useEffect(() => {
+  //   if (locations.length > 0) {
+  //     fetchInstallations();
+  //   }
+  // }, [locations]);
+
+  // if (loading) {
+  //   return <div>Loading...</div>; // Loading state
+  // }
+
+  // useEffect(() => {
+  //   const fetchLocations = async () => {
+  //     try {
+  //       const locationResponse = await getLocation(organizationName);
+  //       setLocations(locationResponse.data);
+
+  //       // Fetch installations for each location
+  //       locationResponse.data.forEach(async (location) => {
+  //         const installationResponse = await getAllInstallation(
+  //           location,
+  //           organizationName
+  //         );
+  //         setInstallations((prev) => ({
+  //           ...prev,
+  //           [location]: installationResponse.data,
+  //         }));
+  //       });
+  //     } catch (error) {
+  //       console.error("Error fetching locations or installations", error);
+  //     }
+  //   };
+
+  //   fetchLocations();
+  // }, [organizationName]);
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const locationData = await getLocation(organizationName);
-      setLocations(locationData.data);
+      try {
+        const locationResponse = await getLocation(organizationName);
+        setLocations(locationResponse.data);
+
+        // Fetch installations for each location
+        locationResponse.data.forEach(async (location) => {
+          const installationResponse = await getAllInstallation(
+            location,
+            organizationName
+          );
+          setInstallations((prev) => ({
+            ...prev,
+            [location]: installationResponse.data,
+          }));
+        });
+      } catch (error) {
+        console.error("Error fetching locations or installations", error);
+      }
     };
+
     fetchLocations();
   }, [organizationName]);
 
-  // Fetch installations for each location
-  useEffect(() => {
-    const fetchInstallationsForLocations = async () => {
-      const newInstallations = {};
-      for (const location of locations) {
-        const installationData = await getAllInstallation(
-          location,
-          organizationName
-        );
-        newInstallations[location] = installationData.data;
-      }
-      setInstallations(newInstallations);
-    };
-
-    if (locations.length > 0) {
-      fetchInstallationsForLocations();
-    }
-  }, [locations, organizationName]);
   return (
     <div>
       <Grid
@@ -155,53 +229,272 @@ function WellMaster() {
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
       >
-         <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: 'auto' }}>
-      <Table aria-label="customized table" stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Location</TableCell>
-            <TableCell align="center">Installations</TableCell>
-            <TableCell align="center">Well Types</TableCell>
-            <TableCell align="center">Well Numbers</TableCell>
-            <TableCell align="center">Landmark</TableCell>
-            <TableCell align="right">Geolocation</TableCell>
-            <TableCell align="center">Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {locations.map((location) => {
-            const locationInstallations = installations[location] || [];
-
-            // Create installation names with line breaks and horizontal lines
-            const installationDisplay = locationInstallations.map((inst, index) => (
-              <div key={inst._id}>
-                {inst.name}
-                {index < locationInstallations.length - 1 && <hr />} {/* Add horizontal line except after the last item */}
-              </div>
-            ));
-
-            const wellTypes = locationInstallations.flatMap(inst => inst.wellTypes.map(well => well.wellType)).join(', ') || "N/A";
-            const wellNumbers = locationInstallations.flatMap(inst => inst.wellTypes.flatMap(well => well.wellNumbers)).join(', ') || "N/A";
-
-            return (
-              <TableRow key={location}>
-                <TableCell align="center">{location}</TableCell>
-                <TableCell align="center" style={{ whiteSpace: 'pre-line' }}>
-                  {installationDisplay}
+        {/* <TableContainer
+          component={Paper}
+          sx={{ maxHeight: 620, overflow: "auto" }}
+        >
+          <Table aria-label="customized table" stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontSize: "18px" }} align="center">
+                  Location
                 </TableCell>
-                <TableCell align="center">{wellTypes}</TableCell>
-                <TableCell align="center">{wellNumbers}</TableCell>
-                <TableCell align="center"></TableCell> {/* Landmark placeholder */}
+                <TableCell sx={{ fontSize: "18px" }} align="center">
+                  Installation
+                </TableCell>
+                <TableCell sx={{ fontSize: "18px" }} align="center">
+                  Well Type
+                </TableCell>
+                <TableCell sx={{ fontSize: "18px" }} align="center">
+                  Well Number
+                </TableCell>
+                <TableCell sx={{ fontSize: "18px" }} align="center">
+                  Landmark
+                </TableCell>
+                <TableCell sx={{ fontSize: "18px" }} align="right">
+                  Geolocation
+                </TableCell>
+                <TableCell sx={{ fontSize: "18px" }} align="center">
+                  Action
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow key={location}>
+                <TableCell
+                  align="center"
+                  component="th"
+                  scope="row"
+                ></TableCell>
+                <TableCell align="center"></TableCell>
+                <TableCell align="center"></TableCell>
+                <TableCell align="center"></TableCell>
+                <TableCell align="center"></TableCell>
                 <TableCell align="right">
                   <Link to="/dashboard/virtual">
-                    <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
+                    <IconButton
+                      sx={{
+                        color: "grey",
+                        "&:hover": { color: "darkred" },
+                        marginRight: "5px",
+                      }}
+                    >
                       <LocationOnIcon fontSize="large" />
                     </IconButton>
                   </Link>
                 </TableCell>
                 <TableCell align="center">
                   <Link to="/dashboard/addwell">
-                    <IconButton sx={{ color: 'darkblue', '&:hover': { color: 'black' } }}>
+                    <IconButton
+                      sx={{
+                        color: "darkblue",
+                        "&:hover": { color: "black" },
+                      }}
+                    >
+                      <SettingsIcon fontSize="large" />
+                    </IconButton>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer> */}
+
+        {/* <TableContainer component={Paper} sx={{ maxHeight: 620, overflow: "auto" }}>
+      <Table aria-label="customized table" stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Location
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Installation
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Well Type
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Well Number
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="right">
+              Action
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {locations.map((location) => (
+            installations[location] &&
+            installations[location].map((installation, idx) => (
+              <TableRow key={`${location}-${idx}`}>
+     
+                <TableCell align="center">{location}</TableCell>
+
+                <TableCell align="center">{installation.name}</TableCell>
+
+                <TableCell align="center">
+                
+                </TableCell>
+
+                <TableCell align="center">
+             
+                </TableCell>
+
+                <TableCell align="right">
+                  <Link to="/dashboard/virtual">
+                    <IconButton
+                      sx={{
+                        color: "grey",
+                        "&:hover": { color: "darkred" },
+                        marginRight: "5px",
+                      }}
+                    >
+                      <LocationOnIcon fontSize="large" />
+                    </IconButton>
+                  </Link>
+                  <Link to="/dashboard/addwell">
+                    <IconButton
+                      sx={{
+                        color: "darkblue",
+                        "&:hover": { color: "black" },
+                      }}
+                    >
+                      <SettingsIcon fontSize="large" />
+                    </IconButton>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer> */}
+
+<TableContainer component={Paper} sx={{ maxHeight: 620, overflow: "auto" }}>
+      <Table aria-label="customized table" stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Location
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Installation
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Well Type
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="center">
+              Well Number
+            </TableCell>
+            <TableCell sx={{ fontSize: "18px" }} align="right">
+              Action
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {locations.map((location) => {
+            const locationInstallations = installations[location] || [];
+
+            // Ensure that each installation is displayed
+            return locationInstallations.length > 0 ? (
+              locationInstallations.map((installation) => {
+                const wellTypes = installation.wellTypes || [];
+
+                // If there are well types, map through them
+                if (wellTypes.length > 0) {
+                  return wellTypes.map((wellType) =>
+                    wellType.wellNumbers.map((wellNumber, numberIdx) => (
+                      <TableRow key={`${location}-${installation.name}-${wellNumber}`}>
+                        <TableCell align="center">{location}</TableCell>
+                        <TableCell align="center">{installation.name}</TableCell>
+                        <TableCell align="center">{wellType.wellType}</TableCell>
+                        <TableCell align="center">{wellNumber}</TableCell>
+                        <TableCell align="right">
+                          <Link to="/dashboard/virtual">
+                            <IconButton
+                              sx={{
+                                color: "grey",
+                                "&:hover": { color: "darkred" },
+                                marginRight: "5px",
+                              }}
+                            >
+                              <LocationOnIcon fontSize="large" />
+                            </IconButton>
+                          </Link>
+                          <Link to="/dashboard/addwell">
+                            <IconButton
+                              sx={{
+                                color: "darkblue",
+                                "&:hover": { color: "black" },
+                              }}
+                            >
+                              <SettingsIcon fontSize="large" />
+                            </IconButton>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  );
+                } else {
+                  // If no well types for the installation, show it with placeholders
+                  return (
+                    <TableRow key={`${location}-${installation.name}`}>
+                      <TableCell align="center">{location}</TableCell>
+                      <TableCell align="center">{installation.name}</TableCell>
+                      <TableCell align="center">No Well Type</TableCell>
+                      <TableCell align="center">No Well Number</TableCell>
+                      <TableCell align="right">
+                        <Link to="/dashboard/virtual">
+                          <IconButton
+                            sx={{
+                              color: "grey",
+                              "&:hover": { color: "darkred" },
+                              marginRight: "5px",
+                            }}
+                          >
+                            <LocationOnIcon fontSize="large" />
+                          </IconButton>
+                        </Link>
+                        <Link to="/dashboard/addwell">
+                          <IconButton
+                            sx={{
+                              color: "darkblue",
+                              "&:hover": { color: "black" },
+                            }}
+                          >
+                            <SettingsIcon fontSize="large" />
+                          </IconButton>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
+              })
+            ) : (
+              // If no installations for the location, show a row with no installations
+              <TableRow key={location}>
+                <TableCell align="center">{location}</TableCell>
+                <TableCell align="center">No Installations Available</TableCell>
+                <TableCell align="center">-</TableCell>
+                <TableCell align="center">-</TableCell>
+                <TableCell align="right">
+                  <Link to="/dashboard/virtual">
+                    <IconButton
+                      sx={{
+                        color: "grey",
+                        "&:hover": { color: "darkred" },
+                        marginRight: "5px",
+                      }}
+                    >
+                      <LocationOnIcon fontSize="large" />
+                    </IconButton>
+                  </Link>
+                  <Link to="/dashboard/addwell">
+                    <IconButton
+                      sx={{
+                        color: "darkblue",
+                        "&:hover": { color: "black" },
+                      }}
+                    >
                       <SettingsIcon fontSize="large" />
                     </IconButton>
                   </Link>
