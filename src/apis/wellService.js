@@ -47,7 +47,7 @@ export const getAllInstallation = async (location, organizationName) => {
     return response.data;
   } catch (error) {
     console.error(error); // Log error for debugging
-    throw error; // Throw error to handle in the calling function
+    return catchError(error); // Throw error to handle in the calling function
   }
 };
 
@@ -58,7 +58,7 @@ export const addWellNum = async (formData) => {
       `${WELL_API}/save-WellTypeForInstallation`,
       formData
     );
-    return response.data;
+    return response.data
   } catch (error) {
     return catchError(error);
   }
@@ -113,5 +113,23 @@ export const getLocationOfWell = async (wellNumber, organizationName) => {
   } catch (error) {
     console.error(error); // Log error for debugging
     throw error; // Throw error to handle in the calling function
+  }
+};
+
+export const saveWellDetails = async (details) => {
+  try {
+    const response = await axios.post(`${WELL_API}/save-WellDetails?location=${details.location}&installation=${details.installation}&wellType=${details.wellType}&wellNumber=${details.wellNumber}&organizationName=${details.organizationName}`, {
+      landmark: details.landmark,
+      latitude: details.latitude,
+      longitude: details.longitude,
+      descriptions: details.descriptions,
+      alarmSettings: details.alarmSettings,
+      flowing: details.flowing,
+      notFlowing: details.notFlowing,
+    });
+    return response.data; // or response if you need more info
+  } catch (error) {
+    console.error('Error saving well details:', error);
+    return catchError; 
   }
 };

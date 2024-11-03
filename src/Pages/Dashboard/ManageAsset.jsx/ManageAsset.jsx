@@ -705,9 +705,10 @@ function ManageAsset() {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
-      // if (organizationlogo instanceof File) {
-      //   formDataToUpdate.organizationlogo = organizationlogo;
-      // }
+      console.log(organizationlogo,"org logo...............")
+      if (organizationlogo instanceof File) {
+        formDataToUpdate.organizationlogo = organizationlogo;
+      }
       setFormData(formDataToUpdate);
       console.log("hgdvdhc..........", data.organizationlogo);
       console.log("organization\\\\\\\\\\\\\\\\\\\\\\\\", response.data);
@@ -760,8 +761,8 @@ function ManageAsset() {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
-          <Typography variant="h4" mt={1}>
-            Organization: [ {organizationName ? organizationName : "N/A"} ]
+          <Typography variant="h5" fontWeight={800} mt={1}>
+           {organizationName ? organizationName : "N/A"}
           </Typography>
 
           {/* Organization Logo (Top of Organization Name) */}

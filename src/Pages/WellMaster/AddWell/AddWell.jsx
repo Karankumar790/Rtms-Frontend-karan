@@ -14,85 +14,92 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
+import { saveWellDetails } from "../../../apis/wellService";
 
-const data = [
+
+const initialData = [
   {
     employeeId: "01",
+    Parameter: "GIP (kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
     Description: "",
-    Parameter: "GIP (kg/Cm²)",
-    Condition1: "",
-    Description1: "",
   },
   {
     employeeId: "02",
+    Parameter: "CHP (kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
     Description: "",
-    Parameter: "CHP (kg/Cm²)",
-    Condition1: "",
   },
   {
     employeeId: "03",
-    NormalAlert: "",
-    CriticalAlert: "",
-    Condition: "",
-    Description: "",
     Parameter: "THP(kg)",
-    Condition1: "",
-  },
-  {
-    employeeId: "04",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
     Description: "",
-    Parameter: "Battery (%)",
-    Condition1: "",
   },
   {
     employeeId: "05",
+    Parameter: "Low Battery",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
     Description: "",
+  },
+  {
+    employeeId: "06",
     Parameter: "Solar Voltage",
-    Condition1: "",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
   },
 ];
 
 function AddWell() {
-  const [employeeData, setEmployeeData] = useState(data);
+  const [employeeData, setEmployeeData] = useState(initialData);
+  const organizationName = useSelector((state) => state.auth.organization);
+  const [formValues, setFormValues] = useState({
+    organizationName,
+    location: "",
+    installation: "",
+    wellType: "",
+    wellNumber: "",
+    landmark: "",
+    latitude: "",
+    longitude: "",
+    descriptions: "",
+    alarmSettings: [],
+    flowing: {
+      pressures: [
+        { pressure1: "", comparison: "", pressure2: "", tolerance: "" },
+      ],
+    },
+    notFlowing: {
+      pressures: [
+        { pressure1: "", comparison: "", pressure2: "", tolerance: "" },
+      ],
+    },
+  });
+
   const onChangeInput = (e, employeeId) => {
     const { name, value } = e.target;
-    console.log("name", name);
-    console.log("value", value);
-    console.log("employeeId", employeeId);
 
     const editData = employeeData.map((item) =>
-      item.employeeId === employeeId && name ? { ...item, [name]: value } : item
+      item.employeeId === employeeId ? { ...item, [name]: value } : item
     );
 
-    console.log("editData", editData);
     setEmployeeData(editData);
   };
-
-  const [formValues, setFormValues] = useState({
-    parameter1: "",
-    parameter2: "",
-    parameter3: "",
-    parameter4: "",
-    parameter5: "",
-    parameter6: "",
-  });
 
   const handleChangeParameter = (event) => {
     const { name, value } = event.target;
@@ -102,75 +109,63 @@ function AddWell() {
     });
   };
 
-  const [wellDetails, setWellDetails] = useState({
-    location: "",
-    installation: "",
-    wellType: "",
-    wellNumber: "",
-    landmark: "",
-    latitude: "",
-    longitude: "",
-    description: "",
-  });
+  const handleFlowingChange = (index, name, value) => {
+    const updatedFlowing = { ...formValues.flowing };
+    const pressureData = updatedFlowing.pressures[index];
 
-  const handleWellDetails = (e) => {
-    const { name, value } = e.target;
-    setWellDetails({ ...wellDetails, [name]: value });
-    console.log(wellDetails.landmark,wellDetails.latitude,"//////////////////")
-  };
-console.log(wellDetails,".................")
-
-  // Fetch data from localStorage on component mount
-  useEffect(() => {
-    const storedWellDetails = localStorage.getItem("wellDetails");
-    if (storedWellDetails) {
-      setWellDetails(JSON.parse(storedWellDetails));
+    if (name === "pressure1" || name === "pressure2") {
+      pressureData[name] = value;
+    } else if (name === "comparison") {
+      pressureData.comparison = value;
+    } else if (name === "tolerance") {
+      pressureData.tolerance = value;
     }
-  }, []);
 
-  const bodyData = {
-    landmark: wellDetails.landmark,
-    latitude: wellDetails.latitude,
-    longitude: wellDetails.longitude,
-    descriptions: wellDetails.description,
-    alarmSettings: {
-      gip: {
-        normalAlert: {
-          normalalert: employeeData[0].NormalAlert,
-          condition: employeeData[0].Condition1,
-          description: employeeData[0].Description,
-        },
-        criticalAlert: {
-          criticalalert: employeeData[0].CriticalAlert,
-          condition: employeeData[0].Condition,
-          description: employeeData[0].Description1,
-        },
-      },
-      // Continue filling out the other alarm settings as needed
-    },
-    flowing: {
-      pressures: [
-        {
-          pressure1: formValues.parameter1,
-          comparison: formValues.parameter3,
-          pressure2: formValues.parameter2,
-          tolerance: formValues.tolerance,
-        },
-      ],
-    },
-    notFlowing: {
-      pressures: [
-        {
-          pressure1: "THP",
-          comparison: "=",
-          pressure2: "GIP",
-          tolerance: 0,
-        },
-      ],
-    },
+    updatedFlowing.pressures[index] = pressureData;
+    setFormValues({ ...formValues, flowing: updatedFlowing });
   };
 
-  // const wellDetails = useSelector((state) => state.wellDetails);
+  const handleNotFlowingChange = (index, name, value) => {
+    const updatedNotFlowing = { ...formValues.notFlowing };
+    const pressureData = updatedNotFlowing.pressures[index];
+
+    if (name === "pressure1" || name === "pressure2") {
+      pressureData[name] = value;
+    } else if (name === "comparison") {
+      pressureData.comparison = value;
+    } else if (name === "tolerance") {
+      pressureData.tolerance = value;
+    }
+
+    updatedNotFlowing.pressures[index] = pressureData;
+    setFormValues({ ...formValues, notFlowing: updatedNotFlowing });
+  };
+
+  const handleSubmit = async () => {
+    if (!organizationName) {
+      toast.error("Organization name is missing");
+      return;
+    }
+    try {
+      // Prepare data for API call
+      const details = {
+        ...formValues,
+        alarmSettings: employeeData, // Pass employee data directly or transform as needed
+        flowing: {
+          pressures: formValues.flowing.pressures,
+        },
+        notFlowing: {
+          pressures: formValues.notFlowing.pressures,
+        },
+      };
+
+      const response = await saveWellDetails(details);
+      console.log("Well saved successfully:", response);  
+      // You may want to reset form or show a success message here
+    } catch (error) {
+      console.error("Error saving well:", error);
+    }
+  };
 
   return (
     <div>
@@ -189,14 +184,15 @@ console.log(wellDetails,".................")
           spacing={2}
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
+          {/* Input Fields */}
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <TextField
               fullWidth
               size="small"
               label="Location"
               variant="outlined"
-              value={wellDetails.location}
-              readOnly
+              name="location"
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -205,8 +201,8 @@ console.log(wellDetails,".................")
               size="small"
               label="Installation"
               variant="outlined"
-              value={wellDetails.installation}
-              readOnly
+              name="installation"
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -215,8 +211,8 @@ console.log(wellDetails,".................")
               size="small"
               label="Well Type"
               variant="outlined"
-              value={wellDetails.wellType}
-              readOnly
+              name="wellType"
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -225,8 +221,8 @@ console.log(wellDetails,".................")
               size="small"
               label="Well Number"
               variant="outlined"
-              value={wellDetails.wellNumber}
-              readOnly
+              name="wellNumber"
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -236,8 +232,7 @@ console.log(wellDetails,".................")
               label="Landmark"
               variant="outlined"
               name="landmark"
-              value={wellDetails.landmark}
-              onChange={handleWellDetails}
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -247,8 +242,7 @@ console.log(wellDetails,".................")
               label="Latitude"
               variant="outlined"
               name="latitude"
-              value={wellDetails.latitude}
-              onChange={handleWellDetails}
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -258,8 +252,7 @@ console.log(wellDetails,".................")
               label="Longitude"
               variant="outlined"
               name="longitude"
-              value={wellDetails.longitude}
-              onChange={handleWellDetails}
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -268,9 +261,8 @@ console.log(wellDetails,".................")
               size="small"
               label="Description"
               variant="outlined"
-              name="description"
-              value={wellDetails.description}
-              onChange={handleWellDetails}
+              name="descriptions"
+              onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
         </Grid>
@@ -316,22 +308,21 @@ console.log(wellDetails,".................")
               </TableRow>
             </TableHead>
             <TableBody>
-              {employeeData?.map(
+              {employeeData.map(
                 ({
                   employeeId,
                   Parameter,
                   NormalAlert,
                   CriticalAlert,
                   Condition,
-                  Condition1,
                   Description,
+                  Condition1,
                   Description1,
                 }) => (
                   <TableRow key={employeeId}>
                     <TableCell>
                       <Typography>{Parameter}</Typography>
                     </TableCell>
-
                     <TableCell>
                       <TextField
                         name="NormalAlert"
@@ -339,7 +330,6 @@ console.log(wellDetails,".................")
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        // style={{ width: '90px' }}
                         fullWidth
                       />
                     </TableCell>
@@ -351,7 +341,6 @@ console.log(wellDetails,".................")
                           value={Condition1}
                           onChange={(e) => onChangeInput(e, employeeId)}
                           size="small"
-                          // style={{ width: '90px' }}
                           fullWidth
                         >
                           <MenuItem value="High">High</MenuItem>
@@ -366,7 +355,6 @@ console.log(wellDetails,".................")
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        // style={{ width: '450px' }}
                         fullWidth
                       />
                     </TableCell>
@@ -377,7 +365,6 @@ console.log(wellDetails,".................")
                         onChange={(e) => onChangeInput(e, employeeId)}
                         variant="outlined"
                         size="small"
-                        // style={{ width: '90px' }}
                         fullWidth
                       />
                     </TableCell>
@@ -389,7 +376,6 @@ console.log(wellDetails,".................")
                           value={Condition}
                           onChange={(e) => onChangeInput(e, employeeId)}
                           size="small"
-                          // style={{ width: '90px' }}
                           fullWidth
                         >
                           <MenuItem value="High">High</MenuItem>
@@ -405,7 +391,6 @@ console.log(wellDetails,".................")
                         variant="outlined"
                         size="small"
                         fullWidth
-                        // style={{ width: '350px' }}
                       />
                     </TableCell>
                   </TableRow>
@@ -414,6 +399,7 @@ console.log(wellDetails,".................")
             </TableBody>
           </Table>
         </Grid>
+
         <Paper sx={{ mt: "1" }}>
           <Grid container spacing={0.8} p={2}>
             <Grid container display={"flex"} gap={2.5} p={2}>
@@ -423,82 +409,83 @@ console.log(wellDetails,".................")
               </Grid>
               <Grid item lg={9} display={"flex"} gap={3}>
                 <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small" variant="outlined">
+                  <FormControl fullWidth size="small">
                     <InputLabel id="pressure-label">Pressure</InputLabel>
                     <Select
                       labelId="pressure-label"
-                      id="pressure-select"
-                      name="parameter1"
-                      value={formValues.parameter1}
-                      onChange={handleChangeParameter}
+                      name="pressure1"
+                      value={formValues.flowing.pressures[0].pressure1}
+                      onChange={(e) =>
+                        handleFlowingChange(0, "pressure1", e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="">
                         <em>All</em>
                       </MenuItem>
-                      <MenuItem value={3}>GIP</MenuItem>
-                      <MenuItem value={1}>THP</MenuItem>
-                      <MenuItem value={2}>CHP</MenuItem>
+                      <MenuItem value="GIP">GIP</MenuItem>
+                      <MenuItem value="THP">THP</MenuItem>
+                      <MenuItem value="CHP">CHP</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-
                 <Grid item lg={3} md={6} sm={12} xs={12}>
                   <FormControl fullWidth size="small">
-                    <InputLabel id="pressure-label">comparison</InputLabel>
+                    <InputLabel id="comparison-label">Comparison</InputLabel>
                     <Select
-                      labelId="pressure-label"
-                      id="pressure-select"
-                      name="parameter3"
-                      value={formValues.parameter3}
-                      onChange={handleChangeParameter}
+                      labelId="comparison-label"
+                      name="comparison"
+                      value={formValues.flowing.pressures[0].comparison}
+                      onChange={(e) =>
+                        handleFlowingChange(0, "comparison", e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="">
                         <em>All</em>
                       </MenuItem>
-                      <MenuItem value={1} sx={{ fontSize: "20px" }}>
-                        &gt;
-                      </MenuItem>
-                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
-                        &lt;
-                      </MenuItem>
-                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
-                        =
-                      </MenuItem>
+                      <MenuItem value=">">&gt;</MenuItem>
+                      <MenuItem value="<">&lt;</MenuItem>
+                      <MenuItem value="=">=</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-
-                <Grid item lg={3} md={6} sm={6} xs={12}>
+                <Grid item lg={3} md={6} sm={12} xs={12}>
                   <FormControl fullWidth size="small">
                     <InputLabel id="pressure-label">Pressure</InputLabel>
                     <Select
                       labelId="pressure-label"
-                      id="pressure-select"
-                      name="parameter2"
-                      value={formValues.parameter2}
-                      onChange={handleChangeParameter}
+                      name="pressure2"
+                      value={formValues.flowing.pressures[0].pressure2}
+                      onChange={(e) =>
+                        handleFlowingChange(0, "pressure2", e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="">
                         <em>All</em>
                       </MenuItem>
-                      <MenuItem value={1}>GIP</MenuItem>
-                      <MenuItem value={2}>THP</MenuItem>
-                      <MenuItem value={3}>CHP</MenuItem>
+                      <MenuItem value="GIP">GIP</MenuItem>
+                      <MenuItem value="THP">THP</MenuItem>
+                      <MenuItem value="CHP">CHP</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <Typography>Tolerance(%)</Typography>
-                  <TextField variant="outlined" size="small" fullWidth />
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <Typography>Tolerance (%)</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={formValues.flowing.pressures[0].tolerance}
+                    onChange={(e) =>
+                      handleFlowingChange(0, "tolerance", e.target.value)
+                    }
+                    fullWidth
+                  />
                 </Grid>
               </Grid>
             </Grid>
             {/* Row 2: Not Flowing */}
-
             <Grid container display={"flex"} gap={2.5} p={2}>
               <Grid item lg={1}>
                 <Typography mt={2}>Not Flowing</Typography>
@@ -509,73 +496,75 @@ console.log(wellDetails,".................")
                     <InputLabel id="pressure-label">Pressure</InputLabel>
                     <Select
                       labelId="pressure-label"
-                      id="pressure-select"
-                      name="parameter4"
-                      value={formValues.parameter4}
-                      onChange={handleChangeParameter}
+                      name="pressure1"
+                      value={formValues.notFlowing.pressures[0].pressure1}
+                      onChange={(e) =>
+                        handleNotFlowingChange(0, "pressure1", e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="">
                         <em>All</em>
                       </MenuItem>
-                      <MenuItem value={1}>GIP</MenuItem>
-                      <MenuItem value={2}>THP</MenuItem>
-                      <MenuItem value={3}>CHP</MenuItem>
+                      <MenuItem value="GIP">GIP</MenuItem>
+                      <MenuItem value="THP">THP</MenuItem>
+                      <MenuItem value="CHP">CHP</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-
                 <Grid item lg={3} md={6} sm={12} xs={12}>
                   <FormControl fullWidth size="small">
-                    <InputLabel id="pressure-label">comparison</InputLabel>
+                    <InputLabel id="comparison-label">Comparison</InputLabel>
                     <Select
-                      labelId="pressure-label"
-                      id="pressure-select"
-                      name="parameter5"
-                      value={formValues.parameter5}
-                      onChange={handleChangeParameter}
+                      labelId="comparison-label"
+                      name="comparison"
+                      value={formValues.notFlowing.pressures[0].comparison}
+                      onChange={(e) =>
+                        handleNotFlowingChange(0, "comparison", e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="">
                         <em>All</em>
                       </MenuItem>
-                      <MenuItem value={1} sx={{ fontSize: "20px" }}>
-                        &gt;
-                      </MenuItem>
-                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
-                        &lt;
-                      </MenuItem>
-                      <MenuItem value={2} sx={{ fontSize: "20px" }}>
-                        =
-                      </MenuItem>
+                      <MenuItem value=">">&gt;</MenuItem>
+                      <MenuItem value="<">&lt;</MenuItem>
+                      <MenuItem value="=">=</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-
-                <Grid item lg={3} md={6} sm={6} xs={12}>
+                <Grid item lg={3} md={6} sm={12} xs={12}>
                   <FormControl fullWidth size="small">
                     <InputLabel id="pressure-label">Pressure</InputLabel>
                     <Select
                       labelId="pressure-label"
-                      id="pressure-select"
-                      name="parameter6"
-                      value={formValues.parameter6}
-                      onChange={handleChangeParameter}
+                      name="pressure2"
+                      value={formValues.notFlowing.pressures[0].pressure2}
+                      onChange={(e) =>
+                        handleNotFlowingChange(0, "pressure2", e.target.value)
+                      }
                       size="small"
                     >
                       <MenuItem value="">
                         <em>All</em>
                       </MenuItem>
-                      <MenuItem value={1}>GIP</MenuItem>
-                      <MenuItem value={2}>THP</MenuItem>
-                      <MenuItem value={3}>CHP</MenuItem>
+                      <MenuItem value="GIP">GIP</MenuItem>
+                      <MenuItem value="THP">THP</MenuItem>
+                      <MenuItem value="CHP">CHP</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                  <Typography>Tolerance(%)</Typography>
-                  <TextField variant="outlined" size="small" fullWidth />
+                <Grid item lg={3} md={6} sm={12} xs={12}>
+                  <Typography>Tolerance (%)</Typography>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    value={formValues.notFlowing.pressures[0].tolerance}
+                    onChange={(e) =>
+                      handleNotFlowingChange(0, "tolerance", e.target.value)
+                    }
+                    fullWidth
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -590,22 +579,22 @@ console.log(wellDetails,".................")
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "green", // Change button color to green
+              backgroundColor: "green",
               "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
+                backgroundColor: "darkgreen",
               },
               fontSize: "16px",
             }}
+            onClick={handleSubmit} // Call handleSubmit on click
           >
-            {" "}
             Add Well
           </Button>
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "green", // Change button color to green
+              backgroundColor: "green",
               "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
+                backgroundColor: "darkgreen",
               },
               fontSize: "16px",
             }}

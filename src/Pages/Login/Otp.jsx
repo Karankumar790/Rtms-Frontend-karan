@@ -1,11 +1,10 @@
-//Api Integration Using Store In Redux
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Paper, Typography, Button, Link } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import PageContainer from "../../components/HOC/PageContainer";
 import { useNavigate } from "react-router-dom";
 import OTPInput from "react-otp-input";
-import { login, sendOtpLogin } from "../../apis/Service"; // Import login and sendOtpLogin APIs
+import { login, sendOtpLogin } from "../../apis/Service"; 
 import {
   setOtp,
   setAuthenticated,
@@ -17,10 +16,25 @@ import { toast } from "react-toastify";
 
 export default function OtpLogin() {
   const [otpValue, setOtpValue] = useState("");
+  const [timer, setTimer] = useState(200);
+  const [isExpired, setIsExpired] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { username, password } = useSelector((state) => state.auth); // Get username and password from Redux store
+  const { username, password } = useSelector((state) => state.auth); 
+
+  useEffect(() => {
+    if (timer > 0) {
+      const countdown = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+
+      return () => clearInterval(countdown);
+    } else {
+      setIsExpired(true);
+      toast.error("OTP has expired. Please request a new one.");
+    }
+  }, [timer]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,30 +43,16 @@ export default function OtpLogin() {
 
     try {
       const response = await login(formData);
-
-      // console.log("Login Response:", response);  // Log the full response
-      // console.log("orgnzaition anme", response.data.organization);
-
-      console.log(response);
       if (response.success) {
-        dispatch(setOtp(otpValue)); // Store OTP in Redux
-        dispatch(setAuthenticated(true)); // Set authenticated state to true
-        dispatch(setAuthToken(response.token)); // Store auth token
-        dispatch(setRole(response.data.role)); // Store user role
-        dispatch(setOrganizationName(response.data.organization)) //store organization role
+        dispatch(setOtp(otpValue)); 
+        dispatch(setAuthenticated(true)); 
+        dispatch(setAuthToken(response.token)); 
+        dispatch(setRole(response.data.role)); 
+        dispatch(setOrganizationName(response.data.organization)); 
 
         toast.success("Login successful!");
 
-        // navigate("/dashboard");
-
-        // Conditionally navigate based on role
-        if (response.data.role === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/dashboard");
-        }
-
-        // dispatch(clearAuth()); // Clear auth data after login success
+        navigate(response.data.role === "admin" ? "/admin" : "/dashboard");
       } else {
         toast.error("OTP does not match.");
       }
@@ -63,16 +63,23 @@ export default function OtpLogin() {
   };
 
   const handleResendOtp = async () => {
-    try {
-      const response = await sendOtpLogin({ username, password }); // Call API to resend OTP
-      if (response.success) {
-        toast.success("OTP resent successfully!");
-      } else {
-        toast.error("Failed to resend OTP.");
+    if (isExpired) {
+      try {
+        const response = await sendOtpLogin({ username, password }); 
+        if (response.success) {
+          toast.success("OTP resent successfully!");
+          setOtpValue("");
+          setTimer(200); // Reset timer to 5 minutes
+          setIsExpired(false);
+        } else {
+          toast.error("Failed to resend OTP.");
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Error resending OTP.");
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("Error resending OTP.");
+    } else {
+      toast.error("Please wait for the current OTP to expire.");
     }
   };
 
@@ -114,6 +121,7 @@ export default function OtpLogin() {
                     numInputs={6}
                     renderSeparator={<span> &nbsp; &nbsp; </span>}
                     renderInput={(props) => <input {...props} />}
+                    disabled={isExpired} // Disable input if expired
                   />
                 </Grid>
                 <Grid item xs={12} mt={3} textAlign="center">
@@ -123,6 +131,7 @@ export default function OtpLogin() {
                     size="small"
                     sx={{ bgcolor: "#0c113b" }}
                     type="submit"
+                    disabled={isExpired} // Disable submit if expired
                   >
                     Submit
                   </Button>
@@ -138,6 +147,14 @@ export default function OtpLogin() {
                     </Typography>
                   </Link>
                 </Grid>
+                <Grid item xs={12} textAlign="center" py={1}>
+                  {isExpired && (
+                    <Typography color="red">OTP expired. Please resend.</Typography>
+                  )}
+                  <Typography color="gray">
+                    Time left: {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
+                  </Typography>
+                </Grid>
               </form>
             </Grid>
           </Paper>
@@ -146,104 +163,3 @@ export default function OtpLogin() {
     </PageContainer>
   );
 }
-
-// // //local storage storing data integration
-// import React, { useState } from "react";
-// import { Grid, Paper, Typography, Button, Link } from "@mui/material";
-// import PageContainer from "../../components/HOC/PageContainer";
-// import { useNavigate } from "react-router-dom";
-// import OTPInput from "react-otp-input";
-// import { login } from "../../apis/Service"; // Import the login service
-
-// export default function OtpLogin() {
-//   const [otpValue, setOtpValue] = useState("");
-//   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     // Retrieve username and password from localStorage
-//     const username = localStorage.getItem("username");
-//     const password = localStorage.getItem("password");
-
-//     const formData = { username, password, otp: otpValue };
-
-//     try {
-//       const response = await login(formData);
-//       if (response.success) {
-//         // Clear localStorage after login success
-//         localStorage.removeItem("username");
-//         localStorage.removeItem("password");
-
-//         navigate("/dashboard");
-//         // You can use a toast or any other notification here
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   return (
-//     <PageContainer
-//       showheader
-//       showfooter
-//       className="bgImg"
-//       style={{ display: "grid", placeContent: "center" }}
-//     >
-//       <Grid container m={0}>
-//         <Grid item xs={12}>
-//           <Paper sx={{ borderRadius: "10px" }}>
-//             <Grid container p={2}>
-//               <form onSubmit={handleSubmit}>
-//                 <Grid item xs={12} mt={2}>
-//                   <Typography
-//                     fontSize="x-large"
-//                     sx={{ color: "#0c1352", textAlign: "center" }}
-//                   >
-//                     Enter OTP To Verify E-Mail
-//                   </Typography>
-//                 </Grid>
-//                 <Grid
-//                   item
-//                   xs={12}
-//                   mt={3}
-//                   display="flex"
-//                   justifyContent="center"
-//                 >
-//                   <OTPInput
-//                     inputStyle={{
-//                       width: "2rem",
-//                       height: "4vh",
-//                       fontSize: "18px",
-//                     }}
-//                     value={otpValue}
-//                     onChange={setOtpValue}
-//                     numInputs={6}
-//                     renderSeparator={<span> &nbsp; &nbsp; </span>}
-//                     renderInput={(props) => <input {...props} />}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={12} mt={3} textAlign="center">
-//                   <Button
-//                     variant="contained"
-//                     color="primary"
-//                     size="small"
-//                     sx={{ bgcolor: "#0c113b" }}
-//                     type="submit"
-//                   >
-//                     Submit
-//                   </Button>
-//                 </Grid>
-//                 <Grid item xs={12} textAlign="center" py={1}>
-//                   <Link to="#" style={{ textDecoration: "none" }}>
-//                     <Typography>Resend One-Time Password</Typography>
-//                   </Link>
-//                 </Grid>
-//               </form>
-//             </Grid>
-//           </Paper>
-//         </Grid>
-//       </Grid>
-//     </PageContainer>
-//   );
-// }
