@@ -50,6 +50,15 @@ const data = [
     Condition1: "",
   },
   {
+    employeeId: "04",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
+    Parameter: "Battery (%)",
+    Condition1: "",
+  },
+  {
     employeeId: "05",
     NormalAlert: "",
     CriticalAlert: "",
@@ -62,7 +71,6 @@ const data = [
 
 function AddWell() {
   const [employeeData, setEmployeeData] = useState(data);
-
   const onChangeInput = (e, employeeId) => {
     const { name, value } = e.target;
     console.log("name", name);
@@ -99,7 +107,18 @@ function AddWell() {
     installation: "",
     wellType: "",
     wellNumber: "",
+    landmark: "",
+    latitude: "",
+    longitude: "",
+    description: "",
   });
+
+  const handleWellDetails = (e) => {
+    const { name, value } = e.target;
+    setWellDetails({ ...wellDetails, [name]: value });
+    console.log(wellDetails.landmark,wellDetails.latitude,"//////////////////")
+  };
+console.log(wellDetails,".................")
 
   // Fetch data from localStorage on component mount
   useEffect(() => {
@@ -108,6 +127,48 @@ function AddWell() {
       setWellDetails(JSON.parse(storedWellDetails));
     }
   }, []);
+
+  const bodyData = {
+    landmark: wellDetails.landmark,
+    latitude: wellDetails.latitude,
+    longitude: wellDetails.longitude,
+    descriptions: wellDetails.description,
+    alarmSettings: {
+      gip: {
+        normalAlert: {
+          normalalert: employeeData[0].NormalAlert,
+          condition: employeeData[0].Condition1,
+          description: employeeData[0].Description,
+        },
+        criticalAlert: {
+          criticalalert: employeeData[0].CriticalAlert,
+          condition: employeeData[0].Condition,
+          description: employeeData[0].Description1,
+        },
+      },
+      // Continue filling out the other alarm settings as needed
+    },
+    flowing: {
+      pressures: [
+        {
+          pressure1: formValues.parameter1,
+          comparison: formValues.parameter3,
+          pressure2: formValues.parameter2,
+          tolerance: formValues.tolerance,
+        },
+      ],
+    },
+    notFlowing: {
+      pressures: [
+        {
+          pressure1: "THP",
+          comparison: "=",
+          pressure2: "GIP",
+          tolerance: 0,
+        },
+      ],
+    },
+  };
 
   // const wellDetails = useSelector((state) => state.wellDetails);
 
@@ -174,6 +235,9 @@ function AddWell() {
               size="small"
               label="Landmark"
               variant="outlined"
+              name="landmark"
+              value={wellDetails.landmark}
+              onChange={handleWellDetails}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -182,6 +246,9 @@ function AddWell() {
               size="small"
               label="Latitude"
               variant="outlined"
+              name="latitude"
+              value={wellDetails.latitude}
+              onChange={handleWellDetails}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -190,6 +257,9 @@ function AddWell() {
               size="small"
               label="Longitude"
               variant="outlined"
+              name="longitude"
+              value={wellDetails.longitude}
+              onChange={handleWellDetails}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -198,6 +268,9 @@ function AddWell() {
               size="small"
               label="Description"
               variant="outlined"
+              name="description"
+              value={wellDetails.description}
+              onChange={handleWellDetails}
             />
           </Grid>
         </Grid>

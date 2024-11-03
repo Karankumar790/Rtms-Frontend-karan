@@ -413,3 +413,15 @@ export const updateOrganizationData = async (formData) => {
     return catchError(error);
   }
 };
+
+// all users data api
+export const getUsersByOrganization = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${USER_API}/get-UsersByOrganization/:organizationName?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};

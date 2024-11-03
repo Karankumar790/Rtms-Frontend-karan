@@ -2,7 +2,6 @@ import axios from "axios";
 import { catchError } from "../helper/helper";
 import { WELL_API } from "./Client";
 
-
 // add location
 
 export const addLocation = async (formData) => {
@@ -43,7 +42,7 @@ export const addInstallation = async (formData) => {
 export const getAllInstallation = async (location, organizationName) => {
   try {
     const response = await axios.get(
-`      ${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
+      `      ${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {
@@ -56,7 +55,7 @@ export const getAllInstallation = async (location, organizationName) => {
 export const addWellNum = async (formData) => {
   try {
     const response = await axios.post(
-      `${WELL_API}/save-WellTypeAndNumber`,
+      `${WELL_API}/save-WellTypeForInstallation`,
       formData
     );
     return response.data;
@@ -65,15 +64,54 @@ export const addWellNum = async (formData) => {
   }
 };
 
-// GET SELECTED  WELL INFO 
-export const getWellDetails = async (location,installationName,wellType, wellNumber,organizationName) => {
+// GET SELECTED  WELL INFO
+export const getWellDetails = async (
+  location,
+  installationName,
+  wellType,
+  wellNumber,
+  organizationName
+) => {
   try {
     const response = await axios.get(
-`      ${WELL_API}/get-WellDetails?location=${location}&installation=${installationName}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`
+      `${WELL_API}/get-WellDetails?location=${location}&installation=${installationName}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {
-    console.error(error); 
-    throw error; 
+    console.error(error);
+    throw error;
+  }
+};
+
+// GET SELECTED  WELL INFO
+export const getWellSetting = async (
+  location,
+  installationName,
+  wellType,
+  wellNumber,
+  organizationName,
+  formData
+) => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/save-WellDetails?location=${location}&installation=${installationName}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getLocationOfWell = async (wellNumber, organizationName) => {
+  try {
+    const response = await axios.get(
+      `      ${WELL_API}/get-WellLocations?organizationName=${organizationName}&wellNumber=${wellNumber}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // Log error for debugging
+    throw error; // Throw error to handle in the calling function
   }
 };
