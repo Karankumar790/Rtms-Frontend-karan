@@ -19,7 +19,7 @@ import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
-import { saveWellDetails } from "../../../apis/wellService";
+import { saveWellDetails } from "../../../apis/WellService";
 
 
 const initialData = [
