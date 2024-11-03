@@ -9,6 +9,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { toast } from "react-toastify";
@@ -40,6 +41,7 @@ function OtherTable() {
     // selectedInstallation,
     // locate
   });
+  console.log(formValues, "......../////");
   const handleChangeWell = (event) => {
     const { name, value } = event.target;
     setFormValues({
@@ -59,7 +61,7 @@ function OtherTable() {
   // ----------------- ADD LOCATION -------------------------------
   // const handleAddLocation = async () => {
   //   if (!location) {
-  //     toast.error("Location is requirred");
+  //     toast.error("Location is required");
   //     return;
   //   }
   //   try {
@@ -70,14 +72,31 @@ function OtherTable() {
   //     const response = await addLocation(formData);
   //     if (response) {
   //       toast.success(response.message);
-  //       setLocation("");
+  //       setLocation(""); // Clear the input field
+        
+  //       // Update the locations state to add the new location without page refresh
+  //       setLocations((prevLocations) => [...prevLocations, formData.location]);
   //     } else {
   //       toast.error(response.message);
   //     }
   //   } catch (error) {
-  //     toast.error("something went wrong");
+  //     toast.error("Something went wrong");
   //   }
   // };
+
+  // const fetchLocations = async () => {
+  //   try {
+  //     const result = await getLocation(organizationName);
+  //     if (result && result.data) {
+  //       setLocations(result.data); // Assuming setLocations is used in the component to update state
+  //       // Store the locations in localStorage
+  //       localStorage.setItem("locations", JSON.stringify(result.data));
+  //     }
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
+  
   const handleAddLocation = async () => {
     if (!location) {
       toast.error("Location is required");
@@ -92,9 +111,16 @@ function OtherTable() {
       if (response) {
         toast.success(response.message);
         setLocation(""); // Clear the input field
-        
+  
         // Update the locations state to add the new location without page refresh
-        setLocations((prevLocations) => [...prevLocations, formData.location]);
+        setLocations((prevLocations) => {
+          const updatedLocations = [...prevLocations, formData.location];
+          
+          // Store updated locations in localStorage
+          localStorage.setItem("locations", JSON.stringify(updatedLocations));
+  
+          return updatedLocations;
+        });
       } else {
         toast.error(response.message);
       }
@@ -102,14 +128,15 @@ function OtherTable() {
       toast.error("Something went wrong");
     }
   };
-
+  
   const fetchLocations = async () => {
     try {
       const result = await getLocation(organizationName);
       if (result && result.data) {
-        setLocations(result.data); // Assuming setLocations is used in the component to update state
-        // Store the locations in localStorage
-        // localStorage.setItem("locations", JSON.stringify(result.data));
+        setLocations(result.data); // Update state with fetched locations
+        
+        // Store the fetched locations in localStorage
+        localStorage.setItem("locations", JSON.stringify(result.data));
       }
     } catch (error) {
       toast.error(error);
@@ -173,11 +200,16 @@ function OtherTable() {
       fetchInstallations(locate, organizationName); // Only fetch installations if a location is selected
     }
   }, [locate]);
-  // Fetch locations on component mount
+ 
+
   useEffect(() => {
-    fetchLocations();
-    // fetchInstallations()
+    const savedLocations = JSON.parse(localStorage.getItem("locations"));
+    if (savedLocations) {
+      setLocations(savedLocations);
+    }
+    fetchLocations(); // Always fetch fresh data too
   }, []);
+  
 
   // Handle location selection change
   const handleAllLocationChange = (event) => {

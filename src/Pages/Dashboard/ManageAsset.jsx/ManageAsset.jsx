@@ -605,23 +605,6 @@ function ManageAsset() {
   }, []);
 
 
-  //HAndle Update Organization
-  const handleUpdate = async () => {
-    setLoading(true);
-    const updatedFormData = {
-      ...formData,
-      organizationName: organizationName,
-    };
-    try {
-      await updateOrganizationData(updatedFormData);
-      toast.success("Organization updated successfully");
-      setIsEditOrganization(false);
-    } catch (error) {
-      toast.error("Error updating organization:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   //fetch organization data based on Organization Name\
   const fetchOrganization = async () => {
@@ -641,6 +624,7 @@ function ManageAsset() {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
+      console.log(organizationlogo,"org logo...............")
       if (organizationlogo instanceof File) {
         formDataToUpdate.organizationlogo = organizationlogo;
       }
@@ -696,8 +680,8 @@ function ManageAsset() {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
-          <Typography variant="h4" mt={1}>
-            Organization: [ {organizationName ? organizationName : "N/A"} ]
+          <Typography variant="h5" fontWeight={800} mt={1}>
+           {organizationName ? organizationName : "N/A"}
           </Typography>
 
 
@@ -781,7 +765,7 @@ function ManageAsset() {
                     <Typography variant="h6" sx={{ flexShrink: 0, width: '250px' }}>{field.label}</Typography>
                     {field.name === "organizationName" ? (
                       // Display organizationName as text instead of an input
-                      <Typography sx={{ flexShrink: 0, width: '250px', fontSize: '24px', fontWeight: 'bold' }}>
+                      <Typography sx={{ flexShrink: 0, fontSize: '18px' }}>
                         {formData[field.name]}
                       </Typography>
                     ) : (
