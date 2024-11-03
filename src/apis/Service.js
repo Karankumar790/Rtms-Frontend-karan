@@ -413,3 +413,26 @@ export const updateOrganizationData = async (formData) => {
     return catchError(error);
   }
 };
+
+// all users data api
+export const getUsersByOrganization = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${USER_API}/get-UsersByOrganization/:organizationName?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+}
+// This function fetches all owners by admin ID
+
+export const getAllOwnersByAdmin = async (adminID) => {
+  try {
+    const response = await axios.get(`${USER_API}/get-OwnersByAdmin`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching owners by admin:", error);
+    return  catchError;
+  }
+};

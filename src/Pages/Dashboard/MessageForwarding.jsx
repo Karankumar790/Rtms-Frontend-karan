@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   Grid,
@@ -7,7 +7,7 @@ import {
   MenuItem,
   Paper,
   Typography,
-  Select, // Use MUI Select
+  Select,
   Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -17,7 +17,10 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { getUsersByOrganization } from "../../apis/Service";
 // ----------------------Table for Mobile------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -105,11 +108,32 @@ const rows = [
 ];
 
 function MessageForwarding() {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState("");
+  const organizationName = useSelector((state) => state.auth.organization);
+  const [usersData, setUsersData] = useState([]);
+
+  const fetchAllUserData = async () => {
+    try {
+      const response = await getUsersByOrganization(organizationName);
+      if (response.success) {
+        setUsersData(response.data);
+      } else {
+        toast.error(response.message || "something went wrong");
+      }
+      console.log(usersData, "all user data iiiiiiiiiiii");
+    } catch (error) {
+      console.log(error);
+      toast.error(error, "error occured");
+    }
+  };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
+  useEffect(() => {
+    fetchAllUserData();
+  }, [organizationName]);
 
   return (
     <div>
@@ -131,7 +155,6 @@ function MessageForwarding() {
           </Box>
         </Grid>
 
-        {/* Dropdown */}
         <Grid item lg={3} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
             <InputLabel id="dropdown-label">Select an Option</InputLabel>
@@ -168,27 +191,40 @@ function MessageForwarding() {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">User Name</StyledTableCell>
-                <StyledTableCell align="left">Department</StyledTableCell>
-                <StyledTableCell align="left">Employee ID</StyledTableCell>
-                <StyledTableCell align="left">Email Add</StyledTableCell>
-                <StyledTableCell align="left">Contact No.</StyledTableCell>
-                <StyledTableCell align="left">User Status</StyledTableCell>
-                <StyledTableCell align="center">View</StyledTableCell>
+                <StyledTableCell align="left"  width={"12.5%"}>User Name</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>Positions</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>Department</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>Employee ID</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>Email Add</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>Contact No.</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>User Status</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
+              {usersData?.map((user) => (
+                <StyledTableRow key={user._id}>
                   <StyledTableCell component="th" scope="row">
-                    {row.name}
+                    {user.username}
                   </StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="right"></StyledTableCell>
-                  <StyledTableCell align="right"></StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell component="th" scope="row">
+                    {user.roleInRTMS}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {user.department}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {user.employeeID}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{user.email}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {user.contactNumber}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {" "}
+                    Active
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
                     <IconButton
                       sx={{
                         color: "grey",

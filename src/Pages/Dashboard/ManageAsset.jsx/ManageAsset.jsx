@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Button,
   Card,
   CardContent,
@@ -49,7 +50,6 @@ import OrgMessageForward from "../ManageAsset.jsx/OrgMessageForward";
 
 function ManageAsset() {
   const organizationName = useSelector((state) => state.auth.organization);
-  const inputRefDepartment = useRef(null);
   const [DepartmentLoading, setDepartmentLoading] = useState(true);
   const [departments, setDepartments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -58,6 +58,7 @@ function ManageAsset() {
   const [selectedPositionDepartment, setSelectedPositionDepartment] =
     useState("");
   const [position, setPosition] = useState("");
+  const [positions, setPositions] = useState("");
   const [positionRows, setPositionRows] = useState([]);
   const [positionLoading, setPositionLoading] = useState(true);
   const [isEditingPosition, setIsEditingPosition] = useState(false);
@@ -71,12 +72,11 @@ function ManageAsset() {
     useState("");
   const [isEditMode, setIsEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
-
-  // New state variables for old values
   const [oldAction, setOldAction] = useState("");
   const [oldLevel1, setOldLevel1] = useState("");
   const [oldLevel2, setOldLevel2] = useState("");
-
+  const [selectedLevelDepartment, setSelectedLevelDepartment] = useState("");
+  const [positionsForApp, setPositionsForApp] = useState([]);
   //organization Data Add
   const [formData, setFormData] = useState({
     OrganizationName: "",
@@ -99,14 +99,22 @@ function ManageAsset() {
   const [isEditOrganization, setIsEditOrganization] = useState(false);
   const [organiatioLoading, setOrganiationLoading] = useState(false);
   const [file, setFile] = useState(null);
-
+  // Options for the dropdown
+  const actions = [
+    "User Registration",
+    "Well Setting",
+    "Node Configuration",
+    "Device Registration",
+    "Close Complain",
+    "Close Notification",
+    "Delete User",
+  ];
   // Function to initiate Updating department
   const handleEditClick = (index) => {
     setNewDepartmentName(departments[index]); // Set current department name to input
     setIsEditing(true); // Set editing mode
     setEditingIndex(index); // Set index of the department being edited
   };
-
   //integration for add department and Update department
   const handleAddOrUpdateDepartment = async () => {
     const value = newDepartmentName.trim();
@@ -158,11 +166,9 @@ function ManageAsset() {
     }
   };
 
-
-// Delete Department
-const handleDeleteDepartment = async (departmentName) => {
-  if (!organizationName || !departmentName) {
-
+  // Delete Department
+  const handleDeleteDepartment = async (departmentName) => {
+    if (!organizationName || !departmentName) {
       toast.error("Organization name and department name are required");
       return;
     }
@@ -196,7 +202,6 @@ const handleDeleteDepartment = async (departmentName) => {
       toast.error("Error: " + (error.response?.data?.message || error.message));
     }
   };
-
 
   const handlePositionSubmit = async () => {
     if (!selectedPositionDepartment || !position) {
@@ -263,9 +268,9 @@ const handleDeleteDepartment = async (departmentName) => {
       if (result && result.success) {
         toast.success(
           result.message ||
-          (isEditingPosition
-            ? "Position updated successfully"
-            : "Position added successfully")
+            (isEditingPosition
+              ? "Position updated successfully"
+              : "Position added successfully")
         );
         setPosition(""); // Clear position input
         setSelectedPositionDepartment(""); // Clear department selection
@@ -332,18 +337,27 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
-  //ADD and Update approval chain on the base of department
+  // Reset form fields after submission
+  const resetForm = () => {
+    setSelectedApprovalDepartment("");
+    setApprovalChains("");
+    setLevel1("");
+    setLevel2("");
+    setIsEditMode(false);
+    setOldAction("");
+    setOldLevel1("");
+    setOldLevel2("");
+  };
+
   const handleApprovalChainSubmit = async () => {
-    // Validate required fields
-    if (!selectedApprovalDepartment || !approvalChains || !level1 || !level2) {
+    if (!selectedLevelDepartment || !level1 || !level2) {
       toast.error("All fields are required.");
       return;
     }
 
-    // Construct formData based on mode
     const formData = {
       organizationName,
-      departmentName: selectedApprovalDepartment,
+      departmentName: selectedLevelDepartment,
     };
 
     if (isEditMode) {
@@ -360,19 +374,54 @@ const handleDeleteDepartment = async (departmentName) => {
     }
 
     try {
-      let result;
-      if (isEditMode) {
-        result = await updateApprovalChain(formData);
-        console.log("Update Approval Chain Result:", result);
-        toast.success("Approval chain updated successfully!");
-      } else {
-        result = await addApprovalChain(formData);
-        console.log("Add Approval Chain Result:", result);
-        toast.success("Approval chain added successfully!");
-      }
+      const result = isEditMode
+        ? await updateApprovalChain(formData)
+        : await addApprovalChain(formData);
 
-      // Reset the form after submission
-      setSelectedApprovalDepartment("");
+      toast.success(
+        isEditMode
+          ? "Approval chain updated successfully!"
+          : "Approval chain added successfully!"
+      );
+
+      // Update state to reflect changes immediately
+      setApprovalChainRows((prevRows) => {
+        const updatedRows = [...prevRows];
+        const departmentIndex = updatedRows.findIndex(
+          (row) => row.departmentName === selectedLevelDepartment
+        );
+
+        if (isEditMode) {
+          // Update the existing chain in the department
+          updatedRows[departmentIndex].approvalChains = updatedRows[
+            departmentIndex
+          ].approvalChains.map((chain) =>
+            chain.action === oldAction &&
+            chain.level1 === oldLevel1 &&
+            chain.level2 === oldLevel2
+              ? { action: approvalChains, level1, level2 }
+              : chain
+          );
+        } else {
+          // Add the new chain to the department, or create a new department entry
+          if (departmentIndex > -1) {
+            updatedRows[departmentIndex].approvalChains.push({
+              action: approvalChains,
+              level1,
+              level2,
+            });
+          } else {
+            updatedRows.push({
+              departmentName: selectedLevelDepartment,
+              approvalChains: [{ action: approvalChains, level1, level2 }],
+            });
+          }
+        }
+        return updatedRows;
+      });
+
+      // Reset fields post-submit
+      setSelectedLevelDepartment("");
       setApprovalChains("");
       setLevel1("");
       setLevel2("");
@@ -388,14 +437,14 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
-  //update approvalchain
+  // Handle edit initiation for updating fields
   const handleApprovalChainEdit = (index, chainIndex) => {
     try {
       const approvalChainToEdit = approvalChainRows[index];
       const chain = approvalChainToEdit.approvalChains[chainIndex];
 
       // Set new values in the form fields
-      setSelectedApprovalDepartment(approvalChainToEdit.departmentName);
+      setSelectedLevelDepartment(approvalChainToEdit.departmentName);
       setApprovalChains(chain.action || "");
       setLevel1(chain.level1 || "");
       setLevel2(chain.level2 || "");
@@ -416,6 +465,20 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
+  const handleDepartmentChange = async (departmentName) => {
+    // setDepartmentLoading(true);
+    try {
+      const response = await getPosition(organizationName, departmentName);
+      if (response.success) {
+        setPositionsForApp(response.data);
+      } else {
+        setPositionsForApp([]);
+      }
+    } catch (error) {
+      console.error("Error fetching positions:", error);
+    }
+    setDepartmentLoading(false);
+  };
 
   //Delete Approval chain
   const handleDeleteApprovalChain = async (index) => {
@@ -572,7 +635,7 @@ const handleDeleteDepartment = async (departmentName) => {
       setLoading(true);
       const updatedFormData = { ...formData };
       const response = await organizationAddData(updatedFormData);
-      // console.log("jhdvchjdfjc", response);
+      console.log("jhdvchjdfjc", response);
       if (response.success) {
         toast.success(response.message || "Data saved successfully");
         setIsEditOrganization(true); // Switch to Update mode after saving
@@ -605,7 +668,6 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   }, []);
 
-
   //HAndle Update Organization
   const handleUpdate = async () => {
     setLoading(true);
@@ -629,6 +691,7 @@ const handleDeleteDepartment = async (departmentName) => {
     setOrganiationLoading(true);
     try {
       const response = await getOrganizationData(organizationName);
+      console.log(response, "organizationdata  //////////////");
       setFormData({
         organizationName: response.data.organizationName || "",
         organizationlogo: response.data.organizationlogo || "",
@@ -642,12 +705,13 @@ const handleDeleteDepartment = async (departmentName) => {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
+      console.log(organizationlogo,"org logo...............")
       if (organizationlogo instanceof File) {
         formDataToUpdate.organizationlogo = organizationlogo;
       }
       setFormData(formDataToUpdate);
-      // console.log("hgdvdhc", data.organizationlogo);
-      // console.log("organization", response.data);
+      console.log("hgdvdhc..........", data.organizationlogo);
+      console.log("organization\\\\\\\\\\\\\\\\\\\\\\\\", response.data);
     } catch (error) {
       console.error("Error fetching organization data:", error);
     } finally {
@@ -658,7 +722,7 @@ const handleDeleteDepartment = async (departmentName) => {
   // -------------------Table------------------------
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#8C000B', // Customize background color
+      backgroundColor: "#8C000B", // Customize background color
       color: theme.palette.common.white,
       padding: "15px", // Increase padding
       height: "20px", // Set a specific height
@@ -697,10 +761,9 @@ const handleDeleteDepartment = async (departmentName) => {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
-          <Typography variant="h4" mt={1}>
-            Organization: [ {organizationName ? organizationName : "N/A"} ]
+          <Typography variant="h5" fontWeight={800} mt={1}>
+           {organizationName ? organizationName : "N/A"}
           </Typography>
-
 
           {/* Organization Logo (Top of Organization Name) */}
           {isEditOrganization && formData.organizationlogo && (
@@ -741,7 +804,7 @@ const handleDeleteDepartment = async (departmentName) => {
                     sm={12}
                     md={12}
                     lg={12}
-                    sx={{ display: 'flex' }}
+                    sx={{ display: "flex" }}
                   >
                     <Typography variant="h6">Organization Logo</Typography>
                     <span>
@@ -767,7 +830,10 @@ const handleDeleteDepartment = async (departmentName) => {
                   </Grid>
                 )}
                 {[
-                  { name: "organizationName", label: "Organization Display Name" },
+                  {
+                    name: "organizationName",
+                    label: "Organization Display Name",
+                  },
                   { name: "subtitlename", label: "Portal Display Name" },
                   { name: "address", label: "Address" },
                   { name: "city", label: "City" },
@@ -778,11 +844,33 @@ const handleDeleteDepartment = async (departmentName) => {
                   { name: "fax", label: "Fax" },
                   { name: "email", label: "Email" },
                 ].map((field) => (
-                  <Grid item xs={12} sm={3} md={3} lg={12} key={field.name} spacing={3} sx={{ display: 'flex' }} gap={2}>
-                    <Typography variant="h6" sx={{ flexShrink: 0, width: '250px' }}>{field.label}</Typography>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={3}
+                    md={3}
+                    lg={12}
+                    key={field.name}
+                    spacing={3}
+                    sx={{ display: "flex" }}
+                    gap={2}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{ flexShrink: 0, width: "250px" }}
+                    >
+                      {field.label}
+                    </Typography>
                     {field.name === "organizationName" ? (
                       // Display organizationName as text instead of an input
-                      <Typography sx={{ flexShrink: 0, width: '250px', fontSize: '24px', fontWeight: 'bold' }}>
+                      <Typography
+                        sx={{
+                          flexShrink: 0,
+                          width: "250px",
+                          fontSize: "24px",
+                          fontWeight: "bold",
+                        }}
+                      >
                         {formData[field.name]}
                       </Typography>
                     ) : (
@@ -790,7 +878,7 @@ const handleDeleteDepartment = async (departmentName) => {
                         type="text"
                         variant="outlined"
                         size="small"
-                        sx={{ height: '50%', width: '30%' }}
+                        sx={{ height: "50%", width: "30%" }}
                         name={field.name}
                         value={formData[field.name]}
                         onChange={handleInputChange}
@@ -806,7 +894,7 @@ const handleDeleteDepartment = async (departmentName) => {
             container
             mt={2}
             display={"flex"}
-            justifyContent={'end'}
+            justifyContent={"end"}
             gap={1}
           >
             <Box>
@@ -899,11 +987,11 @@ const handleDeleteDepartment = async (departmentName) => {
               <Grid container>
                 <TableContainer
                   component={Paper}
-                  sx={{ maxHeight: 320, height: 600, overflowY: "auto"  }}
+                  sx={{ maxHeight: 320, height: 600, overflowY: "auto" }}
                 >
-                  <Table aria-label="customized table" stickyHeader >
+                  <Table aria-label="customized table" stickyHeader>
                     <TableHead>
-                      <TableRow sx={{msOverflowY:'scroll'}}>
+                      <TableRow sx={{ msOverflowY: "scroll" }}>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "15%" }}
                         >
@@ -920,7 +1008,7 @@ const handleDeleteDepartment = async (departmentName) => {
                         </TableRow>
                       ) : departments && departments.length > 0 ? (
                         departments.map((departmentName, index) => (
-                          <TableRow key={index}>
+                          <StyledTableRow key={index}>
                             <StyledTableCell>
                               <Box
                                 display="flex"
@@ -952,7 +1040,7 @@ const handleDeleteDepartment = async (departmentName) => {
                                 </Box>
                               </Box>
                             </StyledTableCell>
-                          </TableRow>
+                          </StyledTableRow>
                         ))
                       ) : (
                         <TableRow>
@@ -1049,11 +1137,11 @@ const handleDeleteDepartment = async (departmentName) => {
               <Grid container>
                 <TableContainer
                   component={Paper}
-                  sx={{ maxHeight: 320, height: 400, overflowY: 'scroll' }}
+                  sx={{ maxHeight: 320, height: 400, overflowY: "scroll" }}
                 >
                   <Table aria-label="customized table" stickyHeader>
                     <TableHead>
-                      <TableRow sx={{overflowY: 'scroll' }}>
+                      <TableRow sx={{ overflowY: "scroll" }}>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "15%" }}
                         >
@@ -1064,7 +1152,6 @@ const handleDeleteDepartment = async (departmentName) => {
                         >
                           Position
                         </StyledTableCell>
-
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -1091,52 +1178,52 @@ const handleDeleteDepartment = async (departmentName) => {
                             <StyledTableCell align="left">
                               {row.positions.length > 0
                                 ? row.positions.map((position, posIndex) => (
-                                  <div
-                                    key={posIndex}
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "space-between",
-                                    }}
-                                  >
-                                    {posIndex + 1}. {position}
-                                    <Box display="flex">
-                                      <IconButton
-                                        aria-label="edit"
-                                        size="small"
-                                        sx={{
-                                          color: "darkblue",
-                                          "&:hover": { color: "black" },
-                                        }}
-                                        onClick={() =>
-                                          handleEditPosition(
-                                            row.departmentName,
-                                            position
-                                          )
-                                        }
-                                      >
-                                        <EditIcon fontSize="small" />
-                                      </IconButton>
-                                      <IconButton
-                                        aria-label="delete"
-                                        size="small"
-                                        sx={{
-                                          color: "red",
-                                          "&:hover": { color: "darkred" },
-                                          marginRight: "8px",
-                                        }}
-                                        onClick={() =>
-                                          handleDeletePosition(
-                                            row.departmentName,
-                                            position
-                                          )
-                                        }
-                                      >
-                                        <DeleteForeverIcon fontSize="small" />
-                                      </IconButton>
-                                    </Box>
-                                  </div>
-                                ))
+                                    <div
+                                      key={posIndex}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                      }}
+                                    >
+                                      {posIndex + 1}. {position}
+                                      <Box display="flex">
+                                        <IconButton
+                                          aria-label="edit"
+                                          size="small"
+                                          sx={{
+                                            color: "darkblue",
+                                            "&:hover": { color: "black" },
+                                          }}
+                                          onClick={() =>
+                                            handleEditPosition(
+                                              row.departmentName,
+                                              position
+                                            )
+                                          }
+                                        >
+                                          <EditIcon fontSize="small" />
+                                        </IconButton>
+                                        <IconButton
+                                          aria-label="delete"
+                                          size="small"
+                                          sx={{
+                                            color: "red",
+                                            "&:hover": { color: "darkred" },
+                                            marginRight: "8px",
+                                          }}
+                                          onClick={() =>
+                                            handleDeletePosition(
+                                              row.departmentName,
+                                              position
+                                            )
+                                          }
+                                        >
+                                          <DeleteForeverIcon fontSize="small" />
+                                        </IconButton>
+                                      </Box>
+                                    </div>
+                                  ))
                                 : "No positions available"}
                             </StyledTableCell>
                           </StyledTableRow>
@@ -1154,6 +1241,7 @@ const handleDeleteDepartment = async (departmentName) => {
               </Grid>
             </Grid>
             {/* ------------------------APPROVAL CHAIN------------------------------ */}
+
             <Grid
               item
               xs={12}
@@ -1179,10 +1267,16 @@ const handleDeleteDepartment = async (departmentName) => {
                         labelId="department-select-label"
                         id="department-select"
                         label="Department"
-                        value={selectedApprovalDepartment}
-                        onChange={(e) =>
-                          setSelectedApprovalDepartment(e.target.value)
-                        }
+                        // value={selectedApprovalDepartment}
+
+                        // onChange={(e) =>
+                        //   setSelectedApprovalDepartment(e.target.value)
+                        // }
+                        value={selectedLevelDepartment}
+                        onChange={(e) => {
+                          setSelectedLevelDepartment(e.target.value);
+                          handleDepartmentChange(e.target.value); // Fetch positions when department changes
+                        }}
                       >
                         <MenuItem value="" disabled>
                           Select a department
@@ -1206,7 +1300,7 @@ const handleDeleteDepartment = async (departmentName) => {
                   )}
                 </Grid>
 
-                <FormControl fullWidth size="small">
+                {/* <FormControl fullWidth size="small">
                   <InputLabel id="demo-select-large-label">Action</InputLabel>
                   <Select
                     labelId="demo-select-small-label"
@@ -1218,7 +1312,6 @@ const handleDeleteDepartment = async (departmentName) => {
                     <MenuItem value="" disabled>
                       Select an action
                     </MenuItem>
-                    {/* Assign value props to the MenuItems */}
                     <MenuItem value="User Registration">
                       User Registration
                     </MenuItem>
@@ -1235,23 +1328,71 @@ const handleDeleteDepartment = async (departmentName) => {
                     </MenuItem>
                     <MenuItem value="Delete User">Delete User</MenuItem>
                   </Select>
+                </FormControl> */}
+
+                <FormControl fullWidth size="small">
+                  <Autocomplete
+                    freeSolo // Allows users to type their own value
+                    options={actions} // Provides options to select from
+                    value={approvalChains}
+                    onChange={(event, newValue) => setApprovalChains(newValue)}
+                    onInputChange={(event, newInputValue) =>
+                      setApprovalChains(newInputValue)
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Action"
+                        variant="outlined"
+                        size="small"
+                      />
+                    )}
+                  />
                 </FormControl>
+
                 <TextField
                   variant="outlined"
                   label="Level-1"
                   size="small"
+                  select
                   value={level1}
                   onChange={(e) => setLevel1(e.target.value)}
                   fullWidth
-                />
+                >
+                  {positionsForApp.length > 0 ? (
+                    positionsForApp.map((position, index) => (
+                      <MenuItem key={position} value={position}>
+                        {index + 1}. {position}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value="" disabled>
+                      No positions available
+                    </MenuItem>
+                  )}
+                </TextField>
+
                 <TextField
                   variant="outlined"
                   label="Level-2"
                   size="small"
+                  select
                   value={level2}
                   onChange={(e) => setLevel2(e.target.value)}
                   fullWidth
-                />
+                >
+                  {positionsForApp.length > 0 ? (
+                    positionsForApp.map((position, index) => (
+                      <MenuItem key={position} value={position}>
+                        {index + 1}. {position}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value="" disabled>
+                      No positions available
+                    </MenuItem>
+                  )}
+                </TextField>
                 <Button
                   variant="contained"
                   onClick={handleApprovalChainSubmit}
@@ -1377,8 +1518,8 @@ const handleDeleteDepartment = async (departmentName) => {
                 </TableContainer>
               </Grid>
               {/*------------Button-------------- */}
-
             </Grid>
+
             <Grid container mt={2}>
               <OrgMessageForward />
             </Grid>
