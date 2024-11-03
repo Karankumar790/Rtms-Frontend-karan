@@ -7,7 +7,7 @@ import { WELL_API } from "./Client";
 
 export const addLocation = async (formData) => {
   try {
-    const response = await axios.post(`${WELL_API}/add-location, formData`);
+    const response = await axios.post(`${WELL_API}/add-location`, formData);
     return response.data;
   } catch (error) {
     return catchError(error);
@@ -43,7 +43,7 @@ export const addInstallation = async (formData) => {
 export const getAllInstallation = async (location, organizationName) => {
   try {
     const response = await axios.get(
-     `${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
+`      ${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {
@@ -68,9 +68,7 @@ export const addWellNum = async (formData) => {
 //  GET SELECTED  WELL INFO 
 export const getWellDetails = async (location,installationName,wellType, wellNumber,organizationName) => {
   try {
-    const response = await axios.get(
-       `${WELL_API}/get-WellDetails?location=${location}&installation=${installationName}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`
-    );
+    const response = await axios.get(`${WELL_API}/get-WellDetails?location=${location}&installation=${installationName}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`);
     return response.data;
   } catch (error) {
     console.error(error); 
