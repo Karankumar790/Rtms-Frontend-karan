@@ -23,6 +23,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, padding } from "@mui/system";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
+import PersonIcon from "@mui/icons-material/Person";
+import LinkIcon from '@mui/icons-material/Link';
 import { useSelector } from "react-redux";
 import {
   Edit as EditIcon,
@@ -960,7 +962,10 @@ function ManageAsset() {
               display="flex"
               flexDirection={"column"}
             >
-              <Typography variant="h5">Add Department</Typography>
+              <Box display="flex" gap={1}>
+                <AssetsIcon />
+                <Typography variant="h5">Add Department</Typography>
+              </Box>
               <Box display="flex" gap={1}>
                 <TextField
                   variant="outlined"
@@ -1066,7 +1071,10 @@ function ManageAsset() {
               display="flex"
               flexDirection={"column"}
             >
-              <Typography variant="h5">Add Position</Typography>
+              <Box display="flex" gap={1}>
+                <PersonIcon />
+                <Typography variant="h5">Add Position</Typography>
+              </Box>
               <Box display="flex" gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   {DepartmentLoading ? (
@@ -1253,7 +1261,10 @@ function ManageAsset() {
               display="flex"
               flexDirection="column"
             >
-              <Typography variant="h5">Approval Chain</Typography>
+             <Box display="flex" gap={1}>
+                <LinkIcon />
+                <Typography variant="h5">Approval Chain</Typography>
+              </Box>
               <Box display="flex" gap={1}>
                 <Grid item lg={12} md={12} sm={12} xs={12}>
                   {DepartmentLoading ? (
