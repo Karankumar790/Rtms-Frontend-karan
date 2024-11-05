@@ -25,7 +25,6 @@ import { Box } from "@mui/system";
 import master from "/assets/wellMaster.png";
 import { Link, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
-import Othertable from "./OtherTable.jsx";
 import {
   addInstallation,
   addLocation,
@@ -141,32 +140,6 @@ const WellMaster = () => {
     fetchLocations();
   }, [organizationName]);
   //---------------------- ADDING INSTALLATION----------------------
-// const handleAddInstallation = async () => {
-//   const formData = {
-//     location: allLocForPosItion,
-//     installation,
-//     organizationName,
-//   };
-
-//   if (!formData.location || !formData.installation) {
-//     toast.error("All fields are required");
-//     return;
-//   }
-//   try {
-//     const response = await addInstallation(formData);
-
-//     // Check if the response is successful
-//     if (response && response.data && response.message) {
-//       toast.success(response.message);
-//       setInstallation("");
-//       setAllLocForPosItion("");
-//     } else {
-//       toast.error("Failed to install");
-//     }
-//   } catch (error) {
-//     toast.error("Failed to add installation");
-//   }
-// };
 
 const handleAddInstallation = async () => {
   const formData = {
@@ -321,15 +294,18 @@ const handleAddInstallation = async () => {
       const data = await getLocationOfWell(wellNumber, organizationName);
       if (data?.success) {
         const { latitude, longitude } = data.data.well.coordinates;
-        setCoordinates({ latitude, longitude });
-        navigate("/dashboard/virtual")
-        // Call a function to update the map with these coordinates
-        updateMapLocation({ latitude, longitude });
+        // Store coordinates in local storage
+        localStorage.setItem("latitude", latitude);
+        localStorage.setItem("longitude", longitude);
+        console.log(latitude,longitude)
+        
+        navigate("/dashboard/virtual");
       }
     } catch (error) {
       console.error("Failed to fetch well location:", error);
     }
   };
+
   return (
     <div>
       <Grid

@@ -14,13 +14,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
 import { saveWellDetails } from "../../../apis/WellService";
-
+import { setWellDetails } from "../../../apis/authSlice";
 
 const initialData = [
   {
@@ -68,12 +68,15 @@ const initialData = [
 function AddWell() {
   const [employeeData, setEmployeeData] = useState(initialData);
   const organizationName = useSelector((state) => state.auth.organization);
+  const [wellDetails, setWellDetails] = useState({
+    location: '',
+    installation: '',
+    wellType: '',
+    wellNumber: ''
+  });
   const [formValues, setFormValues] = useState({
     organizationName,
-    location: "",
-    installation: "",
-    wellType: "",
-    wellNumber: "",
+    // wellDetails,
     landmark: "",
     latitude: "",
     longitude: "",
@@ -90,10 +93,17 @@ function AddWell() {
       ],
     },
   });
+  
+  useEffect(() => {
+    const storedWellDetails = localStorage.getItem("wellDetails");
+    if (storedWellDetails) {
+      setWellDetails(JSON.parse(storedWellDetails));
+    }
+  }, []);
 
   const onChangeInput = (e, employeeId) => {
     const { name, value } = e.target;
-
+    
     const editData = employeeData.map((item) =>
       item.employeeId === employeeId ? { ...item, [name]: value } : item
     );
@@ -108,6 +118,14 @@ function AddWell() {
       [name]: value,
     });
   };
+
+  // const handleChangeParameterwe = (event) => {
+  //   const { name, value } = event.target;
+  //   setWellDetails({
+  //     ...wellDetails,
+  //     [name]: value,
+  //   });
+  // };
 
   const handleFlowingChange = (index, name, value) => {
     const updatedFlowing = { ...formValues.flowing };
@@ -147,8 +165,21 @@ function AddWell() {
       return;
     }
     try {
+
+      // // const detailsToStore = {
+      // //   location: wellDetails.location,
+      // //   installation: wellDetails.installation,
+      // //   wellType: wellDetails.wellType,
+      // //   wellNumber:wellDetails.wellNumber
+      // };
+      // localStorage.setItem("wellDetails", JSON.stringify(detailsToStore));
+
       // Prepare data for API call
       const details = {
+        location: wellDetails.location,
+        installation: wellDetails.installation,
+        wellType: wellDetails.wellType,
+        wellNumber:wellDetails.wellNumber,
         ...formValues,
         alarmSettings: employeeData, // Pass employee data directly or transform as needed
         flowing: {
@@ -160,12 +191,13 @@ function AddWell() {
       };
 
       const response = await saveWellDetails(details);
-      console.log("Well saved successfully:", response);  
+      console.log("Well saved successfully:", response);
       // You may want to reset form or show a success message here
     } catch (error) {
       console.error("Error saving well:", error);
     }
   };
+
 
   return (
     <div>
@@ -192,7 +224,8 @@ function AddWell() {
               label="Location"
               variant="outlined"
               name="location"
-              onChange={(e) => handleChangeParameter(e)}
+              value={wellDetails.location}
+              // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -202,7 +235,8 @@ function AddWell() {
               label="Installation"
               variant="outlined"
               name="installation"
-              onChange={(e) => handleChangeParameter(e)}
+              value={wellDetails.installation}
+              // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -212,7 +246,8 @@ function AddWell() {
               label="Well Type"
               variant="outlined"
               name="wellType"
-              onChange={(e) => handleChangeParameter(e)}
+              value={wellDetails.wellType}
+              // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -222,7 +257,8 @@ function AddWell() {
               label="Well Number"
               variant="outlined"
               name="wellNumber"
-              onChange={(e) => handleChangeParameter(e)}
+              value={wellDetails.wellNumber}
+              // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
