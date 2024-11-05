@@ -25,7 +25,7 @@ import Fade from "@mui/material/Fade";
 import OTPInput from "react-otp-input";
 import { createOrg, genrateOtpOrg } from "../../../apis/Service";
 import { toast } from "react-toastify";
-import PageContainer from "../../../components/HOC/PageContainer";
+// import PageContainer from "../../../components/HOC/PageContainer";
 
 export default function SuperAdmin() {
   const [formValues, setFormValues] = useState({
@@ -116,8 +116,8 @@ export default function SuperAdmin() {
   };
 
   return (
-    <div>
-      <PageContainer className="admin-bg-image ">
+    <div className="admin-bg-image " style={{height:'99vh'}}>
+      {/* <PageContainer > */}
         <FoxboroHeader />
         <Grid
           container
@@ -378,7 +378,7 @@ export default function SuperAdmin() {
         <Grid>
           <FoxboroFooter />
         </Grid>
-      </PageContainer>
+      {/* </PageContainer> */}
     </div>
   );
 }
