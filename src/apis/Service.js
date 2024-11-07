@@ -262,9 +262,9 @@ export const UpdateDepartment = async (formData) => {
 export const DeleteDepartment = async (formData) => {
   try {
     const response = await axios.post(
-      `${ORGANIZATION_API}/delete-department`,
-      formData
-    );
+      `${ORGANIZATION_API}/delete-department`,{
+      data: formData
+  });
     return response.data;
   } catch (error) {
     return catchError(error);
@@ -274,12 +274,12 @@ export const DeleteDepartment = async (formData) => {
 //Delete Position
 export const deletePosition = async (formData) => {
   try {
-    const response = await axios.delete(`${ORGANIZATION_API}/delete-position`, {
-      data: formData, // Use the data field to send the request body with DELETE
-    });
+    const response = await axios.post(`${ORGANIZATION_API}/delete-position`,
+     formData
+    );
     return response.data;
   } catch (error) {
-    return catchError(error); // Ensure you handle the error appropriately
+    return catchError(error);
   }
 };
 

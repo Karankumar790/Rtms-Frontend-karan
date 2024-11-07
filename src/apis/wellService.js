@@ -101,7 +101,7 @@ export const saveWellDetails = async (details) => {
       flowing: details.flowing,
       notFlowing: details.notFlowing,
     });
-    return response.data; // or response if you need more info
+    return response.data;
   } catch (error) {
     console.error('Error saving well details:', error);
     return catchError; 
@@ -112,11 +112,11 @@ export const saveWellDetails = async (details) => {
 export const getLocationOfWell = async (wellNumber, organizationName) => {
   try {
     const response = await axios.get(
-      `      ${WELL_API}/get-WellLocations?organizationName=${organizationName}&wellNumber=${wellNumber}`
+      `${WELL_API}/get-WellLocations?organizationName=${organizationName}&wellNumber=${wellNumber}`
     );
     return response.data;
   } catch (error) {
-    console.error(error); // Log error for debugging
-    throw error; // Throw error to handle in the calling function
+    console.error(error);
+    return catchError; 
   }
 };
