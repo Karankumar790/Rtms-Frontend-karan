@@ -64,7 +64,7 @@ function Header() {
           <Link to="/checkOrganization" style={{ textDecoration: "none" }}>
             <Box border={"2px solid black"} borderRadius={2}>
             <Typography variant="h5" color={"white"} fontWeight={900}>
-              New Customer
+              Customer
             </Typography>
             </Box>
           </Link>
