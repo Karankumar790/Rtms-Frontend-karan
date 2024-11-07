@@ -9,6 +9,7 @@ import {
   Typography,
   Select,
   Box,
+  TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -20,7 +21,10 @@ import TableRow from "@mui/material/TableRow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Modal from "@mui/material/Modal";
 import { getUsersByOrganization } from "../../apis/Service";
+import { Button } from "@mui/material";
+import { bgcolor, borderRadius, display } from "@mui/system";
 // ----------------------Table for Mobile------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -34,6 +38,34 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
+
+const style = {
+  // position: "absolute",
+  // top: "50%",
+  // left: "50%",
+  // transform: "translate(-50%, -50%)",
+  // display:'flex',
+  // alignItems:"center",
+  // justifyContent:"center",
+  // flexDirection:'column',
+  borderRadius:"10px",
+  // width: "40%",
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  boxShadow: 24,
+  p: 6,
+};
+
+const userDetails = [
+  "Username",
+  "Position",
+  "Department",
+  "EmployeeID",
+  "Email",
+  "Contact no.",
+  "Joining Date",
+  "User Status",
+];
 
 let data = {
   "Well No": "1",
@@ -111,6 +143,9 @@ function MessageForwarding() {
   const [selectedValue, setSelectedValue] = useState("");
   const organizationName = useSelector((state) => state.auth.organization);
   const [usersData, setUsersData] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const fetchAllUserData = async () => {
     try {
@@ -139,7 +174,7 @@ function MessageForwarding() {
     <div>
       <Grid
         container
-        sx={{ display: "flex", justifyContent: "space-between" }}
+        // sx={{ display: "flex", justifyContent: "space-between" }}
         pt={2}
         paddingBottom={2}
       >
@@ -175,6 +210,102 @@ function MessageForwarding() {
       </Grid>
 
       {/* ------------------Table for Desktop--------------------------------- */}
+      <Grid container >
+        <Modal
+          open={open}
+          // onClose={handleClose}
+          className="center"
+          sx={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}
+        >
+          <Grid item lg={6} md={8} sm={8} xs={12} sx={style} >
+            <Box textAlign="center" pb={1} >
+              <Typography id="modal-modal-title" variant="h4" component="h2">
+                User Details
+              </Typography>
+            </Box>
+            {/* <Grid
+              item
+              lg={12}
+              md={12}
+              sm={12}
+              xs={12}
+              // display="flex"
+              gap={2}
+              spacing={1}
+            > */}
+              <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
+                <Grid lg={10} md={8} xs={12} sm={12}>
+                {userDetails.map((field, index) => (
+                  <Grid item 
+                    display="flex"
+                    // justifyContent="space-around"
+                    // spacing={999}
+                    // gap={1}
+                    p={2}
+                  >
+                    <Grid
+                      lg={4}
+                      md={5}
+                      sm={12}
+                      xs={12}
+                      key={index}
+                      display={"flex"}
+                    >
+                      <Typography variant="h6">{field}</Typography>
+                    </Grid>
+                    <Grid
+                      lg={8}
+                      md={7}
+                      sm={12}
+                      xs={12}
+                    >
+                      <TextField
+                        variant="standard"
+                        placeholder={field}
+                        disabled
+                        fullWidth
+                        size="small"
+                      ></TextField>
+                    </Grid>
+                  </Grid>
+                ))}
+                </Grid>
+                <Grid item lg={4} md={4} xs={12} sm={12}  >
+                  <Box className="center" height={"200px"} width={"200px"} border={'1px solid black'} ml={3} mt={3} mb={2}  >
+                    {" "}
+                    Id Card Photo
+                  </Box>
+                  <Box className="center" height={"200px"} width={"200px"} border={'1px solid black'} mt={4} ml={3}>
+                    {" "}
+                    Passport Photo
+                  </Box>
+                </Grid>
+              </Grid>
+            {/* </Grid> */}
+           {/* ----------Button--------------------- */}
+           <Box
+              display="flex"
+              justifyContent="end"
+              // bgcolor='yellowgreen'
+              pt={1}
+              pb={1}
+              // pl={1}
+              pr={3}
+              gap={3}
+              // mr={6}
+              // pr={73}
+         
+              width={'100%'}
+            >
+              <Button  variant="contained" sx={{width:"150px", p:"10px", fontSize:"15px"}} > Delete User</Button>
+              <Button variant="contained" sx={{width:"150px", p:"10px", fontSize:"15px", mr:"12px"}} onClick={handleClose}>
+                Close
+              </Button>
+            </Box>
+          </Grid>
+           
+        </Modal>
+      </Grid>
       <Grid
         container
         mt={2}
@@ -191,14 +322,30 @@ function MessageForwarding() {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left"  width={"12.5%"}>User Name</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>Positions</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>Department</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>Employee ID</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>Email Add</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>Contact No.</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>User Status</StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>View</StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  User Name
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  Positions
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  Department
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  Employee ID
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  Email Add
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  Contact No.
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  User Status
+                </StyledTableCell>
+                <StyledTableCell align="left" width={"12.5%"}>
+                  View
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -220,10 +367,7 @@ function MessageForwarding() {
                   <StyledTableCell align="left">
                     {user.contactNumber}
                   </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {" "}
-                    Active
-                  </StyledTableCell>
+                  <StyledTableCell align="left"> Active</StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{
@@ -231,6 +375,7 @@ function MessageForwarding() {
                         "&:hover": { color: "darkred" },
                         marginRight: "5px",
                       }}
+                      onClick={handleOpen}
                     >
                       <VisibilityIcon fontSize="large" />
                     </IconButton>
