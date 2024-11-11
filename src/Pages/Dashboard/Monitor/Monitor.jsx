@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Divider,
@@ -23,6 +23,7 @@ import well from "/assets/WELL.png";
 import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
+import { deviceData } from "../../../apis/WellService";
 
 const style = {
   position: "absolute",
@@ -151,6 +152,20 @@ function Monitor() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [rows, setRows] = useState([]);
+   
+  useEffect(() => {
+    const Device = async () => {
+       try {
+        const response = await deviceData();
+        setRows(response.data);
+       } catch (error) {
+        console.error("There is an issue for fetching data",error)
+       }
+    };
+    Device();
+  },[]);
+
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -308,6 +323,9 @@ function Monitor() {
                   Well No.
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Node ID
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   GIP (kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
@@ -317,16 +335,13 @@ function Monitor() {
                   THP (kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Flow Status
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Sensor Battery
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Solar Voltage
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Communication{" "}
+                  Flow Status
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Action
@@ -334,20 +349,16 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.calories}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+            {rows.map((row, index) => (
+              <StyledTableRow key={index}>
+                <StyledTableCell component="th" scope="row">{row.data.OrgID}</StyledTableCell>
+                <StyledTableCell align="left">{row.data.NodeAdd}</StyledTableCell>
+                <StyledTableCell align="left">{row.data.P1}</StyledTableCell>
+                <StyledTableCell align="left">{row.data.P2}</StyledTableCell>
+                <StyledTableCell align="left">{row.data.P3}</StyledTableCell>
+                <StyledTableCell align="left">{row.data.Bat}</StyledTableCell>
+                <StyledTableCell align="left">{row.data.Solar}</StyledTableCell>
+                <StyledTableCell align="left">Normal</StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{

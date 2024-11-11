@@ -1,6 +1,6 @@
 import axios from "axios";
 import { catchError } from "../helper/helper";
-import { WELL_API } from "./Client";
+import { DEVICE_API, WELL_API } from "./Client";
 
 // add location
 
@@ -124,3 +124,18 @@ export const getLocationOfWell = async (wellNumber, organizationName) => {
     return catchError; // Throw error to handle in the calling function
   }
 };
+
+
+// DEVICE ALL DATA API 
+export const deviceData = async () => {
+  try {
+    const response = await axios.get(
+      `${DEVICE_API}/external-device-show`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return catchError;
+    
+  }
+}
