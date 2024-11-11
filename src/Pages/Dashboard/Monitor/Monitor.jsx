@@ -20,7 +20,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
-import {Box    } from "@mui/system";
+import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 
@@ -500,7 +500,7 @@ function Monitor() {
                 </Box>
               ))}
             </Box> */}
-            <Box sx={{ display: "flex", gap: 4 }}>
+            <Box sx={{ display: "flex", gap: 4, }}>
               {/* First Column */}
               <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {[
@@ -563,68 +563,73 @@ function Monitor() {
             </Box>
 
             <Box>
-              <Box>
-                <Typography variant="h6">GIP</Typography>
-              </Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
+              <Box display="flex" mt={2} justifyContent={"space-evenly"} >
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  GIP
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"120px"} ml={2}>
                   Critical Value
                 </Typography>
-                <TextField size="small"></TextField>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             <Box>
-              <Box>
-                <Typography variant="h6">CHP</Typography>
-              </Box>
               <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  CHP
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"120px"} ml={2}>
                   Critical Value
                 </Typography>
-                <TextField size="small"></TextField>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             <Box>
-              <Box>
-                <Typography variant="h6">THP</Typography>
-              </Box>
               <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  THP
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"120px"} ml={2}>
                   Critical Value
                 </Typography>
-                <TextField size="small"></TextField>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             <Box>
-              <Box>
-                <Typography variant="h6">Battery(%)</Typography>
-              </Box>
               <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  Battery(%)
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"120px"} ml={2}>
                   Critical Value
                 </Typography>
-                <TextField size="small"></TextField>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             <Box>
-              <Box>
-                <Typography variant="h6">Solar Voltage</Typography>
-              </Box>
               <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  Solar Voltage
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"120px"} ml={2}>
                   Critical Value
                 </Typography>
-                <TextField size="small"></TextField>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             {/* <Box display="flex" mt={2} gap={2}>
@@ -652,7 +657,6 @@ function Monitor() {
                 <TextField size="small"></TextField>
               </Box>
             </Box> */}
-
             {/* <Box>
               <Box>
                 <Typography variant="h6">Not Flowing</Typography>
