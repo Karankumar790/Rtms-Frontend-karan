@@ -80,7 +80,7 @@ function AddWell() {
     landmark: "",
     latitude: "",
     longitude: "",
-    descriptions: "",
+    nodeId: "",
     alarmSettings: [],
     flowing: {
       pressures: [
@@ -295,9 +295,9 @@ function AddWell() {
             <TextField
               fullWidth
               size="small"
-              label="Description"
+              label="nodeId"
               variant="outlined"
-              name="descriptions"
+              name="nodeId"
               onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
