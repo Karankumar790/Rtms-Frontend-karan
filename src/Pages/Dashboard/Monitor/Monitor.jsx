@@ -354,7 +354,7 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {rows.map((row, index) => (
+            {rows?.map((row, index) => (
               <StyledTableRow key={index}>
                 <StyledTableCell component="th" scope="row">{row.data.OrgID}</StyledTableCell>
                 <StyledTableCell align="left">{row.data.NodeAdd}</StyledTableCell>

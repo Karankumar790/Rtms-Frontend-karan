@@ -209,8 +209,6 @@ function AddWell() {
     };
     Device();
   }, []);
-  console.log(rows,"mmmmmmmmmmmmmaster")
-
 
   return (
     <div>
