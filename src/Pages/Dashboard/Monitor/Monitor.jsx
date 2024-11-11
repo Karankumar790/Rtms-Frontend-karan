@@ -23,13 +23,15 @@ import well from "/assets/WELL.png";
 import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
+import { CardOverflow } from "@mui/joy";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  // width: 500,
+  // CardOverflow:'scr',
+  // width: "35%",
   // bgcolor: "background.paper",
   bgcolor: "white",
   // border: "2px solid black",
@@ -448,8 +450,8 @@ function Monitor() {
       </Grid>
 
       <Modal open={open}>
-        <Box borderRadius={3} sx={style}>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid container lg={5} md={8} sm={10} xs={12} borderRadius={3} overflow="auto" height="70vh" sx={style} mx={2}>
+          <Box width={"100%"} sx={{ display: "flex", justifyContent: "center" }}>
             <Typography
               variant="h4"
               component="h2"
@@ -459,7 +461,7 @@ function Monitor() {
             </Typography>
           </Box>
           <Box sx={{ mt: 2 }}>
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 gap: 1,
@@ -472,7 +474,7 @@ function Monitor() {
                 fontWeight={700}
                 color={"brown"}
               ></Typography>
-            </Box>
+            </Box> */}
             {/* <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
               {[
                 { label: "Well Number :", value: "1" },
@@ -500,9 +502,9 @@ function Monitor() {
                 </Box>
               ))}
             </Box> */}
-            <Box sx={{ display: "flex", gap: 4, }}>
+            <Grid container sx={{ display: "flex", gap: 3, }}>
               {/* First Column */}
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {[
                   { label: "Well Number :", value: "1" },
                   { label: "Location :", value: "" },
@@ -524,10 +526,10 @@ function Monitor() {
                     /> */}
                   </Box>
                 ))}
-              </Box>
+              </Grid>
 
               {/* Second Column */}
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {[
                   { label: "Landmark :", value: "" },
                   { label: "Notification ID:", value: "" },
@@ -536,7 +538,7 @@ function Monitor() {
                 ].map((item, index) => (
                   <Box
                     key={index + 4}
-                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                    sx={{ display: "flex", alignItems: "center", gap: 2}}
                   >
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
@@ -549,8 +551,8 @@ function Monitor() {
                     /> */}
                   </Box>
                 ))}
-              </Box>
-            </Box>
+              </Grid>
+            </Grid>
 
             <Box sx={{ display: "flex", justifyContent: "center", pt: "16px" }}>
               <Typography
@@ -568,9 +570,9 @@ function Monitor() {
                   GIP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>Normal value</Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"120px"} ml={2}>
+                <Typography width={"10%"} ml={2}>
                   Critical Value
                 </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
@@ -582,9 +584,9 @@ function Monitor() {
                   CHP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>Normal value</Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"120px"} ml={2}>
+                <Typography width={"10%"} ml={2}>
                   Critical Value
                 </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
@@ -596,9 +598,9 @@ function Monitor() {
                   THP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>Normal value</Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"120px"} ml={2}>
+                <Typography width={"10%"} ml={2}>
                   Critical Value
                 </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
@@ -610,9 +612,9 @@ function Monitor() {
                   Battery(%)
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>Normal value</Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"120px"} ml={2}>
+                <Typography width={"10%"} ml={2}>
                   Critical Value
                 </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
@@ -624,9 +626,9 @@ function Monitor() {
                   Solar Voltage
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>Normal value</Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"120px"} ml={2}>
+                <Typography width={"10%"} ml={2}>
                   Critical Value
                 </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
@@ -673,7 +675,7 @@ function Monitor() {
               </Box>
             </Box> */}
           </Box>
-          <Box mt={2} gap={2} sx={{ display: "flex", justifyContent: "end" }}>
+          <Box mt={2} width={"100%"} gap={2} sx={{ display: "flex", justifyContent: "end" }}>
             <Button
               variant="contained"
               color="primary"
@@ -683,7 +685,7 @@ function Monitor() {
               Close
             </Button>
           </Box>
-        </Box>
+        </Grid>
       </Modal>
     </div>
   );
