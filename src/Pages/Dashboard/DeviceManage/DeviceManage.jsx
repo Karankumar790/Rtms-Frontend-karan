@@ -168,22 +168,24 @@ function DeviceManage() {
             <TableHead>
               <TableRow>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Sr No.
+                  Device Id                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  LoRa Id
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Device Name
+                  GIP
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Cloud ID
+                  CHP
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  LoRa ID
+                  THP
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Landmark
+                  Battery%
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Geolocation
+                  Solar Voltage
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Action
@@ -200,8 +202,9 @@ function DeviceManage() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
-                  <Link to="/dashboard/virtual">
+                  {/* <Link to="/dashboard/virtual">
                       <IconButton
                         sx={{
                           color: "grey",
@@ -211,7 +214,7 @@ function DeviceManage() {
                       >
                         <LocationOnIcon fontSize="large" />
                       </IconButton>
-                    </Link>
+                    </Link> */}
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     <Link to="/dashboard/Lora">
