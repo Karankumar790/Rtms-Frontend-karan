@@ -19,7 +19,7 @@ import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
-import { saveWellDetails } from "../../../apis/WellService";
+import { deviceData, saveWellDetails } from "../../../apis/WellService";
 import { setWellDetails } from "../../../apis/authSlice";
 
 const initialData = [
@@ -68,11 +68,12 @@ const initialData = [
 function AddWell() {
   const [employeeData, setEmployeeData] = useState(initialData);
   const organizationName = useSelector((state) => state.auth.organization);
+  const [rows, setRows] = useState([]);
   const [wellDetails, setWellDetails] = useState({
-    location: '',
-    installation: '',
-    wellType: '',
-    wellNumber: ''
+    location: "",
+    installation: "",
+    wellType: "",
+    wellNumber: "",
   });
   const [formValues, setFormValues] = useState({
     organizationName,
@@ -80,7 +81,7 @@ function AddWell() {
     landmark: "",
     latitude: "",
     longitude: "",
-    descriptions: "",
+    nodeId: "",
     alarmSettings: [],
     flowing: {
       pressures: [
@@ -93,7 +94,7 @@ function AddWell() {
       ],
     },
   });
-  
+
   useEffect(() => {
     const storedWellDetails = localStorage.getItem("wellDetails");
     if (storedWellDetails) {
@@ -103,7 +104,7 @@ function AddWell() {
 
   const onChangeInput = (e, employeeId) => {
     const { name, value } = e.target;
-    
+
     const editData = employeeData.map((item) =>
       item.employeeId === employeeId ? { ...item, [name]: value } : item
     );
@@ -165,7 +166,6 @@ function AddWell() {
       return;
     }
     try {
-
       // // const detailsToStore = {
       // //   location: wellDetails.location,
       // //   installation: wellDetails.installation,
@@ -179,7 +179,7 @@ function AddWell() {
         location: wellDetails.location,
         installation: wellDetails.installation,
         wellType: wellDetails.wellType,
-        wellNumber:wellDetails.wellNumber,
+        wellNumber: wellDetails.wellNumber,
         ...formValues,
         alarmSettings: employeeData, // Pass employee data directly or transform as needed
         flowing: {
@@ -197,6 +197,19 @@ function AddWell() {
       console.error("Error saving well:", error);
     }
   };
+
+  useEffect(() => {
+    const Device = async () => {
+      try {
+        const response = await deviceData(organizationName);
+        setRows(response.data);
+      } catch (error) {
+        console.error("There is an issue for fetching data", error);
+      }
+    };
+    Device();
+  }, []);
+  console.log(rows,"mmmmmmmmmmmmmaster")
 
 
   return (
@@ -292,14 +305,33 @@ function AddWell() {
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
-            <TextField
+            {/* <TextField
               fullWidth
               size="small"
-              label="Description"
+              label="nodeId"
               variant="outlined"
-              name="descriptions"
+              name="nodeId"
               onChange={(e) => handleChangeParameter(e)}
-            />
+            /> */}
+            <TextField
+             fullWidth
+             size="small"
+             label="nodeId"
+             variant="outlined"
+              select
+            >
+              {rows.length > 0 ? (
+                rows.map((nodeId, index) => (
+                  <MenuItem key={index} >
+                    {nodeId.data.NodeAdd}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem value="" disabled>
+                  No NodeId available
+                </MenuItem>
+              )}
+            </TextField>
           </Grid>
         </Grid>
       </Paper>

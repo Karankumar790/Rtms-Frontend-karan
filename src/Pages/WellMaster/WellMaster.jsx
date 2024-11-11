@@ -387,34 +387,6 @@ const handleAddInstallation = async () => {
                   gap={1}
                 >
                   <Grid item lg={12} md={12} sm={12} xs={12}>
-                    {/* <FormControl fullWidth size="small">
-                    <InputLabel id="location-label">Locations</InputLabel>
-                    <Select
-                      labelId="location-label"
-                      id="location-select"
-                      value={allSelectedInstallation}
-                      label="Location"
-                      onChange={handleAllLocationChange}
-                      MenuProps={{
-                        PaperProps: {
-                          style: {
-                            maxHeight: 300, 
-                            overflowY:'scroll'
-                          },
-                        },
-                      }}
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      {locations.map((loc, index) => (
-                        <MenuItem key={index} value={loc}>
-                          {loc}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl> */}
-
                     <FormControl fullWidth size="small">
                       <InputLabel id="location-label">Locations</InputLabel>
                       <Select
