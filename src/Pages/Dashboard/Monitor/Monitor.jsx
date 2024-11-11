@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Divider, Grid, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Divider,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -13,7 +20,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
-import { bgcolor, border, Box } from "@mui/system";
+import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 
@@ -22,10 +29,10 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1000,
+  // width: 500,
   // bgcolor: "background.paper",
   bgcolor: "white",
-  border: "2px solid black",
+  // border: "2px solid black",
   boxShadow: 24,
   p: 2,
 };
@@ -162,7 +169,12 @@ function Monitor() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        filter: open ? "blur(8px)" : "none",
+        transition: "filter 0.1s ease",
+      }}
+    >
       {/* ------------------------Img and Content-------------------------------------- */}
       <Grid container>
         <Grid item display={"flex"} lg={4} md={8} sm={12} xs={12}>
@@ -488,13 +500,13 @@ function Monitor() {
                 </Box>
               ))}
             </Box> */}
-            <Box sx={{ display: "flex", gap: 4 }}>
+            <Box sx={{ display: "flex", gap: 4, }}>
               {/* First Column */}
               <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {[
                   { label: "Well Number :", value: "1" },
-                  { label: "Well Type :", value: "" },
                   { label: "Location :", value: "" },
+                  { label: "Well Type :", value: "" },
                   { label: "Installation :", value: "" },
                 ].map((item, index) => (
                   <Box
@@ -504,12 +516,12 @@ function Monitor() {
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
                     </Typography>
-                    <TextField
+                    {/* <TextField
                       size="small"
                       value={item.value}
                       disabled
                       fullWidth
-                    />
+                    /> */}
                   </Box>
                 ))}
               </Box>
@@ -518,9 +530,9 @@ function Monitor() {
               <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 {[
                   { label: "Landmark :", value: "" },
-                  { label: "Latitude :", value: "" },
-                  { label: "Longitude :", value: "" },
+                  { label: "Notification ID:", value: "" },
                   { label: "Node ID :", value: "" },
+                  { label: "Status :", value: "" },
                 ].map((item, index) => (
                   <Box
                     key={index + 4}
@@ -529,12 +541,12 @@ function Monitor() {
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
                     </Typography>
-                    <TextField
+                    {/* <TextField
                       size="small"
                       value={item.value}
                       disabled
                       fullWidth
-                    />
+                    /> */}
                   </Box>
                 ))}
               </Box>
@@ -551,78 +563,73 @@ function Monitor() {
             </Box>
 
             <Box>
-              <Box>
-                <Typography variant="h6">GIP</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField  size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-                <Typography width={"120px"}>Critical Value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box>
-                <Typography variant="h6">CHP</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-              <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-                <Typography width={"120px"}>Critical Value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
+              <Box display="flex" mt={2} justifyContent={"space-evenly"} >
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  GIP
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
+                <Typography width={"120px"} ml={2}>
+                  Critical Value
+                </Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             <Box>
-              <Box>
-                <Typography variant="h6">THP</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-                <Typography width={"120px"}>Critical Value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box>
-                <Typography variant="h6">Battery(%)</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-                <Typography width={"120px"}>Critical Value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
+              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  CHP
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
+                <Typography width={"120px"} ml={2}>
+                  Critical Value
+                </Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             <Box>
-              <Box>
-                <Typography variant="h6">Solar Voltage</Typography>
+              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  THP
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
+                <Typography width={"120px"} ml={2}>
+                  Critical Value
+                </Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
-              <Box display="flex" gap={2}>
-                <Typography width={"120px"}>Normal value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
-                <Typography width={"120px"}>Critical Value</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Condition</Typography>
-                <TextField size="small"></TextField>
+            </Box>
+            <Box>
+              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  Battery(%)
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
+                <Typography width={"120px"} ml={2}>
+                  Critical Value
+                </Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
+              </Box>
+            </Box>
+            <Box>
+              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
+                <Typography mr={2} variant="h6" width={"100px"}>
+                  Solar Voltage
+                </Typography>
+                <TextField size="small" variant="standard" disabled></TextField>
+                <Typography width={"120px"} ml={2}>Normal value</Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
+                <Typography width={"120px"} ml={2}>
+                  Critical Value
+                </Typography>
+                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
             {/* <Box display="flex" mt={2} gap={2}>
@@ -635,9 +642,7 @@ function Monitor() {
                 <TextField size="small"></TextField>
               </Box>
             </Box> */}
-            <Divider sx={{marginTop:"5px"}}/>
-
-            <Box>
+            {/* <Box>
               <Box>
                 <Typography variant="h6">Flowing</Typography>
               </Box>
@@ -651,9 +656,8 @@ function Monitor() {
                 <Typography>Tolerance</Typography>
                 <TextField size="small"></TextField>
               </Box>
-            </Box>
-
-            <Box>
+            </Box> */}
+            {/* <Box>
               <Box>
                 <Typography variant="h6">Not Flowing</Typography>
               </Box>
@@ -667,7 +671,7 @@ function Monitor() {
                 <Typography>Tolerance</Typography>
                 <TextField size="small"></TextField>
               </Box>
-            </Box>
+            </Box> */}
           </Box>
           <Box mt={2} gap={2} sx={{ display: "flex", justifyContent: "end" }}>
             <Button
