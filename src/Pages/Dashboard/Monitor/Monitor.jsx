@@ -24,6 +24,8 @@ import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 import { deviceData } from "../../../apis/WellService";
+import { useSelector } from "react-redux";
+import { state } from "@antv/g2plot/lib/adaptor/common";
 
 const style = {
   position: "absolute",
@@ -51,6 +53,7 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
+
 
 let data = {
   "Well No": "1",
@@ -153,12 +156,13 @@ function Monitor() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const organizationName = useSelector((state) => state.auth.organization);
   const [rows, setRows] = useState([]);
    
   useEffect(() => {
     const Device = async () => {
        try {
-        const response = await deviceData();
+        const response = await deviceData(organizationName);
         setRows(response.data);
        } catch (error) {
         console.error("There is an issue for fetching data",error)
