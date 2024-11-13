@@ -318,7 +318,7 @@ function AddWell() {
              variant="outlined"
               select
             >
-              {rows?.length > 0 ? (
+              {rows? (
                 rows?.map((nodeId, index) => (
                   <MenuItem key={index} >
                     {nodeId.data.NodeAdd}

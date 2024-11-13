@@ -157,19 +157,19 @@ function Monitor() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
    
-  useEffect(() => {
-    const monitorTable = async () => {
-       try {
-        const response = await wellMonitorData(organizationName);
-        setRows(response.wellData);
-       } catch (error) {
-        console.error("There is an issue for fetching data",error)
-       }
-    };
-    monitorTable();
-  },[]);
+  // useEffect(() => {
+  //   const monitorTable = async () => {
+  //      try {
+  //       const response = await wellMonitorData(organizationName);
+  //       setRows(response.wellData);
+  //      } catch (error) {
+  //       console.error("There is an issue for fetching data",error)
+  //      }
+  //   };
+  //   monitorTable();
+  // },[]);
 
 
   const handleChange = (event) => {
@@ -354,15 +354,15 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {/* {rows?.map((row, index) => (
+            {rows?.map((row, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell component="th" scope="row">{row.data.OrgID}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.NodeAdd}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.P1}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.P2}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.P3}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.Bat}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.Solar}</StyledTableCell>
+                <StyledTableCell component="th" scope="row">{}</StyledTableCell>
+                <StyledTableCell align="left">{}</StyledTableCell>
+                <StyledTableCell align="left">{}</StyledTableCell>
+                <StyledTableCell align="left">{}</StyledTableCell>
+                <StyledTableCell align="left">{}</StyledTableCell>
+                <StyledTableCell align="left">{}</StyledTableCell>
+                <StyledTableCell align="left">{}</StyledTableCell>
                 <StyledTableCell align="left">Normal</StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
@@ -377,7 +377,7 @@ function Monitor() {
                     </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
-              ))} */}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
