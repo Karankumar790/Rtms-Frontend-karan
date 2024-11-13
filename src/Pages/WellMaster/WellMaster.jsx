@@ -319,7 +319,7 @@ const handleAddInstallation = async () => {
             <img src={master} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Well Master</Typography>
+            <Typography variant="h4">Well Masterrr</Typography>
           </Box>
         </Grid>
       </Grid>
