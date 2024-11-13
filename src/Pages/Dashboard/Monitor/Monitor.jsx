@@ -23,7 +23,7 @@ import well from "/assets/WELL.png";
 import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
-import { deviceData } from "../../../apis/WellService";
+import {wellMonitorData } from "../../../apis/WellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
 
@@ -160,15 +160,15 @@ function Monitor() {
   const [rows, setRows] = useState([]);
    
   useEffect(() => {
-    const Device = async () => {
+    const monitorTable = async () => {
        try {
-        const response = await deviceData(organizationName);
-        setRows(response.data);
+        const response = await wellMonitorData(organizationName);
+        setRows(response.wellData);
        } catch (error) {
         console.error("There is an issue for fetching data",error)
        }
     };
-    Device();
+    monitorTable();
   },[]);
 
 
@@ -354,7 +354,7 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {rows?.map((row, index) => (
+            {/* {rows?.map((row, index) => (
               <StyledTableRow key={index}>
                 <StyledTableCell component="th" scope="row">{row.data.OrgID}</StyledTableCell>
                 <StyledTableCell align="left">{row.data.NodeAdd}</StyledTableCell>
@@ -377,7 +377,7 @@ function Monitor() {
                     </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
-              ))}
+              ))} */}
             </TableBody>
           </Table>
         </TableContainer>
@@ -475,47 +475,6 @@ function Monitor() {
             </Typography>
           </Box>
           <Box sx={{ mt: 2 }}>
-            {/* <Box
-              sx={{
-                display: "flex",
-                gap: 1,
-                mb: 3,
-                justifyContent: "space-evenly",
-              }}
-            >
-              <Typography
-                variant="h5"
-                fontWeight={700}
-                color={"brown"}
-              ></Typography>
-            </Box> */}
-            {/* <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-              {[
-                { label: "Well Number :", value: "1" },
-                { label: "Well Type :", value: "" },
-                { label: "Location :", value: "" },
-                { label: "Installation :", value: "" },
-                { label: "Landmark :", value: "" },
-                { label: "Latitude :", value: "" },
-                { label: "Longitude :", value: "" },
-                { label: "Node ID :", value: "" },
-              ].map((item, index) => (
-                <Box
-                  key={index -4}
-                  sx={{ display: "flex", alignItems: "center", gap: 2 }}
-                >
-                  <Typography variant="h6" width={"250px"}>
-                    {item.label}
-                  </Typography>
-                  <TextField
-                    size="small"
-                    value={item.value}
-                    disabled
-                    fullWidth
-                  />
-                </Box>
-              ))}
-            </Box> */}
             <Grid container sx={{ display: "flex", gap: 3, }}>
               {/* First Column */}
               <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
@@ -524,7 +483,7 @@ function Monitor() {
                   { label: "Location :", value: "" },
                   { label: "Well Type :", value: "" },
                   { label: "Installation :", value: "" },
-                ].map((item, index) => (
+                ]?.map((item, index) => (
                   <Box
                     key={index}
                     sx={{ display: "flex", alignItems: "center", gap: 2 }}
@@ -549,7 +508,7 @@ function Monitor() {
                   { label: "Notification ID:", value: "" },
                   { label: "Node ID :", value: "" },
                   { label: "Status :", value: "" },
-                ].map((item, index) => (
+                ]?.map((item, index) => (
                   <Box
                     key={index + 4}
                     sx={{ display: "flex", alignItems: "center", gap: 2}}
@@ -648,46 +607,6 @@ function Monitor() {
                 <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
-            {/* <Box display="flex" mt={2} gap={2}>
-              <Box display="flex" gap={2}>
-                <Typography variant="h6">Battery(%)</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-              <Box display="flex" ml={35} gap={2}>
-                <Typography variant="h6">Solar Voltage</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box> */}
-            {/* <Box>
-              <Box>
-                <Typography variant="h6">Flowing</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography>Pressure 1</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Comparison</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Pressure 2</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Tolerance</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box> */}
-            {/* <Box>
-              <Box>
-                <Typography variant="h6">Not Flowing</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography>Pressure 1</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Comparison</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Pressure 2</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Tolerance</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box> */}
           </Box>
           <Box mt={2} width={"100%"} gap={2} sx={{ display: "flex", justifyContent: "end" }}>
             <Button

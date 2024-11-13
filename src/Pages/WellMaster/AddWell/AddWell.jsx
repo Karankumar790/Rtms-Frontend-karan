@@ -318,8 +318,8 @@ function AddWell() {
              variant="outlined"
               select
             >
-              {rows.length > 0 ? (
-                rows.map((nodeId, index) => (
+              {rows?.length > 0 ? (
+                rows?.map((nodeId, index) => (
                   <MenuItem key={index} >
                     {nodeId.data.NodeAdd}
                   </MenuItem>
@@ -374,7 +374,7 @@ function AddWell() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {employeeData.map(
+              {employeeData?.map(
                 ({
                   employeeId,
                   Parameter,
