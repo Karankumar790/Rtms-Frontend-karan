@@ -265,9 +265,9 @@ function NotificationHistory() {
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row" sx={{ width: '13%' }}>
-                    {row.name}
+                    {/* {row.name} */}
                   </StyledTableCell>
-                  <StyledTableCell align="left" sx={{ width: '13%' }}>5/6/2024</StyledTableCell>
+                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>

@@ -48,7 +48,7 @@ const style = {
   // alignItems:"center",
   // justifyContent:"center",
   // flexDirection:'column',
-  borderRadius:"10px",
+  borderRadius: "10px",
   // width: "40%",
   bgcolor: "background.paper",
   border: "1px solid #000",
@@ -128,17 +128,6 @@ function createData(name) {
   return { name };
 }
 
-const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
-];
-
 function MessageForwarding() {
   const [selectedValue, setSelectedValue] = useState("");
   const organizationName = useSelector((state) => state.auth.organization);
@@ -146,6 +135,7 @@ function MessageForwarding() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const fetchAllUserData = async () => {
     try {
@@ -166,6 +156,11 @@ function MessageForwarding() {
     setSelectedValue(event.target.value);
   };
 
+  const handleViewUser = (user) => {
+    setSelectedUser(user);
+    setOpen(true);
+  };
+
   useEffect(() => {
     fetchAllUserData();
   }, [organizationName]);
@@ -174,7 +169,7 @@ function MessageForwarding() {
     <div>
       <Grid
         container
-        // sx={{ display: "flex", justifyContent: "space-between" }}
+        sx={{ display: "flex", justifyContent: "space-between" }}
         pt={2}
         paddingBottom={2}
       >
@@ -190,9 +185,9 @@ function MessageForwarding() {
           </Box>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={3} md={6} sm={6} xs={12} >
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel  id="dropdown-label">Select an Option</InputLabel>
             <Select
               labelId="dropdown-label"
               value={selectedValue}
@@ -210,15 +205,15 @@ function MessageForwarding() {
       </Grid>
 
       {/* ------------------Table for Desktop--------------------------------- */}
-      <Grid container >
+      <Grid container>
         <Modal
           open={open}
           // onClose={handleClose}
           className="center"
-          sx={{backgroundColor: `rgba(255, 255, 255, 0.5)`}}
+          sx={{ backgroundColor: `rgba(255, 255, 255, 0.5)` }}
         >
-          <Grid item lg={6} md={8} sm={8} xs={12} sx={style} >
-            <Box textAlign="center" pb={1} >
+          <Grid item lg={6} md={8} sm={8} xs={12} sx={style}>
+            <Box textAlign="center" pb={1}>
               <Typography id="modal-modal-title" variant="h4" component="h2">
                 User Details
               </Typography>
@@ -235,55 +230,66 @@ function MessageForwarding() {
             > */}
               <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
                 <Grid lg={10} md={8} xs={12} sm={12}>
-                {userDetails.map((field, index) => (
-                  <Grid item 
-                    display="flex"
-                    // justifyContent="space-around"
-                    // spacing={999}
-                    // gap={1}
-                    p={2}
-                  >
+                  {userDetails.map((field, index) => (
                     <Grid
-                      lg={4}
-                      md={5}
-                      sm={12}
-                      xs={12}
-                      key={index}
-                      display={"flex"}
+                      item
+                      display="flex"
+                      // justifyContent="space-around"
+                      // spacing={999}
+                      // gap={1}
+                      p={2}
                     >
-                      <Typography variant="h6">{field}</Typography>
+                      <Grid
+                        lg={4}
+                        md={5}
+                        sm={12}
+                        xs={12}
+                        key={index}
+                        display={"flex"}
+                      >
+                        <Typography variant="h6">{field}</Typography>
+                      </Grid>
+                      <Grid lg={8} md={7} sm={12} xs={12}>
+                        <TextField
+                          variant="standard"
+                          placeholder={field}
+                          disabled
+                          fullWidth
+                          size="small"
+                        ></TextField>
+                      </Grid>
                     </Grid>
-                    <Grid
-                      lg={8}
-                      md={7}
-                      sm={12}
-                      xs={12}
-                    >
-                      <TextField
-                        variant="standard"
-                        placeholder={field}
-                        disabled
-                        fullWidth
-                        size="small"
-                      ></TextField>
-                    </Grid>
-                  </Grid>
-                ))}
+                  ))}
                 </Grid>
-                <Grid item lg={4} md={4} xs={12} sm={12}  >
-                  <Box className="center" height={"200px"} width={"200px"} border={'1px solid black'} ml={3} mt={3} mb={2}  >
+                <Grid item lg={4} md={4} xs={12} sm={12}>
+                  <Box
+                    className="center"
+                    height={"200px"}
+                    width={"200px"}
+                    border={"1px solid black"}
+                    ml={3}
+                    mt={3}
+                    mb={2}
+                  >
                     {" "}
                     Id Card Photo
                   </Box>
-                  <Box className="center" height={"200px"} width={"200px"} border={'1px solid black'} mt={4} ml={3}>
+                  <Box
+                    className="center"
+                    height={"200px"}
+                    width={"200px"}
+                    border={"1px solid black"}
+                    mt={4}
+                    ml={3}
+                  >
                     {" "}
                     Passport Photo
                   </Box>
                 </Grid>
               </Grid>
             {/* </Grid> */}
-           {/* ----------Button--------------------- */}
-           <Box
+            {/* ----------Button--------------------- */}
+            <Box
               display="flex"
               justifyContent="end"
               // bgcolor='yellowgreen'
@@ -294,16 +300,25 @@ function MessageForwarding() {
               gap={3}
               // mr={6}
               // pr={73}
-         
-              width={'100%'}
+
+              width={"100%"}
             >
-              <Button  variant="contained" sx={{width:"150px", p:"10px", fontSize:"15px"}} > Delete User</Button>
-              <Button variant="contained" sx={{width:"150px", p:"10px", fontSize:"15px", mr:"12px"}} onClick={handleClose}>
+              <Button
+                variant="contained"
+                sx={{ width: "150px", p: "10px", fontSize: "15px" }}
+              >
+                {" "}
+                Delete User
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ width: "150px", p: "10px", fontSize: "15px", mr: "12px" }}
+                onClick={handleClose}
+              >
                 Close
               </Button>
             </Box>
           </Grid>
-           
         </Modal>
       </Grid>
       <Grid
@@ -375,7 +390,7 @@ function MessageForwarding() {
                         "&:hover": { color: "darkred" },
                         marginRight: "5px",
                       }}
-                      onClick={handleOpen}
+                      onClick={() => handleViewUser(user)}
                     >
                       <VisibilityIcon fontSize="large" />
                     </IconButton>

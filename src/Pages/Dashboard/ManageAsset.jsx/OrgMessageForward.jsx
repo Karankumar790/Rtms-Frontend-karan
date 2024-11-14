@@ -23,10 +23,9 @@ import TableRow from "@mui/material/TableRow";
 import dayjs from "dayjs";
 import { Box } from "@mui/system";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import ThreePIcon from "@mui/icons-material/ThreeP";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import EmailIcon from '@mui/icons-material/Email';
-
+import Person3Icon from '@mui/icons-material/Person';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -133,7 +132,7 @@ function OrgMessageForward() {
                 </Grid>
                 <Grid item xs={12}  sm={2} md={6} lg={6}>
                   <Box display="flex" alignItems="center" gap={1}>
-                    <ThreePIcon />
+                    <Person3Icon />
                     <TextField
                       variant="outlined"
                       size="small"
