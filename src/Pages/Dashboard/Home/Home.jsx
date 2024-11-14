@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, CardContent, Grid, IconButton, Typography } from '@mui/material'
+import { Box, Button, CardContent, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, TextField, Typography } from '@mui/material'
 import { Card } from '@mui/joy'
 
 import well from '/assets/WELL.png'
@@ -58,7 +58,7 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  
+
 ];
 
 
@@ -208,7 +208,7 @@ export default function BasicCard() {
               <Typography fontSize='large'>Network Error</Typography>
             </CardContent>
           </CardWrapper>
-       
+
         </Grid>
 
         <Grid item lg={2.4} md={3} sm={6} xs={12}>
@@ -329,12 +329,12 @@ export default function BasicCard() {
 
       {/* -------------------------Table for Desktop--------------------------- */}
 
-       <Grid container mt={2} md={12}
+      <Grid container mt={2} md={12}
         lg={12}
         sm={5}
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-        <TableContainer component={Paper}>
+        {/* <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
               <TableRow  >
@@ -368,7 +368,19 @@ export default function BasicCard() {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
+
+        <Box sx={{ width: '100%' }}>
+          <Grid container sx={{ bgcolor: 'grey.100', width: '100%', py: 2 }}>
+            {/* Sidebar container with dynamic width */}
+            <Grid item xs={12} sx={{ width: '100%',height:'100%' }}>
+              <Box sx={{ display:'flex', width: '200vh',bgcolor:'white', minHeight: '20vh',p: 2  }}>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+
+
       </Grid>
     </Grid >
   );
