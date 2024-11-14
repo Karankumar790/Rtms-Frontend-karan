@@ -130,7 +130,21 @@ export const getLocationOfWell = async (wellNumber, organizationName) => {
 export const deviceData = async (organizationName) => {
   try {
     const response = await axios.get(
-      `${DEVICE_API}/external-device-show?organizationName=${organizationName}`
+      `${DEVICEvi_API}/external-device-show?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return catchError;
+    
+  }
+}
+
+// DEVICE ALL DATA API 
+export const wellMonitorData = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${DEVICE_API}/get-node-all-data-by-organization?organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {

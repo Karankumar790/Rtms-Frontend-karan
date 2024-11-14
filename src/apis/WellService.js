@@ -139,3 +139,17 @@ export const deviceData = async (organizationName) => {
     
   }
 }
+
+// DEVICE ALL DATA API 
+export const wellMonitorData = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${DEVICE_API}/get-node-all-data-by-organization?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return catchError;
+    
+  }
+}

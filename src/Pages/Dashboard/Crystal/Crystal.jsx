@@ -169,7 +169,7 @@ function Monitor() {
         <Typography fontSize='x-large'> <IconButton><SummarizeIcon sx={{ fontSize: 40, color: 'blue' }} /></IconButton>Well Report</Typography>
         {/* --------------------------Well Report Inputs Field------------------------------------- */}
         <Grid container spacing={2}>
-          <Grid item sm={6} md={3} xs={12} lg={3}>
+          <Grid item sm={6} md={3} xs={12} lg={4}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
@@ -187,7 +187,30 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}>
+
+          <Grid item sm={6} md={3} xs={12} lg={4}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="demo-select-large-label">Parameter</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={report}
+                label="Report Type"
+                onChange={handleChangeReport}
+              >
+                <MenuItem value="">
+                </MenuItem>
+                <MenuItem value={10}>Low Bettery</MenuItem>
+                <MenuItem value={20}>Flowing Well</MenuItem>
+                <MenuItem value={30}>Not Flowing Well</MenuItem>
+                <MenuItem value={40}>Low Solar Power</MenuItem>
+                <MenuItem value={50}>Network Error</MenuItem>
+                <MenuItem value={60}>Low Pressure</MenuItem>
+                <MenuItem value={70}>High Pressure</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={4}>
             <FormControl fullWidth>
               <TextField
                 fullWidth
@@ -206,7 +229,7 @@ function Monitor() {
               />
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}>
+          <Grid item sm={6} md={3} xs={12} lg={4}>
             <FormControl fullWidth >
               <TextField
                 fullWidth
@@ -225,7 +248,7 @@ function Monitor() {
               />
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3}>
+          <Grid item sm={6} md={3} xs={12} lg={4}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Resolution</InputLabel>
               <Select
@@ -245,10 +268,26 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
+          <Grid item sm={6} md={3} xs={12} lg={4}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="demo-select-large-label">Report Type</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-large"
+                value={report}
+                label="Report Type"
+                onChange={handleChangeReport}
+              >
+                <MenuItem value="">
+                </MenuItem>
+                <MenuItem value={10}>Matric Report</MenuItem>
+                <MenuItem value={20}>Crystal Report</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
         {/* ---------------------Icon and Globle Report------------------------------------ */}
-        <Typography fontSize='x-large'> <IconButton><BallotIcon sx={{ fontSize: 40, color: 'blue' }} /></IconButton>Global Report</Typography>
-        {/* ---------------------Globle Report Iputs Field--------------------------------- */}
+        {/* <Typography fontSize='x-large'> <IconButton><BallotIcon sx={{ fontSize: 40, color: 'blue' }} /></IconButton>Global Report</Typography>
         <Grid container spacing={3}>
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <FormControl fullWidth size="small">
@@ -331,7 +370,7 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-        </Grid>
+        </Grid> */}
         {/* ----------------------------Button---------------------------------- */}
         <Grid container display={'flex'} justifyContent={'end'} >
           <Grid item lg={1.3} md={3} sm={6} xs={12} paddingTop={3} paddingBottom={2}>

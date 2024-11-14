@@ -27,7 +27,7 @@ import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 const initialData = [
   {
     employeeId: "01",
-    Parameter: "GIP (kg/Cm²)",
+    Parameter: "GIP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -35,7 +35,7 @@ const initialData = [
   },
   {
     employeeId: "02",
-    Parameter: "CHP (kg/Cm²)",
+    Parameter: "CHP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -43,7 +43,7 @@ const initialData = [
   },
   {
     employeeId: "03",
-    Parameter: "THP(kg)",
+    Parameter: "THP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -51,7 +51,7 @@ const initialData = [
   },
   {
     employeeId: "05",
-    Parameter: "Low Battery",
+    Parameter: "Battery (%)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -59,7 +59,7 @@ const initialData = [
   },
   {
     employeeId: "06",
-    Parameter: "Solar Voltage",
+    Parameter: "Solar (V)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -348,121 +348,122 @@ function AddWell() {
             Notification Setting
           </Typography>
         </Grid>
-        <Grid item>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ fontSize: "1.5rem" }}>Parameter</TableCell>
-                <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                  Normal Alert
-                </TableCell>
-                <TableCell sx={{ fontSize: "1.5rem" }}>Condition</TableCell>
-                <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                  Description
-                </TableCell>
-                <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                  Critical Alert
-                </TableCell>
-                <TableCell sx={{ fontSize: "1.5rem" }}>Condition</TableCell>
-                <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                  Description
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {employeeData.map(
-                ({
-                  employeeId,
-                  Parameter,
-                  NormalAlert,
-                  CriticalAlert,
-                  Condition,
-                  Description,
-                  Condition1,
-                  Description1,
-                }) => (
-                  <TableRow key={employeeId}>
-                    <TableCell>
-                      <Typography>{Parameter}</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <TextField
-                        name="NormalAlert"
-                        value={NormalAlert}
-                        onChange={(e) => onChangeInput(e, employeeId)}
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormControl variant="outlined" size="small" fullWidth>
-                        <Select
-                          labelId={`condition-label-${employeeId}`}
-                          name="Condition1"
-                          value={Condition1}
+        <Paper>
+          <Grid item>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontSize: "1.5rem" }}>Parameter</TableCell>
+                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                    Normal Alert
+                  </TableCell>
+                  <TableCell sx={{ fontSize: "1.5rem" }}>Condition</TableCell>
+                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                    Description
+                  </TableCell>
+                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                    Critical Alert
+                  </TableCell>
+                  <TableCell sx={{ fontSize: "1.5rem" }}>Condition</TableCell>
+                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                    Description
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {employeeData?.map(
+                  ({
+                    employeeId,
+                    Parameter,
+                    NormalAlert,
+                    CriticalAlert,
+                    Condition,
+                    Description,
+                    Condition1,
+                    Description1,
+                  }) => (
+                    <TableRow key={employeeId}>
+                      <TableCell>
+                        <Typography>{Parameter}</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <TextField
+                          name="NormalAlert"
+                          value={NormalAlert}
                           onChange={(e) => onChangeInput(e, employeeId)}
+                          variant="outlined"
                           size="small"
                           fullWidth
-                        >
-                          <MenuItem value="High">High</MenuItem>
-                          <MenuItem value="Low">Low</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </TableCell>
-                    <TableCell>
-                      <TextField
-                        name="Description"
-                        value={Description}
-                        onChange={(e) => onChangeInput(e, employeeId)}
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <TextField
-                        name="CriticalAlert"
-                        value={CriticalAlert}
-                        onChange={(e) => onChangeInput(e, employeeId)}
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormControl variant="outlined" size="small" fullWidth>
-                        <Select
-                          labelId={`condition-label-${employeeId}`}
-                          name="Condition"
-                          value={Condition}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <FormControl variant="outlined" size="small" fullWidth>
+                          <Select
+                            labelId={`condition-label-${employeeId}`}
+                            name="Condition1"
+                            value={Condition1}
+                            onChange={(e) => onChangeInput(e, employeeId)}
+                            size="small"
+                            fullWidth
+                          >
+                            <MenuItem value="High">High</MenuItem>
+                            <MenuItem value="Low">Low</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+                      <TableCell>
+                        <TextField
+                          name="Description"
+                          value={Description}
                           onChange={(e) => onChangeInput(e, employeeId)}
+                          variant="outlined"
                           size="small"
                           fullWidth
-                        >
-                          <MenuItem value="High">High</MenuItem>
-                          <MenuItem value="Low">Low</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </TableCell>
-                    <TableCell>
-                      <TextField
-                        name="Description1"
-                        value={Description1}
-                        onChange={(e) => onChangeInput(e, employeeId)}
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                      />
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
-            </TableBody>
-          </Table>
-        </Grid>
-
-        <Paper sx={{ mt: "1" }}>
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <TextField
+                          name="CriticalAlert"
+                          value={CriticalAlert}
+                          onChange={(e) => onChangeInput(e, employeeId)}
+                          variant="outlined"
+                          size="small"
+                          fullWidth
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <FormControl variant="outlined" size="small" fullWidth>
+                          <Select
+                            labelId={`condition-label-${employeeId}`}
+                            name="Condition"
+                            value={Condition}
+                            onChange={(e) => onChangeInput(e, employeeId)}
+                            size="small"
+                            fullWidth
+                          >
+                            <MenuItem value="High">High</MenuItem>
+                            <MenuItem value="Low">Low</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+                      <TableCell>
+                        <TextField
+                          name="Description1"
+                          value={Description1}
+                          onChange={(e) => onChangeInput(e, employeeId)}
+                          variant="outlined"
+                          size="small"
+                          fullWidth
+                        />
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
+              </TableBody>
+            </Table>
+          </Grid>
+        </Paper>
+        <Paper sx={{ mt: "15px" }}>
           <Grid container spacing={0.8} p={2}>
             <Grid container display={"flex"} gap={2.5} p={2}>
               {/* Row 1: Flowing */}
@@ -649,7 +650,7 @@ function AddWell() {
             }}
             onClick={handleSubmit} // Call handleSubmit on click
           >
-            Add Well
+            Update Well
           </Button>
           <Button
             variant="contained"

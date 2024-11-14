@@ -1019,7 +1019,7 @@ function ManageAsset() {
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span>
+                                <span style={{fontSize:"medium"}}>
                                   {index + 1}. {departmentName}
                                 </span>
                                 <Box display="flex">
@@ -1048,7 +1048,7 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={2}>
+                          <StyledTableCell style={{fontSize:"medium"}} colSpan={2}>
                             No departments available
                           </StyledTableCell>
                         </TableRow>
@@ -1177,7 +1177,7 @@ function ManageAsset() {
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span>
+                                <span style={{fontSize:"medium"}}>
                                   {index + 1}. {row.departmentName}
                                 </span>
                               </Box>
@@ -1191,6 +1191,7 @@ function ManageAsset() {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "space-between",
+                                        fontSize:"medium",
                                       }}
                                     >
                                       {posIndex + 1}. {position}
@@ -1237,7 +1238,7 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={2}>
+                          <StyledTableCell style={{fontSize:"large"}} colSpan={2}>
                             No Positions available
                           </StyledTableCell>
                         </TableRow>
@@ -1468,22 +1469,22 @@ function ManageAsset() {
                             {row.approvalChains?.map((chain, chainIndex) => (
                               <StyledTableRow key={`${index}-${chainIndex}`}>
                                 {chainIndex === 0 && (
-                                  <StyledTableCell
+                                  <StyledTableCell style={{fontSize:'medium'}}
                                     rowSpan={row.approvalChains.length}
                                   >
                                     {index + 1}. {row.departmentName}
                                   </StyledTableCell>
                                 )}
-                                <StyledTableCell>
+                                <StyledTableCell style={{fontSize:'medium'}} >
                                   {chainIndex + 1}. {chain.action || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell>
+                                <StyledTableCell style={{fontSize:'medium'}}>
                                   {chainIndex + 1}. {chain.level1 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell>
+                                <StyledTableCell style={{fontSize:'medium'}}>
                                   {chainIndex + 1}. {chain.level2 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">
+                                <StyledTableCell align="center" style={{fontSize:'medium'}}>
                                   <Box display="flex" justifyContent="center">
                                     <IconButton
                                       onClick={() =>
@@ -1518,7 +1519,7 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={5}>
+                          <StyledTableCell colSpan={5} style={{fontSize:'medium'}}>
                             No Approval Chain Available
                           </StyledTableCell>
                         </TableRow>

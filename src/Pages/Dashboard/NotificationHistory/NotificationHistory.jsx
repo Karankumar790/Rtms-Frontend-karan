@@ -252,11 +252,11 @@ function NotificationHistory() {
               <TableRow  >
                 <StyledTableCell >Notification</StyledTableCell>
                 <StyledTableCell >Data/Time</StyledTableCell>
-                <StyledTableCell >Device ID</StyledTableCell>
+                <StyledTableCell >Well Number</StyledTableCell>
+                <StyledTableCell >Node ID</StyledTableCell>
                 <StyledTableCell >Location</StyledTableCell>
                 <StyledTableCell >Installation</StyledTableCell>
-                <StyledTableCell >Well Number</StyledTableCell>
-                <StyledTableCell >Well Port</StyledTableCell>
+                {/* <StyledTableCell >Well Port</StyledTableCell> */}
                 <StyledTableCell >Status</StyledTableCell>
                 <StyledTableCell >Description</StyledTableCell>
               </TableRow>
@@ -272,7 +272,7 @@ function NotificationHistory() {
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
-                  <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
+                  {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                   <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell>
                 </StyledTableRow>

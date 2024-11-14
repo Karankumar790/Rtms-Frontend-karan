@@ -673,22 +673,22 @@ const WellMaster = () => {
                       )
                     ) : (
                       <StyledTableRow key={installation.name}>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           {location}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           {installation.name}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           No Well Type
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           No Well Number
                         </StyledTableCell>
                         {/* <StyledTableCell align="left">
                           No Landmark
                         </StyledTableCell> */}
-                        <StyledTableCell align="left">N/A</StyledTableCell>
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">N/A</StyledTableCell>
 
                         <StyledTableCell>
                           {/* <Link to = "/dashboard/virtual"> */}
@@ -726,13 +726,13 @@ const WellMaster = () => {
                   })
                 ) : (
                   <StyledTableRow key={location}>
-                    <StyledTableCell align="left">{location}</StyledTableCell>
-                    <StyledTableCell align="left">
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">{location}</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">
                       No Installations Available
                     </StyledTableCell>
-                    <StyledTableCell align="left">-</StyledTableCell>
-                    <StyledTableCell align="left">-</StyledTableCell>
-                    <StyledTableCell align="left">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
                     <StyledTableCell>
                       <IconButton
                         sx={{

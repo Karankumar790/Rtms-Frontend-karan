@@ -23,7 +23,7 @@ import well from "/assets/WELL.png";
 import { Box, height } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
-import { deviceData } from "../../../apis/WellService";
+import {wellMonitorData } from "../../../apis/WellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
 
@@ -157,19 +157,20 @@ function Monitor() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
+   
+  // useEffect(() => {
+  //   const monitorTable = async () => {
+  //      try {
+  //       const response = await wellMonitorData(organizationName);
+  //       setRows(response.wellData);
+  //      } catch (error) {
+  //       console.error("There is an issue for fetching data",error)
+  //      }
+  //   };
+  //   monitorTable();
+  // },[]);
 
-  useEffect(() => {
-    const Device = async () => {
-      try {
-        const response = await deviceData(organizationName);
-        setRows(response.data);
-      } catch (error) {
-        console.error("There is an issue for fetching data", error);
-      }
-    };
-    Device();
-  }, []);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -359,17 +360,17 @@ function Monitor() {
               {rows.map((row, index) => (
                 <StyledTableRow key={index} style={{height:"20px"}}>
                   <StyledTableCell component="th" scope="row">
-                    {row.data.OrgID}
+                    {/* {row.data.OrgID} */}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.data.NodeAdd}
+                    {/* {row.data.NodeAdd} */}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.data.P1}</StyledTableCell>
-                  <StyledTableCell align="left">{row.data.P2}</StyledTableCell>
-                  <StyledTableCell align="left">{row.data.P3}</StyledTableCell>
-                  <StyledTableCell align="left">{row.data.Bat}</StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
-                    {row.data.Solar}
+                   
                   </StyledTableCell>
                   <StyledTableCell align="left">Normal</StyledTableCell>
                     <StyledTableCell align="left"></StyledTableCell>
@@ -512,7 +513,7 @@ function Monitor() {
                   { label: "Location :", value: "" },
                   { label: "Well Type :", value: "" },
                   { label: "Installation :", value: "" },
-                ].map((item, index) => (
+                ]?.map((item, index) => (
                   <Box
                     key={index}
                     sx={{ display: "flex", alignItems: "center", gap: 2 }}
@@ -536,7 +537,7 @@ function Monitor() {
                   { label: "Notification ID:", value: "" },
                   { label: "Node ID :", value: "" },
                   { label: "Status :", value: "" },
-                ].map((item, index) => (
+                ]?.map((item, index) => (
                   <Box
                     key={index + 4}
                     sx={{ display: "flex", alignItems: "center", gap: 2 }}
