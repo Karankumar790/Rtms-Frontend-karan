@@ -329,7 +329,7 @@ export default function BasicCard() {
 
       {/* -------------------------Table for Desktop--------------------------- */}
 
-       <Grid container mt={2} md={12}
+       {/* <Grid container mt={2} md={12}
         lg={12}
         sm={5}
         xs={4}
@@ -369,6 +369,57 @@ export default function BasicCard() {
             </TableBody>
           </Table>
         </TableContainer>
+      </Grid> */}
+      <Grid container mt={2} md={12}
+        lg={12}
+        sm={5}
+        xs={4}
+        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
+        {/* <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead >
+              <TableRow  >
+                <StyledTableCell sx={{ fontSize: '18px' }}>Well No.</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">GIP (kg)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">CHP (kg)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">THP (kg)</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Flow Status</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Sensor Battery</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Solar Voltage</StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Communication </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Last Update</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer> */}
+
+        <Box sx={{ width: '100%' }}>
+          <Grid container sx={{ bgcolor: 'grey.100', width: '100%', p: 2 }}>
+            {/* Sidebar container with dynamic width */}
+            <Grid item xs={12} sx={{ width: '100%',height:'100%' }}>
+              <Box sx={{ display:'flex', width: '200vh',bgcolor:'white', minHeight: '20vh',p: 2  }}>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
       </Grid>
     </Grid >
   );

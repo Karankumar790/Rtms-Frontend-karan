@@ -20,7 +20,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
-import { Box } from "@mui/system";
+import { Box, height } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 import {wellMonitorData } from "../../../apis/WellService";
@@ -117,6 +117,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    padding: "6px",
   },
 }));
 
@@ -330,22 +331,25 @@ function Monitor() {
                   Node ID
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  GIP (kg)
+                  GIP (Kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  CHP (kg)
+                  CHP (Kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  THP (kg)
+                  THP (Kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Sensor Battery
+                  Battery (%)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Solar Voltage
+                  Solar (V)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Flow Status
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Alerts
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Action
@@ -353,16 +357,23 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {rows?.map((row, index) => (
-              <StyledTableRow key={index}>
-                <StyledTableCell component="th" scope="row">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">Normal</StyledTableCell>
+              {rows.map((row, index) => (
+                <StyledTableRow key={index} style={{height:"20px"}}>
+                  <StyledTableCell component="th" scope="row">
+                    {/* {row.data.OrgID} */}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {/* {row.data.NodeAdd} */}
+                  </StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left">
+                   
+                  </StyledTableCell>
+                  <StyledTableCell align="left">Normal</StyledTableCell>
+                    <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{
