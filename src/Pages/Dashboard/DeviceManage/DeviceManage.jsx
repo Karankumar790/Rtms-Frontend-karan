@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  IconButton,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,12 +10,12 @@ import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 import Network from "../../../../public/assets/NetworkWire2.jpg";
 import { Link } from "react-router-dom";
-import SettingsIcon from '@mui/icons-material/Settings';
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import StoreIcon from '@mui/icons-material/Store';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import SettingsIcon from "@mui/icons-material/Settings";
+import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
+import StoreIcon from "@mui/icons-material/Store";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 // ----------------------Table for Moblie------------------------------
 
@@ -96,11 +91,7 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("1"),
-];
-
-
+const rows = [createData("1")];
 
 function DeviceManage() {
   return (
@@ -120,8 +111,8 @@ function DeviceManage() {
           </Box>
         </Grid>
       </Grid>
-   
-   <Grid container display={'flex'} gap={9}>
+
+      {/* <Grid container display={'flex'} gap={9}>
     <Box display={'flex'} gap={1}>
       <TravelExploreIcon sx={{ color: 'black', fontSize: 30 }} />
       <Typography variant="h5">Browser</Typography>
@@ -139,52 +130,66 @@ function DeviceManage() {
       <Typography  variant="h5">Firmware</Typography>
     </Box>
 
-   </Grid>
+   </Grid> */}
       {/* ------------------Table for Desktop--------------------------------- */}
-      <Grid
-        container
-        mt={2}
-        md={12}
-        lg={12}
-        sm={5}
-        xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
-      >
-        <TableContainer
-          component={Paper}
-          sx={{ maxHeight: 620, overflow: "auto" }}
+      <Paper sx={{ height: "75vh" }}>
+        <Grid
+          container
+          mt={2}
+          md={12}
+          lg={12}
+          sm={5}
+          xs={4}
+          sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
-          <Table aria-label="customized table" stickyHeader>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Device Id                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  LoRa Id
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  GIP
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  CHP
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  THP
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Battery%
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Solar Voltage
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Action
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
+          <TableContainer
+            component={Paper}
+            sx={{ maxHeight: 620, overflow: "auto" }}
+          >
+            <Table aria-label="customized table" stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Client ID{" "}
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Node ID{" "}
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    LoRa ID
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Network
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Time (s)
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    GIP (Kg)
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    CHP (Kg)
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    THP (Kg)
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Battery (%)
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Solar (V)
+                  </StyledTableCell>
+                  {/* <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Alerts
+                  </StyledTableCell> */}
+                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                    Action
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {rows.map((row) => (
+                <StyledTableRow key={row.name} sx={{height: "80px"}}>
                   <StyledTableCell component="th" scope="row">
                     {row.name}
                   </StyledTableCell>
@@ -194,17 +199,6 @@ function DeviceManage() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
-                  {/* <Link to="/dashboard/virtual">
-                      <IconButton
-                        sx={{
-                          color: "grey",
-                          "&:hover": { color: "darkred" },
-                          marginRight: "5px",
-                        }}
-                      >
-                        <LocationOnIcon fontSize="large" />
-                      </IconButton>
-                    </Link> */}
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     <Link to="/dashboard/Lora">
@@ -214,11 +208,12 @@ function DeviceManage() {
                     </Link>
                   </StyledTableCell>
                 </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+              ))} */}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Paper>
 
       {/* ---------------------------Table for Moblie------------------------------------- */}
 

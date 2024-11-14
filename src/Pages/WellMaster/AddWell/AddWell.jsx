@@ -25,7 +25,7 @@ import { setWellDetails } from "../../../apis/authSlice";
 const initialData = [
   {
     employeeId: "01",
-    Parameter: "GIP (kg/Cm²)",
+    Parameter: "GIP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -33,7 +33,7 @@ const initialData = [
   },
   {
     employeeId: "02",
-    Parameter: "CHP (kg/Cm²)",
+    Parameter: "CHP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -41,7 +41,7 @@ const initialData = [
   },
   {
     employeeId: "03",
-    Parameter: "THP(kg)",
+    Parameter: "THP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -49,7 +49,7 @@ const initialData = [
   },
   {
     employeeId: "05",
-    Parameter: "Low Battery",
+    Parameter: "Battery (%)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -57,7 +57,7 @@ const initialData = [
   },
   {
     employeeId: "06",
-    Parameter: "Solar Voltage",
+    Parameter: "Solar (V)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -465,7 +465,6 @@ function AddWell() {
             </Table>
           </Grid>
         </Paper>
-        
         <Paper sx={{ mt: "15px" }}>
           <Grid container spacing={0.8} p={2}>
             <Grid container display={"flex"} gap={2.5} p={2}>
@@ -653,7 +652,7 @@ function AddWell() {
             }}
             onClick={handleSubmit} // Call handleSubmit on click
           >
-            Add Well
+            Update Well
           </Button>
           <Button
             variant="contained"
