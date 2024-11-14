@@ -696,8 +696,8 @@ function ManageAsset() {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
-          <Typography variant="h4" mt={1}>
-            Organization: [ {organizationName ? organizationName : "N/A"} ]
+          <Typography variant="h5" fontWeight={700}  mt={1}>
+             {organizationName ? organizationName : "N/A"} 
           </Typography>
 
 
@@ -781,7 +781,7 @@ function ManageAsset() {
                     <Typography variant="h6" sx={{ flexShrink: 0, width: '250px' }}>{field.label}</Typography>
                     {field.name === "organizationName" ? (
                       // Display organizationName as text instead of an input
-                      <Typography sx={{ flexShrink: 0, width: '250px', fontSize: '24px', fontWeight: 'bold' }}>
+                      <Typography sx={{ flexShrink: 0, fontSize: '20px' }}>
                         {formData[field.name]}
                       </Typography>
                     ) : (

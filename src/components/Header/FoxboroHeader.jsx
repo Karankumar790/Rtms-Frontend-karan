@@ -2,6 +2,8 @@ import React from "react";
 import logo from "/assets/logo.svg";
 import { Grid, Typography, Box } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 
 function Header() {
@@ -50,10 +52,19 @@ function Header() {
           // sm={4}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
-          <Box display="flex" alignItems="center" justifyContent="end" gap={1}>
-            <Box p={2}>
-              <AccountCircleIcon sx={{ color: 'white', fontSize: '300%' }} />
-            </Box>
+          <Box display="flex" alignItems="center" justifyContent="end" gap={1} mt={2}>
+            <Link to={'/checkOrganization'} style={{ textDecoration: 'none' }}>
+              <Button sx={{
+                backgroundColor: 'darkgreen', // Set your desired background color
+                color: 'green', // Set text color to white
+                '&:hover': {
+                  backgroundColor: '#1565c0', // Set hover color
+                }
+              }} >
+                New Customer
+              </Button>
+            </Link>
+            <AccountCircleIcon sx={{ color: 'white', fontSize: '300%' }} />
           </Box>
 
         </Grid>

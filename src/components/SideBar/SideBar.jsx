@@ -84,6 +84,8 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role);
   const organizationLogo = localStorage.getItem("organizationLogo");
 
+  console.log("logo", organizationLogo)
+
   const menuItems = [
     {
       name: "Admin",

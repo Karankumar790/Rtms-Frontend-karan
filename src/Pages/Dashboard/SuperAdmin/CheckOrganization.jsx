@@ -19,6 +19,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import PageContainer from "../../../components/HOC/PageContainer";
+import FoxboroHeader from "../../../components/Header/FoxboroHeader";
+import FoxboroFooter from "../../../components/Footer/FoxboroFooter";
 // ----------------------Table for Mobile------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -113,7 +116,8 @@ function CheckOrganization() {
   };
 
   return (
-    <div>
+    <PageContainer className="admin-bg-image ">
+      <FoxboroHeader />
       <Grid
         container
         sx={{ display: "flex", justifyContent: "space-between" }}
@@ -122,28 +126,44 @@ function CheckOrganization() {
       >
         <Grid item lg={6} md={6} sm={6} xs={12}>
           <Box display={"flex"} gap={1} p={2}>
-            <AccountBalanceIcon sx={{height:'37px', width:'40px'}}/>
-            <Typography variant="h4">Customers</Typography>
+            <AccountBalanceIcon sx={{height:'37px', width:'40px' ,color:'white'}}/>
+            <Typography variant="h4" color={'white'}>Customers</Typography>
           </Box>
         </Grid>
 
         {/* Dropdown */}
         <Grid item lg={3} md={6} sm={6} xs={12}  p={2}>
-          <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Customers</InputLabel>
-            <Select
-              labelId="dropdown-label"
-              value={selectedValue}
-              onChange={handleChange}
-              label="Customers"
-              fullWidth
-              size="small"
-            >
-              <MenuItem value={10}>Active Customer</MenuItem>
-              <MenuItem value={20}>IN Active Customer</MenuItem>
-              <MenuItem value={30}>Option 3</MenuItem>
-            </Select>
-          </FormControl>
+        <FormControl fullWidth variant="outlined" sx={{ color: 'white' }}>
+    <InputLabel sx={{ color: 'white' }}>Customers</InputLabel>
+    <Select
+        labelId="dropdown-label"
+        value={selectedValue}
+        onChange={handleChange}
+        label="Customers"
+        fullWidth
+        size="small"
+        sx={{
+            color: 'white', // Change the text color of the select
+            '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change the border color
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change the border color on hover
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white', // Change the border color when focused
+            },
+            '& .MuiSelect-icon': {
+                color: 'white', // Change the dropdown icon color
+            },
+        }}
+    >
+        <MenuItem value={10}>Active Customer</MenuItem>
+        <MenuItem value={20}>Inactive Customer</MenuItem>
+        <MenuItem value={30}>Option 3</MenuItem>
+    </Select>
+</FormControl>
+
         </Grid>
       </Grid>
 
@@ -232,7 +252,8 @@ function CheckOrganization() {
           {/* Similar structure for Tata, Mata, Sata */}
         </Paper>
       </Grid>
-    </div>
+      <FoxboroFooter />
+    </PageContainer>
   );
 }
 

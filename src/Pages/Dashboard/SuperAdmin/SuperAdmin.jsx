@@ -291,9 +291,7 @@ export default function SuperAdmin() {
                       </Grid>
 
                       <Grid item mt={2} display={'flex'} justifyContent={'center'}>
-                        <Link to={'/checkOrganization'} style={{ textDecoration: 'none' }}>
-                          <Typography variant="h5" >Check Organization</Typography>
-                        </Link>
+                       
                       </Grid>
                     </Grid>
                   </form>
