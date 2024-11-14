@@ -209,7 +209,6 @@ function AddWell() {
     };
     Device();
   }, []);
-  console.log(rows,"mmmmmmmmmmmmmaster")
 
 
   return (
@@ -316,12 +315,12 @@ function AddWell() {
             <TextField
              fullWidth
              size="small"
-             label="nodeId"
+             label="Node ID"
              variant="outlined"
               select
             >
-              {rows.length > 0 ? (
-                rows.map((nodeId, index) => (
+              {rows?.length > 0 ? (
+                rows?.map((nodeId, index) => (
                   <MenuItem key={index} >
                     {nodeId.data.NodeAdd}
                   </MenuItem>
@@ -351,7 +350,7 @@ function AddWell() {
             <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
           </IconButton>
           <Typography variant="h4" mt={1}>
-            Alarm Setting
+            Notification Setting
           </Typography>
         </Grid>
         <Grid item>
@@ -540,7 +539,7 @@ function AddWell() {
                   </FormControl>
                 </Grid>
                 <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <Typography>Tolerance (%)</Typography>
+                  <Typography>Dead Band (%)</Typography>
                   <TextField
                     variant="outlined"
                     size="small"
@@ -623,7 +622,7 @@ function AddWell() {
                   </FormControl>
                 </Grid>
                 <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <Typography>Tolerance (%)</Typography>
+                  <Typography>Dead Band (%)</Typography>
                   <TextField
                     variant="outlined"
                     size="small"

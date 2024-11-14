@@ -763,7 +763,7 @@ function ManageAsset() {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
-          <Typography variant="h5" fontWeight={800} mt={1}>
+          <Typography variant="h4" fontWeight={700} mt={1}>
            {organizationName ? organizationName : "N/A"}
           </Typography>
 
@@ -868,9 +868,8 @@ function ManageAsset() {
                       <Typography
                         sx={{
                           flexShrink: 0,
-                          width: "250px",
-                          fontSize: "24px",
-                          fontWeight: "bold",
+                          width: "460px",
+                          fontSize: "20px",
                         }}
                       >
                         {formData[field.name]}
@@ -1028,7 +1027,7 @@ function ManageAsset() {
                                     onClick={() => handleEditClick(index)}
                                   >
                                     {" "}
-                                    <EditIcon fontSize="medium" />
+                                    <EditIcon fontSize="large" />
                                   </IconButton>{" "}
                                   <IconButton
                                     sx={{
@@ -1040,7 +1039,7 @@ function ManageAsset() {
                                       handleDeleteDepartment(departmentName)
                                     }
                                   >
-                                    <DeleteForeverIcon fontSize="medium" />
+                                    <DeleteForeverIcon fontSize="large" />
                                   </IconButton>
                                 </Box>
                               </Box>
@@ -1210,7 +1209,7 @@ function ManageAsset() {
                                             )
                                           }
                                         >
-                                          <EditIcon fontSize="small" />
+                                          <EditIcon fontSize="large" />
                                         </IconButton>
                                         <IconButton
                                           aria-label="delete"
@@ -1227,7 +1226,7 @@ function ManageAsset() {
                                             )
                                           }
                                         >
-                                          <DeleteForeverIcon fontSize="small" />
+                                          <DeleteForeverIcon fontSize="large" />
                                         </IconButton>
                                       </Box>
                                     </div>
@@ -1494,7 +1493,7 @@ function ManageAsset() {
                                         )
                                       }
                                     >
-                                      <EditIcon fontSize="medium" />
+                                      <EditIcon fontSize="large" />
                                     </IconButton>
                                     <IconButton
                                       onClick={() =>
@@ -1509,7 +1508,7 @@ function ManageAsset() {
                                         marginLeft: "8px",
                                       }}
                                     >
-                                      <DeleteForeverIcon fontSize="medium" />
+                                      <DeleteForeverIcon fontSize="large" />
                                     </IconButton>
                                   </Box>
                                 </StyledTableCell>

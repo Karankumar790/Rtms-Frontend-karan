@@ -262,9 +262,9 @@ export const UpdateDepartment = async (formData) => {
 export const DeleteDepartment = async (formData) => {
   try {
     const response = await axios.post(
-      `${ORGANIZATION_API}/delete-department`,{
-      data: formData
-  });
+      `${ORGANIZATION_API}/delete-department`,
+     formData
+  );
     return response.data;
   } catch (error) {
     return catchError(error);

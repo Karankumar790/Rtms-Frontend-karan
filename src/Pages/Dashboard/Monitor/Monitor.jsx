@@ -54,7 +54,6 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   backgroundColor: "white",
 }));
 
-
 let data = {
   "Well No": "1",
   "GIP (kg)": "New York",
@@ -158,19 +157,18 @@ function Monitor() {
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
   const [rows, setRows] = useState([]);
-   
+
   useEffect(() => {
     const Device = async () => {
-       try {
+      try {
         const response = await deviceData(organizationName);
         setRows(response.data);
-       } catch (error) {
-        console.error("There is an issue for fetching data",error)
-       }
+      } catch (error) {
+        console.error("There is an issue for fetching data", error);
+      }
     };
     Device();
-  },[]);
-
+  }, []);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -354,16 +352,22 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {rows.map((row, index) => (
-              <StyledTableRow key={index}>
-                <StyledTableCell component="th" scope="row">{row.data.OrgID}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.NodeAdd}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.P1}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.P2}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.P3}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.Bat}</StyledTableCell>
-                <StyledTableCell align="left">{row.data.Solar}</StyledTableCell>
-                <StyledTableCell align="left">Normal</StyledTableCell>
+              {rows.map((row, index) => (
+                <StyledTableRow key={index}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.data.OrgID}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {row.data.NodeAdd}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{row.data.P1}</StyledTableCell>
+                  <StyledTableCell align="left">{row.data.P2}</StyledTableCell>
+                  <StyledTableCell align="left">{row.data.P3}</StyledTableCell>
+                  <StyledTableCell align="left">{row.data.Bat}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {row.data.Solar}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">Normal</StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{
@@ -464,8 +468,22 @@ function Monitor() {
       </Grid>
 
       <Modal open={open}>
-        <Grid container lg={5} md={8} sm={10} xs={12} borderRadius={3} overflow="auto" height="70vh" sx={style} mx={2}>
-          <Box width={"100%"} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          container
+          lg={5}
+          md={8}
+          sm={10}
+          xs={12}
+          borderRadius={3}
+          overflow="auto"
+          height="70vh"
+          sx={style}
+          mx={2}
+        >
+          <Box
+            width={"100%"}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
             <Typography
               variant="h4"
               component="h2"
@@ -475,50 +493,15 @@ function Monitor() {
             </Typography>
           </Box>
           <Box sx={{ mt: 2 }}>
-            {/* <Box
-              sx={{
-                display: "flex",
-                gap: 1,
-                mb: 3,
-                justifyContent: "space-evenly",
-              }}
-            >
-              <Typography
-                variant="h5"
-                fontWeight={700}
-                color={"brown"}
-              ></Typography>
-            </Box> */}
-            {/* <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-              {[
-                { label: "Well Number :", value: "1" },
-                { label: "Well Type :", value: "" },
-                { label: "Location :", value: "" },
-                { label: "Installation :", value: "" },
-                { label: "Landmark :", value: "" },
-                { label: "Latitude :", value: "" },
-                { label: "Longitude :", value: "" },
-                { label: "Node ID :", value: "" },
-              ].map((item, index) => (
-                <Box
-                  key={index -4}
-                  sx={{ display: "flex", alignItems: "center", gap: 2 }}
-                >
-                  <Typography variant="h6" width={"250px"}>
-                    {item.label}
-                  </Typography>
-                  <TextField
-                    size="small"
-                    value={item.value}
-                    disabled
-                    fullWidth
-                  />
-                </Box>
-              ))}
-            </Box> */}
-            <Grid container sx={{ display: "flex", gap: 3, }}>
+            <Grid container sx={{ display: "flex", gap: 3 }}>
               {/* First Column */}
-              <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Grid
+                lg={5.5}
+                md={5.5}
+                sm={6}
+                xs={12}
+                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+              >
                 {[
                   { label: "Well Number :", value: "1" },
                   { label: "Location :", value: "" },
@@ -532,18 +515,17 @@ function Monitor() {
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
                     </Typography>
-                    {/* <TextField
-                      size="small"
-                      value={item.value}
-                      disabled
-                      fullWidth
-                    /> */}
                   </Box>
                 ))}
               </Grid>
-
               {/* Second Column */}
-              <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Grid
+                lg={5.5}
+                md={5.5}
+                sm={6}
+                xs={12}
+                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+              >
                 {[
                   { label: "Landmark :", value: "" },
                   { label: "Notification ID:", value: "" },
@@ -552,7 +534,7 @@ function Monitor() {
                 ].map((item, index) => (
                   <Box
                     key={index + 4}
-                    sx={{ display: "flex", alignItems: "center", gap: 2}}
+                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
                   >
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
@@ -579,12 +561,14 @@ function Monitor() {
             </Box>
 
             <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"} >
+              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
                 <Typography mr={2} variant="h6" width={"100px"}>
                   GIP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -598,7 +582,9 @@ function Monitor() {
                   CHP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -612,7 +598,9 @@ function Monitor() {
                   THP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -626,7 +614,9 @@ function Monitor() {
                   Battery(%)
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -640,7 +630,9 @@ function Monitor() {
                   Solar Voltage
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -648,48 +640,13 @@ function Monitor() {
                 <TextField size="small" disabled variant="standard"></TextField>
               </Box>
             </Box>
-            {/* <Box display="flex" mt={2} gap={2}>
-              <Box display="flex" gap={2}>
-                <Typography variant="h6">Battery(%)</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-              <Box display="flex" ml={35} gap={2}>
-                <Typography variant="h6">Solar Voltage</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box> */}
-            {/* <Box>
-              <Box>
-                <Typography variant="h6">Flowing</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography>Pressure 1</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Comparison</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Pressure 2</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Tolerance</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box> */}
-            {/* <Box>
-              <Box>
-                <Typography variant="h6">Not Flowing</Typography>
-              </Box>
-              <Box display="flex" gap={2}>
-                <Typography>Pressure 1</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Comparison</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Pressure 2</Typography>
-                <TextField size="small"></TextField>
-                <Typography>Tolerance</Typography>
-                <TextField size="small"></TextField>
-              </Box>
-            </Box> */}
           </Box>
-          <Box mt={2} width={"100%"} gap={2} sx={{ display: "flex", justifyContent: "end" }}>
+          <Box
+            mt={2}
+            width={"100%"}
+            gap={2}
+            sx={{ display: "flex", justifyContent: "end" }}
+          >
             <Button
               variant="contained"
               color="primary"

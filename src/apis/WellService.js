@@ -130,7 +130,7 @@ export const getLocationOfWell = async (wellNumber, organizationName) => {
 export const deviceData = async (organizationName) => {
   try {
     const response = await axios.get(
-      `${DEVICE_API}/external-device-show?organizationName=${organizationName}`
+      `${DEVICEvi_API}/external-device-show?organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {
