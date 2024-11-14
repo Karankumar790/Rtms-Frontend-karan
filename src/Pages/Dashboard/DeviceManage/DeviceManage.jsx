@@ -97,7 +97,7 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("1"),
+ 
 ];
 
 

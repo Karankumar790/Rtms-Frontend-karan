@@ -116,7 +116,7 @@ export default function Sidebar({
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "IoT Gateway",
+      name: "LoRa Gateway",
       icon: <Networkicon sx={{ color: "black" }} />,
       path: "/dashboard/Network",
       roles: ["owner", "manager", "employee"],
