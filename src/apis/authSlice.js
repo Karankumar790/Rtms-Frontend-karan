@@ -178,6 +178,29 @@ const forgotAuthSlice = createSlice({
   },
 });
 
+const wellDetailsSlice = createSlice({
+  name: "wellDetails",
+  initialState: {
+    location: "",
+    installation: "",
+    wellType: "",
+    wellNumber: "",
+  },
+  reducers: {
+    setWellDetails: (state, action) => {
+      return action.payload;
+    },
+    clearWellDetails: (state) => {
+      return {
+        location: "",
+        installation: "",
+        wellType: "",
+        wellNumber: "",
+      };
+    },
+  },
+});
+
 // Export actions
 export const {
   setLoginDetails,
@@ -204,8 +227,11 @@ export const {
   clearForgotAuth,
 } = forgotAuthSlice.actions;
 
+export const { setWellDetails, clearWellDetails } = wellDetailsSlice.actions;
+
 // Export reducers with unique names
 export const authReducer = authSlice.reducer;
 export const registerAuthReducer = registerAuthSlice.reducer;
 export const checkAuthReducer = checkAuthSlice.reducer;
 export const forgotAuthReducer = forgotAuthSlice.reducer;
+export default wellDetailsSlice.reducer;

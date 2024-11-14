@@ -9,6 +9,7 @@ import { Grid, Box, useMediaQuery, Menu, MenuItem } from '@mui/material';
 import { useTheme } from '@mui/material/styles'; // Correct import for useTheme
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240; // Define drawerWidth
 
@@ -124,7 +125,9 @@ export default function Header({ open, handleDrawerOpen }) {
               }}
             >
               <MenuItem onClick={handleLogout}>View Profile</MenuItem>
+              <Link to="/" style={{textDecoration:"none", color:"black"}}>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Link>
             </Menu>
           </Box>
         </Grid>

@@ -263,8 +263,8 @@ export const DeleteDepartment = async (formData) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/delete-department`,
-      formData
-    );
+     formData
+  );
     return response.data;
   } catch (error) {
     return catchError(error);
@@ -274,18 +274,14 @@ export const DeleteDepartment = async (formData) => {
 //Delete Position
 export const deletePosition = async (formData) => {
   try {
-
-    const response = await axios.post(
-      `${ORGANIZATION_API}/delete-position`,
-      formData
+    const response = await axios.post(`${ORGANIZATION_API}/delete-position`,
+     formData
     );
     return response.data;
   } catch (error) {
     return catchError(error);
-
   }
 };
-
 
 //Add Position on the basic of department
 export const addPosition = async (formData) => {
@@ -351,7 +347,6 @@ export const updateApprovalChain = async (formData) => {
   }
 };
 
-
 export const deleteApprovalChain = async (formData) => {
   try {
     const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
@@ -360,7 +355,6 @@ export const deleteApprovalChain = async (formData) => {
     return catchError(error); // Handle errors appropriately
   }
 };
-
 
 // https://rtms-backend.onrender.com/api/v1/organization/get-approval-chain?organizationName=AbhiCompany&departmentName=HOD dep
 export const getApprovalChain = async (organizationName, departmentName) => {
@@ -417,4 +411,25 @@ export const updateOrganizationData = async (formData) => {
   }
 };
 
+// all users data api
+export const getUsersByOrganization = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${USER_API}/get-UsersByOrganization/:organizationName?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+}
+// This function fetches all owners by admin ID
 
+export const getAllOwnersByAdmin = async (adminID) => {
+  try {
+    const response = await axios.get(`${USER_API}/get-OwnersByAdmin`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching owners by admin:", error);
+    return  catchError;
+  }
+};

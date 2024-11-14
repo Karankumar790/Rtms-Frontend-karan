@@ -484,18 +484,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
-  // createData('3'),
-  // createData('4'),
-  // createData('5'),
 ];
-
 
 
 function DeviceManage() {

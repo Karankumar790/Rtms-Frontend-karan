@@ -20,6 +20,8 @@ import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import StoreIcon from '@mui/icons-material/Store';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 // ----------------------Table for Moblie------------------------------
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
@@ -96,16 +98,6 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
-  // createData('3'),
-  // createData('4'),
-  // createData('5'),
 ];
 
 
@@ -166,22 +158,24 @@ function DeviceManage() {
             <TableHead>
               <TableRow>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Sr No.
+                  Device Id                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  LoRa Id
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Device Name
+                  GIP
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Cloud ID
+                  CHP
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  LoRa ID
+                  THP
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Landmark
+                  Battery%
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Geolocation
+                  Solar Voltage
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Action
@@ -199,6 +193,19 @@ function DeviceManage() {
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left">
+                  {/* <Link to="/dashboard/virtual">
+                      <IconButton
+                        sx={{
+                          color: "grey",
+                          "&:hover": { color: "darkred" },
+                          marginRight: "5px",
+                        }}
+                      >
+                        <LocationOnIcon fontSize="large" />
+                      </IconButton>
+                    </Link> */}
+                  </StyledTableCell>
                   <StyledTableCell align="left">
                     <Link to="/dashboard/Lora">
                       <IconButton sx={{ color: 'grey', '&:hover': { color: 'darkred' }, marginRight: '5px' }}>
