@@ -54,7 +54,6 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   backgroundColor: "white",
 }));
 
-
 let data = {
   "Well No": "1",
   "GIP (kg)": "New York",
@@ -464,8 +463,22 @@ function Monitor() {
       </Grid>
 
       <Modal open={open}>
-        <Grid container lg={5} md={8} sm={10} xs={12} borderRadius={3} overflow="auto" height="70vh" sx={style} mx={2}>
-          <Box width={"100%"} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          container
+          lg={5}
+          md={8}
+          sm={10}
+          xs={12}
+          borderRadius={3}
+          overflow="auto"
+          height="70vh"
+          sx={style}
+          mx={2}
+        >
+          <Box
+            width={"100%"}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
             <Typography
               variant="h4"
               component="h2"
@@ -475,9 +488,15 @@ function Monitor() {
             </Typography>
           </Box>
           <Box sx={{ mt: 2 }}>
-            <Grid container sx={{ display: "flex", gap: 3, }}>
+            <Grid container sx={{ display: "flex", gap: 3 }}>
               {/* First Column */}
-              <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Grid
+                lg={5.5}
+                md={5.5}
+                sm={6}
+                xs={12}
+                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+              >
                 {[
                   { label: "Well Number :", value: "1" },
                   { label: "Location :", value: "" },
@@ -491,18 +510,17 @@ function Monitor() {
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
                     </Typography>
-                    {/* <TextField
-                      size="small"
-                      value={item.value}
-                      disabled
-                      fullWidth
-                    /> */}
                   </Box>
                 ))}
               </Grid>
-
               {/* Second Column */}
-              <Grid lg={5.5} md={5.5} sm={6} xs={12} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Grid
+                lg={5.5}
+                md={5.5}
+                sm={6}
+                xs={12}
+                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+              >
                 {[
                   { label: "Landmark :", value: "" },
                   { label: "Notification ID:", value: "" },
@@ -511,7 +529,7 @@ function Monitor() {
                 ]?.map((item, index) => (
                   <Box
                     key={index + 4}
-                    sx={{ display: "flex", alignItems: "center", gap: 2}}
+                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
                   >
                     <Typography variant="h6" width={"250px"}>
                       {item.label}
@@ -538,12 +556,14 @@ function Monitor() {
             </Box>
 
             <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"} >
+              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
                 <Typography mr={2} variant="h6" width={"100px"}>
                   GIP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -557,7 +577,9 @@ function Monitor() {
                   CHP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -571,7 +593,9 @@ function Monitor() {
                   THP
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -585,7 +609,9 @@ function Monitor() {
                   Battery(%)
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -599,7 +625,9 @@ function Monitor() {
                   Solar Voltage
                 </Typography>
                 <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>Normal value</Typography>
+                <Typography width={"10%"} ml={2}>
+                  Normal value
+                </Typography>
                 <TextField size="small" disabled variant="standard"></TextField>
                 <Typography width={"10%"} ml={2}>
                   Critical Value
@@ -608,7 +636,12 @@ function Monitor() {
               </Box>
             </Box>
           </Box>
-          <Box mt={2} width={"100%"} gap={2} sx={{ display: "flex", justifyContent: "end" }}>
+          <Box
+            mt={2}
+            width={"100%"}
+            gap={2}
+            sx={{ display: "flex", justifyContent: "end" }}
+          >
             <Button
               variant="contained"
               color="primary"

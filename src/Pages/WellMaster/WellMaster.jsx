@@ -620,19 +620,19 @@ const handleAddInstallation = async () => {
                           <StyledTableRow
                             key={`${location}-${installation.name}-${well.wellNumber}`}
                           >
-                            <StyledTableCell align="left">
+                            <StyledTableCell style={{fontSize:"medium"}} align="left">
                               {location}
                             </StyledTableCell>
-                            <StyledTableCell align="left">
+                            <StyledTableCell style={{fontSize:"medium"}} align="left">
                               {installation.name}
                             </StyledTableCell>
-                            <StyledTableCell align="left">
+                            <StyledTableCell style={{fontSize:"medium"}} align="left">
                               {wellType.wellType}
                             </StyledTableCell>
-                            <StyledTableCell align="left">
+                            <StyledTableCell style={{fontSize:"medium"}} align="left">
                               {well.wellNumber}
                             </StyledTableCell>
-                            <StyledTableCell align="left">
+                            <StyledTableCell style={{fontSize:"medium"}} align="left">
                               {well.landmark || "N/A"}
                             </StyledTableCell>
                             <StyledTableCell>
@@ -672,22 +672,22 @@ const handleAddInstallation = async () => {
                       )
                     ) : (
                       <StyledTableRow key={installation.name}>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           {location}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           {installation.name}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           No Well Type
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">
                           No Well Number
                         </StyledTableCell>
                         {/* <StyledTableCell align="left">
                           No Landmark
                         </StyledTableCell> */}
-                        <StyledTableCell align="left">N/A</StyledTableCell>
+                        <StyledTableCell style={{fontSize:"medium"}} align="left">N/A</StyledTableCell>
 
                         <StyledTableCell>
                           {/* <Link to = "/dashboard/virtual"> */}
@@ -720,13 +720,13 @@ const handleAddInstallation = async () => {
                   })
                 ) : (
                   <StyledTableRow key={location}>
-                    <StyledTableCell align="left">{location}</StyledTableCell>
-                    <StyledTableCell align="left">
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">{location}</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">
                       No Installations Available
                     </StyledTableCell>
-                    <StyledTableCell align="left">-</StyledTableCell>
-                    <StyledTableCell align="left">-</StyledTableCell>
-                    <StyledTableCell align="left">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
                     <StyledTableCell>
                         <IconButton
                                 sx={{

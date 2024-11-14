@@ -284,12 +284,12 @@ function ComplaintHistory() {
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row">
-                    {row.name}
+                    {/* {row.name} */}
                   </StyledTableCell>
-                  <StyledTableCell align="left">1</StyledTableCell>
-                  <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                  <StyledTableCell align="left">gbz</StyledTableCell>
-                  <StyledTableCell align="left">yes</StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left"></StyledTableCell>

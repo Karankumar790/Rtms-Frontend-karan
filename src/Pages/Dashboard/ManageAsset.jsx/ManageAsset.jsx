@@ -763,7 +763,7 @@ function ManageAsset() {
           <IconButton>
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
-          <Typography variant="h5" fontWeight={800} mt={1}>
+          <Typography variant="h4" fontWeight={700} mt={1}>
            {organizationName ? organizationName : "N/A"}
           </Typography>
 
@@ -868,9 +868,8 @@ function ManageAsset() {
                       <Typography
                         sx={{
                           flexShrink: 0,
-                          width: "250px",
-                          fontSize: "24px",
-                          fontWeight: "bold",
+                          width: "460px",
+                          fontSize: "20px",
                         }}
                       >
                         {formData[field.name]}
@@ -1020,7 +1019,7 @@ function ManageAsset() {
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span>
+                                <span style={{fontSize:"medium"}}>
                                   {index + 1}. {departmentName}
                                 </span>
                                 <Box display="flex">
@@ -1028,7 +1027,7 @@ function ManageAsset() {
                                     onClick={() => handleEditClick(index)}
                                   >
                                     {" "}
-                                    <EditIcon fontSize="medium" />
+                                    <EditIcon fontSize="large" />
                                   </IconButton>{" "}
                                   <IconButton
                                     sx={{
@@ -1040,7 +1039,7 @@ function ManageAsset() {
                                       handleDeleteDepartment(departmentName)
                                     }
                                   >
-                                    <DeleteForeverIcon fontSize="medium" />
+                                    <DeleteForeverIcon fontSize="large" />
                                   </IconButton>
                                 </Box>
                               </Box>
@@ -1049,7 +1048,7 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={2}>
+                          <StyledTableCell style={{fontSize:"medium"}} colSpan={2}>
                             No departments available
                           </StyledTableCell>
                         </TableRow>
@@ -1178,7 +1177,7 @@ function ManageAsset() {
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span>
+                                <span style={{fontSize:"medium"}}>
                                   {index + 1}. {row.departmentName}
                                 </span>
                               </Box>
@@ -1192,6 +1191,7 @@ function ManageAsset() {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "space-between",
+                                        fontSize:"medium",
                                       }}
                                     >
                                       {posIndex + 1}. {position}
@@ -1210,7 +1210,7 @@ function ManageAsset() {
                                             )
                                           }
                                         >
-                                          <EditIcon fontSize="small" />
+                                          <EditIcon fontSize="large" />
                                         </IconButton>
                                         <IconButton
                                           aria-label="delete"
@@ -1227,7 +1227,7 @@ function ManageAsset() {
                                             )
                                           }
                                         >
-                                          <DeleteForeverIcon fontSize="small" />
+                                          <DeleteForeverIcon fontSize="large" />
                                         </IconButton>
                                       </Box>
                                     </div>
@@ -1238,7 +1238,7 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={2}>
+                          <StyledTableCell style={{fontSize:"large"}} colSpan={2}>
                             No Positions available
                           </StyledTableCell>
                         </TableRow>
@@ -1469,22 +1469,22 @@ function ManageAsset() {
                             {row.approvalChains?.map((chain, chainIndex) => (
                               <StyledTableRow key={`${index}-${chainIndex}`}>
                                 {chainIndex === 0 && (
-                                  <StyledTableCell
+                                  <StyledTableCell style={{fontSize:'medium'}}
                                     rowSpan={row.approvalChains.length}
                                   >
                                     {index + 1}. {row.departmentName}
                                   </StyledTableCell>
                                 )}
-                                <StyledTableCell>
+                                <StyledTableCell style={{fontSize:'medium'}} >
                                   {chainIndex + 1}. {chain.action || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell>
+                                <StyledTableCell style={{fontSize:'medium'}}>
                                   {chainIndex + 1}. {chain.level1 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell>
+                                <StyledTableCell style={{fontSize:'medium'}}>
                                   {chainIndex + 1}. {chain.level2 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">
+                                <StyledTableCell align="center" style={{fontSize:'medium'}}>
                                   <Box display="flex" justifyContent="center">
                                     <IconButton
                                       onClick={() =>
@@ -1494,7 +1494,7 @@ function ManageAsset() {
                                         )
                                       }
                                     >
-                                      <EditIcon fontSize="medium" />
+                                      <EditIcon fontSize="large" />
                                     </IconButton>
                                     <IconButton
                                       onClick={() =>
@@ -1509,7 +1509,7 @@ function ManageAsset() {
                                         marginLeft: "8px",
                                       }}
                                     >
-                                      <DeleteForeverIcon fontSize="medium" />
+                                      <DeleteForeverIcon fontSize="large" />
                                     </IconButton>
                                   </Box>
                                 </StyledTableCell>
@@ -1519,7 +1519,7 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={5}>
+                          <StyledTableCell colSpan={5} style={{fontSize:'medium'}}>
                             No Approval Chain Available
                           </StyledTableCell>
                         </TableRow>

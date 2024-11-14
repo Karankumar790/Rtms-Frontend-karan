@@ -128,17 +128,6 @@ function createData(name) {
   return { name };
 }
 
-const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
-];
-
 function MessageForwarding() {
   const [selectedValue, setSelectedValue] = useState("");
   const organizationName = useSelector((state) => state.auth.organization);
@@ -180,7 +169,7 @@ function MessageForwarding() {
     <div>
       <Grid
         container
-        // sx={{ display: "flex", justifyContent: "space-between" }}
+        sx={{ display: "flex", justifyContent: "space-between" }}
         pt={2}
         paddingBottom={2}
       >
@@ -196,9 +185,9 @@ function MessageForwarding() {
           </Box>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={3} md={6} sm={6} xs={12} >
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel  id="dropdown-label">Select an Option</InputLabel>
             <Select
               labelId="dropdown-label"
               value={selectedValue}
