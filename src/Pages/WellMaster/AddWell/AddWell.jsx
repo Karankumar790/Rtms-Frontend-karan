@@ -74,6 +74,7 @@ function AddWell() {
     installation: "",
     wellType: "",
     wellNumber: "",
+    landmark:"",
   });
   const [formValues, setFormValues] = useState({
     organizationName,
@@ -100,6 +101,7 @@ function AddWell() {
     if (storedWellDetails) {
       setWellDetails(JSON.parse(storedWellDetails));
     }
+    // console.log(wellDetails,"..........................")
   }, []);
 
   const onChangeInput = (e, employeeId) => {
@@ -160,44 +162,138 @@ function AddWell() {
     setFormValues({ ...formValues, notFlowing: updatedNotFlowing });
   };
 
+  // const handleSubmit = async () => {
+  //   if (!organizationName) {
+  //     toast.error("Organization name is missing");
+  //     return;
+  //   }
+  //   try {
+  //     // localStorage.setItem("wellDetails", JSON.stringify(detailsToStore));
+
+  //     // Prepare data for API call
+  //     const details = {
+  //       location: wellDetails.location,
+  //       installation: wellDetails.installation,
+  //       wellType: wellDetails.wellType,
+  //       wellNumber: wellDetails.wellNumber,
+  //       ...formValues,
+  //       alarmSettings: employeeData, // Pass employee data directly or transform as needed
+  //       flowing: {
+  //         pressures: formValues.flowing.pressures,
+  //       },
+  //       notFlowing: {
+  //         pressures: formValues.notFlowing.pressures,
+  //       },
+  //     };
+
+  //     const response = await saveWellDetails(details);
+  //     console.log("Well saved successfully:", response);
+  //     // You may want to reset form or show a success message here
+  //   } catch (error) {
+  //     console.error("Error saving well:", error);
+  //   }
+  // };
+
+
   const handleSubmit = async () => {
     if (!organizationName) {
       toast.error("Organization name is missing");
       return;
     }
     try {
-      // // const detailsToStore = {
-      // //   location: wellDetails.location,
-      // //   installation: wellDetails.installation,
-      // //   wellType: wellDetails.wellType,
-      // //   wellNumber:wellDetails.wellNumber
-      // };
-      // localStorage.setItem("wellDetails", JSON.stringify(detailsToStore));
-
       // Prepare data for API call
+      const alarmSettings = {
+        gip: {
+          normalAlert: {
+            normalalert: formValues.gipNormalAlert || "GIP Normal Alert", // Use values from formValues
+            condition: formValues.gipNormalCondition || "Low",
+            description: formValues.gipNormalDescription || "GIP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.gipCriticalAlert || "GIP Critical Alert",
+            condition: formValues.gipCriticalCondition || "High",
+            description: formValues.gipCriticalDescription || "GIP critical alert description",
+          },
+        },
+        // Repeat for other keys: chp, thp, lowBattery, solarVoltage
+        // Example for "chp":
+        chp: {
+          normalAlert: {
+            normalalert: formValues.chpNormalAlert || "CHP Normal Alert",
+            condition: formValues.chpNormalCondition || "Low",
+            description: formValues.chpNormalDescription || "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.chpCriticalAlert || "CHP Critical Alert",
+            condition: formValues.chpCriticalCondition || "High",
+            description: formValues.chpCriticalDescription || "CHP critical alert description",
+          },
+        },
+
+        thp: {
+          normalAlert: {
+            normalalert: formValues.thpNormalAlert || "CHP Normal Alert",
+            condition: formValues.thpNormalCondition || "Low",
+            description: formValues.thpNormalDescription || "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.thpCriticalAlert || "CHP Critical Alert",
+            condition: formValues.thpCriticalCondition || "High",
+            description: formValues.thpCriticalDescription || "CHP critical alert description",
+          },
+        },
+
+        lowBattery: {
+          normalAlert: {
+            normalalert: formValues.lowBatteryNormalAlert || "CHP Normal Alert",
+            condition: formValues.lowBatteryNormalCondition || "Low",
+            description: formValues.lowBatteryNormalDescription || "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.lowBatteryCriticalAlert || "CHP Critical Alert",
+            condition: formValues.lowBatteryCriticalCondition || "High",
+            description: formValues.lowBatteryCriticalDescription || "CHP critical alert description",
+          },
+        },
+        solarVoltage: {
+          normalAlert: {
+            normalalert: formValues.solarVoltageNormalAlert || "CHP Normal Alert",
+            condition: formValues.solarVoltageNormalCondition || "Low",
+            description: formValues.solarVoltageNormalDescription || "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.solarVoltageCriticalAlert || "CHP Critical Alert",
+            condition: formValues.solarVoltageCriticalCondition || "High",
+            description: formValues.solarVoltageCriticalDescription || "CHP critical alert description",
+          },
+        },
+      };
+  
       const details = {
         location: wellDetails.location,
         installation: wellDetails.installation,
         wellType: wellDetails.wellType,
         wellNumber: wellDetails.wellNumber,
         ...formValues,
-        alarmSettings: employeeData, // Pass employee data directly or transform as needed
+        alarmSettings, // Pass transformed alarmSettings
         flowing: {
-          pressures: formValues.flowing.pressures,
+          pressures: formValues.flowing?.pressures || [], // Ensure flowing.pressures is passed as an array
         },
         notFlowing: {
-          pressures: formValues.notFlowing.pressures,
+          pressures: formValues.notFlowing?.pressures || [], // Ensure notFlowing.pressures is passed as an array
         },
       };
-
+  
       const response = await saveWellDetails(details);
       console.log("Well saved successfully:", response);
-      // You may want to reset form or show a success message here
+      toast.success("Well saved successfully!");
+      // Reset form or additional logic here
     } catch (error) {
       console.error("Error saving well:", error);
+      toast.error("Error saving well");
     }
   };
-
+  
   useEffect(() => {
     const Device = async () => {
       try {
@@ -279,6 +375,8 @@ function AddWell() {
               label="Landmark"
               variant="outlined"
               name="landmark"
+              value={wellDetails.landmark}
+              
               onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
@@ -303,24 +401,21 @@ function AddWell() {
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
-            {/* <TextField
-              fullWidth
-              size="small"
-              label="nodeId"
-              variant="outlined"
-              name="nodeId"
-              onChange={(e) => handleChangeParameter(e)}
-            /> */}
             <TextField
               fullWidth
               size="small"
               label="Node ID"
               variant="outlined"
+              name="nodeId"
+              value={formValues.nodeId || ""} // Bind the value to state
+              onChange={(e) => handleChangeParameter(e)}
               select
             >
               {rows?.length > 0 ? (
                 rows?.map((nodeId, index) => (
-                  <MenuItem key={index}>{nodeId.data.NodeAdd}</MenuItem>
+                  <MenuItem key={index} value={nodeId.data.NodeAdd}>
+                    {nodeId.data.NodeAdd}
+                  </MenuItem>
                 ))
               ) : (
                 <MenuItem value="" disabled>

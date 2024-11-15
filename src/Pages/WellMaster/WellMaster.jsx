@@ -283,6 +283,7 @@ const handleAddInstallation = async () => {
         organizationName
       );
       localStorage.setItem("wellDetails", JSON.stringify(wellDetails.data));
+      console.log(wellDetails,"///////////")
       navigate("/dashboard/addwell");
     } catch (error) {
       console.error("Failed to fetch well details:", error);
@@ -319,7 +320,7 @@ const handleAddInstallation = async () => {
             <img src={master} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Well Masterrr</Typography>
+            <Typography variant="h4">Well Master</Typography>
           </Box>
         </Grid>
       </Grid>

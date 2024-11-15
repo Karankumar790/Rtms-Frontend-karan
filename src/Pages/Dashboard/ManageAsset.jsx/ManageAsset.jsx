@@ -768,7 +768,7 @@ function ManageAsset() {
           </Typography>
 
           {/* Organization Logo (Top of Organization Name) */}
-          {isEditOrganization && formData.organizationlogo && (
+          {/* {isEditOrganization && formData.organizationlogo && (
             <Grid
               container
               justifyContent="flex-start"
@@ -794,7 +794,7 @@ function ManageAsset() {
                 }}
               />
             </Grid>
-          )}
+          )} */}
           <Grid container spacing={3}>
             <Grid item md={10} sm={10} xs={12} lg={12} marginTop={4}>
               <Grid container spacing={3}>
