@@ -55,7 +55,7 @@ export const getAllInstallation = async (location, organizationName) => {
 export const addWellNum = async (formData) => {
   try {
     const response = await axios.post(
-      `${WELL_API}/save-WellTypeAndNumber`,
+      `${WELL_API}/save-WellTypeForInstallation`,
       formData
     );
     return response.data
@@ -100,7 +100,7 @@ export const saveWellDetails = async (details) => {
         landmark: details.landmark,
         latitude: details.latitude,
         longitude: details.longitude,
-        descriptions: details.descriptions,
+        nodeId: details.nodeId,
         alarmSettings: details.alarmSettings,
         flowing: details.flowing,
         notFlowing: details.notFlowing,
@@ -130,10 +130,10 @@ export const getLocationOfWell = async (wellNumber, organizationName) => {
 export const deviceData = async (organizationName) => {
   try {
     const response = await axios.get(
-      `${DEVICEvi_API}/external-device-show?organizationName=${organizationName}`
+      `${DEVICE_API}/external-device-show?organizationName=${organizationName}`
     );
     return response.data;
-  } catch (error) {
+  } catch (error) { 
     console.error(error);
     return catchError;
     
