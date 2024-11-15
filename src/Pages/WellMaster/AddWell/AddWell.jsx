@@ -2,6 +2,7 @@ import {
   Button,
   Grid,
   IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Paper,
@@ -21,11 +22,12 @@ import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
 import { deviceData, saveWellDetails } from "../../../apis/WellService";
 import { setWellDetails } from "../../../apis/authSlice";
+import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 
 const initialData = [
   {
     employeeId: "01",
-    Parameter: "GIP (kg/Cm²)",
+    Parameter: "GIP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -33,7 +35,7 @@ const initialData = [
   },
   {
     employeeId: "02",
-    Parameter: "CHP (kg/Cm²)",
+    Parameter: "CHP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -41,7 +43,7 @@ const initialData = [
   },
   {
     employeeId: "03",
-    Parameter: "THP(kg)",
+    Parameter: "THP (Kg/Cm²)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -49,7 +51,7 @@ const initialData = [
   },
   {
     employeeId: "05",
-    Parameter: "Low Battery",
+    Parameter: "Battery (%)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -57,7 +59,7 @@ const initialData = [
   },
   {
     employeeId: "06",
-    Parameter: "Solar Voltage",
+    Parameter: "Solar (V)",
     NormalAlert: "",
     CriticalAlert: "",
     Condition: "",
@@ -198,17 +200,17 @@ function AddWell() {
     }
   };
 
-  useEffect(() => {
-    const Device = async () => {
-      try {
-        const response = await deviceData(organizationName);
-        setRows(response.data);
-      } catch (error) {
-        console.error("There is an issue for fetching data", error);
-      }
-    };
-    Device();
-  }, []);
+  // useEffect(() => {
+  //   const Device = async () => {
+  //     try {
+  //       const response = await deviceData(organizationName);
+  //       setRows(response.data);
+  //     } catch (error) {
+  //       console.error("There is an issue for fetching data", error);
+  //     }
+  //   };
+  //   Device();
+  // }, []);
 
   return (
     <div>
@@ -302,32 +304,28 @@ function AddWell() {
               onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
-            {/* <TextField
-              fullWidth
-              size="small"
-              label="nodeId"
-              variant="outlined"
-              name="nodeId"
-              onChange={(e) => handleChangeParameter(e)}
-            /> */}
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1} display={"flex"}>
             <TextField
               fullWidth
               size="small"
               label="Node ID"
               variant="outlined"
-              select
+              // InputProps={{
+              //   endAdornment: (
+              //     <InputAdornment position="end">
+              //     </InputAdornment>
+              //   ),
+              // }}
+            />
+            <Button
+            variant="contained"
+              sx={{
+                color: "",
+                "&:hover": { color: "black" }, ml:"3px"
+              }}
             >
-              {rows?.length > 0 ? (
-                rows?.map((nodeId, index) => (
-                  <MenuItem key={index}>{nodeId.data.NodeAdd}</MenuItem>
-                ))
-              ) : (
-                <MenuItem value="" disabled>
-                  No NodeId available
-                </MenuItem>
-              )}
-            </TextField>
+              <SearchedForIcon fontSize="medium" />
+            </Button>
           </Grid>
         </Grid>
       </Paper>
@@ -465,7 +463,6 @@ function AddWell() {
             </Table>
           </Grid>
         </Paper>
-        
         <Paper sx={{ mt: "15px" }}>
           <Grid container spacing={0.8} p={2}>
             <Grid container display={"flex"} gap={2.5} p={2}>
@@ -653,7 +650,7 @@ function AddWell() {
             }}
             onClick={handleSubmit} // Call handleSubmit on click
           >
-            Add Well
+            Update Well
           </Button>
           <Button
             variant="contained"

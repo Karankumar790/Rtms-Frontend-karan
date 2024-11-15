@@ -37,8 +37,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setWellDetails } from "../../apis/authSlice.js";
 import { toast } from "react-toastify";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 // Styled components for tables and layout
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -83,7 +82,7 @@ const WellMaster = () => {
   const organizationName = useSelector((state) => state.auth.organization);
   const navigate = useNavigate();
   const [locationsForTable, setLocationsForTable] = useState([]);
-  const[installationsForTable,setInstallationsForTable]= useState([]);
+  const [installationsForTable, setInstallationsForTable] = useState([]);
   const [formValues, setFormValues] = useState({});
   const [coordinates, setCoordinates] = useState(null);
   // Adding new location
@@ -141,44 +140,44 @@ const WellMaster = () => {
   }, [organizationName]);
   //---------------------- ADDING INSTALLATION----------------------
 
-const handleAddInstallation = async () => {
-  const formData = {
-    location: allLocForPosItion,
-    installation,
-    organizationName,
-  };
+  const handleAddInstallation = async () => {
+    const formData = {
+      location: allLocForPosItion,
+      installation,
+      organizationName,
+    };
 
-  if (!formData.location || !formData.installation) {
-    toast.error("All fields are required");
-    return;
-  }
-
-  try {
-    const response = await addInstallation(formData);
-    if (response && response.data && response.message) {
-      toast.success(response.message);
-
-      setInstallationsForTable(prev => ({
-        ...prev,
-        [formData.location]: [
-          ...(prev[formData.location] || []),
-          {
-            name: formData.installation,
-            wellTypes: [], 
-          },
-        ],
-      }));
-
-      // Clear the input fields
-      setInstallation("");
-      setAllLocForPosItion("");
-    } else {
-      toast.error("Failed to install");
+    if (!formData.location || !formData.installation) {
+      toast.error("All fields are required");
+      return;
     }
-  } catch (error) {
-    toast.error("Failed to add installation");
-  }
-};
+
+    try {
+      const response = await addInstallation(formData);
+      if (response && response.data && response.message) {
+        toast.success(response.message);
+
+        setInstallationsForTable((prev) => ({
+          ...prev,
+          [formData.location]: [
+            ...(prev[formData.location] || []),
+            {
+              name: formData.installation,
+              wellTypes: [],
+            },
+          ],
+        }));
+
+        // Clear the input fields
+        setInstallation("");
+        setAllLocForPosItion("");
+      } else {
+        toast.error("Failed to install");
+      }
+    } catch (error) {
+      toast.error("Failed to add installation");
+    }
+  };
 
   // fetching installation
   const handleLocationChange = async (event) => {
@@ -221,7 +220,7 @@ const handleAddInstallation = async () => {
       !formData.wellType ||
       !formData.wellNumber
     ) {
-      toast.error("All fields are required."); 
+      toast.error("All fields are required.");
       return;
     }
 
@@ -248,8 +247,11 @@ const handleAddInstallation = async () => {
     const fetchLocationsAndInstallations = async () => {
       try {
         const locationData = await getLocation(organizationName);
-        if (locationData && locationData.message === "Well locations fetched successfully") {
-        setLocationsForTable(locationData.data);
+        if (
+          locationData &&
+          locationData.message === "Well locations fetched successfully"
+        ) {
+          setLocationsForTable(locationData.data);
         }
         const installationData = {};
         for (const location of locationData.data) {
@@ -297,8 +299,8 @@ const handleAddInstallation = async () => {
         // Store coordinates in local storage
         localStorage.setItem("latitude", latitude);
         localStorage.setItem("longitude", longitude);
-        console.log(latitude,longitude)
-        
+        console.log(latitude, longitude);
+
         navigate("/dashboard/virtual");
       }
     } catch (error) {
@@ -319,269 +321,262 @@ const handleAddInstallation = async () => {
             <img src={master} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Well Masterrr</Typography>
+            <Typography variant="h4">Well Manager</Typography>
           </Box>
         </Grid>
       </Grid>
 
-      <Grid container>
-        <Card sx={{ my: 1 }}>
-          <CardContent>
-            <Grid container spacing={2}>
-              {/* ------------------------ADD LOCATION------------------------------ */}
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={6}
-                lg={2.5}
-                gap={1}
+      <Paper sx={{mb:"15px",p:'15px'}}>
+        <Grid container>
+          <Grid container spacing={2}>
+            {/* ------------------------ADD LOCATION------------------------------ */}
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={2.5}
+              gap={1}
+              display="flex"
+              flexDirection={"column"}
+            >
+              <Box
                 display="flex"
-                flexDirection={"column"}
-              >
-                <Box
-                  display="flex"
-                  flexDirection={{ xs: "column", sm: "row" }}
-                  gap={1}
-                >
-                  <TextField
-                    variant="outlined"
-                    size="small"
-                    label="Add Location"
-                    // inputRef={inputRef}
-                    value={location}
-                    onChange={(e) => {
-                      setLocation(e.target.value);
-                    }}
-                    fullWidth
-                  />
-                  <Button
-                    variant="contained"
-                    // onClick={handleAdd}
-                    onClick={handleAddLocation}
-                    size="small"
-                    sx={{
-                      backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
-                    }}
-                  >
-                    ADD
-                  </Button>
-                </Box>
-              </Grid>
-
-              {/* ------------------------ADD INSTALLATION------------------------------ */}
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={6}
-                lg={3.5}
+                flexDirection={{ xs: "column", sm: "row" }}
                 gap={1}
-                display="flex"
-                flexDirection="column"
               >
-                <Box
-                  display="flex"
-                  flexDirection={{ xs: "column", sm: "row" }}
-                  gap={1}
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Add Location"
+                  // inputRef={inputRef}
+                  value={location}
+                  onChange={(e) => {
+                    setLocation(e.target.value);
+                  }}
+                  fullWidth
+                />
+                <Button
+                  variant="contained"
+                  // onClick={handleAdd}
+                  onClick={handleAddLocation}
+                  size="small"
+                  sx={{
+                    backgroundColor: "green",
+                    "&:hover": { backgroundColor: "darkgreen" },
+                  }}
                 >
-                  <Grid item lg={12} md={12} sm={12} xs={12}>
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="location-label">Locations</InputLabel>
-                      <Select
-                        labelId="location-label"
-                        id="location-select"
-                        value={allLocForPosItion}
-                        label="locate"
-                        onChange={(e) => {
-                          setAllLocForPosItion(e.target.value);
-                        }}
-                        MenuProps={{
-                          PaperProps: {
-                            style: {
-                              maxHeight: 300,
-                              overflowY: "scroll",
-                            },
-                          },
-                        }}
-                      >
-                        <MenuItem value="">
-                          <em>All</em>
-                        </MenuItem>
-                        {locations.map((loc, index) => (
-                          <MenuItem key={index} value={loc}>
-                            {loc}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Grid>
+                  ADD
+                </Button>
+              </Box>
+            </Grid>
 
-                  <TextField
-                    variant="outlined"
-                    size="small"
-                    label="Add Installation"
-                    fullWidth
-                    name="installation"
-                    value={installation}
-                    onChange={(e) => {
-                      setInstallation(e.target.value);
-                    }}
-                  />
-
-                  <Button
-                    variant="contained"
-                    size="small"
-                    sx={{
-                      backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
-                    }}
-                    onClick={handleAddInstallation}
-                  >
-                    ADD
-                  </Button>
-                </Box>
-              </Grid>
-
-              {/* ------------------------Add Well NUMBER ------------------------------ */}
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={12}
-                lg={6}
+            {/* ------------------------ADD INSTALLATION------------------------------ */}
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3.5}
+              gap={1}
+              display="flex"
+              flexDirection="column"
+            >
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", sm: "row" }}
                 gap={1}
-                display="flex"
-                flexDirection={"column"}
               >
-                <Box
-                  display="flex"
-                  flexDirection={{ xs: "column", sm: "row" }}
-                  gap={1}
-                >
-                  <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="location-label">Locations</InputLabel>
-                      <Select
-                        labelId="location-label"
-                        id="location-select"
-                        value={allLocForWell}
-                        label="Location"
-                        onChange={handleLocationChange}
-                        MenuProps={{
-                          PaperProps: {
-                            style: {
-                              maxHeight: 300,
-                              overflowY: "scroll",
-                            },
+                <Grid item lg={12} md={12} sm={12} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="location-label">Locations</InputLabel>
+                    <Select
+                      labelId="location-label"
+                      id="location-select"
+                      value={allLocForPosItion}
+                      label="locate"
+                      onChange={(e) => {
+                        setAllLocForPosItion(e.target.value);
+                      }}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 300,
+                            overflowY: "scroll",
                           },
-                        }}
-                      >
-                        <MenuItem value="">
-                          <em>All</em>
-                        </MenuItem>
-                        {locations.map((loc, index) => (
-                          <MenuItem key={index} value={loc}>
-                            {loc}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="installation-label">
-                        Installation
-                      </InputLabel>
-                      <Select
-                        labelId="installation-label"
-                        id="installation-select"
-                        value={selectedInstallation}
-                        label="Installation"
-                        onChange={(e) =>
-                          setSelectedInstallation(e.target.value)
-                        }
-                        MenuProps={{
-                          PaperProps: {
-                            style: {
-                              maxHeight: 300,
-                              overflowY: "scroll",
-                            },
-                          },
-                        }}
-                      >
-                        {installations.length > 0 ? (
-                          installations.map((installation, index) => (
-                            <MenuItem key={index} value={installation}>
-                              {installation}
-                            </MenuItem>
-                          ))
-                        ) : (
-                          <MenuItem disabled>
-                            No Installations Available
-                          </MenuItem>
-                        )}
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="demo-select-large-label">
-                        Well Type
-                      </InputLabel>
-                      <Select
-                        labelId="demo-select-small-label"
-                        id="demo-select-large"
-                        name="wellType"
-                        // value={formValues.wellType}
-                        // onChange={handleChangeWell}
-                        value={wellType}
-                        label="Well Type"
-                        onChange={(e) => setWellType(e.target.value)}
-                      >
-                        <MenuItem value="">
-                          <em>All</em>
-                        </MenuItem>
-                        <MenuItem value="self-flowing">self-flowing</MenuItem>
-                        <MenuItem value="pugger well">pugger well</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                  <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <TextField
-                      variant="outlined"
-                      label="Well Number"
-                      size="small"
-                      name="wellNumber"
-                      // name="wellNumber"
-                      value={wellNumber}
-                      onChange={(e) => setWellNumber(e.target.value)}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <Button
-                      variant="contained"
-                      onClick={handleAddWell}
-                      fullWidth
-                      sx={{
-                        backgroundColor: "green",
-                        "&:hover": { backgroundColor: "darkgreen" },
+                        },
                       }}
                     >
-                      ADD
-                    </Button>
-                  </Grid>
-                </Box>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-      </Grid>
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      {locations.map((loc, index) => (
+                        <MenuItem key={index} value={loc}>
+                          {loc}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Add Installation"
+                  fullWidth
+                  name="installation"
+                  value={installation}
+                  onChange={(e) => {
+                    setInstallation(e.target.value);
+                  }}
+                />
+
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    backgroundColor: "green",
+                    "&:hover": { backgroundColor: "darkgreen" },
+                  }}
+                  onClick={handleAddInstallation}
+                >
+                  ADD
+                </Button>
+              </Box>
+            </Grid>
+
+            {/* ------------------------Add Well NUMBER ------------------------------ */}
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              gap={1}
+              display="flex"
+              flexDirection={"column"}
+            >
+              <Box
+                display="flex"
+                flexDirection={{ xs: "column", sm: "row" }}
+                gap={1}
+              >
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="location-label">Locations</InputLabel>
+                    <Select
+                      labelId="location-label"
+                      id="location-select"
+                      value={allLocForWell}
+                      label="Location"
+                      onChange={handleLocationChange}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 300,
+                            overflowY: "scroll",
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      {locations.map((loc, index) => (
+                        <MenuItem key={index} value={loc}>
+                          {loc}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="installation-label">
+                      Installation
+                    </InputLabel>
+                    <Select
+                      labelId="installation-label"
+                      id="installation-select"
+                      value={selectedInstallation}
+                      label="Installation"
+                      onChange={(e) => setSelectedInstallation(e.target.value)}
+                      MenuProps={{
+                        PaperProps: {
+                          style: {
+                            maxHeight: 300,
+                            overflowY: "scroll",
+                          },
+                        },
+                      }}
+                    >
+                      {installations.length > 0 ? (
+                        installations.map((installation, index) => (
+                          <MenuItem key={index} value={installation}>
+                            {installation}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <MenuItem disabled>No Installations Available</MenuItem>
+                      )}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="demo-select-large-label">
+                      Well Type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-select-small-label"
+                      id="demo-select-large"
+                      name="wellType"
+                      // value={formValues.wellType}
+                      // onChange={handleChangeWell}
+                      value={wellType}
+                      label="Well Type"
+                      onChange={(e) => setWellType(e.target.value)}
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value="self-flowing">self-flowing</MenuItem>
+                      <MenuItem value="pugger well">pugger well</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <TextField
+                    variant="outlined"
+                    label="Well Number"
+                    size="small"
+                    name="wellNumber"
+                    // name="wellNumber"
+                    value={wellNumber}
+                    onChange={(e) => setWellNumber(e.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item lg={1} md={6} sm={6} xs={12}>
+                  <Button
+                    variant="contained"
+                    onClick={handleAddWell}
+                    fullWidth
+                    sx={{
+                      backgroundColor: "green",
+                      "&:hover": { backgroundColor: "darkgreen" }, p:"8px"
+                    }}
+                  >
+                    ADD
+                  </Button>
+                </Grid>
+              </Box>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
       <Grid
         container
         md={12}
@@ -597,10 +592,10 @@ const handleAddInstallation = async () => {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <TableRow>
+                <StyledTableCell align="center">Well Number</StyledTableCell>
+                <StyledTableCell align="center">Well Type</StyledTableCell>
                 <StyledTableCell align="center">Location</StyledTableCell>
                 <StyledTableCell align="center">Installation</StyledTableCell>
-                <StyledTableCell align="center">Well Type</StyledTableCell>
-                <StyledTableCell align="center">Well Number</StyledTableCell>
                 <StyledTableCell align="center">Landmark</StyledTableCell>
                 <StyledTableCell align="center">Geolocation</StyledTableCell>
                 <StyledTableCell align="center">Action</StyledTableCell>
@@ -608,7 +603,8 @@ const handleAddInstallation = async () => {
             </TableHead>
             <TableBody>
               {locationsForTable?.map((location) => {
-                const locationInstallations = installationsForTable[location] || [];
+                const locationInstallations =
+                  installationsForTable[location] || [];
 
                 return locationInstallations.length > 0 ? (
                   locationInstallations?.map((installation) => {
@@ -620,36 +616,41 @@ const handleAddInstallation = async () => {
                           <StyledTableRow
                             key={`${location}-${installation.name}-${well.wellNumber}`}
                           >
-                            <StyledTableCell style={{fontSize:"medium"}} align="left">
-                              {location}
-                            </StyledTableCell>
-                            <StyledTableCell style={{fontSize:"medium"}} align="left">
-                              {installation.name}
-                            </StyledTableCell>
-                            <StyledTableCell style={{fontSize:"medium"}} align="left">
-                              {wellType.wellType}
-                            </StyledTableCell>
-                            <StyledTableCell style={{fontSize:"medium"}} align="left">
+                            <StyledTableCell align="left" width={"14.2%"}>
                               {well.wellNumber}
                             </StyledTableCell>
-                            <StyledTableCell style={{fontSize:"medium"}} align="left">
+                            <StyledTableCell align="left" width={"14.2%"}>
+                              {wellType.wellType}
+                            </StyledTableCell>
+                            <StyledTableCell align="left" width={"14.2%"}>
+                              {location}
+                            </StyledTableCell>
+                            <StyledTableCell align="left" width={"14.2%"}>
+                              {installation.name}
+                            </StyledTableCell>
+                            <StyledTableCell align="left" width={"14.2%"}>
                               {well.landmark || "N/A"}
                             </StyledTableCell>
                             <StyledTableCell>
-                            {/* <Link to = "/dashboard/virtual"> */}
-                            <IconButton
+                              {/* <Link to = "/dashboard/virtual"> */}
+                              <IconButton
                                 sx={{
                                   color: "grey",
                                   "&:hover": { color: "darkred" },
                                   marginRight: "5px",
                                 }}
-                                onClick={() => handleLocationClick(well.wellNumber,organizationName)}
+                                onClick={() =>
+                                  handleLocationClick(
+                                    well.wellNumber,
+                                    organizationName
+                                  )
+                                }
                               >
                                 <LocationOnIcon fontSize="large" />
                               </IconButton>
-                            {/* </Link> */}
+                              {/* </Link> */}
                             </StyledTableCell>
-                            <StyledTableCell align="left">
+                            <StyledTableCell align="left" width={"14.2%"}>
                               <IconButton
                                 onClick={() =>
                                   handleSettingsClick(
@@ -691,21 +692,26 @@ const handleAddInstallation = async () => {
 
                         <StyledTableCell>
                           {/* <Link to = "/dashboard/virtual"> */}
-                        <IconButton
-                                sx={{
-                                  color: "grey",
-                                  "&:hover": { color: "darkred" },
-                                  marginRight: "5px",
-                                }}
-                              >
-                                <LocationOnIcon fontSize="large" />
-                              </IconButton>
-                            {/* </Link> */}
+                          <IconButton
+                            sx={{
+                              color: "grey",
+                              "&:hover": { color: "darkred" },
+                              marginRight: "5px",
+                            }}
+                          >
+                            <LocationOnIcon fontSize="large" />
+                          </IconButton>
+                          {/* </Link> */}
                         </StyledTableCell>
                         <StyledTableCell align="left">
                           <IconButton
                             onClick={() =>
-                              handleSettingsClick(location, installation.name,wellType.wellType,well.wellNumber)
+                              handleSettingsClick(
+                                location,
+                                installation.name,
+                                wellType.wellType,
+                                well.wellNumber
+                              )
                             }
                             sx={{
                               color: "darkblue",
@@ -728,16 +734,16 @@ const handleAddInstallation = async () => {
                     <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
                     <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
                     <StyledTableCell>
-                        <IconButton
-                                sx={{
-                                  color: "grey",
-                                  "&:hover": { color: "darkred" },
-                                  marginRight: "5px",
-                                }}
-                              >
-                                <LocationOnIcon fontSize="large" />
-                              </IconButton>
-                        </StyledTableCell>
+                      <IconButton
+                        sx={{
+                          color: "grey",
+                          "&:hover": { color: "darkred" },
+                          marginRight: "5px",
+                        }}
+                      >
+                        <LocationOnIcon fontSize="large" />
+                      </IconButton>
+                    </StyledTableCell>
                     <StyledTableCell align="left">
                       <IconButton
                         onClick={() => handleSettingsClick(location)}

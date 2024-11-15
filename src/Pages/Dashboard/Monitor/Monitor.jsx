@@ -20,10 +20,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
-import { Box } from "@mui/system";
+import { Box, height } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
-import { wellMonitorData } from "../../../apis/WellService";
+import {
+  getAllInstallation,
+  getLocation,
+  wellMonitorData,
+} from "../../../apis/WellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
 
@@ -117,6 +121,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    padding: "6px",
   },
 }));
 
@@ -156,6 +161,13 @@ function Monitor() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
+  const [locate, setLocate] = useState(""); // To track the selected location
+  const [allLocForPosItion, setAllLocForPosItion] = useState("");
+  const [locations, setLocations] = useState([]);
+
+  const [installations, setInstallations] = useState([]); // State to store fetched installations
+  const [selectedLocation, setSelectedLocation] = useState(""); // Track selected location
+
   // const [rows, setRows] = useState([]);
 
   // useEffect(() => {
@@ -169,7 +181,6 @@ function Monitor() {
   //   };
   //   monitorTable();
   // },[]);
-
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -185,6 +196,64 @@ function Monitor() {
 
   const handleChangeNumber = (event) => {
     setNumber(event.target.value);
+  };
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await getLocation(organizationName);
+        if (
+          response &&
+          response.message === "Well locations fetched successfully"
+        ) {
+          setLocations(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching locations", error);
+      }
+    };
+
+    fetchLocations();
+  }, [organizationName]);
+
+  // Fetch installations when location changes
+  useEffect(() => {
+    const fetchInstallations = async () => {
+      if (selectedLocation) {
+        // Only fetch if a location is selected
+        try {
+          const response = await getAllInstallation(
+            selectedLocation,
+            organizationName
+          );
+          if (
+            response &&
+            response.message === "Installations fetched successfully"
+          ) {
+            setInstallations(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching installations", error);
+          setInstallations([]); // Clear installations on error
+        }
+      } else {
+        setInstallations([]); // Clear installations if no location selected
+      }
+    };
+
+    fetchInstallations();
+  }, [selectedLocation, organizationName]);
+
+  // Handle location change
+  const handleLocationChange = (event) => {
+    const newLocation = event.target.value;
+    setSelectedLocation(newLocation);
+    setInstallation(""); // Reset installation when location changes
+  };
+
+  // Handle installation change
+  const handleInstallationChange = (event) => {
+    setInstallation(event.target.value);
   };
 
   return (
@@ -209,38 +278,56 @@ function Monitor() {
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <InputLabel id="location-label">Locations</InputLabel>
             <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
+              labelId="location-label"
+              id="location-select"
+              value={allLocForPosItion}
+              label="locate"
+              onChange={(e) => {
+                setAllLocForPosItion(e.target.value);
+              }}
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 300,
+                    overflowY: "scroll",
+                  },
+                },
+              }}
             >
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              <MenuItem value="">
+                <em>All</em>
+              </MenuItem>
+              {locations.map((loc, index) => (
+                <MenuItem key={index} value={loc}>
+                  {loc}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
           <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">
+            <InputLabel id="installation-select-label">
               Well Installation
             </InputLabel>
             <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
+              labelId="installation-select-label"
+              id="installation-select"
               value={installation}
-              label="Well  Installation"
-              onChange={handleChangeInstallation}
+              label="Well Installation"
+              onChange={handleInstallationChange}
+              disabled={!selectedLocation} // Disable if no location is selected
             >
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              {installations.map((inst, index) => (
+                <MenuItem key={index} value={inst}>
+                  {inst}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
@@ -330,22 +417,25 @@ function Monitor() {
                   Node ID
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  GIP (kg)
+                  GIP (Kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  CHP (kg)
+                  CHP (Kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  THP (kg)
+                  THP (Kg)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Sensor Battery
+                  Battery (%)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Solar Voltage
+                  Solar (V)
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Flow Status
+                </StyledTableCell>
+                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  Alerts
                 </StyledTableCell>
                 <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                   Action
@@ -353,16 +443,21 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows?.map((row, index) => (
-                <StyledTableRow key={index}>
-                  <StyledTableCell component="th" scope="row">{ }</StyledTableCell>
-                  <StyledTableCell align="left">{ }</StyledTableCell>
-                  <StyledTableCell align="left">{ }</StyledTableCell>
-                  <StyledTableCell align="left">{ }</StyledTableCell>
-                  <StyledTableCell align="left">{ }</StyledTableCell>
-                  <StyledTableCell align="left">{ }</StyledTableCell>
-                  <StyledTableCell align="left">{ }</StyledTableCell>
+              {rows.map((row, index) => (
+                <StyledTableRow key={index} style={{ height: "20px" }}>
+                  <StyledTableCell component="th" scope="row">
+                    {/* {row.data.OrgID} */}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {/* {row.data.NodeAdd} */}
+                  </StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">Normal</StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{
