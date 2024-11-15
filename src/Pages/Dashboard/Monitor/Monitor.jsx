@@ -24,6 +24,7 @@ import { Box, height } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 import {
+  deviceData,
   getAllInstallation,
   getLocation,
   wellMonitorData,
@@ -141,15 +142,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
-  createData("9"),
-  createData("10"),
+  // createData("2"),
 ];
 
 function Monitor() {
@@ -161,12 +154,14 @@ function Monitor() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
-  const [locate, setLocate] = useState(""); // To track the selected location
-  const [allLocForPosItion, setAllLocForPosItion] = useState("");
   const [locations, setLocations] = useState([]);
-
-  const [installations, setInstallations] = useState([]); // State to store fetched installations
-  const [selectedLocation, setSelectedLocation] = useState(""); // Track selected location
+  const [allLocForPosItion, setAllLocForPosItion] = useState("");
+  const [selectedInstallation, setSelectedInstallation] = useState("");
+  const [installations, setInstallations] = useState([]);
+  const [allLocForWell, setAllLocForWell] = useState("");
+  // const [deviceDataList, setDeviceDataList] = useState("");
+  const [deviceDataList, setDeviceDataList] = useState([]);
+  const [wellNumber, setWellNumber] = useState([2, 8]);
 
   // const [rows, setRows] = useState([]);
 
@@ -181,6 +176,31 @@ function Monitor() {
   //   };
   //   monitorTable();
   // },[]);
+
+  // fetching installation
+  const handleLocationChange = async (event) => {
+    const selectedLocation = event.target.value;
+    setAllLocForWell(selectedLocation);
+
+    if (selectedLocation) {
+      try {
+        const data = await getAllInstallation(
+          selectedLocation,
+          organizationName
+        );
+        if (data && data.message === "Installations fetched successfully") {
+          setInstallations(data.data.map((inst) => inst.name)); // Extract installation names
+        } else {
+          setInstallations([]);
+        }
+      } catch (error) {
+        console.error("Error fetching installations:", error);
+        setInstallations([]); // Clear installations on error
+      }
+    } else {
+      setInstallations([]); // Clear installations if no location is selected
+    }
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -200,61 +220,32 @@ function Monitor() {
 
   useEffect(() => {
     const fetchLocations = async () => {
-      try {
-        const response = await getLocation(organizationName);
-        if (
-          response &&
-          response.message === "Well locations fetched successfully"
-        ) {
-          setLocations(response.data);
-        }
-      } catch (error) {
-        console.error("Error fetching locations", error);
+      const data = await getLocation(organizationName);
+      if (data && data.message === "Well locations fetched successfully") {
+        setLocations(data.data);
       }
+      console.log("Retrieved data::::::::::::::::::::::::::::::::");
     };
 
     fetchLocations();
   }, [organizationName]);
-
-  // Fetch installations when location changes
   useEffect(() => {
-    const fetchInstallations = async () => {
-      if (selectedLocation) {
-        // Only fetch if a location is selected
-        try {
-          const response = await getAllInstallation(
-            selectedLocation,
-            organizationName
-          );
-          if (
-            response &&
-            response.message === "Installations fetched successfully"
-          ) {
-            setInstallations(response.data);
-          }
-        } catch (error) {
-          console.error("Error fetching installations", error);
-          setInstallations([]); // Clear installations on error
+    const fetchData = async () => {
+      try {
+        const data = await deviceData(organizationName);
+        if (data.success) {
+          setDeviceDataList(data.data);
+          localStorage.setItem("deviceDataList", JSON.stringify(data.data));
+        } else {
+          console.error("Failed to fetch data");
         }
-      } else {
-        setInstallations([]); // Clear installations if no location selected
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchInstallations();
-  }, [selectedLocation, organizationName]);
-
-  // Handle location change
-  const handleLocationChange = (event) => {
-    const newLocation = event.target.value;
-    setSelectedLocation(newLocation);
-    setInstallation(""); // Reset installation when location changes
-  };
-
-  // Handle installation change
-  const handleInstallationChange = (event) => {
-    setInstallation(event.target.value);
-  };
+    fetchData();
+  }, [organizationName]);
 
   return (
     <div
@@ -277,16 +268,28 @@ function Monitor() {
       {/* ------------------------Inputs------------------------------------------------ */}
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={3}>
+          {/* <FormControl fullWidth size="small">
+            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-large"
+              value={age}
+              label="Well Location"
+              onChange={handleChange}
+            >
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl> */}
           <FormControl fullWidth size="small">
             <InputLabel id="location-label">Locations</InputLabel>
             <Select
               labelId="location-label"
               id="location-select"
-              value={allLocForPosItion}
-              label="locate"
-              onChange={(e) => {
-                setAllLocForPosItion(e.target.value);
-              }}
+              value={allLocForWell}
+              label="Location"
+              onChange={handleLocationChange}
               MenuProps={{
                 PaperProps: {
                   style: {
@@ -308,8 +311,8 @@ function Monitor() {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
-          <FormControl fullWidth size="small">
-            <InputLabel id="installation-select-label">
+          {/* <FormControl fullWidth size="small">
+            <InputLabel id="demo-select-large-label">
               Well Installation
             </InputLabel>
             <Select
@@ -323,11 +326,37 @@ function Monitor() {
               <MenuItem value="">
                 <em>All</em>
               </MenuItem>
-              {installations.map((inst, index) => (
-                <MenuItem key={index} value={inst}>
-                  {inst}
-                </MenuItem>
-              ))}
+              <MenuItem value={10}>UP</MenuItem>
+              <MenuItem value={20}>MP</MenuItem>
+              <MenuItem value={30}>WB</MenuItem>
+            </Select>
+          </FormControl> */}
+          <FormControl fullWidth size="small">
+            <InputLabel id="installation-label">Installation</InputLabel>
+            <Select
+              labelId="installation-label"
+              id="installation-select"
+              value={selectedInstallation}
+              label="Installation"
+              onChange={(e) => setSelectedInstallation(e.target.value)}
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 300,
+                    overflowY: "scroll",
+                  },
+                },
+              }}
+            >
+              {installations.length > 0 ? (
+                installations.map((installation, index) => (
+                  <MenuItem key={index} value={installation}>
+                    {installation}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem disabled>No Installations Available</MenuItem>
+              )}
             </Select>
           </FormControl>
         </Grid>
@@ -341,9 +370,9 @@ function Monitor() {
               label="Well Number"
               onChange={handleChangeNumber}
             >
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
+              <MenuItem value={10}>2</MenuItem>
+              <MenuItem value={20}>8</MenuItem>
+              <MenuItem value={30}>4</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -443,21 +472,56 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, index) => (
-                <StyledTableRow key={index} style={{ height: "20px" }}>
+              {/* {rows?.map((row, index) => (
+                <StyledTableRow key={index}>
                   <StyledTableCell component="th" scope="row">
-                    {/* {row.data.OrgID} */}
+                    2
+                  </StyledTableCell>
+                  <StyledTableCell align="left">.123</StyledTableCell>
+                  <StyledTableCell align="left">2.45</StyledTableCell>
+                  <StyledTableCell align="left">3.123</StyledTableCell>
+                  <StyledTableCell align="left">2.23</StyledTableCell>
+                  <StyledTableCell align="left">6.342</StyledTableCell>
+                  <StyledTableCell align="left">1.89</StyledTableCell>
+                  <StyledTableCell align="left">Normal</StyledTableCell>
+                  <StyledTableCell align="left">
+                    <IconButton
+                      sx={{
+                        color: "grey",
+                        "&:hover": { color: "darkred" },
+                        marginRight: "5px",
+                      }}
+                      onClick={handleOpen}
+                    >
+                      <VisibilityIcon fontSize="large" />
+                    </IconButton>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))} */}
+              {deviceDataList.map((device, index) => (
+                <StyledTableRow key={device._id} sx={{ height: "80px" }}>
+                  <StyledTableCell component="th" scope="row">
+                    {wellNumber[index] || "N/A"}{" "}
                   </StyledTableCell>
                   <StyledTableCell align="left">
-                    {/* {row.data.NodeAdd} */}
+                    {device.data.NodeAdd}
                   </StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left">Normal</StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
+                  <StyledTableCell align="left"> {}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {device.data.P1}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {device.data.P2}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {device.data.P3}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {device.data.Bat}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {device.data.Solar}
+                  </StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{

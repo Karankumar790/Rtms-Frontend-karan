@@ -285,6 +285,7 @@ const WellMaster = () => {
         organizationName
       );
       localStorage.setItem("wellDetails", JSON.stringify(wellDetails.data));
+      console.log(wellDetails,"///////////")
       navigate("/dashboard/addwell");
     } catch (error) {
       console.error("Failed to fetch well details:", error);
@@ -322,6 +323,7 @@ const WellMaster = () => {
           </Box>
           <Box>
             <Typography variant="h4">Well Manager</Typography>
+            <Typography variant="h4">Well Master</Typography>
           </Box>
         </Grid>
       </Grid>
