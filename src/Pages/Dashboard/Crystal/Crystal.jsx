@@ -303,6 +303,12 @@ function Monitor() {
             </Grid>
           </Grid>
         </Grid>
+        <Grid
+          container
+          sx={{ display: "flex", justifyContent: "end", height: "40%", p: "6" }}
+        >
+          <PrintIcon sx={{ height: "4%", width: "4%" }} />
+        </Grid>
       </Grid>
 
       {/* Conditional rendering based on report type */}
@@ -371,7 +377,10 @@ function Monitor() {
         {/* Matric Report */}
         <Grid item lg={12}>
           {selectedOption === "Matric Report" && (
-            <TableContainer component={Paper}  sx={{ maxHeight: 640, height: 1200, overflow: "auto" }}>
+            <TableContainer
+              component={Paper}
+              sx={{ maxHeight: 640, height: 1200, overflow: "auto" }}
+            >
               <Table aria-label="customized table" stickyHeader>
                 <TableHead>
                   <TableRow>
@@ -423,115 +432,159 @@ function Monitor() {
         </Grid>
 
         {/* Crystal Report */}
-        <Grid item lg={10}>
+        <Grid item lg={12}>
           {selectedOption === "Crystal Report" && (
             <Grid container sx={{ mb: 4 }}>
-              <TableContainer component={Paper}  sx={{ maxHeight: 640, height: 1200, overflow: "auto" }}>
-                <Table aria-label="customized table" stickyHeader>
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell sx={{ fontSize: "18px" }}>
-                        Well No.
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        GIP (kg)
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        CHP (kg)
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        THP (kg)
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        Battery %
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        Solar Power (V)
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        Communication
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                        Flow Status
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <StyledTableRow key={row.name}>
-                        <StyledTableCell component="th" scope="row">
-                          {row.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">1</StyledTableCell>
-                        <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                        <StyledTableCell align="left">gbz</StyledTableCell>
-                        <StyledTableCell align="left">yes</StyledTableCell>
-                        <StyledTableCell align="left">all good</StyledTableCell>
-                        <StyledTableCell align="left">Bad</StyledTableCell>
-                        <StyledTableCell align="left">High</StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Grid container>
+                <Grid item  lg={10} p={1}>
+                  <TableContainer
+                    component={Paper}
+                    sx={{ maxHeight: 640, height: 1200, overflow: "auto" }}
+                  >
+                    <Table aria-label="customized table" stickyHeader>
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell sx={{ fontSize: "18px" }}>
+                            Well No.
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            GIP (kg)
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            CHP (kg)
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            THP (kg)
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            Battery %
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            Solar Power (V)
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            Communication
+                          </StyledTableCell>
+                          <StyledTableCell
+                            sx={{ fontSize: "18px" }}
+                            align="left"
+                          >
+                            Flow Status
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {rows.map((row) => (
+                          <StyledTableRow key={row.name}>
+                            <StyledTableCell component="th" scope="row">
+                              {row.name}
+                            </StyledTableCell>
+                            <StyledTableCell align="left">1</StyledTableCell>
+                            <StyledTableCell align="left">
+                              5/6/2024
+                            </StyledTableCell>
+                            <StyledTableCell align="left">gbz</StyledTableCell>
+                            <StyledTableCell align="left">yes</StyledTableCell>
+                            <StyledTableCell align="left">
+                              all good
+                            </StyledTableCell>
+                            <StyledTableCell align="left">Bad</StyledTableCell>
+                            <StyledTableCell align="left">High</StyledTableCell>
+                          </StyledTableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
 
+                <Grid item lg={2} p={1}>
+                  <Box border={2} borderColor="black" height="100%" gap={8}>
+                    <Typography variant="h4">Well Number</Typography>
+                    <Typography variant="h4">Parameter</Typography>
+                    <Typography variant="h4">Start Date</Typography>
+                    <Typography variant="h4">End Date</Typography>
+                    <Typography variant="h4">Resolution</Typography>
+                    <Typography variant="h4">Report Type</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
               {/* Chart Buttons */}
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: 2,
-                  marginBottom: 4,
-                }}
-              >
-                <IconButton
-                  onClick={() => setChartType("line")}
-                  color={chartType === "line" ? "primary" : "default"}
+              <Grid container>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: 2,
+                    marginBottom: 4,
+                  }}
                 >
-                  <ShowChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-                <IconButton
-                  onClick={() => setChartType("bar")}
-                  color={chartType === "bar" ? "primary" : "default"}
-                >
-                  <BarChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-                <IconButton
-                  onClick={() => setChartType("pie")}
-                  color={chartType === "pie" ? "primary" : "default"}
-                >
-                  <PieChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              </Box>
-              {chartType === "None" && (
-                <Typography variant="h6" textAlign="center">
-                  Please select a chart type using the icons above.
-                </Typography>
-              )}
-              {/* Render selected chart */}
-              <div style={{ height: "400px", width: "100%" }}>
-                {chartType === "line" && (
-                  <Line
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
+                  <IconButton
+                    onClick={() => setChartType("line")}
+                    color={chartType === "line" ? "primary" : "default"}
+                  >
+                    <ShowChartIcon sx={{ fontSize: 40 }} />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => setChartType("bar")}
+                    color={chartType === "bar" ? "primary" : "default"}
+                  >
+                    <BarChartIcon sx={{ fontSize: 40 }} />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => setChartType("pie")}
+                    color={chartType === "pie" ? "primary" : "default"}
+                  >
+                    <PieChartIcon sx={{ fontSize: 40 }} />
+                  </IconButton>
+                </Box>
+                {chartType === "None" && (
+                  <Typography variant="h6" textAlign="center">
+                    Please select a chart type using the icons above.
+                  </Typography>
                 )}
-                {chartType === "bar" && (
-                  <Bar
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-                {chartType === "pie" && (
-                  <Pie
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-              </div>
+                {/* Render selected chart */}
+                <div style={{ height: "400px", width: "100%" }}>
+                  {chartType === "line" && (
+                    <Line
+                      data={chartData}
+                      options={options}
+                      style={{ height: "100%", width: "100%" }}
+                    />
+                  )}
+                  {chartType === "bar" && (
+                    <Bar
+                      data={chartData}
+                      options={options}
+                      style={{ height: "100%", width: "100%" }}
+                    />
+                  )}
+                  {chartType === "pie" && (
+                    <Pie
+                      data={chartData}
+                      options={options}
+                      style={{ height: "100%", width: "100%" }}
+                    />
+                  )}
+                </div>
+              </Grid>
             </Grid>
           )}
         </Grid>
