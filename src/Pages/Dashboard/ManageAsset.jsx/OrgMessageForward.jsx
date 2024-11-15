@@ -25,8 +25,8 @@ import dayjs from "dayjs";
 import { Box } from "@mui/system";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import EmailIcon from '@mui/icons-material/Email';
-import Person3Icon from '@mui/icons-material/Person';
+import EmailIcon from "@mui/icons-material/Email";
+import Person3Icon from "@mui/icons-material/Person";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -70,11 +70,9 @@ function OrgMessageForward() {
     <>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={12} p={1}>
-          <Box display="flex" sx={{ pt: 2,pb:2 }} gap={1}>
-            <EmailIcon  sx={{mt:"2px"}}/>
-            <Typography variant="h5" >
-              Message Forwarding
-            </Typography>
+          <Box display="flex" sx={{ pt: 2, pb: 2 }} gap={1}>
+            <EmailIcon sx={{ mt: "2px" }} />
+            <Typography variant="h5">Message Forwarding</Typography>
           </Box>
           <Grid container spacing={0.5} gap={0.5}>
             <Grid item xs={12} sm={2} md={2} lg={1.7}>
@@ -105,15 +103,14 @@ function OrgMessageForward() {
               <Grid
                 item
                 md={10}
-                lg={3.38}
-               gap={1.5}
+                lg={3.20}
+                gap={1.5}
                 spacing={0.5}
                 key={level}
-                sx={{ display:"flex", alignItems:'center' }}
+                sx={{ display: "flex", alignItems: "center" }}
               >
-                {" "}
                 {/* Add margin top here */}
-                <Grid item xs={12}  sm={2} md={6} lg={5.5} gap={1}>
+                <Grid item xs={12} sm={2} md={6} lg={5.5} gap={1}>
                   <Box display="flex" alignItems="center" gap={1}>
                     <AccessAlarmIcon />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -131,7 +128,7 @@ function OrgMessageForward() {
                     </LocalizationProvider>
                   </Box>
                 </Grid>
-                <Grid item xs={12}  sm={2} md={6} lg={6}>
+                <Grid item xs={12} sm={2} md={6} lg={6}>
                   <Box display="flex" alignItems="center" gap={1}>
                     <Person3Icon />
                     <TextField
@@ -142,17 +139,20 @@ function OrgMessageForward() {
                     />
                   </Box>
                 </Grid>
-            <Button
-            variant="contained"
-              sx={{
-                color: "",
-                "&:hover": { color: "black" }, ml:"3px"
-              }}
-            >
-              ADD
-            </Button>
               </Grid>
             ))}
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    backgroundColor: "green",
+                    "&:hover": {
+                      backgroundColor: "darkgreen",
+                    },
+                  }}
+                >
+                  ADD
+                </Button>
           </Grid>
         </Grid>
 
