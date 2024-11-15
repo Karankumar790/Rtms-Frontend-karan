@@ -23,7 +23,7 @@ import well from "/assets/WELL.png";
 import { Box } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
-import {wellMonitorData } from "../../../apis/WellService";
+import { wellMonitorData } from "../../../apis/WellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
 
@@ -157,7 +157,7 @@ function Monitor() {
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
   // const [rows, setRows] = useState([]);
-   
+
   // useEffect(() => {
   //   const monitorTable = async () => {
   //      try {
@@ -353,16 +353,16 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-            {rows?.map((row, index) => (
-              <StyledTableRow key={index}>
-                <StyledTableCell component="th" scope="row">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">{}</StyledTableCell>
-                <StyledTableCell align="left">Normal</StyledTableCell>
+              {rows?.map((row, index) => (
+                <StyledTableRow key={index}>
+                  <StyledTableCell component="th" scope="row">{ }</StyledTableCell>
+                  <StyledTableCell align="left">{ }</StyledTableCell>
+                  <StyledTableCell align="left">{ }</StyledTableCell>
+                  <StyledTableCell align="left">{ }</StyledTableCell>
+                  <StyledTableCell align="left">{ }</StyledTableCell>
+                  <StyledTableCell align="left">{ }</StyledTableCell>
+                  <StyledTableCell align="left">{ }</StyledTableCell>
+                  <StyledTableCell align="left">Normal</StyledTableCell>
                   <StyledTableCell align="left">
                     <IconButton
                       sx={{
@@ -462,7 +462,7 @@ function Monitor() {
         </Paper>
       </Grid>
 
-      <Modal open={open}>
+      <Modal open={open} onClose={handleClose}>
         <Grid
           container
           lg={5}
@@ -472,175 +472,141 @@ function Monitor() {
           borderRadius={3}
           overflow="auto"
           height="70vh"
-          sx={style}
+          sx={{
+            ...style,
+            bgcolor: "background.paper",
+            p: 4,
+            boxShadow: 24,
+            borderRadius: 2,
+          }}
           mx={2}
         >
+          {/* Header */}
           <Box
-            width={"100%"}
-            sx={{ display: "flex", justifyContent: "center" }}
+            width="100%"
+            sx={{ display: "flex", justifyContent: "center", mb: 3 }}
           >
-            <Typography
-              variant="h4"
-              component="h2"
-              sx={{ fontStyle: "oblique" }}
-            >
+            <Typography variant="h4" component="h2" sx={{ fontStyle: "oblique" }}>
               Well Details
             </Typography>
           </Box>
-          <Box sx={{ mt: 2 }}>
-            <Grid container sx={{ display: "flex", gap: 3 }}>
-              {/* First Column */}
-              <Grid
-                lg={5.5}
-                md={5.5}
-                sm={6}
-                xs={12}
-                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-              >
-                {[
-                  { label: "Well Number :", value: "1" },
-                  { label: "Location :", value: "" },
-                  { label: "Well Type :", value: "" },
-                  { label: "Installation :", value: "" },
-                ]?.map((item, index) => (
-                  <Box
-                    key={index}
-                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
-                  >
-                    <Typography variant="h6" width={"250px"}>
-                      {item.label}
-                    </Typography>
-                  </Box>
-                ))}
-              </Grid>
-              {/* Second Column */}
-              <Grid
-                lg={5.5}
-                md={5.5}
-                sm={6}
-                xs={12}
-                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-              >
-                {[
-                  { label: "Landmark :", value: "" },
-                  { label: "Notification ID:", value: "" },
-                  { label: "Node ID :", value: "" },
-                  { label: "Status :", value: "" },
-                ]?.map((item, index) => (
-                  <Box
-                    key={index + 4}
-                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
-                  >
-                    <Typography variant="h6" width={"250px"}>
-                      {item.label}
-                    </Typography>
-                    {/* <TextField
-                      size="small"
-                      value={item.value}
-                      disabled
-                      fullWidth
-                    /> */}
-                  </Box>
-                ))}
-              </Grid>
+
+          {/* Well Details Section */}
+          <Grid container spacing={3}>
+            {/* First Column */}
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              {[
+                { label: "Well Number :", value: "1" },
+                { label: "Location :", value: "" },
+                { label: "Well Type :", value: "" },
+                { label: "Installation :", value: "" },
+              ].map((item, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 1,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography variant="h6" sx={{ width: "45%" }}>
+                    {item.label}
+                  </Typography>
+                  <Typography variant="body1" sx={{ width: "50%" }}>
+                    {item.value}
+                  </Typography>
+                </Box>
+              ))}
             </Grid>
 
-            <Box sx={{ display: "flex", justifyContent: "center", pt: "16px" }}>
-              <Typography
-                variant="h5"
-                component="h2"
-                sx={{ fontStyle: "oblique" }}
-              >
-                Alarm Setting
-              </Typography>
-            </Box>
+            {/* Second Column */}
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              {[
+                { label: "Landmark :", value: "" },
+                { label: "Notification ID:", value: "" },
+                { label: "Node ID :", value: "" },
+                { label: "Status :", value: "" },
+              ].map((item, index) => (
+                <Box
+                  key={index + 4}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 1,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography variant="h6" sx={{ width: "45%" }}>
+                    {item.label}
+                  </Typography>
+                  <Typography variant="body1" sx={{ width: "50%" }}>
+                    {item.value}
+                  </Typography>
+                </Box>
+              ))}
+            </Grid>
+          </Grid>
 
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  GIP
+          {/* Alarm Settings Section */}
+          <Box sx={{ mt: 4 }}>
+            <Typography
+              variant="h5"
+              component="h2"
+              sx={{ fontStyle: "oblique", textAlign: "center", mb: 3 }}
+            >
+              Alarm Setting
+            </Typography>
+
+            {[
+              "GIP",
+              "CHP",
+              "THP",
+              "Battery(%)",
+              "Solar Voltage",
+            ].map((label, index) => (
+              <Box
+                key={index}
+                display="flex"
+                mt={2}
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Typography variant="h6" sx={{ width: "20%" }}>
+                  {label}
                 </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
+                <TextField
+                  size="small"
+                  variant="standard"
+                  disabled
+                  sx={{ width: "20%", mr: 2 }}
+                />
+                <Typography variant="body1" sx={{ width: "20%" }}>
                   Normal value
                 </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
+                <TextField
+                  size="small"
+                  variant="standard"
+                  disabled
+                  sx={{ width: "20%", mr: 2 }}
+                />
+                <Typography variant="body1" sx={{ width: "20%" }}>
                   Critical Value
                 </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
+                <TextField
+                  size="small"
+                  variant="standard"
+                  disabled
+                  sx={{ width: "20%" }}
+                />
               </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  CHP
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  THP
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  Battery(%)
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  Solar Voltage
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
+            ))}
           </Box>
+
+          {/* Footer */}
           <Box
-            mt={2}
-            width={"100%"}
-            gap={2}
-            sx={{ display: "flex", justifyContent: "end" }}
+            mt={3}
+            sx={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
           >
             <Button
               variant="contained"
@@ -653,6 +619,7 @@ function Monitor() {
           </Box>
         </Grid>
       </Modal>
+
     </div>
   );
 }

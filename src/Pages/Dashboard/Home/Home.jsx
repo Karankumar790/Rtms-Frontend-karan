@@ -373,8 +373,56 @@ export default function BasicCard() {
         <Box sx={{ width: '100%' }}>
           <Grid container sx={{ bgcolor: 'grey.100', width: '100%', py: 2 }}>
             {/* Sidebar container with dynamic width */}
-            <Grid item xs={12} sx={{ width: '100%',height:'100%' }}>
-              <Box sx={{ display:'flex', width: '200vh',bgcolor:'white', minHeight: '20vh',p: 2  }}>
+            <Grid item xs={12} sx={{ width: '100%' }}>
+              <Box sx={{ display:'flex', width: 'fit-content', minHeight: '50vh' }}>
+
+                {/* Category Filter Section */}
+                <Box sx={{ width: '500px', overflowY: 'auto' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2, bgcolor: 'grey.300', borderRadius: '4px' }}>
+                    {/* <Typography variant="h6" color="text.secondary">Category</Typography> */}
+                  </Box>
+                  <Box sx={{ p: 2, bgcolor: 'white', maxHeight: 128, overflowY: 'auto' }}>
+                    <FormGroup sx={{ height: '150px', overflowY: 'auto' }}>
+                      {/* <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Men's Clothing" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Women's Clothing" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Accessories" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Cable" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="IOT" /> */}
+                    </FormGroup>
+                  </Box>
+                </Box>
+
+                {/* Sub-Category Filter Section */}
+                <Box sx={{ width: '500px', overflowY: 'auto'}}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2, bgcolor: 'grey.300' }}>
+                    {/* <Typography variant="h6" color="text.secondary">Sub-Category</Typography> */}
+                  </Box>
+                  <Box sx={{ p: 2, bgcolor: 'white', maxHeight: 128, overflowY: 'auto' }}>
+                    <FormGroup sx={{ height: '150px', overflowY: 'auto' }}>
+                      {/* <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Brand A" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Brand B" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Brand C" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Brand D" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="Brand E" /> */}
+                    </FormGroup>
+                  </Box>
+                </Box>
+
+                {/* Brand Filter Section */}
+                <Box sx={{ width: '500px', overflowY: 'auto'}}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2, bgcolor: 'grey.300' }}>
+                    {/* <Typography variant="h6" color="text.secondary">Brand</Typography> */}
+                  </Box>
+                  <Box sx={{ p: 2, bgcolor: 'white', maxHeight: 128, overflowY: 'auto' }}>
+                    <FormGroup sx={{ height: '150px', overflowY: 'auto' }}>
+                      {/* <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="10% or more" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="20% or more" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="30% or more" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="40% or more" />
+                      <FormControlLabel control={<Checkbox size="medium" color="primary" />} label="50% or more" /> */}
+                    </FormGroup>
+                  </Box>
+                </Box>
               </Box>
             </Grid>
           </Grid>
