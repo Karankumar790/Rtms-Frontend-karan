@@ -285,6 +285,7 @@ const WellMaster = () => {
         organizationName
       );
       localStorage.setItem("wellDetails", JSON.stringify(wellDetails.data));
+      console.log(wellDetails,"///////////")
       navigate("/dashboard/addwell");
     } catch (error) {
       console.error("Failed to fetch well details:", error);
@@ -559,14 +560,14 @@ const WellMaster = () => {
                     fullWidth
                   />
                 </Grid>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
+                <Grid item lg={1} md={6} sm={6} xs={12}>
                   <Button
                     variant="contained"
                     onClick={handleAddWell}
                     fullWidth
                     sx={{
                       backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
+                      "&:hover": { backgroundColor: "darkgreen" }, p:"8px"
                     }}
                   >
                     ADD

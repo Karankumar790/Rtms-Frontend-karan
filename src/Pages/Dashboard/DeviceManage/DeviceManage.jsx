@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, IconButton, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -16,6 +16,8 @@ import StoreIcon from "@mui/icons-material/Store";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { deviceData } from "../../../apis/WellService";
+import { useSelector } from "react-redux";
 
 // ----------------------Table for Moblie------------------------------
 
@@ -98,6 +100,39 @@ const rows = [
 
 
 function DeviceManage() {
+  const organizationName = useSelector((state) => state.auth.organization);
+  const [deviceDataList, setDeviceDataList] = useState([]);
+
+  // useEffect(() => {
+  //   // Fetch data on component mount
+  //   const fetchData = async () => {
+  //     const data = await deviceData(organizationName);
+  //     if (data.success) {
+  //       setDeviceDataList(data.data);
+  //     } else {
+  //       console.error("Failed to fetch data");
+  //     }
+  //   };
+  //   fetchData();
+  // }, [organizationName]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await deviceData(organizationName);
+        if (data.success) {
+          setDeviceDataList(data.data);
+          localStorage.setItem('deviceDataList', JSON.stringify(data.data));
+        } else {
+          console.error("Failed to fetch data");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, [organizationName]);
+  
   return (
     <div>
       <Grid
@@ -152,6 +187,7 @@ function DeviceManage() {
           >
             <Table aria-label="customized table" stickyHeader>
               <TableHead>
+                
                 <TableRow>
                   <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                     Client ID{" "}
@@ -192,17 +228,21 @@ function DeviceManage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {rows.map((row) => (
-                <StyledTableRow key={row.name} sx={{height: "80px"}}>
+                {deviceDataList.map((device) => (
+                <StyledTableRow key={device._id} sx={{height: "80px"}}>
                   <StyledTableCell component="th" scope="row">
-                    {row.name}
+                    {/* {device.data.OrgID} */}
+                    1
                   </StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left">
+                  <StyledTableCell align="left">{device.data.NodeAdd}</StyledTableCell>
+                  <StyledTableCell align="left"> {device.data.NodeAdd}</StyledTableCell>
+                  <StyledTableCell align="left"> {}</StyledTableCell>
+                  <StyledTableCell align="left"> 1 min</StyledTableCell>
+                  <StyledTableCell align="left"> {device.data.P1}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.P2}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.P3}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.Bat}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.Solar}
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     <Link to="/dashboard/Lora">
@@ -212,7 +252,7 @@ function DeviceManage() {
                     </Link>
                   </StyledTableCell>
                 </StyledTableRow>
-              ))} */}
+              ))}
               </TableBody>
             </Table>
           </TableContainer>
