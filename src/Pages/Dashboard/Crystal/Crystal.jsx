@@ -5,18 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Chart from "react-apexcharts";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SummarizeIcon from '@mui/icons-material/Summarize';
-import BallotIcon from '@mui/icons-material/Ballot';
-import { Box } from "@mui/system";
+import { LineChart } from '@mui/x-charts/LineChart';
+import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine';
+import { PiecewiseColorLegend } from '@mui/x-charts/ChartsLegend';
+import { dataset } from './tempAnomaly';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,9 +43,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
+
 ];
 
 
@@ -111,6 +104,7 @@ let Sata = {
 };
 
 
+
 function Monitor() {
   const [age, setAge] = React.useState("");
   const [parameters, setParameters] = React.useState("");
@@ -169,7 +163,7 @@ function Monitor() {
         <Typography fontSize='x-large'> <IconButton><SummarizeIcon sx={{ fontSize: 40, color: 'blue' }} /></IconButton>Well Report</Typography>
         {/* --------------------------Well Report Inputs Field------------------------------------- */}
         <Grid container spacing={2}>
-          <Grid item sm={6} md={3} xs={12} lg={4}>
+          <Grid item sm={6} md={3} xs={12} lg={2}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Well Number</InputLabel>
               <Select
@@ -188,7 +182,7 @@ function Monitor() {
             </FormControl>
           </Grid>
 
-          <Grid item sm={6} md={3} xs={12} lg={4}>
+          <Grid item sm={6} md={3} xs={12} lg={2}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Parameter</InputLabel>
               <Select
@@ -210,7 +204,7 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={4}>
+          <Grid item sm={6} md={3} xs={12} lg={2}>
             <FormControl fullWidth>
               <TextField
                 fullWidth
@@ -229,7 +223,7 @@ function Monitor() {
               />
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={4}>
+          <Grid item sm={6} md={3} xs={12} lg={2}>
             <FormControl fullWidth >
               <TextField
                 fullWidth
@@ -248,7 +242,7 @@ function Monitor() {
               />
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={4}>
+          <Grid item sm={6} md={3} xs={12} lg={2}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Resolution</InputLabel>
               <Select
@@ -268,7 +262,7 @@ function Monitor() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={4}>
+          <Grid item sm={6} md={3} xs={12} lg={2}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Report Type</InputLabel>
               <Select
@@ -383,10 +377,60 @@ function Monitor() {
                 fontSize: '16px',
 
               }} fullWidth>
-              Submit
+              Print
             </Button>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid>
+      <div style={{ width: '100%' }}>
+      <Typography variant="body1">
+        Global temperature anomaly relative to 1961-1990 average
+      </Typography>
+      <LineChart
+        dataset={dataset}
+        series={[
+          {
+            label: 'Global temperature anomaly relative to 1961-1990',
+            dataKey: 'anomaly',
+            showMark: false,
+            valueFormatter: (value) => `${value?.toFixed(2)}°`,
+          },
+        ]}
+        xAxis={[
+          {
+            scaleType: 'time',
+            dataKey: 'year',
+            disableLine: true,
+            valueFormatter: (value) => value.getFullYear().toString(),
+            colorMap: {
+              type: 'piecewise',
+              thresholds: [new Date(1961, 0, 1), new Date(1990, 0, 1)],
+              colors: ['blue', 'gray', 'red'],
+            },
+          },
+        ]}
+        yAxis={[
+          {
+            disableLine: true,
+            disableTicks: true,
+            valueFormatter: (value) => `${value}°`,
+          },
+        ]}
+        grid={{ horizontal: true }}
+        height={300}
+        margin={{ top: 30, right: 150 }}
+        slotProps={{ legend: { hidden: true } }}
+      >
+        <PiecewiseColorLegend
+          axisDirection="x"
+          position={{ vertical: 'top', horizontal: 'right' }}
+          direction="column"
+        />
+        <ChartsReferenceLine y={0} />
+      </LineChart>
+    </div>
+
       </Grid>
     </div>
   );

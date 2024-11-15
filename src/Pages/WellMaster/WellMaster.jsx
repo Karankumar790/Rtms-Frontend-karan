@@ -559,14 +559,14 @@ const WellMaster = () => {
                     fullWidth
                   />
                 </Grid>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
+                <Grid item lg={1} md={6} sm={6} xs={12}>
                   <Button
                     variant="contained"
                     onClick={handleAddWell}
                     fullWidth
                     sx={{
                       backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
+                      "&:hover": { backgroundColor: "darkgreen" }, p:"8px"
                     }}
                   >
                     ADD
