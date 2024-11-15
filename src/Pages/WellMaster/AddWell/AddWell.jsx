@@ -308,7 +308,7 @@ function AddWell() {
             <TextField
               fullWidth
               size="small"
-              label="Device ID"
+              label="Node ID"
               variant="outlined"
               // InputProps={{
               //   endAdornment: (
