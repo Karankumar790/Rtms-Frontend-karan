@@ -117,12 +117,12 @@ export default function Sidebar({
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
-    {
-      name: "LoRa Gateway",
-      icon: <Networkicon sx={{ color: "black" }} />,
-      path: "/dashboard/Network",
-      roles: ["owner", "manager", "employee"],
-    },
+    // {
+    //   name: "LoRa Gateway",
+    //   icon: <Networkicon sx={{ color: "black" }} />,
+    //   path: "/dashboard/Network",
+    //   roles: ["owner", "manager", "employee"],
+    // },
     {
       name: "Well Monitor",
       icon: <WellmonitorIcon sx={{ color: "black" }} />,
