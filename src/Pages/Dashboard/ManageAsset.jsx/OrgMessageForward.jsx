@@ -53,8 +53,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name) {
+  return { name };
 }
 
 const rows = [createData("1")];
@@ -72,7 +72,9 @@ function OrgMessageForward() {
         <Grid item xs={12} sm={12} md={12} lg={12} p={1}>
           <Box display="flex" sx={{ pt: 2, pb: 2 }} gap={1}>
             <EmailIcon sx={{ mt: "2px" }} />
-            <Typography variant="h5">Message Forwarding</Typography>
+            <Typography variant="h5">
+              Message Forwarding
+            </Typography>
           </Box>
           <Grid container spacing={0.5} gap={0.5}>
             <Grid item xs={12} sm={2} md={2} lg={1.7}>
@@ -98,19 +100,10 @@ function OrgMessageForward() {
               </Box>
             </Grid>
 
-            {/** Add spacing here for levels **/}
-            {[1, 2, 3].map((level) => (
-              <Grid
-                item
-                md={10}
-                lg={3.20}
-                gap={1.5}
-                spacing={0.5}
-                key={level}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                {/* Add margin top here */}
-                <Grid item xs={12} sm={2} md={6} lg={5.5} gap={1}>
+            {/* Loop through levels and align them in a row with ADD button */}
+            <Grid container item xs={12} spacing={2} alignItems="center">
+              {[1, 2, 3].map((level) => (
+                <Grid item xs={12} sm={4} key={level}>
                   <Box display="flex" alignItems="center" gap={1}>
                     <AccessAlarmIcon />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -127,9 +120,7 @@ function OrgMessageForward() {
                       </DemoContainer>
                     </LocalizationProvider>
                   </Box>
-                </Grid>
-                <Grid item xs={12} sm={2} md={6} lg={6}>
-                  <Box display="flex" alignItems="center" gap={1}>
+                  <Box display="flex" alignItems="center" gap={1} mt={1}>
                     <Person3Icon />
                     <TextField
                       variant="outlined"
@@ -139,20 +130,21 @@ function OrgMessageForward() {
                     />
                   </Box>
                 </Grid>
-              </Grid>
-            ))}
+              ))}
+
+              {/* Add button aligned to the end of the row */}
+              <Grid item xs={12} sm={2} container justifyContent="flex-end">
                 <Button
                   variant="contained"
-                  size="small"
                   sx={{
-                    backgroundColor: "green",
-                    "&:hover": {
-                      backgroundColor: "darkgreen",
-                    },
+                    color: "",
+                    "&:hover": { color: "black" },
                   }}
                 >
                   ADD
                 </Button>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
 
@@ -217,3 +209,4 @@ function OrgMessageForward() {
 }
 
 export default OrgMessageForward;
+  

@@ -228,7 +228,7 @@ function DeviceManage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {deviceDataList.map((device) => (
+                {deviceDataList?.map((device) => (
                 <StyledTableRow key={device._id} sx={{height: "80px"}}>
                   <StyledTableCell component="th" scope="row">
                     {/* {device.data.OrgID} */}

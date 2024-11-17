@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, CardContent, Grid, IconButton, Typography } from '@mui/material'
+import { Box, Button, CardContent, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, TextField, Typography } from '@mui/material'
 import { Card } from '@mui/joy'
 
 import well from '/assets/WELL.png'
@@ -58,7 +58,7 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  
+
 ];
 
 
@@ -208,7 +208,7 @@ export default function BasicCard() {
               <Typography fontSize='large'>Network Error</Typography>
             </CardContent>
           </CardWrapper>
-       
+
         </Grid>
 
         <Grid item lg={2.4} md={3} sm={6} xs={12}>
@@ -334,7 +334,7 @@ export default function BasicCard() {
         sm={5}
         xs={4}
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-        <TableContainer component={Paper}>
+        {/* <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead >
               <TableRow  >
