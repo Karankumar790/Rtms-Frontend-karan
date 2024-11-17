@@ -1346,8 +1346,8 @@ function ManageAsset() {
                     freeSolo // Allows users to type their own value
                     options={actions} // Provides options to select from
                     value={approvalChains}
-                    onChange={(event, newValue) => setApprovalChains(newValue)}
-                    onInputChange={(event, newInputValue) =>
+                    onChange={( newValue) => setApprovalChains(newValue)}
+                    onInputChange={( newInputValue) =>
                       setApprovalChains(newInputValue)
                     }
                     renderInput={(params) => (

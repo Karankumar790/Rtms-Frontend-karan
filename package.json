@@ -21,6 +21,7 @@
     "@mui/material": "^5.16.7",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/system": "^5.16.7",
+    "@mui/x-charts": "^7.22.2",
     "@mui/x-date-pickers": "^7.20.0",
     "@reduxjs/toolkit": "^2.2.7",
     "apexcharts": "^3.54.0",
