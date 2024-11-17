@@ -497,7 +497,7 @@ function Monitor() {
               }}
             >
               {installations.length > 0 ? (
-                installations.map((installation, index) => (
+                installations?.map((installation, index) => (
                   <MenuItem key={index} value={installation}>
                     {installation}
                   </MenuItem>
@@ -646,7 +646,7 @@ function Monitor() {
                   </StyledTableCell>
                 </StyledTableRow>
               ))} */}
-              {deviceDataList.map((device, index) => (
+              {deviceDataList?.map((device, index) => (
                 <StyledTableRow key={device._id} sx={{ height: "80px" }}>
                   <StyledTableCell component="th" scope="row">
                     {wellNumber[index] || "N/A"}{" "}
@@ -1212,6 +1212,7 @@ function Monitor() {
           </Grid>
         </Grid>
       </Modal>
+
     </div>
   );
 }
