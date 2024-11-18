@@ -21,6 +21,8 @@ import PrintIcon from "@mui/icons-material/Print";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import { LineChart } from "@mui/x-charts/LineChart";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -75,6 +77,19 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [createData("1")];
+
+const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
+const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
+const wData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
+const xLabels = [
+  "Page A",
+  "Page B",
+  "Page C",
+  "Page D",
+  "Page E",
+  "Page F",
+  "Page G",
+];
 
 // Main component
 function Monitor() {
@@ -307,7 +322,7 @@ function Monitor() {
           container
           sx={{ display: "flex", justifyContent: "end", height: "40%", p: "6" }}
         >
-          <PrintIcon sx={{ height: "4%", width: "4%" }} />
+          <PrintIcon sx={{ height: "2%", width: "2%" }} />
         </Grid>
       </Grid>
 
@@ -374,12 +389,12 @@ function Monitor() {
           )}
         </Grid>
 
-        {/* Matric Report */}
+        {/* Matric Report  Table*/}
         <Grid item lg={12}>
           {selectedOption === "Matric Report" && (
             <TableContainer
               component={Paper}
-              sx={{ maxHeight: 640, height: 1200, overflow: "auto" }}
+              sx={{ maxHeight: 600, height: 1150, overflow: "auto" }}
             >
               <Table aria-label="customized table" stickyHeader>
                 <TableHead>
@@ -416,13 +431,13 @@ function Monitor() {
                       <StyledTableCell component="th" scope="row">
                         {row.name}
                       </StyledTableCell>
-                      <StyledTableCell align="left">1</StyledTableCell>
-                      <StyledTableCell align="left">5/6/2024</StyledTableCell>
-                      <StyledTableCell align="left">gbz</StyledTableCell>
-                      <StyledTableCell align="left">yes</StyledTableCell>
-                      <StyledTableCell align="left">all good</StyledTableCell>
-                      <StyledTableCell align="left">Bad</StyledTableCell>
-                      <StyledTableCell align="left">High</StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
@@ -435,11 +450,172 @@ function Monitor() {
         <Grid item lg={12}>
           {selectedOption === "Crystal Report" && (
             <Grid container sx={{ mb: 4 }}>
-              <Grid container>
-                <Grid item  lg={10} p={1}>
+              {/* Chart Buttons */}
+              <Grid container sx={{ mb: 4 }}>
+                {/* Chart Buttons */}
+                <Grid container>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: 2,
+                      marginBottom: 4,
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => setChartType("line")}
+                      color={chartType === "line" ? "primary" : "default"}
+                    >
+                      <ShowChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("bar")}
+                      color={chartType === "bar" ? "primary" : "default"}
+                    >
+                      <BarChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("pie")}
+                      color={chartType === "pie" ? "primary" : "default"}
+                    >
+                      <PieChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                  </Box>
+                  <Grid container justifyContent={"center"}>
+                    <Box>
+                      <Typography sx={{ fontSize: "30px" }}>
+                        Solar Voltage (V)
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  {chartType === "None" && (
+                    <Typography variant="h6" textAlign="center">
+                      Please select a chart type using the icons above.
+                    </Typography>
+                  )}
+                  {/* Render selected chart */}
+                  <Grid
+                    container
+                    spacing={2}
+                    sx={{ alignItems: "flex-start", marginTop: 2 }}
+                  >
+                    <Grid item lg={10} xs={8}>
+                      <Paper>
+                        <div style={{ height: "620px", width: "100%" }}>
+                          {chartType === "line" && (
+                            <Line
+                              data={chartData}
+                              options={options}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                          {chartType === "bar" && (
+                            <Bar
+                              data={chartData}
+                              options={options}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                          {chartType === "pie" && (
+                            <Pie
+                              data={chartData}
+                              options={options}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                        </div>
+                      </Paper>
+                    </Grid>
+                    <Grid item lg={2} xs={4}>
+                      <Paper>
+                        <Box
+                          sx={{
+                            maxHeight: 600,
+                            height: 1150,
+                            overflow: "auto",
+                            padding: 1,
+                          }}
+                          gap={2}
+                        >
+                          <Typography variant="h4">Well Number</Typography>
+                          <Typography variant="h4">Parameter</Typography>
+                          <Typography variant="h4">Start Date</Typography>
+                          <Typography variant="h4">End Date</Typography>
+                          <Typography variant="h4">Resolution</Typography>
+                          <Typography variant="h4">Report Type</Typography>
+                        </Box>
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    spacing={2}
+                    sx={{ alignItems: "flex-start", marginTop: 2 }}
+                  >
+                    <Grid container justifyContent={"center"}>
+                      <Box>
+                        <Typography sx={{ fontSize: "30px" }}>
+                          Battery (%)
+                        </Typography>
+                      </Box>
+                    </Grid>
+
+                    <Grid item lg={10} xs={8} mt={5}>
+                      <Paper>
+                        <div style={{ height: "620px", width: "100%" }}>
+                          {chartType === "line" && (
+                            <Line
+                              data={chartData}
+                              options={options}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                          {chartType === "bar" && (
+                            <Bar
+                              data={chartData}
+                              options={options}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                          {chartType === "pie" && (
+                            <Pie
+                              data={chartData}
+                              options={options}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                        </div>
+                      </Paper>
+                    </Grid>
+                    <Grid item lg={2} xs={4} mt={5}>
+                      <Paper>
+                        <Box
+                          sx={{
+                            maxHeight: 600,
+                            height: 1150,
+                            overflow: "auto",
+                            padding: 1,
+                          }}
+                          gap={2}
+                        >
+                          <Typography variant="h4">Well Number</Typography>
+                          <Typography variant="h4">Parameter</Typography>
+                          <Typography variant="h4">Start Date</Typography>
+                          <Typography variant="h4">End Date</Typography>
+                          <Typography variant="h4">Resolution</Typography>
+                          <Typography variant="h4">Report Type</Typography>
+                        </Box>
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid container mt={5}>
+                <Grid item lg={12} p={1}>
                   <TableContainer
                     component={Paper}
-                    sx={{ maxHeight: 640, height: 1200, overflow: "auto" }}
+                    sx={{ maxHeight: 730, height: 1150, overflow: "auto" }}
                   >
                     <Table aria-label="customized table" stickyHeader>
                       <TableHead>
@@ -497,96 +673,34 @@ function Monitor() {
                             <StyledTableCell component="th" scope="row">
                               {row.name}
                             </StyledTableCell>
-                            <StyledTableCell align="left">1</StyledTableCell>
-                            <StyledTableCell align="left">
-                              5/6/2024
-                            </StyledTableCell>
-                            <StyledTableCell align="left">gbz</StyledTableCell>
-                            <StyledTableCell align="left">yes</StyledTableCell>
-                            <StyledTableCell align="left">
-                              all good
-                            </StyledTableCell>
-                            <StyledTableCell align="left">Bad</StyledTableCell>
-                            <StyledTableCell align="left">High</StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
+                            <StyledTableCell align="left"></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
                     </Table>
                   </TableContainer>
                 </Grid>
-
-                <Grid item lg={2} p={1}>
-                  <Box border={2} borderColor="black" height="100%" gap={8}>
-                    <Typography variant="h4">Well Number</Typography>
-                    <Typography variant="h4">Parameter</Typography>
-                    <Typography variant="h4">Start Date</Typography>
-                    <Typography variant="h4">End Date</Typography>
-                    <Typography variant="h4">Resolution</Typography>
-                    <Typography variant="h4">Report Type</Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-              {/* Chart Buttons */}
-              <Grid container>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: 2,
-                    marginBottom: 4,
-                  }}
-                >
-                  <IconButton
-                    onClick={() => setChartType("line")}
-                    color={chartType === "line" ? "primary" : "default"}
-                  >
-                    <ShowChartIcon sx={{ fontSize: 40 }} />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => setChartType("bar")}
-                    color={chartType === "bar" ? "primary" : "default"}
-                  >
-                    <BarChartIcon sx={{ fontSize: 40 }} />
-                  </IconButton>
-                  <IconButton
-                    onClick={() => setChartType("pie")}
-                    color={chartType === "pie" ? "primary" : "default"}
-                  >
-                    <PieChartIcon sx={{ fontSize: 40 }} />
-                  </IconButton>
-                </Box>
-                {chartType === "None" && (
-                  <Typography variant="h6" textAlign="center">
-                    Please select a chart type using the icons above.
-                  </Typography>
-                )}
-                {/* Render selected chart */}
-                <div style={{ height: "400px", width: "100%" }}>
-                  {chartType === "line" && (
-                    <Line
-                      data={chartData}
-                      options={options}
-                      style={{ height: "100%", width: "100%" }}
-                    />
-                  )}
-                  {chartType === "bar" && (
-                    <Bar
-                      data={chartData}
-                      options={options}
-                      style={{ height: "100%", width: "100%" }}
-                    />
-                  )}
-                  {chartType === "pie" && (
-                    <Pie
-                      data={chartData}
-                      options={options}
-                      style={{ height: "100%", width: "100%" }}
-                    />
-                  )}
-                </div>
               </Grid>
             </Grid>
           )}
+        </Grid>
+        <Grid>
+          <LineChart
+            width={500}
+            height={300}
+            series={[
+              { data: pData, label: "pv" },
+              { data: uData, label: "uv" },
+              { data: wData, label: "uw" },
+            ]}
+            xAxis={[{ scaleType: "point", data: xLabels }]}
+          />
         </Grid>
       </Grid>
     </div>
