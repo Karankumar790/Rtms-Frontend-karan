@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
+  CircularProgress,
   Divider,
   Grid,
   IconButton,
   TextField,
   Typography,
 } from "@mui/material";
-import PodcastsIcon from '@mui/icons-material/Podcasts';
+import PodcastsIcon from "@mui/icons-material/Podcasts";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -289,6 +290,7 @@ function Monitor() {
   const [wellNumber, setWellNumber] = useState([2, 8]);
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line"); // Add state for chart type
+  const [loading, setLoading] = useState(true);
 
   // Handle dropdown change
   const handleDropChange = (event) => {
@@ -386,9 +388,11 @@ function Monitor() {
 
     fetchLocations();
   }, [organizationName]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true); // Start loading
         const data = await deviceData(organizationName);
         if (data.success) {
           setDeviceDataList(data.data);
@@ -398,6 +402,8 @@ function Monitor() {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
@@ -620,72 +626,54 @@ function Monitor() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* {rows?.map((row, index) => (
-                <StyledTableRow key={index}>
-                  <StyledTableCell component="th" scope="row">
-                    2
-                  </StyledTableCell>
-                  <StyledTableCell align="left">.123</StyledTableCell>
-                  <StyledTableCell align="left">2.45</StyledTableCell>
-                  <StyledTableCell align="left">3.123</StyledTableCell>
-                  <StyledTableCell align="left">2.23</StyledTableCell>
-                  <StyledTableCell align="left">6.342</StyledTableCell>
-                  <StyledTableCell align="left">1.89</StyledTableCell>
-                  <StyledTableCell align="left">Normal</StyledTableCell>
-                  <StyledTableCell align="left">
-                    <IconButton
-                      sx={{
-                        color: "grey",
-                        "&:hover": { color: "darkred" },
-                        marginRight: "5px",
-                      }}
-                      onClick={handleOpen}
-                    >
-                      <VisibilityIcon fontSize="large" />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))} */}
-              {deviceDataList?.map((device, index) => (
-                <StyledTableRow key={device._id} sx={{ height: "80px" }}>
-                  <StyledTableCell component="th" scope="row">
-                    {wellNumber[index] || "N/A"}{" "}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {device.data.NodeAdd}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {device.data.P1}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {device.data.P2}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {device.data.P3}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {device.data.Bat}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {device.data.Solar}
-                  </StyledTableCell>
-                  <StyledTableCell align="left"> {}</StyledTableCell>
-                  <StyledTableCell align="left"> {}</StyledTableCell>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={11} align="center">
+                    <CircularProgress />
+                  </TableCell>
+                </TableRow>
+              ) : (
+                deviceDataList?.map((device, index) => (
+                  <StyledTableRow key={device._id} sx={{ height: "80px" }}>
+                    <StyledTableCell component="th" scope="row">
+                      {wellNumber[index] || "N/A"}{" "}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {device.data.NodeAdd}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {device.data.P1}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {device.data.P2}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {device.data.P3}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {device.data.Bat}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {device.data.Solar}
+                    </StyledTableCell>
+                    <StyledTableCell align="left"> {}</StyledTableCell>
+                    <StyledTableCell align="left"> {}</StyledTableCell>
 
-                  <StyledTableCell align="left">
-                    <IconButton
-                      sx={{
-                        color: "grey",
-                        "&:hover": { color: "darkred" },
-                        marginRight: "5px",
-                      }}
-                      onClick={handleOpen}
-                    >
-                      <VisibilityIcon fontSize="large" />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+                    <StyledTableCell align="left">
+                      <IconButton
+                        sx={{
+                          color: "grey",
+                          "&:hover": { color: "darkred" },
+                          marginRight: "5px",
+                        }}
+                        onClick={handleOpen}
+                      >
+                        <VisibilityIcon fontSize="large" />
+                      </IconButton>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </TableContainer>
@@ -956,25 +944,45 @@ function Monitor() {
                       maxHeight: 455,
                       height: 1150,
                       overflow: "auto",
-                      paddingRight:2 ,
-                      paddingTop:1,
-                      display:"flex",
-                      flexDirection:'column',
-                      alignItems:'flex-end',
-                      gap:'0.85rem'
-
+                      paddingRight: 2,
+                      paddingTop: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                      gap: "0.85rem",
                     }}
                   >
-                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>After Beam Pressure {"(ABP)"}</Typography>
-                    <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
-                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Tubing Head Pressure {"(THP)"}</Typography>
-                    <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
-                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Cashing Head Pressure {"(CHP)"}</Typography>
-                    <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
-                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Battery {"(%)"}</Typography>
-                    <Typography variant="h4" color={'red'}>12%</Typography>
-                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Solar Voltage {"(V)"}</Typography>
-                    <Typography variant="h4" color={'green'}> 12V</Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      After Beam Pressure {"(ABP)"}
+                    </Typography>
+                    <Typography variant="h4" color={"red"}>
+                      2 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Tubing Head Pressure {"(THP)"}
+                    </Typography>
+                    <Typography variant="h4" color={"green"}>
+                      2 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Cashing Head Pressure {"(CHP)"}
+                    </Typography>
+                    <Typography variant="h4" color={"blue"}>
+                      5.326 Kg/cm<sup>2</sup>{" "}
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Battery {"(%)"}
+                    </Typography>
+                    <Typography variant="h4" color={"red"}>
+                      12%
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Solar Voltage {"(V)"}
+                    </Typography>
+                    <Typography variant="h4" color={"green"}>
+                      {" "}
+                      12V
+                    </Typography>
                   </Box>
                 </Paper>
               </Grid>
@@ -1140,7 +1148,9 @@ function Monitor() {
                   { label: "Last Update ", value: "Now" },
                 ].map((item, index) => (
                   <Grid item lg={3} key={index} sx={{ mb: 2 }}>
-                    <Typography variant="h4" color={"green"}>{item.label}</Typography>
+                    <Typography variant="h4" color={"green"}>
+                      {item.label}
+                    </Typography>
                     <Typography variant="h6">{item.value}</Typography>
                   </Grid>
                 ))}
@@ -1212,7 +1222,6 @@ function Monitor() {
           </Grid>
         </Grid>
       </Modal>
-
     </div>
   );
 }
