@@ -420,62 +420,101 @@ function Monitor() {
       {/* Conditional rendering based on report type */}
       <Grid container mt={2}>
         {/* Conditional rendering based on report type */}
-        <Grid container mt={2}>
-          {/* Show chart when no report is selected */}
-          {selectedOption === "" && (
-            <Grid item component={Paper} lg={12}>
-              {/* Chart Buttons */}
-              <Box
-                sx={{
-                  gap: 2,
-                }}
-              >
-                <IconButton
-                  onClick={() => setChartType("line")}
-                  color={chartType === "line" ? "primary" : "default"}
-                >
-                  <ShowChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-                <IconButton
-                  onClick={() => setChartType("bar")}
-                  color={chartType === "bar" ? "primary" : "default"}
-                >
-                  <BarChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-                <IconButton
-                  onClick={() => setChartType("pie")}
-                  color={chartType === "pie" ? "primary" : "default"}
-                >
-                  <PieChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              </Box>
+        {selectedOption === "" && (
+          <Grid container mt={2}>
+            {/* Show chart when no report is selected */}
+            <Grid
+              container
+              spacing={2}
+              sx={{ alignItems: "stretch", margin: 2, }}
+            >
+              <Grid item component={Paper} lg={9.5} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                <Box display={"flex"} justifyContent={"center"}>
+                  <Typography sx={{ fontSize: "30px", color: 'darkgreen' }}>Well Report</Typography>
+                </Box>
+                {/* Chart Buttons */}
+                <Box sx={{ padding: 4, flexGrow: 1 }}>
+                  <Box
+                    sx={{
+                      gap: 2,
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => setChartType("line")}
+                      color={chartType === "line" ? "primary" : "default"}
+                    >
+                      <ShowChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("bar")}
+                      color={chartType === "bar" ? "primary" : "default"}
+                    >
+                      <BarChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("pie")}
+                      color={chartType === "pie" ? "primary" : "default"}
+                    >
+                      <PieChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                  </Box>
 
-              <div style={{ height: "400px", width: "100%" }}>
-                {chartType === "line" && (
-                  <Line
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-                {chartType === "bar" && (
-                  <Bar
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-                {chartType === "pie" && (
-                  <Pie
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-              </div>
+                  <div style={{ height: "400px", width: "100%" }}>
+                    {chartType === "line" && (
+                      <Line
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "bar" && (
+                      <Bar
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "pie" && (
+                      <Pie
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                  </div>
+                </Box>
+              </Grid>
+              <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
+              <Box
+                        sx={{
+
+                          overflow: "auto",
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
+                        }}
+                      >
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1.1rem"  }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1rem"  }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1rem"  }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem"  }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1.1rem"  }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
+                      </Box>
+
+              </Grid>
             </Grid>
-          )}
-        </Grid>
+          </Grid>
+        )}
 
         {/* Matric Report  Table*/}
         <Grid item lg={12}>
@@ -604,10 +643,10 @@ function Monitor() {
 
                     {/* Sidebar Area */}
                     <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                     
+
                       <Box
                         sx={{
-                          
+
                           overflow: "auto",
                           paddingRight: 2,
                           paddingTop: 1,
@@ -618,15 +657,15 @@ function Monitor() {
 
                         }}
                       >
-                        <Typography variant="h6" sx={{ color: "#aaaaaa" }}>After Beam Pressure {"(ABP)"}</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>After Beam Pressure{"(ABP)"}</Typography>
                         <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
-                        <Typography variant="h6" sx={{ color: "#aaaaaa" }}>Tubing Head Pressure {"(THP)"}</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Tubing Head Pressure{"(THP)"}</Typography>
                         <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
-                        <Typography variant="h6" sx={{ color: "#aaaaaa" }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Cashing Head Pressure{"(CHP)"}</Typography>
                         <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
-                        <Typography variant="h6" sx={{ color: "#aaaaaa" }}>Battery {"(%)"}</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Battery {"(%)"}</Typography>
                         <Typography variant="h4" color={'red'}>12%</Typography>
-                        <Typography variant="h6" sx={{ color: "#aaaaaa" }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Solar Voltage {"(V)"}</Typography>
                         <Typography variant="h4" color={'green'}> 12V</Typography>
                       </Box>
 
@@ -642,7 +681,7 @@ function Monitor() {
                     <Grid item component={Paper} lg={9.5} xs={8} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
                       <Box display={'flex'} justifyContent={"center"}>
                         <Typography sx={{ fontSize: "30px" }}>
-                         Solar Voltage (v)
+                          Solar Voltage (v)
                         </Typography>
                       </Box>
                       {/* ----------icons---------- */}
@@ -696,22 +735,32 @@ function Monitor() {
 
                     </Grid>
                     <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
                       <Box
                         sx={{
-                          maxHeight: 665,
-                          height: 1150,
+
                           overflow: "auto",
-                          padding: 1,
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
                         }}
-                        gap={2}
                       >
-                        <Typography variant="h4">Well Number</Typography>
-                        <Typography variant="h4">Parameter</Typography>
-                        <Typography variant="h4">Start Date</Typography>
-                        <Typography variant="h4">End Date</Typography>
-                        <Typography variant="h4">Resolution</Typography>
-                        <Typography variant="h4">Report Type</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
                       </Box>
+
                     </Grid>
                   </Grid>
                   {/* -------------Graphy of  Battery (v)  ---------------- */}
@@ -780,23 +829,33 @@ function Monitor() {
                       </Box>
 
                     </Grid>
-                    <Grid item lg={2.2} xs={4} component={Paper} ml={1} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+                    <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
                       <Box
                         sx={{
-                          maxHeight: 665,
-                          height: 1150,
+
                           overflow: "auto",
-                          padding: 1,
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
                         }}
-                        gap={2}
                       >
-                        <Typography variant="h4">Well Number</Typography>
-                        <Typography variant="h4">Parameter</Typography>
-                        <Typography variant="h4">Start Date</Typography>
-                        <Typography variant="h4">End Date</Typography>
-                        <Typography variant="h4">Resolution</Typography>
-                        <Typography variant="h4">Report Type</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
                       </Box>
+
                     </Grid>
                   </Grid>
                 </Grid>
