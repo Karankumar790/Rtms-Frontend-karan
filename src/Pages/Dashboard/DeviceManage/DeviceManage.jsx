@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, IconButton, Paper, Typography } from "@mui/material";
+import { CircularProgress, Grid, IconButton, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -93,46 +93,34 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
- 
-];
-
-
+const rows = [];
 
 function DeviceManage() {
   const organizationName = useSelector((state) => state.auth.organization);
   const [deviceDataList, setDeviceDataList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   // Fetch data on component mount
-  //   const fetchData = async () => {
-  //     const data = await deviceData(organizationName);
-  //     if (data.success) {
-  //       setDeviceDataList(data.data);
-  //     } else {
-  //       console.error("Failed to fetch data");
-  //     }
-  //   };
-  //   fetchData();
-  // }, [organizationName]);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true); // Start loading
         const data = await deviceData(organizationName);
         if (data.success) {
           setDeviceDataList(data.data);
-          localStorage.setItem('deviceDataList', JSON.stringify(data.data));
+          localStorage.setItem("deviceDataList", JSON.stringify(data.data));
         } else {
           console.error("Failed to fetch data");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false); // End loading
       }
     };
-  
+
     fetchData();
   }, [organizationName]);
-  
+
   return (
     <div>
       <Grid
@@ -187,7 +175,6 @@ function DeviceManage() {
           >
             <Table aria-label="customized table" stickyHeader>
               <TableHead>
-                
                 <TableRow>
                   <StyledTableCell sx={{ fontSize: "18px" }} align="left">
                     Client ID{" "}
@@ -227,11 +214,10 @@ function DeviceManage() {
                   </StyledTableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              {/* <TableBody>
                 {deviceDataList?.map((device) => (
                 <StyledTableRow key={device._id} sx={{height: "80px"}}>
                   <StyledTableCell component="th" scope="row">
-                    {/* {device.data.OrgID} */}
                     1
                   </StyledTableCell>
                   <StyledTableCell align="left">{device.data.NodeAdd}</StyledTableCell>
@@ -253,6 +239,59 @@ function DeviceManage() {
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
+              </TableBody> */}
+              <TableBody>
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={11} align="center">
+                      <CircularProgress />
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  deviceDataList?.map((device) => (
+                    <StyledTableRow key={device._id} sx={{ height: "80px" }}>
+                      <StyledTableCell component="th" scope="row">
+                        1
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.NodeAdd}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.NodeAdd}
+                      </StyledTableCell>
+                      <StyledTableCell align="left"></StyledTableCell>
+                      <StyledTableCell align="left">1 min</StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.P1}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.P2}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.P3}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.Bat}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        <Link to="/dashboard/Lora">
+                          <IconButton
+                            sx={{
+                              color: "grey",
+                              "&:hover": { color: "darkred" },
+                              marginRight: "5px",
+                            }}
+                          >
+                            <SettingsIcon fontSize="large" />
+                          </IconButton>
+                        </Link>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))
+                )}
               </TableBody>
             </Table>
           </TableContainer>
