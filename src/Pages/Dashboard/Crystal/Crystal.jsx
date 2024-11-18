@@ -185,6 +185,98 @@ function Monitor() {
     },
   };
 
+  const [chartTypess, setChartTypess] = useState("line"); // Add state for chart type
+
+  // Handle dropdown change
+  const handleDropChangess = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const chartDataes = {
+    labels: ["January", "February", "March", "April", "May"],
+    datasets: [
+      {
+        label: "Sample Data",
+        data: [65, 59, 80, 81, 56],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 1)",
+          "rgba(255, 159, 64, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const lineChartOptionss = {
+    chart: {
+      type: "line",
+    },
+    stroke: {
+      width: 2, // Adjust the width here
+    },
+    xaxis: {
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    },
+  };
+
+  const lineChartSeriess = [
+    {
+      name: "Sales",
+      data: [30, 40, 35, 50, 49, 60, 70],
+    },
+  ];
+
+  const optionss = {
+    responsive: true, // makes the chart responsive
+    maintainAspectRatio: false, // important for custom sizing
+    plugins: {
+      tooltip: {
+        enabled: true,
+      },
+    },
+  };
+
+  const [chartTypes, setChartTypes] = useState("");
+
+  // Sample Data for Pressure Readings
+  const chartDatas = {
+    labels: ["Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4", "Sensor 5"],
+    datasets: [
+      {
+        label: "ABP",
+        data: [65, 59, 80, 81, 56],
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "THP",
+        data: [45, 70, 60, 40, 50],
+        backgroundColor: "rgba(255, 159, 64, 0.2)",
+        borderColor: "rgba(255, 159, 64, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "CHP",
+        data: [25, 50, 40, 60, 30],
+        backgroundColor: "rgba(153, 102, 255, 0.2)",
+        borderColor: "rgba(153, 102, 255, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
   return (
     <div>
       {/* Dropdown to select report type */}
@@ -219,7 +311,6 @@ function Monitor() {
                 </Select>
               </FormControl>
             </Grid>
-
             <Grid item sm={6} md={3} xs={12} lg={2}>
               <FormControl fullWidth size="small">
                 <InputLabel id="demo-select-large-label">Parameter</InputLabel>
@@ -329,65 +420,101 @@ function Monitor() {
       {/* Conditional rendering based on report type */}
       <Grid container mt={2}>
         {/* Conditional rendering based on report type */}
-        <Grid container mt={2}>
-          {/* Show chart when no report is selected */}
-          {selectedOption === "" && (
-            <Grid item lg={12}>
-              {/* Chart Buttons */}
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: 2,
-                  marginBottom: 4,
-                }}
-              >
-                <IconButton
-                  onClick={() => setChartType("line")}
-                  color={chartType === "line" ? "primary" : "default"}
-                >
-                  <ShowChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-                <IconButton
-                  onClick={() => setChartType("bar")}
-                  color={chartType === "bar" ? "primary" : "default"}
-                >
-                  <BarChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-                <IconButton
-                  onClick={() => setChartType("pie")}
-                  color={chartType === "pie" ? "primary" : "default"}
-                >
-                  <PieChartIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              </Box>
+        {selectedOption === "" && (
+          <Grid container mt={2}>
+            {/* Show chart when no report is selected */}
+            <Grid
+              container
+              spacing={2}
+              sx={{ alignItems: "stretch", margin: 2, }}
+            >
+              <Grid item component={Paper} lg={9.5} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                <Box display={"flex"} justifyContent={"center"}>
+                  <Typography sx={{ fontSize: "30px", color: 'darkgreen' }}>Well Report</Typography>
+                </Box>
+                {/* Chart Buttons */}
+                <Box sx={{ padding: 4, flexGrow: 1 }}>
+                  <Box
+                    sx={{
+                      gap: 2,
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => setChartType("line")}
+                      color={chartType === "line" ? "primary" : "default"}
+                    >
+                      <ShowChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("bar")}
+                      color={chartType === "bar" ? "primary" : "default"}
+                    >
+                      <BarChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("pie")}
+                      color={chartType === "pie" ? "primary" : "default"}
+                    >
+                      <PieChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                  </Box>
 
-              <div style={{ height: "400px", width: "100%" }}>
-                {chartType === "line" && (
-                  <Line
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-                {chartType === "bar" && (
-                  <Bar
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-                {chartType === "pie" && (
-                  <Pie
-                    data={chartData}
-                    options={options}
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                )}
-              </div>
+                  <div style={{ height: "400px", width: "100%" }}>
+                    {chartType === "line" && (
+                      <Line
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "bar" && (
+                      <Bar
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "pie" && (
+                      <Pie
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                  </div>
+                </Box>
+              </Grid>
+              <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
+              <Box
+                        sx={{
+
+                          overflow: "auto",
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
+                        }}
+                      >
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1.1rem"  }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1rem"  }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1rem"  }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem"  }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography  sx={{ color: "#aaaaaa", fontSize: "1.1rem"  }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
+                      </Box>
+
+              </Grid>
             </Grid>
-          )}
-        </Grid>
+          </Grid>
+        )}
 
         {/* Matric Report  Table*/}
         <Grid item lg={12}>
@@ -449,119 +576,233 @@ function Monitor() {
         {/* Crystal Report */}
         <Grid item lg={12}>
           {selectedOption === "Crystal Report" && (
-            <Grid container sx={{ mb: 4 }}>
+            <Grid container sx={{ mb: 1 }}>
               {/* Chart Buttons */}
-              <Grid container sx={{ mb: 4 }}>
+              <Grid container >
                 {/* Chart Buttons */}
-                <Grid container>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: 2,
-                      marginBottom: 4,
-                    }}
-                  >
-                    <IconButton
-                      onClick={() => setChartType("line")}
-                      color={chartType === "line" ? "primary" : "default"}
-                    >
-                      <ShowChartIcon sx={{ fontSize: 40 }} />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => setChartType("bar")}
-                      color={chartType === "bar" ? "primary" : "default"}
-                    >
-                      <BarChartIcon sx={{ fontSize: 40 }} />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => setChartType("pie")}
-                      color={chartType === "pie" ? "primary" : "default"}
-                    >
-                      <PieChartIcon sx={{ fontSize: 40 }} />
-                    </IconButton>
-                  </Box>
-                  <Grid container justifyContent={"center"}>
-                    <Box>
-                      <Typography sx={{ fontSize: "30px" }}>
-                        Solar Voltage (V)
-                      </Typography>
-                    </Box>
-                  </Grid>
-                  {chartType === "None" && (
-                    <Typography variant="h6" textAlign="center">
-                      Please select a chart type using the icons above.
-                    </Typography>
-                  )}
+                <Grid container >
                   {/* Render selected chart */}
                   <Grid
                     container
                     spacing={2}
-                    sx={{ alignItems: "flex-start", marginTop: 2 }}
+                    sx={{ alignItems: "stretch", margin: 2, }}
                   >
-                    <Grid item lg={10} xs={8}>
-                      <Paper>
+                    {/* Main Chart Area */}
+                    <Grid item component={Paper} lg={9.5} xs={8} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                      <Box display={"flex"} justifyContent={"center"}>
+                        <Typography sx={{ fontSize: "30px" }}>Pressure (ABP/THP/CHP)</Typography>
+                      </Box>
+                      <Box sx={{ padding: 4, flexGrow: 1 }}>
+                        {/* Chart Selection Buttons */}
+                        <Box sx={{ display: "flex", gap: 2 }}>
+                          <IconButton
+                            onClick={() => setChartTypes("line")}
+                            color={chartTypes === "line" ? "primary" : "default"}
+                          >
+                            <ShowChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setChartTypes("bar")}
+                            color={chartTypes === "bar" ? "primary" : "default"}
+                          >
+                            <BarChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setChartTypes("pie")}
+                            color={chartTypes === "pie" ? "primary" : "default"}
+                          >
+                            <PieChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                        </Box>
                         <div style={{ height: "620px", width: "100%" }}>
-                          {chartType === "line" && (
+                          {chartTypes === "line" && (
                             <Line
-                              data={chartData}
+                              data={chartDatas}
                               options={options}
                               style={{ height: "100%", width: "100%" }}
                             />
                           )}
-                          {chartType === "bar" && (
+                          {chartTypes === "bar" && (
                             <Bar
-                              data={chartData}
+                              data={chartDatas}
                               options={options}
                               style={{ height: "100%", width: "100%" }}
                             />
                           )}
-                          {chartType === "pie" && (
+                          {chartTypes === "pie" && (
                             <Pie
-                              data={chartData}
+                              data={chartDatas}
                               options={options}
                               style={{ height: "100%", width: "100%" }}
                             />
                           )}
                         </div>
-                      </Paper>
+
+                      </Box>
                     </Grid>
-                    <Grid item lg={2} xs={4}>
-                      <Paper>
-                        <Box
-                          sx={{
-                            maxHeight: 600,
-                            height: 1150,
-                            overflow: "auto",
-                            padding: 1,
-                          }}
-                          gap={2}
-                        >
-                          <Typography variant="h4">Well Number</Typography>
-                          <Typography variant="h4">Parameter</Typography>
-                          <Typography variant="h4">Start Date</Typography>
-                          <Typography variant="h4">End Date</Typography>
-                          <Typography variant="h4">Resolution</Typography>
-                          <Typography variant="h4">Report Type</Typography>
-                        </Box>
-                      </Paper>
+
+                    {/* Sidebar Area */}
+                    <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
+                      <Box
+                        sx={{
+
+                          overflow: "auto",
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
+                        }}
+                      >
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
+                      </Box>
+
                     </Grid>
                   </Grid>
+
+                  {/* -------------Graphy of  Voltage (v)  ---------------- */}
                   <Grid
                     container
                     spacing={2}
-                    sx={{ alignItems: "flex-start", marginTop: 2 }}
+                    sx={{ alignItems: "flex-start", margin: 2 }}
                   >
-                    <Grid container justifyContent={"center"}>
-                      <Box>
+                    <Grid item component={Paper} lg={9.5} xs={8} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                      <Box display={'flex'} justifyContent={"center"}>
+                        <Typography sx={{ fontSize: "30px" }}>
+                          Solar Voltage (v)
+                        </Typography>
+                      </Box>
+                      {/* ----------icons---------- */}
+                      <Box sx={{ padding: 4, flexGrow: 1 }}>
+                        <Box
+                          sx={{ display: "flex", gap: 2 }}
+                        >
+                          <IconButton
+                            onClick={() => setChartTypess("line")}
+                            color={chartTypess === "line" ? "primary" : "default"}
+                          >
+                            <ShowChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setChartTypess("bar")}
+                            color={chartTypess === "bar" ? "primary" : "default"}
+                          >
+                            <BarChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setChartTypess("pie")}
+                            color={chartTypess === "pie" ? "primary" : "default"}
+                          >
+                            <PieChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                        </Box>
+                        <div style={{ height: "620px", width: "100%" }}>
+                          {chartTypess === "line" && (
+                            <Line
+                              data={chartDataes}
+                              options={optionss}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                          {chartTypess === "bar" && (
+                            <Bar
+                              data={chartDataes}
+                              options={optionss}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                          {chartTypess === "pie" && (
+                            <Pie
+                              data={chartDataes}
+                              options={optionss}
+                              style={{ height: "100%", width: "100%" }}
+                            />
+                          )}
+                        </div>
+                      </Box>
+
+                    </Grid>
+                    <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
+                      <Box
+                        sx={{
+
+                          overflow: "auto",
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
+                        }}
+                      >
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
+                      </Box>
+
+                    </Grid>
+                  </Grid>
+                  {/* -------------Graphy of  Battery (v)  ---------------- */}
+                  <Grid
+                    container
+                    spacing={2}
+                    sx={{ alignItems: "flex-start", margin: 2, }}
+                  >
+
+                    <Grid item component={Paper} lg={9.5} xs={8} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                      <Box display={'flex'} justifyContent={"center"}>
                         <Typography sx={{ fontSize: "30px" }}>
                           Battery (%)
                         </Typography>
                       </Box>
-                    </Grid>
-
-                    <Grid item lg={10} xs={8} mt={5}>
-                      <Paper>
+                      {/* ----------icons---------- */}
+                      <Box sx={{ padding: 4, flexGrow: 1 }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            gap: 2,
+                          }}
+                        >
+                          <IconButton
+                            onClick={() => setChartType("line")}
+                            color={chartType === "line" ? "primary" : "default"}
+                          >
+                            <ShowChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setChartType("bar")}
+                            color={chartType === "bar" ? "primary" : "default"}
+                          >
+                            <BarChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setChartType("pie")}
+                            color={chartType === "pie" ? "primary" : "default"}
+                          >
+                            <PieChartIcon sx={{ fontSize: 40 }} />
+                          </IconButton>
+                        </Box>
                         <div style={{ height: "620px", width: "100%" }}>
                           {chartType === "line" && (
                             <Line
@@ -585,27 +826,36 @@ function Monitor() {
                             />
                           )}
                         </div>
-                      </Paper>
+                      </Box>
+
                     </Grid>
-                    <Grid item lg={2} xs={4} mt={5}>
-                      <Paper>
-                        <Box
-                          sx={{
-                            maxHeight: 600,
-                            height: 1150,
-                            overflow: "auto",
-                            padding: 1,
-                          }}
-                          gap={2}
-                        >
-                          <Typography variant="h4">Well Number</Typography>
-                          <Typography variant="h4">Parameter</Typography>
-                          <Typography variant="h4">Start Date</Typography>
-                          <Typography variant="h4">End Date</Typography>
-                          <Typography variant="h4">Resolution</Typography>
-                          <Typography variant="h4">Report Type</Typography>
-                        </Box>
-                      </Paper>
+                    <Grid item component={Paper} ml={1} lg={2.2} xs={4} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+
+                      <Box
+                        sx={{
+
+                          overflow: "auto",
+                          paddingRight: 2,
+                          paddingTop: 1,
+                          display: "flex",
+                          flexDirection: 'column',
+                          alignItems: 'flex-end',
+                          gap: '2rem'
+
+                        }}
+                      >
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>After Beam Pressure{"(ABP)"}</Typography>
+                        <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Tubing Head Pressure{"(THP)"}</Typography>
+                        <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1rem" }}>Cashing Head Pressure{"(CHP)"}</Typography>
+                        <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Battery {"(%)"}</Typography>
+                        <Typography variant="h4" color={'red'}>12%</Typography>
+                        <Typography sx={{ color: "#aaaaaa", fontSize: "1.1rem" }}>Solar Voltage {"(V)"}</Typography>
+                        <Typography variant="h4" color={'green'}> 12V</Typography>
+                      </Box>
+
                     </Grid>
                   </Grid>
                 </Grid>
@@ -691,16 +941,7 @@ function Monitor() {
           )}
         </Grid>
         <Grid>
-          <LineChart
-            width={500}
-            height={300}
-            series={[
-              { data: pData, label: "pv" },
-              { data: uData, label: "uv" },
-              { data: wData, label: "uw" },
-            ]}
-            xAxis={[{ scaleType: "point", data: xLabels }]}
-          />
+
         </Grid>
       </Grid>
     </div>

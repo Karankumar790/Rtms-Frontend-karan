@@ -84,6 +84,8 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role);
   const organizationLogo = localStorage.getItem("organizationLogo");
 
+  console.log("logo", organizationLogo)
+
   const menuItems = [
     {
       name: "Admin",
@@ -115,12 +117,12 @@ export default function Sidebar({
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
-    {
-      name: "LoRa Gateway",
-      icon: <Networkicon sx={{ color: "black" }} />,
-      path: "/dashboard/Network",
-      roles: ["owner", "manager", "employee"],
-    },
+    // {
+    //   name: "LoRa Gateway",
+    //   icon: <Networkicon sx={{ color: "black" }} />,
+    //   path: "/dashboard/Network",
+    //   roles: ["owner", "manager", "employee"],
+    // },
     {
       name: "Well Monitor",
       icon: <WellmonitorIcon sx={{ color: "black" }} />,

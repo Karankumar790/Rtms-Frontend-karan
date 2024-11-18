@@ -53,8 +53,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name) {
+  return { name };
 }
 
 const rows = [createData("1")];

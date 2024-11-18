@@ -9,6 +9,7 @@ import {
   IconButton,
   Typography,
   CircularProgress,
+  Checkbox,
 } from "@mui/material";
 import { Card } from "@mui/joy";
 // -------------import for table--------------------------------//
@@ -23,7 +24,7 @@ import Paper from "@mui/material/Paper";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
-import { Box } from "@mui/system";
+import { Box, width } from "@mui/system";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useSelector } from "react-redux";
 import {
@@ -34,6 +35,13 @@ import {
   rejectByManager,
   rejectByOwner,
 } from "../../../apis/Service";
+import MailIcon from '@mui/icons-material/Mail';
+import CreateIcon from '@mui/icons-material/Create';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { List, ListItem } from "flowbite-react";
+
+
 // ---------FUNCTIONS OF TABLE--------------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -190,6 +198,21 @@ export default function BasicCard() {
     setSelectedUser(null);
   };
 
+
+  const [data] = useState([
+    { id: 1, title: 'Sample Data Item 1' },
+    { id: 2, title: 'Sample Data Item 2' },
+    { id: 3, title: 'Sample Data Item 3' },
+    { id: 4, title: 'Sample Data Item 4' },
+    { id: 5, title: 'Sample Data Item 5' },
+    { id: 6, title: 'Sample Data Item 6' },
+    { id: 7, title: 'Sample Data Item 7' },
+    { id: 8, title: 'Sample Data Item 8' },
+    { id: 9, title: 'Sample Data Item 9' },
+    { id: 10, title: 'Sample Data Item 10' },
+  ]);
+
+
   return (
     <Grid container spacing={2} p={2}>
       <Grid item xs={12} container alignItems="center">
@@ -202,7 +225,7 @@ export default function BasicCard() {
       </Grid>
 
       {/* Loading and Error States */}
-      <Grid item xs={12}>
+       <Grid item xs={12}>
         {loading && (
           <Box display="flex" justifyContent="center" my={2}>
             <CircularProgress />
@@ -234,20 +257,17 @@ export default function BasicCard() {
               <Grid container mt={2} direction="column">
                 {users?.map((user, index) => (
                   <Grid container key={user._id || index} mb={2}>
-                    {/* Header Section */}
                     <StyledGridItem item xs={4}>
                       <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                         {`User ${index + 1}`}
                       </Typography>
                     </StyledGridItem>
-                    {/* Content Section */}
                     <StyledContent item xs={8}>
                       <Typography variant="body1">{user.username}</Typography>
                       <Typography variant="body1">{user.email}</Typography>
                       <Typography variant="body1">
                         {user.contactNumber}
                       </Typography>
-                      {/* Add more fields as necessary */}
                       <IconButton
                         onClick={() => handleClickOpen(user)}
                         sx={{
@@ -265,7 +285,6 @@ export default function BasicCard() {
             </Paper>
           </TabPanel>
           <TabPanel>
-            {/* Add Well Approval Content Here */}
             <Typography variant="body1">Add Well Approval Content</Typography>
           </TabPanel>
         </Tabs>
@@ -347,7 +366,6 @@ export default function BasicCard() {
                             >
                               <RemoveRedEyeIcon fontSize="large" />
                             </IconButton>
-                            {/* Add more action buttons if needed */}
                           </Box>
                         </StyledTableCell>
                       </StyledTableRow>
@@ -357,7 +375,6 @@ export default function BasicCard() {
               </TableContainer>
             </TabPanel>
             <TabPanel>
-              {/* Add Well Approval Content Here */}
               <Typography variant="body1">Add Well Approval Content</Typography>
             </TabPanel>
           </Tabs>
@@ -486,7 +503,62 @@ export default function BasicCard() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Grid>
+
+      {/* Header Section */}
+      {/* <Grid container justifyContent="end">
+
+        <Box>
+          <IconButton color="primary">
+            <MailIcon sx={{ fontSize: '30px' }} />
+          </IconButton>
+          <IconButton color="primary">
+            <CreateIcon sx={{ fontSize: '30px' }} />
+          </IconButton>
+          <IconButton color="primary">
+            <DraftsIcon sx={{ fontSize: '30px' }} />
+          </IconButton>
+          <IconButton color="primary">
+            <DeleteIcon sx={{ fontSize: '30px' }} />
+          </IconButton>
+        </Box>
+      </Grid>
+      <Grid container sx={{ width: '100%', height: '80vh' }}>
+        <Box
+          sx={{
+            border: '1px solid #ddd',
+            borderRadius: '8px',
+            padding: '16px',
+            boxShadow: 3,
+            backgroundColor: '#fff',
+            position: 'relative',
+            width: '100%', // Full width
+            height: '100%', // Full height of the container
+            overflowY: 'auto', // Add scrolling if content overflows
+          }}
+        >
+          {/* Content Section */}
+          {/* {data.map((item) => (
+            <Box
+              key={item.id}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                borderBottom: '1px solid #f0f0f0',
+                padding: '8px 0',
+              }}
+            >
+              <Checkbox />
+              <Typography variant="body1" sx={{ fontWeight: 'medium', marginLeft: '8px' }}>
+                {item.title}
+              </Typography>
+            </Box>
+          ))}
+        </Box> */}
+
+      {/* </Grid>  */}
+
+
+    </Grid> 
   );
 }
 

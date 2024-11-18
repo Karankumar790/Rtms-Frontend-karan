@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import PodcastsIcon from '@mui/icons-material/Podcasts';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -20,9 +21,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
-import { Box, height } from "@mui/system";
+import { borderRadius, Box, height, width } from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
+import NotificationsIcon from "@mui/icons-material/NotificationsActive";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import PieChartIcon from "@mui/icons-material/PieChart";
+import { LineChart } from "@mui/x-charts/LineChart";
 import {
   deviceData,
   getAllInstallation,
@@ -31,15 +37,67 @@ import {
 } from "../../../apis/WellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
+import { Line, Bar, Pie } from "react-chartjs-2";
+import GeoIcon from "@mui/icons-material/Place";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
+import PendingIcon from "@mui/icons-material/Pending";
+// Registering the necessary components for chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend
+);
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
+
   transform: "translate(-50%, -50%)",
-  // CardOverflow:'scr',
+  CardOverflow: "scroll",
+  overflowY: "scroll",
+  height: "70vh",
   // width: "35%",
   // bgcolor: "background.paper",
+  // bgcolor={"yellow"}
+
+  bgcolor: "white",
+  // border: "2px solid black",
+  // boxShadow: 24,
+  // p: 2,
+};
+
+const containerStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+
+  transform: "translate(-50%, -50%)",
+
+  height: "75vh",
+  // width: "35%",
+  // bgcolor: "background.paper",
+  // bgcolor={"yellow"}
+  borderRadius: "1rem",
   bgcolor: "white",
   // border: "2px solid black",
   boxShadow: 24,
@@ -136,6 +194,49 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const initialData = [
+  {
+    employeeId: "01",
+    Parameter: "GIP (Kg/Cm²)",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
+  },
+  {
+    employeeId: "02",
+    Parameter: "CHP (Kg/Cm²)",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
+  },
+  {
+    employeeId: "03",
+    Parameter: "THP (Kg/Cm²)",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
+  },
+  {
+    employeeId: "05",
+    Parameter: "Battery (%)",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
+  },
+  {
+    employeeId: "06",
+    Parameter: "Solar (V)",
+    NormalAlert: "",
+    CriticalAlert: "",
+    Condition: "",
+    Description: "",
+  },
+];
+
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -144,6 +245,32 @@ const rows = [
   createData("1"),
   // createData("2"),
 ];
+
+// Sample chart data for both charts
+const chartData = {
+  labels: ["January", "February", "March", "April", "May"],
+  datasets: [
+    {
+      label: "Sample Data",
+      data: [65, 59, 80, 81, 56],
+      backgroundColor: [
+        "rgba(75, 192, 192, 0.2)",
+        "rgba(255, 159, 64, 0.2)",
+        "rgba(54, 162, 235, 0.2)",
+        "rgba(255, 206, 86, 0.2)",
+        "rgba(153, 102, 255, 0.2)",
+      ],
+      borderColor: [
+        "rgba(75, 192, 192, 1)",
+        "rgba(255, 159, 64, 1)",
+        "rgba(54, 162, 235, 1)",
+        "rgba(255, 206, 86, 1)",
+        "rgba(153, 102, 255, 1)",
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 
 function Monitor() {
   const [age, setAge] = React.useState("");
@@ -155,28 +282,18 @@ function Monitor() {
   const handleClose = () => setOpen(false);
   const organizationName = useSelector((state) => state.auth.organization);
   const [locations, setLocations] = useState([]);
-  const [allLocForPosItion, setAllLocForPosItion] = useState("");
   const [selectedInstallation, setSelectedInstallation] = useState("");
   const [installations, setInstallations] = useState([]);
   const [allLocForWell, setAllLocForWell] = useState("");
-  // const [deviceDataList, setDeviceDataList] = useState("");
   const [deviceDataList, setDeviceDataList] = useState([]);
   const [wellNumber, setWellNumber] = useState([2, 8]);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [chartType, setChartType] = useState("line"); // Add state for chart type
 
-  // const [rows, setRows] = useState([]);
-
-  // useEffect(() => {
-  //   const monitorTable = async () => {
-  //      try {
-  //       const response = await wellMonitorData(organizationName);
-  //       setRows(response.wellData);
-  //      } catch (error) {
-  //       console.error("There is an issue for fetching data",error)
-  //      }
-  //   };
-  //   monitorTable();
-  // },[]);
-
+  // Handle dropdown change
+  const handleDropChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
   // fetching installation
   const handleLocationChange = async (event) => {
     const selectedLocation = event.target.value;
@@ -218,13 +335,53 @@ function Monitor() {
     setNumber(event.target.value);
   };
 
+  const [employeeData, setEmployeeData] = useState(initialData);
+
+  const onChangeInput = (e, employeeId) => {
+    const { name, value } = e.target;
+
+    const editData = employeeData.map((item) =>
+      item.employeeId === employeeId ? { ...item, [name]: value } : item
+    );
+
+    setEmployeeData(editData);
+  };
+
+  const lineChartOptions = {
+    chart: {
+      type: "line",
+    },
+    stroke: {
+      width: 2, // Adjust the width here
+    },
+    xaxis: {
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    },
+  };
+
+  const lineChartSeries = [
+    {
+      name: "Sales",
+      data: [30, 40, 35, 50, 49, 60, 70],
+    },
+  ];
+
+  const options = {
+    responsive: true, // makes the chart responsive
+    maintainAspectRatio: false, // important for custom sizing
+    plugins: {
+      tooltip: {
+        enabled: true,
+      },
+    },
+  };
+
   useEffect(() => {
     const fetchLocations = async () => {
       const data = await getLocation(organizationName);
       if (data && data.message === "Well locations fetched successfully") {
         setLocations(data.data);
       }
-      console.log("Retrieved data::::::::::::::::::::::::::::::::");
     };
 
     fetchLocations();
@@ -247,6 +404,31 @@ function Monitor() {
     fetchData();
   }, [organizationName]);
 
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+    iconRetinaUrl:
+      "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+  });
+
+  function ChangeMapView({ coords }) {
+    const map = useMap();
+    map.setView(coords, 12); // Adjust zoom level as needed
+    return null;
+  }
+
+  const [coords, setCoords] = useState([0, 0]); // Initial coordinates
+
+  useEffect(() => {
+    // Retrieve coordinates from local storage
+    const lat = parseFloat(localStorage.getItem("latitude"));
+    const lng = parseFloat(localStorage.getItem("longitude"));
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+      setCoords([lat, lng]); // Set the coordinates from local storage
+    }
+  }, []); // Only run on mount
   return (
     <div
       style={{
@@ -268,20 +450,6 @@ function Monitor() {
       {/* ------------------------Inputs------------------------------------------------ */}
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={3}>
-          {/* <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">Well Location</InputLabel>
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-large"
-              value={age}
-              label="Well Location"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl> */}
           <FormControl fullWidth size="small">
             <InputLabel id="location-label">Locations</InputLabel>
             <Select
@@ -311,26 +479,6 @@ function Monitor() {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={3}>
-          {/* <FormControl fullWidth size="small">
-            <InputLabel id="demo-select-large-label">
-              Well Installation
-            </InputLabel>
-            <Select
-              labelId="installation-select-label"
-              id="installation-select"
-              value={installation}
-              label="Well Installation"
-              onChange={handleInstallationChange}
-              disabled={!selectedLocation} // Disable if no location is selected
-            >
-              <MenuItem value="">
-                <em>All</em>
-              </MenuItem>
-              <MenuItem value={10}>UP</MenuItem>
-              <MenuItem value={20}>MP</MenuItem>
-              <MenuItem value={30}>WB</MenuItem>
-            </Select>
-          </FormControl> */}
           <FormControl fullWidth size="small">
             <InputLabel id="installation-label">Installation</InputLabel>
             <Select
@@ -349,7 +497,7 @@ function Monitor() {
               }}
             >
               {installations.length > 0 ? (
-                installations.map((installation, index) => (
+                installations?.map((installation, index) => (
                   <MenuItem key={index} value={installation}>
                     {installation}
                   </MenuItem>
@@ -498,7 +646,7 @@ function Monitor() {
                   </StyledTableCell>
                 </StyledTableRow>
               ))} */}
-              {deviceDataList.map((device, index) => (
+              {deviceDataList?.map((device, index) => (
                 <StyledTableRow key={device._id} sx={{ height: "80px" }}>
                   <StyledTableCell component="th" scope="row">
                     {wellNumber[index] || "N/A"}{" "}
@@ -623,197 +771,448 @@ function Monitor() {
         </Paper>
       </Grid>
 
-      <Modal open={open}>
-        <Grid
-          container
-          lg={5}
-          md={8}
-          sm={10}
-          xs={12}
-          borderRadius={3}
-          overflow="auto"
-          height="70vh"
-          sx={style}
-          mx={2}
-        >
-          <Box
-            width={"100%"}
-            sx={{ display: "flex", justifyContent: "center" }}
+      <Modal open={open} onClose={handleClose}>
+        <Grid container lg={8.1} sx={containerStyle}>
+          <Grid
+            container
+            lg={11.9}
+            md={8}
+            sm={10}
+            xs={12}
+            borderRadius={3}
+            overflow="auto"
+            // height="70vh"
+            sx={style}
+            // mx={2}
           >
-            <Typography
-              variant="h4"
-              component="h2"
-              sx={{ fontStyle: "oblique" }}
-            >
-              Well Details
+            {/*---------------- input field -------------------     */}
+            {/* <Box
+                      width={"100%"}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        // my: 2,
+                        // bgcolor: "pink",
+                      }}
+                    >
+                      <Typography variant="h4" component="h2">
+                        Well Number
+                      </Typography>
+                    </Box> */}
+            <Grid container>
+              {/* Header */}
+
+              <Paper sx={{ width: "100%", mt: "20px", mx: "14px" }}>
+                <Grid container gap={2}>
+                  <Grid
+                    item
+                    lg={2}
+                    md={3}
+                    sm={6}
+                    xs={12}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    // bgcolor='pink'
+                  >
+                    <img
+                      src={well}
+                      alt="img"
+                      height={"150px"}
+                      width={"150px"}
+                    />
+                  </Grid>
+                  <Grid item lg={9}>
+                    <Grid container>
+                      <Grid lg={12} md={3} sm={6} xs={12} p={2}>
+                        <Box
+                          width={"100%"}
+                          sx={{
+                            display: "flex",
+                            justifyContent: "start",
+                            // my: 2,
+                            // bgcolor: "pink",
+                          }}
+                        >
+                          <Typography variant="h4" component="h2">
+                            Well Number
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      {/* Second Section: Location and Installation */}
+                      <Grid item lg={4} md={3} sm={6} xs={12} p={2}>
+                        {[
+                          { label: "Location :", value: "" },
+                          { label: "Installation :", value: "" },
+                        ].map((item, index) => (
+                          <Box key={index} sx={{ mb: 2 }}>
+                            <Typography variant="h5">{item.label}</Typography>
+                            {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
+                          </Box>
+                        ))}
+                      </Grid>
+
+                      {/* Third Section: Well Type and Landmark */}
+                      <Grid item lg={4} md={3} sm={6} xs={12} p={2}>
+                        {[
+                          { label: "Well Type :", value: "" },
+                          { label: "Landmark :", value: "" },
+                        ].map((item, index) => (
+                          <Box key={index} sx={{ mb: 2 }}>
+                            <Typography variant="h5">{item.label}</Typography>
+                            {/* <TextField size="small" fullWidth value={item.value} /> */}
+                          </Box>
+                        ))}
+                      </Grid>
+
+                      {/* Fourth Section: Status and Last Update */}
+                      <Grid item lg={4} md={3} sm={6} xs={12} p={2}>
+                        {[
+                          { label: "Status :", value: "" },
+                          { label: "Last Update :", value: "" },
+                        ].map((item, index) => (
+                          <Box key={index} sx={{ mb: 2 }}>
+                            <Typography variant="h5">{item.label}</Typography>
+                            {/* <TextField size="small" fullWidth value={item.value} /> */}
+                          </Box>
+                        ))}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+
+            {/* ---------chart----------------------------- ------------- */}
+            {/* <Grid container mt={5}>
+            <IconButton>
+              <DataThresholdingIcon sx={{ fontSize: "40px", color: "red" }} />
+            </IconButton>
+            <Typography variant="h4" mt={1}>
+              Data Graphs
             </Typography>
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <Grid container sx={{ display: "flex", gap: 3 }}>
-              {/* First Column */}
-              <Grid
-                lg={5.5}
-                md={5.5}
-                sm={6}
-                xs={12}
-                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-              >
-                {[
-                  { label: "Well Number :", value: "1" },
-                  { label: "Location :", value: "" },
-                  { label: "Well Type :", value: "" },
-                  { label: "Installation :", value: "" },
-                ]?.map((item, index) => (
+          </Grid> */}
+            <Grid container p={2} mt={3}>
+              <Grid item lg={9}>
+                {/* Chart Buttons */}
+                <Paper elevation={2} sx={{ pb: "5px" }}>
                   <Box
-                    key={index}
-                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "start",
+                      gap: 2,
+                      // marginBottom: 1,
+                    }}
                   >
-                    <Typography variant="h6" width={"250px"}>
-                      {item.label}
-                    </Typography>
+                    <IconButton
+                      onClick={() => setChartType("line")}
+                      color={chartType === "line" ? "primary" : "default"}
+                    >
+                      <ShowChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("bar")}
+                      color={chartType === "bar" ? "primary" : "default"}
+                    >
+                      <BarChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("pie")}
+                      color={chartType === "pie" ? "primary" : "default"}
+                    >
+                      <PieChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
                   </Box>
-                ))}
+
+                  <div style={{ height: "400px", width: "100%" }}>
+                    {chartType === "line" && (
+                      <Line
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "bar" && (
+                      <Bar
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "pie" && (
+                      <Pie
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                  </div>
+                </Paper>
               </Grid>
-              {/* Second Column */}
-              <Grid
-                lg={5.5}
-                md={5.5}
-                sm={6}
-                xs={12}
-                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-              >
-                {[
-                  { label: "Landmark :", value: "" },
-                  { label: "Notification ID:", value: "" },
-                  { label: "Node ID :", value: "" },
-                  { label: "Status :", value: "" },
-                ]?.map((item, index) => (
+              <Grid item lg={3} xs={4}>
+                <Paper>
                   <Box
-                    key={index + 4}
-                    sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                    sx={{
+                      maxHeight: 455,
+                      height: 1150,
+                      overflow: "auto",
+                      paddingRight:2 ,
+                      paddingTop:1,
+                      display:"flex",
+                      flexDirection:'column',
+                      alignItems:'flex-end',
+                      gap:'0.85rem'
+
+                    }}
                   >
-                    <Typography variant="h6" width={"250px"}>
-                      {item.label}
-                    </Typography>
-                    {/* <TextField
-                      size="small"
-                      value={item.value}
-                      disabled
-                      fullWidth
-                    /> */}
+                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>After Beam Pressure {"(ABP)"}</Typography>
+                    <Typography variant="h4" color={'red'}>2 Kg/cm<sup>2</sup></Typography>
+                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Tubing Head Pressure {"(THP)"}</Typography>
+                    <Typography variant="h4" color={'green'}>2 Kg/cm<sup>2</sup></Typography>
+                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Cashing Head Pressure {"(CHP)"}</Typography>
+                    <Typography variant="h4" color={'blue'}>5.326 Kg/cm<sup>2</sup> </Typography>
+                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Battery {"(%)"}</Typography>
+                    <Typography variant="h4" color={'red'}>12%</Typography>
+                    <Typography variant="h6" sx={{color:"#aaaaaa"}}>Solar Voltage {"(V)"}</Typography>
+                    <Typography variant="h4" color={'green'}> 12V</Typography>
                   </Box>
-                ))}
+                </Paper>
               </Grid>
             </Grid>
 
-            <Box sx={{ display: "flex", justifyContent: "center", pt: "16px" }}>
-              <Typography
-                variant="h5"
-                component="h2"
-                sx={{ fontStyle: "oblique" }}
-              >
-                Alarm Setting
+            <Grid container mt={5}>
+              <IconButton>
+                <DataThresholdingIcon sx={{ fontSize: "40px", color: "red" }} />
+              </IconButton>
+              <Typography variant="h4" mt={1}>
+                Threshold Values
               </Typography>
-            </Box>
+            </Grid>
+            <Grid container>
+              <Paper sx={{ mx: "15px", width: "100%" }}>
+                <Grid container>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell sx={{ fontSize: "1.5rem" }}>
+                          Parameter
+                        </TableCell>
+                        <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                          Normal Alert
+                        </TableCell>
+                        <TableCell sx={{ fontSize: "1.5rem" }}>
+                          Condition
+                        </TableCell>
+                        {/* <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                      Description
+                    </TableCell> */}
+                        <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                          Critical Alert
+                        </TableCell>
+                        <TableCell sx={{ fontSize: "1.5rem" }}>
+                          Condition
+                        </TableCell>
+                        {/* <TableCell sx={{ fontSize: "1.5rem" }} align="center">
+                      Description
+                    </TableCell> */}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {employeeData?.map(
+                        ({
+                          employeeId,
+                          Parameter,
+                          NormalAlert,
+                          CriticalAlert,
+                          Condition,
+                          // Description,
+                          Condition1,
+                          // Description1,
+                        }) => (
+                          <TableRow key={employeeId}>
+                            <TableCell>
+                              <Typography>{Parameter}</Typography>
+                            </TableCell>
+                            <TableCell>
+                              <TextField
+                                name="NormalAlert"
+                                value={NormalAlert}
+                                onChange={(e) => onChangeInput(e, employeeId)}
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <FormControl
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                              >
+                                <Select
+                                  labelId={`condition-label-${employeeId}`}
+                                  name="Condition1"
+                                  value={Condition1}
+                                  onChange={(e) => onChangeInput(e, employeeId)}
+                                  size="small"
+                                  fullWidth
+                                >
+                                  <MenuItem value="High">High</MenuItem>
+                                  <MenuItem value="Low">Low</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </TableCell>
+                            {/* <TableCell>
+                          <TextField
+                            name="Description"
+                            value={Description}
+                            onChange={(e) => onChangeInput(e, employeeId)}
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                          />
+                        </TableCell> */}
+                            <TableCell>
+                              <TextField
+                                name="CriticalAlert"
+                                value={CriticalAlert}
+                                onChange={(e) => onChangeInput(e, employeeId)}
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <FormControl
+                                variant="outlined"
+                                size="small"
+                                fullWidth
+                              >
+                                <Select
+                                  labelId={`condition-label-${employeeId}`}
+                                  name="Condition"
+                                  value={Condition}
+                                  onChange={(e) => onChangeInput(e, employeeId)}
+                                  size="small"
+                                  fullWidth
+                                >
+                                  <MenuItem value="High">High</MenuItem>
+                                  <MenuItem value="Low">Low</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </TableCell>
+                            {/* <TableCell>
+                          <TextField
+                            name="Description1"
+                            value={Description1}
+                            onChange={(e) => onChangeInput(e, employeeId)}
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                          />
+                        </TableCell> */}
+                          </TableRow>
+                        )
+                      )}
+                    </TableBody>
+                  </Table>
+                </Grid>
+              </Paper>
+            </Grid>
 
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  GIP
+            <Grid container mt={5}>
+              <IconButton>
+                <PodcastsIcon sx={{ fontSize: "40px", color: "red" }} />
+              </IconButton>
+              <Typography variant="h4" mt={1}>
+                Communication
+              </Typography>
+            </Grid>
+
+            {/* ---------communication */}
+            {/* <Paper sx={{mx:"15px"}}> */}
+            <Grid container component={Paper} mt={3} p={2} m={2}>
+              <Grid item lg={12} md={3} sm={6} xs={12} display={"flex"} gap={3}>
+                {[
+                  { label: "Node ID ", value: "2" },
+                  { label: "LoRa ID ", value: "2" },
+                  { label: "Network ", value: "GSM" },
+                  { label: "Last Update ", value: "Now" },
+                ].map((item, index) => (
+                  <Grid item lg={3} key={index} sx={{ mb: 2 }}>
+                    <Typography variant="h4" color={"green"}>{item.label}</Typography>
+                    <Typography variant="h6">{item.value}</Typography>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+            {/* </Paper> */}
+            <Grid container gap={1} mt={3}>
+              <Box display="flex">
+                <IconButton>
+                  <GeoIcon sx={{ fontSize: 35, color: "red" }} />
+                </IconButton>
+                <Typography mt={1} variant="h4">
+                  Geo-Location{" "}
                 </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
               </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  CHP
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  THP
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  Battery(%)
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-            <Box>
-              <Box display="flex" mt={2} justifyContent={"space-evenly"}>
-                <Typography mr={2} variant="h6" width={"100px"}>
-                  Solar Voltage
-                </Typography>
-                <TextField size="small" variant="standard" disabled></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Normal value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-                <Typography width={"10%"} ml={2}>
-                  Critical Value
-                </Typography>
-                <TextField size="small" disabled variant="standard"></TextField>
-              </Box>
-            </Box>
-          </Box>
-          <Box
-            mt={2}
-            width={"100%"}
-            gap={2}
-            sx={{ display: "flex", justifyContent: "end" }}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              onClick={handleClose}
+
+              <Grid container textAlign={"center"} m={2} display={"block"}>
+                <Grid item md={12} border={"1px solid black"}>
+                  <MapContainer
+                    center={coords}
+                    zoom={12}
+                    style={{ height: "500px", width: "100%" }}
+                  >
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <Marker position={coords} />
+                    <ChangeMapView coords={coords} />
+                  </MapContainer>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid container mt={5}>
+              <IconButton>
+                <PendingIcon sx={{ fontSize: "40px", color: "red" }} />
+              </IconButton>
+              <Typography variant="h4" mt={1}>
+                Pending Notification
+              </Typography>
+            </Grid>
+
+            {/* ---------communication */}
+            <Grid container mt={3}>
+              <Box
+                height={"300px"}
+                width="100%"
+                border="1px solid black"
+                m={2}
+              ></Box>
+            </Grid>
+            {/* Footer */}
+            <Box
+              mt={3}
+              pr={2}
+              width={"100%"}
+              sx={{ display: "flex", justifyContent: "end" }}
             >
-              Close
-            </Button>
-          </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={handleClose}
+              >
+                Close
+              </Button>
+            </Box>
+          </Grid>
         </Grid>
       </Modal>
+
     </div>
   );
 }
