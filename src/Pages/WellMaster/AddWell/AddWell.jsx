@@ -956,6 +956,14 @@ function AddWell() {
         {/* </Paper> */}
         <Paper sx={{ mt: "15px" }}>
           <Grid container spacing={0.8} p={2}>
+            <Grid container>
+              <IconButton>
+                <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
+              </IconButton>
+              <Typography variant="h4" mt={1}>
+                Flow Condition{" "}
+              </Typography>
+            </Grid>
             <Grid container display={"flex"} gap={2.5} p={2}>
               {/* Row 1: Flowing */}
               <Grid item lg={1}>
