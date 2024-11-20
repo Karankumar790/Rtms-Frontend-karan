@@ -134,7 +134,7 @@ function DeviceManage() {
             <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Node Manager</Typography>
+            <Typography variant="h4">Node Monitor</Typography>
           </Box>
         </Grid>
       </Grid>

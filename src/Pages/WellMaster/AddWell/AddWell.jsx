@@ -76,7 +76,7 @@ function AddWell() {
     installation: "",
     wellType: "",
     wellNumber: "",
-    landmark:"",
+    landmark: "",
   });
   const [formValues, setFormValues] = useState({
     organizationName,
@@ -196,7 +196,6 @@ function AddWell() {
   //   }
   // };
 
-
   const handleSubmit = async () => {
     if (!organizationName) {
       toast.error("Organization name is missing");
@@ -209,12 +208,15 @@ function AddWell() {
           normalAlert: {
             normalalert: formValues.gipNormalAlert || "GIP Normal Alert", // Use values from formValues
             condition: formValues.gipNormalCondition || "Low",
-            description: formValues.gipNormalDescription || "GIP normal alert description",
+            description:
+              formValues.gipNormalDescription || "GIP normal alert description",
           },
           criticalAlert: {
             criticalalert: formValues.gipCriticalAlert || "GIP Critical Alert",
             condition: formValues.gipCriticalCondition || "High",
-            description: formValues.gipCriticalDescription || "GIP critical alert description",
+            description:
+              formValues.gipCriticalDescription ||
+              "GIP critical alert description",
           },
         },
         // Repeat for other keys: chp, thp, lowBattery, solarVoltage
@@ -223,12 +225,15 @@ function AddWell() {
           normalAlert: {
             normalalert: formValues.chpNormalAlert || "CHP Normal Alert",
             condition: formValues.chpNormalCondition || "Low",
-            description: formValues.chpNormalDescription || "CHP normal alert description",
+            description:
+              formValues.chpNormalDescription || "CHP normal alert description",
           },
           criticalAlert: {
             criticalalert: formValues.chpCriticalAlert || "CHP Critical Alert",
             condition: formValues.chpCriticalCondition || "High",
-            description: formValues.chpCriticalDescription || "CHP critical alert description",
+            description:
+              formValues.chpCriticalDescription ||
+              "CHP critical alert description",
           },
         },
 
@@ -236,12 +241,15 @@ function AddWell() {
           normalAlert: {
             normalalert: formValues.thpNormalAlert || "CHP Normal Alert",
             condition: formValues.thpNormalCondition || "Low",
-            description: formValues.thpNormalDescription || "CHP normal alert description",
+            description:
+              formValues.thpNormalDescription || "CHP normal alert description",
           },
           criticalAlert: {
             criticalalert: formValues.thpCriticalAlert || "CHP Critical Alert",
             condition: formValues.thpCriticalCondition || "High",
-            description: formValues.thpCriticalDescription || "CHP critical alert description",
+            description:
+              formValues.thpCriticalDescription ||
+              "CHP critical alert description",
           },
         },
 
@@ -249,28 +257,39 @@ function AddWell() {
           normalAlert: {
             normalalert: formValues.lowBatteryNormalAlert || "CHP Normal Alert",
             condition: formValues.lowBatteryNormalCondition || "Low",
-            description: formValues.lowBatteryNormalDescription || "CHP normal alert description",
+            description:
+              formValues.lowBatteryNormalDescription ||
+              "CHP normal alert description",
           },
           criticalAlert: {
-            criticalalert: formValues.lowBatteryCriticalAlert || "CHP Critical Alert",
+            criticalalert:
+              formValues.lowBatteryCriticalAlert || "CHP Critical Alert",
             condition: formValues.lowBatteryCriticalCondition || "High",
-            description: formValues.lowBatteryCriticalDescription || "CHP critical alert description",
+            description:
+              formValues.lowBatteryCriticalDescription ||
+              "CHP critical alert description",
           },
         },
         solarVoltage: {
           normalAlert: {
-            normalalert: formValues.solarVoltageNormalAlert || "CHP Normal Alert",
+            normalalert:
+              formValues.solarVoltageNormalAlert || "CHP Normal Alert",
             condition: formValues.solarVoltageNormalCondition || "Low",
-            description: formValues.solarVoltageNormalDescription || "CHP normal alert description",
+            description:
+              formValues.solarVoltageNormalDescription ||
+              "CHP normal alert description",
           },
           criticalAlert: {
-            criticalalert: formValues.solarVoltageCriticalAlert || "CHP Critical Alert",
+            criticalalert:
+              formValues.solarVoltageCriticalAlert || "CHP Critical Alert",
             condition: formValues.solarVoltageCriticalCondition || "High",
-            description: formValues.solarVoltageCriticalDescription || "CHP critical alert description",
+            description:
+              formValues.solarVoltageCriticalDescription ||
+              "CHP critical alert description",
           },
         },
       };
-  
+
       const details = {
         location: wellDetails.location,
         installation: wellDetails.installation,
@@ -285,7 +304,7 @@ function AddWell() {
           pressures: formValues.notFlowing?.pressures || [], // Ensure notFlowing.pressures is passed as an array
         },
       };
-  
+
       const response = await saveWellDetails(details);
       console.log("Well saved successfully:", response);
       toast.success("Well saved successfully!");
@@ -295,7 +314,7 @@ function AddWell() {
       toast.error("Error saving well");
     }
   };
-  
+
   useEffect(() => {
     const Device = async () => {
       try {
@@ -316,7 +335,7 @@ function AddWell() {
             <Brightness5Icon sx={{ fontSize: "40px", color: "red" }} />
           </IconButton>
           <Typography variant="h4" mt={1}>
-            Add New Well
+            Add Well
           </Typography>
         </Grid>
         <Grid
@@ -378,7 +397,6 @@ function AddWell() {
               variant="outlined"
               name="landmark"
               value={wellDetails.landmark}
-              
               onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
@@ -564,6 +582,14 @@ function AddWell() {
         </Paper>
         <Paper sx={{ mt: "15px" }}>
           <Grid container spacing={0.8} p={2}>
+            <Grid container>
+              <IconButton>
+                <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
+              </IconButton>
+              <Typography variant="h4" mt={1}>
+                Flow Condition{" "}
+              </Typography>
+            </Grid>
             <Grid container display={"flex"} gap={2.5} p={2}>
               {/* Row 1: Flowing */}
               <Grid item lg={1}>
