@@ -429,7 +429,7 @@ function Monitor() {
               sx={{ alignItems: "stretch", margin: 2, }}
             >
               <Grid item component={Paper} lg={9.5} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                <Box display={"flex"} justifyContent={"center"}>
+                <Box display={"flex"} justifyContent={"flex-start"}>
                   <Typography sx={{ fontSize: "30px", color: 'darkgreen' }}>Well Report</Typography>
                 </Box>
                 {/* Chart Buttons */}
