@@ -13,6 +13,7 @@ import {
   Modal,
   Paper,
   Select,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -30,8 +31,11 @@ import { deviceData, saveWellDetails } from "../../../apis/WellService";
 import { setWellDetails } from "../../../apis/authSlice";
 import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, style } from "@mui/system";
+import { borderRadius, Box, style } from "@mui/system";
 import { FaPlus } from "react-icons/fa";
+import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const initialData = [
   {
@@ -85,20 +89,20 @@ const styless = {
   CardOverflow: "scroll",
   overflowY: "scroll",
   height: "70vh",
-  // width: "35%",
-  // bgcolor: "background.paper",
-  // bgcolor={"yellow"}
+  borderRadius: "1%",
 
   bgcolor: "white",
   // border: "2px solid black",
   // boxShadow: 24,
-  // p: 2,
+  // p: 1,
 };
 
 function AddWell() {
   const [employeeData, setEmployeeData] = useState(initialData);
   const organizationName = useSelector((state) => state.auth.organization);
   const [rows, setRows] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [addData, setAddData] = useState(false);
   const [wellDetails, setWellDetails] = useState({
     location: "",
     installation: "",
@@ -371,6 +375,11 @@ function AddWell() {
     }
   };
 
+  const handleSave = () => {
+    setIsEditing(true);
+    setAddData(true);
+  };
+
   useEffect(() => {
     const Device = async () => {
       try {
@@ -476,55 +485,65 @@ function AddWell() {
               onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={1.5} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Node ID"
-              variant="outlined"
-              name="nodeId"
-              value={formValues.nodeId || ""}
-              onChange={(e) => handleChangeParameter(e)}
-            />
-          </Grid>
-          <Grid
-            item
-            sm={6}
-            md={3}
-            xs={12}
-            lg={1.5}
-            mt={1}
-            display="flex"
-            alignItems="center"
-          >
-            <TextField
-              fullWidth
-              size="small"
-              label="DIP"
-              variant="outlined"
-              name="dip"
-              value={formValues.dip || ""}
-              onChange={(e) => handleChangeParameter(e)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Box
-                      bgcolor="transparent"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      sx={{
-                        padding: "0.25rem",
-                        borderRadius: "50%",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <SearchIcon />
-                    </Box>
-                  </InputAdornment>
-                ),
-              }}
-            />
+          <Grid item sm={6} md={3} xs={12} lg={3} mt={1} display="flex" gap={2}>
+            <Grid item sm={6} md={3} xs={12} lg={5.5}>
+              <TextField
+                fullWidth
+                size="small"
+                label="Node ID"
+                variant="outlined"
+                name="nodeId"
+                value={formValues.nodeId || ""}
+                onChange={(e) => handleChangeParameter(e)}
+              />
+            </Grid>
+            <Grid
+              item
+              sm={6}
+              md={3}
+              xs={12}
+              lg={5.5}
+              display="flex"
+              alignItems="center"
+            >
+              <TextField
+                fullWidth
+                size="small"
+                label="DIP"
+                variant="outlined"
+                name="dip"
+                value={formValues.dip || ""}
+                onChange={(e) => handleChangeParameter(e)}
+                // InputProps={{
+                //   endAdornment: (
+                //     <InputAdornment position="end">
+                //       <Box
+                //         bgcolor="transparent"
+                //         display="flex"
+                //         alignItems="center"
+                //         justifyContent="center"
+                //         sx={{
+                //           padding: "0.25rem",
+                //           borderRadius: "50%",
+                //           cursor: "pointer",
+                //         }}
+                //       >
+                //         <SearchIcon />
+                //       </Box>
+                //     </InputAdornment>
+                //   ),
+                // }}
+              />
+            </Grid>
+            <Grid
+              item
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              lg={2}
+            >
+              {/* <CircularProgress /> */}
+            </Grid>
           </Grid>
         </Grid>
       </Paper>
@@ -532,30 +551,95 @@ function AddWell() {
       {/* Dialog (Modal) */}
       <Modal
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         // aria-labelledby="modal-title"
         // aria-describedby="modal-description"
       >
-        <Grid container lg={8} sx={styless}>
-          <Grid container  p={2} m={2} spacing={2} component={Paper}>
+        <Grid container lg={7} sx={styless}>
+          <Grid
+            container
+            p={1}
+            m={2}
+            borderRadius={1}
+            spacing={2}
+            component={Paper}
+          >
             <Grid item lg={12}>
               <Typography variant="h4">Add Parameter</Typography>
+              <Box
+                position="absolute"
+                textAlign="end"
+                sx={{
+                  top: "3%",
+                  right: "-2%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <IconButton onClick={handleClose} color=" solid black">
+                  <CloseIcon fontSize="large" />
+                </IconButton>
+              </Box>
             </Grid>
-            <Grid item lg={12} gap={2}>
-              <Grid item lg={3.35}>
-                <Typography variant="h5">Process:</Typography>
 
-                <TextField
-                  variant="outlined"
-                  label="Process"
-                  size="small"
-                  fullWidth
-                ></TextField>
+            <Grid container p={2} spacing={2}>
+              <Grid item lg={3} gap={2}>
+                <Stack spacing={1}>
+                  <Typography variant="h5">Process</Typography>
+                  <FormControl fullWidth size="small">
+                    <Select
+                      fullWidth
+                      size="small"
+                      MenuProps={{
+                        PaperProps: {
+                          sx: {
+                            maxHeight: 210,
+                            overflowY: "scroll",
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value={20}>Temperature</MenuItem>
+                      <MenuItem value={20}>Pressure</MenuItem>
+                      <MenuItem value={20}>Level</MenuItem>
+                      <MenuItem value={20}>Flow Rate</MenuItem>
+                      <MenuItem value={20}>Speed</MenuItem>
+                      <MenuItem value={20}>Solar Power</MenuItem>
+                      <MenuItem value={20}>Voltage</MenuItem>
+                      <MenuItem value={20}>Current</MenuItem>
+                      <MenuItem value={20}>Frequency</MenuItem>
+                      <MenuItem value={20}>Power</MenuItem>
+                      <MenuItem value={20}>Battery Power</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Stack>
               </Grid>
-            </Grid>
-            <Grid container gap={2} p={2} spacing={2}>
-              <Grid item lg={3.5}>
-                <Box>
+              <Grid item lg={3} gap={2}>
+                <Stack spacing={1}>
+                  <Typography variant="h5">Ports</Typography>
+                  <FormControl fullWidth size="small">
+                    <Select
+                      fullWidth
+                      size="small"
+                      MenuProps={{
+                        PaperProps: {
+                          sx: {
+                            maxHeight: 210,
+                            overflowY: "scroll",
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value={20}>GIP</MenuItem>
+                      <MenuItem value={20}>CHP</MenuItem>
+                      <MenuItem value={20}>THP</MenuItem>
+                      <MenuItem value={20}>ABP</MenuItem>
+                      {/* <MenuItem value={20}>Speed</MenuItem> */}
+                    </Select>
+                  </FormControl>
+                </Stack>
+              </Grid>
+              <Grid item lg={3}>
+                <Stack spacing={1}>
                   <Typography variant="h5">Display Name</Typography>
                   <TextField
                     variant="outlined"
@@ -563,10 +647,10 @@ function AddWell() {
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
-              <Grid item lg={3.5}>
-                <Box>
+              <Grid item lg={3}>
+                <Stack spacing={1}>
                   <Typography variant="h5">Description</Typography>
                   <TextField
                     variant="outlined"
@@ -574,46 +658,71 @@ function AddWell() {
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
-              <Grid item lg={3.5}>
-                <Box>
+              <Grid item lg={3}>
+                <Stack spacing={1}>
                   <Typography variant="h5">Unit</Typography>
                   <FormControl fullWidth size="small">
-                    <Autocomplete
-                      freeSolo // Allows users to type their own value
-                      options={actions} // Provides options to select from
-                      // value={approvalChains}
-                      onChange={(newValue) => setApprovalChains(newValue)}
-                      onInputChange={(newInputValue) =>
-                        setApprovalChains(newInputValue)
-                      }
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Unit"
-                          variant="outlined"
-                          size="small"
-                        />
-                      )}
-                    />
+                    <Select
+                      size="small"
+                      MenuProps={{
+                        PaperProps: {
+                          sx: {
+                            maxHeight: 210, // Set max height for dropdown
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value={30}>
+                        <Typography>°C</Typography>
+                      </MenuItem>
+                      <MenuItem value={30}>
+                        <Typography>
+                          Kg/cm<sup>2</sup>
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem value={20}>%</MenuItem>
+                      <MenuItem value={20}>meter</MenuItem>
+                      <MenuItem value={20}>centimeter</MenuItem>
+                      <MenuItem value={20}>
+                        <Typography>
+                          m<sup>3</sup>/H
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem value={20}>galon/H</MenuItem>
+                      <MenuItem value={20}>rpm</MenuItem>
+                      <MenuItem value={20}>Volt</MenuItem>
+                      <MenuItem value={20}>ampere</MenuItem>
+                      <MenuItem value={20}>hz</MenuItem>
+                      <MenuItem value={30}>KWH </MenuItem>
+                      <MenuItem value={30}>0-3 V </MenuItem>
+                      <MenuItem value={30}>0-100 mV </MenuItem>
+                    </Select>
                   </FormControl>
-                </Box>
+                </Stack>
               </Grid>
 
-              <Grid item lg={3.5}>
-                <Box>
+              <Grid item lg={3}>
+                <Stack spacing={1}>
                   <Typography variant="h5">Sensor Output</Typography>
-                  <TextField
-                    variant="outlined"
-                    label="Sensor Output"
-                    size="small"
-                    fullWidth
-                  ></TextField>
-                </Box>
+                  <FormControl fullWidth size="small">
+                    <Select
+                      // labelId="demo-select-small-label"
+                      // label="Sensor Output"
+                      size="small"
+                    >
+                      <MenuItem value={30}>all </MenuItem>
+                      <MenuItem value={30}>
+                        <Typography>{/* Kg/cm<sup>2</sup> */}</Typography>
+                      </MenuItem>
+                      <MenuItem value={20}></MenuItem>
+                    </Select>
+                  </FormControl>
+                </Stack>
               </Grid>
-              <Grid item lg={3.5}>
-                <Box gap={2}>
+              <Grid item lg={3}>
+                <Stack spacing={1}>
                   <Typography variant="h5">Value Minimum</Typography>
                   <TextField
                     variant="outlined"
@@ -621,10 +730,10 @@ function AddWell() {
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
-              <Grid item lg={3.5}>
-                <Box gap={2}>
+              <Grid item lg={3} spacing={2} gap={1}>
+                <Stack spacing={1}>
                   <Typography variant="h5">Value Maximum</Typography>
                   <TextField
                     variant="outlined"
@@ -632,35 +741,35 @@ function AddWell() {
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
-            </Grid>
+              {/* </Grid>
 
-            <Grid container mt={3} mx={2} p={2} spacing={1}>
+            <Grid container mt={1} p={2} spacing={2}> */}
               <Grid item lg={3}>
-                <Box>
-                  <Typography variant="h5">Normal Alert</Typography>
+                <Stack spacing={1}>
+                  <Typography variant="h5">Normal Alert Value</Typography>
                   <TextField
                     variant="outlined"
-                    label="Normal Alert"
+                    label="Normal Alert Value"
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
               <Grid item lg={3}>
-                <Box>
+                <Stack spacing={1}>
                   <Typography variant="h5">Condition</Typography>
-                  <TextField
-                    variant="outlined"
-                    label="Condition"
-                    size="small"
-                    fullWidth
-                  ></TextField>
-                </Box>
+                  <FormControl fullWidth size="small">
+                    <Select size="small">
+                      <MenuItem value={30}>High</MenuItem>
+                      <MenuItem value={20}>Low</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Stack>
               </Grid>
               <Grid item lg={3}>
-                <Box>
+                <Stack spacing={1}>
                   <Typography variant="h5">Description</Typography>
                   <TextField
                     variant="outlined"
@@ -668,44 +777,43 @@ function AddWell() {
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
               <Grid item lg={3}>
-                <Box>
-                  <Typography variant="h5">Alert timing Delay</Typography>
+                <Stack spacing={1}>
+                  <Typography variant="h5">Deadband (%)</Typography>
                   <TextField
                     variant="outlined"
-                    label="Alert timing Delay"
+                    label="Deadband (%)"
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
-
               <Grid item lg={3}>
-                <Box>
-                  <Typography variant="h5">Critical Alert</Typography>
+                <Stack spacing={1}>
+                  <Typography variant="h5">Critical Alert Value</Typography>
                   <TextField
                     variant="outlined"
-                    label="Display Name"
+                    label="Critical Alert Value"
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
               <Grid item lg={3}>
-                <Box>
+                <Stack spacing={1}>
                   <Typography variant="h5">Condition</Typography>
-                  <TextField
-                    variant="outlined"
-                    label="Condition"
-                    size="small"
-                    fullWidth
-                  ></TextField>
-                </Box>
+                  <FormControl fullWidth size="small">
+                    <Select size="small">
+                      <MenuItem value={30}>High</MenuItem>
+                      <MenuItem value={20}>Low</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Stack>
               </Grid>
               <Grid item lg={3}>
-                <Box>
+                <Stack spacing={1}>
                   <Typography variant="h5">Description</Typography>
                   <TextField
                     variant="outlined"
@@ -713,37 +821,49 @@ function AddWell() {
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
               <Grid item lg={3}>
-                <Box>
-                  <Typography variant="h5">Alert timing Delay</Typography>
+                <Stack spacing={1}>
+                  <Typography variant="h5">Deadband (%)</Typography>
                   <TextField
                     variant="outlined"
-                    label="Alert timing Delay"
+                    label="Deadband (%)"
                     size="small"
                     fullWidth
                   ></TextField>
-                </Box>
+                </Stack>
               </Grid>
             </Grid>
 
-            <Grid container justifyContent="flex-end" spacing={2} mt={2} mx={2}>
-              <Grid item>
-                <Button onClick={handleClose} variant="contained">
+            <Grid container justifyContent="flex-end" spacing={2} mt={1} mx={2}>
+              <Stack gap={2} display="flex" flexDirection={"row"}>
+                <Button
+                  onClick={handleClose}
+                  sx={{ width: "120px", height: "50px", fontSize: "medium" }}
+                  variant="contained"
+                >
                   Cancel
                 </Button>
-              </Grid>
-              <Grid item>
-                <Button onClick={handleClose} variant="contained">
+                {/* </Stack>
+              <Stack > */}
+                <Button
+                  sx={{ width: "120px", height: "50px", fontSize: "medium" }}
+                  onClick={() => {
+                    handleClose();
+                    handleSave();
+                  }}
+                  variant="contained"
+                >
                   Save
                 </Button>
-              </Grid>
+              </Stack>
             </Grid>
           </Grid>
         </Grid>
       </Modal>
 
+    
       <Grid
         container
         sx={{
@@ -754,416 +874,484 @@ function AddWell() {
         mt={1}
         p={1}
       >
-        <Grid
-          container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
-          }}
-          mt={1}
-          p={1}
-        >
-          <Grid container alignItems="center">
-            <Box
-              width={"100%"}
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Typography variant="h4" mt={1}>
-                Parameter
-              </Typography>
+        <Grid container alignItems="center">
+          <Box
+            width={"100%"}
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Typography variant="h4" mt={1}>
+              Parameters
+            </Typography>
 
+            <IconButton onClick={handleOpen}>
+              <FaPlus fontSize="large" />
+            </IconButton>
+          </Box>
+        </Grid>
+
+        <Paper>
+          <Grid
+            container
+            alignItems="end"
+          >
+          </Grid>
+        </Paper>
+      </Grid>
+      {addData ? (
+        <Paper >
+          <Grid container spacing={3}  p={1} mt={2}  >
+            <Box width="99%" display="flex" justifyContent="space-between">
+              <Typography pl={3} fontSize={"25px"}>
+                ABP (After Beam Pressure)
+              </Typography>
               <IconButton onClick={handleOpen}>
-                <FaPlus size={24} />
+                <EditIcon fontSize="large" />
               </IconButton>
             </Box>
-          </Grid>
 
-          <Paper>
-            <Grid
-              container
-              alignItems="end"
-              // spacing={2}
-              // p={2}
-              // justifyContent={"space-between"}
-            >
-              {/* Dropdown field */}
-              {/* <Grid item xs={12} sm={8} md={6} lg={3}>
-                <FormControl fullWidth>
-                  <TextField
-                    select
-                    label="Parameter"
-                    defaultValue=""
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack  spacing={1}>
+                <Typography variant="h5">Process</Typography>
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Pressure"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack  spacing={1} >
+                <Typography variant="h5">Ports</Typography>
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"ABP"}
+                >
+                  {" "}
+                  ABP
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Display Name</Typography>
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"ABP"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Description</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"After Beam Pressure"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Unit</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={`Volt`}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Sensor Output</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Sensor Output"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Value Minimum</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  sx={{ width: "100%" }}
+                  value={"Value Minimum"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Value Maximum</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Value Maximum"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            {/* <Grid container spacing={3} p={3}> */}
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Normal Alert Value</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Normal Alert Value"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Condition:</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Condition"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                {" "}
+                <Typography variant="h5">Description</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Value is high"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Deadband (%):</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"90%"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Critical Alert Value</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Critical Alert Value"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Condition</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Condition"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Description</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Description"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Deadband (%)</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"10 %"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            {/* </Grid> */}
+          </Grid>
+          </Paper>
+      ) : (
+        <Grid container></Grid>
+      )}
+        <Grid container spacing={0.8} component={Paper} mt={2} p={2}>
+          <Grid container>
+            <IconButton>
+              <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
+            </IconButton>
+            <Typography variant="h4" mt={1}>
+              Flow Condition{" "}
+            </Typography>
+          </Grid>
+          <Grid container display={"flex"} gap={2.5} p={2}>
+            {/* Row 1: Flowing */}
+            <Grid item lg={1}>
+              <Typography mt={2}>Flowing</Typography>
+            </Grid>
+            <Grid item lg={9} display={"flex"} gap={3}>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="pressure-label">Pressure</InputLabel>
+                  <Select
+                    labelId="pressure-label"
+                    name="pressure1"
+                    value={formValues.flowing.pressures[0].pressure1}
+                    onChange={(e) =>
+                      handleFlowingChange(0, "pressure1", e.target.value)
+                    }
                     size="small"
                   >
                     <MenuItem value="">
                       <em>All</em>
                     </MenuItem>
-                    <MenuItem value={1}>GIP</MenuItem>
-                    <MenuItem value={2}>CHP</MenuItem>
-                    <MenuItem value={3}>TPH</MenuItem>
-                    <MenuItem value={4}>Solar Voltage</MenuItem>
-                    <MenuItem value={5}>Battery</MenuItem>
-                  </TextField>
+                    <MenuItem value="GIP">GIP</MenuItem>
+                    <MenuItem value="THP">THP</MenuItem>
+                    <MenuItem value="CHP">CHP</MenuItem>
+                  </Select>
                 </FormControl>
-              </Grid> */}
-
-              {/* Plus Icon button */}
-              {/* <Grid item lg={12} sx={{ textAlign: "right" }}>
-                <IconButton onClick={handleOpen}>
-                  <FaPlus size={24} />
-                </IconButton>
-              </Grid> */}
-            </Grid>
-          </Paper>
-        </Grid>
-        {/* <Paper> */}
-        {/* <Grid container alignItems="center" spacing={2} p={2} justifyContent={"space-between"}> */}
-        {/* Dropdown field */}
-        {/* <Grid item xs={12} sm={8} md={6} lg={3}>
-              <FormControl fullWidth >
-                <TextField select label="Parameter" defaultValue="" size="small">
-                  <MenuItem value="">
-                    <em>All</em>
-                  </MenuItem>
-                  <MenuItem value={1}>GIP</MenuItem>
-                  <MenuItem value={2}>CHP</MenuItem>
-                  <MenuItem value={3}>TPH</MenuItem>
-                  <MenuItem value={4}>Solar Voltage</MenuItem>
-                  <MenuItem value={5}>Battery</MenuItem>
-                </TextField>
-              </FormControl>
-            </Grid> */}
-
-        {/* Plus Icon button */}
-        {/* <Grid item xs="auto">
-              <IconButton>
-                <FaPlus size={24} />
-              </IconButton>
-            </Grid> */}
-        {/* </Grid> */}
-        {/* <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ fontSize: "1.5rem" }}>Parameter</TableCell>
-                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                    Normal Alert
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "1.5rem" }}>Condition</TableCell>
-                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                    Description
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                    Critical Alert
-                  </TableCell>
-                  <TableCell sx={{ fontSize: "1.5rem" }}>Condition</TableCell>
-                  <TableCell sx={{ fontSize: "1.5rem" }} align="center">
-                    Description
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {employeeData?.map(
-                  ({
-                    employeeId,
-                    Parameter,
-                    NormalAlert,
-                    CriticalAlert,
-                    Condition,
-                    Description,
-                    Condition1,
-                    Description1,
-                  }) => (
-                    <TableRow key={employeeId}>
-                      <TableCell>
-                        <Typography>{Parameter}</Typography>
-                      </TableCell>
-                      <TableCell>
-                        <TextField
-                          name="NormalAlert"
-                          value={NormalAlert}
-                          onChange={(e) => onChangeInput(e, employeeId)}
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <FormControl variant="outlined" size="small" fullWidth>
-                          <Select
-                            labelId={`condition-label-${employeeId}`}
-                            name="Condition1"
-                            value={Condition1}
-                            onChange={(e) => onChangeInput(e, employeeId)}
-                            size="small"
-                            fullWidth
-                          >
-                            <MenuItem value="High">High</MenuItem>
-                            <MenuItem value="Low">Low</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </TableCell>
-                      <TableCell>
-                        <TextField
-                          name="Description"
-                          value={Description}
-                          onChange={(e) => onChangeInput(e, employeeId)}
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <TextField
-                          name="CriticalAlert"
-                          value={CriticalAlert}
-                          onChange={(e) => onChangeInput(e, employeeId)}
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <FormControl variant="outlined" size="small" fullWidth>
-                          <Select
-                            labelId={`condition-label-${employeeId}`}
-                            name="Condition"
-                            value={Condition}
-                            onChange={(e) => onChangeInput(e, employeeId)}
-                            size="small"
-                            fullWidth
-                          >
-                            <MenuItem value="High">High</MenuItem>
-                            <MenuItem value="Low">Low</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </TableCell>
-                      <TableCell>
-                        <TextField
-                          name="Description1"
-                          value={Description1}
-                          onChange={(e) => onChangeInput(e, employeeId)}
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                        />
-                      </TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableBody>
-            </Table> */}
-        {/* </Paper> */}
-        <Paper sx={{ mt: "15px" }}>
-          <Grid container spacing={0.8} p={2}>
-            <Grid container>
-              <IconButton>
-                <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
-              </IconButton>
-              <Typography variant="h4" mt={1}>
-                Flow Condition{" "}
-              </Typography>
-            </Grid>
-            <Grid container display={"flex"} gap={2.5} p={2}>
-              {/* Row 1: Flowing */}
-              <Grid item lg={1}>
-                <Typography mt={2}>Flowing</Typography>
               </Grid>
-              <Grid item lg={9} display={"flex"} gap={3}>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="pressure-label">Pressure</InputLabel>
-                    <Select
-                      labelId="pressure-label"
-                      name="pressure1"
-                      value={formValues.flowing.pressures[0].pressure1}
-                      onChange={(e) =>
-                        handleFlowingChange(0, "pressure1", e.target.value)
-                      }
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value="GIP">GIP</MenuItem>
-                      <MenuItem value="THP">THP</MenuItem>
-                      <MenuItem value="CHP">CHP</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="comparison-label">Comparison</InputLabel>
-                    <Select
-                      labelId="comparison-label"
-                      name="comparison"
-                      value={formValues.flowing.pressures[0].comparison}
-                      onChange={(e) =>
-                        handleFlowingChange(0, "comparison", e.target.value)
-                      }
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value=">">&gt;</MenuItem>
-                      <MenuItem value="<">&lt;</MenuItem>
-                      <MenuItem value="=">=</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="pressure-label">Pressure</InputLabel>
-                    <Select
-                      labelId="pressure-label"
-                      name="pressure2"
-                      value={formValues.flowing.pressures[0].pressure2}
-                      onChange={(e) =>
-                        handleFlowingChange(0, "pressure2", e.target.value)
-                      }
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value="GIP">GIP</MenuItem>
-                      <MenuItem value="THP">THP</MenuItem>
-                      <MenuItem value="CHP">CHP</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <Typography>Dead Band (%)</Typography>
-                  <TextField
-                    variant="outlined"
-                    size="small"
-                    value={formValues.flowing.pressures[0].tolerance}
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="comparison-label">Comparison</InputLabel>
+                  <Select
+                    labelId="comparison-label"
+                    name="comparison"
+                    value={formValues.flowing.pressures[0].comparison}
                     onChange={(e) =>
-                      handleFlowingChange(0, "tolerance", e.target.value)
+                      handleFlowingChange(0, "comparison", e.target.value)
                     }
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            {/* Row 2: Not Flowing */}
-            <Grid container display={"flex"} gap={2.5} p={2}>
-              <Grid item lg={1}>
-                <Typography mt={2}>Not Flowing</Typography>
-              </Grid>
-              <Grid item lg={9} display={"flex"} gap={3}>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="pressure-label">Pressure</InputLabel>
-                    <Select
-                      labelId="pressure-label"
-                      name="pressure1"
-                      value={formValues.notFlowing.pressures[0].pressure1}
-                      onChange={(e) =>
-                        handleNotFlowingChange(0, "pressure1", e.target.value)
-                      }
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value="GIP">GIP</MenuItem>
-                      <MenuItem value="THP">THP</MenuItem>
-                      <MenuItem value="CHP">CHP</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="comparison-label">Comparison</InputLabel>
-                    <Select
-                      labelId="comparison-label"
-                      name="comparison"
-                      value={formValues.notFlowing.pressures[0].comparison}
-                      onChange={(e) =>
-                        handleNotFlowingChange(0, "comparison", e.target.value)
-                      }
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value=">">&gt;</MenuItem>
-                      <MenuItem value="<">&lt;</MenuItem>
-                      <MenuItem value="=">=</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="pressure-label">Pressure</InputLabel>
-                    <Select
-                      labelId="pressure-label"
-                      name="pressure2"
-                      value={formValues.notFlowing.pressures[0].pressure2}
-                      onChange={(e) =>
-                        handleNotFlowingChange(0, "pressure2", e.target.value)
-                      }
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      <MenuItem value="GIP">GIP</MenuItem>
-                      <MenuItem value="THP">THP</MenuItem>
-                      <MenuItem value="CHP">CHP</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={3} md={6} sm={12} xs={12}>
-                  <Typography>Dead Band (%)</Typography>
-                  <TextField
-                    variant="outlined"
                     size="small"
-                    value={formValues.notFlowing.pressures[0].tolerance}
+                  >
+                    <MenuItem value="">
+                      <em>All</em>
+                    </MenuItem>
+                    <MenuItem value=">">&gt;</MenuItem>
+                    <MenuItem value="<">&lt;</MenuItem>
+                    <MenuItem value="=">=</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="pressure-label">Pressure</InputLabel>
+                  <Select
+                    labelId="pressure-label"
+                    name="pressure2"
+                    value={formValues.flowing.pressures[0].pressure2}
                     onChange={(e) =>
-                      handleNotFlowingChange(0, "tolerance", e.target.value)
+                      handleFlowingChange(0, "pressure2", e.target.value)
                     }
-                    fullWidth
-                  />
-                </Grid>
+                    size="small"
+                  >
+                    <MenuItem value="">
+                      <em>All</em>
+                    </MenuItem>
+                    <MenuItem value="GIP">GIP</MenuItem>
+                    <MenuItem value="THP">THP</MenuItem>
+                    <MenuItem value="CHP">CHP</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <Typography>Dead Band (%)</Typography>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  value={formValues.flowing.pressures[0].tolerance}
+                  onChange={(e) =>
+                    handleFlowingChange(0, "tolerance", e.target.value)
+                  }
+                  fullWidth
+                />
               </Grid>
             </Grid>
           </Grid>
-        </Paper>
-        <Grid
-          item
-          p={2}
-          sx={{ display: "flex", justifyContent: "flex-end" }}
-          gap={2}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "green",
-              "&:hover": {
-                backgroundColor: "darkgreen",
-              },
-              fontSize: "16px",
-            }}
-            onClick={handleSubmit} // Call handleSubmit on click
-          >
-            Update Well
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "green",
-              "&:hover": {
-                backgroundColor: "darkgreen",
-              },
-              fontSize: "16px",
-            }}
-          >
-            Cancel
-          </Button>
+          {/* Row 2: Not Flowing */}
+          <Grid container display={"flex"} gap={2.5} p={2}>
+            <Grid item lg={1}>
+              <Typography mt={2}>Not Flowing</Typography>
+            </Grid>
+            <Grid item lg={9} display={"flex"} gap={3}>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="pressure-label">Pressure</InputLabel>
+                  <Select
+                    labelId="pressure-label"
+                    name="pressure1"
+                    value={formValues.notFlowing.pressures[0].pressure1}
+                    onChange={(e) =>
+                      handleNotFlowingChange(0, "pressure1", e.target.value)
+                    }
+                    size="small"
+                  >
+                    <MenuItem value="">
+                      <em>All</em>
+                    </MenuItem>
+                    <MenuItem value="GIP">GIP</MenuItem>
+                    <MenuItem value="THP">THP</MenuItem>
+                    <MenuItem value="CHP">CHP</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="comparison-label">Comparison</InputLabel>
+                  <Select
+                    labelId="comparison-label"
+                    name="comparison"
+                    value={formValues.notFlowing.pressures[0].comparison}
+                    onChange={(e) =>
+                      handleNotFlowingChange(0, "comparison", e.target.value)
+                    }
+                    size="small"
+                  >
+                    <MenuItem value="">
+                      <em>All</em>
+                    </MenuItem>
+                    <MenuItem value=">">&gt;</MenuItem>
+                    <MenuItem value="<">&lt;</MenuItem>
+                    <MenuItem value="=">=</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="pressure-label">Pressure</InputLabel>
+                  <Select
+                    labelId="pressure-label"
+                    name="pressure2"
+                    value={formValues.notFlowing.pressures[0].pressure2}
+                    onChange={(e) =>
+                      handleNotFlowingChange(0, "pressure2", e.target.value)
+                    }
+                    size="small"
+                  >
+                    <MenuItem value="">
+                      <em>All</em>
+                    </MenuItem>
+                    <MenuItem value="GIP">GIP</MenuItem>
+                    <MenuItem value="THP">THP</MenuItem>
+                    <MenuItem value="CHP">CHP</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item lg={3} md={6} sm={12} xs={12}>
+                <Typography>Dead Band (%)</Typography>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  value={formValues.notFlowing.pressures[0].tolerance}
+                  onChange={(e) =>
+                    handleNotFlowingChange(0, "tolerance", e.target.value)
+                  }
+                  fullWidth
+                />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
+      <Grid
+        item
+        p={2}
+        sx={{ display: "flex", justifyContent: "flex-end" }}
+        gap={2}
+      >
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "green",
+            "&:hover": {
+              backgroundColor: "darkgreen",
+            },
+            fontSize: "16px",
+          }}
+          onClick={handleSubmit} // Call handleSubmit on click
+        >
+          Update Well
+        </Button>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "green",
+            "&:hover": {
+              backgroundColor: "darkgreen",
+            },
+            fontSize: "16px",
+          }}
+        >
+          Cancel
+        </Button>
       </Grid>
     </div>
   );

@@ -410,7 +410,7 @@ function Monitor() {
         </Grid>
         <Grid
           container
-          sx={{ display: "flex", justifyContent: "end", height: "40%", p: "6" }}
+          sx={{ display: "flex",  height: "40%", p: "6" }}
         >
           <PrintIcon sx={{ height: "2%", width: "2%" }} />
         </Grid>
@@ -419,7 +419,7 @@ function Monitor() {
       {/* Conditional rendering based on report type */}
       <Grid container mt={2}>
         {/* Conditional rendering based on report type */}
-        {selectedOption === "" && (
+        {/* {selectedOption === "" && ( */}
           <Grid container mt={2}>
             {/* Show chart when no report is selected */}
             <Grid
@@ -541,7 +541,7 @@ function Monitor() {
                 </Box>
               </Grid>
             </Grid>
-        )}
+        {/* )} */}
 
         {/* Matric Report  Table*/}
         <Grid item lg={12}>
@@ -1104,6 +1104,7 @@ function Monitor() {
           )}
         </Grid>
         <Grid></Grid>
+      </Grid>
       </Grid>
     </div>
   );

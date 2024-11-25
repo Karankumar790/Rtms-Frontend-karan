@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress, Grid, IconButton, Paper, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  Grid,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +13,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Box } from "@mui/system";
+import { Box, textAlign } from "@mui/system";
 import Network from "../../../../public/assets/NetworkWire2.jpg";
 import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -71,11 +77,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     padding: "10px", // Increase padding
     height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
+    fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
+    textAlign:"center"
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
+    textAlign:"center",
+    padding: "3px"
   },
 }));
 
@@ -87,6 +96,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
+  padding: "5px",
 }));
 
 function createData(name, calories, fat, carbs, protein) {
@@ -176,40 +186,49 @@ function DeviceManage() {
             <Table aria-label="customized table" stickyHeader>
               <TableHead>
                 <TableRow>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     Client ID{" "}
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     Node ID{" "}
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     LoRa ID
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     Network
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     Time (s)
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                    GIP (Kg)
-                  </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                    CHP (Kg)
-                  </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                    THP (Kg)
-                  </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     Battery (%)
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
                     Solar (V)
                   </StyledTableCell>
-                  {/* <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                    Alerts
-                  </StyledTableCell> */}
-                  <StyledTableCell sx={{ fontSize: "18px" }} align="left">
+                  <StyledTableCell  >
+                    P1{" "}
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    P2
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    P3
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    P4
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    P5
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    E
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    CRC
+                  </StyledTableCell>
+                  <StyledTableCell  >
                     Action
                   </StyledTableCell>
                 </TableRow>
@@ -249,34 +268,46 @@ function DeviceManage() {
                   </TableRow>
                 ) : (
                   deviceDataList?.map((device) => (
-                    <StyledTableRow key={device._id} sx={{ height: "80px" }}>
+                    <StyledTableRow key={device._id} >
                       <StyledTableCell component="th" scope="row">
                         1
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
                         {device.data.NodeAdd}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
                         {device.data.NodeAdd}
                       </StyledTableCell>
-                      <StyledTableCell align="left"></StyledTableCell>
-                      <StyledTableCell align="left">1 min</StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell ></StyledTableCell>
+                      <StyledTableCell >1 min</StyledTableCell>
+                      <StyledTableCell >
                         {device.data.P1}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
                         {device.data.P2}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
                         {device.data.P3}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
                         {device.data.Bat}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
                         {device.data.Solar}
                       </StyledTableCell>
-                      <StyledTableCell align="left">
+                      <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell >
                         <Link to="/dashboard/Lora">
                           <IconButton
                             sx={{

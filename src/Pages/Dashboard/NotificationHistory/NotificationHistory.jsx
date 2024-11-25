@@ -122,21 +122,37 @@ let Sata = {
 };
 // ------------------------Table for Desktop-----------------------------
 
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     backgroundColor: "#8C000B", // Customize background color
+//     color: theme.palette.common.white, // Text color
+//     padding: "10px", // Custom padding
+//     height: "20px", // Specific height for the header row
+//     fontSize: "16px", // Font size for the header
+//     textAlign: "left", // Center-align header content (optional)
+//     // lineHeight: '1.5', // Adjust line height
+//     // borderBottom: `2px solid ${theme.palette.secondary.main}`, // Add border
+//     position: "sticky", // Sticky positioning
+//     zIndex: 1, // Ensure it stays above the rows
+//   },
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//   },
+// }));
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#8C000B", // Customize background color
-    color: theme.palette.common.white, // Text color
-    padding: "10px", // Custom padding
-    height: "20px", // Specific height for the header row
-    fontSize: "16px", // Font size for the header
-    textAlign: "left", // Center-align header content (optional)
-    // lineHeight: '1.5', // Adjust line height
-    // borderBottom: `2px solid ${theme.palette.secondary.main}`, // Add border
-    position: "sticky", // Sticky positioning
-    zIndex: 1, // Ensure it stays above the rows
+    backgroundColor: "#8C000B",
+    color: theme.palette.common.white,
+    padding: "10px", // Increase padding
+    height: "20px", // Set a specific height
+    fontSize: "18px", // Optionally adjust font size for header
+    lineHeight: "1.5", // Adjust line height if needed
+    textAlign:"center"
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
+    textAlign:"center",
+    padding: "3px",
   },
 }));
 
@@ -466,9 +482,9 @@ function NotificationHistory() {
                 <StyledTableCell>Location</StyledTableCell>
                 <StyledTableCell>Installation</StyledTableCell>
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
-                <StyledTableCell>Status</StyledTableCell>
+                {/* <StyledTableCell>Status</StyledTableCell> */}
                 <StyledTableCell>Description</StyledTableCell>
-                <StyledTableCell>Action</StyledTableCell>
+                <StyledTableCell>View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -477,40 +493,34 @@ function NotificationHistory() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    sx={{ width: "13%" }}
+                    // sx={{ width: "13%" }}
                   >
                     {/* {row.name} */}
                   </StyledTableCell>
                   <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
+                    // align="left"
+                    // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
+                    // align="left"
+                    // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
-                  ></StyledTableCell>
-                  <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
+                    // align="left"
+                    // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
                   <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
+                    // align="left"
+                    // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    align="left"
-                    sx={{ width: "13%" }}
+                    // align="left"
+                    // sx={{ width: "13%" }}
                   ></StyledTableCell>
-                  <StyledTableCell align="left">
+                  <StyledTableCell >
                     <IconButton
                       sx={{
                         color: "grey",
