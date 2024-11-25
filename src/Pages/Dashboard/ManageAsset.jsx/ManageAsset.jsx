@@ -24,7 +24,7 @@ import Paper from "@mui/material/Paper";
 import { Box, padding } from "@mui/system";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
 import PersonIcon from "@mui/icons-material/Person";
-import LinkIcon from '@mui/icons-material/Link';
+import LinkIcon from "@mui/icons-material/Link";
 import { useSelector } from "react-redux";
 import {
   Edit as EditIcon,
@@ -707,7 +707,7 @@ function ManageAsset() {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
-      console.log(organizationlogo,"org logo...............")
+      console.log(organizationlogo, "org logo...............");
       if (organizationlogo instanceof File) {
         formDataToUpdate.organizationlogo = organizationlogo;
       }
@@ -764,7 +764,7 @@ function ManageAsset() {
             <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
           </IconButton>
           <Typography variant="h4" fontWeight={700} mt={1}>
-           {organizationName ? organizationName : "N/A"}
+            {organizationName ? organizationName : "N/A"}
           </Typography>
 
           {/* Organization Logo (Top of Organization Name) */}
@@ -796,7 +796,7 @@ function ManageAsset() {
             </Grid>
           )} */}
           <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={12} marginTop={4}>
+            <Grid item md={10} sm={10} xs={12} lg={12}  marginTop={1}>
               <Grid container spacing={3}>
                 {/* Organization Logo Upload (Show only in Save mode) */}
                 {!isEditOrganization && (
@@ -806,29 +806,34 @@ function ManageAsset() {
                     sm={12}
                     md={12}
                     lg={12}
-                    sx={{ display: "flex" }}
+                    // bgcolor={"yellow"}
+                    // position='absolute'
+                    width={"100%"}
+                    // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
                   >
-                    <Typography variant="h6">Organization Logo</Typography>
-                    <span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        style={{ cursor: "pointer", marginLeft: "1rem" }}
-                        onChange={handleLogoUpload}
-                      />
-                    </span>
-                    {file && (
-                      <img
-                        src={file}
-                        alt="Organization Logo Preview"
-                        style={{
-                          width: "250px",
-                          height: "100px",
-                          objectFit: "contain",
-                          marginLeft: "1.5rem",
-                        }}
-                      />
-                    )}
+                    <Box width='450px' display='flex' alignItems='center' gap={2} position={"absolute"} right="1%" top="15%">
+                      <Typography variant="h6">Organization Logo</Typography>
+                      <span >
+                        <input
+                          type="file"
+                          accept="image/*"
+                          style={{ cursor: "pointer", marginLeft: "1rem" }}
+                          onChange={handleLogoUpload}
+                        />
+                      </span>
+                      {file && (
+                        <img
+                          src={file}
+                          alt="Organization Logo Preview"
+                          style={{
+                            width: "250px",
+                            height: "100px",
+                            objectFit: "contain",
+                            marginLeft: "1.5rem",
+                          }}
+                        />
+                      )}
+                    </Box>
                   </Grid>
                 )}
                 {[
@@ -851,7 +856,7 @@ function ManageAsset() {
                     xs={12}
                     sm={3}
                     md={3}
-                    lg={12}
+                    lg={6}
                     key={field.name}
                     spacing={3}
                     sx={{ display: "flex" }}
@@ -879,7 +884,8 @@ function ManageAsset() {
                         type="text"
                         variant="outlined"
                         size="small"
-                        sx={{ height: "50%", width: "30%" }}
+                        fullWidth
+                        // sx={{ height: "50%", width: "30%" }}
                         name={field.name}
                         value={formData[field.name]}
                         onChange={handleInputChange}
@@ -921,14 +927,14 @@ function ManageAsset() {
                       backgroundColor: "green",
                       "&:hover": { backgroundColor: "darkgreen" },
                       fontSize: "16px",
-                      width: "150px",
+                      width: "140px",
                     }}
                     onClick={handleSave}
                     disabled={loading}
                   >
                     {loading ? "SAVING..." : "SAVE"}
                   </Button>
-                  <Button
+                  {/* <Button
                     variant="contained"
                     sx={{
                       backgroundColor: "red",
@@ -939,7 +945,7 @@ function ManageAsset() {
                     onClick={handleCancel}
                   >
                     CANCEL
-                  </Button>
+                  </Button> */}
                 </div>
               )}
             </Box>
@@ -980,6 +986,8 @@ function ManageAsset() {
                   size="small"
                   sx={{
                     backgroundColor: "green",
+                    fontSize: "16px",
+                    width: "162px",
                     "&:hover": {
                       backgroundColor: "darkgreen",
                     },
@@ -1019,7 +1027,7 @@ function ManageAsset() {
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span style={{fontSize:"medium"}}>
+                                <span style={{ fontSize: "medium" }}>
                                   {index + 1}. {departmentName}
                                 </span>
                                 <Box display="flex">
@@ -1048,7 +1056,10 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell style={{fontSize:"medium"}} colSpan={2}>
+                          <StyledTableCell
+                            style={{ fontSize: "medium" }}
+                            colSpan={2}
+                          >
                             No departments available
                           </StyledTableCell>
                         </TableRow>
@@ -1129,6 +1140,8 @@ function ManageAsset() {
                   size="small"
                   sx={{
                     backgroundColor: isEditingPosition ? "blue" : "green",
+                    fontSize: "16px",
+                    width: "300px",
                     "&:hover": {
                       backgroundColor: isEditingPosition
                         ? "darkblue"
@@ -1177,7 +1190,7 @@ function ManageAsset() {
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span style={{fontSize:"medium"}}>
+                                <span style={{ fontSize: "medium" }}>
                                   {index + 1}. {row.departmentName}
                                 </span>
                               </Box>
@@ -1191,7 +1204,7 @@ function ManageAsset() {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "space-between",
-                                        fontSize:"medium",
+                                        fontSize: "medium",
                                       }}
                                     >
                                       {posIndex + 1}. {position}
@@ -1238,7 +1251,10 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell style={{fontSize:"large"}} colSpan={2}>
+                          <StyledTableCell
+                            style={{ fontSize: "large" }}
+                            colSpan={2}
+                          >
                             No Positions available
                           </StyledTableCell>
                         </TableRow>
@@ -1251,22 +1267,19 @@ function ManageAsset() {
             {/* ------------------------APPROVAL CHAIN------------------------------ */}
 
             <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+              container
               gap={1}
               mt={2}
               display="flex"
               flexDirection="column"
             >
-             <Box display="flex" gap={1}>
+              <Box display="flex" gap={1}>
                 <LinkIcon />
                 <Typography variant="h5">Approval Chain</Typography>
               </Box>
               <Box display="flex" gap={1}>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
+                <Grid container >
+                  <Grid item lg={3}></Grid>
                   {DepartmentLoading ? (
                     <div>Loading...</div>
                   ) : (
@@ -1310,44 +1323,13 @@ function ManageAsset() {
                     </FormControl>
                   )}
                 </Grid>
-
-                {/* <FormControl fullWidth size="small">
-                  <InputLabel id="demo-select-large-label">Action</InputLabel>
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-large"
-                    label="Action"
-                    value={approvalChains}
-                    onChange={(e) => setApprovalChains(e.target.value)}
-                  >
-                    <MenuItem value="" disabled>
-                      Select an action
-                    </MenuItem>
-                    <MenuItem value="User Registration">
-                      User Registration
-                    </MenuItem>
-                    <MenuItem value="Well Setting">Well Setting</MenuItem>
-                    <MenuItem value="Node Configuration">
-                      Node Configuration
-                    </MenuItem>
-                    <MenuItem value="Device Registration">
-                      Device Registration
-                    </MenuItem>
-                    <MenuItem value="Close Complain">Close Complain</MenuItem>
-                    <MenuItem value="Close Notification">
-                      Close Notification
-                    </MenuItem>
-                    <MenuItem value="Delete User">Delete User</MenuItem>
-                  </Select>
-                </FormControl> */}
-
                 <FormControl fullWidth size="small">
                   <Autocomplete
                     freeSolo // Allows users to type their own value
                     options={actions} // Provides options to select from
                     value={approvalChains}
-                    onChange={( newValue) => setApprovalChains(newValue)}
-                    onInputChange={( newInputValue) =>
+                    onChange={(newValue) => setApprovalChains(newValue)}
+                    onInputChange={(newInputValue) =>
                       setApprovalChains(newInputValue)
                     }
                     renderInput={(params) => (
@@ -1410,6 +1392,8 @@ function ManageAsset() {
                   size="small"
                   sx={{
                     backgroundColor: isEditMode ? "orange" : "green",
+                    fontSize: "16px",
+                    width: "580px",
                     "&:hover": {
                       backgroundColor: isEditMode ? "darkorange" : "darkgreen",
                     },
@@ -1469,22 +1453,26 @@ function ManageAsset() {
                             {row.approvalChains?.map((chain, chainIndex) => (
                               <StyledTableRow key={`${index}-${chainIndex}`}>
                                 {chainIndex === 0 && (
-                                  <StyledTableCell style={{fontSize:'medium'}}
+                                  <StyledTableCell
+                                    style={{ fontSize: "medium" }}
                                     rowSpan={row.approvalChains.length}
                                   >
                                     {index + 1}. {row.departmentName}
                                   </StyledTableCell>
                                 )}
-                                <StyledTableCell style={{fontSize:'medium'}} >
+                                <StyledTableCell style={{ fontSize: "medium" }}>
                                   {chainIndex + 1}. {chain.action || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell style={{fontSize:'medium'}}>
+                                <StyledTableCell style={{ fontSize: "medium" }}>
                                   {chainIndex + 1}. {chain.level1 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell style={{fontSize:'medium'}}>
+                                <StyledTableCell style={{ fontSize: "medium" }}>
                                   {chainIndex + 1}. {chain.level2 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell align="center" style={{fontSize:'medium'}}>
+                                <StyledTableCell
+                                  align="center"
+                                  style={{ fontSize: "medium" }}
+                                >
                                   <Box display="flex" justifyContent="center">
                                     <IconButton
                                       onClick={() =>
@@ -1519,7 +1507,10 @@ function ManageAsset() {
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={5} style={{fontSize:'medium'}}>
+                          <StyledTableCell
+                            colSpan={5}
+                            style={{ fontSize: "medium" }}
+                          >
                             No Approval Chain Available
                           </StyledTableCell>
                         </TableRow>

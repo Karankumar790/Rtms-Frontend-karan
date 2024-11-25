@@ -22,7 +22,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
-import { borderRadius, Box, height, width } from "@mui/system";
+import {
+  bgcolor,
+  borderRadius,
+  Box,
+  height,
+  padding,
+  width,
+} from "@mui/system";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Modal from "@mui/material/Modal";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
@@ -55,6 +62,7 @@ import {
   Legend,
 } from "chart.js";
 import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
+import CloseIcon from "@mui/icons-material/Close";
 import PendingIcon from "@mui/icons-material/Pending";
 // Registering the necessary components for chart.js
 ChartJS.register(
@@ -72,16 +80,15 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-
   transform: "translate(-50%, -50%)",
   CardOverflow: "scroll",
   overflowY: "scroll",
   height: "70vh",
   // width: "35%",
   // bgcolor: "background.paper",
+  // bgcolor: "pink",
   // bgcolor={"yellow"}
-
-  bgcolor: "white",
+  // bgcolor: "white",
   // border: "2px solid black",
   // boxShadow: 24,
   // p: 2,
@@ -91,18 +98,16 @@ const containerStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
-
   transform: "translate(-50%, -50%)",
-
-  height: "75vh",
+  height: "76vh",
   // width: "35%",
   // bgcolor: "background.paper",
-  // bgcolor={"yellow"}
   borderRadius: "1rem",
   bgcolor: "white",
   // border: "2px solid black",
   boxShadow: 24,
-  p: 2,
+  p: 3,
+  // bgcolor: "yellow",
 };
 
 // --------------------------Table for Moblie-----------------------
@@ -176,12 +181,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     padding: "10px", // Increase padding
     height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
+    fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
+    textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-    padding: "6px",
+    fontSize: 16,
+    textAlign: "center",
+    padding: "3px",
   },
 }));
 
@@ -193,6 +200,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
+  padding: "5px",
 }));
 
 const initialData = [
@@ -593,73 +601,41 @@ function Monitor() {
           <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell sx={{ fontSize: "18px" }}>
-                  Well No.
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Node ID
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  GIP (Kg)
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  CHP (Kg)
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  THP (Kg)
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Battery (%)
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Solar (V)
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Flow Status
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Alerts
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Action
-                </StyledTableCell>
+                <StyledTableCell>Well No.</StyledTableCell>
+                <StyledTableCell>Node ID</StyledTableCell>
+                <StyledTableCell>GIP (Kg)</StyledTableCell>
+                <StyledTableCell>CHP (Kg)</StyledTableCell>
+                <StyledTableCell>THP (Kg)</StyledTableCell>
+                <StyledTableCell>Battery (%)</StyledTableCell>
+                <StyledTableCell>Solar (V)</StyledTableCell>
+                <StyledTableCell>Flow Status</StyledTableCell>
+                <StyledTableCell>Alerts</StyledTableCell>
+                <StyledTableCell>View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={11} align="center">
+                  <TableCell colSpan={11}>
                     <CircularProgress />
                   </TableCell>
                 </TableRow>
               ) : (
                 deviceDataList?.map((device, index) => (
-                  <StyledTableRow key={device._id} sx={{ height: "80px" }}>
+                  <StyledTableRow key={device._id}>
                     <StyledTableCell component="th" scope="row">
                       {wellNumber[index] || "N/A"}{" "}
                     </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {device.data.NodeAdd}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {device.data.P1}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {device.data.P2}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {device.data.P3}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {device.data.Bat}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {device.data.Solar}
-                    </StyledTableCell>
-                    <StyledTableCell align="left"> {}</StyledTableCell>
-                    <StyledTableCell align="left"> {}</StyledTableCell>
+                    <StyledTableCell>{device.data.NodeAdd}</StyledTableCell>
+                    <StyledTableCell>{device.data.P1}</StyledTableCell>
+                    <StyledTableCell>{device.data.P2}</StyledTableCell>
+                    <StyledTableCell>{device.data.P3}</StyledTableCell>
+                    <StyledTableCell>{device.data.Bat}</StyledTableCell>
+                    <StyledTableCell>{device.data.Solar}</StyledTableCell>
+                    <StyledTableCell> {}</StyledTableCell>
+                    <StyledTableCell> {}</StyledTableCell>
 
-                    <StyledTableCell align="left">
+                    <StyledTableCell>
                       <IconButton
                         sx={{
                           color: "grey",
@@ -761,6 +737,18 @@ function Monitor() {
 
       <Modal open={open} onClose={handleClose}>
         <Grid container lg={8.1} sx={containerStyle}>
+          <Box
+            position="absolute"
+            sx={{
+              top: "2.5%",
+              right: "-2.2%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <IconButton onClick={handleClose}   color=" solid black">
+              <CloseIcon fontSize="large" />
+            </IconButton>
+          </Box>
           <Grid
             container
             lg={11.9}
@@ -768,7 +756,7 @@ function Monitor() {
             sm={10}
             xs={12}
             borderRadius={3}
-            overflow="auto"
+            // overflow="auto"
             // height="70vh"
             sx={style}
             // mx={2}
@@ -790,7 +778,7 @@ function Monitor() {
             <Grid container>
               {/* Header */}
 
-              <Paper sx={{ width: "100%", mt: "20px", mx: "14px" }}>
+              <Paper sx={{ width: "100%", mt: "10px", mx: "14px" }}>
                 <Grid container gap={2}>
                   <Grid
                     item

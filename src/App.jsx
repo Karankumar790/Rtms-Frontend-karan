@@ -68,6 +68,10 @@ const CheckOrganization = lazy(() =>
   import("./Pages/Dashboard/SuperAdmin/CheckOrganization.jsx")
 );
 
+const Simulator = lazy(() =>
+  import("./Pages/Dashboard/DeviceManage/Simulator.jsx")
+);
+
 function App() {
   const role = useSelector((state) => state.auth.role);
 
@@ -89,6 +93,7 @@ function App() {
     { path: "Lora", element: <Lora /> },
     { path: "Network", element: <Network /> },
     { path: "AddDevices", element: <AddDevices /> },
+    { path: "simulator", element: <Simulator /> },
 
     { path: "Admin", element: <SuperAdmin /> },
     { path: "technicalSupport", element: <TechnicalSupport /> },

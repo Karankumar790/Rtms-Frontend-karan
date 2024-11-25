@@ -112,7 +112,7 @@ export default function Sidebar({
       roles: ["owner", "manager", "employee"],
     },
     {
-      name: "Node Manager",
+      name: "Node Monitor",
       icon: <DeviceManagerIcon sx={{ color: "black" }} />,
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
