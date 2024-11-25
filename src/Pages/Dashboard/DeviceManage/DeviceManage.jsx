@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Button,
   CircularProgress,
   Grid,
   IconButton,
@@ -139,7 +140,7 @@ function DeviceManage() {
         pt={2}
         paddingBottom={2}
       >
-        <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
+        <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1} >
           <Box sx={{ height: "50px", width: "50px" }}>
             <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
@@ -147,27 +148,25 @@ function DeviceManage() {
             <Typography variant="h4">Node Monitor</Typography>
           </Box>
         </Grid>
+        <Grid item lg={1} display={"flex"} justifyContent={"end"} md={2} sm={2} xs={12} >
+          <Link to="/dashboard/simulator">
+        <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "green", // Change button color to green
+              "&:hover": {
+                backgroundColor: "darkgreen", // Optional: Change color on hover
+              },
+              fontSize: "16px",
+            }}
+            fullWidth
+          >
+            Simulator
+          </Button>
+          </Link>
+        </Grid>
       </Grid>
 
-      {/* <Grid container display={'flex'} gap={9}>
-    <Box display={'flex'} gap={1}>
-      <TravelExploreIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography variant="h5">Browser</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <CloudUploadIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Upload</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <DownloadForOfflineIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Download</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <StoreIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Firmware</Typography>
-    </Box>
-
-   </Grid> */}
       {/* ------------------Table for Desktop--------------------------------- */}
       <Paper sx={{ height: "75vh" }}>
         <Grid

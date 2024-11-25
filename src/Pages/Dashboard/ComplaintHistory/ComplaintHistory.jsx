@@ -18,10 +18,46 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import ComplaintIcon from "@mui/icons-material/AccessAlarm";
+import NotificationsIcon from "@mui/icons-material/NotificationsActive";
+import Modal from "@mui/material/Modal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { padding } from "@mui/system";
-// ----------------------Table for  Moblie --------------------------
+import { borderRadius, Box } from "@mui/system";
+import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+import CloseIcon from "@mui/icons-material/Close";
+import ComplaintIcon from "@mui/icons-material/AccessAlarm";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+
+import BarChartIcon from "@mui/icons-material/BarChart";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import PieChartIcon from "@mui/icons-material/PieChart";
+import { Line, Bar, Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
+import PendingIcon from "@mui/icons-material/Pending";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
+import { Textarea } from "flowbite-react";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend
+);
+
+// -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -51,7 +87,6 @@ let Tata = {
   "Taker Name": "74.0060 W",
   Description: "All Good",
 };
-
 let Mata = {
   "Complain No.": "1",
   "Data/Time": "New York",
@@ -101,54 +136,167 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [createData("1")];
+const rows = [
+  createData("1"),
+  // createData('2'),
+];
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+
+  transform: "translate(-50%, -50%)",
+  CardOverflow: "scroll",
+  overflowY: "scroll",
+  height: "70vh",
+  width: "55%",
+
+  bgcolor: "white",
+  borderRadius: "5px",
+};
+
+const options = {
+  responsive: true, // makes the chart responsive
+  maintainAspectRatio: false, // important for custom sizing
+  plugins: {
+    tooltip: {
+      enabled: true,
+    },
+  },
+};
+
+// Sample chart data for both charts
+const chartData = {
+  labels: ["January", "February", "March", "April", "May"],
+  datasets: [
+    {
+      label: "Sample Data",
+      data: [65, 59, 80, 81, 56],
+      backgroundColor: [
+        "rgba(75, 192, 192, 0.2)",
+        "rgba(255, 159, 64, 0.2)",
+        "rgba(54, 162, 235, 0.2)",
+        "rgba(255, 206, 86, 0.2)",
+        "rgba(153, 102, 255, 0.2)",
+      ],
+      borderColor: [
+        "rgba(75, 192, 192, 1)",
+        "rgba(255, 159, 64, 1)",
+        "rgba(54, 162, 235, 1)",
+        "rgba(255, 206, 86, 1)",
+        "rgba(153, 102, 255, 1)",
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 function ComplaintHistory() {
-  const [compNo, setCompNo] = React.useState("");
-  const [notification, setNotification] = React.useState("");
-  const [rName, setRName] = React.useState("");
-  const [tName, setTname] = React.useState("");
-
-  const handleLocation = (event) => {
-    setCompNo(event.target.value);
-  };
-
-  const handleNotification = (event) => {
-    setNotification(event.target.value);
-  };
-
-  const handleRaiserName = (event) => {
-    setRName(event.target.value);
-  };
-
-  const handleTakerName = (event) => {
-    setTname(event.target.value);
-  };
+  const [age, setAge] = React.useState("");
+  const [parameter, setParameter] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [selectedDate, setSelectedDate] = useState("");
-
+  const [selectedOption, setSelectedOption] = useState("");
+  const [chartType, setChartType] = useState("line");
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [parameter, setParameter] = React.useState("");
+  const [formData, setFormData] = useState({
+    to: "",
+    cc: "",
+  });
 
-  // Handle search input change
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchClick = () => {
-    console.log("Search button clicked");
-    // Additional logic for search button click can be added here
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleChangeParameter = (event) => {
     setParameter(event.target.value);
   };
 
+  const blue = {
+    100: "#DAECFF",
+    200: "#b6daff",
+    400: "#3399FF",
+    500: "#007FFF",
+    600: "#0072E5",
+    900: "#003A75",
+  };
+
+  const grey = {
+    50: "#F3F6F9",
+    100: "#E5EAF2",
+    200: "#DAE2ED",
+    300: "#C7D0DD",
+    400: "#B0B8C4",
+    500: "#9DA8B7",
+    600: "#6B7A90",
+    700: "#434D5B",
+    800: "#303740",
+    900: "#1C2025",
+  };
+
+  const Textarea = styled(BaseTextareaAutosize)(
+    ({ theme }) => `
+    box-sizing: border-box;
+    width: 120%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+    background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+    box-shadow: 0px 2px 2px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[50]
+    };
+
+    &:hover {
+      border-color: ${blue[400]};
+    }
+
+    &:focus {
+      border-color: ${blue[400]};
+      box-shadow: 0 0 0 3px ${
+        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      };
+    }
+
+    // firefox
+    &:focus-visible {
+      outline: 0;
+    }
+  `
+  );
+
   return (
-    <div>
+    <div
+      style={{
+        filter: open ? "blur(8px)" : "none",
+        transition: "filter 0.1s ease",
+      }}
+    >
       <Grid container>
         <IconButton>
           <ComplaintIcon sx={{ fontSize: "40px", color: "red" }} />
@@ -158,7 +306,7 @@ function ComplaintHistory() {
         </Typography>
       </Grid>
       <Grid container spacing={3} pt={3}>
-        <Grid item sm={6} md={6} xs={12} lg={2.4}>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth>
             <TextField
               fullWidth
@@ -221,13 +369,13 @@ function ComplaintHistory() {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          <FormControl fullWidth>
-            <TextField size="small" label="Complaint No." />
+          <FormControl fullWidth size="small">
+            <TextField variant="outlined" size="small" label="Complaint No." />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          <FormControl fullWidth>
-            <TextField size="small" label="Well Number" />
+          <FormControl fullWidth size="small">
+            <TextField variant="outlined" size="small" label="Well Number" />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
@@ -243,15 +391,15 @@ function ComplaintHistory() {
               <MenuItem value={0}>
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={1}>Pending Complaints</MenuItem>
-              <MenuItem value={2}>Resloved Complaints</MenuItem>
-              <MenuItem value={3}>Unsolved Complaints</MenuItem>
+              <MenuItem value={1}>Open Notification</MenuItem>
+              <MenuItem value={2}>Close with comment </MenuItem>
+              <MenuItem value={3}>Conveted to complaint</MenuItem>
             </Select>
           </FormControl>
         </Grid>
       </Grid>
       <Grid container display={"flex"} justifyContent={"end"} pt={2}>
-        <Grid item lg={1.3} md={6} sm={6} xs={12}>
+        <Grid item lg={1.3} md={3} sm={6} xs={12}>
           <Button
             variant="contained"
             sx={{
@@ -272,49 +420,103 @@ function ComplaintHistory() {
           Records Found:
         </Typography>
       </Grid>
-      {/* -----------------------------------------table for Desktop-------------------------- */}
       <Grid
         container
         md={12}
         lg={12}
         sm={5}
         xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
+        sx={{
+          display: { sm: "none", xs: "none", md: "block", lg: "block" },
+          height: "100%",
+        }}
         mt={1}
       >
-        <TableContainer component={Paper} sx={{ maxHeight: 620, height: 1000 }}>
-          <Table aria-label="customized table" stickyHeader>
+        <TableContainer
+          component={Paper}
+          sx={{
+            maxHeight: 620,
+            height: 1000,
+            overflowY: "auto",
+          }}
+        >
+          <Table
+            aria-label="customized table"
+            stickyHeader
+            sx={{
+              minWidth: "800px", // Set minimum width for horizontal scrolling
+            }}
+          >
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">Complain No.</StyledTableCell>
-                <StyledTableCell align="left">Data/Time</StyledTableCell>
-                <StyledTableCell align="left">Sender Name</StyledTableCell>
-                <StyledTableCell align="left">Department</StyledTableCell>
-                <StyledTableCell align="left">Receiver Name</StyledTableCell>
-                <StyledTableCell align="left">Department</StyledTableCell>
-                <StyledTableCell align="center">Description</StyledTableCell>
-                <StyledTableCell align="left">View</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ bgcolor:"black",width: "17%" }}>Complaint No.</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Data/Time</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Sender name</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Department</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Receiver Name</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Department</StyledTableCell>
+                {/* <StyledTableCell >Well Port</StyledTableCell> */}
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Status</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Description</StyledTableCell>
+                <StyledTableCell align="center"
+                    sx={{ width: "17%" }}>Action</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ width: "13%" }}
+                  >
                     {/* {row.name} */}
                   </StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left">
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  {/* <StyledTableCell align="center" sx={{ width: '13%' }}></StyledTableCell> */}
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  <StyledTableCell
+                    align="center"
+                    sx={{ width: "13%" }}
+                  ></StyledTableCell>
+                  <StyledTableCell align="center">
                     <IconButton
                       sx={{
                         color: "grey",
                         "&:hover": { color: "darkred" },
                         marginRight: "5px",
                       }}
+                      onClick={handleOpen}
                     >
                       <VisibilityIcon fontSize="large" />
                     </IconButton>
@@ -325,8 +527,386 @@ function ComplaintHistory() {
           </Table>
         </TableContainer>
       </Grid>
-      {/* ------------------------------------table for mobile------------------------- */}
 
+      {/* ------------------------------notification view --------------------------- */}
+
+      <Modal open={open}>
+        <Grid container sx={style}>
+          <Grid container p={2}>
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: 1,
+                right: 1,
+                fontSize: "22px",
+                color: "black",
+                bgcolor: "transparent",
+                "&:hover": {
+                  bgcolor: "red",
+                },
+              }}
+            >
+              <CloseIcon fontSize="50px" />
+            </IconButton>
+
+            {/* --------------------------------Textfield Values------------------------------------- */}
+            <Grid container mx={2} mt={1}>
+              <Grid container>
+                <Paper
+                  sx={{
+                    width: "990px",
+                  }}
+                >
+                  <Grid container>
+                    <Typography
+                      ml={1}
+                      mt={2}
+                      fontSize={25}
+                      p={1}
+                      fontWeight={600}
+                    >
+                      Complaint Details
+                    </Typography>
+                  </Grid>
+                  {/* ---------------------- view -------------------------- */}
+                  <Box>
+                    <Grid container>
+                      <Grid item lg={12} md={3} sm={6} xs={12} pl={2}>
+                        {[{ label: "Complaint No. :", value: "" }].map(
+                          (item, index) => (
+                            <Box key={index}>
+                              <Typography
+                                variant="h5"
+                                color={"blue"}
+                                fontWeight={600}
+                              >
+                                {item.label}
+                              </Typography>
+                              {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
+                            </Box>
+                          )
+                        )}
+                      </Grid>
+
+                      <Grid item lg={12} md={3} sm={6} xs={12} pl={2} mb={3}>
+                        {[
+                          { label: "Well Number :", value: "" },
+                          { label: "Location :", value: "" },
+                          { label: "Installation :", value: "" },
+                          { label: "Date/Time :", value: "" },
+                          { label: "Description :", value: "" },
+                          { label: "Status :", value: "" },
+                        ].map((item, index) => (
+                          <Box key={index}>
+                            <Typography variant="h5" mt={1}>
+                              {item.label}
+                            </Typography>
+                            {/* <TextField size="small" fullWidth value={item.value} /> */}
+                          </Box>
+                        ))}
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Paper>
+              </Grid>
+            </Grid>
+
+            {/* --------------------------------chart------------------------------------- */}
+            <Grid container p={2}>
+              <Grid item lg={9}>
+                <Paper elevation={2} sx={{ pb: "5px" }}>
+                  <Grid container>
+                    <Typography ml={2} mt={2} fontSize={25} fontWeight={500}>
+                      Status
+                    </Typography>
+                  </Grid>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "start",
+                      gap: 2,
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => setChartType("line")}
+                      color={chartType === "line" ? "primary" : "default"}
+                    >
+                      <ShowChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("bar")}
+                      color={chartType === "bar" ? "primary" : "default"}
+                    >
+                      <BarChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("pie")}
+                      color={chartType === "pie" ? "primary" : "default"}
+                    >
+                      <PieChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                  </Box>
+
+                  <div style={{ height: "400px", width: "100%" }}>
+                    {chartType === "line" && (
+                      <Line
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "bar" && (
+                      <Bar
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "pie" && (
+                      <Pie
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                  </div>
+                </Paper>
+              </Grid>
+              <Grid item lg={3} xs={4}>
+                <Paper>
+                  <Box
+                    sx={{
+                      maxHeight: 505,
+                      height: 1200,
+                      overflow: "auto",
+                      paddingRight: 2,
+                      paddingTop: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                      gap: "0.85rem",
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      After Beam Pressure(ABP)
+                    </Typography>
+                    <Typography variant="h5" color={"red"}>
+                      2 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Tubing Head Pressure(THP)
+                    </Typography>
+                    <Typography variant="h5" color={"green"}>
+                      2 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography fontSize={17} sx={{ color: "#aaaaaa" }}>
+                      Cashing Head Pressure(CHP)
+                    </Typography>
+                    <Typography variant="h5" color={"blue"}>
+                      5.326 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Battery (%)
+                    </Typography>
+                    <Typography variant="h5" color={"red"}>
+                      12%
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Solar Voltage(V)
+                    </Typography>
+                    <Typography variant="h5" color={"green"}>
+                      12V
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+            </Grid>
+
+            {/* ------------------Status ----------------------*/}
+            <Grid container component={Paper} ml={2} width={"990px"}>
+              <Grid container>
+                <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
+                  Forward
+                </Typography>
+              </Grid>
+              <Grid item lg={8} md={2} sm={4} xs={12} display={"flex"} gap={3}>
+                <Box>
+                  <Typography
+                    width={200}
+                    display={"flex"}
+                    justifyContent={"end"}
+                    alignItems={"end"}
+                    variant="h5"
+                  >
+                    Department
+                  </Typography>
+                </Box>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="simple-select-label">Department</InputLabel>
+                  <Select label="Department">
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={1}>HR</MenuItem>
+                    <MenuItem value={2}>Finance</MenuItem>
+                    <MenuItem value={3}>Engineering</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid
+                item
+                lg={8}
+                md={2}
+                sm={4}
+                xs={12}
+                display="flex"
+                alignItems="center"
+                mt={2}
+                gap={3}
+              >
+                <Box>
+                  <Typography
+                    width={200}
+                    display={"flex"}
+                    justifyContent={"end"}
+                    alignItems={"end"}
+                    variant="h5"
+                  >
+                    Position
+                  </Typography>
+                </Box>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="simple-select-label">Position</InputLabel>
+                  <Select
+                    labelId="simple-select-label"
+                    id="simple-select"
+                    label="Department"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={1}>HR</MenuItem>
+                    <MenuItem value={2}>Finance</MenuItem>
+                    <MenuItem value={3}>Engineering</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid container>
+                <Grid item lg={8} md={3} sm={6} xs={12} mb={2} mt={1}>
+                  {[
+                    { label: "To ", value: formData.to, name: "to" },
+                    { label: "Cc", value: formData.cc, name: "cc" },
+                  ].map((item, index) => (
+                    <Box
+                      key={index}
+                      p={1}
+                      gap={3}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-between"
+                      sx={{ pl: 2 }}
+                    >
+                      <Grid item lg={4}>
+                        <Typography
+                          variant="h5"
+                          display={"flex"}
+                          justifyContent={"end"}
+                          alignItems={"end"}
+                          width={182}
+                          gap={3}
+                        >
+                          {item.label}
+                        </Typography>
+                      </Grid>
+                      <TextField
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        value={item.value}
+                        name={item.name}
+                        onChange={handleChange}
+                      />
+                    </Box>
+                  ))}
+                </Grid>
+              </Grid>
+            </Grid>
+
+            {/* --------------------------------Subject------------------------------------- */}
+            {/* <Grid
+              container
+              component={Paper}
+              p={2}
+              mt={3}
+              mx={2}
+              // sx={{ width: "100%", mt: "20px", mx: "10px" }}
+            >
+              <Grid
+                item
+                lg={2}
+                md={2}
+                sm={4}
+                xs={12}
+                display="flex"
+                alignItems="center"
+              >
+                <Typography variant="h4" mt={1}>
+                  Subject:
+                </Typography>
+              </Grid>
+              <Grid item lg={10} md={10} sm={8} xs={12}>
+                <TextField fullWidth variant="outlined"></TextField>
+              </Grid>
+            </Grid> */}
+            {/* --------------------------------Remark------------------------------------- */}
+            <Grid container component={Paper} p={2} m={2}>
+              <Grid container>
+                <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
+                  Message
+                </Typography>
+              </Grid>
+              <Grid item lg={10} md={2} sm={4} xs={12}>
+                <Textarea
+                  // aria-label="minimum height"
+                  minRows={10}
+                  placeholder="REMARK"
+                />
+              </Grid>
+            </Grid>
+            <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
+              <Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                startIcon={<CloudUploadIcon />}
+                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+              >
+                Upload files
+                <VisuallyHiddenInput
+                  type="file"
+                  onChange={(event) => console.log(event.target.files)}
+                  multiple
+                />
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+              >
+                CLOSE COMPLAINT
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+              >
+                UNABLE TO CLOSE
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </Modal>
+      {/* ------------------------------Table for Desktop---------------------------- */}
       <Grid
         container
         md={12}
@@ -341,13 +921,13 @@ function ComplaintHistory() {
             {Object.keys(data).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{data[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -358,13 +938,13 @@ function ComplaintHistory() {
             {Object.keys(Tata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Tata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -375,13 +955,13 @@ function ComplaintHistory() {
             {Object.keys(Mata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Mata[header]}</Typography>
                 </StyledContent>
               </Grid>
@@ -392,13 +972,13 @@ function ComplaintHistory() {
             {Object.keys(Sata).map((header, index) => (
               <Grid container key={index}>
                 {/* Header Section */}
-                <StyledGridItem item xs={4}>
+                <StyledGridItem item xs={6}>
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {header}
                   </Typography>
                 </StyledGridItem>
                 {/* Content Section */}
-                <StyledContent item xs={8}>
+                <StyledContent item xs={6}>
                   <Typography variant="body1">{Sata[header]}</Typography>
                 </StyledContent>
               </Grid>
