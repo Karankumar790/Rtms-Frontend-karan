@@ -195,7 +195,7 @@ function Simulator() {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           {/* Input Fields */}
-          <Grid item sm={10} md={5} xs={10} lg={3}>
+          <Grid item sm={6} md={6} xs={12} lg={3}>
             <TextField
               fullWidth
               size="small"
@@ -213,7 +213,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={9} md={6} xs={10} lg={3}>
+          <Grid item sm={6} md={6} xs={12} lg={3}>
             <TextField
               fullWidth
               size="small"
@@ -231,7 +231,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={10} md={6} xs={10} lg={3}>
+          <Grid item sm={6} md={6} xs={12} lg={3}>
             <TextField
               fullWidth
               size="small"
@@ -249,7 +249,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={8} md={6} xs={10} lg={3}>
+          <Grid item sm={6} md={6} xs={12} lg={3}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-select-large-label">Network</InputLabel>
               <Select
@@ -269,7 +269,7 @@ function Simulator() {
               </FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item sm={8} md={6} xs={10} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -285,7 +285,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={10} md={8} xs={11} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -301,7 +301,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -318,7 +318,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={9} md={8} xs={10} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -335,7 +335,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -352,7 +352,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -369,7 +369,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
@@ -386,7 +386,7 @@ function Simulator() {
               }}
             />
           </Grid>
-          <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
+          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
             <TextField
               fullWidth
               size="small"
