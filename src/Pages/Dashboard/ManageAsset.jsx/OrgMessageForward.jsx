@@ -69,12 +69,12 @@ function OrgMessageForward() {
   return (
     <>
       <Grid container>
-        <Grid item xs={12} sm={12} md={12} lg={12} p={1}>
+        <Grid item xs={12} sm={12} md={12} lg={12}  p={1}>
           <Box display="flex" sx={{ pt: 2, pb: 2 }} gap={1}>
             <EmailIcon sx={{ mt: "2px" }} />
             <Typography variant="h5">Message Forwarding</Typography>
           </Box>
-          <Grid container spacing={0.5} gap={0.5}>
+          <Grid container spacing={0.5} gap={0.5} >
             <Grid item xs={12} sm={2} md={2} lg={1.7}>
               <Box display="flex" alignItems="center" gap={1}>
                 <AccountBalanceIcon />
@@ -103,14 +103,14 @@ function OrgMessageForward() {
               <Grid
                 item
                 md={10}
-                lg={3.20}
+                lg={3.1}
                 gap={1.5}
                 spacing={0.5}
                 key={level}
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 {/* Add margin top here */}
-                <Grid item xs={12} sm={2} md={6} lg={5.5} gap={1}>
+                <Grid item xs={12} sm={2} md={6} lg={5.5} gap={.9}>
                   <Box display="flex" alignItems="center" gap={1}>
                     <AccessAlarmIcon />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -128,7 +128,7 @@ function OrgMessageForward() {
                     </LocalizationProvider>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={2} md={6} lg={6}>
+                <Grid item xs={12} sm={2} md={6} lg={6} >
                   <Box display="flex" alignItems="center" gap={1}>
                     <Person3Icon />
                     <TextField
@@ -141,25 +141,29 @@ function OrgMessageForward() {
                 </Grid>
               </Grid>
             ))}
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    backgroundColor: "green",
-                    "&:hover": {
-                      backgroundColor: "darkgreen",
-                    },
-                  }}
-                >
-                  ADD
-                </Button>
+            <Grid item lg={.4} >
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                backgroundColor: "green",
+                fontSize: "16px",
+                width: "150px",
+                "&:hover": {
+                  backgroundColor: "darkgreen",
+                },
+              }}
+            >
+              ADD
+            </Button>
+            </Grid>
           </Grid>
         </Grid>
 
         {/* --------------------------------------------TABLE-------------------------------------- */}
         <Grid
           container
-          p={2}
+          p={1}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
           mt={1}
         >

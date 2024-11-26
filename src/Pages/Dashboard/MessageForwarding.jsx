@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import Modal from "@mui/material/Modal";
 import { getUsersByOrganization } from "../../apis/Service";
 import { Button } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { bgcolor, borderRadius, display } from "@mui/system";
 // ----------------------Table for Mobile------------------------------
 
@@ -40,7 +41,7 @@ const StyledContent = styled(Grid)(({ theme }) => ({
 }));
 
 const style = {
-  // position: "absolute",
+  position: "relative",
   // top: "50%",
   // left: "50%",
   // transform: "translate(-50%, -50%)",
@@ -51,6 +52,7 @@ const style = {
   borderRadius: "10px",
   // width: "40%",
   bgcolor: "background.paper",
+  // bgcolor:"pink",
   border: "1px solid #000",
   boxShadow: 24,
   p: 6,
@@ -99,17 +101,33 @@ let Sata = {
   Longitude: "74.0060 W",
 };
 
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     backgroundColor: "#8C000B",
+//     color: theme.palette.common.white,
+//     padding: "10px", // Increase padding
+//     height: "20px", // Set a specific height
+//     fontSize: "16px", // Optionally adjust font size for header
+//     lineHeight: "1.5", // Adjust line height if needed
+//   },
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//     padding: "3px",
+//   },
+// }));
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#8C000B",
     color: theme.palette.common.white,
     padding: "10px", // Increase padding
     height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
+    fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
+    textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
+    textAlign: "center",
     padding: "3px",
   },
 }));
@@ -185,9 +203,9 @@ function MessageForwarding() {
           </Box>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12} >
+        <Grid item lg={3} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
-            <InputLabel  id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel id="dropdown-label">Select an Option</InputLabel>
             <Select
               labelId="dropdown-label"
               value={selectedValue}
@@ -212,7 +230,19 @@ function MessageForwarding() {
           className="center"
           sx={{ backgroundColor: `rgba(255, 255, 255, 0.5)` }}
         >
-          <Grid item lg={6} md={8} sm={8} xs={12} sx={style}>
+          <Grid item lg={6} md={8} sm={8} xs={12} sx={style} >
+            <Box
+              position="absolute"
+              sx={{
+                top: "3%",
+                right: "-2.8%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <IconButton onClick={handleClose} color=" solid black">
+                <CloseIcon fontSize="large" />
+              </IconButton>
+            </Box>
             <Box textAlign="center" pb={1}>
               <Typography id="modal-modal-title" variant="h4" component="h2">
                 User Details
@@ -228,65 +258,65 @@ function MessageForwarding() {
               gap={2}
               spacing={1}
             > */}
-              <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
-                <Grid lg={10} md={8} xs={12} sm={12}>
-                  {userDetails.map((field, index) => (
+            <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
+              <Grid lg={10} md={8} xs={12} sm={12}>
+                {userDetails.map((field, index) => (
+                  <Grid
+                    item
+                    display="flex"
+                    // justifyContent="space-around"
+                    // spacing={999}
+                    // gap={1}
+                    p={2}
+                  >
                     <Grid
-                      item
-                      display="flex"
-                      // justifyContent="space-around"
-                      // spacing={999}
-                      // gap={1}
-                      p={2}
+                      lg={4}
+                      md={5}
+                      sm={12}
+                      xs={12}
+                      key={index}
+                      display={"flex"}
                     >
-                      <Grid
-                        lg={4}
-                        md={5}
-                        sm={12}
-                        xs={12}
-                        key={index}
-                        display={"flex"}
-                      >
-                        <Typography variant="h6">{field}</Typography>
-                      </Grid>
-                      <Grid lg={8} md={7} sm={12} xs={12}>
-                        <TextField
-                          variant="standard"
-                          placeholder={field}
-                          disabled
-                          fullWidth
-                          size="small"
-                        ></TextField>
-                      </Grid>
+                      <Typography variant="h6">{field}</Typography>
                     </Grid>
-                  ))}
-                </Grid>
-                <Grid item lg={4} md={4} xs={12} sm={12}>
-                  <Box
-                    className="center"
-                    height={"200px"}
-                    width={"200px"}
-                    border={"1px solid black"}
-                    ml={3}
-                    mt={3}
-                    mb={2}
-                  >
-                    {" "}
-                    Id Card Photo
-                  </Box>
-                  <Box
-                    className="center"
-                    height={"200px"}
-                    width={"200px"}
-                    border={"1px solid black"}
-                    mt={4}
-                    ml={3}
-                  >
-                    {" "}
-                    Passport Photo
-                  </Box>
-                </Grid>
+                    <Grid lg={8} md={7} sm={12} xs={12}>
+                      <TextField
+                        variant="standard"
+                        placeholder={field}
+                        disabled
+                        fullWidth
+                        size="small"
+                      ></TextField>
+                    </Grid>
+                  </Grid>
+                ))}
               </Grid>
+              <Grid item lg={4} md={4} xs={12} sm={12}>
+                <Box
+                  className="center"
+                  height={"200px"}
+                  width={"200px"}
+                  border={"1px solid black"}
+                  ml={3}
+                  mt={3}
+                  mb={2}
+                >
+                  {" "}
+                  Id Card Photo
+                </Box>
+                <Box
+                  className="center"
+                  height={"200px"}
+                  width={"200px"}
+                  border={"1px solid black"}
+                  mt={4}
+                  ml={3}
+                >
+                  {" "}
+                  Passport Photo
+                </Box>
+              </Grid>
+            </Grid>
             {/* </Grid> */}
             {/* ----------Button--------------------- */}
             <Box
@@ -337,30 +367,14 @@ function MessageForwarding() {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  User Name
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  Positions
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  Department
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  Employee ID
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  Email Add
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  Contact No.
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  User Status
-                </StyledTableCell>
-                <StyledTableCell align="left" width={"12.5%"}>
-                  View
-                </StyledTableCell>
+                <StyledTableCell width={"12.5%"}>User Name</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>Positions</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>Department</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>Employee ID</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>Email Add</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>Contact No.</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>User Status</StyledTableCell>
+                <StyledTableCell width={"12.5%"}>View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -372,18 +386,12 @@ function MessageForwarding() {
                   <StyledTableCell component="th" scope="row">
                     {user.roleInRTMS}
                   </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {user.department}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {user.employeeID}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{user.email}</StyledTableCell>
-                  <StyledTableCell align="left">
-                    {user.contactNumber}
-                  </StyledTableCell>
-                  <StyledTableCell align="left"> Active</StyledTableCell>
-                  <StyledTableCell align="left">
+                  <StyledTableCell>{user.department}</StyledTableCell>
+                  <StyledTableCell>{user.employeeID}</StyledTableCell>
+                  <StyledTableCell>{user.email}</StyledTableCell>
+                  <StyledTableCell>{user.contactNumber}</StyledTableCell>
+                  <StyledTableCell> Active</StyledTableCell>
+                  <StyledTableCell>
                     <IconButton
                       sx={{
                         color: "grey",

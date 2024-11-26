@@ -46,13 +46,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     padding: "10px",
     height: "20px",
-    fontSize: "16px",
-    textAlign: "left",
+    fontSize: "18px",
+    // textAlign: "left",
     position: "sticky",
     zIndex: 1,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
     padding: "6px",
   },
 }));
@@ -323,7 +323,6 @@ const WellMaster = () => {
           </Box>
           <Box>
             <Typography variant="h4">Well Manager</Typography>
-            <Typography variant="h4">Well Master</Typography>
           </Box>
         </Grid>
       </Grid>
@@ -593,15 +592,15 @@ const WellMaster = () => {
         >
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
-              <TableRow>
-                <StyledTableCell align="center">Well Number</StyledTableCell>
-                <StyledTableCell align="center">Well Type</StyledTableCell>
-                <StyledTableCell align="center">Location</StyledTableCell>
-                <StyledTableCell align="center">Installation</StyledTableCell>
-                <StyledTableCell align="center">Landmark</StyledTableCell>
-                <StyledTableCell align="center">Geolocation</StyledTableCell>
-                <StyledTableCell align="center">Action</StyledTableCell>
-              </TableRow>
+              <StyledTableRow>
+                <StyledTableCell align="center"  sx={{bgcolor:'black'}}>Well Number</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Well Type</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Location</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Installation</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Landmark</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Geolocation</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Action</StyledTableCell>
+              </StyledTableRow>
             </TableHead>
             <TableBody>
               {locationsForTable?.map((location) => {
@@ -618,22 +617,22 @@ const WellMaster = () => {
                           <StyledTableRow
                             key={`${location}-${installation.name}-${well.wellNumber}`}
                           >
-                            <StyledTableCell align="left" width={"14.2%"}>
+                            <StyledTableCell align="center" width={"14.2%"}>
                               {well.wellNumber}
                             </StyledTableCell>
-                            <StyledTableCell align="left" width={"14.2%"}>
+                            <StyledTableCell align="center" width={"14.2%"}>
                               {wellType.wellType}
                             </StyledTableCell>
-                            <StyledTableCell align="left" width={"14.2%"}>
+                            <StyledTableCell align="center" width={"14.2%"}>
                               {location}
                             </StyledTableCell>
-                            <StyledTableCell align="left" width={"14.2%"}>
+                            <StyledTableCell align="center" width={"14.2%"}>
                               {installation.name}
                             </StyledTableCell>
-                            <StyledTableCell align="left" width={"14.2%"}>
+                            <StyledTableCell align="center" width={"14.2%"}>
                               {well.landmark || "N/A"}
                             </StyledTableCell>
-                            <StyledTableCell>
+                            <StyledTableCell align="center">
                               {/* <Link to = "/dashboard/virtual"> */}
                               <IconButton
                                 sx={{
@@ -652,7 +651,7 @@ const WellMaster = () => {
                               </IconButton>
                               {/* </Link> */}
                             </StyledTableCell>
-                            <StyledTableCell align="left" width={"14.2%"}>
+                            <StyledTableCell align="center" width={"14.2%"}>
                               <IconButton
                                 onClick={() =>
                                   handleSettingsClick(
@@ -675,24 +674,24 @@ const WellMaster = () => {
                       )
                     ) : (
                       <StyledTableRow key={installation.name}>
-                        <StyledTableCell style={{fontSize:"medium"}} align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="center">
                           {location}
                         </StyledTableCell>
-                        <StyledTableCell style={{fontSize:"medium"}} align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="center">
                           {installation.name}
                         </StyledTableCell>
-                        <StyledTableCell style={{fontSize:"medium"}} align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="center">
                           No Well Type
                         </StyledTableCell>
-                        <StyledTableCell style={{fontSize:"medium"}} align="left">
+                        <StyledTableCell style={{fontSize:"medium"}} align="center">
                           No Well Number
                         </StyledTableCell>
-                        {/* <StyledTableCell align="left">
+                        {/* <StyledTableCell align="center">
                           No Landmark
                         </StyledTableCell> */}
-                        <StyledTableCell style={{fontSize:"medium"}} align="left">N/A</StyledTableCell>
+                        <StyledTableCell style={{fontSize:"medium"}} align="center">N/A</StyledTableCell>
 
-                        <StyledTableCell>
+                        <StyledTableCell align="center">
                           {/* <Link to = "/dashboard/virtual"> */}
                           <IconButton
                             sx={{
@@ -705,7 +704,7 @@ const WellMaster = () => {
                           </IconButton>
                           {/* </Link> */}
                         </StyledTableCell>
-                        <StyledTableCell align="left">
+                        <StyledTableCell  align="center">
                           <IconButton
                             onClick={() =>
                               handleSettingsClick(
@@ -728,14 +727,14 @@ const WellMaster = () => {
                   })
                 ) : (
                   <StyledTableRow key={location}>
-                    <StyledTableCell style={{fontSize:"medium"}} align="left">{location}</StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="left">
+                    <StyledTableCell style={{fontSize:"medium"}} align="center">{location}</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="center">
                       No Installations Available
                     </StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="left">-</StyledTableCell>
-                    <StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="center">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="center">-</StyledTableCell>
+                    <StyledTableCell style={{fontSize:"medium"}} align="center">-</StyledTableCell>
+                    <StyledTableCell align="center">
                       <IconButton
                         sx={{
                           color: "grey",
@@ -746,7 +745,7 @@ const WellMaster = () => {
                         <LocationOnIcon fontSize="large" />
                       </IconButton>
                     </StyledTableCell>
-                    <StyledTableCell align="left">
+                    <StyledTableCell align="center">
                       <IconButton
                         onClick={() => handleSettingsClick(location)}
                         sx={{
