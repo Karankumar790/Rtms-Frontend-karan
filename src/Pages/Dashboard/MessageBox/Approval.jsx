@@ -239,7 +239,7 @@ export default function BasicCard() {
       </Grid>
 
       {/* -------------------------Table for Mobile----------------------------- */}
-      <Grid
+      {/* <Grid
         container
         sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}
       >
@@ -288,7 +288,7 @@ export default function BasicCard() {
             <Typography variant="body1">Add Well Approval Content</Typography>
           </TabPanel>
         </Tabs>
-      </Grid>
+      </Grid> */}
 
       {/* -------------------------Table for Desktop--------------------------- */}
 
@@ -504,8 +504,8 @@ export default function BasicCard() {
         </DialogActions>
       </Dialog>
 
-      {/* Header Section */}
-      {/* <Grid container justifyContent="end">
+      {/* Header Section 
+       <Grid container justifyContent="end">
 
         <Box>
           <IconButton color="primary">
@@ -521,7 +521,7 @@ export default function BasicCard() {
             <DeleteIcon sx={{ fontSize: '30px' }} />
           </IconButton>
         </Box>
-      </Grid>
+      </Grid> 
       <Grid container sx={{ width: '100%', height: '80vh' }}>
         <Box
           sx={{
@@ -536,8 +536,8 @@ export default function BasicCard() {
             overflowY: 'auto', // Add scrolling if content overflows
           }}
         >
-          {/* Content Section */}
-          {/* {data.map((item) => (
+          Content Section
+          {data.map((item) => (
             <Box
               key={item.id}
               sx={{
@@ -553,9 +553,9 @@ export default function BasicCard() {
               </Typography>
             </Box>
           ))}
-        </Box> */}
+        </Box>
 
-      {/* </Grid>  */}
+       </Grid>  */}
 
 
     </Grid> 
