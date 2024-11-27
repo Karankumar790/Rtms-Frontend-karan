@@ -301,7 +301,6 @@ function MessageForwarding() {
                   mt={3}
                   mb={2}
                 >
-                  {" "}
                   Id Card Photo
                 </Box>
                 <Box
@@ -312,7 +311,7 @@ function MessageForwarding() {
                   mt={4}
                   ml={3}
                 >
-                  {" "}
+               
                   Passport Photo
                 </Box>
               </Grid>
@@ -337,7 +336,7 @@ function MessageForwarding() {
                 variant="contained"
                 sx={{ width: "150px", p: "10px", fontSize: "15px" }}
               >
-                {" "}
+              
                 Delete User
               </Button>
               <Button
