@@ -35,14 +35,14 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   backgroundColor: "white",
 }));
 
-let data = {
-  "Complain No.": "1",
-  "Data/Time": "New York",
-  "Notification No.": "01/01/2021",
-  "Raiser Name": "40.7128 N",
-  "Taker Name": "74.0060 W",
-  Description: "All Good",
-};
+// let data = {
+//   "Complain No.": "1",
+//   "Data/Time": "New York",
+//   "Notification No.": "01/01/2021",
+//   "Raiser Name": "40.7128 N",
+//   "Taker Name": "74.0060 W",
+//   Description: "All Good",
+// };
 
 let Tata = {
   "Complain No.": "1",
@@ -159,7 +159,23 @@ const chartData = {
 };
 function Simulator() {
   const [selectedValue, setSelectedValue] = useState("");
+  const [formValues, setFormValues] = useState({
+    securityCode: "",
+    organizationID: "",
+    deviceID: "",
+    network: "",
+    time: "",
+  });
 
+  const handleInput = (e) => {
+    const { name, value } = e.target; // Destructure name and value from the event target
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value, // Update the corresponding field in the form data
+    }));
+  };
+  console.log(formValues,".....")
+}
   // Define data that will be shown based on the selected value
   const data = {
     0: "Data for 00",
@@ -201,9 +217,11 @@ function Simulator() {
               size="small"
               label="Security Code"
               variant="outlined"
-              name="Security Code"
-              value={""}
-              disabled
+              name="securityCode"
+              value={formValues.securityCode}
+              onChange={handleInput}
+              // value={""}
+              // disabled
               helperText="hint: Prefix"
               FormHelperTextProps={{
                 style: {
@@ -220,8 +238,10 @@ function Simulator() {
               label="Organization ID"
               variant="outlined"
               name="Organization ID"
-              value={""}
-              disabled
+              value={formValues.organizationID}
+              onChange={handleInput}
+              // value={""}
+              // disabled
               helperText="hint: Prefix"
               FormHelperTextProps={{
                 style: {
@@ -238,8 +258,10 @@ function Simulator() {
               label="Device ID"
               variant="outlined"
               name="Device ID"
-              value={""}
-              disabled
+              value={formValues.deviceID}
+              onChange={handleInput}
+              // value={""}
+              // disabled
               helperText="hint: Prefix"
               FormHelperTextProps={{
                 style: {
@@ -275,7 +297,9 @@ function Simulator() {
               size="small"
               label="Time(s)"
               variant="outlined"
-              name="Time"
+              name="time"
+              value={formValues.time}
+              onChange={handleInput}
               helperText="hint: 00s-3600s"
               FormHelperTextProps={{
                 style: {

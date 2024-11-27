@@ -153,3 +153,21 @@ export const wellMonitorData = async (organizationName) => {
     
   }
 }
+
+export const addParametersForWell = async (formData) => {
+  try {
+    const response = await axios.post(`${WELL_API}/add-parameters`, formData);
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const apidata = async (formData) => {
+  try {
+    const response = await axios.post(`http://localhost:5000/generate-random-values`, formData);
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};

@@ -27,7 +27,7 @@ import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
-import { deviceData, saveWellDetails } from "../../../apis/WellService";
+import { addParametersForWell, deviceData, saveWellDetails } from "../../../apis/WellService";
 import { setWellDetails } from "../../../apis/authSlice";
 import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import SearchIcon from "@mui/icons-material/Search";
@@ -392,6 +392,62 @@ function AddWell() {
     Device();
   }, []);
 
+  const [formData, setFormData] = useState({
+    organizationName: "Abhi Company",
+    wellNumber: "",
+    parameterPORTName: "",
+    alertData: {
+      process: "",
+      displayName: "",
+      parametersDescription: "",
+      units: "",
+      sensorOutput: "",
+      valueMinimum: "",
+      valueMaximum: "",
+      normalAlert: "",
+      normalCondition: "",
+      normalDescription: "",
+      normalDeadbandPercentage: "",
+      criticalAlert: "",
+      criticalCondition: "",
+      criticalDescription: "",
+      criticalDeadbandPercentage: "",
+    },
+  });
+
+  // Handle input changes
+  const handleInputChange = (field, value, nested) => {
+    if (nested) {
+      setFormData((prev) => ({
+        ...prev,
+        alertData: {
+          ...prev.alertData,
+          [field]: value,
+        },
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    }
+  };
+
+  // Save data
+  const handleAddParameter = async () => {
+    try {
+      const response = await addParametersForWell(formData);
+      if (response?.success) {
+        toast.success("Parameters added successfully!");
+        handleClose(); // Close the dialog/modal
+      } else {
+        toast.error(response?.message || "Failed to add parameters.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while adding parameters.");
+    }
+  };
+
   return (
     <div>
       <Paper>
@@ -552,8 +608,6 @@ function AddWell() {
       <Modal
         open={open}
         // onClose={handleClose}
-        // aria-labelledby="modal-title"
-        // aria-describedby="modal-description"
       >
         <Grid container lg={7} sx={styless}>
           <Grid
@@ -589,6 +643,10 @@ function AddWell() {
                     <Select
                       fullWidth
                       size="small"
+                      value={formData.alertData.process}
+                      onChange={(e) =>
+                        handleInputChange("process", e.target.value, true)
+                      }
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -620,6 +678,10 @@ function AddWell() {
                     <Select
                       fullWidth
                       size="small"
+                      value={formData.parameterPORTName}
+                      onChange={(e) =>
+                        handleInputChange("parameterPORTName", e.target.value)
+                      }
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -645,6 +707,10 @@ function AddWell() {
                     variant="outlined"
                     label="Display Name"
                     size="small"
+                    value={formData.alertData.displayName}
+                    onChange={(e) =>
+                      handleInputChange("displayName", e.target.value, true)
+                    }
                     fullWidth
                   ></TextField>
                 </Stack>
@@ -656,6 +722,10 @@ function AddWell() {
                     variant="outlined"
                     label="Description"
                     size="small"
+                    value={formData.alertData.parametersDescription}
+                    onChange={(e) =>
+                      handleInputChange("parametersDescription", e.target.value, true)
+                    }
                     fullWidth
                   ></TextField>
                 </Stack>
@@ -666,6 +736,8 @@ function AddWell() {
                   <FormControl fullWidth size="small">
                     <Select
                       size="small"
+                      value={formData.alertData.units}
+                      onChange={(e) => handleInputChange(e, "units", "alertData")}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -711,6 +783,8 @@ function AddWell() {
                       // labelId="demo-select-small-label"
                       // label="Sensor Output"
                       size="small"
+                      value={formData.alertData.units}
+                      onChange={(e) => handleInputChange(e, "units", "alertData")}
                     >
                       <MenuItem value={30}>all </MenuItem>
                       <MenuItem value={30}>
@@ -729,6 +803,8 @@ function AddWell() {
                     label="Value Minimum"
                     size="small"
                     fullWidth
+                    value={formData.alertData.valueMinimum}
+                    onChange={(e) => handleInputChange(e, "valueMinimum", "alertData")}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -740,6 +816,8 @@ function AddWell() {
                     label="Value Maximum"
                     size="small"
                     fullWidth
+                    value={formData.alertData.valueMaximum}
+                    onChange={(e) => handleInputChange(e, "valueMaximum", "alertData")}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -754,6 +832,8 @@ function AddWell() {
                     label="Normal Alert Value"
                     size="small"
                     fullWidth
+                    value={formData.alertData.normalAlert}
+                    onChange={(e) => handleInputChange(e, "normalAlert", "alertData")}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -761,7 +841,9 @@ function AddWell() {
                 <Stack spacing={1}>
                   <Typography variant="h5">Condition</Typography>
                   <FormControl fullWidth size="small">
-                    <Select size="small">
+                    <Select size="small"
+                     value={formData.alertData.normalCondition}
+                     onChange={(e) => handleInputChange(e, "normalCondition", "alertData")}>
                       <MenuItem value={30}>High</MenuItem>
                       <MenuItem value={20}>Low</MenuItem>
                     </Select>
@@ -776,7 +858,9 @@ function AddWell() {
                     label="Description"
                     size="small"
                     fullWidth
-                  ></TextField>
+                    value={formData.alertData.normalDescription}
+                    onChange={(e) => handleInputChange(e, "normalDescription", "alertData")}>
+                  </TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
@@ -787,7 +871,9 @@ function AddWell() {
                     label="Deadband (%)"
                     size="small"
                     fullWidth
-                  ></TextField>
+                    value={formData.alertData.normalDeadbandPercentage}
+                    onChange={(e) => handleInputChange(e, "normalDeadbandPercentage", "alertData")}>
+                  </TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
@@ -798,7 +884,9 @@ function AddWell() {
                     label="Critical Alert Value"
                     size="small"
                     fullWidth
-                  ></TextField>
+                    value={formData.alertData.criticalAlert}
+                    onChange={(e) => handleInputChange(e, "criticalAlert", "alertData")}>
+                  </TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
@@ -836,11 +924,11 @@ function AddWell() {
               </Grid>
             </Grid>
 
-            <Grid container justifyContent="flex-end" spacing={2} mt={1} mx={2}>
+            <Grid container justifyContent="flex-end"  mt={1} mx={2}>
               <Stack gap={2} display="flex" flexDirection={"row"}>
                 <Button
                   onClick={handleClose}
-                  sx={{ width: "120px", height: "50px", fontSize: "medium" }}
+                  sx={{ width: "120px", height: "45px", fontSize: "medium" }}
                   variant="contained"
                 >
                   Cancel
@@ -848,10 +936,11 @@ function AddWell() {
                 {/* </Stack>
               <Stack > */}
                 <Button
-                  sx={{ width: "120px", height: "50px", fontSize: "medium" }}
+                  sx={{ width: "120px", height: "45px", fontSize: "medium" }}
                   onClick={() => {
                     handleClose();
                     handleSave();
+                    handleAddParameter();
                   }}
                   variant="contained"
                 >
@@ -899,7 +988,7 @@ function AddWell() {
       </Grid>
       {addData ? (
         <Paper >
-          <Grid container spacing={3}  p={1} mt={2}  >
+          <Grid container spacing={3}  p={2} mt={2}  >
             <Box width="99%" display="flex" justifyContent="space-between">
               <Typography pl={3} fontSize={"25px"}>
                 ABP (After Beam Pressure)
@@ -1330,6 +1419,7 @@ function AddWell() {
         <Button
           variant="contained"
           sx={{
+            width:"150px",
             backgroundColor: "green",
             "&:hover": {
               backgroundColor: "darkgreen",
@@ -1343,6 +1433,7 @@ function AddWell() {
         <Button
           variant="contained"
           sx={{
+            width:"150px",
             backgroundColor: "green",
             "&:hover": {
               backgroundColor: "darkgreen",
