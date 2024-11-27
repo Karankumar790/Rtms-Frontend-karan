@@ -45,6 +45,7 @@ import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
 import PendingIcon from "@mui/icons-material/Pending";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import { Textarea } from "flowbite-react";
+import HistoryModal from "../HistoryModal";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -130,11 +131,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     height: "20px", // Set a specific height
     fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
-    textAlign:"center"
+    textAlign: "center"
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 16,
-    textAlign:"center",
+    textAlign: "center",
     padding: "3px",
   },
 }));
@@ -284,9 +285,8 @@ function NotificationHistory() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${
-      theme.palette.mode === "dark" ? grey[900] : grey[50]
-    };
+    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
+      };
 
     &:hover {
       border-color: ${blue[400]};
@@ -294,8 +294,7 @@ function NotificationHistory() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${
-        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -305,6 +304,14 @@ function NotificationHistory() {
     }
   `
   );
+
+
+  // -----------History Modal--------------------
+
+  const [Modalopen, setModalOpen] = useState(false);
+
+  const ModalhandleOpen = () => setModalOpen(true);
+  const ModalhandleClose = () => setModalOpen(false);
 
   return (
     <div
@@ -479,6 +486,7 @@ function NotificationHistory() {
                 {/* <StyledTableCell>Status</StyledTableCell> */}
                 <StyledTableCell>Description</StyledTableCell>
                 <StyledTableCell>View</StyledTableCell>
+                <StyledTableCell> History View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -487,32 +495,32 @@ function NotificationHistory() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    // sx={{ width: "13%" }}
+                  // sx={{ width: "13%" }}
                   >
                     {/* {row.name} */}
                   </StyledTableCell>
                   <StyledTableCell
                   ></StyledTableCell>
                   <StyledTableCell
-                    // align="left"
-                    // sx={{ width: "13%" }}
+                  // align="left"
+                  // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    // align="left"
-                    // sx={{ width: "13%" }}
+                  // align="left"
+                  // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    // align="left"
-                    // sx={{ width: "13%" }}
+                  // align="left"
+                  // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
                   <StyledTableCell
-                    // align="left"
-                    // sx={{ width: "13%" }}
+                  // align="left"
+                  // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell
-                    // align="left"
-                    // sx={{ width: "13%" }}
+                  // align="left"
+                  // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell >
                     <IconButton
@@ -525,6 +533,10 @@ function NotificationHistory() {
                     >
                       <VisibilityIcon fontSize="large" />
                     </IconButton>
+                  </StyledTableCell>
+                  <StyledTableCell >
+                    {/* Pass state and handlers to the modal */}
+                    <HistoryModal/>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -779,7 +791,7 @@ function NotificationHistory() {
                   <Box mr={8.5}>
                     <Typography variant="h5">Position</Typography>
                   </Box>
-                  <FormControl sx={{width:"25rem"}} size="small">
+                  <FormControl sx={{ width: "25rem" }} size="small">
                     <InputLabel id="simple-select-label">Position</InputLabel>
                     <Select
                       labelId="simple-select-label"
@@ -796,7 +808,7 @@ function NotificationHistory() {
                   </FormControl>
                 </Grid>
 
-                
+
               </Grid>
 
               {/* --------------------------------Subject------------------------------------- */}
@@ -827,7 +839,7 @@ function NotificationHistory() {
             </Grid> */}
               {/* --------------------------------Remark------------------------------------- */}
 
-              <Box width="100%" textAlign="end" mx={1}  fullWidth mt={1}>
+              <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
                 <Button
                   component="label"
                   role={undefined}
