@@ -28,10 +28,9 @@ import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
 import {
-  addParametersForWell,
   deviceData,
   saveWellDetails,
-} from "../../../apis/WellService";
+} from "../../../apis/wellService";
 import { setWellDetails } from "../../../apis/authSlice";
 import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import SearchIcon from "@mui/icons-material/Search";
@@ -967,7 +966,7 @@ function AddWell() {
                   onClick={() => {
                     handleClose();
                     handleSave();
-                    handleAddParameter();
+                    // handleAddParameter();
                   }}
                   variant="contained"
                 >
