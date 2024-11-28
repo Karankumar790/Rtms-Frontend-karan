@@ -27,7 +27,11 @@ import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
-import { addParametersForWell, deviceData, saveWellDetails } from "../../../apis/WellService";
+import {
+  addParametersForWell,
+  deviceData,
+  saveWellDetails,
+} from "../../../apis/WellService";
 import { setWellDetails } from "../../../apis/authSlice";
 import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import SearchIcon from "@mui/icons-material/Search";
@@ -176,13 +180,13 @@ function AddWell() {
     setEmployeeData(editData);
   };
 
-  const handleChangeParameter = (event) => {
-    const { name, value } = event.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+  // const handleChangeParameter = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormValues({
+  //     ...formValues,
+  //     [name]: value,
+  //   });
+  // };
 
   // const handleChangeParameterwe = (event) => {
   //   const { name, value } = event.target;
@@ -392,61 +396,82 @@ function AddWell() {
     Device();
   }, []);
 
-  const [formData, setFormData] = useState({
-    organizationName: "Abhi Company",
-    wellNumber: "",
-    parameterPORTName: "",
-    alertData: {
-      process: "",
-      displayName: "",
-      parametersDescription: "",
-      units: "",
-      sensorOutput: "",
-      valueMinimum: "",
-      valueMaximum: "",
-      normalAlert: "",
-      normalCondition: "",
-      normalDescription: "",
-      normalDeadbandPercentage: "",
-      criticalAlert: "",
-      criticalCondition: "",
-      criticalDescription: "",
-      criticalDeadbandPercentage: "",
-    },
+  const [parameterValues, setParameterValues] = useState({
+    process: "",
+    ports: "",
+    name: "",
+    description: "",
+    unit: "",
+    sensorOutput: "",
+    minVal: "",
+    maxVal: "",
+    normAlertValue: "",
+    normalCondition: "",
+    normalDescription: "",
+    normalDeadband: "",
+    criticalAlertValue: "",
+    criticalCondition: "",
+    criticalDescription: "",
+    criticalDeadband: "",
   });
 
-  // Handle input changes
-  const handleInputChange = (field, value, nested) => {
-    if (nested) {
-      setFormData((prev) => ({
+  const handleChangeParameter = (e) => {
+    const { name, value } = e.target;
+    setParameterValues((prev) => {
+      const updatedValues = {
         ...prev,
-        alertData: {
-          ...prev.alertData,
-          [field]: value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [field]: value,
-      }));
-    }
+        [name]: value,
+      };
+      console.log("Updated Form Values:", updatedValues); // Log the updated values immediately
+      return updatedValues;
+    });
+  
   };
+  
+  // const handleChangeParameter = (e) => {
+  //   const { name, value } = e.target;
+  //   setParameterValues((prev) => ({
+  //     // const updatedValues = {
+  //     ...prev,
+  //     [name]: value,
+  //     // };
+  //     // console.log("Updated Form Values:", updatedValues);
+  //     // return updatedValues;
+  //   }));
+  // };
+
+  // Handle input changes
+  // const handleInputChange = (field, value, nested) => {
+  //   if (nested) {
+  //     setparameterValues((prev) => ({
+  //       ...prev,
+  //       alertData: {
+  //         ...prev.alertData,
+  //         [field]: value,
+  //       },
+  //     }));
+  //   } else {
+  //     setparameterValues((prev) => ({
+  //       ...prev,
+  //       [field]: value,
+  //     }));
+  //   }
+  // };
 
   // Save data
-  const handleAddParameter = async () => {
-    try {
-      const response = await addParametersForWell(formData);
-      if (response?.success) {
-        toast.success("Parameters added successfully!");
-        handleClose(); // Close the dialog/modal
-      } else {
-        toast.error(response?.message || "Failed to add parameters.");
-      }
-    } catch (error) {
-      toast.error("An error occurred while adding parameters.");
-    }
-  };
+  // const handleAddParameter = async () => {
+  //   try {
+  //     const response = await addParametersForWell(parameterValues);
+  //     if (response?.success) {
+  //       toast.success("Parameters added successfully!");
+  //       handleClose(); // Close the dialog/modal
+  //     } else {
+  //       toast.error(response?.message || "Failed to add parameters.");
+  //     }
+  //   } catch (error) {
+  //     toast.error("An error occurred while adding parameters.");
+  //   }
+  // };
 
   return (
     <div>
@@ -605,10 +630,7 @@ function AddWell() {
       </Paper>
 
       {/* Dialog (Modal) */}
-      <Modal
-        open={open}
-        // onClose={handleClose}
-      >
+      <Modal open={open}>
         <Grid container lg={7} sx={styless}>
           <Grid
             container
@@ -643,10 +665,9 @@ function AddWell() {
                     <Select
                       fullWidth
                       size="small"
-                      value={formData.alertData.process}
-                      onChange={(e) =>
-                        handleInputChange("process", e.target.value, true)
-                      }
+                      name="process"
+                      value={parameterValues.process}
+                      onChange={handleChangeParameter}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -656,17 +677,17 @@ function AddWell() {
                         },
                       }}
                     >
-                      <MenuItem value={20}>Temperature</MenuItem>
-                      <MenuItem value={20}>Pressure</MenuItem>
-                      <MenuItem value={20}>Level</MenuItem>
-                      <MenuItem value={20}>Flow Rate</MenuItem>
-                      <MenuItem value={20}>Speed</MenuItem>
-                      <MenuItem value={20}>Solar Power</MenuItem>
-                      <MenuItem value={20}>Voltage</MenuItem>
-                      <MenuItem value={20}>Current</MenuItem>
-                      <MenuItem value={20}>Frequency</MenuItem>
-                      <MenuItem value={20}>Power</MenuItem>
-                      <MenuItem value={20}>Battery Power</MenuItem>
+                      <MenuItem value={"Temperature"}>Temperature</MenuItem>
+                      <MenuItem value={"Pressure"}>Pressure</MenuItem>
+                      <MenuItem value={"Level"}>Level</MenuItem>
+                      <MenuItem value={"Flow Rate"}>Flow Rate</MenuItem>
+                      <MenuItem value={"Speed"}>Speed</MenuItem>
+                      <MenuItem value={"Solar Power"}>Solar Power</MenuItem>
+                      <MenuItem value={"Voltage"}>Voltage</MenuItem>
+                      <MenuItem value={"Current"}>Current</MenuItem>
+                      <MenuItem value={"Frequency"}>Frequency</MenuItem>
+                      <MenuItem value={"Power"}>Power</MenuItem>
+                      <MenuItem value={"Battery Power"}>Battery Power</MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -678,10 +699,9 @@ function AddWell() {
                     <Select
                       fullWidth
                       size="small"
-                      value={formData.parameterPORTName}
-                      onChange={(e) =>
-                        handleInputChange("parameterPORTName", e.target.value)
-                      }
+                      name="ports"
+                      value={parameterValues.ports}
+                      onChange={handleChangeParameter}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -691,10 +711,10 @@ function AddWell() {
                         },
                       }}
                     >
-                      <MenuItem value={20}>GIP</MenuItem>
-                      <MenuItem value={20}>CHP</MenuItem>
-                      <MenuItem value={20}>THP</MenuItem>
-                      <MenuItem value={20}>ABP</MenuItem>
+                      <MenuItem value={"GIP"}>GIP</MenuItem>
+                      <MenuItem value={"CHP"}>CHP</MenuItem>
+                      <MenuItem value={"THP"}>THP</MenuItem>
+                      <MenuItem value={"ABP"}>ABP</MenuItem>
                       {/* <MenuItem value={20}>Speed</MenuItem> */}
                     </Select>
                   </FormControl>
@@ -707,10 +727,9 @@ function AddWell() {
                     variant="outlined"
                     label="Display Name"
                     size="small"
-                    value={formData.alertData.displayName}
-                    onChange={(e) =>
-                      handleInputChange("displayName", e.target.value, true)
-                    }
+                    name="name"
+                    value={parameterValues.name}
+                    onChange={handleChangeParameter}
                     fullWidth
                   ></TextField>
                 </Stack>
@@ -722,10 +741,9 @@ function AddWell() {
                     variant="outlined"
                     label="Description"
                     size="small"
-                    value={formData.alertData.parametersDescription}
-                    onChange={(e) =>
-                      handleInputChange("parametersDescription", e.target.value, true)
-                    }
+                    name="description"
+                    value={parameterValues.description}
+                    onChange={handleChangeParameter}
                     fullWidth
                   ></TextField>
                 </Stack>
@@ -736,8 +754,9 @@ function AddWell() {
                   <FormControl fullWidth size="small">
                     <Select
                       size="small"
-                      value={formData.alertData.units}
-                      onChange={(e) => handleInputChange(e, "units", "alertData")}
+                      name="unit"
+                      value={parameterValues.unit}
+                      onChange={handleChangeParameter}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -746,30 +765,20 @@ function AddWell() {
                         },
                       }}
                     >
-                      <MenuItem value={30}>
-                        <Typography>°C</Typography>
-                      </MenuItem>
-                      <MenuItem value={30}>
-                        <Typography>
-                          Kg/cm<sup>2</sup>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem value={20}>%</MenuItem>
-                      <MenuItem value={20}>meter</MenuItem>
-                      <MenuItem value={20}>centimeter</MenuItem>
-                      <MenuItem value={20}>
-                        <Typography>
-                          m<sup>3</sup>/H
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem value={20}>galon/H</MenuItem>
-                      <MenuItem value={20}>rpm</MenuItem>
-                      <MenuItem value={20}>Volt</MenuItem>
-                      <MenuItem value={20}>ampere</MenuItem>
-                      <MenuItem value={20}>hz</MenuItem>
-                      <MenuItem value={30}>KWH </MenuItem>
-                      <MenuItem value={30}>0-3 V </MenuItem>
-                      <MenuItem value={30}>0-100 mV </MenuItem>
+                      <MenuItem value={"°C"}>°C</MenuItem>
+                      <MenuItem value={"Kg/cm²"}>Kg/cm²</MenuItem>
+                      <MenuItem value={"%"}>%</MenuItem>
+                      <MenuItem value={"meter"}>meter</MenuItem>
+                      <MenuItem value={"centimeter"}>centimeter</MenuItem>
+                      <MenuItem value={"m³/H"}>m³/H</MenuItem>
+                      <MenuItem value={"galon/H"}>galon/H</MenuItem>
+                      <MenuItem value={"rpm"}>rpm</MenuItem>
+                      <MenuItem value={"Volt"}>Volt</MenuItem>
+                      <MenuItem value={"ampere"}>ampere</MenuItem>
+                      <MenuItem value={"hz"}>hz</MenuItem>
+                      <MenuItem value={"KWH"}>KWH </MenuItem>
+                      <MenuItem value={"0-3 V"}>0-3 V </MenuItem>
+                      <MenuItem value={"0-100 mV"}>0-100 mV </MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -783,14 +792,16 @@ function AddWell() {
                       // labelId="demo-select-small-label"
                       // label="Sensor Output"
                       size="small"
-                      value={formData.alertData.units}
-                      onChange={(e) => handleInputChange(e, "units", "alertData")}
+                      name="sensorOutput"
+                      value={parameterValues.sensorOutput}
+                      onChange={handleChangeParameter}
                     >
-                      <MenuItem value={30}>all </MenuItem>
-                      <MenuItem value={30}>
+                      {/* <MenuItem value={""}>all </MenuItem> */}
+                      <MenuItem value={""}>
                         <Typography>{/* Kg/cm<sup>2</sup> */}</Typography>
                       </MenuItem>
-                      <MenuItem value={20}></MenuItem>
+                      <MenuItem value={"ok"}>okk</MenuItem>
+                      <MenuItem value={"ims"}>ims</MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -803,8 +814,9 @@ function AddWell() {
                     label="Value Minimum"
                     size="small"
                     fullWidth
-                    value={formData.alertData.valueMinimum}
-                    onChange={(e) => handleInputChange(e, "valueMinimum", "alertData")}
+                    name="minVal"
+                    value={parameterValues.minVal}
+                    onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -816,14 +828,12 @@ function AddWell() {
                     label="Value Maximum"
                     size="small"
                     fullWidth
-                    value={formData.alertData.valueMaximum}
-                    onChange={(e) => handleInputChange(e, "valueMaximum", "alertData")}
+                    name="maxVal"
+                    value={parameterValues.maxVal}
+                    onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
-              {/* </Grid>
-
-            <Grid container mt={1} p={2} spacing={2}> */}
               <Grid item lg={3}>
                 <Stack spacing={1}>
                   <Typography variant="h5">Normal Alert Value</Typography>
@@ -832,8 +842,9 @@ function AddWell() {
                     label="Normal Alert Value"
                     size="small"
                     fullWidth
-                    value={formData.alertData.normalAlert}
-                    onChange={(e) => handleInputChange(e, "normalAlert", "alertData")}
+                    name="normAlertValue"
+                    value={parameterValues.normAlertValue}
+                    onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -841,11 +852,14 @@ function AddWell() {
                 <Stack spacing={1}>
                   <Typography variant="h5">Condition</Typography>
                   <FormControl fullWidth size="small">
-                    <Select size="small"
-                     value={formData.alertData.normalCondition}
-                     onChange={(e) => handleInputChange(e, "normalCondition", "alertData")}>
-                      <MenuItem value={30}>High</MenuItem>
-                      <MenuItem value={20}>Low</MenuItem>
+                    <Select
+                      size="small"
+                      name="normalCondition"
+                      value={parameterValues.normalCondition}
+                      onChange={handleChangeParameter}
+                    >
+                      <MenuItem value={"High"}>High</MenuItem>
+                      <MenuItem value={"Low"}>Low</MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -858,9 +872,10 @@ function AddWell() {
                     label="Description"
                     size="small"
                     fullWidth
-                    value={formData.alertData.normalDescription}
-                    onChange={(e) => handleInputChange(e, "normalDescription", "alertData")}>
-                  </TextField>
+                    name="normalDescription"
+                    value={parameterValues.normalDescription}
+                    onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
@@ -871,9 +886,10 @@ function AddWell() {
                     label="Deadband (%)"
                     size="small"
                     fullWidth
-                    value={formData.alertData.normalDeadbandPercentage}
-                    onChange={(e) => handleInputChange(e, "normalDeadbandPercentage", "alertData")}>
-                  </TextField>
+                    name="normalDeadband"
+                    value={parameterValues.normalDeadband}
+                    onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
@@ -884,18 +900,24 @@ function AddWell() {
                     label="Critical Alert Value"
                     size="small"
                     fullWidth
-                    value={formData.alertData.criticalAlert}
-                    onChange={(e) => handleInputChange(e, "criticalAlert", "alertData")}>
-                  </TextField>
+                    name="criticalAlertValue"
+                    value={parameterValues.criticalAlertValue}
+                    onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
                 <Stack spacing={1}>
                   <Typography variant="h5">Condition</Typography>
                   <FormControl fullWidth size="small">
-                    <Select size="small">
-                      <MenuItem value={30}>High</MenuItem>
-                      <MenuItem value={20}>Low</MenuItem>
+                    <Select
+                      size="small"
+                      name="criticalCondition"
+                      value={parameterValues.criticalCondition}
+                      onChange={handleChangeParameter}
+                    >
+                      <MenuItem value={"High"}>High</MenuItem>
+                      <MenuItem value={"Low"}>Low</MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -908,6 +930,9 @@ function AddWell() {
                     label="Description"
                     size="small"
                     fullWidth
+                    name="criticalDescription"
+                    value={parameterValues.criticalDescription}
+                    onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -919,12 +944,15 @@ function AddWell() {
                     label="Deadband (%)"
                     size="small"
                     fullWidth
+                    name="criticalDeadband"
+                    value={parameterValues.criticalDeadband}
+                    onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
             </Grid>
 
-            <Grid container justifyContent="flex-end"  mt={1} mx={2}>
+            <Grid container justifyContent="flex-end" mt={1} mx={2}>
               <Stack gap={2} display="flex" flexDirection={"row"}>
                 <Button
                   onClick={handleClose}
@@ -933,8 +961,7 @@ function AddWell() {
                 >
                   Cancel
                 </Button>
-                {/* </Stack>
-              <Stack > */}
+
                 <Button
                   sx={{ width: "120px", height: "45px", fontSize: "medium" }}
                   onClick={() => {
@@ -952,7 +979,6 @@ function AddWell() {
         </Grid>
       </Modal>
 
-    
       <Grid
         container
         sx={{
@@ -979,16 +1005,12 @@ function AddWell() {
         </Grid>
 
         <Paper>
-          <Grid
-            container
-            alignItems="end"
-          >
-          </Grid>
+          <Grid container alignItems="end"></Grid>
         </Paper>
       </Grid>
       {addData ? (
-        <Paper >
-          <Grid container spacing={3}  p={2} mt={2}  >
+        <Paper>
+          <Grid container spacing={3} p={2} mt={2}>
             <Box width="99%" display="flex" justifyContent="space-between">
               <Typography pl={3} fontSize={"25px"}>
                 ABP (After Beam Pressure)
@@ -999,7 +1021,7 @@ function AddWell() {
             </Box>
 
             <Grid item xs={12} sm={6} md={3} lg={3}>
-              <Stack  spacing={1}>
+              <Stack spacing={1}>
                 <Typography variant="h5">Process</Typography>
 
                 <TextField
@@ -1014,7 +1036,7 @@ function AddWell() {
               </Stack>
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
-              <Stack  spacing={1} >
+              <Stack spacing={1}>
                 <Typography variant="h5">Ports</Typography>
 
                 <TextField
@@ -1230,186 +1252,186 @@ function AddWell() {
             </Grid>
             {/* </Grid> */}
           </Grid>
-          </Paper>
+        </Paper>
       ) : (
         <Grid container></Grid>
       )}
-        <Grid container spacing={0.8} component={Paper} mt={2} p={2}>
-          <Grid container>
-            <IconButton>
-              <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
-            </IconButton>
-            <Typography variant="h4" mt={1}>
-              Flow Condition{" "}
-            </Typography>
+      <Grid container spacing={0.8} component={Paper} mt={2} p={2}>
+        <Grid container>
+          <IconButton>
+            <NotificationsIcon sx={{ fontSize: "40px", color: "red" }} />
+          </IconButton>
+          <Typography variant="h4" mt={1}>
+            Flow Condition{" "}
+          </Typography>
+        </Grid>
+        <Grid container display={"flex"} gap={2.5} p={2}>
+          {/* Row 1: Flowing */}
+          <Grid item lg={1}>
+            <Typography mt={2}>Flowing</Typography>
           </Grid>
-          <Grid container display={"flex"} gap={2.5} p={2}>
-            {/* Row 1: Flowing */}
-            <Grid item lg={1}>
-              <Typography mt={2}>Flowing</Typography>
-            </Grid>
-            <Grid item lg={9} display={"flex"} gap={3}>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="pressure-label">Pressure</InputLabel>
-                  <Select
-                    labelId="pressure-label"
-                    name="pressure1"
-                    value={formValues.flowing.pressures[0].pressure1}
-                    onChange={(e) =>
-                      handleFlowingChange(0, "pressure1", e.target.value)
-                    }
-                    size="small"
-                  >
-                    <MenuItem value="">
-                      <em>All</em>
-                    </MenuItem>
-                    <MenuItem value="GIP">GIP</MenuItem>
-                    <MenuItem value="THP">THP</MenuItem>
-                    <MenuItem value="CHP">CHP</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="comparison-label">Comparison</InputLabel>
-                  <Select
-                    labelId="comparison-label"
-                    name="comparison"
-                    value={formValues.flowing.pressures[0].comparison}
-                    onChange={(e) =>
-                      handleFlowingChange(0, "comparison", e.target.value)
-                    }
-                    size="small"
-                  >
-                    <MenuItem value="">
-                      <em>All</em>
-                    </MenuItem>
-                    <MenuItem value=">">&gt;</MenuItem>
-                    <MenuItem value="<">&lt;</MenuItem>
-                    <MenuItem value="=">=</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="pressure-label">Pressure</InputLabel>
-                  <Select
-                    labelId="pressure-label"
-                    name="pressure2"
-                    value={formValues.flowing.pressures[0].pressure2}
-                    onChange={(e) =>
-                      handleFlowingChange(0, "pressure2", e.target.value)
-                    }
-                    size="small"
-                  >
-                    <MenuItem value="">
-                      <em>All</em>
-                    </MenuItem>
-                    <MenuItem value="GIP">GIP</MenuItem>
-                    <MenuItem value="THP">THP</MenuItem>
-                    <MenuItem value="CHP">CHP</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <Typography>Dead Band (%)</Typography>
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  value={formValues.flowing.pressures[0].tolerance}
+          <Grid item lg={9} display={"flex"} gap={3}>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="pressure-label">Pressure</InputLabel>
+                <Select
+                  labelId="pressure-label"
+                  name="pressure1"
+                  value={formValues.flowing.pressures[0].pressure1}
                   onChange={(e) =>
-                    handleFlowingChange(0, "tolerance", e.target.value)
+                    handleFlowingChange(0, "pressure1", e.target.value)
                   }
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-          {/* Row 2: Not Flowing */}
-          <Grid container display={"flex"} gap={2.5} p={2}>
-            <Grid item lg={1}>
-              <Typography mt={2}>Not Flowing</Typography>
-            </Grid>
-            <Grid item lg={9} display={"flex"} gap={3}>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="pressure-label">Pressure</InputLabel>
-                  <Select
-                    labelId="pressure-label"
-                    name="pressure1"
-                    value={formValues.notFlowing.pressures[0].pressure1}
-                    onChange={(e) =>
-                      handleNotFlowingChange(0, "pressure1", e.target.value)
-                    }
-                    size="small"
-                  >
-                    <MenuItem value="">
-                      <em>All</em>
-                    </MenuItem>
-                    <MenuItem value="GIP">GIP</MenuItem>
-                    <MenuItem value="THP">THP</MenuItem>
-                    <MenuItem value="CHP">CHP</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="comparison-label">Comparison</InputLabel>
-                  <Select
-                    labelId="comparison-label"
-                    name="comparison"
-                    value={formValues.notFlowing.pressures[0].comparison}
-                    onChange={(e) =>
-                      handleNotFlowingChange(0, "comparison", e.target.value)
-                    }
-                    size="small"
-                  >
-                    <MenuItem value="">
-                      <em>All</em>
-                    </MenuItem>
-                    <MenuItem value=">">&gt;</MenuItem>
-                    <MenuItem value="<">&lt;</MenuItem>
-                    <MenuItem value="=">=</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="pressure-label">Pressure</InputLabel>
-                  <Select
-                    labelId="pressure-label"
-                    name="pressure2"
-                    value={formValues.notFlowing.pressures[0].pressure2}
-                    onChange={(e) =>
-                      handleNotFlowingChange(0, "pressure2", e.target.value)
-                    }
-                    size="small"
-                  >
-                    <MenuItem value="">
-                      <em>All</em>
-                    </MenuItem>
-                    <MenuItem value="GIP">GIP</MenuItem>
-                    <MenuItem value="THP">THP</MenuItem>
-                    <MenuItem value="CHP">CHP</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item lg={3} md={6} sm={12} xs={12}>
-                <Typography>Dead Band (%)</Typography>
-                <TextField
-                  variant="outlined"
                   size="small"
-                  value={formValues.notFlowing.pressures[0].tolerance}
+                >
+                  <MenuItem value="">
+                    <em>All</em>
+                  </MenuItem>
+                  <MenuItem value="GIP">GIP</MenuItem>
+                  <MenuItem value="THP">THP</MenuItem>
+                  <MenuItem value="CHP">CHP</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="comparison-label">Comparison</InputLabel>
+                <Select
+                  labelId="comparison-label"
+                  name="comparison"
+                  value={formValues.flowing.pressures[0].comparison}
                   onChange={(e) =>
-                    handleNotFlowingChange(0, "tolerance", e.target.value)
+                    handleFlowingChange(0, "comparison", e.target.value)
                   }
-                  fullWidth
-                />
-              </Grid>
+                  size="small"
+                >
+                  <MenuItem value="">
+                    <em>All</em>
+                  </MenuItem>
+                  <MenuItem value=">">&gt;</MenuItem>
+                  <MenuItem value="<">&lt;</MenuItem>
+                  <MenuItem value="=">=</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="pressure-label">Pressure</InputLabel>
+                <Select
+                  labelId="pressure-label"
+                  name="pressure2"
+                  value={formValues.flowing.pressures[0].pressure2}
+                  onChange={(e) =>
+                    handleFlowingChange(0, "pressure2", e.target.value)
+                  }
+                  size="small"
+                >
+                  <MenuItem value="">
+                    <em>All</em>
+                  </MenuItem>
+                  <MenuItem value="GIP">GIP</MenuItem>
+                  <MenuItem value="THP">THP</MenuItem>
+                  <MenuItem value="CHP">CHP</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <Typography>Dead Band (%)</Typography>
+              <TextField
+                variant="outlined"
+                size="small"
+                value={formValues.flowing.pressures[0].tolerance}
+                onChange={(e) =>
+                  handleFlowingChange(0, "tolerance", e.target.value)
+                }
+                fullWidth
+              />
             </Grid>
           </Grid>
         </Grid>
+        {/* Row 2: Not Flowing */}
+        <Grid container display={"flex"} gap={2.5} p={2}>
+          <Grid item lg={1}>
+            <Typography mt={2}>Not Flowing</Typography>
+          </Grid>
+          <Grid item lg={9} display={"flex"} gap={3}>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="pressure-label">Pressure</InputLabel>
+                <Select
+                  labelId="pressure-label"
+                  name="pressure1"
+                  value={formValues.notFlowing.pressures[0].pressure1}
+                  onChange={(e) =>
+                    handleNotFlowingChange(0, "pressure1", e.target.value)
+                  }
+                  size="small"
+                >
+                  <MenuItem value="">
+                    <em>All</em>
+                  </MenuItem>
+                  <MenuItem value="GIP">GIP</MenuItem>
+                  <MenuItem value="THP">THP</MenuItem>
+                  <MenuItem value="CHP">CHP</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="comparison-label">Comparison</InputLabel>
+                <Select
+                  labelId="comparison-label"
+                  name="comparison"
+                  value={formValues.notFlowing.pressures[0].comparison}
+                  onChange={(e) =>
+                    handleNotFlowingChange(0, "comparison", e.target.value)
+                  }
+                  size="small"
+                >
+                  <MenuItem value="">
+                    <em>All</em>
+                  </MenuItem>
+                  <MenuItem value=">">&gt;</MenuItem>
+                  <MenuItem value="<">&lt;</MenuItem>
+                  <MenuItem value="=">=</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="pressure-label">Pressure</InputLabel>
+                <Select
+                  labelId="pressure-label"
+                  name="pressure2"
+                  value={formValues.notFlowing.pressures[0].pressure2}
+                  onChange={(e) =>
+                    handleNotFlowingChange(0, "pressure2", e.target.value)
+                  }
+                  size="small"
+                >
+                  <MenuItem value="">
+                    <em>All</em>
+                  </MenuItem>
+                  <MenuItem value="GIP">GIP</MenuItem>
+                  <MenuItem value="THP">THP</MenuItem>
+                  <MenuItem value="CHP">CHP</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={3} md={6} sm={12} xs={12}>
+              <Typography>Dead Band (%)</Typography>
+              <TextField
+                variant="outlined"
+                size="small"
+                value={formValues.notFlowing.pressures[0].tolerance}
+                onChange={(e) =>
+                  handleNotFlowingChange(0, "tolerance", e.target.value)
+                }
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
       <Grid
         item
         p={2}
@@ -1419,7 +1441,7 @@ function AddWell() {
         <Button
           variant="contained"
           sx={{
-            width:"150px",
+            width: "150px",
             backgroundColor: "green",
             "&:hover": {
               backgroundColor: "darkgreen",
@@ -1433,7 +1455,7 @@ function AddWell() {
         <Button
           variant="contained"
           sx={{
-            width:"150px",
+            width: "150px",
             backgroundColor: "green",
             "&:hover": {
               backgroundColor: "darkgreen",
