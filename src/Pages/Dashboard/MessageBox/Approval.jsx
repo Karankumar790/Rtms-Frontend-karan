@@ -403,7 +403,7 @@ export default function BasicCard() {
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
           <Tabs>
-            <TabList>
+            {/* <TabList>
               <Tab style={{ whiteSpace: "break-spaces" }}>
                 <Typography fontSize={"large"}>User Approval</Typography>
               </Tab>
@@ -414,11 +414,11 @@ export default function BasicCard() {
               <Tab>
                 <Typography fontSize={"large"}>Add Well Approval</Typography>
               </Tab>
-            </TabList>
+            </TabList> */}
             
 
             {/* User Approval Tab */}
-            <TabPanel>
+            {/* <TabPanel>
               <TableContainer
                 component={Paper}
                 sx={{ border: "1px solid black", maxHeight: 500 }}
@@ -481,7 +481,7 @@ export default function BasicCard() {
                   </TableBody>
                 </Table>
               </TableContainer>
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
               <Grid container justifyContent="end">
                 <Box>
@@ -583,7 +583,7 @@ export default function BasicCard() {
               </Box>
               <Box>
                 <TextField
-                  sx={{ width: "500px" }}
+                  sx={{ width: "650px" }}
                   size="small"
                   variant="outlined"
                   value=""
@@ -598,7 +598,7 @@ export default function BasicCard() {
               </Box>
               <Box>
                 <TextField
-                  sx={{ width: "500px" }}
+                  sx={{ width: "650px" }}
                   size="small"
                   variant="outlined"
                   value=""
@@ -612,7 +612,7 @@ export default function BasicCard() {
               </Box>
               <Box>
                 <TextField
-                  sx={{ width: "500px" }}
+                  sx={{ width: "650px" }}
                   size="small"
                   variant="outlined"
                   value=""
