@@ -18,13 +18,13 @@ import ComplaintIcon from "@mui/icons-material/AccessAlarm";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Networkicon from "@mui/icons-material/CellTower";
-import { useMediaQuery, Box } from "@mui/material"; // Import Box
+import { useMediaQuery, Box } from "@mui/material";
 import WellmasterIcon from "@mui/icons-material/Settings";
 import WellmonitorIcon from "@mui/icons-material/Search";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from "@mui/icons-material/Person";
 import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
@@ -84,7 +84,7 @@ export default function Sidebar({
   const role = useSelector((state) => state.auth.role);
   const organizationLogo = localStorage.getItem("organizationLogo");
 
-  console.log("logo", organizationLogo)
+  console.log("logo", organizationLogo);
 
   const menuItems = [
     {
@@ -117,12 +117,6 @@ export default function Sidebar({
       path: "/dashboard/DeviceManage",
       roles: ["owner", "manager", "employee"],
     },
-    // {
-    //   name: "LoRa Gateway",
-    //   icon: <Networkicon sx={{ color: "black" }} />,
-    //   path: "/dashboard/Network",
-    //   roles: ["owner", "manager", "employee"],
-    // },
     {
       name: "Well Monitor",
       icon: <WellmonitorIcon sx={{ color: "black" }} />,
@@ -147,18 +141,6 @@ export default function Sidebar({
       path: "/dashboard/crystal",
       roles: ["owner", "manager", "employee"],
     },
-    // {
-    //   name: "Geo Location",
-    //   icon: <GeoIcon sx={{ color: "black" }} />,
-    //   path: "/dashboard/virtual",
-    //   roles: ["owner", "manager", "employee"],
-    // },
-    // {
-    //   name: "Geo Location",
-    //   icon: <GeoIcon sx={{ color: "black" }} />,
-    //   path: "/dashboard/virtual",
-    //   roles: ["owner", "manager", "employee"],
-    // },
     {
       name: "Message Box",
       icon: <ForwardToInboxIcon sx={{ color: "black" }} />,
@@ -186,9 +168,7 @@ export default function Sidebar({
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
-        {/* <img src={ongc_logo} alt="logo" width="83%" /> */}
-          {/* Display the organization logo if available */}
-          {organizationLogo && (
+        {organizationLogo && (
           <img
             src={organizationLogo}
             alt="Organization Logo"

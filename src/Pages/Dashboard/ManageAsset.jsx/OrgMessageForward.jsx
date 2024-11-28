@@ -68,14 +68,15 @@ function OrgMessageForward() {
 
   return (
     <>
-      <Grid container>
-        <Grid item xs={12} sm={12} md={12} lg={12}  p={1}>
+      <Grid container p={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12} >
           <Box display="flex" sx={{ pt: 2, pb: 2 }} gap={1}>
             <EmailIcon sx={{ mt: "2px" }} />
             <Typography variant="h5">Message Forwarding</Typography>
           </Box>
-          <Grid container spacing={0.5} gap={0.5} >
-            <Grid item xs={12} sm={2} md={2} lg={1.7}>
+          <Grid container alignItems="center" spacing={1}>
+            {/* Notification Dropdown */}
+            <Grid item xs={12} sm={2} md={2} lg={2}>
               <Box display="flex" alignItems="center" gap={1}>
                 <AccountBalanceIcon />
                 <FormControl fullWidth size="small">
@@ -98,64 +99,81 @@ function OrgMessageForward() {
               </Box>
             </Grid>
 
-            {/** Add spacing here for levels **/}
+            {/* Levels */}
             {[1, 2, 3].map((level) => (
               <Grid
                 item
-                md={10}
-                lg={3.1}
-                gap={1.5}
-                spacing={0.5}
+                xs={12}
+                sm={2}
+                md={2}
+                lg={3}
                 key={level}
-                sx={{ display: "flex", alignItems: "center" }}
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
-                {/* Add margin top here */}
-                <Grid item xs={12} sm={2} md={6} lg={5.5} gap={.9}>
-                  <Box display="flex" alignItems="center" gap={1}>
-                    <AccessAlarmIcon />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DemoContainer
-                        components={["TimeField"]}
-                        sx={{ padding: 0, margin: 0 }}
-                      >
-                        <TimeField
-                          defaultValue={dayjs("2022-04-17T00:00")}
-                          format="HH:mm:ss"
-                          size="small"
-                          fullWidth
-                        />
-                      </DemoContainer>
-                    </LocalizationProvider>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={2} md={6} lg={6} >
-                  <Box display="flex" alignItems="center" gap={1}>
-                    <Person3Icon />
-                    <TextField
-                      variant="outlined"
-                      size="small"
-                      fullWidth
-                      label={`Level ${level}`}
-                    />
-                  </Box>
-                </Grid>
+                {/* TimeField */}
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                  sx={{ flex: 1 }}
+                >
+                  <AccessAlarmIcon />
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer
+                      components={["TimeField"]}
+                      sx={{ padding: 0, margin: 0, flex: 1 }}
+                    >
+                      <TimeField
+                        defaultValue={dayjs("2022-04-17T00:00")}
+                        format="HH:mm:ss"
+                        size="small"
+                        fullWidth
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </Box>
+
+                {/* Level TextField */}
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                  sx={{ flex: 1 }}
+                >
+                  <Person3Icon />
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    label={`Level ${level}`}
+                  />
+                </Box>
               </Grid>
             ))}
-            <Grid item lg={.4} >
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: "green",
-                fontSize: "16px",
-                width: "150px",
-                "&:hover": {
-                  backgroundColor: "darkgreen",
-                },
-              }}
+
+            {/* Add Button */}
+            <Grid
+              item
+              xs={12}
+              sm={2}
+              md={2}
+              lg={1}
+              sx={{ display: "flex", justifyContent: "flex-end" }}
             >
-              ADD
-            </Button>
+              <Button
+                variant="contained"
+                size="small"
+                fullWidth
+                sx={{
+                  backgroundColor: "green",
+                  fontSize: "16px",
+                  "&:hover": {
+                    backgroundColor: "darkgreen",
+                  },
+                }}
+              >
+                ADD
+              </Button>
             </Grid>
           </Grid>
         </Grid>
@@ -163,7 +181,7 @@ function OrgMessageForward() {
         {/* --------------------------------------------TABLE-------------------------------------- */}
         <Grid
           container
-          p={1}
+          // p={1}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
           mt={1}
         >

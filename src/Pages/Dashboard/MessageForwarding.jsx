@@ -174,9 +174,10 @@ function MessageForwarding() {
     setSelectedValue(event.target.value);
   };
 
+  // Handle opening the modal with user data
   const handleViewUser = (user) => {
-    setSelectedUser(user);
-    setOpen(true);
+    setSelectedUser(user); // Set the selected user's data
+    setOpen(true); // Open the modal
   };
 
   useEffect(() => {
@@ -224,7 +225,7 @@ function MessageForwarding() {
 
       {/* ------------------Table for Desktop--------------------------------- */}
       <Grid container>
-        <Modal
+        {/* <Modal
           open={open}
           // onClose={handleClose}
           className="center"
@@ -248,16 +249,7 @@ function MessageForwarding() {
                 User Details
               </Typography>
             </Box>
-            {/* <Grid
-              item
-              lg={12}
-              md={12}
-              sm={12}
-              xs={12}
-              // display="flex"
-              gap={2}
-              spacing={1}
-            > */}
+       
             <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
               <Grid lg={10} md={8} xs={12} sm={12}>
                 {userDetails.map((field, index) => (
@@ -301,7 +293,6 @@ function MessageForwarding() {
                   mt={3}
                   mb={2}
                 >
-                  {" "}
                   Id Card Photo
                 </Box>
                 <Box
@@ -312,13 +303,12 @@ function MessageForwarding() {
                   mt={4}
                   ml={3}
                 >
-                  {" "}
+               
                   Passport Photo
                 </Box>
               </Grid>
             </Grid>
-            {/* </Grid> */}
-            {/* ----------Button--------------------- */}
+        
             <Box
               display="flex"
               justifyContent="end"
@@ -337,7 +327,118 @@ function MessageForwarding() {
                 variant="contained"
                 sx={{ width: "150px", p: "10px", fontSize: "15px" }}
               >
-                {" "}
+              
+                Delete User
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ width: "150px", p: "10px", fontSize: "15px", mr: "12px" }}
+                onClick={handleClose}
+              >
+                Close
+              </Button>
+            </Box>
+          </Grid>
+        </Modal> */}
+
+        <Modal
+          open={open}
+          // onClose={handleClose} // Close modal
+          className="center"
+          sx={{ backgroundColor: `rgba(255, 255, 255, 0.5)` }}
+        >
+          <Grid item lg={6} md={8} sm={8} xs={12} sx={style}>
+            <Box
+              position="absolute"
+              sx={{
+                top: "3%",
+                right: "-2.8%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <IconButton onClick={handleClose} color="solid black">
+                <CloseIcon fontSize="large" />
+              </IconButton>
+            </Box>
+            <Box textAlign="center" pb={1}>
+              <Typography id="modal-modal-title" variant="h4" component="h2">
+                User Details
+              </Typography>
+            </Box>
+            <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
+              <Grid item lg={10} md={8} xs={12} sm={12}>
+                {userDetails.map((field, index) => (
+                  <Grid item display="flex" p={2} key={index}>
+                    {console.log(field,".................")}
+                    <Grid lg={4} md={5} sm={12} xs={12} display={"flex"}>
+                      <Typography variant="h6">{field}</Typography>
+                    </Grid>
+                    <Grid lg={8} md={7} sm={12} xs={12}>
+                      <TextField
+                        variant="standard"
+                        // sx={"read-only"}
+                        value={
+                          field === "Username"
+                            ? selectedUser?.username
+                            : field === "Position"
+                            ? selectedUser?.roleInRTMS
+                            : field === "Department"
+                            ? selectedUser?.department
+                            : field === "EmployeeID"
+                            ? selectedUser?.employeeID
+                            : field === "Email"
+                            ? selectedUser?.email
+                            : field === "Contact no."
+                            ? selectedUser?.contactNumber
+                            : ""
+                        }
+                        disabled
+                        fullWidth
+                        size="small"
+                      />
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+              <Grid item lg={4} md={4} xs={12} sm={12}>
+                <Box
+                  className="center"
+                  height={"200px"}
+                  width={"200px"}
+                  border={"1px solid black"}
+                  ml={3}
+                  mt={3}
+                  mb={2}
+                  component="img"
+                  src={selectedUser?.idCardPhoto || ""}
+                  alt="ID Card Photo"
+                />
+                <Box
+                  className="center"
+                  height={"200px"}
+                  width={"200px"}
+                  border={"1px solid black"}
+                  mt={4}
+                  ml={3}
+                  component="img"
+                  src={selectedUser?.passportPhoto || ""}
+                  alt="Passport Photo"
+                />
+              </Grid>
+            </Grid>
+            <Box
+            // bgcolor={'yellow'}
+              display="flex"
+              justifyContent="end"
+              pt={1}
+              pb={1}
+              // pr={3}
+              gap={3}
+            >
+              <Button
+                variant="contained"
+                sx={{ width: "150px", p: "10px", fontSize: "15px" }}
+              >
                 Delete User
               </Button>
               <Button

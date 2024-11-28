@@ -10,6 +10,12 @@ import {
   Typography,
   CircularProgress,
   Checkbox,
+  Modal,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { Card } from "@mui/joy";
 // -------------import for table--------------------------------//
@@ -24,6 +30,17 @@ import Paper from "@mui/material/Paper";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import CloseIcon from "@mui/icons-material/Close";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+import SendIcon from '@mui/icons-material/Send';
+import ReplyIcon from '@mui/icons-material/Reply';
+import ForwardIcon from '@mui/icons-material/Forward';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+
 import { Box, width } from "@mui/system";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useSelector } from "react-redux";
@@ -35,12 +52,11 @@ import {
   rejectByManager,
   rejectByOwner,
 } from "../../../apis/Service";
-import MailIcon from '@mui/icons-material/Mail';
-import CreateIcon from '@mui/icons-material/Create';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { List, ListItem } from "flowbite-react";
-
+// import MailIcon from "@mui/icons-material/Mail";
+// import CreateIcon from "@mui/icons-material/Create";
+// import DraftsIcon from "@mui/icons-material/Drafts";
+// import DeleteIcon from "@mui/icons-material/Delete";
+import { blue, grey } from "@mui/material/colors";
 
 // ---------FUNCTIONS OF TABLE--------------------------------
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -83,12 +99,28 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  CardOverflow: "scroll",
+  overflowY: "scroll",
+  height: "60vh",
+  width: "40%",
+  bgcolor: "white",
+  borderRadius: "5px",
+};
 export default function BasicCard() {
   const [open, setOpen] = useState(false); // State to control modal visibility
+  const [opens, setOpens] = useState(false); // State to control modal visibility
   const [users, setUsers] = useState([]); // State to store fetched users
   const [loading, setLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [selectedUser, setSelectedUser] = useState(null); // Selected user for modal
+  const handleOpen = () => setOpen(true);
+
   const role = useSelector((state) => state.auth.role); // Get user role from Redux
   const authToken = useSelector((state) => state.auth.authToken); // Get auth token from Redux
 
@@ -193,39 +225,111 @@ export default function BasicCard() {
     setOpen(true);
   };
 
+  const handleClickOpens = (user) => {
+    setSelectedUser(user);
+    setOpens(true);
+  };
+
   const handleClose = () => {
     setOpen(false);
     setSelectedUser(null);
   };
 
-
+  const handleDialogClose = () => {
+    setOpens(false);
+    setSelectedUser(null);
+  };
   const [data] = useState([
-    { id: 1, title: 'Sample Data Item 1' },
-    { id: 2, title: 'Sample Data Item 2' },
-    { id: 3, title: 'Sample Data Item 3' },
-    { id: 4, title: 'Sample Data Item 4' },
-    { id: 5, title: 'Sample Data Item 5' },
-    { id: 6, title: 'Sample Data Item 6' },
-    { id: 7, title: 'Sample Data Item 7' },
-    { id: 8, title: 'Sample Data Item 8' },
-    { id: 9, title: 'Sample Data Item 9' },
-    { id: 10, title: 'Sample Data Item 10' },
+    { id: 1, title: "Message data 1" },
+    { id: 2, title: "Message data 2" },
+    { id: 3, title: "Message data 3" },
+    { id: 4, title: "Message data 4" },
+    { id: 5, title: "Message data 5" },
+    { id: 6, title: "Message data 6" },
+    { id: 7, title: "Message data 7" },
   ]);
 
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
+  const rows = ["1"];
+
+  const Textarea = styled(BaseTextareaAutosize)(
+    ({ theme }) => `
+    box-sizing: border-box;
+    width: 120%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+    background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+    box-shadow: 0px 2px 2px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[50]
+    };
+
+    &:hover {
+      border-color: ${blue[400]};
+    }
+
+    &:focus {
+      border-color: ${blue[400]};
+      box-shadow: 0 0 0 3px ${
+        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      };
+    }
+
+    // firefox
+    &:focus-visible {
+      outline: 0;
+    }
+  `
+  );
 
   return (
-    <Grid container spacing={2} p={2}>
-      <Grid item xs={12} container alignItems="center">
-        <IconButton>
-          <ForwardToInboxIcon sx={{ fontSize: 30, color: "green " }} />
-        </IconButton>
-        <Typography variant="h4" mt={1}>
-          Message Box
-        </Typography>
+    <Grid container spacing={2} p={1}>
+      <Grid item xs={12} lg={6}>
+        <Box display={"flex"}>
+          <IconButton>
+            <ForwardToInboxIcon sx={{ fontSize: 30, color: "green " }} />
+          </IconButton>
+          <Typography variant="h4" mt={1}>
+            Message Box
+          </Typography>
+        </Box>
+      </Grid>
+      <Grid item xs={12} lg={6} display={"flex"} justifyContent={"end"}>
+        <Button
+          variant="contained"
+          sx={{
+            color: "black",
+            backgroundColor: "lightblue",
+            "&:hover": {
+              backgroundColor: "skyblue",
+            },
+            fontSize: "16px",
+          }}
+          startIcon={<EditIcon />}
+          onClick={handleOpen}
+        >
+          Compose
+        </Button>
       </Grid>
 
       {/* Loading and Error States */}
-       <Grid item xs={12}>
+      <Grid item xs={12}>
         {loading && (
           <Box display="flex" justifyContent="center" my={2}>
             <CircularProgress />
@@ -239,7 +343,7 @@ export default function BasicCard() {
       </Grid>
 
       {/* -------------------------Table for Mobile----------------------------- */}
-      <Grid
+      {/* <Grid
         container
         sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}
       >
@@ -269,14 +373,14 @@ export default function BasicCard() {
                         {user.contactNumber}
                       </Typography>
                       <IconButton
-                        onClick={() => handleClickOpen(user)}
+                        onClick={() => handleClickOpens(user)}
                         sx={{
-                          color: "black",
+                          color: "red",
                           "&:hover": { color: "darkred" },
                           marginTop: 1,
                         }}
                       >
-                        <RemoveRedEyeIcon fontSize="large" />
+                        <RemoveRedEyeIcon fontSize="small" />
                       </IconButton>
                     </StyledContent>
                   </Grid>
@@ -284,11 +388,8 @@ export default function BasicCard() {
               </Grid>
             </Paper>
           </TabPanel>
-          <TabPanel>
-            <Typography variant="body1">Add Well Approval Content</Typography>
-          </TabPanel>
         </Tabs>
-      </Grid>
+      </Grid> */}
 
       {/* -------------------------Table for Desktop--------------------------- */}
 
@@ -302,15 +403,22 @@ export default function BasicCard() {
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
           <Tabs>
-            <TabList>
+            {/* <TabList>
               <Tab style={{ whiteSpace: "break-spaces" }}>
                 <Typography fontSize={"large"}>User Approval</Typography>
               </Tab>
+              <Tab style={{ whiteSpace: "break-spaces" }}>
+                <Typography fontSize={"large"}>User Message</Typography>
+              </Tab>
+              
               <Tab>
                 <Typography fontSize={"large"}>Add Well Approval</Typography>
               </Tab>
-            </TabList>
-            <TabPanel>
+            </TabList> */}
+            
+
+            {/* User Approval Tab */}
+            {/* <TabPanel>
               <TableContainer
                 component={Paper}
                 sx={{ border: "1px solid black", maxHeight: 500 }}
@@ -357,7 +465,7 @@ export default function BasicCard() {
                         <StyledTableCell align="center">
                           <Box display={"flex"} justifyContent={"space-evenly"}>
                             <IconButton
-                              onClick={() => handleClickOpen(user)}
+                              onClick={() => handleClickOpens(user)}
                               sx={{
                                 color: "black",
                                 "&:hover": { color: "darkred" },
@@ -373,19 +481,194 @@ export default function BasicCard() {
                   </TableBody>
                 </Table>
               </TableContainer>
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
-              <Typography variant="body1">Add Well Approval Content</Typography>
+              <Grid container justifyContent="end">
+                <Box>
+                  <IconButton color="primary">
+                    <ForwardToInboxIcon sx={{ fontSize: "30px" }} />
+                  </IconButton>
+                  <IconButton color="primary">
+                    <SendIcon sx={{ fontSize: "30px" }} />
+                  </IconButton>
+                  <IconButton color="primary">
+                    <ReplyIcon sx={{ fontSize: "30px" }} />
+                  </IconButton>
+                  <IconButton color="primary">
+                    <ForwardIcon sx={{ fontSize: "30px" }} />
+                  </IconButton>
+                  <IconButton color="primary">
+                    <DeleteIcon sx={{ fontSize: "30px" }} />
+                  </IconButton>
+                </Box>
+
+              </Grid>
+              {/* User Message content (only your data here) */}
+              <Grid container sx={{ width: "100%", height: "80vh" }}>
+                <Box
+                  sx={{
+                    border: "1px solid #ddd",
+                    borderRadius: "8px",
+                    padding: "16px",
+                    boxShadow: 3,
+                    backgroundColor: "#fff",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    overflowY: "auto",
+                  }}
+                >
+                 
+                  {data.map((item) => (
+                    <Box
+                      key={item.id}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        borderBottom: "1px solid #f0f0f0",
+                        padding: "8px 0",
+                      }}
+                    >
+                      <Checkbox />
+                      <Typography
+                        variant="body1"
+                        sx={{ fontWeight: "medium", marginLeft: "8px" }}
+                      >
+                        {item.title}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Grid>
             </TabPanel>
           </Tabs>
         </Grid>
       </Grid>
 
+      {/* ------------------------------Modal view --------------------------- */}
+
+      <Modal open={open} onClose={handleClose}>
+        <Grid container sx={style} p={2}>
+          {/* Header Section with Close Icon */}
+          <Grid container>
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                fontSize: "24px",
+                color: "black",
+                "&:hover": {
+                  bgcolor: "red",
+                  color: "white",
+                },
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+            <Grid item xs={12} sx={{ position: "relative" }}>
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                New Message
+              </Typography>
+            </Grid>
+          </Grid>
+
+          {/* Email Fields Section */}
+          <Grid container spacing={2}>
+            {/* From Field */}
+            <Grid item xs={12} sm={6} md={12} lg={12} display={"flex"}>
+              <Box mr={5}>
+                <Typography variant="h6">From</Typography>
+              </Box>
+              <Box>
+                <TextField
+                  sx={{ width: "650px" }}
+                  size="small"
+                  variant="outlined"
+                  value=""
+                />
+              </Box>
+            </Grid>
+
+            {/* To Field */}
+            <Grid item xs={12} sm={12} md={12} lg={12} display={"flex"}>
+              <Box mr={8}>
+                <Typography variant="h6">To</Typography>
+              </Box>
+              <Box>
+                <TextField
+                  sx={{ width: "650px" }}
+                  size="small"
+                  variant="outlined"
+                  value=""
+                />
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={12} lg={12} display={"flex"}>
+              <Box mr={3.1}>
+                <Typography variant="h6">Subject</Typography>
+              </Box>
+              <Box>
+                <TextField
+                  sx={{ width: "650px" }}
+                  size="small"
+                  variant="outlined"
+                  value=""
+                />
+              </Box>
+            </Grid>
+
+            {/* Subject Field */}
+            <Grid item xs={12} md={12} sm={12} lg={12}>
+              <Box>
+                <Paper sx={{ padding: 2, height: "200px" }}>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={8}
+                    placeholder="Write your email here..."
+                    variant="outlined"
+                    value={""}
+                  />
+                </Paper>
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            justifyContent={"space-between"}
+            sx={{height:"7%", mt:"2%"}}
+          >
+              <Button
+                component="label"
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+                sx={{ width: "200px" }}
+              >
+                Upload files
+                <VisuallyHiddenInput
+                  type="file"
+                  onChange={(event) => console.log(event.target.files)}
+                  multiple
+                />
+              </Button>
+
+              <Button variant="contained" sx={{ width: "200px" }}>
+                Reply
+              </Button>
+
+              <Button variant="contained" sx={{ width: "200px" }}>
+                Forward
+              </Button>
+          </Grid>
+        </Grid>
+      </Modal>
+
       {/* Modal Dialog */}
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle variant="h4" textAlign={"center"}>
-          Approval User
-        </DialogTitle>
+      <Dialog open={opens} onClose={handleDialogClose} maxWidth="md" fullWidth>
         <DialogContent>
           {selectedUser ? (
             <Grid container spacing={3}>
@@ -503,62 +786,6 @@ export default function BasicCard() {
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* Header Section */}
-      {/* <Grid container justifyContent="end">
-
-        <Box>
-          <IconButton color="primary">
-            <MailIcon sx={{ fontSize: '30px' }} />
-          </IconButton>
-          <IconButton color="primary">
-            <CreateIcon sx={{ fontSize: '30px' }} />
-          </IconButton>
-          <IconButton color="primary">
-            <DraftsIcon sx={{ fontSize: '30px' }} />
-          </IconButton>
-          <IconButton color="primary">
-            <DeleteIcon sx={{ fontSize: '30px' }} />
-          </IconButton>
-        </Box>
-      </Grid>
-      <Grid container sx={{ width: '100%', height: '80vh' }}>
-        <Box
-          sx={{
-            border: '1px solid #ddd',
-            borderRadius: '8px',
-            padding: '16px',
-            boxShadow: 3,
-            backgroundColor: '#fff',
-            position: 'relative',
-            width: '100%', // Full width
-            height: '100%', // Full height of the container
-            overflowY: 'auto', // Add scrolling if content overflows
-          }}
-        >
-          {/* Content Section */}
-          {/* {data.map((item) => (
-            <Box
-              key={item.id}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                borderBottom: '1px solid #f0f0f0',
-                padding: '8px 0',
-              }}
-            >
-              <Checkbox />
-              <Typography variant="body1" sx={{ fontWeight: 'medium', marginLeft: '8px' }}>
-                {item.title}
-              </Typography>
-            </Box>
-          ))}
-        </Box> */}
-
-      {/* </Grid>  */}
-
-
-    </Grid> 
+    </Grid>
   );
 }
-
