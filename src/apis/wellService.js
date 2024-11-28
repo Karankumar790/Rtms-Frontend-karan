@@ -153,3 +153,43 @@ export const wellMonitorData = async (organizationName) => {
     
   }
 }
+
+
+export const addParametersForWell = async (formData) => {
+  try {
+    const response = await axios.post(`${WELL_API}/add-parameters`, formData);
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+//Get Single Well Parameter Value
+export const getParameterData = async (organizationName, wellNumber,location,installation,wellType,) => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/get-wellConfiguration?location=${location}&installation=${installation}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const simulatorData = async (formData) => {
+  try {
+    const response = await axios.post(`http://localhost:5000/generate-random-values`, formData);
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const simulatorGetData = async () => {
+  try {
+    const response = await axios.get(`http://localhost:5000/stream-random-values`);
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};

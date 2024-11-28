@@ -449,25 +449,37 @@ function ComplaintHistory() {
           >
             <TableHead>
               <TableRow>
-                <StyledTableCell align="center"
-                    sx={{ bgcolor:"black",width: "17%" }}>Complaint No.</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Data/Time</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Sender name</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Department</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Receiver Name</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Department</StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ bgcolor: "black", width: "17%" }}
+                >
+                  Complaint No.
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Data/Time
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Sender name
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Department
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Receiver Name
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Department
+                </StyledTableCell>
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Status</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Description</StyledTableCell>
-                <StyledTableCell align="center"
-                    sx={{ width: "17%" }}>Action</StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Status
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Description
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                  Action
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

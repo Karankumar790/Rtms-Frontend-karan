@@ -759,14 +759,15 @@ function ManageAsset() {
   return (
     <div>
       <Paper>
-        <Grid container gap={1} p={3}>
-          <IconButton>
-            <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
-          </IconButton>
-          <Typography variant="h4" fontWeight={700} mt={1}>
-            {organizationName ? organizationName : "N/A"}
-          </Typography>
-
+        <Grid container gap={1} p={2}>
+          <Box display="flex" gap={1}>
+            <IconButton>
+              <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
+            </IconButton>
+            <Typography variant="h4" fontWeight={700} mt={1}>
+              {organizationName ? organizationName : "N/A"}
+            </Typography>
+          </Box>
           {/* Organization Logo (Top of Organization Name) */}
           {/* {isEditOrganization && formData.organizationlogo && (
             <Grid
@@ -795,174 +796,164 @@ function ManageAsset() {
               />
             </Grid>
           )} */}
-          <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={12}  marginTop={1}>
-              <Grid container spacing={3}>
-                {/* Organization Logo Upload (Show only in Save mode) */}
-                {!isEditOrganization && (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    // bgcolor={"yellow"}
-                    // position='absolute'
-                    width={"100%"}
-                    // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
-                  >
-                    <Box width='450px' display='flex' alignItems='center' gap={2} position={"absolute"} right="1%" top="15%">
-                      <Typography variant="h6">Organization Logo</Typography>
-                      <span >
-                        <input
-                          type="file"
-                          accept="image/*"
-                          style={{ cursor: "pointer", marginLeft: "1rem" }}
-                          onChange={handleLogoUpload}
-                        />
-                      </span>
-                      {file && (
-                        <img
-                          src={file}
-                          alt="Organization Logo Preview"
-                          style={{
-                            width: "250px",
-                            height: "100px",
-                            objectFit: "contain",
-                            marginLeft: "1.5rem",
-                          }}
-                        />
-                      )}
-                    </Box>
-                  </Grid>
-                )}
-                {[
-                  {
-                    name: "organizationName",
-                    label: "Organization Display Name",
-                  },
-                  { name: "subtitlename", label: "Portal Display Name" },
-                  { name: "address", label: "Address" },
-                  { name: "city", label: "City" },
-                  { name: "state", label: "State" },
-                  { name: "country", label: "Country" },
-                  { name: "pinCode", label: "Pin Code" },
-                  { name: "phone", label: "Phone" },
-                  { name: "fax", label: "Fax" },
-                  { name: "email", label: "Email" },
-                ].map((field) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={3}
-                    md={3}
-                    lg={6}
-                    key={field.name}
-                    spacing={3}
-                    sx={{ display: "flex" }}
+          <Grid container>
+            {/* <Grid container marginTop={3}> */}
+            <Grid container mt={3} >
+              {/* Organization Logo Upload (Show only in Save mode) */}
+              {!isEditOrganization && (
+                <Grid
+                  item
+                  lg={6}
+                  // bgcolor={"yellow"}
+                  // position='absolute'
+                  // width={"100%"}
+                  // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
+                >
+                  <Box
+                    // bgcolor={'yellowgreen'}
+                    // width="450px"
+                    display="flex"
+                    alignItems="center"
                     gap={2}
+                    position={"absolute"}
+                    right="1%"
+                    top="15%"
                   >
-                    <Typography
-                      variant="h6"
-                      sx={{ flexShrink: 0, width: "250px" }}
-                    >
-                      {field.label}
-                    </Typography>
-                    {field.name === "organizationName" ? (
-                      // Display organizationName as text instead of an input
-                      <Typography
-                        sx={{
-                          flexShrink: 0,
-                          width: "460px",
-                          fontSize: "20px",
+                    <Typography variant="h6">Organization Logo</Typography>
+                    <span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ cursor: "pointer", marginLeft: "1rem" }}
+                        onChange={handleLogoUpload}
+                      />
+                    </span>
+                    {file && (
+                      <img
+                        src={file}
+                        alt="Organization Logo Preview"
+                        style={{
+                          width: "250px",
+                          height: "100px",
+                          objectFit: "contain",
+                          marginLeft: "1.5rem",
                         }}
-                      >
+                      />
+                    )}
+                  </Box>
+                </Grid>
+              )}
+            </Grid>
+
+            <Grid container spacing={3} pr={3}>
+              {[
+                { name: "organizationName", label: "Organization" },
+                { name: "subtitlename", label: "Display Name" },
+                { name: "address", label: "Address" },
+                { name: "city", label: "City" },
+                { name: "state", label: "State" },
+                { name: "country", label: "Country" },
+                { name: "pinCode", label: "Pin Code" },
+                { name: "phone", label: "Phone" },
+                { name: "fax", label: "Fax" },
+                { name: "email", label: "Email" },
+              ].map((field) => (
+                <Grid
+                  container
+                  key={field.name}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  xs={12}
+                  spacing={2}
+                  alignItems="center"
+                >
+                  {/* Label Section */}
+                  <Grid item lg={3} md={3} sm={3} xs={12}>
+                    <Typography variant="h6">{field.label}</Typography>
+                  </Grid>
+
+                  {/* Input/Display Section */}
+                  {field.name === "organizationName" ? (
+                    <Grid item lg={9} md={9} sm={9} xs={12}>
+                      <Typography sx={{ fontSize: "20px" }}>
                         {formData[field.name]}
                       </Typography>
-                    ) : (
+                    </Grid>
+                  ) : (
+                    <Grid item lg={9} md={9} sm={9} xs={12}>
                       <TextField
                         type="text"
                         variant="outlined"
                         size="small"
                         fullWidth
-                        // sx={{ height: "50%", width: "30%" }}
                         name={field.name}
                         value={formData[field.name]}
                         onChange={handleInputChange}
-                        disabled={isEditOrganization} // Disable fields when editing
+                        disabled={isEditOrganization}
                       />
-                    )}
-                  </Grid>
-                ))}
+                    </Grid>
+                  )}
+                </Grid>
+              ))}
+
+              {/* Action Buttons */}
+              <Grid
+                container
+                mt={2}
+                justifyContent={"end"}
+              >
+                <Grid item >
+                  {isEditOrganization ? (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "blue",
+                        fontSize: "16px",
+                        width: "130px",
+                        "&:hover": { backgroundColor: "darkblue" },
+                      }}
+                      onClick={() => setIsEditOrganization(false)}
+                      disabled={loading}
+                    >
+                      {loading ? "UPDATING..." : "UPDATE"}
+                    </Button>
+                  ) : (
+                    <>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          backgroundColor: "green",
+                          fontSize: "16px",
+                          width: "130px",
+                          "&:hover": { backgroundColor: "darkgreen" },
+                        }}
+                        onClick={handleSave}
+                        disabled={loading}
+                      >
+                        {loading ? "SAVING..." : "SAVE"}
+                      </Button>
+                    </>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            mt={2}
-            display={"flex"}
-            justifyContent={"end"}
-            gap={1}
-          >
-            <Box>
-              {isEditOrganization ? (
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "blue",
-                    "&:hover": { backgroundColor: "darkblue" },
-                    fontSize: "16px",
-                    width: "150px",
-                  }}
-                  onClick={() => setIsEditOrganization(false)}
-                  disabled={loading}
-                >
-                  {loading ? "UPDATING..." : "UPDATE"}
-                </Button>
-              ) : (
-                <div style={{ display: "flex", gap: "2rem" }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
-                      fontSize: "16px",
-                      width: "140px",
-                    }}
-                    onClick={handleSave}
-                    disabled={loading}
-                  >
-                    {loading ? "SAVING..." : "SAVE"}
-                  </Button>
-                  {/* <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "red",
-                      "&:hover": { backgroundColor: "darkred" },
-                      fontSize: "16px",
-                      width: "150px",
-                    }}
-                    onClick={handleCancel}
-                  >
-                    CANCEL
-                  </Button> */}
-                </div>
-              )}
-            </Box>
+
+            {/* </Grid> */}
           </Grid>
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
       <Card sx={{ my: 2 }}>
         <CardContent>
-          <Grid container spacing={2} mt={0.1}>
+          <Grid container  mt={0.1}>
             {/* ------------------------ADD DEPARTMENT------------------------------ */}
             <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+              container
+              p={2}
               gap={1}
               display="flex"
               flexDirection={"column"}
@@ -971,111 +962,113 @@ function ManageAsset() {
                 <AssetsIcon />
                 <Typography variant="h5">Add Department</Typography>
               </Box>
-              <Box display="flex" gap={1}>
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  label="Department"
-                  value={newDepartmentName} // Bind value to newDepartmentName state
-                  onChange={(e) => setNewDepartmentName(e.target.value)}
-                  fullWidth
-                />
-                <Button
-                  variant="contained"
-                  onClick={handleAddOrUpdateDepartment}
-                  size="small"
-                  sx={{
-                    backgroundColor: "green",
-                    fontSize: "16px",
-                    width: "162px",
-                    "&:hover": {
-                      backgroundColor: "darkgreen",
-                    },
-                  }}
-                >
-                  {isEditing ? "UPDATE" : "ADD"}{" "}
-                </Button>
-              </Box>
-              <Grid container>
-                <TableContainer
-                  component={Paper}
-                  sx={{ maxHeight: 320, height: 600, overflowY: "auto" }}
-                >
-                  <Table aria-label="customized table" stickyHeader>
-                    <TableHead>
-                      <TableRow sx={{ msOverflowY: "scroll" }}>
-                        <StyledTableCell
-                          sx={{ fontSize: "18px", width: "15%" }}
-                        >
-                          Department
-                        </StyledTableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {DepartmentLoading ? (
-                        <TableRow>
-                          <StyledTableCell colSpan={2}>
-                            Loading...
-                          </StyledTableCell>
-                        </TableRow>
-                      ) : departments && departments.length > 0 ? (
-                        departments.map((departmentName, index) => (
-                          <StyledTableRow key={index}>
-                            <StyledTableCell>
-                              <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="space-between"
-                              >
-                                <span style={{ fontSize: "medium" }}>
-                                  {index + 1}. {departmentName}
-                                </span>
-                                <Box display="flex">
-                                  <IconButton
-                                    onClick={() => handleEditClick(index)}
-                                  >
-                                    {" "}
-                                    <EditIcon fontSize="large" />
-                                  </IconButton>{" "}
-                                  <IconButton
-                                    sx={{
-                                      color: "red",
-                                      "&:hover": { color: "darkred" },
-                                      marginRight: "8px",
-                                    }}
-                                    onClick={() =>
-                                      handleDeleteDepartment(departmentName)
-                                    }
-                                  >
-                                    <DeleteForeverIcon fontSize="large" />
-                                  </IconButton>
-                                </Box>
-                              </Box>
-                            </StyledTableCell>
-                          </StyledTableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <StyledTableCell
-                            style={{ fontSize: "medium" }}
-                            colSpan={2}
-                          >
-                            No departments available
-                          </StyledTableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+              <Grid container spacing={1}>
+                <Grid item lg={11} md={11} sm={11} xs={12}>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    label="Department"
+                    value={newDepartmentName} // Bind value to newDepartmentName state
+                    onChange={(e) => setNewDepartmentName(e.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item lg={1} md={1} sm={1} xs={12}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={handleAddOrUpdateDepartment}
+                    size="small"
+                    sx={{
+                      // backgroundColor: "green",
+                      backgroundColor: isEditing ? "blue" : "green",
+                      fontSize: "16px",
+                      // width: "162px",
+                      "&:hover": {
+                        backgroundColor: isEditing ? "darkorange" : "darkgreen",
+                      },
+                    }}
+                  >
+                    {isEditing ? "UPDATE" : "ADD"}{" "}
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
+            <Grid container p={2}>
+              <TableContainer
+                component={Paper}
+                sx={{ maxHeight: 320, height: 600, overflowY: "auto" }}
+              >
+                <Table aria-label="customized table" stickyHeader>
+                  <TableHead>
+                    <TableRow sx={{ msOverflowY: "scroll" }}>
+                      <StyledTableCell sx={{ fontSize: "18px", width: "15%" }}>
+                        Department
+                      </StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {DepartmentLoading ? (
+                      <TableRow>
+                        <StyledTableCell colSpan={2}>
+                          Loading...
+                        </StyledTableCell>
+                      </TableRow>
+                    ) : departments && departments.length > 0 ? (
+                      departments.map((departmentName, index) => (
+                        <StyledTableRow key={index}>
+                          <StyledTableCell>
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="space-between"
+                            >
+                              <span style={{ fontSize: "medium" }}>
+                                {index + 1}. {departmentName}
+                              </span>
+                              <Box display="flex">
+                                <IconButton
+                                  onClick={() => handleEditClick(index)}
+                                >
+                                  {" "}
+                                  <EditIcon fontSize="large" />
+                                </IconButton>{" "}
+                                <IconButton
+                                  sx={{
+                                    color: "red",
+                                    "&:hover": { color: "darkred" },
+                                    marginRight: "8px",
+                                  }}
+                                  onClick={() =>
+                                    handleDeleteDepartment(departmentName)
+                                  }
+                                >
+                                  <DeleteForeverIcon fontSize="large" />
+                                </IconButton>
+                              </Box>
+                            </Box>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <StyledTableCell
+                          style={{ fontSize: "medium" }}
+                          colSpan={2}
+                        >
+                          No departments available
+                        </StyledTableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+
             {/* ------------------------ADD POSITION------------------------------ */}
             <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
+              container
+              p={2}
               gap={1}
               mt={2}
               display="flex"
@@ -1085,8 +1078,8 @@ function ManageAsset() {
                 <PersonIcon />
                 <Typography variant="h5">Add Position</Typography>
               </Box>
-              <Box display="flex" gap={1}>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Grid container spacing={1}>
+                <Grid item lg={5.5} md={5.5} sm={5.5} xs={12}>
                   {DepartmentLoading ? (
                     <div>Loading...</div>
                   ) : (
@@ -1124,34 +1117,37 @@ function ManageAsset() {
                     </FormControl>
                   )}
                 </Grid>
-
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  label="Position"
-                  value={position}
-                  onChange={(e) => setPosition(e.target.value)}
-                  fullWidth
-                />
-
-                <Button
-                  variant="contained"
-                  onClick={handlePositionSubmit}
-                  size="small"
-                  sx={{
-                    backgroundColor: isEditingPosition ? "blue" : "green",
-                    fontSize: "16px",
-                    width: "300px",
-                    "&:hover": {
-                      backgroundColor: isEditingPosition
-                        ? "darkblue"
-                        : "darkgreen",
-                    },
-                  }}
-                >
-                  {isEditingPosition ? "Update" : "Add"}
-                </Button>
-              </Box>
+                <Grid item lg={5.5} md={5.5} sm={5.5} xs={12}>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    label="Position"
+                    value={position}
+                    onChange={(e) => setPosition(e.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item lg={1} md={1} sm={1} xs={12}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={handlePositionSubmit}
+                    size="small"
+                    sx={{
+                      backgroundColor: isEditingPosition ? "blue" : "green",
+                      fontSize: "16px",
+                      // width: "300px",
+                      "&:hover": {
+                        backgroundColor: isEditingPosition
+                          ? "darkorange"
+                          : "darkgreen",
+                      },
+                    }}
+                  >
+                    {isEditingPosition ? "Update" : "Add"}
+                  </Button>
+                </Grid>
+              </Grid>
 
               {/* Position Table */}
               <Grid container>
@@ -1268,6 +1264,7 @@ function ManageAsset() {
 
             <Grid
               container
+              p={2}
               gap={1}
               mt={2}
               display="flex"
@@ -1277,9 +1274,8 @@ function ManageAsset() {
                 <LinkIcon />
                 <Typography variant="h5">Approval Chain</Typography>
               </Box>
-              <Box display="flex" gap={1}>
-                <Grid container >
-                  <Grid item lg={3}></Grid>
+              <Grid container display="flex" spacing={1}>
+                <Grid item lg={2.75} mg={2.75} sm={5.5} xs={12}>
                   {DepartmentLoading ? (
                     <div>Loading...</div>
                   ) : (
@@ -1323,85 +1319,99 @@ function ManageAsset() {
                     </FormControl>
                   )}
                 </Grid>
-                <FormControl fullWidth size="small">
-                  <Autocomplete
-                    freeSolo // Allows users to type their own value
-                    options={actions} // Provides options to select from
-                    value={approvalChains}
-                    onChange={(newValue) => setApprovalChains(newValue)}
-                    onInputChange={(newInputValue) =>
-                      setApprovalChains(newInputValue)
-                    }
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Action"
-                        variant="outlined"
-                        size="small"
-                      />
+
+                <Grid item lg={2.75} mg={2.75} sm={5.5} xs={12}>
+                  <FormControl fullWidth size="small">
+                    <Autocomplete
+                      freeSolo // Allows users to type their own value
+                      options={actions} // Provides options to select from
+                      value={approvalChains || ""} // Ensure value is controlled
+                      onChange={(event, newValue) => {
+                        setApprovalChains(newValue); // Update the selected value
+                      }}
+                      onInputChange={(event, newInputValue) => {
+                        setApprovalChains(newInputValue); // Update for freeSolo input
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Action"
+                          variant="outlined"
+                          size="small"
+                        />
+                      )}
+                    />
+                  </FormControl>
+                </Grid>
+
+                <Grid item lg={2.75} mg={2.75} sm={5.5} xs={12}>
+                  <TextField
+                    variant="outlined"
+                    label="Level-1"
+                    size="small"
+                    select
+                    value={level1}
+                    onChange={(e) => setLevel1(e.target.value)}
+                    fullWidth
+                  >
+                    {positionsForApp.length > 0 ? (
+                      positionsForApp.map((position, index) => (
+                        <MenuItem key={position} value={position}>
+                          {index + 1}. {position}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem value="" disabled>
+                        No positions available
+                      </MenuItem>
                     )}
-                  />
-                </FormControl>
+                  </TextField>
+                </Grid>
 
-                <TextField
-                  variant="outlined"
-                  label="Level-1"
-                  size="small"
-                  select
-                  value={level1}
-                  onChange={(e) => setLevel1(e.target.value)}
-                  fullWidth
-                >
-                  {positionsForApp.length > 0 ? (
-                    positionsForApp.map((position, index) => (
-                      <MenuItem key={position} value={position}>
-                        {index + 1}. {position}
+                <Grid item lg={2.75} mg={2.75} sm={5.5} xs={12}>
+                  <TextField
+                    variant="outlined"
+                    label="Level-2"
+                    size="small"
+                    select
+                    value={level2}
+                    onChange={(e) => setLevel2(e.target.value)}
+                    fullWidth
+                  >
+                    {positionsForApp.length > 0 ? (
+                      positionsForApp.map((position, index) => (
+                        <MenuItem key={position} value={position}>
+                          {index + 1}. {position}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem value="" disabled>
+                        No positions available
                       </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem value="" disabled>
-                      No positions available
-                    </MenuItem>
-                  )}
-                </TextField>
+                    )}
+                  </TextField>
+                </Grid>
 
-                <TextField
-                  variant="outlined"
-                  label="Level-2"
-                  size="small"
-                  select
-                  value={level2}
-                  onChange={(e) => setLevel2(e.target.value)}
-                  fullWidth
-                >
-                  {positionsForApp.length > 0 ? (
-                    positionsForApp.map((position, index) => (
-                      <MenuItem key={position} value={position}>
-                        {index + 1}. {position}
-                      </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem value="" disabled>
-                      No positions available
-                    </MenuItem>
-                  )}
-                </TextField>
-                <Button
-                  variant="contained"
-                  onClick={handleApprovalChainSubmit}
-                  size="small"
-                  sx={{
-                    backgroundColor: isEditMode ? "orange" : "green",
-                    fontSize: "16px",
-                    width: "580px",
-                    "&:hover": {
-                      backgroundColor: isEditMode ? "darkorange" : "darkgreen",
-                    },
-                  }}
-                >
-                  {isEditMode ? "Update" : "Add"}
-                </Button>
-              </Box>
+                <Grid item lg={1} md={1} sm={1} xs={12}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={handleApprovalChainSubmit}
+                    size="small"
+                    sx={{
+                      backgroundColor: isEditMode ? "blue" : "green",
+                      fontSize: "16px",
+                      "&:hover": {
+                        backgroundColor: isEditMode
+                          ? "darkorange"
+                          : "darkgreen",
+                      },
+                    }}
+                  >
+                    {isEditMode ? "Update" : "Add"}
+                  </Button>
+                </Grid>
+              </Grid>
 
               {/* Approval Chain Table */}
               <Grid container>
