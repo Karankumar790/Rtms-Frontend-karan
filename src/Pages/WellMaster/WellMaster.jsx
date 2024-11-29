@@ -33,7 +33,7 @@ import {
   getLocation,
   getLocationOfWell,
   getWellDetails,
-} from "../../apis/WellService.js";
+} from "../../apis/wellService";
 import { useDispatch, useSelector } from "react-redux";
 import { setWellDetails } from "../../apis/authSlice.js";
 import { toast } from "react-toastify";
