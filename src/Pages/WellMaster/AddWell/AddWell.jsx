@@ -27,11 +27,7 @@ import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import { useSelector } from "react-redux";
-import {
-  addParametersForWell,
-  deviceData,
-  saveWellDetails,
-} from "../../../apis/WellService";
+import { deviceData, saveWellDetails } from "../../../apis/wellService.js";
 import { setWellDetails } from "../../../apis/authSlice";
 import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import SearchIcon from "@mui/icons-material/Search";
@@ -967,7 +963,7 @@ function AddWell() {
                   onClick={() => {
                     handleClose();
                     handleSave();
-                    handleAddParameter();
+                    // handleAddParameter();
                   }}
                   variant="contained"
                 >
