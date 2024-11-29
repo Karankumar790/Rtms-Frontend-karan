@@ -21,9 +21,7 @@ import React, { useEffect, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
-import { useSelector } from "react-redux";
-import { deviceData, saveWellDetails } from "../../../apis/wellService.js";
-import { setWellDetails } from "../../../apis/authSlice";
+import { deviceData } from "../../../apis/wellService.js";
 import SearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import SearchIcon from "@mui/icons-material/Search";
 import { borderRadius, Box, style } from "@mui/system";
@@ -31,6 +29,7 @@ import { FaPlus } from "react-icons/fa";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useSelector } from "react-redux";
 
 const initialData = [
   {
@@ -102,53 +101,14 @@ function AddWell() {
     wellNumber: "",
     landmark: "",
   });
-  const [formValues, setFormValues] = useState({
-    organizationName,
-    // wellDetails,
-    landmark: "",
-    latitude: "",
-    longitude: "",
-    nodeId: "",
-    alarmSettings: [],
-    flowing: {
-      pressures: [
-        { pressure1: "", comparison: "", pressure2: "", tolerance: "" },
-      ],
-    },
-    notFlowing: {
-      pressures: [
-        { pressure1: "", comparison: "", pressure2: "", tolerance: "" },
-      ],
-    },
-  });
+  
 
-  const actions = ["Km/cm", "V", "%"];
   const [open, setOpen] = useState(false);
-  const [employeeDatas, setEmployeeDatas] = useState([
-    // Sample data
-    {
-      employeeId: 1,
-      Parameter: "GIP",
-      NormalAlert: "",
-      CriticalAlert: "",
-      Condition: "",
-      Description: "",
-      Condition1: "",
-      Description1: "",
-    },
-  ]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const onChangeInputt = (e, employeeId) => {
-    const { name, value } = e.target;
-    setEmployeeData((prevData) =>
-      prevData.map((item) =>
-        item.employeeId === employeeId ? { ...item, [name]: value } : item
-      )
-    );
-  };
+
 
   useEffect(() => {
     const storedWellDetails = localStorage.getItem("wellDetails");
@@ -158,15 +118,7 @@ function AddWell() {
     // console.log(wellDetails,"..........................")
   }, []);
 
-  const onChangeInput = (e, employeeId) => {
-    const { name, value } = e.target;
-
-    const editData = employeeData.map((item) =>
-      item.employeeId === employeeId ? { ...item, [name]: value } : item
-    );
-
-    setEmployeeData(editData);
-  };
+ 
 
   // const handleChangeParameter = (event) => {
   //   const { name, value } = event.target;
@@ -182,46 +134,7 @@ function AddWell() {
   //     ...wellDetails,
   //     [name]: value,
   //   });
-  // };
-
-  const handleFlowingChange = (index, name, value) => {
-    const updatedFlowing = { ...formValues.flowing };
-    const pressureData = updatedFlowing.pressures[index];
-
-    if (name === "pressure1" || name === "pressure2") {
-      pressureData[name] = value;
-    } else if (name === "comparison") {
-      pressureData.comparison = value;
-    } else if (name === "tolerance") {
-      pressureData.tolerance = value;
-    }
-
-    updatedFlowing.pressures[index] = pressureData;
-    setFormValues({ ...formValues, flowing: updatedFlowing });
-  };
-
-  const handleNotFlowingChange = (index, name, value) => {
-    const updatedNotFlowing = { ...formValues.notFlowing };
-    const pressureData = updatedNotFlowing.pressures[index];
-
-    if (name === "pressure1" || name === "pressure2") {
-      pressureData[name] = value;
-    } else if (name === "comparison") {
-      pressureData.comparison = value;
-    } else if (name === "tolerance") {
-      pressureData.tolerance = value;
-    }
-
-    updatedNotFlowing.pressures[index] = pressureData;
-    setFormValues({ ...formValues, notFlowing: updatedNotFlowing });
-  };
-
-
-
-  const handleSave = () => {
-    setIsEditing(true);
-    setAddData(true);
-  };
+  // }
 
   useEffect(() => {
     const Device = async () => {
@@ -235,37 +148,37 @@ function AddWell() {
     Device();
   }, []);
 
-  const [parameterValues, setParameterValues] = useState({
-    process: "",
-    ports: "",
-    name: "",
-    description: "",
-    unit: "",
-    sensorOutput: "",
-    minVal: "",
-    maxVal: "",
-    normAlertValue: "",
-    normalCondition: "",
-    normalDescription: "",
-    normalDeadband: "",
-    criticalAlertValue: "",
-    criticalCondition: "",
-    criticalDescription: "",
-    criticalDeadband: "",
-  });
+  // const [parameterValues, setParameterValues] = useState({
+  //   process: "",
+  //   ports: "",
+  //   name: "",
+  //   description: "",
+  //   unit: "",
+  //   sensorOutput: "",
+  //   minVal: "",
+  //   maxVal: "",
+  //   normAlertValue: "",
+  //   normalCondition: "",
+  //   normalDescription: "",
+  //   normalDeadband: "",
+  //   criticalAlertValue: "",
+  //   criticalCondition: "",
+  //   criticalDescription: "",
+  //   criticalDeadband: "",
+  // });
 
-  const handleChangeParameter = (e) => {
-    const { name, value } = e.target;
-    setParameterValues((prev) => {
-      const updatedValues = {
-        ...prev,
-        [name]: value,
-      };
-      console.log("Updated Form Values:", updatedValues); // Log the updated values immediately
-      return updatedValues;
-    });
+  // const handleChangeParameter = (e) => {
+  //   const { name, value } = e.target;
+  //   setParameterValues((prev) => {
+  //     const updatedValues = {
+  //       ...prev,
+  //       [name]: value,
+  //     };
+  //     console.log("Updated Form Values:", updatedValues); // Log the updated values immediately
+  //     return updatedValues;
+  //   });
   
-  };
+  // };
   
   // const handleChangeParameter = (e) => {
   //   const { name, value } = e.target;
@@ -311,7 +224,11 @@ function AddWell() {
   //     toast.error("An error occurred while adding parameters.");
   //   }
   // };
+  const [comparison, setComparison] = useState(''); // Default value is '' (empty string)
 
+  const handleComparisonChange = (e) => {
+    setComparison(e.target.value); // Update the selected value
+  };
   return (
     <div>
       <Paper>
@@ -332,7 +249,7 @@ function AddWell() {
           {/* Input Fields */}
           <Grid item sm={6} md={3} xs={12} lg={3}>
             <TextField
-              fullWidth
+              fullwidth
               size="small"
               label="Location"
               variant="outlined"
@@ -382,7 +299,7 @@ function AddWell() {
               variant="outlined"
               name="landmark"
               value={wellDetails.landmark}
-              onChange={(e) => handleChangeParameter(e)}
+              // onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -392,7 +309,7 @@ function AddWell() {
               label="Latitude"
               variant="outlined"
               name="latitude"
-              onChange={(e) => handleChangeParameter(e)}
+              // onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -402,7 +319,7 @@ function AddWell() {
               label="Longitude"
               variant="outlined"
               name="longitude"
-              onChange={(e) => handleChangeParameter(e)}
+              // onChange={(e) => handleChangeParameter(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1} display="flex" gap={2}>
@@ -413,8 +330,8 @@ function AddWell() {
                 label="Node ID"
                 variant="outlined"
                 name="nodeId"
-                value={formValues.nodeId || ""}
-                onChange={(e) => handleChangeParameter(e)}
+                // value={formValues.nodeId || ""}
+                // onChange={(e) => handleChangeParameter(e)}
               />
             </Grid>
             <Grid
@@ -432,8 +349,8 @@ function AddWell() {
                 label="DIP"
                 variant="outlined"
                 name="dip"
-                value={formValues.dip || ""}
-                onChange={(e) => handleChangeParameter(e)}
+                // value={formValues.dip || ""}
+                // onChange={(e) => handleChangeParameter(e)}
                 // InputProps={{
                 //   endAdornment: (
                 //     <InputAdornment position="end">
@@ -505,8 +422,8 @@ function AddWell() {
                       fullWidth
                       size="small"
                       name="process"
-                      value={parameterValues.process}
-                      onChange={handleChangeParameter}
+                      // value={parameterValues.process}
+                      // onChange={handleChangeParameter}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -539,8 +456,8 @@ function AddWell() {
                       fullWidth
                       size="small"
                       name="ports"
-                      value={parameterValues.ports}
-                      onChange={handleChangeParameter}
+                      // value={parameterValues.ports}
+                      // onChange={handleChangeParameter}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -567,8 +484,8 @@ function AddWell() {
                     label="Display Name"
                     size="small"
                     name="name"
-                    value={parameterValues.name}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.name}
+                    // onChange={handleChangeParameter}
                     fullWidth
                   ></TextField>
                 </Stack>
@@ -581,8 +498,8 @@ function AddWell() {
                     label="Description"
                     size="small"
                     name="description"
-                    value={parameterValues.description}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.description}
+                    // onChange={handleChangeParameter}
                     fullWidth
                   ></TextField>
                 </Stack>
@@ -594,8 +511,8 @@ function AddWell() {
                     <Select
                       size="small"
                       name="unit"
-                      value={parameterValues.unit}
-                      onChange={handleChangeParameter}
+                      // value={parameterValues.unit}
+                      // onChange={handleChangeParameter}
                       MenuProps={{
                         PaperProps: {
                           sx: {
@@ -632,8 +549,8 @@ function AddWell() {
                       // label="Sensor Output"
                       size="small"
                       name="sensorOutput"
-                      value={parameterValues.sensorOutput}
-                      onChange={handleChangeParameter}
+                      // value={parameterValues.sensorOutput}
+                      // onChange={handleChangeParameter}
                     >
                       {/* <MenuItem value={""}>all </MenuItem> */}
                       <MenuItem value={""}>
@@ -654,8 +571,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="minVal"
-                    value={parameterValues.minVal}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.minVal}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -668,8 +585,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="maxVal"
-                    value={parameterValues.maxVal}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.maxVal}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -682,8 +599,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="normAlertValue"
-                    value={parameterValues.normAlertValue}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.normAlertValue}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -694,8 +611,8 @@ function AddWell() {
                     <Select
                       size="small"
                       name="normalCondition"
-                      value={parameterValues.normalCondition}
-                      onChange={handleChangeParameter}
+                      // value={parameterValues.normalCondition}
+                      // onChange={handleChangeParameter}
                     >
                       <MenuItem value={"High"}>High</MenuItem>
                       <MenuItem value={"Low"}>Low</MenuItem>
@@ -712,8 +629,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="normalDescription"
-                    value={parameterValues.normalDescription}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.normalDescription}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -726,8 +643,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="normalDeadband"
-                    value={parameterValues.normalDeadband}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.normalDeadband}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -740,8 +657,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="criticalAlertValue"
-                    value={parameterValues.criticalAlertValue}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.criticalAlertValue}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -752,8 +669,8 @@ function AddWell() {
                     <Select
                       size="small"
                       name="criticalCondition"
-                      value={parameterValues.criticalCondition}
-                      onChange={handleChangeParameter}
+                      // value={parameterValues.criticalCondition}
+                      // onChange={handleChangeParameter}
                     >
                       <MenuItem value={"High"}>High</MenuItem>
                       <MenuItem value={"Low"}>Low</MenuItem>
@@ -770,8 +687,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="criticalDescription"
-                    value={parameterValues.criticalDescription}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.criticalDescription}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -784,8 +701,8 @@ function AddWell() {
                     size="small"
                     fullWidth
                     name="criticalDeadband"
-                    value={parameterValues.criticalDeadband}
-                    onChange={handleChangeParameter}
+                    // value={parameterValues.criticalDeadband}
+                    // onChange={handleChangeParameter}
                   ></TextField>
                 </Stack>
               </Grid>
@@ -849,7 +766,7 @@ function AddWell() {
       </Grid>
       {addData ? (
         <Paper>
-          <Grid container spacing={3} p={2} mt={2}>
+          <Grid container  p={2} mt={2}>
             <Box width="99%" display="flex" justifyContent="space-between">
               <Typography pl={3} fontSize={"25px"}>
                 ABP (After Beam Pressure)
@@ -999,14 +916,14 @@ function AddWell() {
                   size="small"
                   value={"Condition"}
                 >
-                  {" "}
+                
                   90 %
                 </TextField>
               </Stack>
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
               <Stack spacing={1}>
-                {" "}
+               
                 <Typography variant="h5">Description</Typography>
                 <TextField
                   fullWidth
@@ -1014,7 +931,7 @@ function AddWell() {
                   size="small"
                   value={"Value is high"}
                 >
-                  {" "}
+                 
                   90 %
                 </TextField>
               </Stack>
@@ -1028,7 +945,7 @@ function AddWell() {
                   size="small"
                   value={"90%"}
                 >
-                  {" "}
+                  
                   90 %
                 </TextField>
               </Stack>
@@ -1042,7 +959,7 @@ function AddWell() {
                   size="small"
                   value={"Critical Alert Value"}
                 >
-                  {" "}
+                 
                   90 %
                 </TextField>
               </Stack>
@@ -1056,7 +973,7 @@ function AddWell() {
                   size="small"
                   value={"Condition"}
                 >
-                  {" "}
+                 
                   90 %
                 </TextField>
               </Stack>
@@ -1070,7 +987,7 @@ function AddWell() {
                   size="small"
                   value={"Description"}
                 >
-                  {" "}
+                
                   90 %
                 </TextField>
               </Stack>
@@ -1084,12 +1001,11 @@ function AddWell() {
                   size="small"
                   value={"10 %"}
                 >
-                  {" "}
+                 
                   90 %
                 </TextField>
               </Stack>
             </Grid>
-            {/* </Grid> */}
           </Grid>
         </Paper>
       ) : (
@@ -1115,11 +1031,11 @@ function AddWell() {
                 <InputLabel id="pressure-label">Pressure</InputLabel>
                 <Select
                   labelId="pressure-label"
-                  name="pressure1"
-                  value={formValues.flowing.pressures[0].pressure1}
-                  onChange={(e) =>
-                    handleFlowingChange(0, "pressure1", e.target.value)
-                  }
+                  // name="pressure1"
+                  // value={formValues.flowing.pressures[0].pressure1}
+                  // onChange={(e) =>
+                  //   handleFlowingChange(0, "pressure1", e.target.value)
+                  // }
                   size="small"
                 >
                   <MenuItem value="">
@@ -1132,36 +1048,53 @@ function AddWell() {
               </FormControl>
             </Grid>
             <Grid item lg={3} md={6} sm={12} xs={12}>
-              <FormControl fullWidth size="small">
+              {/* <FormControl fullWidth size="small">
                 <InputLabel id="comparison-label">Comparison</InputLabel>
                 <Select
                   labelId="comparison-label"
-                  name="comparison"
-                  value={formValues.flowing.pressures[0].comparison}
-                  onChange={(e) =>
-                    handleFlowingChange(0, "comparison", e.target.value)
-                  }
+                  // name="comparison"
+                  // value={formValues.flowing.pressures[0].comparison}
+                  // onChange={(e) =>
+                  //   handleFlowingChange(0, "comparison", e.target.value)
+                  // }
                   size="small"
                 >
                   <MenuItem value="">
                     <em>All</em>
                   </MenuItem>
-                  <MenuItem value=">">&gt;</MenuItem>
-                  <MenuItem value="<">&lt;</MenuItem>
+                  <MenuItem value="greater than">greater than</MenuItem>
+                  <MenuItem value="less than">less than</MenuItem>
                   <MenuItem value="=">=</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
+
+<FormControl fullWidth size="small">
+      <InputLabel id="comparison-label">Comparison</InputLabel>
+      <Select
+        labelId="comparison-label"
+        value={comparison} // Bind the value to state
+        onChange={handleComparisonChange} // Update the value when the user selects an option
+        size="small"
+      >
+        <MenuItem value="">
+          <em>All</em>
+        </MenuItem>
+        <MenuItem value="greater than">greater than</MenuItem>
+        <MenuItem value="less than">less than</MenuItem>
+        <MenuItem value="=">=</MenuItem>
+      </Select>
+    </FormControl>
             </Grid>
             <Grid item lg={3} md={6} sm={12} xs={12}>
               <FormControl fullWidth size="small">
                 <InputLabel id="pressure-label">Pressure</InputLabel>
                 <Select
                   labelId="pressure-label"
-                  name="pressure2"
-                  value={formValues.flowing.pressures[0].pressure2}
-                  onChange={(e) =>
-                    handleFlowingChange(0, "pressure2", e.target.value)
-                  }
+                  // name="pressure2"
+                  // value={formValues.flowing.pressures[0].pressure2}
+                  // onChange={(e) =>
+                  //   handleFlowingChange(0, "pressure2", e.target.value)
+                  // }
                   size="small"
                 >
                   <MenuItem value="">
@@ -1178,10 +1111,10 @@ function AddWell() {
               <TextField
                 variant="outlined"
                 size="small"
-                value={formValues.flowing.pressures[0].tolerance}
-                onChange={(e) =>
-                  handleFlowingChange(0, "tolerance", e.target.value)
-                }
+                // value={formValues.flowing.pressures[0].tolerance}
+                // onChange={(e) =>
+                //   handleFlowingChange(0, "tolerance", e.target.value)
+                // }
                 fullWidth
               />
             </Grid>
@@ -1198,11 +1131,11 @@ function AddWell() {
                 <InputLabel id="pressure-label">Pressure</InputLabel>
                 <Select
                   labelId="pressure-label"
-                  name="pressure1"
-                  value={formValues.notFlowing.pressures[0].pressure1}
-                  onChange={(e) =>
-                    handleNotFlowingChange(0, "pressure1", e.target.value)
-                  }
+                  // name="pressure1"
+                  // value={formValues.notFlowing.pressures[0].pressure1}
+                  // onChange={(e) =>
+                  //   handleNotFlowingChange(0, "pressure1", e.target.value)
+                  // }
                   size="small"
                 >
                   <MenuItem value="">
@@ -1219,11 +1152,11 @@ function AddWell() {
                 <InputLabel id="comparison-label">Comparison</InputLabel>
                 <Select
                   labelId="comparison-label"
-                  name="comparison"
-                  value={formValues.notFlowing.pressures[0].comparison}
-                  onChange={(e) =>
-                    handleNotFlowingChange(0, "comparison", e.target.value)
-                  }
+                  // name="comparison"
+                  // value={formValues.notFlowing.pressures[0].comparison}
+                  // onChange={(e) =>
+                  //   handleNotFlowingChange(0, "comparison", e.target.value)
+                  // }
                   size="small"
                 >
                   <MenuItem value="">
@@ -1240,11 +1173,11 @@ function AddWell() {
                 <InputLabel id="pressure-label">Pressure</InputLabel>
                 <Select
                   labelId="pressure-label"
-                  name="pressure2"
-                  value={formValues.notFlowing.pressures[0].pressure2}
-                  onChange={(e) =>
-                    handleNotFlowingChange(0, "pressure2", e.target.value)
-                  }
+                  // name="pressure2"
+                  // value={formValues.notFlowing.pressures[0].pressure2}
+                  // onChange={(e) =>
+                  //   handleNotFlowingChange(0, "pressure2", e.target.value)
+                  // }
                   size="small"
                 >
                   <MenuItem value="">
@@ -1261,10 +1194,10 @@ function AddWell() {
               <TextField
                 variant="outlined"
                 size="small"
-                value={formValues.notFlowing.pressures[0].tolerance}
-                onChange={(e) =>
-                  handleNotFlowingChange(0, "tolerance", e.target.value)
-                }
+                // value={formValues.notFlowing.pressures[0].tolerance}
+                // onChange={(e) =>
+                //   handleNotFlowingChange(0, "tolerance", e.target.value)
+                // }
                 fullWidth
               />
             </Grid>
