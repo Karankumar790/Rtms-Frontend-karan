@@ -23,7 +23,7 @@ import StoreIcon from "@mui/icons-material/Store";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { deviceData } from "../../../apis/WellService";
+import { deviceData } from "../../../apis/wellService";
 import { useSelector } from "react-redux";
 
 // ----------------------Table for Moblie------------------------------
