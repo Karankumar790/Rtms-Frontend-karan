@@ -1,14 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // Import the eye icon
-import { Step, StepContent, StepLabel, Stepper, Paper, TextField, StepConnector } from '@mui/material';
-import CloseIcon from "@mui/icons-material/Close";
-import { display } from '@mui/system';
-import styled from 'styled-components';
+import { Step, StepContent, StepLabel, Stepper, StepConnector } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 
 const style = {
   position: 'absolute',
@@ -16,7 +13,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '50%',
-  height: '70vh',
+  height: '60vh',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -25,27 +22,13 @@ const style = {
   display: 'flex',
 };
 
-
-const CustomConnector = styled(StepConnector)(({ theme }) => ({
-  '& .MuiStepConnector-line': {
-    borderWidth: '2px', // Increased thickness
-    height:'40%' // Line color
-  },
-}));
-
 export default function HistoryModal() {
   const [open, setOpen] = React.useState(false);
-  const [activeStep, setActiveStep] = React.useState(0);
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-
-  // Dummy steps (no content inside)
-  const steps = ['', '', '', '', ''];
-
-
-
-  // Local array of step data
-  const steps1 = [
+  const stepss = [
     { label: 'Notification', value: '12' },
     { label: 'Date/Time', value: '2024-11-28T15:30' },
     { label: 'Well Number', value: 'Well-12345' },
@@ -55,16 +38,24 @@ export default function HistoryModal() {
     { label: 'Status', value: 'Pending' },
   ];
 
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
+  const StepIcon = () => {
+    return (
+      <Box
+        sx={{
+          backgroundColor: 'orange', // Orange background for the icon
+          color: 'white', // White check icon
+          borderRadius: '50%',
+          width: '24px',
+          height: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '16px',
+        }}
+      >
+        <CheckIcon />
+      </Box>
+    );
   };
 
   return (
@@ -89,60 +80,61 @@ export default function HistoryModal() {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <Box sx={style} >
+        <Box sx={style}>
+          <Box sx={{ width: '100%', height: '100%' }}>
+            <Box sx={{ padding: 2, backgroundColor: '#f9f9f9', borderRadius: 2, width: '100%', height: '100%' }}>
+              <Stepper
+                activeStep={0} // Only the first step is active
+                orientation="vertical"
+                connector={<StepConnector
+                  sx={{
+                    '& .MuiStepConnector-line': {
+                      minHeight: '100%', // Ensures the connector spans the full height
+                      borderColor: '#ccc', // Maintains the color
+                    },
+                  }}
+                />}
+                sx={{ width: '100%', height: '100%', backgroundColor: '#f9f9f9', borderRadius: 2 }}
+              >
+                {/* First step with all content */}
+                <Step key="all-steps">
+                  <StepLabel StepIconComponent={StepIcon}>
+                    Notifications History
+                  </StepLabel>
+                  <StepContent>
+                    {stepss.map((step) => (
+                      <div key={step.label} style={{ marginBottom: '3px', display: 'flex', alignItems: 'center' }}>
+                        <Typography sx={{ color: 'grey', fontSize: step.label === 'Notification' ? '2rem' : '1rem', fontWeight: '600', marginRight: '10px' }}>
+                          {step.label}:
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: 'grey', fontSize: step.value === '12' ? '2rem' : '1rem', fontWeight: '600', display: 'flex', justifyContent: 'center' }}>
+                          {step.value}
+                        </Typography>
+                      </div>
 
-          <Box sx={{ padding: 4, backgroundColor: '#f5f5f5', borderRadius: 2, boxShadow: 3, width: '100%', display: 'flex' }}>
 
-          <Box sx={{ padding: 2 }}>
-      {/* Stepper Section */}
-      <Stepper
-        activeStep={activeStep}
-        orientation="vertical"
-        connector={<CustomConnector />} // Use the custom connector here
-        sx={{
-          width: '100%',
-          height: '90%',
-          padding: '10px',
-        }}
-      >
-        {steps.map((step, index) => (
-          <Step key={index}>
-            <StepLabel
-              sx={{
-                fontSize: '6.5rem', // Increase font size of labels
-                fontWeight: 'bold',
-                color: '#1976d2',
-                padding: '36px',
-              }}
-            >
-              {step}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Box>
-            <Box sx={{ width: '100%' }}>
-              {/* Title Section */}
-              <Box sx={{ fontWeight: 'bold', fontSize: 24, color: '#1976d2', marginBottom: 3 }}>
-                Notifications
-              </Box>
+                    ))}
+                  </StepContent>
+                </Step>
 
-              {/* Step Data Section */}
-              <Box sx={{ padding: 3, backgroundColor: '#ffffff', borderRadius: 2, boxShadow: 2 }}>
-                {steps1.map((step, index) => (
-                  <Box key={index} sx={{ marginBottom: 2 }}>
-                    <Typography variant="h6" sx={{ fontWeight: '600', color: '#333' }}>
-                      <strong>{step.label}:</strong>
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '1.1rem', color: '#555' }}>
-                      {step.value}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
+                {/* Second step without content */}
+                <Step key="empty-step">
+                  <StepLabel StepIconComponent={StepIcon}>
+                    Step 2 (No Content)
+                  </StepLabel>
+                  <StepContent>
+                    {/* No content displayed here */}
+                  </StepContent>
+                </Step>
+
+                {/* Additional steps, if any, can be left empty or hidden */}
+                {stepss.length > 2 && <Step sx={{ visibility: 'hidden' }} />}
+                {stepss.length > 3 && <Step sx={{ visibility: 'hidden' }} />}
+                {stepss.length > 4 && <Step sx={{ visibility: 'hidden' }} />}
+                {stepss.length > 5 && <Step sx={{ visibility: 'hidden' }} />}
+              </Stepper>
             </Box>
           </Box>
-
         </Box>
       </Modal>
     </div>
