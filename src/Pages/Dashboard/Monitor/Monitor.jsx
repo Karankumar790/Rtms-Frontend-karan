@@ -42,7 +42,7 @@ import {
   getAllInstallation,
   getLocation,
   wellMonitorData,
-} from "../../../apis/WellService";
+} from "../../../apis/wellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
 import { Line, Bar, Pie } from "react-chartjs-2";
