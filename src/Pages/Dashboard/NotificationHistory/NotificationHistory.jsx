@@ -41,10 +41,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
-import PendingIcon from "@mui/icons-material/Pending";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
-import { Textarea } from "flowbite-react";
+
 import HistoryModal from "../HistoryModal";
 ChartJS.register(
   CategoryScale,

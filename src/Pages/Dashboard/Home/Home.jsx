@@ -296,7 +296,7 @@ export default function BasicCard() {
           },
         }}
       >
-        <Grid container p={1} display="flex" justifyContent={"end"}>
+        <Grid container p={1} >
           <Box display={"flex"} gap={2}>
             <Box display="flex">
               <NotificationsNoneIcon
@@ -315,17 +315,18 @@ export default function BasicCard() {
                 width={"30px"}
                 src={complaints}
                 alt="noImg"
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer"}}
+                
               />
-              <Typography variant="h6">Open Complaints</Typography>
+              <Typography ml={0.6} variant="h6">Open Complaints</Typography>
             </Box>
           </Box>
         </Grid>
       </Paper>
       <Grid container  justifyContent={"end"}>
         <Stack spacing={2}>
-          <Pagination count={25} shape="rounded" />
-          {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
+          {/* <Pagination count={25} shape="rounded" /> */}
+          <Pagination  count={25} variant="outlined" shape="rounded" />
         </Stack>
       </Grid>
     </Grid>
