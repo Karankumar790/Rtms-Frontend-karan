@@ -400,7 +400,7 @@ function AddWell() {
             <Brightness5Icon sx={{ fontSize: "40px", color: "red" }} />
           </IconButton>
           <Typography variant="h4" mt={1}>
-            Add Well
+            Well Detail
           </Typography>
         </Grid>
         <Grid
@@ -564,8 +564,8 @@ function AddWell() {
             spacing={2}
             component={Paper}
           >
-            <Grid item lg={12}>
               <Typography variant="h4">Add Parameter</Typography>
+            <Grid item lg={12}>
               <Box
                 position="absolute"
                 textAlign="end"
@@ -629,10 +629,11 @@ function AddWell() {
                         },
                       }}
                     >
-                      <MenuItem value={20}>GIP</MenuItem>
-                      <MenuItem value={20}>CHP</MenuItem>
-                      <MenuItem value={20}>THP</MenuItem>
-                      <MenuItem value={20}>ABP</MenuItem>
+                      <MenuItem value={20}>1</MenuItem>
+                      <MenuItem value={20}>2</MenuItem>
+                      <MenuItem value={20}>3</MenuItem>
+                      <MenuItem value={20}>4</MenuItem>
+                      <MenuItem value={20}>5</MenuItem>
                       {/* <MenuItem value={20}>Speed</MenuItem> */}
                     </Select>
                   </FormControl>

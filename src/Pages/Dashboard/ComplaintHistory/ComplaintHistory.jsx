@@ -393,7 +393,6 @@ function ComplaintHistory() {
               </MenuItem>
               <MenuItem value={1}>Open Notification</MenuItem>
               <MenuItem value={2}>Close with comment </MenuItem>
-              <MenuItem value={3}>Conveted to complaint</MenuItem>
             </Select>
           </FormControl>
         </Grid>

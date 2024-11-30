@@ -6,6 +6,9 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // Import the eye icon
 import { Step, StepContent, StepLabel, Stepper, StepConnector } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from "@mui/icons-material/Close";
+import { Button } from 'flowbite-react';
+
 
 const style = {
   position: 'absolute',
@@ -17,7 +20,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 2,
   overflowY: 'auto',
   display: 'flex',
 };
@@ -27,6 +30,8 @@ export default function HistoryModal() {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleCloses = () => setOpen(false);
+
 
   const stepss = [
     { label: 'Notification', value: '12' },
@@ -72,6 +77,7 @@ export default function HistoryModal() {
         <VisibilityIcon fontSize="large" />
       </IconButton>
 
+
       {/* Modal with Stepper */}
       <Modal
         keepMounted
@@ -82,7 +88,24 @@ export default function HistoryModal() {
       >
         <Box sx={style}>
           <Box sx={{ width: '100%', height: '100%' }}>
-            <Box sx={{ padding: 2, backgroundColor: '#f9f9f9', borderRadius: 2, width: '100%', height: '100%' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2 }}>
+              <Box >
+                <Typography variant='h4'> Notifications History</Typography>
+              </Box>
+              <Box
+                position="absolute"
+                sx={{
+                  top: '5%',
+                  right: "-2.2%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <IconButton onClick={handleCloses} color=" solid black">
+                  <CloseIcon fontSize="large" />
+                </IconButton>
+              </Box>
+            </Box>
+            <Box sx={{ padding: 2, borderRadius: 2, width: '100%', height: '80%' }}>
               <Stepper
                 activeStep={0} // Only the first step is active
                 orientation="vertical"
@@ -91,25 +114,48 @@ export default function HistoryModal() {
                     '& .MuiStepConnector-line': {
                       minHeight: '100%', // Ensures the connector spans the full height
                       borderColor: '#ccc', // Maintains the color
+
                     },
                   }}
                 />}
-                sx={{ width: '100%', height: '100%', backgroundColor: '#f9f9f9', borderRadius: 2 }}
+                sx={{
+                  backgroundColor: '#f9f9f9',
+                  borderRadius: 2,
+                  padding: 2, // Adds padding for spacing
+                  height: '100%'
+                }}
               >
                 {/* First step with all content */}
                 <Step key="all-steps">
                   <StepLabel StepIconComponent={StepIcon}>
-                    Notifications History
+                    Step 1
                   </StepLabel>
                   <StepContent>
                     {stepss.map((step) => (
                       <div key={step.label} style={{ marginBottom: '3px', display: 'flex', alignItems: 'center' }}>
-                        <Typography sx={{ color: 'grey', fontSize: step.label === 'Notification' ? '2rem' : '1rem', fontWeight: '600', marginRight: '10px' }}>
+                        <Typography
+                          sx={{
+                            color: 'grey',
+                            fontSize: step.label === 'Notification' ? '1.8rem' : '1.3rem',
+                            fontWeight: step.label === 'Notification' ? '400' : 'bold', // Adjust font weight here
+                            marginRight: '10px',
+                          }}
+                        >
                           {step.label}:
                         </Typography>
-                        <Typography variant="body1" sx={{ color: 'grey', fontSize: step.value === '12' ? '2rem' : '1rem', fontWeight: '600', display: 'flex', justifyContent: 'center' }}>
+                        <Typography
+                          variant="body1"
+                          sx={{
+                            color: 'grey',
+                            fontSize: step.value === '12' ? '1.8rem' : '1.3rem',
+                            fontWeight: step.value === '12' ? 'base' : '400', // Adjust font weight here
+                            display: 'flex',
+                            justifyContent: 'center',
+                          }}
+                        >
                           {step.value}
                         </Typography>
+
                       </div>
 
 
@@ -120,7 +166,7 @@ export default function HistoryModal() {
                 {/* Second step without content */}
                 <Step key="empty-step">
                   <StepLabel StepIconComponent={StepIcon}>
-                    Step 2 (No Content)
+                    Step 2
                   </StepLabel>
                   <StepContent>
                     {/* No content displayed here */}
@@ -134,6 +180,28 @@ export default function HistoryModal() {
                 {stepss.length > 5 && <Step sx={{ visibility: 'hidden' }} />}
               </Stepper>
             </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'end',
+                margin: 2,
+              }}
+            >
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  backgroundColor: "green", // Ensures it overrides default styles
+                  color: "white", // Set text color for better visibility
+                  "&:hover": {
+                    backgroundColor: "darkgreen !important", // Ensures hover style works
+                  },
+                }}
+              >
+                Cancel
+              </Button>
+            </Box>
+
           </Box>
         </Box>
       </Modal>
