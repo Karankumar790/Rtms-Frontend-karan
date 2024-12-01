@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import ThreePIcon from '@mui/icons-material/ThreeP';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -194,21 +195,23 @@ function MessageForwarding() {
       >
         <Grid item lg={6} md={6} sm={6} xs={12}>
           <Box display={"flex"} gap={1}>
-            <img
+            {/* <img
               src="https://static.thenounproject.com/png/401262-200.png"
               alt="Img"
               height={"50px"}
               width={"50px"}
-            />
+            /> */}
+            <Box sx={{display:"flex",alignItems:"center"}} width={"30px"} height={"40px"}>
+            <ThreePIcon sx={{fontSize:"30px"}}/>
+            </Box>
             <Typography variant="h4">Message User</Typography>
           </Box>
         </Grid>
 
         <Grid item lg={2} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel >Select an Option</InputLabel>
             <Select
-              labelId="dropdown-label"
               value={selectedValue}
               onChange={handleChange}
               label="Select an Option"
@@ -432,6 +435,7 @@ function MessageForwarding() {
               justifyContent="end"
               pt={1}
               pb={1}
+              mt={3}
               // pr={3}
               gap={2}
             >

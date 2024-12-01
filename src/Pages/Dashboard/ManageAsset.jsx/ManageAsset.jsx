@@ -1376,7 +1376,7 @@ function ManageAsset() {
 
                 <Grid item lg={2.85} mg={2.75} sm={5.5} xs={12}>
                   <FormControl fullWidth size="small">
-                    <InputLabel>Action</InputLabel>
+                    <InputLabel>Approval</InputLabel>
                     <Select
                       value={approvalChains || ""} // Controlled value
                       onChange={handleSelectChange} // Handle change
