@@ -204,7 +204,7 @@ function MessageForwarding() {
           </Box>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={2} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
             <InputLabel id="dropdown-label">Select an Option</InputLabel>
             <Select
@@ -215,9 +215,9 @@ function MessageForwarding() {
               fullWidth
               size="small"
             >
-              <MenuItem value={10}>Option 1</MenuItem>
-              <MenuItem value={20}>Option 2</MenuItem>
-              <MenuItem value={30}>Option 3</MenuItem>
+              <MenuItem value={10}>All User</MenuItem>
+              <MenuItem value={20}>Active User</MenuItem>
+              <MenuItem value={30}>Deactivate</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -433,20 +433,20 @@ function MessageForwarding() {
               pt={1}
               pb={1}
               // pr={3}
-              gap={3}
+              gap={2}
             >
               <Button
                 variant="contained"
-                sx={{ width: "150px", p: "10px", fontSize: "15px" }}
+                sx={{ width: "160px", p: "10px", fontSize: "14px" }}
               >
-                Delete User
+                Activate User
               </Button>
               <Button
                 variant="contained"
-                sx={{ width: "150px", p: "10px", fontSize: "15px", mr: "12px" }}
+                sx={{ width: "160px", p: "10px", fontSize: "14px", mr: "10px" }}
                 onClick={handleClose}
               >
-                Close
+                Make Inactivate
               </Button>
             </Box>
           </Grid>

@@ -153,8 +153,8 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  // createData('2'),
 ];
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -473,7 +473,7 @@ function NotificationHistory() {
           >
             <TableHead>
               <TableRow>
-                <StyledTableCell>Notification</StyledTableCell>
+                <StyledTableCell>Notification No.</StyledTableCell>
                 <StyledTableCell>Data/Time</StyledTableCell>
                 <StyledTableCell>Well Number</StyledTableCell>
                 <StyledTableCell>Node ID</StyledTableCell>
