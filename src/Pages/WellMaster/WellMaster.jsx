@@ -544,7 +544,7 @@ const WellMaster = () => {
                         <em>All</em>
                       </MenuItem>
                       <MenuItem value="self-flowing">self-flowing</MenuItem>
-                      <MenuItem value="pugger well">pugger well</MenuItem>
+                      <MenuItem value="pugger-well">pugger well</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
