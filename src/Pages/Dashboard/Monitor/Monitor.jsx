@@ -22,6 +22,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import well from "/assets/WELL.png";
+import PrintIcon from "@mui/icons-material/Print";
 import {
   bgcolor,
   borderRadius,
@@ -451,7 +452,7 @@ function Monitor() {
       }}
     >
       {/* ------------------------Img and Content-------------------------------------- */}
-      <Grid container>
+      <Grid container sx={{ display: "flex", justifyContent: "space-between" }}>
         <Grid item display={"flex"} lg={4} md={8} sm={12} xs={12}>
           <Box sx={{ height: "50px", width: "50px" }}>
             <img src={well} alt="img" height={"50px"} width={"50px"} />
@@ -459,6 +460,18 @@ function Monitor() {
           <Box pt={1}>
             <Typography variant="h4">Well Monitor</Typography>
           </Box>
+        </Grid>
+        <Grid
+          item
+          sx={{
+            width: "3%", // Shrinks to fit the content width
+            height: "3%", // Shrinks to fit the content height
+          }}
+        >
+          <PrintIcon sx={{
+            width: "fit-content", 
+            height: "fit-content",
+          }} />
         </Grid>
       </Grid>
       {/* ------------------------Inputs------------------------------------------------ */}
@@ -632,8 +645,8 @@ function Monitor() {
                     <StyledTableCell>{device.data.P3}</StyledTableCell>
                     <StyledTableCell>{device.data.Bat}</StyledTableCell>
                     <StyledTableCell>{device.data.Solar}</StyledTableCell>
-                    <StyledTableCell> {}</StyledTableCell>
-                    <StyledTableCell> {}</StyledTableCell>
+                    <StyledTableCell> { }</StyledTableCell>
+                    <StyledTableCell> { }</StyledTableCell>
 
                     <StyledTableCell>
                       <IconButton
@@ -745,7 +758,7 @@ function Monitor() {
               transform: "translate(-50%, -50%)",
             }}
           >
-            <IconButton onClick={handleClose}   color=" solid black">
+            <IconButton onClick={handleClose} color=" solid black">
               <CloseIcon fontSize="large" />
             </IconButton>
           </Box>
@@ -759,7 +772,7 @@ function Monitor() {
             // overflow="auto"
             // height="70vh"
             sx={style}
-            // mx={2}
+          // mx={2}
           >
             {/*---------------- input field -------------------     */}
             {/* <Box
@@ -789,7 +802,7 @@ function Monitor() {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    // bgcolor='pink'
+                  // bgcolor='pink'
                   >
                     <img
                       src={well}

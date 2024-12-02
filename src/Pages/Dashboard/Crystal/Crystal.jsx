@@ -8,11 +8,9 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import SummarizeIcon from "@mui/icons-material/Summarize";
-import BallotIcon from "@mui/icons-material/Ballot";
 import { Box } from "@mui/system";
 import { Line, Bar, Pie } from "react-chartjs-2"; // Import chart.js components
 import TableContainer from "@mui/material/TableContainer";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -21,7 +19,6 @@ import PrintIcon from "@mui/icons-material/Print";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import PieChartIcon from "@mui/icons-material/PieChart";
-import { LineChart } from "@mui/x-charts/LineChart";
 
 import {
   Chart as ChartJS,
