@@ -157,7 +157,6 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-
   transform: "translate(-50%, -50%)",
   CardOverflow: "scroll",
   overflowY: "scroll",
@@ -473,18 +472,18 @@ function NotificationHistory() {
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
+            <TextField variant="outlined" size="small" label="Well Number" />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
+          <FormControl fullWidth size="small">
             <TextField
               variant="outlined"
               size="small"
               label="Notification No."
             />
           </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          <FormControl fullWidth size="small">
-            <TextField variant="outlined" size="small" label="Well Number" />
-          </FormControl>
-        </Grid>
+        </Grid>     
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
@@ -559,7 +558,7 @@ function NotificationHistory() {
                 <StyledTableCell>Notification No.</StyledTableCell>
                 <StyledTableCell>Date/Time</StyledTableCell>
                 <StyledTableCell>Well Number</StyledTableCell>
-                <StyledTableCell>Node ID</StyledTableCell>
+                {/* <StyledTableCell>Node ID</StyledTableCell> */}
                 <StyledTableCell>Location</StyledTableCell>
                 <StyledTableCell>Installation</StyledTableCell>
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
@@ -593,10 +592,10 @@ function NotificationHistory() {
                   // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
-                  <StyledTableCell
+                  {/* <StyledTableCell
                   // align="left"
                   // sx={{ width: "13%" }}
-                  ></StyledTableCell>
+                  ></StyledTableCell> */}
                   <StyledTableCell
                   // align="left"
                   // sx={{ width: "13%" }}

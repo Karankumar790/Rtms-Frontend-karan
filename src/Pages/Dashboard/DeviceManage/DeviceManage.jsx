@@ -17,14 +17,10 @@ import TableRow from "@mui/material/TableRow";
 import { Box, textAlign } from "@mui/system";
 import Network from "../../../../public/assets/NetworkWire2.jpg";
 import { Link } from "react-router-dom";
-import SettingsIcon from "@mui/icons-material/Settings";
-import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
-import StoreIcon from "@mui/icons-material/Store";
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { deviceData } from "../../../apis/wellService";
 import { useSelector } from "react-redux";
+import PrintIcon from "@mui/icons-material/Print";
+
 
 // ----------------------Table for Moblie------------------------------
 
@@ -80,12 +76,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     height: "20px", // Set a specific height
     fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
-    textAlign:"center"
+    textAlign: "center"
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 16,
-    textAlign:"center",
-    padding: "3px"
+    textAlign: "center",
+    padding: "10px"
   },
 }));
 
@@ -136,7 +132,7 @@ function DeviceManage() {
     <div>
       <Grid
         container
-        sx={{ display: "flex", justifyContent: "space-between" }}
+        sx={{ display:'flex', justifyContent: "space-between" }}
         pt={2}
         paddingBottom={2}
       >
@@ -148,9 +144,16 @@ function DeviceManage() {
             <Typography variant="h4">Node Monitor</Typography>
           </Box>
         </Grid>
-        <Grid item lg={1} display={"flex"} justifyContent={"end"} md={2} sm={2} xs={12} >
-          <Link to="/dashboard/simulator">
-        <Button
+        <Grid
+          item
+          sx={{ display: "flex", height: "3%",width:'3%' }}
+        >
+          <PrintIcon sx={{ height: "fit-content", width:'fit-content' }} />
+        </Grid>
+      </Grid>
+      <Grid item lg={1} display={"flex"}  justifyContent={"end"} md={2} sm={2} xs={12} >
+        <Link to="/dashboard/simulator">
+          <Button
             variant="contained"
             sx={{
               backgroundColor: "green", // Change button color to green
@@ -163,8 +166,7 @@ function DeviceManage() {
           >
             Simulator
           </Button>
-          </Link>
-        </Grid>
+        </Link>
       </Grid>
 
       {/* ------------------Table for Desktop--------------------------------- */}
@@ -191,9 +193,7 @@ function DeviceManage() {
                   <StyledTableCell  >
                     Node ID{" "}
                   </StyledTableCell>
-                  <StyledTableCell  >
-                    LoRa ID
-                  </StyledTableCell>
+
                   <StyledTableCell  >
                     Network
                   </StyledTableCell>
@@ -207,21 +207,21 @@ function DeviceManage() {
                     Solar (V)
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P1{" "}
+                    Port1{" "}
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P2
+                    Port2
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P3
+                    Port3
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P4
+                    Port4
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P5
+                    Port5
                   </StyledTableCell>
-                  <StyledTableCell  >
+                  {/* <StyledTableCell  >
                     E
                   </StyledTableCell>
                   <StyledTableCell  >
@@ -229,7 +229,7 @@ function DeviceManage() {
                   </StyledTableCell>
                   <StyledTableCell  >
                     Action
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                 </TableRow>
               </TableHead>
               {/* <TableBody>
@@ -297,7 +297,7 @@ function DeviceManage() {
                       <StyledTableCell >
                         {device.data.Solar}
                       </StyledTableCell>
-                      <StyledTableCell >
+                      {/* <StyledTableCell >
                         {device.data.Solar}
                       </StyledTableCell>
                       <StyledTableCell >
@@ -305,8 +305,8 @@ function DeviceManage() {
                       </StyledTableCell>
                       <StyledTableCell >
                         {device.data.Solar}
-                      </StyledTableCell>
-                      <StyledTableCell >
+                      </StyledTableCell> */}
+                      {/* <StyledTableCell >
                         <Link to="/dashboard/Lora">
                           <IconButton
                             sx={{
@@ -318,7 +318,7 @@ function DeviceManage() {
                             <SettingsIcon fontSize="large" />
                           </IconButton>
                         </Link>
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                     </StyledTableRow>
                   ))
                 )}
