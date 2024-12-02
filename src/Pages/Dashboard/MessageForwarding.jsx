@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import ThreePIcon from '@mui/icons-material/ThreeP';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -174,9 +175,10 @@ function MessageForwarding() {
     setSelectedValue(event.target.value);
   };
 
+  // Handle opening the modal with user data
   const handleViewUser = (user) => {
-    setSelectedUser(user);
-    setOpen(true);
+    setSelectedUser(user); // Set the selected user's data
+    setOpen(true); // Open the modal
   };
 
   useEffect(() => {
@@ -193,30 +195,32 @@ function MessageForwarding() {
       >
         <Grid item lg={6} md={6} sm={6} xs={12}>
           <Box display={"flex"} gap={1}>
-            <img
+            {/* <img
               src="https://static.thenounproject.com/png/401262-200.png"
               alt="Img"
               height={"50px"}
               width={"50px"}
-            />
+            /> */}
+            <Box sx={{display:"flex",alignItems:"center"}} width={"30px"} height={"40px"}>
+            <ThreePIcon sx={{fontSize:"30px"}}/>
+            </Box>
             <Typography variant="h4">Message User</Typography>
           </Box>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={2} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel >Select an Option</InputLabel>
             <Select
-              labelId="dropdown-label"
               value={selectedValue}
               onChange={handleChange}
               label="Select an Option"
               fullWidth
               size="small"
             >
-              <MenuItem value={10}>Option 1</MenuItem>
-              <MenuItem value={20}>Option 2</MenuItem>
-              <MenuItem value={30}>Option 3</MenuItem>
+              <MenuItem value={10}>All User</MenuItem>
+              <MenuItem value={20}>Active User</MenuItem>
+              <MenuItem value={30}>Deactivate</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -224,7 +228,7 @@ function MessageForwarding() {
 
       {/* ------------------Table for Desktop--------------------------------- */}
       <Grid container>
-        <Modal
+        {/* <Modal
           open={open}
           // onClose={handleClose}
           className="center"
@@ -248,16 +252,7 @@ function MessageForwarding() {
                 User Details
               </Typography>
             </Box>
-            {/* <Grid
-              item
-              lg={12}
-              md={12}
-              sm={12}
-              xs={12}
-              // display="flex"
-              gap={2}
-              spacing={1}
-            > */}
+       
             <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
               <Grid lg={10} md={8} xs={12} sm={12}>
                 {userDetails.map((field, index) => (
@@ -316,8 +311,7 @@ function MessageForwarding() {
                 </Box>
               </Grid>
             </Grid>
-            {/* </Grid> */}
-            {/* ----------Button--------------------- */}
+        
             <Box
               display="flex"
               justifyContent="end"
@@ -345,6 +339,118 @@ function MessageForwarding() {
                 onClick={handleClose}
               >
                 Close
+              </Button>
+            </Box>
+          </Grid>
+        </Modal> */}
+
+        <Modal
+          open={open}
+          // onClose={handleClose} // Close modal
+          className="center"
+          sx={{ backgroundColor: `rgba(255, 255, 255, 0.5)` }}
+        >
+          <Grid item lg={6} md={8} sm={8} xs={12} sx={style}>
+            <Box
+              position="absolute"
+              sx={{
+                top: "3%",
+                right: "-2.8%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <IconButton onClick={handleClose} color="solid black">
+                <CloseIcon fontSize="large" />
+              </IconButton>
+            </Box>
+            <Box textAlign="center" pb={1}>
+              <Typography id="modal-modal-title" variant="h4" component="h2">
+                User Details
+              </Typography>
+            </Box>
+            <Grid item lg={12} md={10} xs={11} sm={11} gap={2} display="flex">
+              <Grid item lg={10} md={8} xs={12} sm={12}>
+                {userDetails.map((field, index) => (
+                  <Grid item display="flex" p={2} key={index}>
+                    {console.log(field,".................")}
+                    <Grid lg={4} md={5} sm={12} xs={12} display={"flex"}>
+                      <Typography variant="h6">{field}</Typography>
+                    </Grid>
+                    <Grid lg={8} md={7} sm={12} xs={12}>
+                      <TextField
+                        variant="standard"
+                        // sx={"read-only"}
+                        value={
+                          field === "Username"
+                            ? selectedUser?.username
+                            : field === "Position"
+                            ? selectedUser?.roleInRTMS
+                            : field === "Department"
+                            ? selectedUser?.department
+                            : field === "EmployeeID"
+                            ? selectedUser?.employeeID
+                            : field === "Email"
+                            ? selectedUser?.email
+                            : field === "Contact no."
+                            ? selectedUser?.contactNumber
+                            : ""
+                        }
+                        disabled
+                        fullWidth
+                        size="small"
+                      />
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+              <Grid item lg={4} md={4} xs={12} sm={12}>
+                <Box
+                  className="center"
+                  height={"200px"}
+                  width={"200px"}
+                  border={"1px solid black"}
+                  ml={3}
+                  mt={3}
+                  mb={2}
+                  component="img"
+                  src={selectedUser?.idCardPhoto || ""}
+                  alt="ID Card Photo"
+                />
+                <Box
+                  className="center"
+                  height={"200px"}
+                  width={"200px"}
+                  border={"1px solid black"}
+                  mt={4}
+                  ml={3}
+                  component="img"
+                  src={selectedUser?.passportPhoto || ""}
+                  alt="Passport Photo"
+                />
+              </Grid>
+            </Grid>
+            <Box
+            // bgcolor={'yellow'}
+              display="flex"
+              justifyContent="end"
+              pt={1}
+              pb={1}
+              mt={3}
+              // pr={3}
+              gap={2}
+            >
+              <Button
+                variant="contained"
+                sx={{ width: "160px", p: "10px", fontSize: "14px" }}
+              >
+                Activate User
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ width: "160px", p: "10px", fontSize: "14px", mr: "10px" }}
+                onClick={handleClose}
+              >
+                Make Inactivate
               </Button>
             </Box>
           </Grid>

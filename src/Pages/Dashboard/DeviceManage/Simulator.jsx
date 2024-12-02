@@ -80,7 +80,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: "16px", // Font size for the header
     textAlign: "left", // Center-align header content (optional)
     // lineHeight: '1.5', // Adjust line height
-    // borderBottom: `2px solid ${theme.palette.secondary.main}`, // Add border
+    // borderBottom: 2px solid ${theme.palette.secondary.main}, // Add border
     position: "sticky", // Sticky positioning
     zIndex: 1, // Ensure it stays above the rows
   },

@@ -153,8 +153,8 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  // createData('2'),
 ];
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -163,7 +163,7 @@ const style = {
   CardOverflow: "scroll",
   overflowY: "scroll",
   height: "70vh",
-  width: "40%",
+  width: "55%",
 
   bgcolor: "white",
   borderRadius: "5px",
@@ -389,18 +389,18 @@ function NotificationHistory() {
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
+            <TextField variant="outlined" size="small" label="Well Number" />
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
+          <FormControl fullWidth size="small">
             <TextField
               variant="outlined"
               size="small"
               label="Notification No."
             />
           </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          <FormControl fullWidth size="small">
-            <TextField variant="outlined" size="small" label="Well Number" />
-          </FormControl>
-        </Grid>
+        </Grid>     
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
@@ -472,10 +472,10 @@ function NotificationHistory() {
           >
             <TableHead>
               <TableRow>
-                <StyledTableCell>Notification</StyledTableCell>
-                <StyledTableCell>Data/Time</StyledTableCell>
+                <StyledTableCell>Notification No.</StyledTableCell>
+                <StyledTableCell>Date/Time</StyledTableCell>
                 <StyledTableCell>Well Number</StyledTableCell>
-                <StyledTableCell>Node ID</StyledTableCell>
+                {/* <StyledTableCell>Node ID</StyledTableCell> */}
                 <StyledTableCell>Location</StyledTableCell>
                 <StyledTableCell>Installation</StyledTableCell>
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
@@ -510,10 +510,10 @@ function NotificationHistory() {
                   // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
-                  <StyledTableCell
+                  {/* <StyledTableCell
                   // align="left"
                   // sx={{ width: "13%" }}
-                  ></StyledTableCell>
+                  ></StyledTableCell> */}
                   <StyledTableCell
                   // align="left"
                   // sx={{ width: "13%" }}
@@ -544,37 +544,36 @@ function NotificationHistory() {
       {/* ------------------------------Modal view --------------------------- */}
 
       <Modal open={open}>
-        <Grid container sx={style}>
+        <Grid container sx={style} >
           <Grid container>
-            <Grid container p={2}>
-              <Grid item>
-                <IconButton
-                  onClick={handleClose}
+          <Grid container  p={2} >
+            <Grid item>
+              <IconButton
+                onClick={handleClose}
+                sx={{
+                  position: "absolute",
+                  top: 1,
+                  right: 1,
+                  fontSize:"22px",
+                  color: "black",
+                  bgcolor: "transparent",
+                  "&:hover": {
+                    bgcolor: "red",
+                  },
+                }}
+              >
+                <CloseIcon fontSize="50px" />
+              </IconButton>
+            </Grid>
+            {/* --------------------------------Textfield Values------------------------------------- */}
+            <Grid container mx={2} mt={1}>
+              <Grid container>
+                <Paper
                   sx={{
-                    position: "absolute",
-                    top: 1,
-                    right: 1,
-                    fontSize: "22px",
-                    color: "black",
-                    bgcolor: "transparent",
-                    "&:hover": {
-                      bgcolor: "red",
-                    },
+                    width: "990px",
                   }}
                 >
-                  <CloseIcon fontSize="50px" />
-                </IconButton>
-              </Grid>
-              {/* --------------------------------Textfield Values------------------------------------- */}
-              <Grid container mx={2} mt={1}>
-                <Grid container>
-                  <Paper
-                    sx={{
-                      width: "51.5rem",
-                      mb: "15px",
-                    }}
-                  >
-                    {/* <Grid container>
+                  <Grid container>
                     <Typography
                       ml={1}
                       mt={2}
@@ -584,231 +583,272 @@ function NotificationHistory() {
                     >
                       Notification Details
                     </Typography>
-                  </Grid> */}
-                    {/* ---------------------- view -------------------------- */}
-                    <Box>
-                      <Grid container>
-                        <Grid
-                          item
-                          lg={12}
-                          md={3}
-                          sm={6}
-                          xs={12}
-                          pl={2}
-                          display={"flex"}
-                          p={1}
-                          ml={2}
-                        >
-                          <Box mr={10.5}>
-                            <Typography variant="h5">From</Typography>
-                          </Box>
-                          <Box>
-                            <TextField
-                              size="small"
-                              variant="outlined"
-                              value={""}
-                              sx={{ width: "25rem" }}
-                            />
-                          </Box>
-                        </Grid>
-                        <Grid
-                          item
-                          lg={12}
-                          md={3}
-                          sm={6}
-                          xs={12}
-                          pl={2}
-                          display={"flex"}
-                          p={1}
-                          ml={2}
-                        >
-                          <Box mr={14}>
-                            <Typography variant="h5">To</Typography>
-                          </Box>
-                          <Box>
-                            <TextField
-                              size="small"
-                              variant="outlined"
-                              value={""}
-                              sx={{ width: "25rem" }}
-                            />
-                          </Box>
-                        </Grid>
-                        <Grid
-                          item
-                          lg={12}
-                          md={3}
-                          sm={6}
-                          xs={12}
-                          pl={2}
-                          display={"flex"}
-                          p={1}
-                          ml={2}
-                        >
-                          <Box mr={8}>
-                            <Typography variant="h5">Subject</Typography>
-                          </Box>
-                          <Box>
-                            <TextField
-                              size="small"
-                              variant="outlined"
-                              value={""}
-                              sx={{ width: "25rem" }}
-                            />
-                          </Box>
-                        </Grid>
+                  </Grid>
+                  {/* ---------------------- view -------------------------- */}
+                  <Box>
+                    <Grid container>
+                      <Grid item lg={12} md={3} sm={6} xs={12} pl={2} >
+                        {[{ label: "Notification No. :", value: "" }].map(
+                          (item, index) => (
+                            <Box key={index}>
+                              <Typography
+                                variant="h5"
+                                color={"blue"}
+                                fontWeight={600}
+                                
+                              >
+                                {item.label}
+                              </Typography>
+                              {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
+                            </Box>
+                          )
+                        )}
                       </Grid>
-                    </Box>
-                  </Paper>
-                </Grid>
+
+                      <Grid
+                        item
+                        lg={12}
+                        md={3}
+                        sm={6}
+                        xs={12}
+                        pl={2}
+                       
+                        mb={3}
+                      >
+                        {[
+                          { label: "Well Number :", value: "" },
+                          { label: "Location :", value: "" },
+                          { label: "Installation :", value: "" },
+                          { label: "Date/Time :", value: "" },
+                          { label: "Description :", value: "" },
+                          { label: "Status :", value: "" },
+                        ].map((item, index) => (
+                          <Box key={index}>
+                            <Typography variant="h5" mt={1} >
+                              {item.label}
+                            </Typography>
+                            {/* <TextField size="small" fullWidth value={item.value} /> */}
+                          </Box>
+                        ))}
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Paper>
               </Grid>
+            </Grid>
 
-              {/* ------------------Status ----------------------*/}
-              <Grid container component={Paper} ml={2} width={"990px"}>
-                {/* <Grid container>
-                  <Typography
-                    ml={2}
-                    mb={2}
-                    p={2}
-                    fontSize={25}
-                    fontWeight={500}
-                  >
-                    Forward
-                  </Typography>
-                </Grid> */}
-
-                <Grid
-                  item
-                  lg={12}
-                  md={3}
-                  sm={6}
-                  xs={12}
-                  pl={2}
-                  display={"flex"}
-                  p={1}
-                  ml={2}
-                >
-                  <Box mr={10.5}>
-                    <Typography variant="h5">Name</Typography>
-                  </Box>
-                  <Box>
-                    <TextField
-                      size="small"
-                      variant="outlined"
-                      value={""}
-                      sx={{ width: "25rem" }}
-                    />
-                  </Box>
-                </Grid>
-                <Grid
-                  item
-                  lg={12}
-                  md={3}
-                  sm={6}
-                  xs={12}
-                  pl={2}
-                  display={"flex"}
-                  p={1}
-                  ml={2}
-                >
-                  <Box mr={8.5}>
-                    <Typography variant="h5">Contact</Typography>
-                  </Box>
-                  <Box>
-                    <TextField
-                      size="small"
-                      variant="outlined"
-                      value={""}
-                      sx={{ width: "25rem" }}
-                    />
-                  </Box>
-                </Grid>
-                <Grid
-                  item
-                  lg={12}
-                  md={3}
-                  sm={6}
-                  xs={12}
-                  pl={2}
-                  display={"flex"}
-                  p={1}
-                  ml={2}
-                >
-                  <Box mr={11}>
-                    <Typography variant="h5">Email</Typography>
-                  </Box>
-                  <Box>
-                    <TextField
-                      size="small"
-                      variant="outlined"
-                      value={""}
-                      sx={{ width: "25rem" }}
-                    />
-                  </Box>
-                </Grid>
-
-                <Grid
-                  item
-                  lg={12}
-                  md={3}
-                  sm={6}
-                  xs={12}
-                  pl={2}
-                  display={"flex"}
-                  p={1}
-                  ml={2}
-                >
-                  <Box mr={4}>
-                    <Typography variant="h5">Department</Typography>
-                  </Box>
-                  <FormControl sx={{ width: "25rem" }} size="small">
-                    <InputLabel id="simple-select-label">Department</InputLabel>
-                    <Select label="Department">
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={1}>HR</MenuItem>
-                      <MenuItem value={2}>Finance</MenuItem>
-                      <MenuItem value={3}>Engineering</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid
-                  item
-                  lg={12}
-                  md={3}
-                  sm={6}
-                  xs={12}
-                  pl={2}
-                  display={"flex"}
-                  p={1}
-                  ml={2}
-                >
-                  <Box mr={8.5}>
-                    <Typography variant="h5">Position</Typography>
-                  </Box>
-                  <FormControl sx={{ width: "25rem" }} size="small">
-                    <InputLabel id="simple-select-label">Position</InputLabel>
-                    <Select
-                      labelId="simple-select-label"
-                      id="simple-select"
-                      label="Department"
+            {/* --------------------------------chart------------------------------------- */}
+            <Grid container p={2}>
+              <Grid item lg={9}>
+                <Paper elevation={2} sx={{ pb: "5px" }}>
+                  <Grid container>
+                    <Typography
+                      ml={2}
+                      mt={2}
+                      fontSize={25}
+                      fontWeight={500}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={1}>HR</MenuItem>
-                      <MenuItem value={2}>Finance</MenuItem>
-                      <MenuItem value={3}>Engineering</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
+                      Status
+                    </Typography>
+                  </Grid>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "start",
+                      gap: 2,
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => setChartType("line")}
+                      color={chartType === "line" ? "primary" : "default"}
+                    >
+                      <ShowChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("bar")}
+                      color={chartType === "bar" ? "primary" : "default"}
+                    >
+                      <BarChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setChartType("pie")}
+                      color={chartType === "pie" ? "primary" : "default"}
+                    >
+                      <PieChartIcon sx={{ fontSize: 40 }} />
+                    </IconButton>
+                  </Box>
 
-
+                  <div style={{ height: "400px", width: "100%" }}>
+                    {chartType === "line" && (
+                      <Line
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "bar" && (
+                      <Bar
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                    {chartType === "pie" && (
+                      <Pie
+                        data={chartData}
+                        options={options}
+                        style={{ height: "100%", width: "100%" }}
+                      />
+                    )}
+                  </div>
+                </Paper>
               </Grid>
+              <Grid item lg={3} xs={4}>
+                <Paper>
+                  <Box
+                    sx={{
+                      maxHeight: 505,
+                      height: 1200,
+                      overflow: "auto",
+                      paddingRight: 2,
+                      paddingTop: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                      gap: "0.85rem",
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      After Beam Pressure(ABP)
+                    </Typography>
+                    <Typography variant="h5" color={"red"}>
+                      2 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Tubing Head Pressure(THP)
+                    </Typography>
+                    <Typography variant="h5" color={"green"}>
+                      2 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography  fontSize={17} sx={{ color: "#aaaaaa" }}>
+                    Cashing Head Pressure(CHP)
+                    </Typography>
+                    <Typography variant="h5" color={"blue"}>
+                      5.326 Kg/cm<sup>2</sup>
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Battery (%)
+                    </Typography>
+                    <Typography variant="h5" color={"red"}>
+                      12%
+                    </Typography>
+                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                      Solar Voltage(V)
+                    </Typography>
+                    <Typography variant="h5" color={"green"}>
+                      12V
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+            </Grid>
 
-              {/* --------------------------------Subject------------------------------------- */}
-              {/* <Grid
+            {/* ------------------Status ----------------------*/}
+            <Grid container component={Paper} ml={2} width={"990px"}>
+              <Grid container>
+                <Typography ml={2} mb={2} p={2} fontSize={25} fontWeight={500}>
+                  Forward
+                </Typography>
+              </Grid>
+              <Grid item lg={8} md={2} sm={4} xs={12} display={"flex"} gap={3}>
+                <Box>
+                  <Typography width={200} display={"flex"} justifyContent={"end"} alignItems={"end"} variant="h5">
+                    Department
+                  </Typography>
+                </Box>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="simple-select-label">Department</InputLabel>
+                  <Select label="Department">
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={1}>HR</MenuItem>
+                    <MenuItem value={2}>Finance</MenuItem>
+                    <MenuItem value={3}>Engineering</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid
+                item
+                lg={8}
+                md={2}
+                sm={4}
+                xs={12}
+                display="flex"
+                alignItems="center"
+                mt={2}
+                gap={3}
+              >
+                <Box>
+                  <Typography width={200} display={"flex"} justifyContent={"end"} alignItems={"end"} variant="h5">
+                    Position
+                  </Typography>
+                </Box>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="simple-select-label">Position</InputLabel>
+                  <Select
+                    labelId="simple-select-label"
+                    id="simple-select"
+                    label="Department"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={1}>HR</MenuItem>
+                    <MenuItem value={2}>Finance</MenuItem>
+                    <MenuItem value={3}>Engineering</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid container>
+                <Grid item lg={8} md={2} sm={6} xs={12} mb={2}>
+                  {[
+                    { label: "To ", value: formData.to, name: "to" },
+                    { label: "Cc", value: formData.cc, name: "cc" },
+                  ].map((item, index) => (
+                    <Box
+                      key={index}
+                      m={1}
+                      mt={1}
+                      gap={3}
+                      mb={1}
+
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-between"
+                      sx={{ pl: 2 }} // Adds padding to the left side of each Box to align the label-text field pairs uniformly
+                    >
+                      <Grid item lg={4}>
+                        <Typography variant="h5" display={"flex"} justifyContent={"end"} alignItems={"end"} width={180} gap={3} >
+                          {item.label}
+                        </Typography>
+                      </Grid>
+                      <TextField
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        value={item.value}
+                        name={item.name}
+                        onChange={handleChange}
+                      />
+                    </Box>
+                  ))}
+                </Grid>
+              </Grid>
+            </Grid>
+
+            {/* --------------------------------Subject------------------------------------- */}
+            {/* <Grid
               container
               component={Paper}
               p={2}
@@ -833,38 +873,36 @@ function NotificationHistory() {
                 <TextField fullWidth variant="outlined"></TextField>
               </Grid>
             </Grid> */}
-              {/* --------------------------------Remark------------------------------------- */}
-
-              <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
-                <Button
-                  component="label"
-                  role={undefined}
-                  variant="contained"
-                  tabIndex={-1}
-                  startIcon={<CloudUploadIcon />}
-                  sx={{ m: "10px", width: "200px", fontSize: "15px" }}
-                >
-                  Upload files
-                  <VisuallyHiddenInput
-                    type="file"
-                    onChange={(event) => console.log(event.target.files)}
-                    multiple
-                  />
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{ m: "10px", width: "200px", fontSize: "15px" }}
-                >
-                  REPLY
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{ m: "10px", width: "200px", fontSize: "15px" }}
-                >
-                  FORWARD
-                </Button>
-              </Box>
+            {/* --------------------------------Remark------------------------------------- */}
+            <Grid container component={Paper} p={2} m={2} >
+              <Grid container>
+                <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
+                  Message
+                </Typography>
+              </Grid>
+              <Grid item lg={10} md={2} sm={4} xs={12}>
+                <Textarea
+                  // aria-label="minimum height"
+                  minRows={10}
+                  placeholder="REMARK"
+                />
+              </Grid>
             </Grid>
+            <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
+              <Button
+                variant="contained"
+                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+              >
+                CREATE COMPLAINT
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+              >
+                CLOSE NOTIFICATION
+              </Button>
+            </Box>
+          </Grid>
           </Grid>
         </Grid>
       </Modal>

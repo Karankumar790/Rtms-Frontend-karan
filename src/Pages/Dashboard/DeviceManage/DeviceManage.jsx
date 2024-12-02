@@ -23,7 +23,7 @@ import StoreIcon from "@mui/icons-material/Store";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { deviceData } from "../../../apis/WellService";
+import { deviceData } from "../../../apis/wellService";
 import { useSelector } from "react-redux";
 
 // ----------------------Table for Moblie------------------------------
@@ -191,9 +191,7 @@ function DeviceManage() {
                   <StyledTableCell  >
                     Node ID{" "}
                   </StyledTableCell>
-                  <StyledTableCell  >
-                    LoRa ID
-                  </StyledTableCell>
+                 
                   <StyledTableCell  >
                     Network
                   </StyledTableCell>
@@ -207,19 +205,19 @@ function DeviceManage() {
                     Solar (V)
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P1{" "}
+                    Port1{" "}
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P2
+                    Port2
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P3
+                    Port3
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P4
+                    Port4
                   </StyledTableCell>
                   <StyledTableCell  >
-                    P5
+                    Port5
                   </StyledTableCell>
                   <StyledTableCell  >
                     E
@@ -306,7 +304,7 @@ function DeviceManage() {
                       <StyledTableCell >
                         {device.data.Solar}
                       </StyledTableCell>
-                      <StyledTableCell >
+                      {/* <StyledTableCell >
                         <Link to="/dashboard/Lora">
                           <IconButton
                             sx={{
@@ -318,7 +316,7 @@ function DeviceManage() {
                             <SettingsIcon fontSize="large" />
                           </IconButton>
                         </Link>
-                      </StyledTableCell>
+                      </StyledTableCell> */}
                     </StyledTableRow>
                   ))
                 )}

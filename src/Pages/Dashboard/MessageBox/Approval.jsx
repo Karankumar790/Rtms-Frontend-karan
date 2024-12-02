@@ -402,7 +402,7 @@ export default function BasicCard() {
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
           <Tabs>
-            <TabList>
+            {/* <TabList>
               <Tab style={{ whiteSpace: "break-spaces" }}>
                 <Typography fontSize={"large"}>User Approval</Typography>
               </Tab>
@@ -417,7 +417,7 @@ export default function BasicCard() {
 
 
             {/* User Approval Tab */}
-            <TabPanel>
+            {/* <TabPanel>
               <TableContainer
                 component={Paper}
                 sx={{ border: "1px solid black", maxHeight: 500 }}
@@ -480,7 +480,7 @@ export default function BasicCard() {
                   </TableBody>
                 </Table>
               </TableContainer>
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
               <Grid container justifyContent="end">
                 <Box>

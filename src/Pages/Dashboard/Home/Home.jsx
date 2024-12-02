@@ -8,6 +8,8 @@ import {
   FormGroup,
   Grid,
   IconButton,
+  Pagination,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,7 +20,6 @@ import pressure from "/assets/PRESSURE.png";
 import battery from "/assets/battery.png";
 import solar from "/assets/SOLAR1.png";
 import network from "/assets/Network.png";
-// import notifications from '../../../../public/assets/n.jpg'
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import complaints from "../../../../public/assets/com.jpg";
 // -------------import for table--------------------------------//
@@ -30,6 +31,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
@@ -39,10 +42,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#8C000B",
     color: theme.palette.common.white,
-    padding: "10px", // Increase padding
-    height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
-    lineHeight: "1.5", // Adjust line height if needed
+    padding: "10px",
+    height: "20px",
+    fontSize: "16px",
+    lineHeight: "1.5",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -69,8 +72,6 @@ const CardWrapper = styled(Card)(() => ({
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
-
-const rows = [];
 
 // -----------------------------Table for Moblie-------------------------------------
 
@@ -117,6 +118,12 @@ let Sata = {
   Latitude: "40.7128 N",
   Longitude: "74.0060 W",
 };
+
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
+
+const rows = [createData("1")];
 
 export default function BasicCard() {
   return (
@@ -284,204 +291,143 @@ export default function BasicCard() {
           </CardWrapper>
         </Grid>
       </Grid>
-      {/* -------------------------Table for Moblie----------------------------- */}
-      <Grid
-        container
-        sx={{ display: { sm: "block", xs: "block", md: "none", lg: "none" } }}
-      >
-        <Tabs>
-          <TabList>
-            <Tab style={{ whiteSpace: "break-spaces" }}>
-              <Typography fontSize={"large"}>Notification</Typography>
-            </Tab>
-            <Tab>
-              <Typography fontSize={"large"}> Open Complaints</Typography>
-            </Tab>
-          </TabList>
-          <TabPanel>
-            <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-              <Grid container mt={2} direction="column">
-                {Object.keys(data).map((header, index) => (
-                  <Grid container key={index}>
-                    {/* Header Section */}
-                    <StyledGridItem item xs={4}>
-                      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                        {header}
-                      </Typography>
-                    </StyledGridItem>
-                    {/* Content Section */}
-                    <StyledContent item xs={8}>
-                      <Typography variant="body1">{data[header]}</Typography>
-                    </StyledContent>
-                  </Grid>
-                ))}
-              </Grid>
-              {/* ----------------------Dreak---------------------------------- */}
-              <Grid container mt={2} direction="column">
-                {Object.keys(Tata).map((header, index) => (
-                  <Grid container key={index}>
-                    {/* Header Section */}
-                    <StyledGridItem item xs={4}>
-                      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                        {header}
-                      </Typography>
-                    </StyledGridItem>
-                    {/* Content Section */}
-                    <StyledContent item xs={8}>
-                      <Typography variant="body1">{Tata[header]}</Typography>
-                    </StyledContent>
-                  </Grid>
-                ))}
-              </Grid>
-            </Paper>
-          </TabPanel>
-          {/* ----------------------Dreak---------------------------------- */}
-          <TabPanel>
-            <Paper elevation={3} sx={{ padding: 3, maxWidth: 600 }}>
-              <Grid container mt={2} direction="column">
-                {Object.keys(Mata).map((header, index) => (
-                  <Grid container key={index}>
-                    {/* Header Section */}
-                    <StyledGridItem item xs={4}>
-                      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                        {header}
-                      </Typography>
-                    </StyledGridItem>
-                    {/* Content Section */}
-                    <StyledContent item xs={8}>
-                      <Typography variant="body1">{Mata[header]}</Typography>
-                    </StyledContent>
-                  </Grid>
-                ))}
-              </Grid>
-              {/* ----------------------Dreak---------------------------------- */}
-              <Grid container mt={2} direction="column">
-                {Object.keys(Sata).map((header, index) => (
-                  <Grid container key={index}>
-                    {/* Header Section */}
-                    <StyledGridItem item xs={4}>
-                      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-                        {header}
-                      </Typography>
-                    </StyledGridItem>
-                    {/* Content Section */}
-                    <StyledContent item xs={8}>
-                      <Typography variant="body1">{Sata[header]}</Typography>
-                    </StyledContent>
-                  </Grid>
-                ))}
-              </Grid>
-            </Paper>
-          </TabPanel>
-        </Tabs>
-      </Grid>
-
-      {/* -------------------------Table for Desktop--------------------------- */}
-
-      {/* <Grid container mt={2} md={12}
-        lg={12}
-        sm={5}
-        xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-        {/* <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead >
-              <TableRow  >
-                <StyledTableCell sx={{ fontSize: '18px' }}>Well No.</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">GIP (kg)</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">CHP (kg)</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">THP (kg)</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Flow Status</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Sensor Battery</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Solar Voltage</StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Communication </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: '18px' }} align="left">Last Update</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
-
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid> */}
-      {/* <Grid container mt={2} md={12}
-        lg={12}
-        sm={5}
-        xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}>
-        
-        <Box sx={{ width: '100%' }}>
-          <Grid container sx={{ bgcolor: 'grey.100', width: '100%', p: 2 }}>
-            <Grid item xs={12} sx={{ width: '100%',height:'100%' }}>
-              <Box sx={{ display:'flex', width: '200vh',bgcolor:'white', minHeight: '20vh',p: 2  }}>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </Grid> */}
-      {/* <Paper style={{ height: "47vh", width: "100vw", marginTop: "10px" }}>
-        <Grid container p={1} display='flex' justifyContent='space-between'>
-        <Typography variant="h4">Current Notification</Typography>
-          <Box bgcolor="yellow"  textAlign="end">
-            <NotificationsNoneIcon
-              sx={{ height: "100px", width: "100px", color: "red" }}
-            />
-              <img
-                height={"90px"}
-                width={"90px"}
-                src={complaints}
-                alt="noImg"
-              />
-          </Box>
-          
-        </Grid>
-      </Paper> */}
       <Paper
         elevation={6}
-        style={{ height: "47vh", width: "100vw", marginTop: "10px" }}
+        sx={{
+          width: "100%",
+          marginTop: "10px",
+          height: {
+            xs: "15rem",
+            sm: "20rem",
+            md: "25rem",
+            lg: "27rem",
+          },
+        }}
       >
-        <Grid container p={1} display="flex">
-          {/* <Typography variant="h4">{displayText}</Typography> */}
-          <Box display={"flex"}  gap={3}>
+        <Grid container p={1}>
+          <Box display={"flex"} gap={2}>
             <Box display="flex">
               <NotificationsNoneIcon
                 sx={{
-                  height: "50px",
-                  width: "50px",
+                  height: "30px",
+                  width: "30px",
                   color: "red",
                   cursor: "pointer",
                 }}
               />
-              <Typography variant="h5">Current Notification</Typography>
+              <Typography variant="h6" sx={{color:"blue"}}>Notifications</Typography>
             </Box>
             <Box display="flex">
               <img
-                height={"35px"}
-                width={"35px"}
+                height={"30px"}
+                width={"30px"}
                 src={complaints}
                 alt="noImg"
                 style={{ cursor: "pointer" }}
               />
-              <Typography variant="h5">Open Complaints</Typography>
+              <Typography sx={{color:"blue"}} ml={0.6} variant="h6">
+              Complaints
+              </Typography>
             </Box>
           </Box>
+          <Grid
+            container
+            md={12}
+            lg={12}
+            sm={5}
+            xs={4}
+            sx={{
+              display: { sm: "none", xs: "none", md: "block", lg: "block" },
+              height: "100%",
+            }}
+            mt={1}
+          >
+            <TableContainer
+              component={Paper}
+              sx={{
+                maxHeight: 620,
+                height: 320,
+                overflowY: "auto",
+              }}
+            >
+              <Table
+                aria-label="customized table"
+                stickyHeader
+                sx={{
+                  minWidth: "800px", // Set minimum width for horizontal scrolling
+                }}
+              >
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Notification No.</StyledTableCell>
+                    <StyledTableCell>Data/Time</StyledTableCell>
+                    <StyledTableCell>Well Number</StyledTableCell>
+                    {/* <StyledTableCell>Node ID</StyledTableCell> */}
+                    <StyledTableCell>Location</StyledTableCell>
+                    <StyledTableCell>Installation</StyledTableCell>
+                    {/* <StyledTableCell >Well Port</StyledTableCell> */}
+                    <StyledTableCell>Status</StyledTableCell>
+                    <StyledTableCell>Description</StyledTableCell>
+                    <StyledTableCell>View</StyledTableCell>
+                    {/* <StyledTableCell> History View</StyledTableCell> */}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        // sx={{ width: "13%" }}
+                      >
+                        {/* {row.name} */}
+                      </StyledTableCell>
+                      <StyledTableCell></StyledTableCell>
+                      <StyledTableCell
+                      // align="left"
+                      // sx={{ width: "13%" }}
+                      ></StyledTableCell>
+                      {/* <StyledTableCell
+                  align="left"
+                  sx={{ width: "13%" }}
+                  ></StyledTableCell> */}
+                      <StyledTableCell
+                      // align="left"
+                      // sx={{ width: "13%" }}
+                      ></StyledTableCell>
+                      {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
+                      <StyledTableCell
+                      // align="left"
+                      // sx={{ width: "13%" }}
+                      ></StyledTableCell>
+                      <StyledTableCell
+                      
+                      ></StyledTableCell>
+                      <StyledTableCell></StyledTableCell>
+                      <IconButton
+                        sx={{
+                          color: "grey",
+                          "&:hover": { color: "darkred" },
+                          marginRight: "5px",
+                        }}
+                        // onClick={handleOpen}
+                      >
+                        <VisibilityIcon fontSize="large" />
+                      </IconButton>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
         </Grid>
       </Paper>
+      <Grid container justifyContent={"end"}>
+        <Stack spacing={2}>
+          {/* <Pagination count={25} shape="rounded" /> */}
+          <Pagination count={25} variant="outlined" shape="rounded" />
+        </Stack>
+      </Grid>
     </Grid>
   );
 }

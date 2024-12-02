@@ -348,7 +348,7 @@ function Signup() {
                     >
                       <Box
                         sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}
-                      >
+                      >   
                         <CameraAltIcon sx={{ mr: 1 }} fontSize="large" />
                         <Button variant="outlined" component="label" fullWidth>
                           <input
