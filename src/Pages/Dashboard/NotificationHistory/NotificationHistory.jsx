@@ -128,7 +128,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     height: "20px", // Set a specific height
     fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
-    textAlign: "center"
+    textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 16,
@@ -151,9 +151,7 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("1"),
-];
+const rows = [createData("1")];
 
 const style = {
   position: "absolute",
@@ -223,12 +221,9 @@ function NotificationHistory() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [selectedDate, setSelectedDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
-  };
+ 
 
   const [formData, setFormData] = useState({
     to: "",
@@ -282,8 +277,9 @@ function NotificationHistory() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
-      };
+    box-shadow: 0px 2px 2px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[50]
+    };
 
     &:hover {
       border-color: ${blue[400]};
@@ -291,7 +287,8 @@ function NotificationHistory() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${
+        theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -302,13 +299,25 @@ function NotificationHistory() {
   `
   );
 
-
   // -----------History Modal--------------------
 
   const [Modalopen, setModalOpen] = useState(false);
 
   const ModalhandleOpen = () => setModalOpen(true);
   const ModalhandleClose = () => setModalOpen(false);
+
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+
+  // Handlers for date and time changes
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleTimeChange = (event) => {
+    setSelectedTime(event.target.value);
+  };
+
 
   return (
     <div
@@ -327,7 +336,7 @@ function NotificationHistory() {
       </Grid>
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          <FormControl fullWidth>
+          {/* <FormControl fullWidth>
             <TextField
               fullWidth
               type="date"
@@ -355,37 +364,111 @@ function NotificationHistory() {
                 },
               }}
             />
+          </FormControl> */}
+
+<FormControl fullWidth size="small">
+            <Grid container spacing={2}>
+              {/* Date Field */}
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="date"
+                  size="small"
+                  label="Start Date"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  InputLabelProps={{
+                    shrink: true, // Ensures the label is always visible
+                  }}
+                  inputProps={{
+                    min: "2001-02-16",
+                    max: "2024-08-07",
+                  }}
+                  sx={
+                    {
+                      // Optional: Customize the TextField styling as needed
+                    }
+                  }
+                />
+              </Grid>
+
+              {/* Time Field */}
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="time"
+                  size="small"
+                  label="Start Time"
+                  value={selectedTime}
+                  onChange={handleTimeChange}
+                  InputLabelProps={{
+                    shrink: true, // Ensures the label is always visible
+                  }}
+                  inputProps={{
+                    min: "08:00", // Minimum time (24-hour format)
+                    max: "18:00", // Maximum time (24-hour format)
+                  }}
+                  sx={
+                    {
+                      // Optional: Customize the TextField styling as needed
+                    }
+                  }
+                />
+              </Grid>
+            </Grid>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
-            <TextField
-              fullWidth
-              type="date"
-              size="small"
-              label="End Date"
-              value={selectedDate}
-              onChange={handleDateChange}
-              InputLabelProps={{
-                shrink: true, // Ensures the label is always visible
-              }}
-              inputProps={{
-                min: "2001-02-16",
-                max: "2024-08-07",
-              }}
-              sx={{
-                // Optional: Customize the TextField styling as needed
-                ".MuiInputBase-root": {
-                  // Optional: Style the input field if needed
-                },
-                "& .MuiInputLabel-root": {
-                  // Optional: Style the label if needed
-                },
-                "& .MuiInputBase-input": {
-                  // Optional: Style the input value if needed
-                },
-              }}
-            />
+            <Grid container spacing={2}>
+              {/* Date Field */}
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="date"
+                  size="small"
+                  label="End Date"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  InputLabelProps={{
+                    shrink: true, // Ensures the label is always visible
+                  }}
+                  inputProps={{
+                    min: "2001-02-16",
+                    max: "2024-08-07",
+                  }}
+                  sx={
+                    {
+                      // Optional: Customize the TextField styling as needed
+                    }
+                  }
+                />
+              </Grid>
+
+              {/* Time Field */}
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  type="time"
+                  size="small"
+                  label="End Time"
+                  value={selectedTime}
+                  onChange={handleTimeChange}
+                  InputLabelProps={{
+                    shrink: true, // Ensures the label is always visible
+                  }}
+                  inputProps={{
+                    min: "08:00", // Minimum time (24-hour format)
+                    max: "18:00", // Maximum time (24-hour format)
+                  }}
+                  sx={
+                    {
+                      // Optional: Customize the TextField styling as needed
+                    }
+                  }
+                />
+              </Grid>
+            </Grid>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
@@ -474,7 +557,7 @@ function NotificationHistory() {
             <TableHead>
               <TableRow>
                 <StyledTableCell>Notification No.</StyledTableCell>
-                <StyledTableCell>Data/Time</StyledTableCell>
+                <StyledTableCell>Date/Time</StyledTableCell>
                 <StyledTableCell>Well Number</StyledTableCell>
                 <StyledTableCell>Node ID</StyledTableCell>
                 <StyledTableCell>Location</StyledTableCell>
@@ -492,12 +575,11 @@ function NotificationHistory() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                  // sx={{ width: "13%" }}
+                    // sx={{ width: "13%" }}
                   >
                     {/* {row.name} */}
                   </StyledTableCell>
-                  <StyledTableCell
-                  ></StyledTableCell>
+                  <StyledTableCell></StyledTableCell>
                   <StyledTableCell
                   // align="left"
                   // sx={{ width: "13%" }}
@@ -519,7 +601,7 @@ function NotificationHistory() {
                   // align="left"
                   // sx={{ width: "13%" }}
                   ></StyledTableCell>
-                  <StyledTableCell >
+                  <StyledTableCell>
                     <IconButton
                       sx={{
                         color: "grey",
@@ -531,9 +613,9 @@ function NotificationHistory() {
                       <VisibilityIcon fontSize="large" />
                     </IconButton>
                   </StyledTableCell>
-                  <StyledTableCell >
+                  <StyledTableCell>
                     {/* Pass state and handlers to the modal */}
-                    <HistoryModal/>
+                    <HistoryModal />
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -545,311 +627,328 @@ function NotificationHistory() {
       {/* ------------------------------Modal view --------------------------- */}
 
       <Modal open={open}>
-        <Grid container sx={style} >
+        <Grid container sx={style}>
           <Grid container>
-          <Grid container  p={2} >
-            <Grid item>
-              <IconButton
-                onClick={handleClose}
-                sx={{
-                  position: "absolute",
-                  top: 1,
-                  right: 1,
-                  fontSize:"22px",
-                  color: "black",
-                  bgcolor: "transparent",
-                  "&:hover": {
-                    bgcolor: "red",
-                  },
-                }}
-              >
-                <CloseIcon fontSize="50px" />
-              </IconButton>
-            </Grid>
-            {/* --------------------------------Textfield Values------------------------------------- */}
-            <Grid container mx={2} mt={1}>
-              <Grid container>
-                <Paper
+            <Grid container p={2}>
+              <Grid item>
+                <IconButton
+                  onClick={handleClose}
                   sx={{
-                    width: "990px",
+                    position: "absolute",
+                    top: 1,
+                    right: 1,
+                    fontSize: "22px",
+                    color: "black",
+                    bgcolor: "transparent",
+                    "&:hover": {
+                      bgcolor: "red",
+                    },
                   }}
                 >
-                  <Grid container>
-                    <Typography
-                      ml={1}
-                      mt={2}
-                      fontSize={25}
-                      p={1}
-                      fontWeight={600}
-                    >
-                      Notification Details
-                    </Typography>
-                  </Grid>
-                  {/* ---------------------- view -------------------------- */}
-                  <Box>
+                  <CloseIcon fontSize="50px" />
+                </IconButton>
+              </Grid>
+              {/* --------------------------------Textfield Values------------------------------------- */}
+              <Grid container mx={2} mt={1}>
+                <Grid container>
+                  <Paper
+                    sx={{
+                      width: "990px",
+                    }}
+                  >
                     <Grid container>
-                      <Grid item lg={12} md={3} sm={6} xs={12} pl={2} >
-                        {[{ label: "Notification No. :", value: "" }].map(
-                          (item, index) => (
+                      <Typography
+                        ml={1}
+                        mt={2}
+                        fontSize={25}
+                        p={1}
+                        fontWeight={600}
+                      >
+                        Notification Details
+                      </Typography>
+                    </Grid>
+                    {/* ---------------------- view -------------------------- */}
+                    <Box>
+                      <Grid container>
+                        <Grid item lg={12} md={3} sm={6} xs={12} pl={2}>
+                          {[{ label: "Notification No. :", value: "" }].map(
+                            (item, index) => (
+                              <Box key={index}>
+                                <Typography
+                                  variant="h5"
+                                  color={"blue"}
+                                  fontWeight={600}
+                                >
+                                  {item.label}
+                                </Typography>
+                                {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
+                              </Box>
+                            )
+                          )}
+                        </Grid>
+
+                        <Grid item lg={12} md={3} sm={6} xs={12} pl={2} mb={3}>
+                          {[
+                            { label: "Well Number :", value: "" },
+                            { label: "Location :", value: "" },
+                            { label: "Installation :", value: "" },
+                            { label: "Date/Time :", value: "" },
+                            { label: "Description :", value: "" },
+                            { label: "Status :", value: "" },
+                          ].map((item, index) => (
                             <Box key={index}>
-                              <Typography
-                                variant="h5"
-                                color={"blue"}
-                                fontWeight={600}
-                                
-                              >
+                              <Typography variant="h5" mt={1}>
                                 {item.label}
                               </Typography>
-                              {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
+                              {/* <TextField size="small" fullWidth value={item.value} /> */}
                             </Box>
-                          )
-                        )}
+                          ))}
+                        </Grid>
                       </Grid>
-
-                      <Grid
-                        item
-                        lg={12}
-                        md={3}
-                        sm={6}
-                        xs={12}
-                        pl={2}
-                       
-                        mb={3}
-                      >
-                        {[
-                          { label: "Well Number :", value: "" },
-                          { label: "Location :", value: "" },
-                          { label: "Installation :", value: "" },
-                          { label: "Date/Time :", value: "" },
-                          { label: "Description :", value: "" },
-                          { label: "Status :", value: "" },
-                        ].map((item, index) => (
-                          <Box key={index}>
-                            <Typography variant="h5" mt={1} >
-                              {item.label}
-                            </Typography>
-                            {/* <TextField size="small" fullWidth value={item.value} /> */}
-                          </Box>
-                        ))}
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </Paper>
-              </Grid>
-            </Grid>
-
-            {/* --------------------------------chart------------------------------------- */}
-            <Grid container p={2}>
-              <Grid item lg={9}>
-                <Paper elevation={2} sx={{ pb: "5px" }}>
-                  <Grid container>
-                    <Typography
-                      ml={2}
-                      mt={2}
-                      fontSize={25}
-                      fontWeight={500}
-                    >
-                      Status
-                    </Typography>
-                  </Grid>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "start",
-                      gap: 2,
-                    }}
-                  >
-                    <IconButton
-                      onClick={() => setChartType("line")}
-                      color={chartType === "line" ? "primary" : "default"}
-                    >
-                      <ShowChartIcon sx={{ fontSize: 40 }} />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => setChartType("bar")}
-                      color={chartType === "bar" ? "primary" : "default"}
-                    >
-                      <BarChartIcon sx={{ fontSize: 40 }} />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => setChartType("pie")}
-                      color={chartType === "pie" ? "primary" : "default"}
-                    >
-                      <PieChartIcon sx={{ fontSize: 40 }} />
-                    </IconButton>
-                  </Box>
-
-                  <div style={{ height: "400px", width: "100%" }}>
-                    {chartType === "line" && (
-                      <Line
-                        data={chartData}
-                        options={options}
-                        style={{ height: "100%", width: "100%" }}
-                      />
-                    )}
-                    {chartType === "bar" && (
-                      <Bar
-                        data={chartData}
-                        options={options}
-                        style={{ height: "100%", width: "100%" }}
-                      />
-                    )}
-                    {chartType === "pie" && (
-                      <Pie
-                        data={chartData}
-                        options={options}
-                        style={{ height: "100%", width: "100%" }}
-                      />
-                    )}
-                  </div>
-                </Paper>
-              </Grid>
-              <Grid item lg={3} xs={4}>
-                <Paper>
-                  <Box
-                    sx={{
-                      maxHeight: 505,
-                      height: 1200,
-                      overflow: "auto",
-                      paddingRight: 2,
-                      paddingTop: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end",
-                      gap: "0.85rem",
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
-                      After Beam Pressure(ABP)
-                    </Typography>
-                    <Typography variant="h5" color={"red"}>
-                      2 Kg/cm<sup>2</sup>
-                    </Typography>
-                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
-                      Tubing Head Pressure(THP)
-                    </Typography>
-                    <Typography variant="h5" color={"green"}>
-                      2 Kg/cm<sup>2</sup>
-                    </Typography>
-                    <Typography  fontSize={17} sx={{ color: "#aaaaaa" }}>
-                    Cashing Head Pressure(CHP)
-                    </Typography>
-                    <Typography variant="h5" color={"blue"}>
-                      5.326 Kg/cm<sup>2</sup>
-                    </Typography>
-                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
-                      Battery (%)
-                    </Typography>
-                    <Typography variant="h5" color={"red"}>
-                      12%
-                    </Typography>
-                    <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
-                      Solar Voltage(V)
-                    </Typography>
-                    <Typography variant="h5" color={"green"}>
-                      12V
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-            </Grid>
-
-            {/* ------------------Status ----------------------*/}
-            <Grid container component={Paper} ml={2} width={"990px"}>
-              <Grid container>
-                <Typography ml={2} mb={2} p={2} fontSize={25} fontWeight={500}>
-                  Forward
-                </Typography>
-              </Grid>
-              <Grid item lg={8} md={2} sm={4} xs={12} display={"flex"} gap={3}>
-                <Box>
-                  <Typography width={200} display={"flex"} justifyContent={"end"} alignItems={"end"} variant="h5">
-                    Department
-                  </Typography>
-                </Box>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="simple-select-label">Department</InputLabel>
-                  <Select label="Department">
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={1}>HR</MenuItem>
-                    <MenuItem value={2}>Finance</MenuItem>
-                    <MenuItem value={3}>Engineering</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid
-                item
-                lg={8}
-                md={2}
-                sm={4}
-                xs={12}
-                display="flex"
-                alignItems="center"
-                mt={2}
-                gap={3}
-              >
-                <Box>
-                  <Typography width={200} display={"flex"} justifyContent={"end"} alignItems={"end"} variant="h5">
-                    Position
-                  </Typography>
-                </Box>
-                <FormControl fullWidth size="small">
-                  <InputLabel id="simple-select-label">Position</InputLabel>
-                  <Select
-                    labelId="simple-select-label"
-                    id="simple-select"
-                    label="Department"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={1}>HR</MenuItem>
-                    <MenuItem value={2}>Finance</MenuItem>
-                    <MenuItem value={3}>Engineering</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid container>
-                <Grid item lg={8} md={2} sm={6} xs={12} mb={2}>
-                  {[
-                    { label: "To ", value: formData.to, name: "to" },
-                    { label: "Cc", value: formData.cc, name: "cc" },
-                  ].map((item, index) => (
-                    <Box
-                      key={index}
-                      m={1}
-                      mt={1}
-                      gap={3}
-                      mb={1}
-
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="space-between"
-                      sx={{ pl: 2 }} // Adds padding to the left side of each Box to align the label-text field pairs uniformly
-                    >
-                      <Grid item lg={4}>
-                        <Typography variant="h5" display={"flex"} justifyContent={"end"} alignItems={"end"} width={180} gap={3} >
-                          {item.label}
-                        </Typography>
-                      </Grid>
-                      <TextField
-                        size="small"
-                        variant="outlined"
-                        fullWidth
-                        value={item.value}
-                        name={item.name}
-                        onChange={handleChange}
-                      />
                     </Box>
-                  ))}
+                  </Paper>
                 </Grid>
               </Grid>
-            </Grid>
 
-            {/* --------------------------------Subject------------------------------------- */}
-            {/* <Grid
+              {/* --------------------------------chart------------------------------------- */}
+              <Grid container p={2}>
+                <Grid item lg={9}>
+                  <Paper elevation={2} sx={{ pb: "5px" }}>
+                    <Grid container>
+                      <Typography ml={2} mt={2} fontSize={25} fontWeight={500}>
+                        Status
+                      </Typography>
+                    </Grid>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "start",
+                        gap: 2,
+                      }}
+                    >
+                      <IconButton
+                        onClick={() => setChartType("line")}
+                        color={chartType === "line" ? "primary" : "default"}
+                      >
+                        <ShowChartIcon sx={{ fontSize: 40 }} />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => setChartType("bar")}
+                        color={chartType === "bar" ? "primary" : "default"}
+                      >
+                        <BarChartIcon sx={{ fontSize: 40 }} />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => setChartType("pie")}
+                        color={chartType === "pie" ? "primary" : "default"}
+                      >
+                        <PieChartIcon sx={{ fontSize: 40 }} />
+                      </IconButton>
+                    </Box>
+
+                    <div style={{ height: "400px", width: "100%" }}>
+                      {chartType === "line" && (
+                        <Line
+                          data={chartData}
+                          options={options}
+                          style={{ height: "100%", width: "100%" }}
+                        />
+                      )}
+                      {chartType === "bar" && (
+                        <Bar
+                          data={chartData}
+                          options={options}
+                          style={{ height: "100%", width: "100%" }}
+                        />
+                      )}
+                      {chartType === "pie" && (
+                        <Pie
+                          data={chartData}
+                          options={options}
+                          style={{ height: "100%", width: "100%" }}
+                        />
+                      )}
+                    </div>
+                  </Paper>
+                </Grid>
+                <Grid item lg={3} xs={4}>
+                  <Paper>
+                    <Box
+                      sx={{
+                        maxHeight: 505,
+                        height: 1200,
+                        overflow: "auto",
+                        paddingRight: 2,
+                        paddingTop: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                        gap: "0.85rem",
+                      }}
+                    >
+                      <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                        After Beam Pressure(ABP)
+                      </Typography>
+                      <Typography variant="h5" color={"red"}>
+                        2 Kg/cm<sup>2</sup>
+                      </Typography>
+                      <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                        Tubing Head Pressure(THP)
+                      </Typography>
+                      <Typography variant="h5" color={"green"}>
+                        2 Kg/cm<sup>2</sup>
+                      </Typography>
+                      <Typography fontSize={17} sx={{ color: "#aaaaaa" }}>
+                        Cashing Head Pressure(CHP)
+                      </Typography>
+                      <Typography variant="h5" color={"blue"}>
+                        5.326 Kg/cm<sup>2</sup>
+                      </Typography>
+                      <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                        Battery (%)
+                      </Typography>
+                      <Typography variant="h5" color={"red"}>
+                        12%
+                      </Typography>
+                      <Typography variant="h6" sx={{ color: "#aaaaaa" }}>
+                        Solar Voltage(V)
+                      </Typography>
+                      <Typography variant="h5" color={"green"}>
+                        12V
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </Grid>
+              </Grid>
+
+              {/* ------------------Status ----------------------*/}
+              <Grid container component={Paper} ml={2} width={"990px"}>
+                <Grid container>
+                  <Typography
+                    ml={2}
+                    mb={2}
+                    p={2}
+                    fontSize={25}
+                    fontWeight={500}
+                  >
+                    Forward
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  lg={8}
+                  md={2}
+                  sm={4}
+                  xs={12}
+                  display={"flex"}
+                  gap={3}
+                >
+                  <Box>
+                    <Typography
+                      width={200}
+                      display={"flex"}
+                      justifyContent={"end"}
+                      alignItems={"end"}
+                      variant="h5"
+                    >
+                      Department
+                    </Typography>
+                  </Box>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="simple-select-label">Department</InputLabel>
+                    <Select label="Department">
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={1}>HR</MenuItem>
+                      <MenuItem value={2}>Finance</MenuItem>
+                      <MenuItem value={3}>Engineering</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid
+                  item
+                  lg={8}
+                  md={2}
+                  sm={4}
+                  xs={12}
+                  display="flex"
+                  alignItems="center"
+                  mt={2}
+                  gap={3}
+                >
+                  <Box>
+                    <Typography
+                      width={200}
+                      display={"flex"}
+                      justifyContent={"end"}
+                      alignItems={"end"}
+                      variant="h5"
+                    >
+                      Position
+                    </Typography>
+                  </Box>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="simple-select-label">Position</InputLabel>
+                    <Select
+                      labelId="simple-select-label"
+                      id="simple-select"
+                      label="Department"
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={1}>HR</MenuItem>
+                      <MenuItem value={2}>Finance</MenuItem>
+                      <MenuItem value={3}>Engineering</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid container>
+                  <Grid item lg={8} md={2} sm={6} xs={12} mb={2}>
+                    {[
+                      { label: "To ", value: formData.to, name: "to" },
+                      { label: "Cc", value: formData.cc, name: "cc" },
+                    ].map((item, index) => (
+                      <Box
+                        key={index}
+                        m={1}
+                        mt={1}
+                        gap={3}
+                        mb={1}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="space-between"
+                        sx={{ pl: 2 }} // Adds padding to the left side of each Box to align the label-text field pairs uniformly
+                      >
+                        <Grid item lg={4}>
+                          <Typography
+                            variant="h5"
+                            display={"flex"}
+                            justifyContent={"end"}
+                            alignItems={"end"}
+                            width={180}
+                            gap={3}
+                          >
+                            {item.label}
+                          </Typography>
+                        </Grid>
+                        <TextField
+                          size="small"
+                          variant="outlined"
+                          fullWidth
+                          value={item.value}
+                          name={item.name}
+                          onChange={handleChange}
+                        />
+                      </Box>
+                    ))}
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* --------------------------------Subject------------------------------------- */}
+              {/* <Grid
               container
               component={Paper}
               p={2}
@@ -874,36 +973,36 @@ function NotificationHistory() {
                 <TextField fullWidth variant="outlined"></TextField>
               </Grid>
             </Grid> */}
-            {/* --------------------------------Remark------------------------------------- */}
-            <Grid container component={Paper} p={2} m={2} >
-              <Grid container>
-                <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
-                  Message
-                </Typography>
+              {/* --------------------------------Remark------------------------------------- */}
+              <Grid container component={Paper} p={2} m={2}>
+                <Grid container>
+                  <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
+                    Message
+                  </Typography>
+                </Grid>
+                <Grid item lg={10} md={2} sm={4} xs={12}>
+                  <Textarea
+                    // aria-label="minimum height"
+                    minRows={10}
+                    placeholder="REMARK"
+                  />
+                </Grid>
               </Grid>
-              <Grid item lg={10} md={2} sm={4} xs={12}>
-                <Textarea
-                  // aria-label="minimum height"
-                  minRows={10}
-                  placeholder="REMARK"
-                />
-              </Grid>
+              <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
+                <Button
+                  variant="contained"
+                  sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+                >
+                  CREATE COMPLAINT
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ m: "10px", width: "200px", fontSize: "15px" }}
+                >
+                  CLOSE NOTIFICATION
+                </Button>
+              </Box>
             </Grid>
-            <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
-              <Button
-                variant="contained"
-                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
-              >
-                CREATE COMPLAINT
-              </Button>
-              <Button
-                variant="contained"
-                sx={{ m: "10px", width: "200px", fontSize: "15px" }}
-              >
-                CLOSE NOTIFICATION
-              </Button>
-            </Box>
-          </Grid>
           </Grid>
         </Grid>
       </Modal>

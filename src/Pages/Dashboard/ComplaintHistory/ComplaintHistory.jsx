@@ -109,7 +109,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#8C000B",
     color: theme.palette.common.white,
-    padding: "10px", // Increase padding
+    padding: "8px", // Increase padding
     height: "20px", // Set a specific height
     fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
@@ -422,9 +422,9 @@ function ComplaintHistory() {
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "green", // Change button color to green
+              backgroundColor: "green",
               "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
+                backgroundColor: "darkgreen",
               },
               fontSize: "16px",
             }}
@@ -463,40 +463,40 @@ function ComplaintHistory() {
             aria-label="customized table"
             stickyHeader
             sx={{
-              minWidth: "800px", // Set minimum width for horizontal scrolling
+              minWidth: "800px",
             }}
           >
             <TableHead>
               <TableRow>
                 <StyledTableCell
                   align="center"
-                  sx={{ bgcolor: "black", width: "17%" }}
+                  sx={{ bgcolor: "black", width: "5%" }}
                 >
                   Complaint No.
                 </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
-                  Data/Time
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
+                  Date/Time
                 </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
+                  Department
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
                   Sender name
                 </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
                   Department
                 </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
                   Receiver Name
                 </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
-                  Department
-                </StyledTableCell>
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
-                  Status
-                </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
                   Description
                 </StyledTableCell>
-                <StyledTableCell align="center" sx={{ width: "17%" }}>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
+                  Status
+                </StyledTableCell>
+                <StyledTableCell align="center" sx={{ width: "5%" }}>
                   Action
                 </StyledTableCell>
               </TableRow>
