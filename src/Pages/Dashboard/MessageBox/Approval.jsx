@@ -16,6 +16,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Tooltip,
 } from "@mui/material";
 import { Card } from "@mui/joy";
 // -------------import for table--------------------------------//
@@ -276,9 +277,8 @@ export default function BasicCard() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${
-      theme.palette.mode === "dark" ? grey[900] : grey[50]
-    };
+    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
+      };
 
     &:hover {
       border-color: ${blue[400]};
@@ -286,8 +286,7 @@ export default function BasicCard() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${
-        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -410,12 +409,12 @@ export default function BasicCard() {
               <Tab style={{ whiteSpace: "break-spaces" }}>
                 <Typography fontSize={"large"}>User Message</Typography>
               </Tab>
-              
+
               <Tab>
                 <Typography fontSize={"large"}>Add Well Approval</Typography>
               </Tab>
-            </TabList> */}
-            
+            </TabList>
+
 
             {/* User Approval Tab */}
             {/* <TabPanel>
@@ -485,18 +484,23 @@ export default function BasicCard() {
             <TabPanel>
               <Grid container justifyContent="end">
                 <Box>
-                  <IconButton color="primary">
-                    <ForwardToInboxIcon sx={{ fontSize: "30px" }} />
-                  </IconButton>
-                  <IconButton color="primary">
-                    <SendIcon sx={{ fontSize: "30px" }} />
-                  </IconButton>
-                  <IconButton color="primary">
+                  <Tooltip title={<span style={{ fontSize: "16px" }}>Inbox</span>} arrow>
+                    <IconButton color="primary">
+                      <ForwardToInboxIcon sx={{ fontSize: "30px" }} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title={<span style={{ fontSize: "16px" }}>Sent</span>} arrow>
+                    <IconButton color="primary">
+                      <SendIcon sx={{ fontSize: "30px" }} />
+                    </IconButton>
+                  </Tooltip>
+
+                  {/* <IconButton color="primary">
                     <ReplyIcon sx={{ fontSize: "30px" }} />
                   </IconButton>
                   <IconButton color="primary">
                     <ForwardIcon sx={{ fontSize: "30px" }} />
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton color="primary">
                     <DeleteIcon sx={{ fontSize: "30px" }} />
                   </IconButton>
@@ -518,7 +522,7 @@ export default function BasicCard() {
                     overflowY: "auto",
                   }}
                 >
-                 
+
                   {data.map((item) => (
                     <Box
                       key={item.id}
@@ -567,8 +571,8 @@ export default function BasicCard() {
             >
               <CloseIcon fontSize="inherit" />
             </IconButton>
-            <Grid item xs={12} sx={{ position: "relative" }}>
-              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+            <Grid item xs={12} pb={2} sx={{ position: "relative" }}>
+              <Typography variant="h4" sx={{ fontWeight: 600 }}>
                 New Message
               </Typography>
             </Grid>
@@ -577,57 +581,61 @@ export default function BasicCard() {
           {/* Email Fields Section */}
           <Grid container spacing={2}>
             {/* From Field */}
-            <Grid item xs={12} sm={6} md={12} lg={12} display={"flex"}>
-              <Box mr={5}>
-                <Typography variant="h6">From</Typography>
-              </Box>
-              <Box>
-                <TextField
-                  sx={{ width: "650px" }}
-                  size="small"
-                  variant="outlined"
-                  value=""
-                />
-              </Box>
-            </Grid>
+            <Grid container spacing={2} p={3}>
+              {/* To Field */}
+              <Grid item xs={12} sm={6} md={12} lg={12} display="flex" alignItems="center">
+                <Box mr={2} width="80px"> {/* Uniform width for the label box */}
+                  <Typography variant="h6" noWrap>To</Typography>
+                </Box>
+                <Box>
+                  <TextField
+                    sx={{ width: "610px" }}
+                    size="small"
+                    variant="outlined"
+                    value=""
+                  />
+                </Box>
+              </Grid>
 
-            {/* To Field */}
-            <Grid item xs={12} sm={12} md={12} lg={12} display={"flex"}>
-              <Box mr={8}>
-                <Typography variant="h6">To</Typography>
-              </Box>
-              <Box>
-                <TextField
-                  sx={{ width: "650px" }}
-                  size="small"
-                  variant="outlined"
-                  value=""
-                />
-              </Box>
-            </Grid>
+              {/* From Field */}
+              <Grid item xs={12} sm={6} md={12} lg={12} display="flex" alignItems="center">
+                <Box mr={2} width="80px"> {/* Same width as above */}
+                  <Typography variant="h6" noWrap>CC</Typography>
+                </Box>
+                <Box>
+                  <TextField
+                    sx={{ width: "610px" }}
+                    size="small"
+                    variant="outlined"
+                    value=""
+                  />
+                </Box>
+              </Grid>
 
-            <Grid item xs={12} sm={12} md={12} lg={12} display={"flex"}>
-              <Box mr={3.1}>
-                <Typography variant="h6">Subject</Typography>
-              </Box>
-              <Box>
-                <TextField
-                  sx={{ width: "650px" }}
-                  size="small"
-                  variant="outlined"
-                  value=""
-                />
-              </Box>
+              {/* Subject Field */}
+              <Grid item xs={12} sm={6} md={12} lg={12} display="flex" alignItems="center">
+                <Box mr={2} width="80px"> {/* Same width for consistent alignment */}
+                  <Typography variant="h6" noWrap>Subject</Typography>
+                </Box>
+                <Box>
+                  <TextField
+                    sx={{ width: "610px" }}
+                    size="small"
+                    variant="outlined"
+                    value=""
+                  />
+                </Box>
+              </Grid>
             </Grid>
 
             {/* Subject Field */}
             <Grid item xs={12} md={12} sm={12} lg={12}>
               <Box>
-                <Paper sx={{ padding: 2, height: "200px" }}>
+                <Paper sx={{ padding: 2, height: "250px" }}>
                   <TextField
                     fullWidth
                     multiline
-                    rows={8}
+                    rows={11}
                     placeholder="Write your email here..."
                     variant="outlined"
                     value={""}
@@ -639,30 +647,35 @@ export default function BasicCard() {
 
           <Grid
             container
+            direction={rows}
             justifyContent={"space-between"}
-            sx={{height:"7%", mt:"2%"}}
+            sx={{ height: "7%", mt: "2%" }}
           >
-              <Button
-                component="label"
-                variant="contained"
-                startIcon={<CloudUploadIcon />}
-                sx={{ width: "200px" }}
-              >
-                Upload files
-                <VisuallyHiddenInput
-                  type="file"
-                  onChange={(event) => console.log(event.target.files)}
-                  multiple
-                />
-              </Button>
+            <Button
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              sx={{ width: "150px" }}
+            >
+              Upload files
+              <VisuallyHiddenInput
+                type="file"
+                onChange={(event) => console.log(event.target.files)}
+                multiple
+              />
+            </Button>
 
-              <Button variant="contained" sx={{ width: "200px" }}>
-                Reply
-              </Button>
+            <Button variant="contained" sx={{ width: "150px" }}>
+              Reply
+            </Button>
 
-              <Button variant="contained" sx={{ width: "200px" }}>
-                Forward
-              </Button>
+            <Button variant="contained" sx={{ width: "150px" }}>
+              Forward
+            </Button>
+
+            <Button variant="contained" sx={{ width: "150px" }}>
+              Send
+            </Button>
           </Grid>
         </Grid>
       </Modal>

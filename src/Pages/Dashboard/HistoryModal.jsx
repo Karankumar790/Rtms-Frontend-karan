@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // Import the eye icon
-import { Step, StepContent, StepLabel, Stepper, StepConnector, Grid, Button } from '@mui/material';
+import { Step, StepContent, StepLabel, Stepper, StepConnector, Button } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -14,8 +14,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '50%',
-  height: '64vh',
+  width: '35%',
+  height: '40vh',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -46,7 +46,7 @@ export default function HistoryModal() {
     return (
       <Box
         sx={{
-          backgroundColor: 'orange', // Orange background for the icon
+          backgroundColor: 'green', // Orange background for the icon
           color: 'white', // White check icon
           borderRadius: '50%',
           width: '24px',
@@ -84,7 +84,7 @@ export default function HistoryModal() {
         onClose={handleClose}
       >
         <Box sx={style}>
-          <Box sx={{ width: '100%', height: '100%' }}>
+          <Box sx={{ width: '100%', height: '80%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2 }}>
               <Box >
                 <Typography variant='h4'> Notifications History</Typography>
@@ -102,7 +102,7 @@ export default function HistoryModal() {
                 </IconButton>
               </Box>
             </Box>
-            <Box sx={{ padding: 2, borderRadius: 2, width: '100%', height: '80%' }}>
+            <Box sx={{ padding: 2, borderRadius: 2, width: '97%', height: '80%' }}>
               <Stepper
                 activeStep={0} // Only the first step is active
                 orientation="vertical"
@@ -111,7 +111,6 @@ export default function HistoryModal() {
                     '& .MuiStepConnector-line': {
                       minHeight: '100%', // Ensures the connector spans the full height
                       borderColor: '#ccc', // Maintains the color
-
                     },
                   }}
                 />}
@@ -132,9 +131,9 @@ export default function HistoryModal() {
                       <div key={step.label} style={{ marginBottom: '3px', display: 'flex', alignItems: 'center' }}>
                         <Typography
                           sx={{
-                            color: 'grey',
+                            color: 'black',
                             fontSize: step.label === 'Notification' ? '1.8rem' : '1.3rem',
-                            fontWeight: step.label === 'Notification' ? '400' : 'bold', // Adjust font weight here
+                            fontWeight: step.label === 'Notification' ? 'bold' : 'bold', // Adjust font weight here
                             marginRight: '10px',
                           }}
                         >
@@ -143,9 +142,9 @@ export default function HistoryModal() {
                         <Typography
                           variant="body1"
                           sx={{
-                            color: 'grey',
+                            color: 'black',
                             fontSize: step.value === '12' ? '1.8rem' : '1.3rem',
-                            fontWeight: step.value === '12' ? 'base' : '400', // Adjust font weight here
+                            fontWeight: step.value === '12' ? 'bold' : '400', // Adjust font weight here
                             display: 'flex',
                             justifyContent: 'center',
                           }}
@@ -161,14 +160,14 @@ export default function HistoryModal() {
                 </Step>
 
                 {/* Second step without content */}
-                <Step key="empty-step">
+                 {/* <Step key="empty-step">
                   <StepLabel StepIconComponent={StepIcon}>
                     Step 2
                   </StepLabel>
                   <StepContent>
                     {/* No content displayed here */}
-                  </StepContent>
-                </Step>
+                  {/* </StepContent>
+                </Step> */}
 
                 {/* Additional steps, if any, can be left empty or hidden */}
                 {stepss.length > 2 && <Step sx={{ visibility: 'hidden' }} />}
@@ -177,21 +176,21 @@ export default function HistoryModal() {
                 {stepss.length > 5 && <Step sx={{ visibility: 'hidden' }} />}
               </Stepper>
             </Box>
-            <Box display={"flex"}justifyContent={"end"} mt={2}>
-            <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "green", // Change button color to green
-              "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
-              },
-              fontSize: "16px",
-            }}
-           
-          >
-            Submit
-          </Button>
-          </Box>
+            <Box display={"flex"} justifyContent={"end"} mt={4}>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "green", // Change button color to green
+                  "&:hover": {
+                    backgroundColor: "darkgreen", // Optional: Change color on hover
+                  },
+                  fontSize: "16px",
+                }}
+
+              >
+                Cancel
+              </Button>
+            </Box>
 
           </Box>
         </Box>
