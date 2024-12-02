@@ -153,3 +153,16 @@ export const wellMonitorData = async (organizationName) => {
     
   }
 }
+
+// ----------------Get AllWell Number----------
+
+export const AllWellNumbers = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/get-AllWellNumbers`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
