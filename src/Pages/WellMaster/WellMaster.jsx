@@ -25,6 +25,7 @@ import { Box } from "@mui/system";
 import master from "/assets/wellMaster.png";
 import { Link, useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
+import PrintIcon from "@mui/icons-material/Print";
 import {
   addInstallation,
   addLocation,
@@ -285,7 +286,7 @@ const WellMaster = () => {
         organizationName
       );
       localStorage.setItem("wellDetails", JSON.stringify(wellDetails.data));
-      console.log(wellDetails,"///////////")
+      console.log(wellDetails, "///////////")
       navigate("/dashboard/addwell");
     } catch (error) {
       console.error("Failed to fetch well details:", error);
@@ -325,9 +326,21 @@ const WellMaster = () => {
             <Typography variant="h4">Well Manager</Typography>
           </Box>
         </Grid>
+        <Grid
+          item
+          sx={{
+            width: "3%", // Shrinks to fit the content width
+            height: "3%", // Shrinks to fit the content height
+          }}
+        >
+          <PrintIcon sx={{
+            width: "fit-content",
+            height: "fit-content",
+          }} />
+        </Grid>
       </Grid>
 
-      <Paper sx={{mb:"15px",p:'15px'}}>
+      <Paper sx={{ mb: "15px", p: '15px' }}>
         <Grid container>
           <Grid container spacing={2}>
             {/* ------------------------ADD LOCATION------------------------------ */}
@@ -567,7 +580,7 @@ const WellMaster = () => {
                     fullWidth
                     sx={{
                       backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" }, p:"8px"
+                      "&:hover": { backgroundColor: "darkgreen" }, p: "8px"
                     }}
                   >
                     ADD
@@ -593,7 +606,7 @@ const WellMaster = () => {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <StyledTableRow>
-                <StyledTableCell align="center"  sx={{bgcolor:'black'}}>Well Number</StyledTableCell>
+                <StyledTableCell align="center" sx={{ bgcolor: 'black' }}>Well Number</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Well Type</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Location</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Installation</StyledTableCell>
@@ -674,22 +687,22 @@ const WellMaster = () => {
                       )
                     ) : (
                       <StyledTableRow key={installation.name}>
-                        <StyledTableCell style={{fontSize:"medium"}} align="center">
+                        <StyledTableCell style={{ fontSize: "medium" }} align="center">
                           {location}
                         </StyledTableCell>
-                        <StyledTableCell style={{fontSize:"medium"}} align="center">
+                        <StyledTableCell style={{ fontSize: "medium" }} align="center">
                           {installation.name}
                         </StyledTableCell>
-                        <StyledTableCell style={{fontSize:"medium"}} align="center">
+                        <StyledTableCell style={{ fontSize: "medium" }} align="center">
                           No Well Type
                         </StyledTableCell>
-                        <StyledTableCell style={{fontSize:"medium"}} align="center">
+                        <StyledTableCell style={{ fontSize: "medium" }} align="center">
                           No Well Number
                         </StyledTableCell>
                         {/* <StyledTableCell align="center">
                           No Landmark
                         </StyledTableCell> */}
-                        <StyledTableCell style={{fontSize:"medium"}} align="center">N/A</StyledTableCell>
+                        <StyledTableCell style={{ fontSize: "medium" }} align="center">N/A</StyledTableCell>
 
                         <StyledTableCell align="center">
                           {/* <Link to = "/dashboard/virtual"> */}
@@ -704,7 +717,7 @@ const WellMaster = () => {
                           </IconButton>
                           {/* </Link> */}
                         </StyledTableCell>
-                        <StyledTableCell  align="center">
+                        <StyledTableCell align="center">
                           <IconButton
                             onClick={() =>
                               handleSettingsClick(
@@ -727,13 +740,13 @@ const WellMaster = () => {
                   })
                 ) : (
                   <StyledTableRow key={location}>
-                    <StyledTableCell style={{fontSize:"medium"}} align="center">{location}</StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="center">
+                    <StyledTableCell style={{ fontSize: "medium" }} align="center">{location}</StyledTableCell>
+                    <StyledTableCell style={{ fontSize: "medium" }} align="center">
                       No Installations Available
                     </StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="center">-</StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="center">-</StyledTableCell>
-                    <StyledTableCell style={{fontSize:"medium"}} align="center">-</StyledTableCell>
+                    <StyledTableCell style={{ fontSize: "medium" }} align="center">-</StyledTableCell>
+                    <StyledTableCell style={{ fontSize: "medium" }} align="center">-</StyledTableCell>
+                    <StyledTableCell style={{ fontSize: "medium" }} align="center">-</StyledTableCell>
                     <StyledTableCell align="center">
                       <IconButton
                         sx={{
