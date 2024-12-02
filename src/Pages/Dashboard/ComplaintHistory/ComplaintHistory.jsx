@@ -210,6 +210,7 @@ function ComplaintHistory() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
+  const [installation, setInstallation] = useState("");
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
@@ -285,6 +286,9 @@ function ComplaintHistory() {
     }
   `
   );
+  const handleChangeInstallation = (event) => {
+    setInstallation(event.target.value);
+  };
 
 
   const stepss = [
@@ -398,13 +402,29 @@ function ComplaintHistory() {
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          <FormControl fullWidth size="small">
-            <TextField variant="outlined" size="small" label="Complaint No." />
-          </FormControl>
+          <Box display="flex" alignItems="center">
+            <FormControl fullWidth size="small">
+              <InputLabel id="activity-label">Department</InputLabel>
+              <Select
+                labelId="activity-label"
+                id="activity-select"
+                value={installation}
+                label="Activity"
+                onChange={handleChangeInstallation}
+              >
+                <MenuItem value="">
+                  <em>All</em>
+                </MenuItem>
+                <MenuItem value={10}>Well</MenuItem>
+                <MenuItem value={20}>Router</MenuItem>
+                <MenuItem value={30}>Device</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
-            <TextField variant="outlined" size="small" label="Well Number" />
+            <TextField variant="outlined" size="small" label="Complaint No." />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
@@ -420,8 +440,8 @@ function ComplaintHistory() {
               <MenuItem value={0}>
                 <em>All</em>
               </MenuItem>
-              <MenuItem value={1}>Open Notification</MenuItem>
-              <MenuItem value={2}>Close with comment </MenuItem>
+              <MenuItem value={1}>Open Complaint</MenuItem>
+              <MenuItem value={2}>Close Complaint </MenuItem>
             </Select>
           </FormControl>
         </Grid>
