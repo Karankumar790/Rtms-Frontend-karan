@@ -571,7 +571,7 @@ export default function BasicCard() {
             >
               <CloseIcon fontSize="inherit" />
             </IconButton>
-            <Grid item xs={12} sx={{ position: "relative" }}>
+            <Grid item xs={12} pb={2} sx={{ position: "relative" }}>
               <Typography variant="h4" sx={{ fontWeight: 600 }}>
                 New Message
               </Typography>
@@ -589,7 +589,7 @@ export default function BasicCard() {
                 </Box>
                 <Box>
                   <TextField
-                    sx={{ width: "500px" }}
+                    sx={{ width: "610px" }}
                     size="small"
                     variant="outlined"
                     value=""
@@ -600,11 +600,11 @@ export default function BasicCard() {
               {/* From Field */}
               <Grid item xs={12} sm={6} md={12} lg={12} display="flex" alignItems="center">
                 <Box mr={2} width="80px"> {/* Same width as above */}
-                  <Typography variant="h6" noWrap>From</Typography>
+                  <Typography variant="h6" noWrap>CC</Typography>
                 </Box>
                 <Box>
                   <TextField
-                    sx={{ width: "500px" }}
+                    sx={{ width: "610px" }}
                     size="small"
                     variant="outlined"
                     value=""
@@ -619,7 +619,7 @@ export default function BasicCard() {
                 </Box>
                 <Box>
                   <TextField
-                    sx={{ width: "500px" }}
+                    sx={{ width: "610px" }}
                     size="small"
                     variant="outlined"
                     value=""
