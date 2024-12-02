@@ -31,6 +31,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
@@ -116,6 +118,12 @@ let Sata = {
   Latitude: "40.7128 N",
   Longitude: "74.0060 W",
 };
+
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
+
+const rows = [createData("1")];
 
 export default function BasicCard() {
   return (
@@ -296,7 +304,7 @@ export default function BasicCard() {
           },
         }}
       >
-        <Grid container p={1} display="flex" justifyContent={"end"}>
+        <Grid container p={1}>
           <Box display={"flex"} gap={2}>
             <Box display="flex">
               <NotificationsNoneIcon
@@ -307,7 +315,7 @@ export default function BasicCard() {
                   cursor: "pointer",
                 }}
               />
-              <Typography variant="h6">Current Notification</Typography>
+              <Typography variant="h6" sx={{color:"blue"}}>Notifications</Typography>
             </Box>
             <Box display="flex">
               <img
@@ -317,15 +325,107 @@ export default function BasicCard() {
                 alt="noImg"
                 style={{ cursor: "pointer" }}
               />
-              <Typography variant="h6">Open Complaints</Typography>
+              <Typography sx={{color:"blue"}} ml={0.6} variant="h6">
+              Complaints
+              </Typography>
             </Box>
           </Box>
+          <Grid
+            container
+            md={12}
+            lg={12}
+            sm={5}
+            xs={4}
+            sx={{
+              display: { sm: "none", xs: "none", md: "block", lg: "block" },
+              height: "100%",
+            }}
+            mt={1}
+          >
+            <TableContainer
+              component={Paper}
+              sx={{
+                maxHeight: 620,
+                height: 320,
+                overflowY: "auto",
+              }}
+            >
+              <Table
+                aria-label="customized table"
+                stickyHeader
+                sx={{
+                  minWidth: "800px", // Set minimum width for horizontal scrolling
+                }}
+              >
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Notification No.</StyledTableCell>
+                    <StyledTableCell>Data/Time</StyledTableCell>
+                    <StyledTableCell>Well Number</StyledTableCell>
+                    {/* <StyledTableCell>Node ID</StyledTableCell> */}
+                    <StyledTableCell>Location</StyledTableCell>
+                    <StyledTableCell>Installation</StyledTableCell>
+                    {/* <StyledTableCell >Well Port</StyledTableCell> */}
+                    <StyledTableCell>Status</StyledTableCell>
+                    <StyledTableCell>Description</StyledTableCell>
+                    <StyledTableCell>View</StyledTableCell>
+                    {/* <StyledTableCell> History View</StyledTableCell> */}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        // sx={{ width: "13%" }}
+                      >
+                        {/* {row.name} */}
+                      </StyledTableCell>
+                      <StyledTableCell></StyledTableCell>
+                      <StyledTableCell
+                      // align="left"
+                      // sx={{ width: "13%" }}
+                      ></StyledTableCell>
+                      {/* <StyledTableCell
+                  align="left"
+                  sx={{ width: "13%" }}
+                  ></StyledTableCell> */}
+                      <StyledTableCell
+                      // align="left"
+                      // sx={{ width: "13%" }}
+                      ></StyledTableCell>
+                      {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
+                      <StyledTableCell
+                      // align="left"
+                      // sx={{ width: "13%" }}
+                      ></StyledTableCell>
+                      <StyledTableCell
+                      
+                      ></StyledTableCell>
+                      <StyledTableCell></StyledTableCell>
+                      <IconButton
+                        sx={{
+                          color: "grey",
+                          "&:hover": { color: "darkred" },
+                          marginRight: "5px",
+                        }}
+                        // onClick={handleOpen}
+                      >
+                        <VisibilityIcon fontSize="large" />
+                      </IconButton>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
         </Grid>
       </Paper>
-      <Grid container  justifyContent={"end"}>
+      <Grid container justifyContent={"end"}>
         <Stack spacing={2}>
-          <Pagination count={25} shape="rounded" />
-          {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
+          {/* <Pagination count={25} shape="rounded" /> */}
+          <Pagination count={25} variant="outlined" shape="rounded" />
         </Stack>
       </Grid>
     </Grid>

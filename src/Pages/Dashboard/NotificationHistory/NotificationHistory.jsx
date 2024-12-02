@@ -41,10 +41,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
-import PendingIcon from "@mui/icons-material/Pending";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
-import { Textarea } from "flowbite-react";
+
 import HistoryModal from "../HistoryModal";
 ChartJS.register(
   CategoryScale,
@@ -156,8 +153,8 @@ function createData(name, calories, fat, carbs, protein) {
 
 const rows = [
   createData("1"),
-  // createData('2'),
 ];
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -476,7 +473,7 @@ function NotificationHistory() {
           >
             <TableHead>
               <TableRow>
-                <StyledTableCell>Notification</StyledTableCell>
+                <StyledTableCell>Notification No.</StyledTableCell>
                 <StyledTableCell>Data/Time</StyledTableCell>
                 <StyledTableCell>Well Number</StyledTableCell>
                 <StyledTableCell>Node ID</StyledTableCell>

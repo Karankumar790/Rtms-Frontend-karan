@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import ThreePIcon from '@mui/icons-material/ThreeP';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -194,30 +195,32 @@ function MessageForwarding() {
       >
         <Grid item lg={6} md={6} sm={6} xs={12}>
           <Box display={"flex"} gap={1}>
-            <img
+            {/* <img
               src="https://static.thenounproject.com/png/401262-200.png"
               alt="Img"
               height={"50px"}
               width={"50px"}
-            />
+            /> */}
+            <Box sx={{display:"flex",alignItems:"center"}} width={"30px"} height={"40px"}>
+            <ThreePIcon sx={{fontSize:"30px"}}/>
+            </Box>
             <Typography variant="h4">Message User</Typography>
           </Box>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={2} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
-            <InputLabel id="dropdown-label">Select an Option</InputLabel>
+            <InputLabel >Select an Option</InputLabel>
             <Select
-              labelId="dropdown-label"
               value={selectedValue}
               onChange={handleChange}
               label="Select an Option"
               fullWidth
               size="small"
             >
-              <MenuItem value={10}>Option 1</MenuItem>
-              <MenuItem value={20}>Option 2</MenuItem>
-              <MenuItem value={30}>Option 3</MenuItem>
+              <MenuItem value={10}>All User</MenuItem>
+              <MenuItem value={20}>Active User</MenuItem>
+              <MenuItem value={30}>Deactivate</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -432,21 +435,22 @@ function MessageForwarding() {
               justifyContent="end"
               pt={1}
               pb={1}
+              mt={3}
               // pr={3}
-              gap={3}
+              gap={2}
             >
               <Button
                 variant="contained"
-                sx={{ width: "150px", p: "10px", fontSize: "15px" }}
+                sx={{ width: "160px", p: "10px", fontSize: "14px" }}
               >
-                Delete User
+                Activate User
               </Button>
               <Button
                 variant="contained"
-                sx={{ width: "150px", p: "10px", fontSize: "15px", mr: "12px" }}
+                sx={{ width: "160px", p: "10px", fontSize: "14px", mr: "10px" }}
                 onClick={handleClose}
               >
-                Close
+                Make Inactivate
               </Button>
             </Box>
           </Grid>

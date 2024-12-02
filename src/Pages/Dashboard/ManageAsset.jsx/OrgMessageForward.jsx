@@ -57,7 +57,7 @@ function createData(name) {
   return { name };
 }
 
-const rows = [createData("1")];
+const rows = [];
 
 function OrgMessageForward() {
   const [installation, setInstallation] = useState("");
@@ -68,19 +68,19 @@ function OrgMessageForward() {
 
   return (
     <>
-      <Grid container p={2}>
-        <Grid item xs={12} sm={12} md={12} lg={12} >
+      <Grid container p={2} component={Paper} boxShadow="4">
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <Box display="flex" sx={{ pt: 2, pb: 2 }} gap={1}>
             <EmailIcon sx={{ mt: "2px" }} />
-            <Typography variant="h5">Message Forwarding</Typography>
+            <Typography variant="h5">Notification Forwarding</Typography>
           </Box>
           <Grid container alignItems="center" spacing={1}>
             {/* Notification Dropdown */}
-            <Grid item xs={12} sm={2} md={2} lg={2}>
+            <Grid item xs={12} sm={2} md={2} lg={1.6} >
               <Box display="flex" alignItems="center" gap={1}>
                 <AccountBalanceIcon />
                 <FormControl fullWidth size="small">
-                  <InputLabel id="activity-label">Notification</InputLabel>
+                  <InputLabel id="activity-label">Department</InputLabel>
                   <Select
                     labelId="activity-label"
                     id="activity-select"
@@ -106,7 +106,7 @@ function OrgMessageForward() {
                 xs={12}
                 sm={2}
                 md={2}
-                lg={3}
+                lg={3.2}
                 key={level}
                 sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
@@ -157,7 +157,7 @@ function OrgMessageForward() {
               xs={12}
               sm={2}
               md={2}
-              lg={1}
+              lg={0.8}
               sx={{ display: "flex", justifyContent: "flex-end" }}
             >
               <Button
@@ -186,11 +186,10 @@ function OrgMessageForward() {
           mt={1}
         >
           <TableContainer
-            component={Paper}
             sx={{ maxHeight: 320, height: 1000, overflowY: "auto" }}
           >
             <Table aria-label="customized table" stickyHeader>
-              <TableHead>
+              {/* <TableHead>
                 <TableRow>
                   <StyledTableCell align="left" style={{ width: "10%" }}>
                     Notification
@@ -214,7 +213,7 @@ function OrgMessageForward() {
                     Level 3
                   </StyledTableCell>
                 </TableRow>
-              </TableHead>
+              </TableHead> */}
               <TableBody>
                 {rows.map((row) => (
                   <StyledTableRow key={row.name}>
