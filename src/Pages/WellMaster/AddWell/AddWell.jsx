@@ -247,9 +247,9 @@ function AddWell() {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           {/* Input Fields */}
-          <Grid item sm={6} md={3} xs={12} lg={3}>
+          <Grid item sm={6} md={3} xs={12} lg={3} >
             <TextField
-              fullwidth
+              fullWidth
               size="small"
               label="Location"
               variant="outlined"
