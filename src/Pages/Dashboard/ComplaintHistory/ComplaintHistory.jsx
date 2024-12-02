@@ -107,7 +107,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#8C000B",
     color: theme.palette.common.white,
-    padding: "10px", // Increase padding
+    padding: "8px", // Increase padding
     height: "20px", // Set a specific height
     fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
@@ -451,9 +451,9 @@ function ComplaintHistory() {
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "green", // Change button color to green
+              backgroundColor: "green",
               "&:hover": {
-                backgroundColor: "darkgreen", // Optional: Change color on hover
+                backgroundColor: "darkgreen",
               },
               fontSize: "16px",
             }}
