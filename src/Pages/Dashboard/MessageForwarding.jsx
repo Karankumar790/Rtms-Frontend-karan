@@ -201,8 +201,8 @@ function MessageForwarding() {
               height={"50px"}
               width={"50px"}
             /> */}
-            <Box sx={{display:"flex",alignItems:"center"}} width={"30px"} height={"40px"}>
-            <ThreePIcon sx={{fontSize:"30px"}}/>
+            <Box sx={{ display: "flex", alignItems: "center" }} width={"30px"} height={"40px"}>
+              <ThreePIcon sx={{ fontSize: "30px" }} />
             </Box>
             <Typography variant="h4">Message User</Typography>
           </Box>
@@ -372,7 +372,7 @@ function MessageForwarding() {
               <Grid item lg={10} md={8} xs={12} sm={12}>
                 {userDetails.map((field, index) => (
                   <Grid item display="flex" p={2} key={index}>
-                    {console.log(field,".................")}
+                    {console.log(field, ".................")}
                     <Grid lg={4} md={5} sm={12} xs={12} display={"flex"}>
                       <Typography variant="h6">{field}</Typography>
                     </Grid>
@@ -384,16 +384,20 @@ function MessageForwarding() {
                           field === "Username"
                             ? selectedUser?.username
                             : field === "Position"
-                            ? selectedUser?.roleInRTMS
-                            : field === "Department"
-                            ? selectedUser?.department
-                            : field === "EmployeeID"
-                            ? selectedUser?.employeeID
-                            : field === "Email"
-                            ? selectedUser?.email
-                            : field === "Contact no."
-                            ? selectedUser?.contactNumber
-                            : ""
+                              ? selectedUser?.roleInRTMS
+                              : field === "Department"
+                                ? selectedUser?.department
+                                : field === "EmployeeID"
+                                  ? selectedUser?.employeeID
+                                  : field === "Email"
+                                    ? selectedUser?.email
+                                    : field === "Contact no."
+                                      ? selectedUser?.contactNumber
+                                      : field === "Joining Date"
+                                        ? selectedUser?.createdAt
+                                        : field === "User Status"
+                                          ? selectedUser?.accountStatus
+                                          : ""
                         }
                         disabled
                         fullWidth
@@ -430,7 +434,7 @@ function MessageForwarding() {
               </Grid>
             </Grid>
             <Box
-            // bgcolor={'yellow'}
+              // bgcolor={'yellow'}
               display="flex"
               justifyContent="end"
               pt={1}

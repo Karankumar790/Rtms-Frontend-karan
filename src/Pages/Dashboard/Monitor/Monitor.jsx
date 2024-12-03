@@ -43,6 +43,7 @@ import {
   getAllInstallation,
   getLocation,
   wellMonitorData,
+  AllWellNumbers,
 } from "../../../apis/wellService";
 import { useSelector } from "react-redux";
 import { state } from "@antv/g2plot/lib/adaptor/common";
@@ -444,6 +445,28 @@ function Monitor() {
       setCoords([lat, lng]); // Set the coordinates from local storage
     }
   }, []); // Only run on mount
+
+
+  // -----------------Get WellNumber----------------------------
+
+  const [wellNumbers, setWellNumbers] = useState([]);
+
+  useEffect(() => {
+    const getWellNumbers = async () => {
+      try {
+        const response = await AllWellNumbers();
+        // Extract the wellNumbers array from the response
+        setWellNumbers(response?.wellNumbers || []);
+      } catch (error) {
+        console.error("Error fetching well numbers:", error);
+        setWellNumbers([]);
+      }
+    };
+  
+    getWellNumbers();
+  }, []);
+  
+
   return (
     <div
       style={{
@@ -469,7 +492,7 @@ function Monitor() {
           }}
         >
           <PrintIcon sx={{
-            width: "fit-content", 
+            width: "fit-content",
             height: "fit-content",
           }} />
         </Grid>
@@ -494,14 +517,7 @@ function Monitor() {
                 },
               }}
             >
-              <MenuItem value="">
-                <em>All</em>
-              </MenuItem>
-              {locations.map((loc, index) => (
-                <MenuItem key={index} value={loc}>
-                  {loc}
-                </MenuItem>
-              ))}
+
             </Select>
           </FormControl>
         </Grid>
@@ -545,9 +561,15 @@ function Monitor() {
               label="Well Number"
               onChange={handleChangeNumber}
             >
-              <MenuItem value={10}>2</MenuItem>
-              <MenuItem value={20}>8</MenuItem>
-              <MenuItem value={30}>4</MenuItem>
+              {wellNumbers.length > 0 ? (
+                wellNumbers.map((well, index) => (
+                  <MenuItem key={index} value={well}>
+                    {well} 
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem disabled>No Well Numbers Available</MenuItem>
+              )}
             </Select>
           </FormControl>
         </Grid>

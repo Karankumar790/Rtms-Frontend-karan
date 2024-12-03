@@ -154,9 +154,9 @@ export const wellMonitorData = async (organizationName) => {
   }
 }
 
-// ----------------Get AllWell Number----------
+// ----------------Get AllWell Number------------------
 
-export const AllWellNumbers = async (organizationName) => {
+export const AllWellNumbers = async (WellNumber) => {
   try {
     const response = await axios.get(
       `${WELL_API}/get-AllWellNumbers`
