@@ -882,7 +882,7 @@ function ManageAsset() {
 
             <Grid container spacing={3} pr={3}>
               {[
-                { name: "organizationName", label: "Organization" },
+                // { name: "organizationName", label: "Organization" },
                 { name: "subtitlename", label: "Display Name" },
                 { name: "address", label: "Address" },
                 { name: "city", label: "City" },
@@ -892,6 +892,8 @@ function ManageAsset() {
                 { name: "phone", label: "Phone" },
                 { name: "fax", label: "Fax" },
                 { name: "email", label: "Email" },
+                { name: "Addbusiness", label: "Add Business" },
+                
               ].map((field) => (
                 <Grid
                   container
@@ -1066,7 +1068,7 @@ function ManageAsset() {
                                     justifyContent="space-between"
                                   >
                                     <span style={{ fontSize: "medium" }}>
-                                      {index + 1}. {departmentName}
+                                       {departmentName}
                                     </span>
                                     <Box display="flex">
                                       <IconButton
@@ -1154,7 +1156,7 @@ function ManageAsset() {
                                 key={departmentName}
                                 value={departmentName}
                               >
-                                {index + 1}. {departmentName}
+                               {departmentName}
                               </MenuItem>
                             ))
                           ) : (
@@ -1239,7 +1241,7 @@ function ManageAsset() {
                                   justifyContent="space-between"
                                 >
                                   <span style={{ fontSize: "medium" }}>
-                                    {index + 1}. {row.departmentName}
+                                     {row.departmentName}
                                   </span>
                                 </Box>
                               </StyledTableCell>
@@ -1255,7 +1257,7 @@ function ManageAsset() {
                                           fontSize: "medium",
                                         }}
                                       >
-                                        {posIndex + 1}. {position}
+                                        {position}
                                         <Box display="flex">
                                           <IconButton
                                             aria-label="edit"
@@ -1361,7 +1363,7 @@ function ManageAsset() {
                               key={departmentName}
                               value={departmentName}
                             >
-                              {index + 1}. {departmentName}
+                               {departmentName}
                             </MenuItem>
                           ))
                         ) : (
@@ -1444,7 +1446,7 @@ function ManageAsset() {
                     {positionsForApp.length > 0 ? (
                       positionsForApp.map((position, index) => (
                         <MenuItem key={position} value={position}>
-                          {index + 1}. {position}
+                         {position}
                         </MenuItem>
                       ))
                     ) : (
@@ -1468,7 +1470,7 @@ function ManageAsset() {
                     {positionsForApp.length > 0 ? (
                       positionsForApp.map((position, index) => (
                         <MenuItem key={position} value={position}>
-                          {index + 1}. {position}
+                           {position}
                         </MenuItem>
                       ))
                     ) : (
@@ -1553,7 +1555,7 @@ function ManageAsset() {
                                     style={{ fontSize: "medium" }}
                                     rowSpan={row.approvalChains.length}
                                   >
-                                    {index + 1}. {row.departmentName}
+                                  {row.departmentName}
                                   </StyledTableCell>
                                 )}
                                 <StyledTableCell style={{ fontSize: "medium" }}>

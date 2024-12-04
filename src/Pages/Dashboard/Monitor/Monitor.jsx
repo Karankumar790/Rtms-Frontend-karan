@@ -444,6 +444,9 @@ function Monitor() {
       setCoords([lat, lng]); // Set the coordinates from local storage
     }
   }, []); // Only run on mount
+
+  
+
   return (
     <div
       style={{
@@ -611,7 +614,7 @@ function Monitor() {
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
       >
         <TableContainer component={Paper}>
-          <Table aria-label="customized table">
+          <Table aria-label="customized table">  
             <TableHead>
               <TableRow>
                 <StyledTableCell>Well No.</StyledTableCell>

@@ -222,7 +222,6 @@ function NotificationHistory() {
   const handleClose = () => setOpen(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
- 
 
   const [formData, setFormData] = useState({
     to: "",
@@ -317,7 +316,6 @@ function NotificationHistory() {
     setSelectedTime(event.target.value);
   };
 
-
   return (
     <div
       style={{
@@ -365,7 +363,7 @@ function NotificationHistory() {
             />
           </FormControl> */}
 
-<FormControl fullWidth size="small">
+          <FormControl fullWidth size="small">
             <Grid container spacing={2}>
               {/* Date Field */}
               <Grid item xs={6}>
@@ -483,7 +481,7 @@ function NotificationHistory() {
               label="Notification No."
             />
           </FormControl>
-        </Grid>     
+        </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>

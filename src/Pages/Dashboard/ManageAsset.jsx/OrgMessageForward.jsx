@@ -72,7 +72,7 @@ function OrgMessageForward() {
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Box display="flex" sx={{ pt: 2, pb: 2 }} gap={1}>
             <EmailIcon sx={{ mt: "2px" }} />
-            <Typography variant="h5">Notification Forwarding</Typography>
+            <Typography variant="h5">Alarm Forwarding</Typography>
           </Box>
           <Grid container alignItems="center" spacing={1}>
             {/* Notification Dropdown */}
