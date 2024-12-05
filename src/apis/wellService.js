@@ -150,6 +150,7 @@ export const wellMonitorData = async (organizationName) => {
     console.error(error);
     return catchError;
   }
+
 };
 
 //  Well node search
@@ -197,3 +198,17 @@ export const totalWells = async () => {
     return catchError;
   }
 }
+}
+
+// ----------------Get AllWell Number----------
+
+export const AllWellNumbers = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/get-AllWellNumbers`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
