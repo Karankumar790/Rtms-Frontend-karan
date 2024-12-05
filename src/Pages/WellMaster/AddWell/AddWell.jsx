@@ -22,7 +22,8 @@ import {
   deviceData,
   nodeSearch,
   notFlowing,
-  saveWellDetails,
+  // notFlowing,
+ 
 } from "../../../apis/wellService";
 import SearchIcon from "@mui/icons-material/Search";
 import { borderRadius, Box, style } from "@mui/system";
@@ -102,6 +103,15 @@ function AddWell() {
   const [valueGreaterThan2, setValueGreaterThan2] = useState("");
   const [comparison, setComparison] = useState("");
   
+  // const [pressure1, setPressure1] = useState('');
+  // const [valueLessThan1, setValueLessThan1] = useState('');
+  // const [valueGreaterThan1, setValueGreaterThan1] = useState('');
+  // const [comparison, setComparison] = useState('');
+  // const [pressure2, setPressure2] = useState('');
+  // const [valueLessThan2, setValueLessThan2] = useState('');
+  // const [valueGreaterThan2, setValueGreaterThan2] = useState('');
+
+  
   const [wellDetails, setWellDetails] = useState({
     location: "",
     installation: "",
@@ -138,6 +148,38 @@ function AddWell() {
     //     [name]: value,
     //   });
     // }
+
+      // handleSubmit function to call API
+  const handleSubmit = async () => {
+    const pressures = [
+      {
+        pressure: pressure1,
+        valueLessThan: valueLessThan1,
+        valueGreaterThan: valueGreaterThan1
+      },
+      {
+        pressure: pressure2,
+        valueLessThan: valueLessThan2,
+        valueGreaterThan: valueGreaterThan2
+      }
+    ];
+
+    // API call with the collected form data
+    try {
+      const response = await notFlowing(
+        'location', // Replace with dynamic data if needed
+        'installation', // Replace with dynamic data if needed
+        'wellType', // Replace with dynamic data if needed
+        'wellNumber', // Replace with dynamic data if needed
+        'organizationName', // Replace with dynamic data if needed
+        pressures
+      );
+      console.log(response); // You can add further actions based on response (e.g., show success message)
+    } catch (error) {
+      console.error('Error occurred during API call:', error);
+    }
+  };
+
     
     useEffect(() => {
       const Device = async () => {
@@ -400,27 +442,27 @@ function AddWell() {
   
   
   // Handle the form submission
-  const handleSubmit = async () => {
-    // Prepare data to send to API
-    const pressures = [
-      {
-        pressure1,
-        valueLessThan1,
-        valueGreaterThan1,
-        comparison,
-        pressure2,
-        valueLessThan2,
-        valueGreaterThan2
-      }
-    ];
+  // const handleSubmit = async () => {
+  //   // Prepare data to send to API
+  //   const pressures = [
+  //     {
+  //       pressure1,
+  //       valueLessThan1,
+  //       valueGreaterThan1,
+  //       comparison,
+  //       pressure2,
+  //       valueLessThan2,
+  //       valueGreaterThan2
+  //     }
+  //   ];
 
-    // Call the notFlowing service function with the appropriate parameters
-    const response = await notFlowing(
-      "locationValue", "installationValue", "wellTypeValue", "wellNumberValue", "organizationNameValue", pressures
-    );
+  //   // Call the notFlowing service function with the appropriate parameters
+  //   const response = await notFlowing(
+  //     "locationValue", "installationValue", "wellTypeValue", "wellNumberValue", "organizationNameValue", pressures
+  //   );
 
-    console.log(response); // Handle the response from the API
-  };
+  //   console.log(response); // Handle the response from the API
+  // };
   return (
     <div>
       <Grid container component={Paper} p={1}>

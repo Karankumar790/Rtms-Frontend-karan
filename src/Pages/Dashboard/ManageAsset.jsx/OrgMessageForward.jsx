@@ -76,7 +76,7 @@ function OrgMessageForward() {
           </Box>
           <Grid container alignItems="center" spacing={1}>
             {/* Notification Dropdown */}
-            <Grid item xs={12} sm={2} md={2} lg={1.6} >
+            <Grid item xs={12} sm={2} md={2} lg={1.6}>
               <Box display="flex" alignItems="center" gap={1}>
                 <AccountBalanceIcon />
                 <FormControl fullWidth size="small">
@@ -100,13 +100,13 @@ function OrgMessageForward() {
             </Grid>
 
             {/* Levels */}
-            {[1, 2, 3].map((level) => (
+            {[1, 2].map((level) => (
               <Grid
                 item
                 xs={12}
                 sm={2}
                 md={2}
-                lg={3.2}
+                lg={4.8}
                 key={level}
                 sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
@@ -132,7 +132,28 @@ function OrgMessageForward() {
                     </DemoContainer>
                   </LocalizationProvider>
                 </Box>
-
+                <Grid item lg={4} md={4} sm={4} xs={5}>
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <AccountBalanceIcon />
+                    <FormControl fullWidth size="small">
+                      <InputLabel id="activity-label">Department</InputLabel>
+                      <Select
+                        labelId="activity-label"
+                        id="activity-select"
+                        value={installation}
+                        label="Activity"
+                        onChange={handleChangeInstallation}
+                      >
+                        <MenuItem value="">
+                          <em>All</em>
+                        </MenuItem>
+                        <MenuItem value={10}>Well</MenuItem>
+                        <MenuItem value={20}>Router</MenuItem>
+                        <MenuItem value={30}>Device</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
                 {/* Level TextField */}
                 <Box
                   display="flex"

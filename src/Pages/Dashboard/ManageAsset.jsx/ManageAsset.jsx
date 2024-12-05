@@ -880,7 +880,7 @@ function ManageAsset() {
               )}
             </Grid>
 
-            <Grid container spacing={3} pr={3}>
+            <Grid container spacing={3} pr={5}>
               {[
                 // { name: "organizationName", label: "Organization" },
                 { name: "subtitlename", label: "Display Name" },
@@ -892,7 +892,7 @@ function ManageAsset() {
                 { name: "phone", label: "Phone" },
                 { name: "fax", label: "Fax" },
                 { name: "email", label: "Email" },
-                { name: "Addbusiness", label: "Add Business" },
+                { name: "business", label: "Business" },
                 
               ].map((field) => (
                 <Grid
@@ -903,23 +903,23 @@ function ManageAsset() {
                   md={6}
                   sm={12}
                   xs={12}
-                  spacing={2}
+                  spacing={3}
                   alignItems="center"
                 >
                   {/* Label Section */}
-                  <Grid item lg={3} md={3} sm={3} xs={12}>
+                  <Grid item lg={2} md={3} sm={3} xs={12} >
                     <Typography variant="h6">{field.label}</Typography>
                   </Grid>
 
                   {/* Input/Display Section */}
                   {field.name === "organizationName" ? (
-                    <Grid item lg={6} md={9} sm={9} xs={12}>
+                    <Grid item lg={6} md={9} sm={9} xs={12} >
                       <Typography sx={{ fontSize: "20px" }}>
                         {formData[field.name]}
                       </Typography>
                     </Grid>
                   ) : (
-                    <Grid item lg={9} md={9} sm={9} xs={12}>
+                    <Grid item lg={10} md={9} sm={9} xs={12} >
                       <TextField
                         type="text"
                         variant="outlined"
@@ -1245,7 +1245,7 @@ function ManageAsset() {
                                   </span>
                                 </Box>
                               </StyledTableCell>
-                              <StyledTableCell align="left">
+                              <StyledTableCell align="left" width={"52%"}>
                                 {row.positions.length > 0
                                   ? row.positions.map((position, posIndex) => (
                                       <div
@@ -1255,6 +1255,7 @@ function ManageAsset() {
                                           alignItems: "center",
                                           justifyContent: "space-between",
                                           fontSize: "medium",
+                                          
                                         }}
                                       >
                                         {position}
@@ -1554,18 +1555,19 @@ function ManageAsset() {
                                   <StyledTableCell
                                     style={{ fontSize: "medium" }}
                                     rowSpan={row.approvalChains.length}
+                                    width={"22%"}
                                   >
                                   {row.departmentName}
                                   </StyledTableCell>
                                 )}
-                                <StyledTableCell style={{ fontSize: "medium" }}>
-                                  {chainIndex + 1}. {chain.action || "N/A"}
+                                <StyledTableCell style={{ fontSize: "medium" }} width={"25%"}>
+                                  {chain.action || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell style={{ fontSize: "medium" }}>
-                                  {chainIndex + 1}. {chain.level1 || "N/A"}
+                                <StyledTableCell style={{ fontSize: "medium" }} width={"21%"}>
+                                   {chain.level1 || "N/A"}
                                 </StyledTableCell>
-                                <StyledTableCell style={{ fontSize: "medium" }}>
-                                  {chainIndex + 1}. {chain.level2 || "N/A"}
+                                <StyledTableCell style={{ fontSize: "medium" }} width={"20%"}>
+                                   {chain.level2 || "N/A"}
                                 </StyledTableCell>
                                 <StyledTableCell
                                   align="center"

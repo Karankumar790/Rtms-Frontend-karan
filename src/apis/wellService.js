@@ -165,24 +165,24 @@ export const nodeSearch = async () => {
 
 
 // Not flowing Well save API
-// export const notFlowing = async (
-//   location, installation, wellType, wellNumber, organizationName, pressures
-// ) => {
-//   try {
-//     const response = await axios.post(
-//       `${WELL_API}/save-notFlowingCondition?location=${location}&installation=${installation}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`,
-//       {
-//         notFlowing: {
-//           pressures: pressures
-//         }
-//       }
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.error(error);
-//     return catchError;
-//   }
-// };
+export const notFlowing = async (
+  location, installation, wellType, wellNumber, organizationName, pressures
+) => {
+  try {
+    const response = await axios.post(
+      `${WELL_API}/save-notFlowingCondition?location=${location}&installation=${installation}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`,
+      {
+        notFlowing: {
+          pressures: pressures
+        }
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return catchError;
+  }
+};
 
 
 // Total well Details
