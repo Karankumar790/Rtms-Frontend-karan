@@ -360,7 +360,7 @@ function Signup() {
                             hidden
                           />
                           {!selectedPhotoName ? (
-                            <Typography>Update Photo</Typography>
+                            <Typography>Upload Photo</Typography>
                           ) : (
                             <Typography variant="body2" color="textSecondary">
                               {selectedPhotoName}
@@ -399,8 +399,8 @@ function Signup() {
                   </Grid>
                 </form>
                 <Grid item textAlign="center" mt={0.5}>
-                  <Typography fontSize={"medium"}>
-                    Already have an account?{" "}
+                  <Typography fontSize={"medium"} mr={"2px"}>
+                    Already have an account?
                     <Link
                       to="/"
                       style={{ textDecoration: "none", cursor: "pointer" }}
@@ -409,7 +409,7 @@ function Signup() {
                     </Link>
                   </Typography>
                   <Typography fontSize={"medium"}>
-                    Have Registration?{" "}
+                  Already registered?
                     <Link
                       to="/Popup"
                       style={{ textDecoration: "none", cursor: "pointer" }}
