@@ -198,7 +198,7 @@ export const totalWells = async () => {
     return catchError;
   }
 }
-}
+
 
 // ----------------Get AllWell Number----------
 
