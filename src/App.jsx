@@ -72,6 +72,8 @@ const Simulator = lazy(() =>
   import("./Pages/Dashboard/DeviceManage/Simulator.jsx")
 );
 
+
+
 function App() {
   const role = useSelector((state) => state.auth.role);
 

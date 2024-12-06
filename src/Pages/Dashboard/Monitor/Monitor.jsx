@@ -494,6 +494,7 @@ function Monitor() {
           <PrintIcon sx={{
             width: "fit-content",
             height: "fit-content",
+            color:'#F34E41',
           }} />
         </Grid>
       </Grid>

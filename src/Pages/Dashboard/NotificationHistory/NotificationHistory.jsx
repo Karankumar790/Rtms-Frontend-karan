@@ -222,7 +222,7 @@ function NotificationHistory() {
   const handleClose = () => setOpen(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
- 
+
 
   const [formData, setFormData] = useState({
     to: "",
@@ -276,9 +276,8 @@ function NotificationHistory() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${
-      theme.palette.mode === "dark" ? grey[900] : grey[50]
-    };
+    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
+      };
 
     &:hover {
       border-color: ${blue[400]};
@@ -286,8 +285,7 @@ function NotificationHistory() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${
-        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -365,7 +363,7 @@ function NotificationHistory() {
             />
           </FormControl> */}
 
-<FormControl fullWidth size="small">
+          <FormControl fullWidth size="small">
             <Grid container spacing={2}>
               {/* Date Field */}
               <Grid item xs={6}>
@@ -483,7 +481,7 @@ function NotificationHistory() {
               label="Notification No."
             />
           </FormControl>
-        </Grid>     
+        </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
             <InputLabel id="demo-select-large-label">Custom Search</InputLabel>
@@ -574,7 +572,7 @@ function NotificationHistory() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    // sx={{ width: "13%" }}
+                  // sx={{ width: "13%" }}
                   >
                     {/* {row.name} */}
                   </StyledTableCell>

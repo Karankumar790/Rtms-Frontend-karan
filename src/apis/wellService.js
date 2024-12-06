@@ -42,7 +42,7 @@ export const addInstallation = async (formData) => {
 export const getAllInstallation = async (location, organizationName) => {
   try {
     const response = await axios.get(
-     `${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
+      `${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {
@@ -133,10 +133,10 @@ export const deviceData = async (organizationName) => {
       `${DEVICE_API}/external-device-show?organizationName=${organizationName}`
     );
     return response.data;
-  } catch (error) { 
+  } catch (error) {
     console.error(error);
     return catchError;
-    
+
   }
 }
 
@@ -150,7 +150,7 @@ export const wellMonitorData = async (organizationName) => {
   } catch (error) {
     console.error(error);
     return catchError;
-    
+
   }
 }
 
@@ -160,6 +160,43 @@ export const AllWellNumbers = async (WellNumber) => {
   try {
     const response = await axios.get(
       `${WELL_API}/get-AllWellNumbers`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+
+export const saveFlowingCondition = async (flowingConditionData) => {
+  try {
+    const response = await axios.post(
+      `${WELL_API}/save-flowingCondition?location=agra&installation=agra1&wellType=self-flowing&wellNumber=1122&organizationName=OIL AND NATURAL GAS CORPORATION`,
+      flowingConditionData,
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error saving flowing condition:", error);
+    throw error; // Rethrow to handle in UI if needed.
+  }
+};
+
+
+export const NotFlowingWell = async () => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/count-AllNotFlowingConditionsForOrganization?organizationName=OIL AND NATURAL GAS CORPORATION`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const FlowingWell = async () => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/count-AllFlowingConditionsForOrganization?organizationName=OIL AND NATURAL GAS CORPORATION`
     );
     return response.data;
   } catch (error) {

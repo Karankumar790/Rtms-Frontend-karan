@@ -36,9 +36,10 @@ import {
   getWellDetails,
 } from "../../apis/wellService";
 import { useDispatch, useSelector } from "react-redux";
-import { setWellDetails } from "../../apis/authSlice.js";
+// import { setWellDetails } from "../../apis/authSlice.js";
 import { toast } from "react-toastify";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import WellDetailAdd from "./WellDetailAdd.jsx";
 
 // Styled components for tables and layout
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -320,7 +321,7 @@ const WellMaster = () => {
       >
         <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
           <Box sx={{ height: "50px", width: "50px" }}>
-            <img src={master} alt="img" height={"50px"} width={"50px"} />
+            <img src="/assets/WELL2.png" alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
             <Typography variant="h4">Well Manager</Typography>
@@ -336,15 +337,18 @@ const WellMaster = () => {
           <PrintIcon sx={{
             width: "fit-content",
             height: "fit-content",
+            color:'#F34E41',
           }} />
         </Grid>
       </Grid>
 
-      <Paper sx={{ mb: "15px", p: '15px' }}>
+      <div><WellDetailAdd/></div>
+
+      {/* <Paper sx={{ mb: "15px", p: '15px' }}>
         <Grid container>
-          <Grid container spacing={2}>
+          <Grid container spacing={2}> */}
             {/* ------------------------ADD LOCATION------------------------------ */}
-            <Grid
+            {/* <Grid
               item
               xs={12}
               sm={6}
@@ -383,10 +387,10 @@ const WellMaster = () => {
                   ADD
                 </Button>
               </Box>
-            </Grid>
+            </Grid> */}
 
             {/* ------------------------ADD INSTALLATION------------------------------ */}
-            <Grid
+            {/* <Grid
               item
               xs={12}
               sm={6}
@@ -457,10 +461,10 @@ const WellMaster = () => {
                   ADD
                 </Button>
               </Box>
-            </Grid>
+            </Grid> */}
 
             {/* ------------------------Add Well NUMBER ------------------------------ */}
-            <Grid
+            {/* <Grid
               item
               xs={12}
               sm={12}
@@ -587,10 +591,10 @@ const WellMaster = () => {
                   </Button>
                 </Grid>
               </Box>
-            </Grid>
-          </Grid>
+            </Grid> */}
+          {/* </Grid>
         </Grid>
-      </Paper>
+      </Paper> */}
       <Grid
         container
         md={12}

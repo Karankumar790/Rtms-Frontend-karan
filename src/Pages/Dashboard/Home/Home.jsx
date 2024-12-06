@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
-  Button,
   CardContent,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
   Grid,
   IconButton,
   Pagination,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Card } from "@mui/joy";
@@ -32,9 +27,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { FlowingWell, NotFlowingWell } from "../../../apis/wellService";
 
 // ---------FUNCTIONS OF TABLE--------------------------------
 
@@ -87,45 +81,75 @@ const StyledContent = styled(Grid)(({ theme }) => ({
   backgroundColor: "white",
 }));
 
-let data = {
-  "Well No": "1",
-  Location: "New York",
-  Installation: "01/01/2021",
-  Latitude: "40.7128 N",
-  Longitude: "74.0060 W",
-};
+// let data = {
+//   "Well No": "1",
+//   Location: "New York",
+//   Installation: "01/01/2021",
+//   Latitude: "40.7128 N",
+//   Longitude: "74.0060 W",
+// };
 
-let Tata = {
-  "Well No": "2",
-  Location: "Delhi",
-  Installation: "01/01/2021",
-  Latitude: "40.7128 N",
-  Longitude: "74.0060 W",
-};
+// let Tata = {
+//   "Well No": "2",
+//   Location: "Delhi",
+//   Installation: "01/01/2021",
+//   Latitude: "40.7128 N",
+//   Longitude: "74.0060 W",
+// };
 
-let Mata = {
-  "Well No": "3",
-  Location: "UP",
-  Installation: "01/01/2021",
-  Latitude: "40.7128 N",
-  Longitude: "74.0060 W",
-};
+// let Mata = {
+//   "Well No": "3",
+//   Location: "UP",
+//   Installation: "01/01/2021",
+//   Latitude: "40.7128 N",
+//   Longitude: "74.0060 W",
+// };
 
-let Sata = {
-  "Well No": "4",
-  Location: "MP",
-  Installation: "01/01/2021",
-  Latitude: "40.7128 N",
-  Longitude: "74.0060 W",
-};
+// let Sata = {
+//   "Well No": "4",
+//   Location: "MP",
+//   Installation: "01/01/2021",
+//   Latitude: "40.7128 N",
+//   Longitude: "74.0060 W",
+// };
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
 // }
 
+
+
 const rows = [createData("1")];
 
 export default function BasicCard() {
+
+  // -------NotFlowing-----------------//
+const [notFlowing, setNotFlowing] = useState(0);
+
+useEffect(()=>{
+  const fetchNotFlowing = async () => {
+    const data = await NotFlowingWell();
+    if(data && data.totalNotFlowingConditions){
+      const count = data.totalNotFlowingConditions || 0;
+      setNotFlowing(count);
+    }
+  };
+  fetchNotFlowing();
+},[]);
+
+const [Flowing,setFlowing] = useState(0);
+
+useEffect(()=>{
+  const fetchFlowingWell = async () => {
+    const data = await FlowingWell();
+    if(data && data.totalFlowingConditions){
+      const count = data.totalFlowingConditions || 0;
+      setFlowing(count);
+    }
+  };
+  fetchFlowingWell();
+},[]);
+
   return (
     <Grid container gap={2}>
       <Grid container spacing={2}>
@@ -148,7 +172,7 @@ export default function BasicCard() {
               sx={{ display: "flex", justifyContent: "space-between" }}
             >
               <img src={well} alt="" />
-              <Box fontSize="x-large">0</Box>
+              <Box fontSize="x-large">{Flowing}</Box>
             </Grid>
             <CardContent className="card-Content-text">
               <Typography fontSize="large">Flowing Wells</Typography>
@@ -163,7 +187,7 @@ export default function BasicCard() {
               sx={{ display: "flex", justifyContent: "space-between" }}
             >
               <img src={well} alt="" />
-              <Box fontSize="x-large">0</Box>
+              <Box fontSize="x-large">{notFlowing}</Box>
             </Grid>
             <CardContent className="card-Content-text">
               <Typography fontSize="large">Non Flowing Wells</Typography>
