@@ -25,7 +25,6 @@ import { FaPlus } from "react-icons/fa";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
@@ -545,7 +544,7 @@ function AddWell() {
             {/* </Grid>  */}
           </Grid>
         </Grid>
-        <Grid container display={"flex"} justifyContent={'end'} pr={1.7} >
+        <Grid container display={"flex"} justifyContent={'end'} pr={1.7} mb={1.5} >
           <Button
             variant="contained"
             sx={{
@@ -1081,7 +1080,7 @@ function AddWell() {
 
               <Grid item lg={3}>
                 <Stack spacing={1}>
-                  <Typography variant="h5">Sensor Output(Min)</Typography>
+                  <Typography variant="h5">Signal Minimum</Typography>
                   <FormControl fullWidth size="small">
                     <Select
                       // labelId="demo-select-small-label"
@@ -1103,7 +1102,7 @@ function AddWell() {
               </Grid>
               <Grid item lg={3}>
                 <Stack spacing={1}>
-                  <Typography variant="h5">Sensor Output(Max)</Typography>
+                  <Typography variant="h5">Signal Maximum</Typography>
                   <FormControl fullWidth size="small">
                     <Select
                       // labelId="demo-select-small-label"
@@ -1337,12 +1336,17 @@ function AddWell() {
               <Typography pl={3} fontSize={"25px"}>
                 ABP (After Beam Pressure)
               </Typography>
-              <IconButton onClick={handleOpen}>
-                <EditIcon fontSize="large" />
-              </IconButton>
+              <Box>
+                <IconButton onClick={handleOpen}>
+                  <EditIcon fontSize="large" />
+                </IconButton>
+                <IconButton>
+                  <DeleteIcon fontSize="large" />
+                </IconButton>
+              </Box>
             </Box>
 
-            <Grid item xs={12} sm={6} md={3} lg={3}>
+            {/* <Grid item xs={12} sm={6} md={3} lg={3}>
               <Stack spacing={1}>
                 <Typography variant="h5">Process</Typography>
 
@@ -1356,7 +1360,7 @@ function AddWell() {
                   90 %
                 </TextField>
               </Stack>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6} md={3} lg={3}>
               <Stack spacing={1} >
                 <Typography variant="h5">Ports</Typography>
@@ -1417,7 +1421,7 @@ function AddWell() {
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
               <Stack spacing={1}>
-                <Typography variant="h5">Sensor Output</Typography>
+                <Typography variant="h5">Signal Minimum</Typography>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -1431,7 +1435,21 @@ function AddWell() {
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
               <Stack spacing={1}>
-                <Typography variant="h5">Value Minimum</Typography>
+                <Typography variant="h5">Signal Maximum</Typography>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={"Sensor Output"}
+                >
+                  {" "}
+                  90 %
+                </TextField>
+              </Stack>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} lg={3}>
+              <Stack spacing={1}>
+                <Typography variant="h5">Display Minimum</Typography>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -1446,7 +1464,7 @@ function AddWell() {
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
               <Stack spacing={1}>
-                <Typography variant="h5">Value Maximum</Typography>
+                <Typography variant="h5">Display Maximum</Typography>
                 <TextField
                   fullWidth
                   variant="outlined"

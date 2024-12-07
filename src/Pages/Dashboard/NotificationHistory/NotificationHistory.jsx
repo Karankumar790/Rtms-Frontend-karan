@@ -562,7 +562,7 @@ function NotificationHistory() {
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
                 {/* <StyledTableCell>Status</StyledTableCell> */}
                 <StyledTableCell>Description</StyledTableCell>
-                <StyledTableCell>View</StyledTableCell>
+                <StyledTableCell>Status</StyledTableCell>
                 <StyledTableCell> History View</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -599,16 +599,16 @@ function NotificationHistory() {
                   // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell>
-                    <IconButton
+                    {/* <IconButton
                       sx={{
                         color: "grey",
                         "&:hover": { color: "darkred" },
                         marginRight: "5px",
                       }}
-                      onClick={handleOpen}
+                      // onClick={handleOpen}
                     >
                       <VisibilityIcon fontSize="large" />
-                    </IconButton>
+                    </IconButton> */}
                   </StyledTableCell>
                   <StyledTableCell>
                     {/* Pass state and handlers to the modal */}
@@ -1003,7 +1003,7 @@ function NotificationHistory() {
           </Grid>
         </Grid>
       </Modal>
-      {/* ------------------------------Table for Desktop---------------------------- */}
+      {/* ------------------------------Table for Moblie---------------------------- */}
       <Grid
         container
         md={12}
