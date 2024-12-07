@@ -107,15 +107,17 @@ function AddWell() {
   const handleClose = () => setOpen(false);
 
 
-
   useEffect(() => {
     const storedWellDetails = localStorage.getItem("wellDetails");
     if (storedWellDetails) {
-      setWellDetails(JSON.parse(storedWellDetails));
+      try {
+        const parsedDetails = JSON.parse(storedWellDetails);
+        setWellDetails(parsedDetails);
+      } catch (error) {
+        console.error("Invalid JSON in localStorage for 'wellDetails':", error);
+      }
     }
-    // console.log(wellDetails,"..........................")
   }, []);
-
 
 
   // const handleChangeParameter = (event) => {

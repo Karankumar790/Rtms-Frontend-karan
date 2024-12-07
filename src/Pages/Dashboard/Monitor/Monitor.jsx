@@ -634,7 +634,7 @@ function Monitor() {
         sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
       >
         <TableContainer component={Paper}>
-          <Table aria-label="customized table">
+          <Table aria-label="customized table">  
             <TableHead>
               <TableRow>
                 <StyledTableCell>Well No.</StyledTableCell>

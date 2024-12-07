@@ -43,6 +43,7 @@ export const getAllInstallation = async (location, organizationName) => {
   try {
     const response = await axios.get(
       `${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
+      `${WELL_API}/get-InstallationsByLocation?location=${location}&organizationName=${organizationName}`
     );
     return response.data;
   } catch (error) {
@@ -58,7 +59,7 @@ export const addWellNum = async (formData) => {
       `${WELL_API}/save-WellTypeForInstallation`,
       formData
     );
-    return response.data
+    return response.data;
   } catch (error) {
     return catchError(error);
   }
@@ -95,7 +96,8 @@ export const getWellDetails = async (
 
 export const saveWellDetails = async (details) => {
   try {
-    const response = await axios.post(`${WELL_API}/save-WellDetails?location=${details.location}&installation=${details.installation}&wellType=${details.wellType}&wellNumber=${details.wellNumber}&organizationName=${details.organizationName}`,
+    const response = await axios.post(
+      `${WELL_API}/save-WellDetails?location=${details.location}&installation=${details.installation}&wellType=${details.wellType}&wellNumber=${details.wellNumber}&organizationName=${details.organizationName}`,
       {
         landmark: details.landmark,
         latitude: details.latitude,
@@ -125,8 +127,7 @@ export const getLocationOfWell = async (wellNumber, organizationName) => {
   }
 };
 
-
-// DEVICE ALL DATA API 
+// DEVICE ALL DATA API
 export const deviceData = async (organizationName) => {
   try {
     const response = await axios.get(
@@ -138,9 +139,9 @@ export const deviceData = async (organizationName) => {
     return catchError;
 
   }
-}
+};
 
-// DEVICE ALL DATA API 
+// DEVICE ALL DATA API
 export const wellMonitorData = async (organizationName) => {
   try {
     const response = await axios.get(

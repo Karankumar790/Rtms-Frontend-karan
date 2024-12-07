@@ -136,7 +136,7 @@ function App() {
     {
       path: "/dashboard",
       element: <PrivateRoute />,
-      children: [
+      children: [ 
         {
           path: "",
           element: <Dashboard />,
