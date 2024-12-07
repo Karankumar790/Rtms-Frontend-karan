@@ -148,7 +148,7 @@ function DeviceManage() {
           item
           sx={{ display: "flex", height: "3%",width:'3%' }}
         >
-          <PrintIcon sx={{ height: "fit-content", width:'fit-content' }} />
+            <PrintIcon sx={{ height: "fit-content", width:'fit-content',color:'#F34E41' }} />
         </Grid>
       </Grid>
       <Grid item lg={1} display={"flex"}  justifyContent={"end"} md={2} sm={2} xs={12} >

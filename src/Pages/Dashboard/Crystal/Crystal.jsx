@@ -409,7 +409,7 @@ function Monitor() {
           container
           sx={{ display: "flex",  height: "40%", p: "6" }}
         >
-          <PrintIcon sx={{ height: "2%", width: "2%" }} />
+          <PrintIcon sx={{ height: "2%", width: "2%",color:'#F34E41' }} />
         </Grid>
       </Grid>
 

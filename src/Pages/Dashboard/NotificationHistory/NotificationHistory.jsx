@@ -223,6 +223,7 @@ function NotificationHistory() {
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
 
+
   const [formData, setFormData] = useState({
     to: "",
     cc: "",
@@ -275,9 +276,8 @@ function NotificationHistory() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${
-      theme.palette.mode === "dark" ? grey[900] : grey[50]
-    };
+    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
+      };
 
     &:hover {
       border-color: ${blue[400]};
@@ -285,8 +285,7 @@ function NotificationHistory() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${
-        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -315,6 +314,7 @@ function NotificationHistory() {
   const handleTimeChange = (event) => {
     setSelectedTime(event.target.value);
   };
+
 
   return (
     <div
@@ -562,7 +562,7 @@ function NotificationHistory() {
                 {/* <StyledTableCell >Well Port</StyledTableCell> */}
                 {/* <StyledTableCell>Status</StyledTableCell> */}
                 <StyledTableCell>Description</StyledTableCell>
-                <StyledTableCell>View</StyledTableCell>
+                <StyledTableCell>Status</StyledTableCell>
                 <StyledTableCell> History View</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -572,7 +572,7 @@ function NotificationHistory() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    // sx={{ width: "13%" }}
+                  // sx={{ width: "13%" }}
                   >
                     {/* {row.name} */}
                   </StyledTableCell>
@@ -599,16 +599,16 @@ function NotificationHistory() {
                   // sx={{ width: "13%" }}
                   ></StyledTableCell>
                   <StyledTableCell>
-                    <IconButton
+                    {/* <IconButton
                       sx={{
                         color: "grey",
                         "&:hover": { color: "darkred" },
                         marginRight: "5px",
                       }}
-                      onClick={handleOpen}
+                      // onClick={handleOpen}
                     >
                       <VisibilityIcon fontSize="large" />
-                    </IconButton>
+                    </IconButton> */}
                   </StyledTableCell>
                   <StyledTableCell>
                     {/* Pass state and handlers to the modal */}
@@ -1003,7 +1003,7 @@ function NotificationHistory() {
           </Grid>
         </Grid>
       </Modal>
-      {/* ------------------------------Table for Desktop---------------------------- */}
+      {/* ------------------------------Table for Moblie---------------------------- */}
       <Grid
         container
         md={12}
