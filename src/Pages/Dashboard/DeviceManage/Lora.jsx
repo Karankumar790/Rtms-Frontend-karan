@@ -5,10 +5,6 @@ import { Link } from 'react-router-dom'
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
-
-
-
-
 // -------------------------New Born Table--------------------------------------------
 
 const StyleTableCell = styled(TableCell)(({ theme }) => ({

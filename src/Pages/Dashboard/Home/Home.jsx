@@ -41,6 +41,7 @@ import { borderRadius } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import CloseIcon from "@mui/icons-material/Close";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { FlowingWell, NotFlowingWell } from "../../../apis/wellService";
 
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -234,6 +235,8 @@ export default function BasicCard() {
   const [totalWellsCount, setTotalWellsCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
+const [notFlowing, setNotFlowing] = useState(0);
+
 
   const [formData, setFormData] = useState({
     to: "",
@@ -341,6 +344,30 @@ export default function BasicCard() {
     fetchTotalWells();
   }, []);
 
+  useEffect(()=>{
+    const fetchNotFlowing = async () => {
+      const data = await NotFlowingWell();
+      if(data && data.totalNotFlowingConditions){
+        const count = data.totalNotFlowingConditions || 0;
+        setNotFlowing(count);
+      }
+    };
+    fetchNotFlowing();
+  },[]);
+  
+  const [Flowing,setFlowing] = useState(0);
+  
+  useEffect(()=>{
+    const fetchFlowingWell = async () => {
+      const data = await FlowingWell();
+      if(data && data.totalFlowingConditions){
+        const count = data.totalFlowingConditions || 0;
+        setFlowing(count);
+      }
+    };
+    fetchFlowingWell();
+  },[]);
+
   return (
     <div
       style={{
@@ -369,7 +396,7 @@ export default function BasicCard() {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <img src={well} alt="" />
-                <Box fontSize="x-large">0</Box>
+                <Box fontSize="x-large">{Flowing}</Box>
               </Grid>
               <CardContent className="card-Content-text">
                 <Typography fontSize="large">Flowing Wells</Typography>
@@ -384,7 +411,7 @@ export default function BasicCard() {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <img src={well} alt="" />
-                <Box fontSize="x-large">0</Box>
+                <Box fontSize="x-large">{notFlowing}</Box>
               </Grid>
               <CardContent className="card-Content-text">
                 <Typography fontSize="large">Non Flowing Wells</Typography>
