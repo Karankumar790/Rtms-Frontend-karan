@@ -59,11 +59,18 @@ function createData(name) {
 
 const rows = [];
 
-function OrgMessageForward() {
-  const [installation, setInstallation] = useState("");
+const OrgMessageForward = () => {
+  const [selectedPositionDepartment, setSelectedPositionDepartment] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  const handleChangeInstallation = (event) => {
-    setInstallation(event.target.value);
+  const handleDropdownChange = (dropdown, value) => {
+    setActiveDropdown(dropdown);
+    if (dropdown === 'department') {
+      setSelectedPositionDepartment(value);
+    } else if (dropdown === 'category') {
+      setSelectedCategory(value);
+    }
   };
 
   return (
@@ -80,97 +87,165 @@ function OrgMessageForward() {
               <Box display="flex" alignItems="center" gap={1}>
                 <AccountBalanceIcon />
                 <FormControl fullWidth size="small">
-                  <InputLabel id="activity-label">Department</InputLabel>
+                  <InputLabel id="activity-label">Alarm</InputLabel>
                   <Select
                     labelId="activity-label"
                     id="activity-select"
-                    value={installation}
+                    value={selectedPositionDepartment}
                     label="Activity"
-                    onChange={handleChangeInstallation}
+                    onChange={(e) =>
+                      handleDropdownChange('department', e.target.value)
+                    }
                   >
-                    <MenuItem value="">
+                    <MenuItem value="10">
                       <em>All</em>
                     </MenuItem>
-                    <MenuItem value={10}>Well</MenuItem>
-                    <MenuItem value={20}>Router</MenuItem>
-                    <MenuItem value={30}>Device</MenuItem>
+                    <MenuItem value={20}>Notification</MenuItem>
+                    <MenuItem value={30}>Complaint</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
             </Grid>
 
             {/* Levels */}
-            {[1, 2].map((level) => (
+            <Grid
+              item
+              xs={12}
+              sm={2}
+              md={2}
+              lg={9.6}
+              sx={{ display: "flex", alignItems: "center", gap: 1 }}
+            >
+              {/* TimeField */}
               <Grid
-                item
-                xs={12}
-                sm={2}
-                md={2}
-                lg={4.8}
-                key={level}
-                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                item lg={4} md={4} sm={4} xs={5}
+                display="flex"
+                alignItems="center"
+                gap={1}
+                sx={{ flex: 1 }}
               >
-                {/* TimeField */}
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                  sx={{ flex: 1 }}
-                >
-                  <AccessAlarmIcon />
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer
-                      components={["TimeField"]}
-                      sx={{ padding: 0, margin: 0, flex: 1 }}
+                <AccessAlarmIcon />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["TimeField"]}
+                    sx={{ padding: 0, margin: 0, flex: 1 }}
+                  >
+                    <TimeField
+                      defaultValue={dayjs("2022-04-17T00:00")}
+                      format="HH:mm:ss"
+                      size="small"
+                      fullWidth
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </Grid>
+              <Grid item lg={4} md={4} sm={4} xs={5}>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <AccountBalanceIcon />
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="category-label">Department</InputLabel>
+                    <Select
+                      labelId="category-label"
+                      id="category-select"
+                      value={selectedCategory}
+                      label="Category"
+                      onChange={(e) =>
+                        handleDropdownChange('category', e.target.value)
+                      }
                     >
-                      <TimeField
-                        defaultValue={dayjs("2022-04-17T00:00")}
-                        format="HH:mm:ss"
-                        size="small"
-                        fullWidth
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </Box>
-                <Grid item lg={4} md={4} sm={4} xs={5}>
-                  <Box display="flex" alignItems="center" gap={1}>
-                    <AccountBalanceIcon />
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="activity-label">Department</InputLabel>
-                      <Select
-                        labelId="activity-label"
-                        id="activity-select"
-                        value={installation}
-                        label="Activity"
-                        onChange={handleChangeInstallation}
-                      >
-                        <MenuItem value="">
-                          <em>All</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Well</MenuItem>
-                        <MenuItem value={20}>Router</MenuItem>
-                        <MenuItem value={30}>Device</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </Grid>
-                {/* Level TextField */}
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                  sx={{ flex: 1 }}
-                >
-                  <Person3Icon />
-                  <TextField
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    label={`Level ${level}`}
-                  />
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Manager</MenuItem>
+                      <MenuItem value={20}>Manager</MenuItem>
+                      <MenuItem value={30}>Device</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Box>
               </Grid>
-            ))}
+
+              <Grid
+                item
+                lg={5} md={4} sm={4} xs={5}
+                display="flex"
+                alignItems="center"
+                gap={1}
+                sx={{ flex: 1 }}
+
+              >
+                <Person3Icon />
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  label={`Position `}
+                />
+              </Grid>
+
+              <Grid
+                item lg={4} md={4} sm={4} xs={5}
+                display="flex"
+                alignItems="center"
+                gap={1}
+                sx={{ flex: 1 }}
+              >
+                <AccessAlarmIcon />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["TimeField"]}
+                    sx={{ padding: 0, margin: 0, flex: 1 }}
+                  >
+                    <TimeField
+                      defaultValue={dayjs("2022-04-17T00:00")}
+                      format="HH:mm:ss"
+                      size="small"
+                      fullWidth
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              </Grid>
+              <Grid item lg={5} md={4} sm={4} xs={5}>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <AccountBalanceIcon />
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="category-label">Department</InputLabel>
+                    <Select
+                      labelId="category-label"
+                      id="category-select"
+                      value={selectedCategory}
+                      label="Category"
+                      onChange={(e) =>
+                        handleDropdownChange('category', e.target.value)
+                      }
+                    >
+                      <MenuItem value="">
+                        <em>All</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Manager</MenuItem>
+                      <MenuItem value={20}>Manager</MenuItem>
+                      <MenuItem value={30}>Device</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Grid>
+              {/* Level TextField */}
+              <Grid
+                item
+                lg={5} md={4} sm={4} xs={5}
+                display="flex"
+                alignItems="center"
+                gap={1}
+                sx={{ flex: 1 }}
+              >
+                <Person3Icon />
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  label={`Position `}
+                />
+              </Grid>
+            </Grid>
 
             {/* Add Button */}
             <Grid
@@ -202,7 +277,6 @@ function OrgMessageForward() {
         {/* --------------------------------------------TABLE-------------------------------------- */}
         <Grid
           container
-          // p={1}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
           mt={1}
         >
@@ -210,31 +284,6 @@ function OrgMessageForward() {
             sx={{ maxHeight: 320, height: 1000, overflowY: "auto" }}
           >
             <Table aria-label="customized table" stickyHeader>
-              {/* <TableHead>
-                <TableRow>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Notification
-                  </StyledTableCell>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Delay
-                  </StyledTableCell>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Level 1
-                  </StyledTableCell>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Delay
-                  </StyledTableCell>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Level 2
-                  </StyledTableCell>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Delay
-                  </StyledTableCell>
-                  <StyledTableCell align="left" style={{ width: "10%" }}>
-                    Level 3
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead> */}
               <TableBody>
                 {rows.map((row) => (
                   <StyledTableRow key={row.name}>
@@ -256,6 +305,7 @@ function OrgMessageForward() {
       </Grid>
     </>
   );
-}
+};
 
 export default OrgMessageForward;
+

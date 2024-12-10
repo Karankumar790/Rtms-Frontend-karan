@@ -989,7 +989,7 @@ function AddWell() {
               </Grid> */}
               <Grid item lg={3} gap={2}>
                 <Stack spacing={1}>
-                  <Typography variant="h5">Ports</Typography>
+                  <Typography variant="h5">Variables</Typography>
                   <FormControl fullWidth size="small">
                     <Select
                       fullWidth
@@ -1006,11 +1006,13 @@ function AddWell() {
                         },
                       }}
                     >
-                      <MenuItem value={20}>1</MenuItem>
-                      <MenuItem value={20}>2</MenuItem>
-                      <MenuItem value={20}>3</MenuItem>
-                      <MenuItem value={20}>4</MenuItem>
-                      <MenuItem value={20}>5</MenuItem>
+                      <MenuItem value={20}>Port 1</MenuItem>
+                      <MenuItem value={20}>Port 2</MenuItem>
+                      <MenuItem value={20}>Port 3</MenuItem>
+                      <MenuItem value={20}>Port 4</MenuItem>
+                      <MenuItem value={20}>Port 5</MenuItem>
+                      <MenuItem value={20}>Solor</MenuItem>
+                      <MenuItem value={20}>Battery</MenuItem>
                       {/* <MenuItem value={20}>Speed</MenuItem> */}
                     </Select>
                   </FormControl>
@@ -1061,20 +1063,17 @@ function AddWell() {
                         },
                       }}
                     >
+                      <MenuItem value={"°C"}>Units</MenuItem>
                       <MenuItem value={"°C"}>°C</MenuItem>
                       <MenuItem value={"Kg/cm²"}>Kg/cm²</MenuItem>
-                      <MenuItem value={"%"}>%</MenuItem>
-                      <MenuItem value={"meter"}>meter</MenuItem>
-                      <MenuItem value={"centimeter"}>centimeter</MenuItem>
+                      <MenuItem value={"meter"}>Meter</MenuItem>
                       <MenuItem value={"m³/H"}>m³/H</MenuItem>
-                      <MenuItem value={"galon/H"}>galon/H</MenuItem>
-                      <MenuItem value={"rpm"}>rpm</MenuItem>
+                      <MenuItem value={"galon/H"}>Gal/H</MenuItem>
+                      <MenuItem value={"rpm"}>RPM</MenuItem>
                       <MenuItem value={"Volt"}>Volt</MenuItem>
-                      <MenuItem value={"ampere"}>ampere</MenuItem>
-                      <MenuItem value={"hz"}>hz</MenuItem>
+                      <MenuItem value={"ampere"}>Amp</MenuItem>
+                      <MenuItem value={"hz"}>Hz</MenuItem>
                       <MenuItem value={"KWH"}>KWH </MenuItem>
-                      <MenuItem value={"0-3 V"}>0-3 V </MenuItem>
-                      <MenuItem value={"0-100 mV"}>0-100 mV </MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -1083,45 +1082,29 @@ function AddWell() {
               <Grid item lg={3}>
                 <Stack spacing={1}>
                   <Typography variant="h5">Signal Minimum</Typography>
-                  <FormControl fullWidth size="small">
-                    <Select
-                      // labelId="demo-select-small-label"
-                      // label="Sensor Output"
-                      size="small"
-                      name="sensorOutput"
-                    // value={parameterValues.sensorOutput}
-                    // onChange={handleChangeParameter}
-                    >
-                      {/* <MenuItem value={""}>all </MenuItem> */}
-                      <MenuItem value={""}>
-                        <Typography>{/* Kg/cm<sup>2</sup> */}</Typography>
-                      </MenuItem>
-                      <MenuItem value={"ok"}>okk</MenuItem>
-                      <MenuItem value={"ims"}>ims</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <TextField
+                    variant="outlined"
+                    label="Signal Minimum"
+                    size="small"
+                    fullWidth
+                    name="minVal"
+                  // value={parameterValues.minVal}
+                  // onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
                 <Stack spacing={1}>
                   <Typography variant="h5">Signal Maximum</Typography>
-                  <FormControl fullWidth size="small">
-                    <Select
-                      // labelId="demo-select-small-label"
-                      // label="Sensor Output"
-                      size="small"
-                      name="sensorOutput"
-                    // value={parameterValues.sensorOutput}
-                    // onChange={handleChangeParameter}
-                    >
-                      {/* <MenuItem value={""}>all </MenuItem> */}
-                      <MenuItem value={""}>
-                        <Typography>{/* Kg/cm<sup>2</sup> */}</Typography>
-                      </MenuItem>
-                      <MenuItem value={"ok"}>okk</MenuItem>
-                      <MenuItem value={"ims"}>ims</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <TextField
+                    variant="outlined"
+                    label="Signal Maximum"
+                    size="small"
+                    fullWidth
+                    name="minVal"
+                  // value={parameterValues.minVal}
+                  // onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>

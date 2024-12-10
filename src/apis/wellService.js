@@ -14,8 +14,9 @@ export const addLocation = async (formData) => {
 };
 
 // GET ALL LOCATION
-export const getLocation = async (organizationName) => {
+export const getLocation = async () => {
   try {
+    const organizationName='OIL AND NATURAL GAS CORPORATION'
     const response = await axios.get(
       `${WELL_API}/get-AllLocations?organizationName=${organizationName}`
     );
@@ -198,6 +199,17 @@ export const FlowingWell = async () => {
   try {
     const response = await axios.get(
       `${WELL_API}/count-AllFlowingConditionsForOrganization?organizationName=OIL AND NATURAL GAS CORPORATION`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+export const TotalWell = async () => {
+  try {
+    const response = await axios.get(
+      `${WELL_API}/count-TotalWellNumbers`
     );
     return response.data;
   } catch (error) {

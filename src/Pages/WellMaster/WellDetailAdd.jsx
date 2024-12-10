@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   IconButton,
@@ -18,6 +18,8 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { styled } from "@mui/material/styles";
+import { toast } from "react-toastify";
+import { addLocation, getLocation } from "../../apis/wellService";
 
 function WellDetailAdd() {
   const handleEdit = () => {
@@ -66,6 +68,54 @@ function WellDetailAdd() {
     setValue3(event.target.value);
   };
 
+// -------Adding New Location---------
+
+// const [location, setLocation] = useState([]);
+
+
+// const handleAddLocation = async() => {
+//   if(!location){
+//     toast.error("Location is required");
+//     return;
+//   }
+//   try{
+//     const formData = {
+//       location: location,
+//       organizationName,
+//     };
+//     const response = await addLocation(formData);
+//     if(response){
+//       toast.success(response.message);
+//       setLocation("");
+
+//       setLocation((prevLocation) => {
+//         const updatedLocation = [...prevLocation, formData.location];
+
+//         return updatedLocation;
+//       });
+//     } else {
+//       toast.error(response.message);
+//     }
+//   } catch (error) {
+//     toast.error("Something went wrong")
+//   }
+// };
+
+//  fetch location
+
+// useEffect(()=>{
+//   const fetchLocation = async () => {
+    
+//     const data = await getLocation();
+//     if(data && data.message === "Well location fetched successfully"){
+//       setLocation(data.data);
+//     }
+//   };
+//   fetchLocation();
+// },[organizationName]);
+
+
+
   return (
     <div>
       <Grid container spacing={2}>
@@ -74,10 +124,18 @@ function WellDetailAdd() {
           {/* Input and Add Button */}
           <Grid container spacing={2} alignItems="center">
             <Grid item lg={9.5} xs={12}>
-              <TextField label="Add Location" size="small" fullWidth />
+              <TextField 
+              label="Add Location" 
+              size="small"
+              // value={location}
+              // onChange={(e) => {
+              //   setLocation(e.target.value);
+              // }} 
+              fullWidth />
             </Grid>
             <Grid item lg={2.5} xs={12}>
               <Button
+              //  onClick={handleAddLocation}
                 sx={{
                   color: "white",
                   backgroundColor: "green",

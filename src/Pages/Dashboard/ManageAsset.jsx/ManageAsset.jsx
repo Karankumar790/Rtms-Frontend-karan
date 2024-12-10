@@ -117,6 +117,10 @@ function ManageAsset() {
   //   "Close Notification",
   //   "Delete User",
   // ];
+
+
+
+
   // Function to initiate Updating department
   const handleEditClick = (index) => {
     setNewDepartmentName(departments[index]); // Set current department name to input
@@ -276,9 +280,9 @@ function ManageAsset() {
       if (result && result.success) {
         toast.success(
           result.message ||
-            (isEditingPosition
-              ? "Position updated successfully"
-              : "Position added successfully")
+          (isEditingPosition
+            ? "Position updated successfully"
+            : "Position added successfully")
         );
         setPosition(""); // Clear position input
         setSelectedPositionDepartment(""); // Clear department selection
@@ -405,8 +409,8 @@ function ManageAsset() {
             departmentIndex
           ].approvalChains.map((chain) =>
             chain.action === oldAction &&
-            chain.level1 === oldLevel1 &&
-            chain.level2 === oldLevel2
+              chain.level1 === oldLevel1 &&
+              chain.level2 === oldLevel2
               ? { action: approvalChains, level1, level2 }
               : chain
           );
@@ -795,13 +799,18 @@ function ManageAsset() {
     <div>
       <Paper>
         <Grid container gap={1} p={2}>
-          <Box display="flex" gap={1}>
-            <IconButton>
-              <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
-            </IconButton>
-            <Typography variant="h4" fontWeight={700} mt={1}>
-              {organizationName ? organizationName : "N/A"}
-            </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+            <Box display="flex" gap={1}>
+              <IconButton>
+                <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
+              </IconButton>
+              <Typography variant="h4" fontWeight={700} mt={1}>
+                {organizationName ? organizationName : "N/A"}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="h5">ID:</Typography>
+            </Box>
           </Box>
           {/* Organization Logo (Top of Organization Name) */}
           {/* {isEditOrganization && formData.organizationlogo && (
@@ -839,10 +848,10 @@ function ManageAsset() {
                 <Grid
                   item
                   lg={6}
-                  // bgcolor={"yellow"}
-                  // position='absolute'
-                  // width={"100%"}
-                  // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
+                // bgcolor={"yellow"}
+                // position='absolute'
+                // width={"100%"}
+                // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
                 >
                   <Box
                     // bgcolor={'yellowgreen'}
@@ -893,7 +902,7 @@ function ManageAsset() {
                 { name: "fax", label: "Fax" },
                 { name: "email", label: "Email" },
                 { name: "business", label: "Business" },
-                
+
               ].map((field) => (
                 <Grid
                   container
@@ -980,233 +989,232 @@ function ManageAsset() {
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
-      <Card sx={{ my: 2 }}>
-        <CardContent>
-          <Grid container mt={0.1}>
-            <Grid
-              container
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              {/* ------------------------ADD DEPARTMENT------------------------------ */}
-              <Grid
-                item
-                lg={3.9}
-                md={6}
-                sm={8}
-                xs={12}
-                p={2}
-                gap={1}
-                display="flex"
-                flexDirection={"column"}
-                component={Paper}
-                boxShadow={4}
-              >
-                <Box display="flex" gap={1}>
-                  <AssetsIcon />
-                  <Typography variant="h5">Add Department</Typography>
-                </Box>
-                <Grid container spacing={1}>
-                  <Grid item lg={9.5} md={10.5} sm={10} xs={12}>
-                    <TextField
-                      variant="outlined"
-                      size="small"
-                      label="Department"
-                      value={newDepartmentName} // Bind value to newDepartmentName state
-                      onChange={(e) => setNewDepartmentName(e.target.value)}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item lg={2.5} md={1} sm={1} xs={12}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      onClick={handleAddOrUpdateDepartment}
-                      size="small"
-                      sx={{
-                        // backgroundColor: "green",
-                        backgroundColor: isEditing ? "blue" : "green",
-                        fontSize: "16px",
-                        // width: "162px",
-                        "&:hover": {
-                          backgroundColor: isEditing
-                            ? "darkorange"
-                            : "darkgreen",
-                        },
-                      }}
-                    >
-                      {isEditing ? "UPDATE" : "ADD"}{" "}
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Grid container>
-                  <Grid item lg={12} md={12} sm={12} xs={12}>
-                    <TableContainer
-                      sx={{ maxHeight: 320, height: 600, overflowY: "auto" }}
-                    >
-                      <Table aria-label="customized table" stickyHeader>
-                        {/* <TableHead>
+
+      <Grid container mt={3}>
+        <Grid
+          container
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          {/* ------------------------ADD DEPARTMENT------------------------------ */}
+          <Grid
+            item
+            lg={3.9}
+            md={6}
+            sm={8}
+            xs={12}
+            p={2}
+            gap={1}
+            display="flex"
+            flexDirection={"column"}
+            component={Paper}
+            boxShadow={4}
+          >
+            <Box display="flex" gap={1}>
+              <AssetsIcon />
+              <Typography variant="h5">Add Department</Typography>
+            </Box>
+            <Grid container spacing={1}>
+              <Grid item lg={9.5} md={10.5} sm={10} xs={12}>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Department"
+                  value={newDepartmentName} // Bind value to newDepartmentName state
+                  onChange={(e) => setNewDepartmentName(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item lg={2.5} md={1} sm={1} xs={12}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  onClick={handleAddOrUpdateDepartment}
+                  size="small"
+                  sx={{
+                    // backgroundColor: "green",
+                    backgroundColor: isEditing ? "blue" : "green",
+                    fontSize: "16px",
+                    // width: "162px",
+                    "&:hover": {
+                      backgroundColor: isEditing
+                        ? "darkorange"
+                        : "darkgreen",
+                    },
+                  }}
+                >
+                  {isEditing ? "UPDATE" : "ADD"}{" "}
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
+                <TableContainer
+                  sx={{ maxHeight: 320, height: 600, overflowY: "auto" }}
+                >
+                  <Table aria-label="customized table" stickyHeader>
+                    {/* <TableHead>
                     <TableRow sx={{ msOverflowY: "scroll" }}>
                       <StyledTableCell sx={{ fontSize: "18px", width: "15%" }}>
                         Department
                       </StyledTableCell>
                     </TableRow>
                   </TableHead> */}
-                        <TableBody>
-                          {DepartmentLoading ? (
-                            <TableRow>
-                              <StyledTableCell colSpan={2}>
-                                Loading...
-                              </StyledTableCell>
-                            </TableRow>
-                          ) : departments && departments.length > 0 ? (
-                            departments.map((departmentName, index) => (
-                              <StyledTableRow key={index}>
-                                <StyledTableCell>
-                                  <Box
-                                    display="flex"
-                                    alignItems="center"
-                                    justifyContent="space-between"
+                    <TableBody>
+                      {DepartmentLoading ? (
+                        <TableRow>
+                          <StyledTableCell colSpan={2}>
+                            Loading...
+                          </StyledTableCell>
+                        </TableRow>
+                      ) : departments && departments.length > 0 ? (
+                        departments.map((departmentName, index) => (
+                          <StyledTableRow key={index}>
+                            <StyledTableCell>
+                              <Box
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="space-between"
+                              >
+                                <span style={{ fontSize: "medium" }}>
+                                  {departmentName}
+                                </span>
+                                <Box display="flex">
+                                  <IconButton
+                                    onClick={() => handleEditClick(index)}
                                   >
-                                    <span style={{ fontSize: "medium" }}>
-                                       {departmentName}
-                                    </span>
-                                    <Box display="flex">
-                                      <IconButton
-                                        onClick={() => handleEditClick(index)}
-                                      >
-                                        {" "}
-                                        <EditIcon fontSize="large" />
-                                      </IconButton>{" "}
-                                      <IconButton
-                                        sx={{
-                                          color: "red",
-                                          "&:hover": { color: "darkred" },
-                                          marginRight: "8px",
-                                        }}
-                                        onClick={() =>
-                                          handleDeleteDepartment(departmentName)
-                                        }
-                                      >
-                                        <DeleteForeverIcon fontSize="large" />
-                                      </IconButton>
-                                    </Box>
-                                  </Box>
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            ))
-                          ) : (
-                            <TableRow>
-                              <StyledTableCell
-                                style={{ fontSize: "medium" }}
-                                colSpan={2}
-                              >
-                                No departments available
-                              </StyledTableCell>
-                            </TableRow>
-                          )}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Grid>
-                </Grid>
+                                    {" "}
+                                    <EditIcon fontSize="large" />
+                                  </IconButton>{" "}
+                                  <IconButton
+                                    sx={{
+                                      color: "red",
+                                      "&:hover": { color: "darkred" },
+                                      marginRight: "8px",
+                                    }}
+                                    onClick={() =>
+                                      handleDeleteDepartment(departmentName)
+                                    }
+                                  >
+                                    <DeleteForeverIcon fontSize="large" />
+                                  </IconButton>
+                                </Box>
+                              </Box>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <StyledTableCell
+                            style={{ fontSize: "medium", display: 'flex', justifyContent: 'center' }}
+                            colSpan={2}
+                          >
+                            No departments available
+                          </StyledTableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Grid>
+            </Grid>
+          </Grid>
 
-              {/* ------------------------ADD POSITION------------------------------ */}
-              <Grid
-                item
-                lg={8}
-                md={5.9}
-                sm={8}
-                xs={12}
-                p={2}
-                gap={1}
-                display="flex"
-                flexDirection={"column"}
-                component={Paper}
-                boxShadow="4"
-              >
-                <Box display="flex" gap={1}>
-                  <PersonIcon />
-                  <Typography variant="h5">Add Position</Typography>
-                </Box>
-                <Grid container spacing={1}>
-                  <Grid item lg={5.4} md={5.2} sm={5.5} xs={12}>
-                    {DepartmentLoading ? (
-                      <div>Loading...</div>
-                    ) : (
-                      <FormControl fullWidth size="small">
-                        <InputLabel id="demo-select-large-label">
-                          Department
-                        </InputLabel>
-                        <Select
-                          labelId="demo-select-small-label"
-                          id="demo-select-large"
-                          label="Department"
-                          value={selectedPositionDepartment}
-                          onChange={(e) =>
-                            setSelectedPositionDepartment(e.target.value)
-                          }
-                        >
-                          <MenuItem value="" disabled>
-                            Select a department
-                          </MenuItem>
-                          {departments && departments.length > 0 ? (
-                            departments.map((departmentName, index) => (
-                              <MenuItem
-                                key={departmentName}
-                                value={departmentName}
-                              >
-                               {departmentName}
-                              </MenuItem>
-                            ))
-                          ) : (
-                            <MenuItem value="" disabled>
-                              No departments available
-                            </MenuItem>
-                          )}
-                        </Select>
-                      </FormControl>
-                    )}
-                  </Grid>
-                  <Grid item lg={5.4} md={5.3} sm={5.5} xs={12}>
-                    <TextField
-                      variant="outlined"
-                      size="small"
-                      label="Position"
-                      value={position}
-                      onChange={(e) => setPosition(e.target.value)}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item lg={1.2} md={1} sm={1} xs={12}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      onClick={handlePositionSubmit}
-                      size="small"
-                      sx={{
-                        backgroundColor: isEditingPosition ? "blue" : "green",
-                        fontSize: "16px",
-                        // width: "300px",
-                        "&:hover": {
-                          backgroundColor: isEditingPosition
-                            ? "darkorange"
-                            : "darkgreen",
-                        },
-                      }}
+          {/* ------------------------ADD POSITION------------------------------ */}
+          <Grid
+            item
+            lg={8}
+            md={5.9}
+            sm={8}
+            xs={12}
+            p={2}
+            gap={1}
+            display="flex"
+            flexDirection={"column"}
+            component={Paper}
+            boxShadow="4"
+          >
+            <Box display="flex" gap={1}>
+              <PersonIcon />
+              <Typography variant="h5">Add Position</Typography>
+            </Box>
+            <Grid container spacing={1}>
+              <Grid item lg={5.4} md={5.2} sm={5.5} xs={12}>
+                {DepartmentLoading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="demo-select-large-label">
+                      Department
+                    </InputLabel>
+                    <Select
+                      labelId="demo-select-small-label"
+                      id="demo-select-large"
+                      label="Department"
+                      value={selectedPositionDepartment}
+                      onChange={(e) =>
+                        setSelectedPositionDepartment(e.target.value)
+                      }
                     >
-                      {isEditingPosition ? "Update" : "Add"}
-                    </Button>
-                  </Grid>
-                </Grid>
+                      <MenuItem value="" disabled>
+                        Select a department
+                      </MenuItem>
+                      {departments && departments.length > 0 ? (
+                        departments.map((departmentName, index) => (
+                          <MenuItem
+                            key={departmentName}
+                            value={departmentName}
+                          >
+                            {departmentName}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <MenuItem value="" disabled>
+                          No departments available
+                        </MenuItem>
+                      )}
+                    </Select>
+                  </FormControl>
+                )}
+              </Grid>
+              <Grid item lg={5.4} md={5.3} sm={5.5} xs={12}>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  label="Position"
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item lg={1.2} md={1} sm={1} xs={12}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  onClick={handlePositionSubmit}
+                  size="small"
+                  sx={{
+                    backgroundColor: isEditingPosition ? "blue" : "green",
+                    fontSize: "16px",
+                    // width: "300px",
+                    "&:hover": {
+                      backgroundColor: isEditingPosition
+                        ? "darkorange"
+                        : "darkgreen",
+                    },
+                  }}
+                >
+                  {isEditingPosition ? "Update" : "Add"}
+                </Button>
+              </Grid>
+            </Grid>
 
-                {/* Position Table */}
-                <Grid container>
-                  <TableContainer
-                    sx={{ maxHeight: 320, height: 400, overflowY: "scroll" }}
-                  >
-                    <Table aria-label="customized table" stickyHeader>
-                      {/* <TableHead>
+            {/* Position Table */}
+            <Grid container>
+              <TableContainer
+                sx={{ maxHeight: 320, height: 400, overflowY: "scroll" }}
+              >
+                <Table aria-label="customized table" stickyHeader>
+                  {/* <TableHead>
                       <TableRow sx={{ overflowY: "scroll" }}>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "15%" }}
@@ -1220,296 +1228,353 @@ function ManageAsset() {
                         </StyledTableCell>
                       </TableRow>
                     </TableHead> */}
-                      <TableBody>
-                        {positionLoading ? (
-                          <TableRow>
-                            <StyledTableCell colSpan={2}>
-                              Loading...
-                            </StyledTableCell>
-                          </TableRow>
-                        ) : departments && departments.length > 0 ? (
-                          positionRows.map((row, index) => (
-                            <StyledTableRow key={index}>
-                              <StyledTableCell
-                                component="th"
-                                scope="row"
-                                sx={{ width: "43%" }}
-                              >
-                                <Box
-                                  display="flex"
-                                  alignItems="center"
-                                  justifyContent="space-between"
+                  <TableBody>
+                    {positionLoading ? (
+                      <TableRow>
+                        <StyledTableCell colSpan={2}>
+                          Loading...
+                        </StyledTableCell>
+                      </TableRow>
+                    ) : departments && departments.length > 0 ? (
+                      positionRows.map((row, index) => (
+                        <StyledTableRow key={index}>
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            sx={{ width: "43%" }}
+                          >
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="space-between"
+                            >
+                              <span style={{ fontSize: "medium" }}>
+                                {row.departmentName}
+                              </span>
+                            </Box>
+                          </StyledTableCell>
+                          <StyledTableCell align="left" width={"52%"}>
+                            {row.positions.length > 0
+                              ? row.positions.map((position, posIndex) => (
+                                <div
+                                  key={posIndex}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    fontSize: "medium",
+
+                                  }}
                                 >
-                                  <span style={{ fontSize: "medium" }}>
-                                     {row.departmentName}
-                                  </span>
-                                </Box>
-                              </StyledTableCell>
-                              <StyledTableCell align="left" width={"52%"}>
-                                {row.positions.length > 0
-                                  ? row.positions.map((position, posIndex) => (
-                                      <div
-                                        key={posIndex}
-                                        style={{
-                                          display: "flex",
-                                          alignItems: "center",
-                                          justifyContent: "space-between",
-                                          fontSize: "medium",
-                                          
-                                        }}
-                                      >
-                                        {position}
-                                        <Box display="flex">
-                                          <IconButton
-                                            aria-label="edit"
-                                            size="small"
-                                            sx={{
-                                              color: "darkblue",
-                                              "&:hover": { color: "black" },
-                                            }}
-                                            onClick={() =>
-                                              handleEditPosition(
-                                                row.departmentName,
-                                                position
-                                              )
-                                            }
-                                          >
-                                            <EditIcon fontSize="large" />
-                                          </IconButton>
-                                          <IconButton
-                                            aria-label="delete"
-                                            size="small"
-                                            sx={{
-                                              color: "red",
-                                              "&:hover": { color: "darkred" },
-                                              marginRight: "8px",
-                                            }}
-                                            onClick={() =>
-                                              handleDeletePosition(
-                                                row.departmentName,
-                                                position
-                                              )
-                                            }
-                                          >
-                                            <DeleteForeverIcon fontSize="large" />
-                                          </IconButton>
-                                        </Box>
-                                      </div>
-                                    ))
-                                  : "No positions available"}
-                              </StyledTableCell>
-                            </StyledTableRow>
-                          ))
-                        ) : (
-                          <TableRow>
-                            <StyledTableCell
-                              style={{ fontSize: "large" }}
-                              colSpan={2}
-                            >
-                              No Positions available
-                            </StyledTableCell>
-                          </TableRow>
-                        )}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-              </Grid>
-              {/* ------------------------APPROVAL CHAIN------------------------------ */}
+                                  {position}
+                                  <Box display="flex">
+                                    <IconButton
+                                      aria-label="edit"
+                                      size="small"
+                                      sx={{
+                                        color: "darkblue",
+                                        "&:hover": { color: "black" },
+                                      }}
+                                      onClick={() =>
+                                        handleEditPosition(
+                                          row.departmentName,
+                                          position
+                                        )
+                                      }
+                                    >
+                                      <EditIcon fontSize="large" />
+                                    </IconButton>
+                                    <IconButton
+                                      aria-label="delete"
+                                      size="small"
+                                      sx={{
+                                        color: "red",
+                                        "&:hover": { color: "darkred" },
+                                        marginRight: "8px",
+                                      }}
+                                      onClick={() =>
+                                        handleDeletePosition(
+                                          row.departmentName,
+                                          position
+                                        )
+                                      }
+                                    >
+                                      <DeleteForeverIcon fontSize="large" />
+                                    </IconButton>
+                                  </Box>
+                                </div>
+                              ))
+                              : "No positions available"}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <StyledTableCell
+                          style={{ fontSize: "large", display: 'flex', justifyContent: 'center' }}
+                          colSpan={2}
+                        >
+                          No Positions available
+                        </StyledTableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
-            <Grid
-              container
-              p={2}
-              gap={1}
-              mt={2}
-              display="flex"
-              flexDirection="column"
-              component={Paper}
-              boxShadow={4}
-            >
-              <Box display="flex" gap={1}>
-                <LinkIcon />
-                <Typography variant="h5">Approval Chain</Typography>
-              </Box>
-              <Grid container display="flex" spacing={1}>
-                <Grid item lg={2.75} mg={2.75} sm={5.5} xs={12}>
-                  {DepartmentLoading ? (
-                    <div>Loading...</div>
-                  ) : (
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="department-select-label">
-                        Department
-                      </InputLabel>
-                      <Select
-                        labelId="department-select-label"
-                        id="department-select"
-                        label="Department"
-                        // value={selectedApprovalDepartment}
-
-                        // onChange={(e) =>
-                        //   setSelectedApprovalDepartment(e.target.value)
-                        // }
-                        value={selectedLevelDepartment}
-                        onChange={(e) => {
-                          setSelectedLevelDepartment(e.target.value);
-                          handleDepartmentChange(e.target.value); // Fetch positions when department changes
-                        }}
-                      >
-                        <MenuItem value="" disabled>
-                          Select a department
-                        </MenuItem>
-                        {departments && departments.length > 0 ? (
-                          departments.map((departmentName, index) => (
-                            <MenuItem
-                              key={departmentName}
-                              value={departmentName}
-                            >
-                               {departmentName}
-                            </MenuItem>
-                          ))
-                        ) : (
-                          <MenuItem value="" disabled>
-                            No departments available
-                          </MenuItem>
-                        )}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Grid>
-
-                <Grid item lg={2.85} mg={2.75} sm={5.5} xs={12}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel>Approval</InputLabel>
-                    <Select
-                      value={approvalChains || ""} // Controlled value
-                      onChange={handleSelectChange} // Handle change
-                      label="Action"
-                    >
-                      {/* Render all options except "Add New Approval" */}
-                      {actions
-                        .slice(0, actions.length - 1)
-                        .map((action, index) => (
-                          <MenuItem key={index} value={action}>
-                            {action}
-                          </MenuItem>
-                        ))}
-
-                      {/* Render "Add New Approval" with Add Icon at the last position */}
-                      <MenuItem value="Add New Approval">
-                        Add New Approval
-                        <ListItemIcon  sx={{width:"70%",justifyContent:"end"}}>
-                          <AddIcon fontSize="small" />
-                        </ListItemIcon>
+          </Grid>
+          {/* ------------------------APPROVAL CHAIN------------------------------ */}
+        </Grid>
+        <Grid
+          container
+          p={2}
+          gap={1}
+          mt={2}
+          display="flex"
+          flexDirection="column"
+          component={Paper}
+          boxShadow={4}
+        >
+          <Box display="flex" gap={1}>
+            <LinkIcon />
+            <Typography variant="h5">Approval Chain</Typography>
+          </Box>
+          <Grid container display="flex" spacing={1}>
+            <Grid item lg={2.3} mg={2.8} sm={5.5} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel>Approval List</InputLabel>
+                <Select
+                  value={approvalChains || ""} // Controlled value
+                  onChange={handleSelectChange} // Handle change
+                  label="Action"
+                >
+                  {/* Render all options except "Add New Approval" */}
+                  {actions
+                    .slice(0, actions.length - 1)
+                    .map((action, index) => (
+                      <MenuItem key={index} value={action}>
+                        {action}
                       </MenuItem>
-                    </Select>
-                  </FormControl>
+                    ))}
 
-                  {/* Modal for adding new approval */}
-                  <Dialog open={openModal} onClose={handleCloseModal} >
-                    <DialogTitle>Add New Approval</DialogTitle>
-                    <DialogContent>
-                      <TextField
-                        autoFocus
-                        margin="dense"
-                        label="Create New Approval"
-                        fullWidth
-                        variant="outlined"
-                        size="small"
-                        onChange={(e) => setApprovalChains(e.target.value)} // Update the input value
-                        value={approvalChains}
-                      />
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleCloseModal} color="primary">
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => handleSaveNewApproval(approvalChains)}
-                        color="primary"
-                        disabled={!approvalChains} // Disable if input is empty
-                      >
-                        Save
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                </Grid>
+                  {/* Render "Add New Approval" with Add Icon at the last position */}
+                  <MenuItem value="Add New Approval">
+                    Add New Approval
+                    <ListItemIcon sx={{ width: "70%", justifyContent: "end" }}>
+                      <AddIcon fontSize="small" />
+                    </ListItemIcon>
+                  </MenuItem>
+                </Select>
+              </FormControl>
 
-                <Grid item lg={2.5} mg={2.75} sm={5.5} xs={12}>
+              {/* Modal for adding new approval */}
+              <Dialog open={openModal} onClose={handleCloseModal} >
+                <DialogTitle>Add New Approval</DialogTitle>
+                <DialogContent>
                   <TextField
-                    variant="outlined"
-                    label="Level-1"
-                    size="small"
-                    select
-                    value={level1}
-                    onChange={(e) => setLevel1(e.target.value)}
+                    autoFocus
+                    margin="dense"
+                    label="Create New Approval"
                     fullWidth
-                  >
-                    {positionsForApp.length > 0 ? (
-                      positionsForApp.map((position, index) => (
-                        <MenuItem key={position} value={position}>
-                         {position}
-                        </MenuItem>
-                      ))
-                    ) : (
-                      <MenuItem value="" disabled>
-                        No positions available
-                      </MenuItem>
-                    )}
-                  </TextField>
-                </Grid>
-
-                <Grid item lg={2.75} mg={2.75} sm={5.5} xs={12}>
-                  <TextField
                     variant="outlined"
-                    label="Level-2"
                     size="small"
-                    select
-                    value={level2}
-                    onChange={(e) => setLevel2(e.target.value)}
-                    fullWidth
-                  >
-                    {positionsForApp.length > 0 ? (
-                      positionsForApp.map((position, index) => (
-                        <MenuItem key={position} value={position}>
-                           {position}
-                        </MenuItem>
-                      ))
-                    ) : (
-                      <MenuItem value="" disabled>
-                        No positions available
-                      </MenuItem>
-                    )}
-                  </TextField>
-                </Grid>
-
-                <Grid item lg={0.8} md={1} sm={1} xs={12}>
+                    onChange={(e) => setApprovalChains(e.target.value)} // Update the input value
+                    value={approvalChains}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseModal} color="primary">
+                    Cancel
+                  </Button>
                   <Button
-                    fullWidth
-                    variant="contained"
-                    onClick={handleApprovalChainSubmit}
-                    size="small"
-                    sx={{
-                      backgroundColor: isEditMode ? "blue" : "green",
-                      fontSize: "16px",
-                      "&:hover": {
-                        backgroundColor: isEditMode
-                          ? "darkorange"
-                          : "darkgreen",
-                      },
+                    onClick={() => handleSaveNewApproval(approvalChains)}
+                    color="primary"
+                    disabled={!approvalChains} // Disable if input is empty
+                  >
+                    Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+
+            <Grid item lg={2.3} mg={2.75} sm={5.5} xs={12}>
+              {DepartmentLoading ? (
+                <div>Loading...</div>
+              ) : (
+                <FormControl fullWidth size="small">
+                  <InputLabel id="department-select-label">
+                    Department
+                  </InputLabel>
+                  <Select
+                    labelId="department-select-label"
+                    id="department-select"
+                    label="Department"
+                    // value={selectedApprovalDepartment}
+
+                    // onChange={(e) =>
+                    //   setSelectedApprovalDepartment(e.target.value)
+                    // }
+                    value={selectedLevelDepartment}
+                    onChange={(e) => {
+                      setSelectedLevelDepartment(e.target.value);
+                      handleDepartmentChange(e.target.value); // Fetch positions when department changes
                     }}
                   >
-                    {isEditMode ? "Update" : "Add"}
-                  </Button>
-                </Grid>
-              </Grid>
+                    <MenuItem value="" disabled>
+                      Select a department
+                    </MenuItem>
+                    {departments && departments.length > 0 ? (
+                      departments.map((departmentName, index) => (
+                        <MenuItem
+                          key={departmentName}
+                          value={departmentName}
+                        >
+                          {departmentName}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem value="" disabled>
+                        No departments available
+                      </MenuItem>
+                    )}
+                  </Select>
+                </FormControl>
+              )}
+            </Grid>
 
-              {/* Approval Chain Table */}
-              <Grid container>
-                <TableContainer
-                  sx={{ maxHeight: 320, height: 400, overflow: "auto" }}
+            <Grid item lg={2.2} mg={2.8} sm={5.5} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel>Level 1</InputLabel>
+                <Select
+                  value={approvalChains || ""} // Controlled value
+                  onChange={handleSelectChange} // Handle change
+                  label="Action"
                 >
-                  <Table aria-label="customized table" stickyHeader>
-                    {/* <TableHead>
+                  {/* Render all options except "Add New Approval" */}
+                  {actions
+                    .slice(0, actions.length - 1)
+                    .map((action, index) => (
+                      <MenuItem key={index} value={action}>
+                        {action}
+                      </MenuItem>
+                    ))}
+
+                  {/* Render "Add New Approval" with Add Icon at the last position */}
+                  <MenuItem value="Add New Approval">
+                    Add New Approval
+                    <ListItemIcon sx={{ width: "70%", justifyContent: "end" }}>
+                      <AddIcon fontSize="small" />
+                    </ListItemIcon>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Modal for adding new approval */}
+              <Dialog open={openModal} onClose={handleCloseModal} >
+                <DialogTitle>Add New Approval</DialogTitle>
+                <DialogContent>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    label="Create New Approval"
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    onChange={(e) => setApprovalChains(e.target.value)} // Update the input value
+                    value={approvalChains}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseModal} color="primary">
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={() => handleSaveNewApproval(approvalChains)}
+                    color="primary"
+                    disabled={!approvalChains} // Disable if input is empty
+                  >
+                    Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+
+            <Grid item lg={2.2} mg={2.75} sm={5.5} xs={12}>
+              <TextField
+                variant="outlined"
+                label="Department"
+                size="small"
+                select
+                value={level1}
+                onChange={(e) => setLevel1(e.target.value)}
+                fullWidth
+              >
+                {positionsForApp.length > 0 ? (
+                  positionsForApp.map((position, index) => (
+                    <MenuItem key={position} value={position}>
+                      {position}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value="" disabled>
+                    No positions available
+                  </MenuItem>
+                )}
+              </TextField>
+            </Grid>
+
+            <Grid item lg={2.2} mg={2.75} sm={5.5} xs={12}>
+              <TextField
+                variant="outlined"
+                label="Level-2"
+                size="small"
+                select
+                value={level2}
+                onChange={(e) => setLevel2(e.target.value)}
+                fullWidth
+              >
+                {positionsForApp.length > 0 ? (
+                  positionsForApp.map((position, index) => (
+                    <MenuItem key={position} value={position}>
+                      {position}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value="" disabled>
+                    No positions available
+                  </MenuItem>
+                )}
+              </TextField>
+            </Grid>
+
+            <Grid item lg={0.8} md={1} sm={1} xs={12}>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={handleApprovalChainSubmit}
+                size="small"
+                sx={{
+                  backgroundColor: isEditMode ? "blue" : "green",
+                  fontSize: "16px",
+                  "&:hover": {
+                    backgroundColor: isEditMode
+                      ? "darkorange"
+                      : "darkgreen",
+                  },
+                }}
+              >
+                {isEditMode ? "Update" : "Add"}
+              </Button>
+            </Grid>
+          </Grid>
+
+          {/* Approval Chain Table */}
+          <Grid container>
+            <TableContainer
+              sx={{ maxHeight: 320, height: 400, overflow: "auto" }}
+            >
+              <Table aria-label="customized table" stickyHeader>
+                {/* <TableHead>
                       <TableRow>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "25%" }}
@@ -1539,95 +1604,94 @@ function ManageAsset() {
                         </StyledTableCell>
                       </TableRow>
                     </TableHead> */}
-                    <TableBody>
-                      {approvalChainLoading ? (
-                        <TableRow>
-                          <StyledTableCell colSpan={5}>
-                            Loading...
-                          </StyledTableCell>
-                        </TableRow>
-                      ) : approvalChainRows && approvalChainRows.length > 0 ? (
-                        approvalChainRows.map((row, index) => (
-                          <React.Fragment key={index}>
-                            {row.approvalChains?.map((chain, chainIndex) => (
-                              <StyledTableRow key={`${index}-${chainIndex}`}>
-                                {chainIndex === 0 && (
-                                  <StyledTableCell
-                                    style={{ fontSize: "medium" }}
-                                    rowSpan={row.approvalChains.length}
-                                    width={"22%"}
-                                  >
-                                  {row.departmentName}
-                                  </StyledTableCell>
-                                )}
-                                <StyledTableCell style={{ fontSize: "medium" }} width={"25%"}>
-                                  {chain.action || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell style={{ fontSize: "medium" }} width={"21%"}>
-                                   {chain.level1 || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell style={{ fontSize: "medium" }} width={"20%"}>
-                                   {chain.level2 || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell
-                                  align="center"
-                                  style={{ fontSize: "medium" }}
+                <TableBody>
+                  {approvalChainLoading ? (
+                    <TableRow>
+                      <StyledTableCell colSpan={5}>
+                        Loading...
+                      </StyledTableCell>
+                    </TableRow>
+                  ) : approvalChainRows && approvalChainRows.length > 0 ? (
+                    approvalChainRows.map((row, index) => (
+                      <React.Fragment key={index}>
+                        {row.approvalChains?.map((chain, chainIndex) => (
+                          <StyledTableRow key={`${index}-${chainIndex}`}>
+                            {chainIndex === 0 && (
+                              <StyledTableCell
+                                style={{ fontSize: "medium" }}
+                                rowSpan={row.approvalChains.length}
+                                width={"22%"}
+                              >
+                                {row.departmentName}
+                              </StyledTableCell>
+                            )}
+                            <StyledTableCell style={{ fontSize: "medium" }} width={"25%"}>
+                              {chain.action || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell style={{ fontSize: "medium" }} width={"21%"}>
+                              {chain.level1 || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell style={{ fontSize: "medium" }} width={"20%"}>
+                              {chain.level2 || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              style={{ fontSize: "medium" }}
+                            >
+                              <Box display="flex" justifyContent="center">
+                                <IconButton
+                                  onClick={() =>
+                                    handleApprovalChainEdit(
+                                      index,
+                                      chainIndex
+                                    )
+                                  }
                                 >
-                                  <Box display="flex" justifyContent="center">
-                                    <IconButton
-                                      onClick={() =>
-                                        handleApprovalChainEdit(
-                                          index,
-                                          chainIndex
-                                        )
-                                      }
-                                    >
-                                      <EditIcon fontSize="large" />
-                                    </IconButton>
-                                    <IconButton
-                                      onClick={() =>
-                                        handleDeleteApprovalChain(
-                                          index,
-                                          chainIndex
-                                        )
-                                      }
-                                      sx={{
-                                        color: "red",
-                                        "&:hover": { color: "darkred" },
-                                        marginLeft: "8px",
-                                      }}
-                                    >
-                                      <DeleteForeverIcon fontSize="large" />
-                                    </IconButton>
-                                  </Box>
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            ))}
-                          </React.Fragment>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <StyledTableCell
-                            colSpan={5}
-                            style={{ fontSize: "medium" }}
-                          >
-                            No Approval Chain Available
-                          </StyledTableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid>
-              {/*------------Button-------------- */}
-            </Grid>
-
-            <Grid container mt={2}>
-              <OrgMessageForward />
-            </Grid>
+                                  <EditIcon fontSize="large" />
+                                </IconButton>
+                                <IconButton
+                                  onClick={() =>
+                                    handleDeleteApprovalChain(
+                                      index,
+                                      chainIndex
+                                    )
+                                  }
+                                  sx={{
+                                    color: "red",
+                                    "&:hover": { color: "darkred" },
+                                    marginLeft: "8px",
+                                  }}
+                                >
+                                  <DeleteForeverIcon fontSize="large" />
+                                </IconButton>
+                              </Box>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        ))}
+                      </React.Fragment>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <StyledTableCell
+                        colSpan={5}
+                        style={{ fontSize: "medium", display: 'flex', justifyContent: 'center' }}
+                      >
+                        No Approval Chain Available
+                      </StyledTableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
-        </CardContent>
-      </Card>
+          {/*------------Button-------------- */}
+        </Grid>
+
+        <Grid container mt={2}>
+          <OrgMessageForward />
+        </Grid>
+      </Grid>
+
     </div>
   );
 }

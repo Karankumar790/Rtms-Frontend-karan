@@ -28,7 +28,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import "react-tabs/style/react-tabs.css";
-import { FlowingWell, NotFlowingWell } from "../../../apis/wellService";
+import { FlowingWell, NotFlowingWell, TotalWell } from "../../../apis/wellService";
 
 // ---------FUNCTIONS OF TABLE--------------------------------
 
@@ -150,6 +150,19 @@ useEffect(()=>{
   fetchFlowingWell();
 },[]);
 
+const [totalWell, setTotalWell] = useState(0);
+
+useEffect(()=>{
+  const totalWells = async () => {
+    const data = await TotalWell();
+    if(data && data.totalWellNumberCount){
+      count = data.totalWellNumberCount || 0;
+      setTotalWell(count);
+    }
+  };
+  totalWells();
+},[])
+
   return (
     <Grid container gap={2}>
       <Grid container spacing={2}>
@@ -157,7 +170,7 @@ useEffect(()=>{
           <CardWrapper>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <img src={well} alt="" />
-              <Box fontSize="x-large">0</Box>
+              <Box fontSize="x-large">{totalWell}</Box>
             </Box>
             <CardContent className="card-Content-text">
               <Typography fontSize="large">Total Wells</Typography>
