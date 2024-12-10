@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -20,6 +21,7 @@ import { Link } from "react-router-dom";
 import { deviceData } from "../../../apis/wellService";
 import { useSelector } from "react-redux";
 import PrintIcon from "@mui/icons-material/Print";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 
 // ----------------------Table for Moblie------------------------------
@@ -132,7 +134,7 @@ function DeviceManage() {
     <div>
       <Grid
         container
-        sx={{ display:'flex', justifyContent: "space-between" }}
+        sx={{ display: 'flex', justifyContent: "space-between" }}
         pt={2}
         paddingBottom={2}
       >
@@ -146,12 +148,19 @@ function DeviceManage() {
         </Grid>
         <Grid
           item
-          sx={{ display: "flex", height: "3%",width:'3%' }}
+          sx={{ display: "flex", height: "3%", width: '3%' }}
         >
-            <PrintIcon sx={{ height: "fit-content", width:'fit-content',color:'#F34E41' }} />
+          <PrintIcon sx={{ height: "fit-content", width: 'fit-content', color: '#F34E41' }} />
         </Grid>
       </Grid>
-      <Grid item lg={1} display={"flex"}  justifyContent={"end"} md={2} sm={2} xs={12} >
+      <Grid item lg={12} display={"flex"} justifyContent={"space-between"} md={2} sm={2} xs={12} >
+        <Grid item lg={8} display={'flex'} gap={2} >
+
+          <TextField size="small"  sx={{width:'17rem'}}  label="Node Search"/>
+          <Button variant="contained" size="small" sx={{ backgroundColor: 'green' }}>
+            Search
+          </Button>
+        </Grid>
         <Link to="/dashboard/simulator">
           <Button
             variant="contained"
@@ -180,6 +189,11 @@ function DeviceManage() {
           xs={4}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
+               <Grid container display={"flex"}>
+        <Typography variant="h5" mt={2} sx={{ color: "darkgrey",mb:'10px'}}>
+          Real Time Engineering Data
+        </Typography>
+      </Grid>
           <TableContainer
             component={Paper}
             sx={{ maxHeight: 620, overflow: "auto" }}
@@ -201,25 +215,29 @@ function DeviceManage() {
                     Time (s)
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Battery (%)
+                    Battery
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Solar (V)
+                    Solar 
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Port1{" "}
+                    Port {" "} 1
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Port2
+                    Port {" "} 2
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Port3
+                    Port {" "} 3
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Port4
+                    Port {" "} 4
                   </StyledTableCell>
                   <StyledTableCell  >
-                    Port5
+                    Port {" "} 5
+                  </StyledTableCell>
+                  
+                  <StyledTableCell  >
+                    View
                   </StyledTableCell>
                   {/* <StyledTableCell  >
                     E
@@ -296,6 +314,17 @@ function DeviceManage() {
                       </StyledTableCell>
                       <StyledTableCell >
                         {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                      <IconButton
+                      sx={{
+                        color: "grey",
+                        "&:hover": { color: "darkred" },
+                        marginRight: "5px",
+                      }}
+                    >
+                      <VisibilityIcon fontSize="large" />
+                    </IconButton>
                       </StyledTableCell>
                       {/* <StyledTableCell >
                         {device.data.Solar}

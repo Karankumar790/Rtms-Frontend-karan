@@ -590,6 +590,7 @@ function Monitor() {
               <MenuItem value={1}>Low Battery</MenuItem>
               <MenuItem value={2}>Low Solar Power</MenuItem>
               <MenuItem value={3}>Network Error</MenuItem>
+              <MenuItem value={3}>Have Alerts</MenuItem>
               <MenuItem value={4}>Flowing Wells</MenuItem>
               <MenuItem value={5}>Non Flowing Wells</MenuItem>
             </Select>

@@ -208,7 +208,7 @@ function MessageForwarding() {
           </Box>
         </Grid>
 
-        <Grid item lg={2} md={6} sm={6} xs={12}>
+        {/* <Grid item lg={2} md={6} sm={6} xs={12}>
           <FormControl fullWidth variant="outlined">
             <InputLabel >Select an Option</InputLabel>
             <Select
@@ -220,9 +220,29 @@ function MessageForwarding() {
             >
               <MenuItem value={10}>All User</MenuItem>
               <MenuItem value={20}>Active User</MenuItem>
-              <MenuItem value={30}>Deactivate</MenuItem>
+              <MenuItem value={30}>Inactive Users</MenuItem>
             </Select>
           </FormControl>
+        </Grid> */}
+
+        <Grid item xs={12} sm={8} md={6} lg={2.4}>
+          <Box display="flex" alignItems="center">
+            <FormControl fullWidth size="small">
+              <InputLabel id="activity-label">Select an Option</InputLabel>
+              <Select
+                labelId="activity-label "
+                id="activity-select "
+                label="Select an Option"
+              >
+                <MenuItem value="">
+                  <em>All</em>
+                </MenuItem>
+                <MenuItem value={10}>All Users</MenuItem>
+                <MenuItem value={20}>Active Users</MenuItem>
+                <MenuItem value={30}>Inactive Users</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Grid>
       </Grid>
 
