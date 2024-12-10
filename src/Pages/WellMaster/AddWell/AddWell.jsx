@@ -411,45 +411,47 @@ function AddWell() {
   const sign1 = '<'
 
   const [formData, setFormData] = useState({
-    pressure1: "",
-    valueLessThan1: "",
-    valueGreaterThan1: "",
-    comparison: "",
-    pressure2: "",
-    valueLessThan2: "",
-    valueGreaterThan2: "",
+    pressure1: '',
+    pressure2: '',
+    valueLessThan1: '',
+    valueGreaterThan1: '',
+    comparison: '',
+    valueLessThan2: '',
+    valueGreaterThan2: ''
   });
 
   const handleFlowingChange = (field, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData(prevState => ({
+      ...prevState,
       [field]: value,
     }));
   };
 
   const handleSubmits = async () => {
-    // console.log(formData);
-    const flowingData = {
-      flowing: {
-        pressures: {
-          pressure1: formData.pressure1,
-          valueLessThan1: formData.valueLessThan1,
-          valueGreaterThan1: formData.valueGreaterThan1,
-          comparison: formData.comparison,
-          pressure2: formData.pressure2,
-          valueLessThan2: formData.valueLessThan2,
-          valueGreaterThan2: formData.valueGreaterThan2,
-        },
+    console.log(formData); // Log the form data to see if it's correct
+    const flowingCondition = {
+      pressures: {
+        pressure1: formData.pressure1,
+        valueLessThan1: formData.valueLessThan1,
+        valueGreaterThan1: formData.valueGreaterThan1,
+        comparison: formData.comparison,
+        pressure2: formData.pressure2,
+        valueLessThan2: formData.valueLessThan2,
+        valueGreaterThan2: formData.valueGreaterThan2,
       },
-    }
-
-    // console.log(flowingData);
-    const resp = await saveFlowingCondition(flowingData);
-    // console.log(resp);      
-    if (resp) {
-      console.log("data saved successfully!");
+    };
+  
+    try {
+      const resp = await saveFlowingCondition(flowingCondition);
+      console.log(resp); // Check if the response is as expected
+      if (resp) {
+        console.log("data saved successfully!");
+      }
+    } catch (error) {
+      console.error("Error saving data", error);
     }
   };
+  
 
 
   return (
@@ -576,7 +578,7 @@ function AddWell() {
                 label="DIP (Binary)"
                 variant="outlined"
                 name="dip"
-                value={searchNode?.binaryNodeId || ""} // Display the Binary Node ID (DIP)
+                // value={searchNode?.binaryNodeId || ""} // Display the Binary Node ID (DIP)
               />
             </Grid>
             <Grid item sm={6} md={3} xs={12} lg={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid lightgrey' }}>

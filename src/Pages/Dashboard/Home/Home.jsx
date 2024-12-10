@@ -235,8 +235,7 @@ export default function BasicCard() {
   const [totalWellsCount, setTotalWellsCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
-const [notFlowing, setNotFlowing] = useState(0);
-
+  const [notFlowing, setNotFlowing] = useState(0);
 
   const [formData, setFormData] = useState({
     to: "",
@@ -336,7 +335,7 @@ const [notFlowing, setNotFlowing] = useState(0);
       const data = await totalWells();
       // Check if data is successfully fetched and update the state
       if (data && data.totalWellNumberCount) {
-        const count=data.totalWellNumberCount||0;
+        const count = data.totalWellNumberCount || 0;
         setTotalWellsCount(count); // Assuming the API returns a count field
       }
     };
@@ -344,29 +343,29 @@ const [notFlowing, setNotFlowing] = useState(0);
     fetchTotalWells();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchNotFlowing = async () => {
       const data = await NotFlowingWell();
-      if(data && data.totalNotFlowingConditions){
+      if (data && data.totalNotFlowingConditions) {
         const count = data.totalNotFlowingConditions || 0;
         setNotFlowing(count);
       }
     };
     fetchNotFlowing();
-  },[]);
-  
-  const [Flowing,setFlowing] = useState(0);
-  
-  useEffect(()=>{
+  }, []);
+
+  const [Flowing, setFlowing] = useState(0);
+
+  useEffect(() => {
     const fetchFlowingWell = async () => {
       const data = await FlowingWell();
-      if(data && data.totalFlowingConditions){
+      if (data && data.totalFlowingConditions) {
         const count = data.totalFlowingConditions || 0;
         setFlowing(count);
       }
     };
     fetchFlowingWell();
-  },[]);
+  }, []);
 
   return (
     <div
@@ -552,121 +551,152 @@ const [notFlowing, setNotFlowing] = useState(0);
             },
           }}
         >
-          <Grid container p={1}>
-            <Box display={"flex"} gap={2}>
-              <Box display="flex">
-                <NotificationsNoneIcon
-                  sx={{
-                    height: "30px",
-                    width: "30px",
-                    color: "red",
-                    cursor: "pointer",
-                  }}
-                />
-                <Typography variant="h6" sx={{ color: "blue" }}>
-                  Notifications
-                </Typography>
-              </Box>
-              <Box display="flex">
-                <img
-                  height={"30px"}
-                  width={"30px"}
-                  src={complaints}
-                  alt="noImg"
-                  style={{ cursor: "pointer" }}
-                />
-                <Typography sx={{ color: "blue" }} ml={0.6} variant="h6">
-                  Complaints
-                </Typography>
-              </Box>
-            </Box>
+          <Grid container>
             <Grid
-              container
+              item
               md={12}
               lg={12}
               sm={5}
               xs={4}
               sx={{
                 display: { sm: "none", xs: "none", md: "block", lg: "block" },
-                height: "100%",
               }}
-              mt={1}
             >
-              <TableContainer
-                component={Paper}
-                sx={{
-                  maxHeight: 620,
-                  height: 320,
-                  overflowY: "auto",
-                }}
-              >
-                <Table
-                  aria-label="customized table"
-                  stickyHeader
-                  sx={{
-                    minWidth: "800px", // Set minimum width for horizontal scrolling
-                  }}
-                >
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>Notification No.</StyledTableCell>
-                      <StyledTableCell>Data/Time</StyledTableCell>
-                      <StyledTableCell>Well Number</StyledTableCell>
-                      {/* <StyledTableCell>Node ID</StyledTableCell> */}
-                      <StyledTableCell>Location</StyledTableCell>
-                      <StyledTableCell>Installation</StyledTableCell>
-                      {/* <StyledTableCell >Well Port</StyledTableCell> */}
-                      <StyledTableCell>Status</StyledTableCell>
-                      <StyledTableCell>Description</StyledTableCell>
-                      <StyledTableCell>View</StyledTableCell>
-                      {/* <StyledTableCell> History View</StyledTableCell> */}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <StyledTableRow key={row.name}>
-                        <StyledTableCell
-                          component="th"
-                          scope="row"
-                          // sx={{ width: "13%" }}
-                        >
-                          {/* {row.name} */}
-                        </StyledTableCell>
-                        <StyledTableCell></StyledTableCell>
-                        <StyledTableCell
-                        // align="left"
-                        // sx={{ width: "13%" }}
-                        ></StyledTableCell>
-                        {/* <StyledTableCell
-                  align="left"
-                  sx={{ width: "13%" }}
-                  ></StyledTableCell> */}
-                        <StyledTableCell
-                        // align="left"
-                        // sx={{ width: "13%" }}
-                        ></StyledTableCell>
-                        {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
-                        <StyledTableCell
-                        // align="left"
-                        // sx={{ width: "13%" }}
-                        ></StyledTableCell>
-                        <StyledTableCell></StyledTableCell>
-                        <StyledTableCell></StyledTableCell>
-                        <IconButton
-                          sx={{
-                            color: "grey",
-                            "&:hover": { color: "darkred" },
-                            marginRight: "5px",
-                          }}
-                          onClick={handleOpen}
-                        >
-                          <VisibilityIcon fontSize="large" />
-                        </IconButton>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Tabs>
+                <TabList>
+                  <Tab style={{ whiteSpace: "break-spaces" }}>
+                    <Box display="flex">
+                      <NotificationsNoneIcon
+                        sx={{
+                          height: "30px",
+                          width: "30px",
+                          color: "red",
+                          cursor: "pointer",
+                        }}
+                      />
+                      <Typography variant="h6" sx={{ color: "blue" }}>
+                        Notifications
+                      </Typography>
+                    </Box>
+                  </Tab>
+                  <Tab>
+                    <Box display="flex">
+                      <img
+                        height={"30px"}
+                        width={"30px"}
+                        src={complaints}
+                        alt="noImg"
+                        style={{ cursor: "pointer" }}
+                      />
+                      <Typography sx={{ color: "blue" }} ml={0.6} variant="h6">
+                        Complaints
+                      </Typography>
+                    </Box>
+                  </Tab>
+                </TabList>
+                <TabPanel>
+                  <TableContainer>
+                    <Table aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Notification No.</StyledTableCell>
+                          <StyledTableCell>Date/Time</StyledTableCell>
+                          <StyledTableCell>Well Number</StyledTableCell>
+                          <StyledTableCell>Location</StyledTableCell>
+                          <StyledTableCell>Installation</StyledTableCell>
+                          <StyledTableCell>Description</StyledTableCell>
+                          <StyledTableCell>Status</StyledTableCell>
+                          <StyledTableCell> History View</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        <StyledTableRow>
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell sx={{ width: "10%" }}>
+                            <HistoryModal />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </TabPanel>
+
+                <TabPanel>
+                  <TableContainer>
+                    <Table aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Complaint No.</StyledTableCell>
+                          <StyledTableCell>Date/Time</StyledTableCell>
+                          <StyledTableCell>Sender Name</StyledTableCell>
+                          <StyledTableCell>Department</StyledTableCell>
+                          <StyledTableCell>Receiver Name</StyledTableCell>
+                          <StyledTableCell>Department</StyledTableCell>
+                          <StyledTableCell>Status</StyledTableCell>
+                          <StyledTableCell>Description</StyledTableCell>
+                          <StyledTableCell>View</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        <StyledTableRow>
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                          <StyledTableCell
+                            sx={{ width: "10%" }}
+                          ></StyledTableCell>
+                        </StyledTableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </TabPanel>
+              </Tabs>
             </Grid>
             {/* ------------------------------Modal view --------------------------- */}
 
@@ -1080,10 +1110,13 @@ const [notFlowing, setNotFlowing] = useState(0);
             </Modal>
           </Grid>
         </Paper>
-        <Grid container justifyContent={"end"}>
+        <Grid container justifyContent={"space-between"}>
+          <Box>
+            <Typography>Showing 0 of 200</Typography>
+          </Box>
           <Stack spacing={2}>
             {/* <Pagination count={25} shape="rounded" /> */}
-            <Pagination count={25} variant="outlined" shape="rounded" />
+            <Pagination count={1} variant="outlined" shape="rounded" />
           </Stack>
         </Grid>
       </Grid>

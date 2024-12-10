@@ -149,37 +149,46 @@ export const wellMonitorData = async (organizationName) => {
   } catch (error) {
     console.error(error);
     return catchError;
-
   }
-}
+};
 
 // ----------------Get AllWell Number------------------
 
 export const AllWellNumbers = async (WellNumber) => {
   try {
-    const response = await axios.get(
-      `${WELL_API}/get-AllWellNumbers`
-    );
+    const response = await axios.get(`${WELL_API}/get-AllWellNumbers`);
     return response.data;
   } catch (error) {
     return catchError(error);
   }
 };
 
-
-export const saveFlowingCondition = async (flowingConditionData) => {
+export const saveFlowingCondition = async (
+  location,
+  installation,
+  wellType,
+  wellNumber,
+  organizationName,
+  flowingCondition // Add this parameter to the function
+) => {
   try {
     const response = await axios.post(
-      `${WELL_API}/save-flowingCondition?location=agra&installation=agra1&wellType=self-flowing&wellNumber=1122&organizationName=OIL AND NATURAL GAS CORPORATION`,
-      flowingConditionData,
+      `${WELL_API}/save-flowingCondition`, // Remove query params from URL
+      {
+        location,
+        installation,
+        wellType,
+        wellNumber,
+        organizationName,
+        flowing: flowingCondition, // Include flowing condition in the body
+      }
     );
     return response.data;
   } catch (error) {
     console.error("Error saving flowing condition:", error);
-    throw error; // Rethrow to handle in UI if needed.
+    throw error; // Rethrow to handle in UI if needed
   }
 };
-
 
 export const NotFlowingWell = async () => {
   try {
@@ -203,16 +212,13 @@ export const FlowingWell = async () => {
   }
 };
 
-
 // Totals Wells
 export const totalWells = async () => {
   try {
-    const response = await axios.get(
-      `${WELL_API}/count-TotalWellNumbers`
-    );
+    const response = await axios.get(`${WELL_API}/count-TotalWellNumbers`);
     return response.data;
   } catch (error) {
     console.error(error);
     return catchError;
   }
-}
+};
