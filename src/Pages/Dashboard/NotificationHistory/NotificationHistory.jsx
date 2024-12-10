@@ -224,7 +224,6 @@ function NotificationHistory() {
   const [chartType, setChartType] = useState("line");
 
 
-
   const [formData, setFormData] = useState({
     to: "",
     cc: "",
@@ -315,6 +314,7 @@ function NotificationHistory() {
   const handleTimeChange = (event) => {
     setSelectedTime(event.target.value);
   };
+
 
   return (
     <div

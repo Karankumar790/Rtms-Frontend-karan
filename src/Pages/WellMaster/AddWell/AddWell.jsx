@@ -92,23 +92,6 @@ function AddWell() {
   const [rows, setRows] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [addData, setAddData] = useState(false);
-  const [pressure1, setPressure1] = useState("");
-  const [valueLessThan1, setValueLessThan1] = useState("");
-  const [valueGreaterThan1, setValueGreaterThan1] = useState("");
-  const [pressure2, setPressure2] = useState("");
-  const [valueLessThan2, setValueLessThan2] = useState("");
-  const [valueGreaterThan2, setValueGreaterThan2] = useState("");
-  const [comparison, setComparison] = useState("");
-  
-  // const [pressure1, setPressure1] = useState('');
-  // const [valueLessThan1, setValueLessThan1] = useState('');
-  // const [valueGreaterThan1, setValueGreaterThan1] = useState('');
-  // const [comparison, setComparison] = useState('');
-  // const [pressure2, setPressure2] = useState('');
-  // const [valueLessThan2, setValueLessThan2] = useState('');
-  // const [valueGreaterThan2, setValueGreaterThan2] = useState('');
-
-  
   const [wellDetails, setWellDetails] = useState({
     location: "",
     installation: "",
@@ -122,21 +105,25 @@ function AddWell() {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
+
   useEffect(() => {
     const storedWellDetails = localStorage.getItem("wellDetails");
     if (storedWellDetails) {
-      setWellDetails(JSON.parse(storedWellDetails));
+      try {
+        const parsedDetails = JSON.parse(storedWellDetails);
+        setWellDetails(parsedDetails);
+      } catch (error) {
+        console.error("Invalid JSON in localStorage for 'wellDetails':", error);
+      }
     }
-    // console.log(wellDetails,"..........................")
   }, []);
 
 
-
   // const handleChangeParameter = (event) => {
-    //   const { name, value } = event.target;
+  //   const { name, value } = event.target;
   //   setFormValues({
-    //     ...formValues,
+  //     ...formValues,
   //     [name]: value,
   //   });
   // };
@@ -144,45 +131,13 @@ function AddWell() {
   // const handleChangeParameterwe = (event) => {
   //   const { name, value } = event.target;
   //   setWellDetails({
-    //     ...wellDetails,
-    //     [name]: value,
-    //   });
-    // }
+  //     ...wellDetails,
+  //     [name]: value,
+  //   });
+  // }
 
-      // handleSubmit function to call API
-  const handleSubmit = async () => {
-    const pressures = [
-      {
-        pressure: pressure1,
-        valueLessThan: valueLessThan1,
-        valueGreaterThan: valueGreaterThan1
-      },
-      {
-        pressure: pressure2,
-        valueLessThan: valueLessThan2,
-        valueGreaterThan: valueGreaterThan2
-      }
-    ];
-
-    // API call with the collected form data
-    try {
-      const response = await notFlowing(
-        'location', // Replace with dynamic data if needed
-        'installation', // Replace with dynamic data if needed
-        'wellType', // Replace with dynamic data if needed
-        'wellNumber', // Replace with dynamic data if needed
-        'organizationName', // Replace with dynamic data if needed
-        pressures
-      );
-      console.log(response); // You can add further actions based on response (e.g., show success message)
-    } catch (error) {
-      console.error('Error occurred during API call:', error);
-    }
-  };
-
-    
-    useEffect(() => {
-      const Device = async () => {
+  useEffect(() => {
+    const Device = async () => {
       try {
         const response = await deviceData(organizationName);
         setRows(response.data);
@@ -192,9 +147,9 @@ function AddWell() {
     };
     Device();
   }, []);
-  
+
   // const [parameterValues, setParameterValues] = useState({
-    //   process: "",
+  //   process: "",
   //   ports: "",
   //   name: "",
   //   description: "",
@@ -211,7 +166,7 @@ function AddWell() {
   //   criticalDescription: "",
   //   criticalDeadband: "",
   // });
-  
+
   // const handleChangeParameter = (e) => {
   //   const { name, value } = e.target;
   //   setParameterValues((prev) => {
@@ -228,30 +183,30 @@ function AddWell() {
   // const handleChangeParameter = (e) => {
   //   const { name, value } = e.target;
   //   setParameterValues((prev) => ({
-    //     // const updatedValues = {
-      //     ...prev,
-      //     [name]: value,
+  //     // const updatedValues = {
+  //     ...prev,
+  //     [name]: value,
   //     // };
   //     // console.log("Updated Form Values:", updatedValues);
   //     // return updatedValues;
   //   }));
   // };
-  
+
   // Handle input changes
   // const handleInputChange = (field, value, nested) => {
   //   if (nested) {
   //     setparameterValues((prev) => ({
   //       ...prev,
   //       alertData: {
-    //         ...prev.alertData,
-    //         [field]: value,
-    //       },
+  //         ...prev.alertData,
+  //         [field]: value,
+  //       },
   //     }));
   //   } else {
-    //     setparameterValues((prev) => ({
-      //       ...prev,
-      //       [field]: value,
-      //     }));
+  //     setparameterValues((prev) => ({
+  //       ...prev,
+  //       [field]: value,
+  //     }));
   //   }
   // };
 
@@ -269,131 +224,131 @@ function AddWell() {
   //     toast.error("An error occurred while adding parameters.");
   //   }
   // };
-  
-  // const handleSubmit = async () => {
-  //   if (!organizationName) {
-  //     toast.error("Organization name is missing");
-  //     return;
-  //   }
-  //   try {
-  //     // Prepare data for API call
-  //     const alarmSettings = {
-  //       gip: {
-  //         normalAlert: {
-  //           normalalert: formValues.gipNormalAlert || "GIP Normal Alert", // Use values from formValues
-  //           condition: formValues.gipNormalCondition || "Low",
-  //           description:
-  //             formValues.gipNormalDescription || "GIP normal alert description",
-  //         },
-  //         criticalAlert: {
-  //           criticalalert: formValues.gipCriticalAlert || "GIP Critical Alert",
-  //           condition: formValues.gipCriticalCondition || "High",
-  //           description:
-  //             formValues.gipCriticalDescription ||
-  //             "GIP critical alert description",
-  //         },
-  //       },
-  //       // Repeat for other keys: chp, thp, lowBattery, solarVoltage
-  //       // Example for "chp":
-  //       chp: {
-  //         normalAlert: {
-  //           normalalert: formValues.chpNormalAlert || "CHP Normal Alert",
-  //           condition: formValues.chpNormalCondition || "Low",
-  //           description:
-  //           formValues.chpNormalDescription || "CHP normal alert description",
-  //         },
-  //         criticalAlert: {
-  //           criticalalert: formValues.chpCriticalAlert || "CHP Critical Alert",
-  //           condition: formValues.chpCriticalCondition || "High",
-  //           description:
-  //             formValues.chpCriticalDescription ||
-  //             "CHP critical alert description",
-  //         },
-  //       },
 
-  //       thp: {
-  //         normalAlert: {
-  //           normalalert: formValues.thpNormalAlert || "CHP Normal Alert",
-  //           condition: formValues.thpNormalCondition || "Low",
-  //           description:
-  //             formValues.thpNormalDescription || "CHP normal alert description",
-  //         },
-  //         criticalAlert: {
-  //           criticalalert: formValues.thpCriticalAlert || "CHP Critical Alert",
-  //           condition: formValues.thpCriticalCondition || "High",
-  //           description:
-  //             formValues.thpCriticalDescription ||
-  //             "CHP critical alert description",
-  //           },
-  //       },
+  const handleSubmit = async () => {
+    if (!organizationName) {
+      toast.error("Organization name is missing");
+      return;
+    }
+    try {
+      // Prepare data for API call
+      const alarmSettings = {
+        gip: {
+          normalAlert: {
+            normalalert: formValues.gipNormalAlert || "GIP Normal Alert", // Use values from formValues
+            condition: formValues.gipNormalCondition || "Low",
+            description:
+              formValues.gipNormalDescription || "GIP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.gipCriticalAlert || "GIP Critical Alert",
+            condition: formValues.gipCriticalCondition || "High",
+            description:
+              formValues.gipCriticalDescription ||
+              "GIP critical alert description",
+          },
+        },
+        // Repeat for other keys: chp, thp, lowBattery, solarVoltage
+        // Example for "chp":
+        chp: {
+          normalAlert: {
+            normalalert: formValues.chpNormalAlert || "CHP Normal Alert",
+            condition: formValues.chpNormalCondition || "Low",
+            description:
+              formValues.chpNormalDescription || "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.chpCriticalAlert || "CHP Critical Alert",
+            condition: formValues.chpCriticalCondition || "High",
+            description:
+              formValues.chpCriticalDescription ||
+              "CHP critical alert description",
+          },
+        },
 
-  //       lowBattery: {
-  //         normalAlert: {
-  //           normalalert: formValues.lowBatteryNormalAlert || "CHP Normal Alert",
-  //           condition: formValues.lowBatteryNormalCondition || "Low",
-  //           description:
-  //             formValues.lowBatteryNormalDescription ||
-  //             "CHP normal alert description",
-  //           },
-  //         criticalAlert: {
-  //           criticalalert:
-  //             formValues.lowBatteryCriticalAlert || "CHP Critical Alert",
-  //           condition: formValues.lowBatteryCriticalCondition || "High",
-  //           description:
-  //             formValues.lowBatteryCriticalDescription ||
-  //             "CHP critical alert description",
-  //         },
-  //       },
-  //       solarVoltage: {
-  //         normalAlert: {
-  //           normalalert:
-  //             formValues.solarVoltageNormalAlert || "CHP Normal Alert",
-  //             condition: formValues.solarVoltageNormalCondition || "Low",
-  //             description:
-  //             formValues.solarVoltageNormalDescription ||
-  //             "CHP normal alert description",
-  //           },
-  //         criticalAlert: {
-  //           criticalalert:
-  //             formValues.solarVoltageCriticalAlert || "CHP Critical Alert",
-  //             condition: formValues.solarVoltageCriticalCondition || "High",
-  //             description:
-  //             formValues.solarVoltageCriticalDescription ||
-  //             "CHP critical alert description",
-  //           },
-  //       },
-  //     };
+        thp: {
+          normalAlert: {
+            normalalert: formValues.thpNormalAlert || "CHP Normal Alert",
+            condition: formValues.thpNormalCondition || "Low",
+            description:
+              formValues.thpNormalDescription || "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert: formValues.thpCriticalAlert || "CHP Critical Alert",
+            condition: formValues.thpCriticalCondition || "High",
+            description:
+              formValues.thpCriticalDescription ||
+              "CHP critical alert description",
+          },
+        },
 
-  //     const details = {
-  //       location: wellDetails.location,
-  //       installation: wellDetails.installation,
-  //       wellType: wellDetails.wellType,
-  //       wellNumber: wellDetails.wellNumber,
-  //       ...formValues,
-  //       alarmSettings, // Pass transformed alarmSettings
-  //       flowing: {
-  //         pressures: formValues.flowing?.pressures || [], // Ensure flowing.pressures is passed as an array
-  //       },
-  //       notFlowing: {
-  //         pressures: formValues.notFlowing?.pressures || [], // Ensure notFlowing.pressures is passed as an array
-  //       },
-  //     };
+        lowBattery: {
+          normalAlert: {
+            normalalert: formValues.lowBatteryNormalAlert || "CHP Normal Alert",
+            condition: formValues.lowBatteryNormalCondition || "Low",
+            description:
+              formValues.lowBatteryNormalDescription ||
+              "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert:
+              formValues.lowBatteryCriticalAlert || "CHP Critical Alert",
+            condition: formValues.lowBatteryCriticalCondition || "High",
+            description:
+              formValues.lowBatteryCriticalDescription ||
+              "CHP critical alert description",
+          },
+        },
+        solarVoltage: {
+          normalAlert: {
+            normalalert:
+              formValues.solarVoltageNormalAlert || "CHP Normal Alert",
+            condition: formValues.solarVoltageNormalCondition || "Low",
+            description:
+              formValues.solarVoltageNormalDescription ||
+              "CHP normal alert description",
+          },
+          criticalAlert: {
+            criticalalert:
+              formValues.solarVoltageCriticalAlert || "CHP Critical Alert",
+            condition: formValues.solarVoltageCriticalCondition || "High",
+            description:
+              formValues.solarVoltageCriticalDescription ||
+              "CHP critical alert description",
+          },
+        },
+      };
 
-  //     const response = await saveWellDetails(details);
-  //     console.log("Well saved successfully:", response);
-  //     toast.success("Well saved successfully!");
-  //     // Reset form or additional logic here
-  //   } catch (error) {
-  //     console.error("Error saving well:", error);
-  //     toast.error("Error saving well");
-  //   }
-  // };
-  
+      const details = {
+        location: wellDetails.location,
+        installation: wellDetails.installation,
+        wellType: wellDetails.wellType,
+        wellNumber: wellDetails.wellNumber,
+        ...formValues,
+        alarmSettings, // Pass transformed alarmSettings
+        flowing: {
+          pressures: formValues.flowing?.pressures || [], // Ensure flowing.pressures is passed as an array
+        },
+        notFlowing: {
+          pressures: formValues.notFlowing?.pressures || [], // Ensure notFlowing.pressures is passed as an array
+        },
+      };
+
+      const response = await saveWellDetails(details);
+      console.log("Well saved successfully:", response);
+      toast.success("Well saved successfully!");
+      // Reset form or additional logic here
+    } catch (error) {
+      console.error("Error saving well:", error);
+      toast.error("Error saving well");
+    }
+  };
+
   const handleSave = () => {
     setIsEditing(true);
     setAddData(true);
   };
-  
+
   useEffect(() => {
     const Device = async () => {
       try {
@@ -405,7 +360,7 @@ function AddWell() {
     };
     Device();
   }, []);
-  
+
   // --------For Value Field-----------
   const sign = '>'
   const sign1 = '<'
@@ -458,12 +413,8 @@ function AddWell() {
     <div>
       <Grid container component={Paper} p={1}>
         <Grid container>
-          <Grid item sx={{ height: "100%", width: "3%" }}>
-            <img
-              src="/assets/WELL2.png"
-              alt="well"
-              style={{ height: "100%", width: "100%", objectFit: "cover" }}
-            />
+          <Grid item sx={{ height: '100%', width: '3%' }}>
+            <img src="/assets/WELL2.png" alt="well" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
           </Grid>
           <Typography variant="h4" mt={1}>
             Well Detail
@@ -476,7 +427,7 @@ function AddWell() {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           {/* Input Fields */}
-          <Grid item sm={6} md={3} xs={12} lg={3}>
+          <Grid item sm={6} md={3} xs={12} lg={3} >
             <TextField
               size="small"
               label="Location"
@@ -484,7 +435,7 @@ function AddWell() {
               name="location"
               value={wellDetails.location}
               fullWidth
-              // onChange={(e) => handleChangeParameterwe(e)}
+            // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -495,7 +446,7 @@ function AddWell() {
               variant="outlined"
               name="installation"
               value={wellDetails.installation}
-              // onChange={(e) => handleChangeParameterwe(e)}
+            // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -506,7 +457,7 @@ function AddWell() {
               variant="outlined"
               name="wellType"
               value={wellDetails.wellType}
-              // onChange={(e) => handleChangeParameterwe(e)}
+            // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3}>
@@ -517,7 +468,7 @@ function AddWell() {
               variant="outlined"
               name="wellNumber"
               value={wellDetails.wellNumber}
-              // onChange={(e) => handleChangeParameterwe(e)}
+            // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
           <Grid item sm={6} md={3} xs={12} lg={3} mt={1}>
@@ -556,7 +507,7 @@ function AddWell() {
               <TextField
                 fullWidth
                 size="small"
-                label="Node ID (Decimal)"
+                label="Node ID"
                 variant="outlined"
                 name="nodeId"
               // value={formValues.nodeId || ""}
@@ -575,10 +526,12 @@ function AddWell() {
               <TextField
                 fullWidth
                 size="small"
-                label="DIP (Binary)"
+                label="DIP"
                 variant="outlined"
                 name="dip"
-                // value={searchNode?.binaryNodeId || ""} // Display the Binary Node ID (DIP)
+                // value={formValues.dip || ""}
+                onChange={(e) => handleChangeParameter(e)}
+
               />
             </Grid>
             <Grid item sm={6} md={3} xs={12} lg={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid lightgrey' }}>
@@ -971,9 +924,9 @@ function AddWell() {
       {/* Dialog (Modal) */}
       <Modal
         open={open}
-        // onClose={handleClose}
-        // aria-labelledby="modal-title"
-        // aria-describedby="modal-description"
+      // onClose={handleClose}
+      // aria-labelledby="modal-title"
+      // aria-describedby="modal-description"
       >
         <Grid container lg={7} sx={styless}>
           <Grid
@@ -1038,7 +991,7 @@ function AddWell() {
               </Grid> */}
               <Grid item lg={3} gap={2}>
                 <Stack spacing={1}>
-                  <Typography variant="h5">Ports</Typography>
+                  <Typography variant="h5">Variables</Typography>
                   <FormControl fullWidth size="small">
                     <Select
                       fullWidth
@@ -1055,11 +1008,13 @@ function AddWell() {
                         },
                       }}
                     >
-                      <MenuItem value={20}>1</MenuItem>
-                      <MenuItem value={20}>2</MenuItem>
-                      <MenuItem value={20}>3</MenuItem>
-                      <MenuItem value={20}>4</MenuItem>
-                      <MenuItem value={20}>5</MenuItem>
+                      <MenuItem value={20}>Port 1</MenuItem>
+                      <MenuItem value={20}>Port 2</MenuItem>
+                      <MenuItem value={20}>Port 3</MenuItem>
+                      <MenuItem value={20}>Port 4</MenuItem>
+                      <MenuItem value={20}>Port 5</MenuItem>
+                      <MenuItem value={20}>Solor</MenuItem>
+                      <MenuItem value={20}>Battery</MenuItem>
                       {/* <MenuItem value={20}>Speed</MenuItem> */}
                     </Select>
                   </FormControl>
@@ -1110,20 +1065,17 @@ function AddWell() {
                         },
                       }}
                     >
+                      <MenuItem value={"°C"}>Units</MenuItem>
                       <MenuItem value={"°C"}>°C</MenuItem>
                       <MenuItem value={"Kg/cm²"}>Kg/cm²</MenuItem>
-                      <MenuItem value={"%"}>%</MenuItem>
-                      <MenuItem value={"meter"}>meter</MenuItem>
-                      <MenuItem value={"centimeter"}>centimeter</MenuItem>
+                      <MenuItem value={"meter"}>Meter</MenuItem>
                       <MenuItem value={"m³/H"}>m³/H</MenuItem>
-                      <MenuItem value={"galon/H"}>galon/H</MenuItem>
-                      <MenuItem value={"rpm"}>rpm</MenuItem>
+                      <MenuItem value={"galon/H"}>Gal/H</MenuItem>
+                      <MenuItem value={"rpm"}>RPM</MenuItem>
                       <MenuItem value={"Volt"}>Volt</MenuItem>
-                      <MenuItem value={"ampere"}>ampere</MenuItem>
-                      <MenuItem value={"hz"}>hz</MenuItem>
+                      <MenuItem value={"ampere"}>Amp</MenuItem>
+                      <MenuItem value={"hz"}>Hz</MenuItem>
                       <MenuItem value={"KWH"}>KWH </MenuItem>
-                      <MenuItem value={"0-3 V"}>0-3 V </MenuItem>
-                      <MenuItem value={"0-100 mV"}>0-100 mV </MenuItem>
                     </Select>
                   </FormControl>
                 </Stack>
@@ -1132,45 +1084,29 @@ function AddWell() {
               <Grid item lg={3}>
                 <Stack spacing={1}>
                   <Typography variant="h5">Signal Minimum</Typography>
-                  <FormControl fullWidth size="small">
-                    <Select
-                      // labelId="demo-select-small-label"
-                      // label="Sensor Output"
-                      size="small"
-                      name="sensorOutput"
-                    // value={parameterValues.sensorOutput}
-                    // onChange={handleChangeParameter}
-                    >
-                      {/* <MenuItem value={""}>all </MenuItem> */}
-                      <MenuItem value={""}>
-                        <Typography>{/* Kg/cm<sup>2</sup> */}</Typography>
-                      </MenuItem>
-                      <MenuItem value={"ok"}>okk</MenuItem>
-                      <MenuItem value={"ims"}>ims</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <TextField
+                    variant="outlined"
+                    label="Signal Minimum"
+                    size="small"
+                    fullWidth
+                    name="minVal"
+                  // value={parameterValues.minVal}
+                  // onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
                 <Stack spacing={1}>
                   <Typography variant="h5">Signal Maximum</Typography>
-                  <FormControl fullWidth size="small">
-                    <Select
-                      // labelId="demo-select-small-label"
-                      // label="Sensor Output"
-                      size="small"
-                      name="sensorOutput"
-                    // value={parameterValues.sensorOutput}
-                    // onChange={handleChangeParameter}
-                    >
-                      {/* <MenuItem value={""}>all </MenuItem> */}
-                      <MenuItem value={""}>
-                        <Typography>{/* Kg/cm<sup>2</sup> */}</Typography>
-                      </MenuItem>
-                      <MenuItem value={"ok"}>okk</MenuItem>
-                      <MenuItem value={"ims"}>ims</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <TextField
+                    variant="outlined"
+                    label="Signal Maximum"
+                    size="small"
+                    fullWidth
+                    name="minVal"
+                  // value={parameterValues.minVal}
+                  // onChange={handleChangeParameter}
+                  ></TextField>
                 </Stack>
               </Grid>
               <Grid item lg={3}>
@@ -1346,6 +1282,7 @@ function AddWell() {
         </Grid>
       </Modal>
 
+
       <Grid
         container
         sx={{
@@ -1361,12 +1298,13 @@ function AddWell() {
             width={"100%"}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Box display={"flex"}>
-              <DeviceThermostatIcon sx={{ color: "red", fontSize: "40px" }} />
+            <Box display={'flex'}>
+              <DeviceThermostatIcon sx={{ color: 'red', fontSize: "40px" }} />
               <Typography variant="h4" mt={1}>
                 Parameters
               </Typography>
             </Box>
+
 
             <IconButton onClick={handleOpen}>
               <FaPlus fontSize="large" />
@@ -1379,8 +1317,8 @@ function AddWell() {
         </Paper>
       </Grid>
       {addData ? (
-        <Paper>
-          <Grid container spacing={3} p={1} mt={2}>
+        <Paper >
+          <Grid container spacing={3} p={1} mt={2}  >
             <Box width="99%" display="flex" justifyContent="space-between">
               <Typography pl={3} fontSize={"25px"}>
                 ABP (After Beam Pressure)
@@ -1411,7 +1349,7 @@ function AddWell() {
               </Stack>
             </Grid> */}
             <Grid item xs={12} sm={6} md={3} lg={3}>
-              <Stack spacing={1}>
+              <Stack spacing={1} >
                 <Typography variant="h5">Ports</Typography>
 
                 <TextField
