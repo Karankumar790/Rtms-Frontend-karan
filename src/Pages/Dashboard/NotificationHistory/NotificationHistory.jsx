@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
+import PrintIcon from "@mui/icons-material/Print";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -104,7 +105,7 @@ let Sata = {
 // ------------------------Table for Desktop-----------------------------
 
 // const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
+//   [&.${tableCellClasses.head}]: {
 //     backgroundColor: "#8C000B", // Customize background color
 //     color: theme.palette.common.white, // Text color
 //     padding: "10px", // Custom padding
@@ -112,11 +113,11 @@ let Sata = {
 //     fontSize: "16px", // Font size for the header
 //     textAlign: "left", // Center-align header content (optional)
 //     // lineHeight: '1.5', // Adjust line height
-//     // borderBottom: `2px solid ${theme.palette.secondary.main}`, // Add border
+//     // borderBottom: 2px solid ${theme.palette.secondary.main}, // Add border
 //     position: "sticky", // Sticky positioning
 //     zIndex: 1, // Ensure it stays above the rows
 //   },
-//   [`&.${tableCellClasses.body}`]: {
+//   [&.${tableCellClasses.body}]: {
 //     fontSize: 14,
 //   },
 // }));
@@ -304,11 +305,15 @@ function NotificationHistory() {
   const ModalhandleClose = () => setModalOpen(false);
 
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate2, setSelectedDate2] = useState("")
   const [selectedTime, setSelectedTime] = useState("");
 
   // Handlers for date and time changes
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
+  };
+  const handleDateChange2 = (event) => {
+    setSelectedDate2(event.target.value);
   };
 
   const handleTimeChange = (event) => {
@@ -330,6 +335,9 @@ function NotificationHistory() {
         <Typography variant="h4" mt={1}>
           Notification History
         </Typography>
+          <IconButton sx={{position:'absolute', right:'15px'}}>
+          <PrintIcon sx={{ fontSize: "40px", color: "red" }} />
+        </IconButton>
       </Grid>
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
@@ -366,7 +374,7 @@ function NotificationHistory() {
           <FormControl fullWidth size="small">
             <Grid container spacing={2}>
               {/* Date Field */}
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   type="date"
@@ -390,7 +398,7 @@ function NotificationHistory() {
               </Grid>
 
               {/* Time Field */}
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <TextField
                   fullWidth
                   type="time"
@@ -411,7 +419,7 @@ function NotificationHistory() {
                     }
                   }
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
           </FormControl>
         </Grid>
@@ -419,14 +427,14 @@ function NotificationHistory() {
           <FormControl fullWidth size="small">
             <Grid container spacing={2}>
               {/* Date Field */}
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   type="date"
                   size="small"
                   label="End Date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
+                  value={selectedDate2}
+                  onChange={handleDateChange2}
                   InputLabelProps={{
                     shrink: true, // Ensures the label is always visible
                   }}
@@ -443,7 +451,7 @@ function NotificationHistory() {
               </Grid>
 
               {/* Time Field */}
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <TextField
                   fullWidth
                   type="time"
@@ -464,7 +472,7 @@ function NotificationHistory() {
                     }
                   }
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
           </FormControl>
         </Grid>
@@ -502,8 +510,24 @@ function NotificationHistory() {
           </FormControl>
         </Grid>
       </Grid>
-      <Grid container display={"flex"} justifyContent={"end"} pt={2}>
+      <Grid container display={"flex"} justifyContent={"end"} gap={2} pt={2}>
         <Grid item lg={1.3} md={3} sm={6} xs={12}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#8C000B", // Change button color to green
+              "&:hover": {
+                backgroundColor: "#8C000B", // Optional: Change color on hover
+              },
+              fontSize: "16px",
+            }}
+            fullWidth
+          >
+            Reset
+          </Button>
+          </Grid>
+          <Grid item lg={1.3} md={3} sm={6} xs={12}>
+        
           <Button
             variant="contained"
             sx={{
@@ -517,7 +541,9 @@ function NotificationHistory() {
           >
             Submit
           </Button>
-        </Grid>
+          </Grid>
+        
+
       </Grid>
       <Grid container display={"flex"}>
         <Typography variant="h5" mt={2} sx={{ color: "darkgrey" }}>
@@ -542,6 +568,7 @@ function NotificationHistory() {
             maxHeight: 620,
             height: 1000,
             overflowY: "auto",
+            padding:"0.2rem",
           }}
         >
           <Table
@@ -563,7 +590,7 @@ function NotificationHistory() {
                 {/* <StyledTableCell>Status</StyledTableCell> */}
                 <StyledTableCell>Description</StyledTableCell>
                 <StyledTableCell>Status</StyledTableCell>
-                <StyledTableCell> History View</StyledTableCell>
+                <StyledTableCell> View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -691,7 +718,7 @@ function NotificationHistory() {
                             { label: "Installation :", value: "" },
                             { label: "Date/Time :", value: "" },
                             { label: "Description :", value: "" },
-                            { label: "Status :", value: "" },
+                            { label: "Status :", value:"" },
                           ].map((item, index) => (
                             <Box key={index}>
                               <Typography variant="h5" mt={1}>
@@ -713,7 +740,7 @@ function NotificationHistory() {
                   <Paper elevation={2} sx={{ pb: "5px" }}>
                     <Grid container>
                       <Typography ml={2} mt={2} fontSize={25} fontWeight={500}>
-                        Status
+                        Status 
                       </Typography>
                     </Grid>
                     <Box

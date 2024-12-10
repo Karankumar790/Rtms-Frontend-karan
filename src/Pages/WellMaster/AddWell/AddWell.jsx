@@ -395,7 +395,7 @@ function AddWell() {
         valueGreaterThan2: formData.valueGreaterThan2,
       },
     };
-  
+
     try {
       const resp = await saveFlowingCondition(flowingCondition);
       console.log(resp); // Check if the response is as expected
@@ -406,7 +406,7 @@ function AddWell() {
       console.error("Error saving data", error);
     }
   };
-  
+
 
 
   return (
@@ -419,6 +419,10 @@ function AddWell() {
           <Typography variant="h4" mt={1}>
             Well Detail
           </Typography>
+
+          <Grid item sx={{ position: 'absolute', right: '35px' }}>
+            <EditIcon fontSize="large" sx={{ color: 'grey' }} />
+          </Grid>
         </Grid>
         <Grid
           container
@@ -453,10 +457,10 @@ function AddWell() {
             <TextField
               fullWidth
               size="small"
-              label="Well Type"
+              label="Well Number"
               variant="outlined"
-              name="wellType"
-              value={wellDetails.wellType}
+              name="wellNumber"
+              value={wellDetails.wellNumber}
             // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
@@ -464,10 +468,10 @@ function AddWell() {
             <TextField
               fullWidth
               size="small"
-              label="Well Number"
+              label="Well Type"
               variant="outlined"
-              name="wellNumber"
-              value={wellDetails.wellNumber}
+              name="wellType"
+              value={wellDetails.wellType}
             // onChange={(e) => handleChangeParameterwe(e)}
             />
           </Grid>
@@ -510,6 +514,7 @@ function AddWell() {
                 label="Node ID"
                 variant="outlined"
                 name="nodeId"
+                disabled
               // value={formValues.nodeId || ""}
               // onChange={(e) => handleChangeParameter(e)}
               />
@@ -525,6 +530,7 @@ function AddWell() {
             >
               <TextField
                 fullWidth
+                disabled
                 size="small"
                 label="DIP"
                 variant="outlined"
@@ -566,7 +572,7 @@ function AddWell() {
         </Grid>
       </Grid>
 
-      <Grid container display={"flex"} gap={2.5} p={2}>
+      <Grid container display={"flex"} component={Paper} mt={2} gap={2.5} p={2}>
         {/* Row 1: Flowing */}
         <Grid container >
           <Grid item sx={{ display: 'flex' }} gap={2} lg={6}>
@@ -577,12 +583,17 @@ function AddWell() {
               Flowing Condition{" "}
             </Typography>
           </Grid>
+          <Grid item sx={{ position: 'absolute', right: '35px' }}>
+            <EditIcon fontSize="large" sx={{ color: 'grey' }} />
+          </Grid>
         </Grid>
         <Grid item lg={12} display={"flex"} gap={3}>
           <Grid item lg={3} md={6} sm={12} xs={12}>
             <Typography>Parameter</Typography>
             <FormControl fullWidth size="small">
+              <InputLabel id="pressure1-label">Parameter</InputLabel>
               <Select
+                label="pressure1"
                 name="pressure1"
                 value={formData.pressure1}
                 onChange={(e) => handleFlowingChange("pressure1", e.target.value)}
@@ -601,6 +612,7 @@ function AddWell() {
             <TextField
               variant="outlined"
               size="small"
+              placeholder="Value"
               name="valueLessThan1"
               fullWidth
               value={formData.valueLessThan1}
@@ -613,6 +625,7 @@ function AddWell() {
             <Typography>Value = &gt;</Typography>
             <TextField
               variant="outlined"
+              placeholder="Value"
               size="small"
               name="valueGreaterThan1"
               fullWidth
@@ -622,7 +635,7 @@ function AddWell() {
               }
             />
           </Grid>
-          <Grid item lg={0.5} md={6} sm={12} xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "end" }}>
+          <Grid item lg={0.9} md={6} sm={12} xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "end" }}>
             <FormControl fullWidth size="small">
               <Select
                 name="comparison"
@@ -640,6 +653,7 @@ function AddWell() {
           <Grid item lg={3} md={6} sm={12} xs={12}>
             <Typography>Parameter</Typography>
             <FormControl fullWidth size="small">
+            <InputLabel id="pressure1-label">Parameter</InputLabel>
               <Select
                 name="pressure2"
                 value={formData.pressure2}
@@ -659,6 +673,7 @@ function AddWell() {
             <TextField
               variant="outlined"
               size="small"
+              placeholder="Value"
               name="valueLessThan2"
               fullWidth
               value={formData.valueLessThan2}
@@ -672,6 +687,7 @@ function AddWell() {
             <TextField
               variant="outlined"
               size="small"
+              placeholder="Value"
               name="valueGreaterThan2"
               fullWidth
               value={formData.valueGreaterThan2}
@@ -681,33 +697,38 @@ function AddWell() {
             />
           </Grid>
         </Grid>
-      </Grid>
-      <Grid container display={"flex"} justifyContent={"end"} pr={1.7}>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "green",
-            "&:hover": {
-              backgroundColor: "darkgreen",
-            },
-            fontSize: "16px",
-            width: "120px",
-          }}
-          onClick={handleSubmits}
-        >
-          Save
-        </Button>
+        <Grid container display={"flex"} justifyContent={"end"} >
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "green",
+              "&:hover": {
+                backgroundColor: "darkgreen",
+              },
+              fontSize: "16px",
+              width: "120px",
+            }}
+            onClick={handleSubmits}
+          >
+            Save
+          </Button>
+        </Grid>
       </Grid>
 
-      <Grid container spacing={0.8} component={Paper} mt={2} p={1}>
+
+      <Grid container display={"flex"} component={Paper} mt={2} gap={2.5} pt={1.7}>
         <Grid container >
-          <Grid item sx={{ display: 'flex' }} gap={2} lg={6}>
+          <Grid item sx={{ display: 'flex' }} gap={2} lg={6} pl={1.7}>
             <Grid item sx={{ height: '100%', width: '3%' }}>
               <img src="/assets/WELL2.png" alt="well" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
             </Grid>
             <Typography variant="h4" mt={1}>
               Not Flowing Condition{" "}
             </Typography>
+          </Grid>
+
+          <Grid item sx={{ position: 'absolute', right: '35px' }}>
+            <EditIcon fontSize="large" sx={{ color: 'grey' }} />
           </Grid>
         </Grid>
         <Grid container display={"flex"} gap={2.5} p={2}>
@@ -717,8 +738,9 @@ function AddWell() {
             <Grid item lg={3} md={6} sm={12} xs={12}>
               <Typography>Parameter</Typography>
               <FormControl fullWidth size="small">
+              <InputLabel id="pressure1-label">Parameter</InputLabel>
                 <Select
-                  labelId="pressure-label"
+                  labelId="pressure"
                   name="pressure1"
                   // value={formValues.flowing.pressures[0].pressure1}
                   onChange={(e) =>
@@ -740,6 +762,7 @@ function AddWell() {
               <TextField
                 variant="outlined"
                 size="small"
+                placeholder="Value"
                 // value={formValues.flowing.pressures[0].tolerance}
                 // onChange={(e) =>
                 //   handleFlowingChange(0, "tolerance", e.target.value)
@@ -771,6 +794,7 @@ function AddWell() {
               <TextField
                 variant="outlined"
                 size="small"
+                placeholder="Value"
                 // value={formValues.flowing.pressures[0].tolerance}
                 // onChange={(e) =>
                 //   handleFlowingChange(0, "tolerance", e.target.value)
@@ -797,12 +821,13 @@ function AddWell() {
                 </Select>
               </FormControl> */}
             </Grid>
-            <Grid item lg={0.5} md={6} sm={12} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'end' }}>
+            <Grid item lg={0.9} md={6} sm={12} xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'end' }}>
               <FormControl fullWidth size="small">
                 {/* <InputLabel id="pressure-label">Logic</InputLabel> */}
                 <Select
                   labelId="pressure-label"
                   name="pressure2"
+                  placeholder="Value"
                   // value={formValues.flowing.pressures[0].pressure2}
                   onChange={(e) =>
                     handleFlowingChange(0, "pressure2", e.target.value)
@@ -821,7 +846,6 @@ function AddWell() {
               <Typography>Parameter</Typography>
               <FormControl fullWidth size="small">
                 <Select
-                  labelId="pressure-label"
                   name="pressure1"
                   // value={formValues.flowing.pressures[0].pressure1}
                   onChange={(e) =>
@@ -843,6 +867,7 @@ function AddWell() {
               <TextField
                 variant="outlined"
                 size="small"
+                placeholder="Value"
                 // value={formValues.flowing.pressures[0].tolerance}
                 // onChange={(e) =>
                 //   handleFlowingChange(0, "tolerance", e.target.value)
@@ -874,6 +899,8 @@ function AddWell() {
               <TextField
                 variant="outlined"
                 size="small"
+                placeholder="Value"
+
                 // value={formValues.flowing.pressures[0].tolerance}
                 // onChange={(e) =>
                 //   handleFlowingChange(0, "tolerance", e.target.value)
