@@ -153,6 +153,12 @@ export default function Sidebar({
       path: "/dashboard/MesaageForwarding",
       roles: ["owner", "manager"],
     },
+    {
+      name: "LoRa Network",
+      icon: <PersonIcon sx={{ color: "black" }} />,
+      path: "/dashboard/LoraNetwork",
+      roles: ["owner", "manager"],
+    },
   ];
 
   const filteredMenuItems = menuItems.filter((item) =>

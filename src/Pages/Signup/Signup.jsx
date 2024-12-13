@@ -354,8 +354,7 @@ function Signup() {
                           // onChange={handleUsernameChange}
                           label="Position"
                         >
-                          <MenuItem value="manager">Manager</MenuItem>
-                          <MenuItem value="employee">Employee</MenuItem>
+                         
                         </Select>
                       </FormControl>
                     </Box> 

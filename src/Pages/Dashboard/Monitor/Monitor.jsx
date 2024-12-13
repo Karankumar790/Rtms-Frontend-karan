@@ -640,11 +640,12 @@ function Monitor() {
               <TableRow>
                 <StyledTableCell>Well No.</StyledTableCell>
                 <StyledTableCell>Node ID</StyledTableCell>
+                <StyledTableCell>Solar (V)</StyledTableCell>
+                <StyledTableCell>Battery (%)</StyledTableCell>
+                <StyledTableCell>Network</StyledTableCell>
                 <StyledTableCell>GIP (Kg)</StyledTableCell>
                 <StyledTableCell>CHP (Kg)</StyledTableCell>
                 <StyledTableCell>THP (Kg)</StyledTableCell>
-                <StyledTableCell>Battery (%)</StyledTableCell>
-                <StyledTableCell>Solar (V)</StyledTableCell>
                 <StyledTableCell>Flow Status</StyledTableCell>
                 <StyledTableCell>Alerts</StyledTableCell>
                 <StyledTableCell>View</StyledTableCell>
@@ -669,6 +670,7 @@ function Monitor() {
                     <StyledTableCell>{device.data.P3}</StyledTableCell>
                     <StyledTableCell>{device.data.Bat}</StyledTableCell>
                     <StyledTableCell>{device.data.Solar}</StyledTableCell>
+                    <StyledTableCell> { }</StyledTableCell>
                     <StyledTableCell> { }</StyledTableCell>
                     <StyledTableCell> { }</StyledTableCell>
 
