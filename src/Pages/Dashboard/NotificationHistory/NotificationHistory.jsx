@@ -6,7 +6,9 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
+  Pagination,
   Select,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -223,7 +225,6 @@ function NotificationHistory() {
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
 
-
   const [formData, setFormData] = useState({
     to: "",
     cc: "",
@@ -276,8 +277,9 @@ function NotificationHistory() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
-      };
+    box-shadow: 0px 2px 2px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[50]
+    };
 
     &:hover {
       border-color: ${blue[400]};
@@ -285,7 +287,8 @@ function NotificationHistory() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${
+        theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -314,7 +317,6 @@ function NotificationHistory() {
   const handleTimeChange = (event) => {
     setSelectedTime(event.target.value);
   };
-
 
   return (
     <div
@@ -572,7 +574,7 @@ function NotificationHistory() {
                   <StyledTableCell
                     component="th"
                     scope="row"
-                  // sx={{ width: "13%" }}
+                    // sx={{ width: "13%" }}
                   >
                     {/* {row.name} */}
                   </StyledTableCell>
@@ -619,6 +621,11 @@ function NotificationHistory() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Grid container justifyContent={"end"} mt={1}>
+        <Stack spacing={2}>
+          <Pagination count={1} variant="outlined" shape="rounded" />
+        </Stack>
+        </Grid>
       </Grid>
 
       {/* ------------------------------Modal view --------------------------- */}

@@ -180,9 +180,9 @@ export default function HistoryModal() {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: "green", // Change button color to green
+                  backgroundColor: "green", 
                   "&:hover": {
-                    backgroundColor: "darkgreen", // Optional: Change color on hover
+                    backgroundColor: "darkgreen",
                   },
                   fontSize: "16px",
                 }}

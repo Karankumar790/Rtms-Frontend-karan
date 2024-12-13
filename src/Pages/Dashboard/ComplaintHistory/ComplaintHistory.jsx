@@ -6,7 +6,9 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
+  Pagination,
   Select,
+  Stack,
   Step,
   StepConnector,
   StepContent,
@@ -566,6 +568,11 @@ function ComplaintHistory() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Grid container justifyContent={"end"} mt={1}>
+        <Stack spacing={2}>
+          <Pagination count={1} variant="outlined" shape="rounded" />
+        </Stack>
+        </Grid>
       </Grid>
 
       {/* ------------------------------notification view --------------------------- */}

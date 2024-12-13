@@ -14,6 +14,11 @@ import {
   Pagination,
   Select,
   Stack,
+  Step,
+  StepConnector,
+  StepContent,
+  StepLabel,
+  Stepper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -42,6 +47,7 @@ import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAuto
 import CloseIcon from "@mui/icons-material/Close";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { FlowingWell, NotFlowingWell } from "../../../apis/wellService";
+import CheckIcon from "@mui/icons-material/Check";
 
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -164,17 +170,18 @@ let Sata = {
 // }
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  CardOverflow: "scroll",
-  overflowY: "scroll",
-  height: "70vh",
-  width: "55%",
-
-  bgcolor: "white",
-  borderRadius: "5px",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '35%',
+  height: '47vh',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 2,
+  overflowY: 'auto',
+  display: 'flex',
 };
 
 const options = {
@@ -224,13 +231,20 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const rows = [createData("1")];
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
+
+// const rows = [createData("1")];
 
 export default function BasicCard() {
   const [age, setAge] = React.useState("");
   const [parameter, setParameter] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [opens, setOpens] = React.useState(false);
   const handleOpen = () => setOpen(true);
+  const handleOpens = () => setOpens(true);
+  const handleCloses = () => setOpen(false);
   const handleClose = () => setOpen(false);
   const [totalWellsCount, setTotalWellsCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
@@ -366,6 +380,37 @@ export default function BasicCard() {
     };
     fetchFlowingWell();
   }, []);
+
+  const stepss = [
+    { label: "Complaint", value: "12" },
+    { label: "Date/Time", value: "2024-11-28T15:30" },
+    { label: "Sender", value: "Dubey" },
+    { label: "Department", value: "Site Alpha, Block B" },
+    { label: "Reciever Name", value: "Anil" },
+    { label: "Department", value: "Ground Department " },
+    { label: "Description", value: "well number 10 is not working" },
+    { label: "Status", value: "Pending" },
+  ];
+
+  const StepIcon = () => {
+    return (
+      <Box
+        sx={{
+          backgroundColor: "green", // Orange background for the icon
+          color: "white", // White check icon
+          borderRadius: "50%",
+          width: "24px",
+          height: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "16px",
+        }}
+      >
+        <CheckIcon />
+      </Box>
+    );
+  };
 
   return (
     <div
@@ -606,7 +651,7 @@ export default function BasicCard() {
                           <StyledTableCell>Installation</StyledTableCell>
                           <StyledTableCell>Description</StyledTableCell>
                           <StyledTableCell>Status</StyledTableCell>
-                          <StyledTableCell> History View</StyledTableCell>
+                          <StyledTableCell>View</StyledTableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -637,6 +682,16 @@ export default function BasicCard() {
                           ></StyledTableCell>
                           <StyledTableCell sx={{ width: "10%" }}>
                             <HistoryModal />
+                            {/* <IconButton
+                              sx={{
+                                color: "grey",
+                                "&:hover": { color: "darkred" },
+                                marginRight: "5px",
+                              }}
+                              onClick={handleOpen}
+                            >
+                              <VisibilityIcon fontSize="large" />
+                            </IconButton> */}
                           </StyledTableCell>
                         </StyledTableRow>
                       </TableBody>
@@ -666,7 +721,9 @@ export default function BasicCard() {
                             component="th"
                             scope="row"
                             sx={{ width: "10%" }}
-                          ></StyledTableCell>
+                          >
+                            1
+                          </StyledTableCell>
                           <StyledTableCell
                             sx={{ width: "10%" }}
                           ></StyledTableCell>
@@ -688,9 +745,18 @@ export default function BasicCard() {
                           <StyledTableCell
                             sx={{ width: "10%" }}
                           ></StyledTableCell>
-                          <StyledTableCell
-                            sx={{ width: "10%" }}
-                          ></StyledTableCell>
+                          <StyledTableCell sx={{ width: "10%" }}>
+                            <IconButton
+                              sx={{
+                                color: "grey",
+                                "&:hover": { color: "darkred" },
+                                marginRight: "5px",
+                              }}
+                              onClick={handleOpens}
+                            >
+                              <VisibilityIcon fontSize="large" />
+                            </IconButton>
+                          </StyledTableCell>
                         </StyledTableRow>
                       </TableBody>
                     </Table>
@@ -699,7 +765,7 @@ export default function BasicCard() {
               </Tabs>
             </Grid>
             {/* ------------------------------Modal view --------------------------- */}
-
+            {/* 
             <Modal open={open}>
               <Grid container sx={style}>
                 <Grid container>
@@ -722,7 +788,6 @@ export default function BasicCard() {
                         <CloseIcon fontSize="50px" />
                       </IconButton>
                     </Grid>
-                    {/* --------------------------------Textfield Values------------------------------------- */}
                     <Grid container mx={2} mt={1}>
                       <Grid container>
                         <Paper
@@ -741,7 +806,6 @@ export default function BasicCard() {
                               Notification Details
                             </Typography>
                           </Grid>
-                          {/* ---------------------- view -------------------------- */}
                           <Box>
                             <Grid container>
                               <Grid item lg={12} md={3} sm={6} xs={12} pl={2}>
@@ -756,7 +820,6 @@ export default function BasicCard() {
                                     >
                                       {item.label}
                                     </Typography>
-                                    {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
                                   </Box>
                                 ))}
                               </Grid>
@@ -782,7 +845,6 @@ export default function BasicCard() {
                                     <Typography variant="h5" mt={1}>
                                       {item.label}
                                     </Typography>
-                                    {/* <TextField size="small" fullWidth value={item.value} /> */}
                                   </Box>
                                 ))}
                               </Grid>
@@ -792,7 +854,6 @@ export default function BasicCard() {
                       </Grid>
                     </Grid>
 
-                    {/* --------------------------------chart------------------------------------- */}
                     <Grid container p={2}>
                       <Grid item lg={9}>
                         <Paper elevation={2} sx={{ pb: "5px" }}>
@@ -914,7 +975,6 @@ export default function BasicCard() {
                       </Grid>
                     </Grid>
 
-                    {/* ------------------Status ----------------------*/}
                     <Grid container component={Paper} ml={2} width={"990px"}>
                       <Grid container>
                         <Typography
@@ -1044,33 +1104,6 @@ export default function BasicCard() {
                       </Grid>
                     </Grid>
 
-                    {/* --------------------------------Subject------------------------------------- */}
-                    {/* <Grid
-              container
-              component={Paper}
-              p={2}
-              mt={3}
-              mx={2}
-              // sx={{ width: "100%", mt: "20px", mx: "10px" }}
-            >
-              <Grid
-                item
-                lg={2}
-                md={2}
-                sm={4}
-                xs={12}
-                display="flex"
-                alignItems="center"
-              >
-                <Typography variant="h4" mt={1}>
-                  Subject:
-                </Typography>
-              </Grid>
-              <Grid item lg={10} md={10} sm={8} xs={12}>
-                <TextField fullWidth variant="outlined"></TextField>
-              </Grid>
-            </Grid> */}
-                    {/* --------------------------------Remark------------------------------------- */}
                     <Grid container component={Paper} p={2} m={2}>
                       <Grid container>
                         <Typography
@@ -1107,6 +1140,284 @@ export default function BasicCard() {
                   </Grid>
                 </Grid>
               </Grid>
+            </Modal> */}
+
+            {/* <Modal keepMounted open={open} onClose={handleClose}>
+              <Box sx={style}>
+                <Box sx={{ width: "100%", height: "80%" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingRight: 2,
+                      paddingLeft: 2,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant="h4">
+                        {" "}
+                        Notifications History
+                      </Typography>
+                    </Box>
+                    <Box
+                      position="absolute"
+                      sx={{
+                        top: "5%",
+                        right: "-2.2%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <IconButton onClick={handleCloses} color=" solid black">
+                        <CloseIcon fontSize="large" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      padding: 2,
+                      borderRadius: 2,
+                      width: "97%",
+                      height: "80%",
+                    }}
+                  >
+                    <Stepper
+                      activeStep={0} // Only the first step is active
+                      orientation="vertical"
+                      connector={
+                        <StepConnector
+                          sx={{
+                            "& .MuiStepConnector-line": {
+                              minHeight: "100%", // Ensures the connector spans the full height
+                              borderColor: "#ccc", // Maintains the color
+                            },
+                          }}
+                        />
+                      }
+                      sx={{
+                        backgroundColor: "#f9f9f9",
+                        borderRadius: 2,
+                        padding: 2, // Adds padding for spacing
+                        height: "100%",
+                      }}
+                    >
+                      <Step key="all-steps">
+                        <StepLabel StepIconComponent={StepIcon}>
+                          Step 1
+                        </StepLabel>
+                        <StepContent>
+                          {stepss.map((step) => (
+                            <div
+                              key={step.label}
+                              style={{
+                                marginBottom: "3px",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  color: "black",
+                                  fontSize:
+                                    step.label === "Notification"
+                                      ? "1.8rem"
+                                      : "1.3rem",
+                                  fontWeight:
+                                    step.label === "Notification"
+                                      ? "bold"
+                                      : "bold", // Adjust font weight here
+                                  marginRight: "10px",
+                                }}
+                              >
+                                {step.label}:
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  color: "black",
+                                  fontSize:
+                                    step.value === "12" ? "1.8rem" : "1.3rem",
+                                  fontWeight:
+                                    step.value === "12" ? "bold" : "400", // Adjust font weight here
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {step.value}
+                              </Typography>
+                            </div>
+                          ))}
+                        </StepContent>
+                      </Step>
+
+                      {stepss.length > 2 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 3 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 4 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 5 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                    </Stepper>
+                  </Box>
+                  <Box display={"flex"} justifyContent={"end"} mt={4}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "green", // Change button color to green
+                        "&:hover": {
+                          backgroundColor: "darkgreen", // Optional: Change color on hover
+                        },
+                        fontSize: "16px",
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+            </Modal> */}
+
+            <Modal keepMounted open={opens} onClose={handleCloses}>
+              <Box sx={style}>
+                <Box sx={{ width: "100%", height: "77%" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingRight: 2,
+                      paddingLeft: 2,
+                      pt: 2,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant="h4"> Complaint History</Typography>
+                    </Box>
+                    <Box
+                      position="absolute"
+                      sx={{
+                        top: "5%",
+                        right: "-2.2%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <IconButton onClick={handleCloses} color=" solid black">
+                        <CloseIcon fontSize="large" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      padding: 2,
+                      borderRadius: 2,
+                      width: "95%",
+                      height: "83%",
+                    }}
+                  >
+                    <Stepper
+                      activeStep={0} // Only the first step is active
+                      orientation="vertical"
+                      connector={
+                        <StepConnector
+                          sx={{
+                            "& .MuiStepConnector-line": {
+                              minHeight: "100%", // Ensures the connector spans the full height
+                              borderColor: "#ccc", // Maintains the color
+                            },
+                          }}
+                        />
+                      }
+                      sx={{
+                        backgroundColor: "#f9f9f9",
+                        borderRadius: 2,
+                        padding: 2, // Adds padding for spacing
+                        height: "100%",
+                      }}
+                    >
+                      {/* First step with all content */}
+                      <Step key="all-steps">
+                        <StepLabel StepIconComponent={StepIcon}>
+                          Step 1
+                        </StepLabel>
+                        <StepContent>
+                          {stepss.map((step) => (
+                            <div
+                              key={step.label}
+                              style={{
+                                marginBottom: "3px",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  color: "black",
+                                  fontSize:
+                                    step.label === "Notification"
+                                      ? "1.8rem"
+                                      : "1.3rem",
+                                  fontWeight:
+                                    step.label === "Notification"
+                                      ? "bold"
+                                      : "bold", // Adjust font weight here
+                                  marginRight: "10px",
+                                }}
+                              >
+                                {step.label}:
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  color: "black",
+                                  fontSize:
+                                    step.value === "12" ? "1.8rem" : "1.3rem",
+                                  fontWeight:
+                                    step.value === "12" ? "bold" : "400", // Adjust font weight here
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {step.value}
+                              </Typography>
+                            </div>
+                          ))}
+                        </StepContent>
+                      </Step>
+
+                      {/* Additional steps, if any, can be left empty or hidden */}
+                      {stepss.length > 2 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 3 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 4 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 5 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                    </Stepper>
+                  </Box>
+                  <Box display={"flex"} justifyContent={"end"} p={3}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "green", // Change button color to green
+                        "&:hover": {
+                          backgroundColor: "darkgreen", // Optional: Change color on hover
+                        },
+                        fontSize: "16px",
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
             </Modal>
           </Grid>
         </Paper>

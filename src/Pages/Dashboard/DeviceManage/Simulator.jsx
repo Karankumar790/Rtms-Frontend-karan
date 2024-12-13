@@ -22,6 +22,10 @@ import {
 import { styled } from "@mui/material/styles";
 import DeviceHubIcon from "@mui/icons-material/DeviceHub";
 import { Box } from "@mui/system";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -173,10 +177,7 @@ function Simulator() {
   };
 
   return (
-    <div>
-      {/* <Grid>
-      <Typography>Simulator</Typography>
-     </Grid> */}
+    <>
       <Paper>
         <Grid container>
           <Box display={"flex"}>
@@ -188,258 +189,373 @@ function Simulator() {
             </Typography>
           </Box>
         </Grid>
-        <Grid
-          container
-          p={1.7}
-          spacing={2}
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          {/* Input Fields */}
-          <Grid item sm={6} md={6} xs={12} lg={3}>
+        <Grid container p={1}>
+          <Grid item lg={6} display={"flex"}>
+            <Typography variant="h5">Security Code</Typography>
             <TextField
-              fullWidth
-              size="small"
-              label="Security Code"
               variant="outlined"
-              name="Security Code"
-              value={""}
-              disabled
-              helperText="hint: Prefix"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
+              size="small"
+              sx={{ width: "75%", ml: "26px" }}
+            ></TextField>
           </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3}>
+          <Grid item lg={6} display={"flex"}>
+            <Typography variant="h5">Client ID</Typography>
             <TextField
-              fullWidth
-              size="small"
-              label="Organization ID"
               variant="outlined"
-              name="Organization ID"
-              value={""}
-              disabled
-              helperText="hint: Prefix"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3}>
-            <TextField
-              fullWidth
               size="small"
-              label="Device ID"
-              variant="outlined"
-              name="Device ID"
-              value={""}
-              disabled
-              helperText="hint: Prefix"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3}>
-            <FormControl fullWidth size="small">
-              <InputLabel id="demo-select-large-label">Network</InputLabel>
-              <Select
-                labelId="demo-select-large-label"
-                id="demo-select-large"
-                value={selectedValue}
-                label="Well Location"
-                onChange={handleChange}
-              >
-                <MenuItem value={0}>00</MenuItem>
-                <MenuItem value={2}>01</MenuItem>
-                <MenuItem value={3}>10</MenuItem>
-                <MenuItem value={4}>11</MenuItem>
-              </Select>
-              <FormHelperText sx={{ color: "gray", fontSize: "0.875rem" }}>
-                hint: 00-none, 01-lora, 10-gsm, 11-both
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Time(s)"
-              variant="outlined"
-              name="Time"
-              helperText="hint: 00s-3600s"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Battery (%)"
-              variant="outlined"
-              name="Battery"
-              helperText="hint: 0%-100%"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Solar(V)"
-              variant="outlined"
-              name="Solar"
-              value={""}
-              helperText="hint: 0V-15V"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Port 1"
-              variant="outlined"
-              name="Port 1"
-              value={""}
-              helperText="hint: GIP(0V-3V)"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Port 2"
-              variant="outlined"
-              name="Port 2"
-              value={""}
-              helperText="hint: CHP(0V-3V)"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Port 3"
-              variant="outlined"
-              name="Port 3"
-              value={""}
-              helperText="hint: THP(0V-3V)"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Port 4"
-              variant="outlined"
-              name="Port 4"
-              value={""}
-              helperText="hint: 0V-3V"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
-          </Grid>
-          <Grid item sm={6} md={6} xs={12} lg={3} mt={1}>
-            <TextField
-              fullWidth
-              size="small"
-              label="Port 5"
-              variant="outlined"
-              name="Port 5"
-              value={""}
-              helperText="hint: 0V-3V"
-              FormHelperTextProps={{
-                style: {
-                  fontSize: "0.875rem",
-                  color: "gray", // A light gray color for the hint text
-                },
-              }}
-            />
+              sx={{ width: "50%", ml: "26px" }}
+            ></TextField>
           </Grid>
         </Grid>
-        <Grid container display={"flex"} p={1.7}>
-          <Grid item lg={6} md={6} sm={6} xs={6} display={"flex"} gap={1}>
-            <Box>
-              <Button variant="contained">INCREMENT</Button>
-            </Box>
-            <Box>
-              <TextField
-                sx={{ width: "45px", borderRadius: "7px" }}
-                size="small"
-              ></TextField>
-            </Box>
-          </Grid>
-          <Grid
-            item
-            lg={6}
-            md={6}
-            sm={6}
-            xs={6}
-            display={"flex"}
-            justifyContent={"end"}
-            gap={2}
-          >
-            <Box width={120} >
-              <Button sx={{width:"120px"}} variant="contained">START</Button>
-            </Box>
-            <Box width={120}>
-              <Button sx={{width:"120px"}} variant="contained">STOP</Button>
-            </Box>
-            <Box width={120}>
-              <Button sx={{width:"120px"}} variant="contained">CLEAR</Button>
-            </Box>
-          </Grid>
+        {/* -------------------------packet=------------------ */}
+        <Grid container>
+          <Box width="100%" display={"flex"} p={1}>
+            <Typography variant="h5" mr={12}>
+              Packet{" "}
+            </Typography>
+            <FormControl>
+              {/* <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel> */}
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                // defaultValue=""
+                name="radio-buttons-group"
+                sx={{ display: "flex" }}
+              >
+                <Box
+                  display={"flex"}
+                  justifyContent={"space-between"}
+                  width={"150%"}
+                >
+                  <FormControlLabel
+                    value="Indivisual"
+                    control={<Radio />}
+                    label="Indivisual"
+                  />
+                  <FormControlLabel
+                    value="combined"
+                    control={<Radio />}
+                    label="combined"
+                  />
+                </Box>
+              </RadioGroup>
+            </FormControl>
+          </Box>
+        </Grid>
+        <Grid item p={1} display={"flex"}>
+          <Box width="8.5%">
+            <Typography variant="h5">Network </Typography>
+          </Box>
+          <Box width={"50%"} justifyContent={"space-evenly"}>
+            <FormControl>
+              {/* <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel> */}
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                name="radio-buttons-group"
+                // sx={{ display: "flex" }}
+              >
+                <Box
+                  display={"flex"}
+                  width={"208%"}
+                  justifyContent={"space-between"}
+                >
+                  <FormControlLabel
+                    value="LoRa"
+                    control={<Radio />}
+                    label="LoRa"
+                  />
+                  <FormControlLabel
+                    value="GSM"
+                    control={<Radio />}
+                    label="GSM"
+                  />
+                  <FormControlLabel
+                    value="LoRa + GSM"
+                    control={<Radio />}
+                    label="LoRa + GSM"
+                  />
+                  <FormControlLabel
+                    value="Rotate"
+                    control={<Radio />}
+                    label="Rotate"
+                  />
+                </Box>
+              </RadioGroup>
+            </FormControl>
+          </Box>
+        </Grid>
+        <Grid container p={1}>
+          <Typography variant="h5">Interval</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+        <Grid container p={1}>
+          <Typography variant="h5">Node</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "3%" }}
+          ></TextField>
+          <Typography variant="h5" ml={"2%"}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+        <Grid container p={1}>
+          <Typography variant="h5">Battery</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+
+        <Grid container p={1}>
+          <Typography variant="h5">Solar</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "3%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+        <Grid container p={1}>
+          <Typography variant="h5">Port 1</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2.5%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+
+        <Grid container p={1}>
+          <Typography variant="h5">Port 2</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2.5%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+
+        <Grid container p={1}>
+          <Typography variant="h5">Port 3</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2.5%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+
+        <Grid container p={1}>
+          <Typography variant="h5">Port 4</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2.5%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+
+        <Grid container p={1}>
+          <Typography variant="h5">Port 5</Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2.5%" }}
+          ></TextField>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            To
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Increase/Decrease
+          </Typography>
+          <Typography variant="h5" sx={{ ml: "2%" }}>
+            Value
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ ml: "2%" }}
+          ></TextField>
+        </Grid>
+
+        <Grid container p={1}>
+          <Box width="100%">
+            <Typography variant="h5">Packet Send</Typography>
+            <Box
+              sx={{ height: "100px", width: "100%", border: "1px solid black" }}
+            ></Box>
+          </Box>
+        </Grid>
+
+        <Grid container p={1}>
+          <Box width="100%">
+            <Typography variant="h5">Packet Decoded</Typography>
+            <Box
+              sx={{ height: "300px", width: "100%", border: "1px solid black" }}
+            ></Box>
+          </Box>
+        </Grid>
+
+        <Grid container p={1}>
+          <Box width="100%">
+            <Typography variant="h5">Result</Typography>
+            <Box
+              sx={{ height: "150px", width: "100%", border: "1px solid black" }}
+            ></Box>
+          </Box>
+        </Grid>
+
+        <Grid container p={1} gap={2} justifyContent={"end"}>
+          <Box width={120}>
+            <Button sx={{ width: "120px" }} variant="contained">
+              START
+            </Button>
+          </Box>
+          <Box width={120}>
+            <Button sx={{ width: "120px" }} variant="contained">
+              STOP
+            </Button>
+          </Box>
+          <Box width={120}>
+            <Button sx={{ width: "120px" }} variant="contained">
+              CLEAR
+            </Button>
+          </Box>
         </Grid>
       </Paper>
       {/* --------------------------Table view ------------------------------- */}
-      <Paper>
+      {/* <Paper>
         <Grid
           container
           md={12}
@@ -469,29 +585,39 @@ function Simulator() {
             >
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Organization ID</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Device ID</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Network</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Time(s)</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Battery(%)</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Solar(V)</StyledTableCell>
-                  {/* <StyledTableCell >Well Port</StyledTableCell> */}
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Port 1</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Port 2</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Port 3</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Port 4</StyledTableCell>
-                  <StyledTableCell align="center"
-                      sx={{ width: "9%" }}>Port 5</StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Organization ID
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Device ID
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Network
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Time(s)
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Battery(%)
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Solar(V)
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Port 1
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Port 2
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Port 3
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Port 4
+                  </StyledTableCell>
+                  <StyledTableCell align="center" sx={{ width: "9%" }}>
+                    Port 5
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -502,7 +628,6 @@ function Simulator() {
                       scope="row"
                       sx={{ width: "9%" }}
                     >
-                      {/* {row.name} */}
                     </StyledTableCell>
                     <StyledTableCell
                       align="left"
@@ -524,7 +649,6 @@ function Simulator() {
                       align="left"
                       sx={{ width: "9%" }}
                     ></StyledTableCell>
-                    {/* <StyledTableCell align="left" sx={{ width: '13%' }}></StyledTableCell> */}
                     <StyledTableCell
                       align="left"
                       sx={{ width: "9%" }}
@@ -551,8 +675,8 @@ function Simulator() {
             </Table>
           </TableContainer>
         </Grid>
-      </Paper>
-    </div>
+      </Paper> */}
+    </>
   );
 }
 
