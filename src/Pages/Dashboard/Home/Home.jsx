@@ -71,6 +71,7 @@ import {
 
 import HistoryModal from "../HistoryModal";
 import { totalWells } from "../../../apis/wellService";
+import { Link } from "react-router-dom";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -476,7 +477,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">CHP-THP&lt;10KSc</Typography>
+                <Typography fontSize="large">High Pressure</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -495,7 +496,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Well THP=ABP</Typography>
+                <Typography fontSize="large">Low Pressure</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -510,7 +511,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Low Battery</Typography>
+                <Typography fontSize="large">High Temperature</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -525,7 +526,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Low Solar Power</Typography>
+                <Typography fontSize="large">Low Flow Rate</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -540,7 +541,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Network Error</Typography>
+                <Typography fontSize="large">Low Battery</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -558,7 +559,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Current Notification</Typography>
+                <Typography fontSize="large">Low Solar</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -578,7 +579,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Open Complaint</Typography>
+                <Typography fontSize="large">Network Error</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -1403,6 +1404,7 @@ export default function BasicCard() {
                     </Stepper>
                   </Box>
                   <Box display={"flex"} justifyContent={"end"} p={3}>
+                    <Link to ="#">
                     <Button
                       variant="contained"
                       sx={{
@@ -1415,6 +1417,7 @@ export default function BasicCard() {
                     >
                       Cancel
                     </Button>
+                    </Link>
                   </Box>
                 </Box>
               </Box>

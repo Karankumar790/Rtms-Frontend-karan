@@ -587,7 +587,7 @@ function ComplaintHistory() {
             <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2,pt:2 }}>
               <Box >
                 <Typography variant='h4'> Complaint History</Typography>
-              </Box>
+              </Box> 
               <Box
                 position="absolute"
                 sx={{
