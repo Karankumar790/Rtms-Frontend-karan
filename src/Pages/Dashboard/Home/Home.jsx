@@ -71,7 +71,6 @@ import {
 
 import HistoryModal from "../HistoryModal";
 import { totalWells } from "../../../apis/wellService";
-import { Link } from "react-router-dom";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -245,12 +244,14 @@ export default function BasicCard() {
   const [opens, setOpens] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleOpens = () => setOpens(true);
-  const handleCloses = () => setOpen(false);
+  // const handleCloses = () => setOpen(false);
   const handleClose = () => setOpen(false);
   const [totalWellsCount, setTotalWellsCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
   const [notFlowing, setNotFlowing] = useState(0);
+
+
 
   const [formData, setFormData] = useState({
     to: "",
@@ -269,6 +270,7 @@ export default function BasicCard() {
     setParameter(event.target.value);
   };
 
+  
   const blue = {
     100: "#DAECFF",
     200: "#b6daff",
@@ -412,6 +414,11 @@ export default function BasicCard() {
       </Box>
     );
   };
+
+  const handleCloses = () => {
+    setOpens(false);  // Close the modal
+  };
+  
 
   return (
     <div
@@ -1295,7 +1302,7 @@ export default function BasicCard() {
                     }}
                   >
                     <Box>
-                      <Typography variant="h4"> Complaint History</Typography>
+                      <Typography variant="h4"> Complaint Details</Typography>
                     </Box>
                     <Box
                       position="absolute"
@@ -1404,7 +1411,6 @@ export default function BasicCard() {
                     </Stepper>
                   </Box>
                   <Box display={"flex"} justifyContent={"end"} p={3}>
-                    <Link to ="#">
                     <Button
                       variant="contained"
                       sx={{
@@ -1414,10 +1420,10 @@ export default function BasicCard() {
                         },
                         fontSize: "16px",
                       }}
+                      onClick={handleCloses}
                     >
                       Cancel
                     </Button>
-                    </Link>
                   </Box>
                 </Box>
               </Box>

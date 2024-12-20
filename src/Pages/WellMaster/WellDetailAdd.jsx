@@ -120,7 +120,7 @@ function WellDetailAdd() {
     <div>
       <Grid container spacing={2}>
         {/* First Section */}
-        <Grid item lg={4}  component={Paper}>
+        <Grid item lg={4}  >
           {/* Input and Add Button */}
           <Grid container spacing={2} alignItems="center">
             <Grid item lg={9.5} xs={12}>
@@ -175,7 +175,7 @@ function WellDetailAdd() {
         </Grid>
 
         {/* Second Section */}
-        <Grid item lg={8}  component={Paper}>
+        <Grid item lg={8} >
           <Grid container spacing={2}>
             <Grid item lg={5}>
               <FormControl fullWidth size="small">
@@ -264,6 +264,9 @@ function WellDetailAdd() {
           </FormControl>
         </Grid>
         <Grid item lg={2.7}>
+          <TextField label="Well Number" fullWidth size="small" />
+        </Grid>
+        <Grid item lg={2.7}>
           <FormControl fullWidth size="small">
             <InputLabel id="dropdown-label">Well Type</InputLabel>
             <Select
@@ -279,9 +282,6 @@ function WellDetailAdd() {
               <MenuItem value="option3">Option 3</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
-        <Grid item lg={2.7}>
-          <TextField label="Well Number" fullWidth size="small" />
         </Grid>
         <Grid item lg={1}>
           <Button

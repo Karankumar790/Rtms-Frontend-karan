@@ -876,7 +876,6 @@ function ManageAsset() {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
               width: "100%",
             }}
           >
@@ -887,10 +886,9 @@ function ManageAsset() {
               <Typography variant="h4" fontWeight={700} mt={1}>
                 {organizationName ? organizationName : "N/A"}
               </Typography>
+              <Typography variant="h4" fontWeight={700} mt={1} ml={1}>[ID:{formData.organizationId}]</Typography>
             </Box>
-            <Box>
-              <Typography variant="h5">ID:{formData.organizationId}</Typography>
-            </Box>
+
           </Box>
           {/* Organization Logo (Top of Organization Name) */}
           {/* {isEditOrganization && formData.organizationlogo && (
