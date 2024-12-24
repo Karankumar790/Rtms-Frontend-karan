@@ -23,12 +23,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Card } from "@mui/joy";
-
+import  SolarPower  from "/assets/solar power.jpeg";
+import Highpres from "/assets/High Pressure.png";
+import LowPressure from "/assets/LowPressure.webp"
+import solar1 from "/assets/solar.jpg"
+import highTem from "/assets/high temperature.png";
 import well from "/assets/WELL.png";
-import pressure from "/assets/PRESSURE.png";
+// import pressure from "/assets/PRESSURE.png";
 import battery from "/assets/battery.png";
 import solar from "/assets/SOLAR1.png";
-import network from "/assets/Network.png";
+// import network from "/assets/Network.png";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import complaints from "../../../../public/assets/com.jpg";
 // -------------import for table--------------------------------//
@@ -45,7 +49,7 @@ import Modal from "@mui/material/Modal";
 import { borderRadius } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import CloseIcon from "@mui/icons-material/Close";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { FlowingWell, NotFlowingWell } from "../../../apis/wellService";
 import CheckIcon from "@mui/icons-material/Check";
 
@@ -170,18 +174,18 @@ let Sata = {
 // }
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '35%',
-  height: '47vh',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "35%",
+  height: "47vh",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 2,
-  overflowY: 'auto',
-  display: 'flex',
+  overflowY: "auto",
+  display: "flex",
 };
 
 const options = {
@@ -244,7 +248,7 @@ export default function BasicCard() {
   const [opens, setOpens] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleOpens = () => setOpens(true);
-  const handleCloses = () => setOpen(false);
+  // const handleCloses = () => setOpen(false);
   const handleClose = () => setOpen(false);
   const [totalWellsCount, setTotalWellsCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
@@ -412,6 +416,10 @@ export default function BasicCard() {
     );
   };
 
+  const handleCloses = () => {
+    setOpens(false); // Close the modal
+  };
+
   return (
     <div
       style={{
@@ -469,14 +477,14 @@ export default function BasicCard() {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <img
-                  src={pressure}
+                  src={Highpres}
                   alt=""
                   style={{ objectFit: "cover", width: "7rem" }}
                 />
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">CHP-THP&lt;10KSc</Typography>
+                <Typography fontSize="large">High Pressure</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -488,14 +496,14 @@ export default function BasicCard() {
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
                 <img
-                  src={pressure}
+                  src={LowPressure}
                   alt=""
                   style={{ objectFit: "cover", width: "7rem" }}
                 />
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Well THP=ABP</Typography>
+                <Typography fontSize="large">Low Pressure</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -506,11 +514,16 @@ export default function BasicCard() {
                 item
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                <img src={battery} alt="" />
+                {/* <img src={battery} alt="" /> */}
+                <img
+                  src={highTem}
+                  alt=""
+                  style={{ objectFit: "cover", width: "7rem" }}
+                />
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Low Battery</Typography>
+                <Typography fontSize="large">High Temperature</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -525,7 +538,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Low Solar Power</Typography>
+                <Typography fontSize="large">Low Flow Rate</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -536,11 +549,11 @@ export default function BasicCard() {
                 item
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                <img src={network} alt="noImg" />
+                <img src={battery} alt="noImg" />
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Network Error</Typography>
+                <Typography fontSize="large">Low Battery</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -551,14 +564,12 @@ export default function BasicCard() {
                 item
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                {/* <img height={'100px'} width={'100px'} src={notifications} alt="noImg" /> */}
-                <NotificationsNoneIcon
-                  sx={{ height: "100px", width: "100px", color: "red" }}
-                />
+                <img height={'100px'} width={'100px'} src={solar1} alt="noImg" />
+               
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Current Notification</Typography>
+                <Typography fontSize="large">Low Solar</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -578,7 +589,7 @@ export default function BasicCard() {
                 <Box fontSize="x-large">0</Box>
               </Grid>
               <CardContent className="card-Content-text">
-                <Typography fontSize="large">Open Complaint</Typography>
+                <Typography fontSize="large">Network Error</Typography>
               </CardContent>
             </CardWrapper>
           </Grid>
@@ -1294,7 +1305,7 @@ export default function BasicCard() {
                     }}
                   >
                     <Box>
-                      <Typography variant="h4"> Complaint History</Typography>
+                      <Typography variant="h4"> Complaint Details</Typography>
                     </Box>
                     <Box
                       position="absolute"
@@ -1412,6 +1423,7 @@ export default function BasicCard() {
                         },
                         fontSize: "16px",
                       }}
+                      onClick={handleCloses}
                     >
                       Cancel
                     </Button>
@@ -1423,7 +1435,7 @@ export default function BasicCard() {
         </Paper>
         <Grid container justifyContent={"space-between"}>
           <Box>
-            <Typography>Showing 0 of 200</Typography>
+            <Typography>Showing 0 of 0</Typography>
           </Box>
           <Stack spacing={2}>
             {/* <Pagination count={25} shape="rounded" /> */}

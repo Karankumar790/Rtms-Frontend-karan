@@ -655,7 +655,6 @@ const WellMaster = () => {
                               {well.landmark || "N/A"}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                              {/* <Link to = "/dashboard/virtual"> */}
                               <IconButton
                                 sx={{
                                   color: "grey",
@@ -671,7 +670,6 @@ const WellMaster = () => {
                               >
                                 <LocationOnIcon fontSize="large" />
                               </IconButton>
-                              {/* </Link> */}
                             </StyledTableCell>
                             <StyledTableCell align="center" width={"14.2%"}>
                               <IconButton
@@ -708,13 +706,9 @@ const WellMaster = () => {
                         <StyledTableCell style={{ fontSize: "medium" }} align="center">
                           No Well Number
                         </StyledTableCell>
-                        {/* <StyledTableCell align="center">
-                          No Landmark
-                        </StyledTableCell> */}
                         <StyledTableCell style={{ fontSize: "medium" }} align="center">N/A</StyledTableCell>
 
                         <StyledTableCell align="center">
-                          {/* <Link to = "/dashboard/virtual"> */}
                           <IconButton
                             sx={{
                               color: "grey",

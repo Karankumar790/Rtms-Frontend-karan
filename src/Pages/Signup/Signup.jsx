@@ -10,7 +10,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import PageContainer from "../../components/HOC/PageContainer";
@@ -23,6 +23,7 @@ import { setRegisterDetails } from "../../apis/authSlice";
 import { toast } from "react-toastify";
 import {
   departmentDropdown,
+  getPosition,
   organizationDropDown,
   sendOtpRegister,
 } from "../../apis/Service";
@@ -34,6 +35,9 @@ function Signup() {
   const [idCardName, setIdCardName] = useState(null); // To store the ID card photo name
   const [organizations, setOrganizations] = useState([]);
   const [departments, setDepartments] = useState("");
+  const organizationName = useSelector((state) => state.auth.organization);
+  const authToken = useSelector((state) => state.auth.authToken);
+  const [position, setPosition] = useState("");
   const [formValues, setFormValues] = useState({
     username: "",
     email: "",
@@ -41,6 +45,7 @@ function Signup() {
     employeeID: "",
     organizationName: "",
     department: "",
+    position: "",
     roleInRTMS: "",
     idCardPhoto: "", //this is Image Uploaded by User
     passportPhoto: "", //this is Image Uploaded by User
@@ -90,6 +95,7 @@ function Signup() {
             employeeID: formValues.employeeID,
             organizationName: formValues.organizationName,
             department: formValues.department,
+            position: formValues.position,
             roleInRTMS: formValues.roleInRTMS,
             passportPhoto: passportPhotoURL || formValues.passportPhoto,
             idCardPhoto: idCardPhotoURL || formValues.idCardPhoto, // Store the image URL
@@ -107,6 +113,7 @@ function Signup() {
     }
   };
 
+  //  
   // Fetch organizations only
   const fetchData = async () => {
     try {
@@ -164,11 +171,29 @@ function Signup() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchPositionData = async () => {
+      try {
+        const response = await getPosition();  // Your API call
+        if (Array.isArray(response.data)) {
+          setPosition(response.data);
+        } else {
+          setPosition([]);  // Set to empty array if data is not in array format
+        }
+      } catch (error) {
+        console.error("Error fetching positions:", error);
+        setPosition([]);  // Handle error by setting to empty array
+      }
+    };
+  
+    fetchPositionData();
+  }, []);
+
   return (
     <PageContainer className="bgImg" showheader="true" showfooter="true">
-      <Grid container display='flex' alignContent='center' height='100%'>
+      <Grid container display="flex" alignContent="center" height="100%">
         <Grid item padding={2} width={600}>
-          <Card style={{backgroundColor:'#e9f4f7'}}>
+          <Card style={{ backgroundColor: "#e9f4f7" }}>
             <CardContent orientation="vertical">
               <Grid item pt={1} sx={{ textAlign: "center" }}>
                 <Typography variant="h4">Registration</Typography>
@@ -260,8 +285,6 @@ function Signup() {
                         </InputLabel>
                         <Select
                           labelId="organization-label"
-
-
                           name="organizationName"
                           required
                           value={formValues.organizationName}
@@ -322,6 +345,7 @@ function Signup() {
                               ...prev,
                               department: selectedDept,
                             }));
+                            handleDepartmentChange(selectedDept);
                           }}
                           label="Department"
                         >
@@ -343,28 +367,38 @@ function Signup() {
                       </FormControl>
                     </Box>
 
-                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+
+                    {/* Position dropdown  */}
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                       <AccountCircle sx={{ mr: 1 }} fontSize="large" />
                       <FormControl fullWidth variant="standard">
-                        <InputLabel>Position</InputLabel>
+                        <InputLabel id="position-label">Position</InputLabel>
                         <Select
-                          required
-                          name="position"
-                          // value={formValues.roleInRTMS}
-                          // onChange={handleUsernameChange}
+                          labelId="position-label"
+                          value={formValues.position}
+                          onChange={(event) => {
+                            const selectedPos = event.target.value;
+                            setFormValues((prev) => ({
+                              ...prev,
+                              department: selectedPos,
+                            }));
+                            handleDepartmentChange(selectedPos);
+                          }}
                           label="Position"
                         >
-                         
+                          {position.map((value, index) => (
+                            <MenuItem key={index}>{value}</MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
-                    </Box> 
+                    </Box>
 
                     <Box
                       sx={{ display: "flex", flexDirection: "column", mb: 2 }}
                     >
                       <Box
                         sx={{ display: "flex", alignItems: "flex-end", mb: 2 }}
-                      >   
+                      >
                         <CameraAltIcon sx={{ mr: 1 }} fontSize="large" />
                         <Button variant="outlined" component="label" fullWidth>
                           <input
@@ -425,7 +459,7 @@ function Signup() {
                     </Link>
                   </Typography>
                   <Typography fontSize={"medium"}>
-                  Already registered?
+                    Already registered?
                     <Link
                       to="/Popup"
                       style={{ textDecoration: "none", cursor: "pointer" }}

@@ -9,13 +9,28 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from "@mui/icons-material/Close";
 
 
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: '35%',
+//   height: '40vh',
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 2,
+//   overflowY: 'auto',
+//   display: 'flex',
+// };
+
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '35%',
-  height: '40vh',
+  height: '47vh',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -82,7 +97,7 @@ export default function HistoryModal() {
 
 
       {/* Modal with Stepper */}
-      <Modal
+      {/* <Modal
         keepMounted
         open={open}
         onClose={handleClose}
@@ -91,7 +106,7 @@ export default function HistoryModal() {
           <Box sx={{ width: '100%', height: '80%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2 }}>
               <Box >
-                <Typography variant='h4'> Notifications History</Typography>
+                <Typography variant='h4'> Notifications Details</Typography>
               </Box>
               <Box
                 position="absolute"
@@ -125,7 +140,6 @@ export default function HistoryModal() {
                   height: '100%'
                 }}
               >
-                {/* First step with all content */}
                 <Step key="all-steps">
                   <StepLabel StepIconComponent={StepIcon}>
                     Step 1
@@ -163,17 +177,8 @@ export default function HistoryModal() {
                   </StepContent>
                 </Step>
 
-                {/* Second step without content */}
-                 {/* <Step key="empty-step">
-                  <StepLabel StepIconComponent={StepIcon}>
-                    Step 2
-                  </StepLabel>
-                  <StepContent>
-                    {/* No content displayed here */}
-                  {/* </StepContent>
-                </Step> */}
+                
 
-                {/* Additional steps, if any, can be left empty or hidden */}
                 {stepss.length > 2 && <Step sx={{ visibility: 'hidden' }} />}
                 {stepss.length > 3 && <Step sx={{ visibility: 'hidden' }} />}
                 {stepss.length > 4 && <Step sx={{ visibility: 'hidden' }} />}
@@ -198,7 +203,146 @@ export default function HistoryModal() {
 
           </Box>
         </Box>
-      </Modal>
+      </Modal> */}
+      <Modal keepMounted open={open} onClose={handleCloses}>
+              <Box sx={style}>
+                <Box sx={{ width: "100%", height: "77%" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingRight: 2,
+                      paddingLeft: 2,
+                      pt: 2,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant="h4"> Notification Details</Typography>
+                    </Box>
+                    <Box
+                      position="absolute"
+                      sx={{
+                        top: "5%",
+                        right: "-2.2%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <IconButton onClick={handleCloses} color=" solid black">
+                        <CloseIcon fontSize="large" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      padding: 2,
+                      borderRadius: 2,
+                      width: "95%",
+                      height: "83%",
+                    }}
+                  >
+                    <Stepper
+                      activeStep={0} // Only the first step is active
+                      orientation="vertical"
+                      connector={
+                        <StepConnector
+                          sx={{
+                            "& .MuiStepConnector-line": {
+                              minHeight: "100%", // Ensures the connector spans the full height
+                              borderColor: "#ccc", // Maintains the color
+                            },
+                          }}
+                        />
+                      }
+                      sx={{
+                        backgroundColor: "#f9f9f9",
+                        borderRadius: 2,
+                        padding: 2, // Adds padding for spacing
+                        height: "100%",
+                      }}
+                    >
+                      {/* First step with all content */}
+                      <Step key="all-steps">
+                        <StepLabel StepIconComponent={StepIcon}>
+                          Step 1
+                        </StepLabel>
+                        <StepContent>
+                          {stepss.map((step) => (
+                            <div
+                              key={step.label}
+                              style={{
+                                marginBottom: "3px",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  color: "black",
+                                  fontSize:
+                                    step.label === "Notification"
+                                      ? "1.8rem"
+                                      : "1.3rem",
+                                  fontWeight:
+                                    step.label === "Notification"
+                                      ? "bold"
+                                      : "bold", // Adjust font weight here
+                                  marginRight: "10px",
+                                }}
+                              >
+                                {step.label}:
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  color: "black",
+                                  fontSize:
+                                    step.value === "12" ? "1.8rem" : "1.3rem",
+                                  fontWeight:
+                                    step.value === "12" ? "bold" : "400", // Adjust font weight here
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {step.value}
+                              </Typography>
+                            </div>
+                          ))}
+                        </StepContent>
+                      </Step>
+
+                      {/* Additional steps, if any, can be left empty or hidden */}
+                      {stepss.length > 2 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 3 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 4 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                      {stepss.length > 5 && (
+                        <Step sx={{ visibility: "hidden" }} />
+                      )}
+                    </Stepper>
+                  </Box>
+                  <Box display={"flex"} justifyContent={"end"} p={3}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "green", // Change button color to green
+                        "&:hover": {
+                          backgroundColor: "darkgreen", // Optional: Change color on hover
+                        },
+                        fontSize: "16px",
+                      }}
+                      onClick={handleCloses}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+            </Modal>
     </div>
   );
 }

@@ -9,6 +9,7 @@ const initialState = {
   authToken: null,  // Store authToken in Redux
   role: "employee",  // Store role in Redux (default to employee)
   organization: "",
+  organizationId:"",
 };
 
 // initial state for Signup
@@ -19,6 +20,7 @@ const registerInitialState = {
   employeeID: "",
   organizationName: "",
   department: "",
+  position:"",
   roleInRTMS: "",
   idCardPhoto: "", // this is Image Upload by the user
   passportPhoto: "", // this is Image Upload by the user
@@ -87,6 +89,9 @@ const authSlice = createSlice({
     setOrganizationName: (state, action) => {
       state.organization = action.payload;
     },
+    setOranizationId: (state,action) => {
+      state.organizationId = action.payload
+    },
     clearAuth: (state) => {
       state.username = "";
       state.password = "";
@@ -95,6 +100,7 @@ const authSlice = createSlice({
       state.authToken = null; // Clear the token
       state.role = "employee"; // Clear the role
       state.organization = ""; // clear organization name
+      state.organizationId = "";
     },
   },
 });
@@ -111,6 +117,7 @@ const registerAuthSlice = createSlice({
       state.employeeID = action.payload.employeeID;
       state.organizationName = action.payload.organizationName;
       state.department = action.payload.department;
+      state.position = action.payload.position;
       state.roleInRTMS = action.payload.roleInRTMS;
       state.idCardPhoto = action.payload.idCardPhoto; // this is Image Upload by the user
       state.passportPhoto = action.payload.passportPhoto; // this is Image Upload by the users
@@ -128,6 +135,7 @@ const registerAuthSlice = createSlice({
       state.employeeID = "";
       state.organizationName = "";
       state.department = "";
+      state.position = "";
       state.roleInRTMS = "";
       state.idCardPhoto = ""; // this is Image Upload by the user
       state.passportPhoto = ""; // this is Image Upload by the user
@@ -209,6 +217,7 @@ export const {
   setAuthToken,
   setRole,
   setOrganizationName,
+  setOranizationId,
   clearAuth,
 } = authSlice.actions;
 export const {

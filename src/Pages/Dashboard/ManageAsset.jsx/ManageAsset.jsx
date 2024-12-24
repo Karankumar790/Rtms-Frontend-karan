@@ -58,6 +58,9 @@ import OrgMessageForward from "../ManageAsset.jsx/OrgMessageForward";
 
 function ManageAsset() {
   const organizationName = useSelector((state) => state.auth.organization);
+  const organizationId = useSelector((state) => state.auth.organizationId);
+  // console.log(organizationId,"........................")
+  const authToken = useSelector((state) => state.auth.authToken);
   const [DepartmentLoading, setDepartmentLoading] = useState(true);
   const [departments, setDepartments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -88,6 +91,7 @@ function ManageAsset() {
   //organization Data Add
   const [formData, setFormData] = useState({
     OrganizationName: "",
+    organizationId: "",
     organizationlogo: "",
     subtitlename: "",
     address: "",
@@ -118,9 +122,6 @@ function ManageAsset() {
   //   "Delete User",
   // ];
 
-
-
-
   // Function to initiate Updating department
   const handleEditClick = (index) => {
     setNewDepartmentName(departments[index]); // Set current department name to input
@@ -135,6 +136,10 @@ function ManageAsset() {
       return;
     }
     if (value) {
+      if (!authToken) {
+        toast.error("Unauthorized: No token provided");
+        return;
+      }
       try {
         const formData = {
           organizationName: organizationName,
@@ -143,7 +148,7 @@ function ManageAsset() {
           const oldDepartmentName = departments[editingIndex];
           formData.oldDepartmentName = oldDepartmentName;
           formData.newDepartmentName = value;
-          const result = await UpdateDepartment(formData);
+          const result = await UpdateDepartment(formData, authToken);
           if (result && result.success) {
             const updatedDepartments = [...departments];
             updatedDepartments[editingIndex] = value;
@@ -155,7 +160,7 @@ function ManageAsset() {
         } else {
           // Handle adding the department
           formData.departmentName = value;
-          const result = await addDepartment(formData);
+          const result = await addDepartment(formData, authToken);
           if (result && result.success) {
             setDepartments((prevDepartments) => [...prevDepartments, value]);
             toast.success(result.message || "Department added successfully");
@@ -179,17 +184,60 @@ function ManageAsset() {
   };
 
   // Delete Department
+  // const handleDeleteDepartment = async (departmentName) => {
+  //   if (!organizationName || !departmentName) {
+  //     toast.error("Organization name and department name are required");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await DeleteDepartment({
+  //       organizationName,
+  //       departmentName,
+  //     });
+
+  //     // Log the response for debugging
+  //     console.log("Delete Department Response:", response);
+
+  //     if (response && response.success) {
+  //       // Update the UI to remove the deleted department
+  //       setDepartments((prevDepartments) =>
+  //         prevDepartments.filter((dep) => dep !== departmentName)
+  //       );
+
+  //       // Optionally, also remove positions associated with this department from state
+  //       setPositionRows((prevRows) =>
+  //         prevRows.filter((row) => row.departmentName !== departmentName)
+  //       );
+
+  //       toast.success(`Department "${departmentName}" deleted successfully`);
+  //     } else {
+  //       toast.error(response.data.message || "Failed to delete department");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting department: ", error);
+  //     toast.error("Error: " + (error.response?.data?.message || error.message));
+  //   }
+  // };
+
   const handleDeleteDepartment = async (departmentName) => {
     if (!organizationName || !departmentName) {
       toast.error("Organization name and department name are required");
+      console.log(authToken, "auth is not defined ");
+      return;
+    }
+    if (!authToken) {
+      toast.error("Authorization token is missing");
       return;
     }
 
+    const formdata = {
+      organizationName,
+      departmentName,
+    };
+
     try {
-      const response = await DeleteDepartment({
-        organizationName,
-        departmentName,
-      });
+      const response = await DeleteDepartment(formdata, authToken);
 
       // Log the response for debugging
       console.log("Delete Department Response:", response);
@@ -221,6 +269,11 @@ function ManageAsset() {
       return;
     }
 
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      return;
+    }
+
     try {
       let result;
       const formData = {
@@ -232,7 +285,7 @@ function ManageAsset() {
       };
 
       if (isEditingPosition) {
-        result = await updatePosition(formData);
+        result = await updatePosition(formData, authToken);
         // Update the position in positionRows
         setPositionRows((prevRows) =>
           prevRows.map((row) => {
@@ -248,7 +301,7 @@ function ManageAsset() {
           })
         );
       } else {
-        result = await addPosition(formData);
+        result = await addPosition(formData, authToken);
         // Add the new position to positionRows
         setPositionRows((prevRows) => {
           const departmentExists = prevRows.some(
@@ -280,9 +333,9 @@ function ManageAsset() {
       if (result && result.success) {
         toast.success(
           result.message ||
-          (isEditingPosition
-            ? "Position updated successfully"
-            : "Position added successfully")
+            (isEditingPosition
+              ? "Position updated successfully"
+              : "Position added successfully")
         );
         setPosition(""); // Clear position input
         setSelectedPositionDepartment(""); // Clear department selection
@@ -312,13 +365,20 @@ function ManageAsset() {
       return;
     }
 
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      return;
+    }
+
+    const formdata = {
+      organizationName,
+      departmentName,
+      positionName,
+    };
+
     try {
       // Call the deletePosition API
-      const deletePositionResponse = await deletePosition({
-        organizationName,
-        departmentName,
-        positionName,
-      });
+      const deletePositionResponse = await deletePosition(formdata, authToken);
 
       if (deletePositionResponse && deletePositionResponse.success) {
         // Update the UI to remove the deleted position
@@ -409,8 +469,8 @@ function ManageAsset() {
             departmentIndex
           ].approvalChains.map((chain) =>
             chain.action === oldAction &&
-              chain.level1 === oldLevel1 &&
-              chain.level2 === oldLevel2
+            chain.level1 === oldLevel1 &&
+            chain.level2 === oldLevel2
               ? { action: approvalChains, level1, level2 }
               : chain
           );
@@ -479,8 +539,19 @@ function ManageAsset() {
 
   const handleDepartmentChange = async (departmentName) => {
     // setDepartmentLoading(true);
+    setDepartmentLoading(true);
+
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      setDepartmentLoading(false);
+      return;
+    }
     try {
-      const response = await getPosition(organizationName, departmentName);
+      const response = await getPosition(
+        organizationName,
+        departmentName,
+        authToken  
+      );
       if (response.success) {
         setPositionsForApp(response.data);
       } else {
@@ -561,6 +632,11 @@ function ManageAsset() {
     }
     // Fetch all Positions and their respective department
     setPositionLoading(true);
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      setDepartmentLoading(false);
+      return;
+    }
     try {
       const formData = { organizationName };
       const departmentResponse = await departmentDropdown(formData); // Fetch departments
@@ -573,7 +649,8 @@ function ManageAsset() {
           departmentList.map(async (department) => {
             const positionResponse = await getPosition(
               organizationName,
-              department
+              department,
+              authToken
             );
             return {
               departmentName: department,
@@ -706,6 +783,7 @@ function ManageAsset() {
       console.log(response, "organizationdata  //////////////");
       setFormData({
         organizationName: response.data.organizationName || "",
+        organizationId: response.data.organizationId || "",
         organizationlogo: response.data.organizationlogo || "",
         subtitlename: response.data.subtitlename || "",
         address: response.data.address || "",
@@ -717,7 +795,7 @@ function ManageAsset() {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
-      console.log(organizationlogo, "org logo...............");
+      // console.log(organizationlogo, "org logo...............");
       if (organizationlogo instanceof File) {
         formDataToUpdate.organizationlogo = organizationlogo;
       }
@@ -768,11 +846,7 @@ function ManageAsset() {
 
   const [approvalChains, setApprovalChains] = useState("");
   const [openModal, setOpenModal] = useState(false); // State to control modal visibility
-  const actions = [
-    "User Registration",
-    "Well Setting",
-    "Add New Approval",
-  ]; // Options for the dropdown
+  const actions = ["User Registration", "Well Setting", "Add New Approval"]; // Options for the dropdown
 
   // Open modal when "Add New Approval" is selected
   const handleSelectChange = (event) => {
@@ -799,7 +873,12 @@ function ManageAsset() {
     <div>
       <Paper>
         <Grid container gap={1} p={2}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+            }}
+          >
             <Box display="flex" gap={1}>
               <IconButton>
                 <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
@@ -807,10 +886,9 @@ function ManageAsset() {
               <Typography variant="h4" fontWeight={700} mt={1}>
                 {organizationName ? organizationName : "N/A"}
               </Typography>
+              <Typography variant="h4" fontWeight={700} mt={1} ml={1}>[ID:{formData.organizationId}]</Typography>
             </Box>
-            <Box>
-              <Typography variant="h5">ID:</Typography>
-            </Box>
+
           </Box>
           {/* Organization Logo (Top of Organization Name) */}
           {/* {isEditOrganization && formData.organizationlogo && (
@@ -848,10 +926,10 @@ function ManageAsset() {
                 <Grid
                   item
                   lg={6}
-                // bgcolor={"yellow"}
-                // position='absolute'
-                // width={"100%"}
-                // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
+                  // bgcolor={"yellow"}
+                  // position='absolute'
+                  // width={"100%"}
+                  // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
                 >
                   <Box
                     // bgcolor={'yellowgreen'}
@@ -902,7 +980,6 @@ function ManageAsset() {
                 { name: "fax", label: "Fax" },
                 { name: "email", label: "Email" },
                 { name: "business", label: "Business" },
-
               ].map((field) => (
                 <Grid
                   container
@@ -916,19 +993,19 @@ function ManageAsset() {
                   alignItems="center"
                 >
                   {/* Label Section */}
-                  <Grid item lg={2} md={3} sm={3} xs={12} >
+                  <Grid item lg={2} md={3} sm={3} xs={12}>
                     <Typography variant="h6">{field.label}</Typography>
                   </Grid>
 
                   {/* Input/Display Section */}
                   {field.name === "organizationName" ? (
-                    <Grid item lg={6} md={9} sm={9} xs={12} >
+                    <Grid item lg={6} md={9} sm={9} xs={12}>
                       <Typography sx={{ fontSize: "20px" }}>
                         {formData[field.name]}
                       </Typography>
                     </Grid>
                   ) : (
-                    <Grid item lg={10} md={9} sm={9} xs={12} >
+                    <Grid item lg={10} md={9} sm={9} xs={12}>
                       <TextField
                         type="text"
                         variant="outlined"
@@ -1036,9 +1113,7 @@ function ManageAsset() {
                     fontSize: "16px",
                     // width: "162px",
                     "&:hover": {
-                      backgroundColor: isEditing
-                        ? "darkorange"
-                        : "darkgreen",
+                      backgroundColor: isEditing ? "darkorange" : "darkgreen",
                     },
                   }}
                 >
@@ -1105,7 +1180,11 @@ function ManageAsset() {
                       ) : (
                         <TableRow>
                           <StyledTableCell
-                            style={{ fontSize: "medium", display: 'flex', justifyContent: 'center' }}
+                            style={{
+                              fontSize: "medium",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
                             colSpan={2}
                           >
                             No departments available
@@ -1160,10 +1239,7 @@ function ManageAsset() {
                       </MenuItem>
                       {departments && departments.length > 0 ? (
                         departments.map((departmentName, index) => (
-                          <MenuItem
-                            key={departmentName}
-                            value={departmentName}
-                          >
+                          <MenuItem key={departmentName} value={departmentName}>
                             {departmentName}
                           </MenuItem>
                         ))
@@ -1256,54 +1332,53 @@ function ManageAsset() {
                           <StyledTableCell align="left" width={"52%"}>
                             {row.positions.length > 0
                               ? row.positions.map((position, posIndex) => (
-                                <div
-                                  key={posIndex}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    fontSize: "medium",
-
-                                  }}
-                                >
-                                  {position}
-                                  <Box display="flex">
-                                    <IconButton
-                                      aria-label="edit"
-                                      size="small"
-                                      sx={{
-                                        color: "darkblue",
-                                        "&:hover": { color: "black" },
-                                      }}
-                                      onClick={() =>
-                                        handleEditPosition(
-                                          row.departmentName,
-                                          position
-                                        )
-                                      }
-                                    >
-                                      <EditIcon fontSize="large" />
-                                    </IconButton>
-                                    <IconButton
-                                      aria-label="delete"
-                                      size="small"
-                                      sx={{
-                                        color: "red",
-                                        "&:hover": { color: "darkred" },
-                                        marginRight: "8px",
-                                      }}
-                                      onClick={() =>
-                                        handleDeletePosition(
-                                          row.departmentName,
-                                          position
-                                        )
-                                      }
-                                    >
-                                      <DeleteForeverIcon fontSize="large" />
-                                    </IconButton>
-                                  </Box>
-                                </div>
-                              ))
+                                  <div
+                                    key={posIndex}
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "space-between",
+                                      fontSize: "medium",
+                                    }}
+                                  >
+                                    {position}
+                                    <Box display="flex">
+                                      <IconButton
+                                        aria-label="edit"
+                                        size="small"
+                                        sx={{
+                                          color: "darkblue",
+                                          "&:hover": { color: "black" },
+                                        }}
+                                        onClick={() =>
+                                          handleEditPosition(
+                                            row.departmentName,
+                                            position
+                                          )
+                                        }
+                                      >
+                                        <EditIcon fontSize="large" />
+                                      </IconButton>
+                                      <IconButton
+                                        aria-label="delete"
+                                        size="small"
+                                        sx={{
+                                          color: "red",
+                                          "&:hover": { color: "darkred" },
+                                          marginRight: "8px",
+                                        }}
+                                        onClick={() =>
+                                          handleDeletePosition(
+                                            row.departmentName,
+                                            position
+                                          )
+                                        }
+                                      >
+                                        <DeleteForeverIcon fontSize="large" />
+                                      </IconButton>
+                                    </Box>
+                                  </div>
+                                ))
                               : "No positions available"}
                           </StyledTableCell>
                         </StyledTableRow>
@@ -1311,7 +1386,11 @@ function ManageAsset() {
                     ) : (
                       <TableRow>
                         <StyledTableCell
-                          style={{ fontSize: "large", display: 'flex', justifyContent: 'center' }}
+                          style={{
+                            fontSize: "large",
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
                           colSpan={2}
                         >
                           No Positions available
@@ -1351,13 +1430,11 @@ function ManageAsset() {
                   labelId="department-select-label"
                 >
                   {/* Render all options except "Add New Approval" */}
-                  {actions
-                    .slice(0, actions.length - 1)
-                    .map((action, index) => (
-                      <MenuItem key={index} value={action}>
-                        {action}
-                      </MenuItem>
-                    ))}
+                  {actions.slice(0, actions.length - 1).map((action, index) => (
+                    <MenuItem key={index} value={action}>
+                      {action}
+                    </MenuItem>
+                  ))}
 
                   {/* Render "Add New Approval" with Add Icon at the last position */}
                   <MenuItem value="Add New Approval">
@@ -1370,7 +1447,7 @@ function ManageAsset() {
               </FormControl>
 
               {/* Modal for adding new approval */}
-              <Dialog open={openModal} onClose={handleCloseModal} >
+              <Dialog open={openModal} onClose={handleCloseModal}>
                 <DialogTitle>Add New Approval</DialogTitle>
                 <DialogContent>
                   <TextField
@@ -1427,10 +1504,7 @@ function ManageAsset() {
                     </MenuItem>
                     {departments && departments.length > 0 ? (
                       departments.map((departmentName, index) => (
-                        <MenuItem
-                          key={departmentName}
-                          value={departmentName}
-                        >
+                        <MenuItem key={departmentName} value={departmentName}>
                           {departmentName}
                         </MenuItem>
                       ))
@@ -1453,13 +1527,18 @@ function ManageAsset() {
                   label="Action"
                 >
                   {/* Render all options except "Add New Approval" */}
-                  {actions
-                    .slice(0, actions.length - 1)
-                    .map((action, index) => (
-                      <MenuItem key={index} value={action}>
-                        {action}
-                      </MenuItem>
-                    ))}
+                  {/* {actions.slice(0, actions.length - 1).map((action, index) => (
+                    <MenuItem key={index} value={action}>
+                      {action}
+                    </MenuItem> */}
+                  {/* ))} */}
+                  {
+                    positionsForApp.map((value,index)=>(
+                      <MenuItem key={index} >
+                      {value}
+                    </MenuItem> 
+                    ))
+                  }
 
                   {/* Render "Add New Approval" with Add Icon at the last position */}
                   <MenuItem value="Add New Approval">
@@ -1472,7 +1551,7 @@ function ManageAsset() {
               </FormControl>
 
               {/* Modal for adding new approval */}
-              <Dialog open={openModal} onClose={handleCloseModal} >
+              <Dialog open={openModal} onClose={handleCloseModal}>
                 <DialogTitle>Add New Approval</DialogTitle>
                 <DialogContent>
                   <TextField
@@ -1559,9 +1638,7 @@ function ManageAsset() {
                   backgroundColor: isEditMode ? "blue" : "green",
                   fontSize: "16px",
                   "&:hover": {
-                    backgroundColor: isEditMode
-                      ? "darkorange"
-                      : "darkgreen",
+                    backgroundColor: isEditMode ? "darkorange" : "darkgreen",
                   },
                 }}
               >
@@ -1609,9 +1686,7 @@ function ManageAsset() {
                 <TableBody>
                   {approvalChainLoading ? (
                     <TableRow>
-                      <StyledTableCell colSpan={5}>
-                        Loading...
-                      </StyledTableCell>
+                      <StyledTableCell colSpan={5}>Loading...</StyledTableCell>
                     </TableRow>
                   ) : approvalChainRows && approvalChainRows.length > 0 ? (
                     approvalChainRows.map((row, index) => (
@@ -1627,13 +1702,22 @@ function ManageAsset() {
                                 {row.departmentName}
                               </StyledTableCell>
                             )}
-                            <StyledTableCell style={{ fontSize: "medium" }} width={"25%"}>
+                            <StyledTableCell
+                              style={{ fontSize: "medium" }}
+                              width={"25%"}
+                            >
                               {chain.action || "N/A"}
                             </StyledTableCell>
-                            <StyledTableCell style={{ fontSize: "medium" }} width={"21%"}>
+                            <StyledTableCell
+                              style={{ fontSize: "medium" }}
+                              width={"21%"}
+                            >
                               {chain.level1 || "N/A"}
                             </StyledTableCell>
-                            <StyledTableCell style={{ fontSize: "medium" }} width={"20%"}>
+                            <StyledTableCell
+                              style={{ fontSize: "medium" }}
+                              width={"20%"}
+                            >
                               {chain.level2 || "N/A"}
                             </StyledTableCell>
                             <StyledTableCell
@@ -1643,20 +1727,14 @@ function ManageAsset() {
                               <Box display="flex" justifyContent="center">
                                 <IconButton
                                   onClick={() =>
-                                    handleApprovalChainEdit(
-                                      index,
-                                      chainIndex
-                                    )
+                                    handleApprovalChainEdit(index, chainIndex)
                                   }
                                 >
                                   <EditIcon fontSize="large" />
                                 </IconButton>
                                 <IconButton
                                   onClick={() =>
-                                    handleDeleteApprovalChain(
-                                      index,
-                                      chainIndex
-                                    )
+                                    handleDeleteApprovalChain(index, chainIndex)
                                   }
                                   sx={{
                                     color: "red",
@@ -1676,7 +1754,11 @@ function ManageAsset() {
                     <TableRow>
                       <StyledTableCell
                         colSpan={5}
-                        style={{ fontSize: "medium", display: 'flex', justifyContent: 'center' }}
+                        style={{
+                          fontSize: "medium",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
                       >
                         No Approval Chain Available
                       </StyledTableCell>
@@ -1693,7 +1775,6 @@ function ManageAsset() {
           <OrgMessageForward />
         </Grid>
       </Grid>
-
     </div>
   );
 }
