@@ -40,6 +40,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WellDetailAdd from "./WellDetailAdd.jsx";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 
 // Styled components for tables and layout
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -337,18 +340,18 @@ const WellMaster = () => {
           <PrintIcon sx={{
             width: "fit-content",
             height: "fit-content",
-            color:'#F34E41',
+            color: '#F34E41',
           }} />
         </Grid>
       </Grid>
 
-      <div><WellDetailAdd/></div>
+      <div><WellDetailAdd /></div>
 
       {/* <Paper sx={{ mb: "15px", p: '15px' }}>
         <Grid container>
           <Grid container spacing={2}> */}
-            {/* ------------------------ADD LOCATION------------------------------ */}
-            {/* <Grid
+      {/* ------------------------ADD LOCATION------------------------------ */}
+      {/* <Grid
               item
               xs={12}
               sm={6}
@@ -389,8 +392,8 @@ const WellMaster = () => {
               </Box>
             </Grid> */}
 
-            {/* ------------------------ADD INSTALLATION------------------------------ */}
-            {/* <Grid
+      {/* ------------------------ADD INSTALLATION------------------------------ */}
+      {/* <Grid
               item
               xs={12}
               sm={6}
@@ -463,8 +466,8 @@ const WellMaster = () => {
               </Box>
             </Grid> */}
 
-            {/* ------------------------Add Well NUMBER ------------------------------ */}
-            {/* <Grid
+      {/* ------------------------Add Well NUMBER ------------------------------ */}
+      {/* <Grid
               item
               xs={12}
               sm={12}
@@ -592,7 +595,7 @@ const WellMaster = () => {
                 </Grid>
               </Box>
             </Grid> */}
-          {/* </Grid>
+      {/* </Grid>
         </Grid>
       </Paper> */}
       <Grid
@@ -610,12 +613,14 @@ const WellMaster = () => {
           <Table aria-label="customized table" stickyHeader>
             <TableHead>
               <StyledTableRow>
-                <StyledTableCell align="center" sx={{ bgcolor: 'black' }}>Well Number</StyledTableCell>
+                <StyledTableCell align="center" sx={{ bgcolor: 'black' }}>Location</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}>Installation</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Well Number</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Well Type</StyledTableCell>
-                <StyledTableCell align="center" width={"14.2%"}> Location</StyledTableCell>
-                <StyledTableCell align="center" width={"14.2%"}> Installation</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Landmark</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Geolocation</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Node ID</StyledTableCell>
+                <StyledTableCell align="center" width={"14.2%"}> Setting</StyledTableCell>
                 <StyledTableCell align="center" width={"14.2%"}> Action</StyledTableCell>
               </StyledTableRow>
             </TableHead>
@@ -757,6 +762,9 @@ const WellMaster = () => {
                       </IconButton>
                     </StyledTableCell>
                     <StyledTableCell align="center">
+
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
                       <IconButton
                         onClick={() => handleSettingsClick(location)}
                         sx={{
@@ -766,6 +774,17 @@ const WellMaster = () => {
                       >
                         <SettingsIcon fontSize="large" />
                       </IconButton>
+                    </StyledTableCell>
+                    <StyledTableCell  >
+                      <div style={{display:'flex',flexDirection:'row'}}>
+                      <IconButton color="primary"  >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton color="secondary" >
+                        <DeleteIcon />
+                      </IconButton>
+                      
+                      </div>
                     </StyledTableCell>
                   </StyledTableRow>
                 );

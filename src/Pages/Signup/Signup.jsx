@@ -310,6 +310,23 @@ function Signup() {
                       </FormControl>
                     </Box>
 
+                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
+                      <FormControl fullWidth variant="standard">
+                        <InputLabel>Role in RTMS</InputLabel>
+                        <Select
+                          required
+                          name="roleInRTMS"
+                          value={formValues.roleInRTMS}
+                          onChange={handleUsernameChange}
+                          label="Role in RTMS"
+                        >
+                          <MenuItem value="manager">Manager</MenuItem>
+                          <MenuItem value="employee">Employee</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
+
                     {/* Department Dropdown */}
                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                       <AccountCircle sx={{ mr: 1 }} fontSize="large" />
@@ -350,6 +367,7 @@ function Signup() {
                       </FormControl>
                     </Box>
 
+
                     {/* Position dropdown  */}
                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                       <AccountCircle sx={{ mr: 1 }} fontSize="large" />
@@ -371,23 +389,6 @@ function Signup() {
                           {position.map((value, index) => (
                             <MenuItem key={index}>{value}</MenuItem>
                           ))}
-                        </Select>
-                      </FormControl>
-                    </Box>
-
-                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                      <AccountCircle sx={{ mr: 1 }} fontSize="large" />
-                      <FormControl fullWidth variant="standard">
-                        <InputLabel>Role in RTMS</InputLabel>
-                        <Select
-                          required
-                          name="roleInRTMS"
-                          value={formValues.roleInRTMS}
-                          onChange={handleUsernameChange}
-                          label="Role in RTMS"
-                        >
-                          <MenuItem value="manager">Manager</MenuItem>
-                          <MenuItem value="employee">Employee</MenuItem>
                         </Select>
                       </FormControl>
                     </Box>

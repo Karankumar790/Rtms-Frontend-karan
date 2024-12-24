@@ -1420,12 +1420,14 @@ function ManageAsset() {
           </Box>
           <Grid container display="flex" spacing={1}>
             <Grid item lg={2.3} mg={2.8} sm={5.5} xs={12}>
-              <FormControl fullWidth size="small">
-                <InputLabel>Approval List</InputLabel>
+              <FormControl fullWidth size="small" >
+                <InputLabel id="department-select-label  ">Approval List</InputLabel>
                 <Select
                   value={approvalChains || ""} // Controlled value
                   onChange={handleSelectChange} // Handle change
                   label="Action"
+                  id="department-select  "
+                  labelId="department-select-label"
                 >
                   {/* Render all options except "Add New Approval" */}
                   {actions.slice(0, actions.length - 1).map((action, index) => (

@@ -309,7 +309,7 @@ export default function BasicCard() {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12} lg={6} display={"flex"} justifyContent={"end"}>
+      {/* <Grid item xs={12} lg={6} display={"flex"} justifyContent={"end"}>
         <Button
           variant="contained"
           sx={{
@@ -325,7 +325,7 @@ export default function BasicCard() {
         >
           Compose
         </Button>
-      </Grid>
+      </Grid> */}
 
       {/* Loading and Error States */}
       <Grid item xs={12}>
@@ -483,7 +483,29 @@ export default function BasicCard() {
             </TabPanel> */}
             <TabPanel>
               <Grid container justifyContent="end">
-                <Box>
+                <Box sx={{
+                  display: "flex",
+                  gap: "16px", // Adjust the value as needed 
+                  mb:'10px'
+                }}>
+                  <Button variant="contained" sx={{
+                    color: "black",
+                    backgroundColor: "lightblue",
+                    "&:hover": {
+                      backgroundColor: "skyblue",
+                    },
+                    fontSize: "16px",
+                  }}>Approval</Button>
+                  <Button variant="contained" sx={{
+                    color: "black",
+                    backgroundColor: "lightblue",
+                    "&:hover": {
+                      backgroundColor: "skyblue",
+                    },
+                    fontSize: "16px",
+                  }}>Reject</Button>
+                </Box>
+                {/* <Box>
                   <Tooltip title={<span style={{ fontSize: "16px" }}>Inbox</span>} arrow>
                     <IconButton color="primary">
                       <ForwardToInboxIcon sx={{ fontSize: "30px" }} />
@@ -500,11 +522,11 @@ export default function BasicCard() {
                   </IconButton>
                   <IconButton color="primary">
                     <ForwardIcon sx={{ fontSize: "30px" }} />
-                  </IconButton> */}
-                  <IconButton color="primary">
+                  </IconButton> 
+                   <IconButton color="primary">
                     <DeleteIcon sx={{ fontSize: "30px" }} />
                   </IconButton>
-                </Box>
+                </Box> */}
 
               </Grid>
               {/* User Message content (only your data here) */}

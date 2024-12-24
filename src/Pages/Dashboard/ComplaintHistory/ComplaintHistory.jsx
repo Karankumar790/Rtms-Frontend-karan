@@ -18,6 +18,8 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
+import PrintIcon from "@mui/icons-material/Print";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -60,13 +62,13 @@ ChartJS.register(
 // -------------------------------Table for  Moblie --------------------------
 const StyledGridItem = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: `1px solid ${theme.palette.divider}`,
+  borderBottom:` 1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.grey[100],
 }));
 
 const StyledContent = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderBottom: `1px solid ${theme.palette.divider}`,
+  borderBottom:` 1px solid ${theme.palette.divider}`,
   backgroundColor: "white",
 }));
 
@@ -210,13 +212,23 @@ function ComplaintHistory() {
   const handleClose = () => setOpen(false);
   const handleCloses = () => setOpen(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate2, setSelectedDate2] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
   const [installation, setInstallation] = useState("");
+
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
 
+  const handleDateChange2 = (event) => {
+    setSelectedDate2(event.target.value);
+  };
+
+  const date = new Date();
+  const showTime = date.getHours() 
+      + ':' + date.getMinutes() 
+      + ":" + date.getSeconds();
   const [formData, setFormData] = useState({
     to: "",
     cc: "",
@@ -301,7 +313,7 @@ function ComplaintHistory() {
     { label: 'Reciever Name', value: 'Anil' },
     { label: 'Department', value: 'Ground Department ' },
     { label: 'Description', value: 'well number 10 is not working' },
-    { label: 'Status', value: 'Pending' },
+    { label: 'Status', value:`${showTime} PM` },
   ];
   
   const StepIcon = () => {
@@ -339,6 +351,9 @@ function ComplaintHistory() {
         <Typography variant="h4" mt={1}>
           Complaint History
         </Typography>
+        <IconButton sx={{position:'absolute', right:'15px'}}>
+        <PrintIcon sx={{ fontSize: "40px", color: "red" }} />
+        </IconButton>
       </Grid>
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
@@ -379,8 +394,8 @@ function ComplaintHistory() {
               type="date"
               size="small"
               label="End Date"
-              value={selectedDate}
-              onChange={handleDateChange}
+              value={selectedDate2}
+              onChange={handleDateChange2}
               InputLabelProps={{
                 shrink: true, // Ensures the label is always visible
               }}
@@ -448,7 +463,23 @@ function ComplaintHistory() {
           </FormControl>
         </Grid>
       </Grid>
-      <Grid container display={"flex"} justifyContent={"end"} pt={2}>
+      <Grid container display={"flex"} justifyContent={"end"} pt={2} gap={2}>
+      <Grid item lg={1.3} md={3} sm={6} xs={12}>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#8C000B", // Change button color to green
+              "&:hover": {
+                backgroundColor: "#8C000B", // Optional: Change color on hover
+              },
+              fontSize: "16px",
+            }}
+            fullWidth
+          >
+            Reset
+          </Button>
+          </Grid>
+        
         <Grid item lg={1.3} md={3} sm={6} xs={12}>
           <Button
             variant="contained"

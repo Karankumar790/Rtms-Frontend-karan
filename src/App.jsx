@@ -72,6 +72,10 @@ const Simulator = lazy(() =>
   import("./Pages/Dashboard/DeviceManage/Simulator.jsx")
 );
 
+const LoraNetwork = lazy(() =>
+  import("./Pages/Dashboard/LoraNetwork.jsx")
+);
+
 
 
 function App() {
@@ -100,6 +104,7 @@ function App() {
     { path: "Admin", element: <SuperAdmin /> },
     { path: "technicalSupport", element: <TechnicalSupport /> },
     { path: "MesaageForwarding", element: <MesaageForwarding /> },
+    { path: "LoraNetwork", element: <LoraNetwork /> },
 
   ];
 
