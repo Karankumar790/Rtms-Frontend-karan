@@ -179,10 +179,10 @@ function WellDetailAdd() {
           <Grid container spacing={2}>
             <Grid item lg={5}>
               <FormControl fullWidth size="small">
-                <InputLabel id="dropdown-label">Add Location</InputLabel>
+                <InputLabel id="dropdown-label">Location</InputLabel>
 
                 <Select labelId="location-select-label" id="location-select" label="Choose Option">
-                  <MenuItem value="">Add location based on other fields</MenuItem>
+                  <MenuItem value="">location based on other fields</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -211,7 +211,7 @@ function WellDetailAdd() {
               <Table>
                 <TableBody>
                   <CustomTableRow>
-                    <CustomTableCell align="left">Add Location</CustomTableCell>
+                    <CustomTableCell align="left">Location</CustomTableCell>
                     <CustomTableCell align="left">Add Installation</CustomTableCell>
                     <CustomTableCell align="right">
                       <IconButton color="primary" onClick={handleEdit}>

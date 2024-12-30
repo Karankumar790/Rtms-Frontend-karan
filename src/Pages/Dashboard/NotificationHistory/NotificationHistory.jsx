@@ -162,7 +162,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   CardOverflow: "scroll",
   overflowY: "scroll",
-  height: "70vh",
+  height: "72vh",
   width: "55%",
 
   bgcolor: "white",
@@ -335,7 +335,7 @@ function NotificationHistory() {
       </Grid>
       <Grid container spacing={3} pt={3}>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
-          {/* <FormControl fullWidth>
+          <FormControl fullWidth>
             <TextField
               fullWidth
               type="date"
@@ -363,111 +363,30 @@ function NotificationHistory() {
                 },
               }}
             />
-          </FormControl> */}
-
-          <FormControl fullWidth size="small">
-            <Grid container spacing={2}>
-              {/* Date Field */}
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  type="date"
-                  size="small"
-                  label="Start Date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  InputLabelProps={{
-                    shrink: true, // Ensures the label is always visible
-                  }}
-                  inputProps={{
-                    min: "2001-02-16",
-                    max: "2024-08-07",
-                  }}
-                  sx={
-                    {
-                      // Optional: Customize the TextField styling as needed
-                    }
-                  }
-                />
-              </Grid>
-
-              {/* Time Field */}
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  type="time"
-                  size="small"
-                  label="Start Time"
-                  value={selectedTime}
-                  onChange={handleTimeChange}
-                  InputLabelProps={{
-                    shrink: true, // Ensures the label is always visible
-                  }}
-                  inputProps={{
-                    min: "08:00", // Minimum time (24-hour format)
-                    max: "18:00", // Maximum time (24-hour format)
-                  }}
-                  sx={
-                    {
-                      // Optional: Customize the TextField styling as needed
-                    }
-                  }
-                />
-              </Grid>
-            </Grid>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
           <FormControl fullWidth size="small">
-            <Grid container spacing={2}>
-              {/* Date Field */}
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  type="date"
-                  size="small"
-                  label="End Date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  InputLabelProps={{
-                    shrink: true, // Ensures the label is always visible
-                  }}
-                  inputProps={{
-                    min: "2001-02-16",
-                    max: "2024-08-07",
-                  }}
-                  sx={
-                    {
-                      // Optional: Customize the TextField styling as needed
-                    }
-                  }
-                />
-              </Grid>
-
-              {/* Time Field */}
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  type="time"
-                  size="small"
-                  label="End Time"
-                  value={selectedTime}
-                  onChange={handleTimeChange}
-                  InputLabelProps={{
-                    shrink: true, // Ensures the label is always visible
-                  }}
-                  inputProps={{
-                    min: "08:00", // Minimum time (24-hour format)
-                    max: "18:00", // Maximum time (24-hour format)
-                  }}
-                  sx={
-                    {
-                      // Optional: Customize the TextField styling as needed
-                    }
-                  }
-                />
-              </Grid>
-            </Grid>
+            <TextField
+              fullWidth
+              type="date"
+              size="small"
+              label="End Date"
+              value={selectedDate}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true, // Ensures the label is always visible
+              }}
+              inputProps={{
+                min: "2001-02-16",
+                max: "2024-08-07",
+              }}
+              sx={
+                {
+                  // Optional: Customize the TextField styling as needed
+                }
+              }
+            />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={2.4}>
@@ -565,7 +484,7 @@ function NotificationHistory() {
                 {/* <StyledTableCell>Status</StyledTableCell> */}
                 <StyledTableCell>Description</StyledTableCell>
                 <StyledTableCell>Status</StyledTableCell>
-                <StyledTableCell> History View</StyledTableCell>
+                <StyledTableCell>View</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -622,9 +541,9 @@ function NotificationHistory() {
           </Table>
         </TableContainer>
         <Grid container justifyContent={"end"} mt={1}>
-        <Stack spacing={2}>
-          <Pagination count={1} variant="outlined" shape="rounded" />
-        </Stack>
+          <Stack spacing={2}>
+            <Pagination count={1} variant="outlined" shape="rounded" />
+          </Stack>
         </Grid>
       </Grid>
 

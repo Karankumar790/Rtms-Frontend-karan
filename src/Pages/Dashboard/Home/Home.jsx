@@ -393,7 +393,7 @@ export default function BasicCard() {
     { label: "Reciever Name", value: "Anil" },
     { label: "Department", value: "Ground Department " },
     { label: "Description", value: "well number 10 is not working" },
-    { label: "Status", value: "Pending" },
+    { label: "Status", value: "Pending [0 Days : 0 Hr : 0 min]" },
   ];
 
   const StepIcon = () => {

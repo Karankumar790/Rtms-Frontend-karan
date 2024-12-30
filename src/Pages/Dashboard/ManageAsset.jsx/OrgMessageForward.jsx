@@ -139,7 +139,7 @@ const OrgMessageForward = () => {
                   </DemoContainer>
                 </LocalizationProvider>
               </Grid>
-              <Grid item lg={4} md={4} sm={4} xs={5}>
+              <Grid item lg={5} md={4} sm={4} xs={5}>
                 <Box display="flex" alignItems="center" gap={1}>
                   <AccountBalanceIcon />
                   <FormControl fullWidth size="small">
