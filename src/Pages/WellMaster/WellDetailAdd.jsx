@@ -68,51 +68,51 @@ function WellDetailAdd() {
     setValue3(event.target.value);
   };
 
-// -------Adding New Location---------
+  // -------Adding New Location---------
 
-// const [location, setLocation] = useState([]);
+  // const [location, setLocation] = useState([]);
 
 
-// const handleAddLocation = async() => {
-//   if(!location){
-//     toast.error("Location is required");
-//     return;
-//   }
-//   try{
-//     const formData = {
-//       location: location,
-//       organizationName,
-//     };
-//     const response = await addLocation(formData);
-//     if(response){
-//       toast.success(response.message);
-//       setLocation("");
+  // const handleAddLocation = async() => {
+  //   if(!location){
+  //     toast.error("Location is required");
+  //     return;
+  //   }
+  //   try{
+  //     const formData = {
+  //       location: location,
+  //       organizationName,
+  //     };
+  //     const response = await addLocation(formData);
+  //     if(response){
+  //       toast.success(response.message);
+  //       setLocation("");
 
-//       setLocation((prevLocation) => {
-//         const updatedLocation = [...prevLocation, formData.location];
+  //       setLocation((prevLocation) => {
+  //         const updatedLocation = [...prevLocation, formData.location];
 
-//         return updatedLocation;
-//       });
-//     } else {
-//       toast.error(response.message);
-//     }
-//   } catch (error) {
-//     toast.error("Something went wrong")
-//   }
-// };
+  //         return updatedLocation;
+  //       });
+  //     } else {
+  //       toast.error(response.message);
+  //     }
+  //   } catch (error) {
+  //     toast.error("Something went wrong")
+  //   }
+  // };
 
-//  fetch location
+  //  fetch location
 
-// useEffect(()=>{
-//   const fetchLocation = async () => {
-    
-//     const data = await getLocation();
-//     if(data && data.message === "Well location fetched successfully"){
-//       setLocation(data.data);
-//     }
-//   };
-//   fetchLocation();
-// },[organizationName]);
+  // useEffect(()=>{
+  //   const fetchLocation = async () => {
+
+  //     const data = await getLocation();
+  //     if(data && data.message === "Well location fetched successfully"){
+  //       setLocation(data.data);
+  //     }
+  //   };
+  //   fetchLocation();
+  // },[organizationName]);
 
 
 
@@ -120,22 +120,23 @@ function WellDetailAdd() {
     <div>
       <Grid container spacing={2}>
         {/* First Section */}
+
         <Grid item lg={4}  >
           {/* Input and Add Button */}
           <Grid container spacing={2} alignItems="center">
             <Grid item lg={9.5} xs={12}>
-              <TextField 
-              label="Add Location" 
-              size="small"
-              // value={location}
-              // onChange={(e) => {
-              //   setLocation(e.target.value);
-              // }} 
-              fullWidth />
+              <TextField
+                label="Add Location"
+                size="small"
+                // value={location}
+                // onChange={(e) => {
+                //   setLocation(e.target.value);
+                // }} 
+                fullWidth />
             </Grid>
             <Grid item lg={2.5} xs={12}>
               <Button
-              //  onClick={handleAddLocation}
+                //  onClick={handleAddLocation}
                 sx={{
                   color: "white",
                   backgroundColor: "green",
@@ -205,8 +206,9 @@ function WellDetailAdd() {
             </Grid>
           </Grid>
 
+
           {/* Table */}
-          <Grid item mt={2.5}>
+          <Grid item mt={2}>
             <TableContainer component={Paper} sx={{ maxHeight: 320, height: 400, overflow: "auto" }}>
               <Table>
                 <TableBody>
@@ -228,8 +230,9 @@ function WellDetailAdd() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container  mt={3} mb={2} spacing={3} >
-        <Grid item lg={2.7}>
+
+      <Grid container mt={3} mb={2} spacing={3} >
+        <Grid item lg={2.8}>
           <FormControl fullWidth size="small">
             <InputLabel id="dropdown-label">Locations</InputLabel>
             <Select
@@ -266,7 +269,7 @@ function WellDetailAdd() {
         <Grid item lg={2.7}>
           <TextField label="Well Number" fullWidth size="small" />
         </Grid>
-        <Grid item lg={2.7}>
+        <Grid item lg={2.8}>
           <FormControl fullWidth size="small">
             <InputLabel id="dropdown-label">Well Type</InputLabel>
             <Select

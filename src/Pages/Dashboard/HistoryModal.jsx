@@ -45,8 +45,11 @@ export default function HistoryModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleCloses = () => setOpen(false);
-
-
+  const date = new Date();
+  const showTime = date.getHours() 
+      + ':' + date.getMinutes() 
+      + ":" + date.getSeconds();
+      
   const stepss = [
     { label: 'Notification', value: '12' },
     { label: 'Date/Time', value: '2024-11-28T15:30' },

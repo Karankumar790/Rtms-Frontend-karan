@@ -162,20 +162,6 @@ const chartData = {
   ],
 };
 function Simulator() {
-  const [selectedValue, setSelectedValue] = useState("");
-
-  // Define data that will be shown based on the selected value
-  const data = {
-    0: "Data for 00",
-    2: "Data for 01",
-    3: "Data for 10",
-    4: "Data for 11",
-  };
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
   return (
     <>
       <Paper>

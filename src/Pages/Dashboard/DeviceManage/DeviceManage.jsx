@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -192,6 +193,11 @@ function DeviceManage() {
           xs={4}
           sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
+               <Grid container display={"flex"}>
+        <Typography variant="h5" mt={2} sx={{ color: "darkgrey",mb:'10px'}}>
+          Real Time Engineering Data
+        </Typography>
+      </Grid>
           <TableContainer
             component={Paper}
             sx={{ maxHeight: 620, overflow: "auto" }}
