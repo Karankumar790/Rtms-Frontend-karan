@@ -33,8 +33,7 @@ import { Box } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import CloseIcon from "@mui/icons-material/Close";
 import ComplaintIcon from "@mui/icons-material/AccessAlarm";
-import CheckIcon from '@mui/icons-material/Check';
-
+import CheckIcon from "@mui/icons-material/Check";
 
 import {
   Chart as ChartJS,
@@ -149,7 +148,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   CardOverflow: "scroll",
   overflowY: "scroll",
-  height: "44vh",
+  height: "51vh",
   width: "40%",
 
   bgcolor: "white",
@@ -211,12 +210,16 @@ function ComplaintHistory() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleCloses = () => setOpen(false);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedDate2, setSelectedDate2] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [chartType, setChartType] = useState("line");
   const [installation, setInstallation] = useState("");
-
+   const [selectedDate, setSelectedDate] = useState("");
+    const [selectedTime, setSelectedTime] = useState("");
+  
+    // Handlers for date and time changes
+    const handleTimeChange = (event) => {
+      setSelectedTime(event.target.value);
+    };
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
@@ -281,8 +284,9 @@ function ComplaintHistory() {
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 2px ${theme.palette.mode === "dark" ? grey[900] : grey[50]
-      };
+    box-shadow: 0px 2px 2px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[50]
+    };
 
     &:hover {
       border-color: ${blue[400]};
@@ -290,7 +294,8 @@ function ComplaintHistory() {
 
     &:focus {
       border-color: ${blue[400]};
-      box-shadow: 0 0 0 3px ${theme.palette.mode === "dark" ? blue[600] : blue[200]
+      box-shadow: 0 0 0 3px ${
+        theme.palette.mode === "dark" ? blue[600] : blue[200]
       };
     }
 
@@ -304,7 +309,6 @@ function ComplaintHistory() {
     setInstallation(event.target.value);
   };
 
-
   const stepss = [
     { label: 'Complaint', value: '12' },
     { label: 'Date/Time', value: '2024-11-28T15:30' },
@@ -315,27 +319,26 @@ function ComplaintHistory() {
     { label: 'Description', value: 'well number 10 is not working' },
     { label: 'Status', value:`${showTime} PM` },
   ];
-  
+
   const StepIcon = () => {
     return (
       <Box
         sx={{
-          backgroundColor: 'green', // Orange background for the icon
-          color: 'white', // White check icon
-          borderRadius: '50%',
-          width: '24px',
-          height: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '16px',
+          backgroundColor: "green", // Orange background for the icon
+          color: "white", // White check icon
+          borderRadius: "50%",
+          width: "24px",
+          height: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "16px",
         }}
       >
         <CheckIcon />
       </Box>
     );
   };
-
 
   return (
     <div
@@ -394,7 +397,7 @@ function ComplaintHistory() {
               type="date"
               size="small"
               label="End Date"
-              value={selectedDate2}
+              value={""}
               onChange={handleDateChange2}
               InputLabelProps={{
                 shrink: true, // Ensures the label is always visible
@@ -526,20 +529,21 @@ function ComplaintHistory() {
             stickyHeader
             sx={{
               minWidth: "900px", // Set minimum width for horizontal scrolling
-              tableLayout: 'fixed', width: '100%'
+              tableLayout: "fixed",
+              width: "100%",
             }}
           >
             <TableHead>
               <TableRow>
-                <StyledTableCell >Complaint No.</StyledTableCell>
-                <StyledTableCell >Date/Time</StyledTableCell>
-                <StyledTableCell >Sender Name</StyledTableCell>
-                <StyledTableCell >Department</StyledTableCell>
-                <StyledTableCell >Receiver Name</StyledTableCell>
-                <StyledTableCell >Department</StyledTableCell>
-                <StyledTableCell >Status</StyledTableCell>
-                <StyledTableCell >Description</StyledTableCell>
-                <StyledTableCell >View</StyledTableCell>
+                <StyledTableCell>Complaint No.</StyledTableCell>
+                <StyledTableCell>Date/Time</StyledTableCell>
+                <StyledTableCell>Sender Name</StyledTableCell>
+                <StyledTableCell>Department</StyledTableCell>
+                <StyledTableCell>Receiver Name</StyledTableCell>
+                <StyledTableCell>Department</StyledTableCell>
+                <StyledTableCell>Status</StyledTableCell>
+                <StyledTableCell>Description</StyledTableCell>
+                <StyledTableCell>View</StyledTableCell>
               </TableRow>
             </TableHead>
 
@@ -600,29 +604,33 @@ function ComplaintHistory() {
           </Table>
         </TableContainer>
         <Grid container justifyContent={"end"} mt={1}>
-        <Stack spacing={2}>
-          <Pagination count={1} variant="outlined" shape="rounded" />
-        </Stack>
+          <Stack spacing={2}>
+            <Pagination count={1} variant="outlined" shape="rounded" />
+          </Stack>
         </Grid>
       </Grid>
 
       {/* ------------------------------notification view --------------------------- */}
 
-      <Modal  
-        keepMounted
-        open={open}
-        onClose={handleClose}>
-
-      <Box sx={style}>
-          <Box sx={{ width: '100%', height: '77%' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2,pt:2 }}>
-              <Box >
-                <Typography variant='h4'> Complaint History</Typography>
-              </Box> 
+      <Modal keepMounted open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <Box sx={{ width: "100%", height: "77%" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                paddingRight: 2,
+                paddingLeft: 2,
+                pt: 2,
+              }}
+            >
+              <Box>
+                <Typography variant="h4"> Complaint History</Typography>
+              </Box>
               <Box
                 position="absolute"
                 sx={{
-                  top: '5%',
+                  top: "5%",
                   right: "-2.2%",
                   transform: "translate(-50%, -50%)",
                 }}
@@ -632,39 +640,52 @@ function ComplaintHistory() {
                 </IconButton>
               </Box>
             </Box>
-            <Box sx={{ padding: 2, borderRadius: 2, width: '95%', height: '83%' }}>
+            <Box
+              sx={{ padding: 2, borderRadius: 2, width: "95%", height: "83%" }}
+            >
               <Stepper
                 activeStep={0} // Only the first step is active
                 orientation="vertical"
-                connector={<StepConnector
-                  sx={{
-                    '& .MuiStepConnector-line': {
-                      minHeight: '100%', // Ensures the connector spans the full height
-                      borderColor: '#ccc', // Maintains the color
-                    },
-                  }}
-                />}
+                connector={
+                  <StepConnector
+                    sx={{
+                      "& .MuiStepConnector-line": {
+                        minHeight: "100%", // Ensures the connector spans the full height
+                        borderColor: "#ccc", // Maintains the color
+                      },
+                    }}
+                  />
+                }
                 sx={{
-                  backgroundColor: '#f9f9f9',
+                  backgroundColor: "#f9f9f9",
                   borderRadius: 2,
                   padding: 2, // Adds padding for spacing
-                  height: '100%'
+                  height: "100%",
                 }}
               >
                 {/* First step with all content */}
                 <Step key="all-steps">
-                  <StepLabel StepIconComponent={StepIcon}>
-                    Step 1
-                  </StepLabel>
+                  <StepLabel StepIconComponent={StepIcon}>Step 1</StepLabel>
                   <StepContent>
                     {stepss.map((step) => (
-                      <div key={step.label} style={{ marginBottom: '3px', display: 'flex', alignItems: 'center' }}>
+                      <div
+                        key={step.label}
+                        style={{
+                          marginBottom: "3px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
                         <Typography
                           sx={{
-                            color: 'black',
-                            fontSize: step.label === 'Notification' ? '1.8rem' : '1.3rem',
-                            fontWeight: step.label === 'Notification' ? 'bold' : 'bold', // Adjust font weight here
-                            marginRight: '10px',
+                            color: "black",
+                            fontSize:
+                              step.label === "Notification"
+                                ? "1.8rem"
+                                : "1.3rem",
+                            fontWeight:
+                              step.label === "Notification" ? "bold" : "bold", // Adjust font weight here
+                            marginRight: "10px",
                           }}
                         >
                           {step.label}:
@@ -672,38 +693,35 @@ function ComplaintHistory() {
                         <Typography
                           variant="body1"
                           sx={{
-                            color: 'black',
-                            fontSize: step.value === '12' ? '1.8rem' : '1.3rem',
-                            fontWeight: step.value === '12' ? 'bold' : '400', // Adjust font weight here
-                            display: 'flex',
-                            justifyContent: 'center',
+                            color: "black",
+                            fontSize: step.value === "12" ? "1.8rem" : "1.3rem",
+                            fontWeight: step.value === "12" ? "bold" : "400", // Adjust font weight here
+                            display: "flex",
+                            justifyContent: "center",
                           }}
                         >
                           {step.value}
                         </Typography>
-
                       </div>
-
-
                     ))}
                   </StepContent>
                 </Step>
 
                 {/* Second step without content */}
-                 {/* <Step key="empty-step">
+                {/* <Step key="empty-step">
                   <StepLabel StepIconComponent={StepIcon}>
                     Step 2
                   </StepLabel>
                   <StepContent>
                     {/* No content displayed here */}
-                  {/* </StepContent>
+                {/* </StepContent>
                 </Step> */}
 
                 {/* Additional steps, if any, can be left empty or hidden */}
-                {stepss.length > 2 && <Step sx={{ visibility: 'hidden' }} />}
-                {stepss.length > 3 && <Step sx={{ visibility: 'hidden' }} />}
-                {stepss.length > 4 && <Step sx={{ visibility: 'hidden' }} />}
-                {stepss.length > 5 && <Step sx={{ visibility: 'hidden' }} />}
+                {stepss.length > 2 && <Step sx={{ visibility: "hidden" }} />}
+                {stepss.length > 3 && <Step sx={{ visibility: "hidden" }} />}
+                {stepss.length > 4 && <Step sx={{ visibility: "hidden" }} />}
+                {stepss.length > 5 && <Step sx={{ visibility: "hidden" }} />}
               </Stepper>
             </Box>
             <Box display={"flex"} justifyContent={"end"} p={3}>
@@ -716,7 +734,6 @@ function ComplaintHistory() {
                   },
                   fontSize: "16px",
                 }}
-
               >
                 Cancel
               </Button>
@@ -724,14 +741,9 @@ function ComplaintHistory() {
           </Box>
         </Box>
 
-
-
-
-
-
         {/* <Grid container sx={style}> */}
-          {/* <Grid container p={2}> */}
-            {/* <IconButton
+        {/* <Grid container p={2}> */}
+        {/* <IconButton
               onClick={handleClose}
               sx={{
                 position: "absolute",
@@ -747,9 +759,9 @@ function ComplaintHistory() {
             >
               <CloseIcon fontSize="50px" />
             </IconButton> */}
-            {/* <HistoryModal /> */}
-            {/* --------------------------------Textfield Values------------------------------------- */}
-            {/* <Grid container mx={2} mt={1}>
+        {/* <HistoryModal /> */}
+        {/* --------------------------------Textfield Values------------------------------------- */}
+        {/* <Grid container mx={2} mt={1}>
               <Grid container>
                 <Paper
                   sx={{
@@ -768,7 +780,7 @@ function ComplaintHistory() {
                     </Typography>
                   </Grid>
                   {/* ---------------------- view -------------------------- */}
-            {/* <Box>
+        {/* <Box>
                     <Grid container>
                       <Grid item lg={12} md={3} sm={6} xs={12} pl={2}>
                         {[{ label: "Complaint No. :", value: "" }].map(
@@ -782,12 +794,12 @@ function ComplaintHistory() {
                                 {item.label}
                               </Typography>
                               {/* <TextField size="small" variant="standard" disabled fullWidth value={item.value} /> */}
-            {/* </Box> */}
-            {/* )
+        {/* </Box> */}
+        {/* )
                         )}
                       </Grid> */}
 
-            {/* <Grid item lg={12} md={3} sm={6} xs={12} pl={2} mb={3}>
+        {/* <Grid item lg={12} md={3} sm={6} xs={12} pl={2} mb={3}>
                         {[
                           { label: "Well Number :", value: "" },
                           { label: "Location :", value: "" },
@@ -801,17 +813,17 @@ function ComplaintHistory() {
                               {item.label}
                             </Typography>
                             {/* <TextField size="small" fullWidth value={item.value} /> */}
-            {/* </Box> */}
-            {/* ))} */}
-            {/* </Grid> */}
-            {/* </Grid> */}
-            {/* </Box>  */}
-            {/* </Paper> */}
-            {/* </Grid> */}
-            {/* </Grid>  */}
+        {/* </Box> */}
+        {/* ))} */}
+        {/* </Grid> */}
+        {/* </Grid> */}
+        {/* </Box>  */}
+        {/* </Paper> */}
+        {/* </Grid> */}
+        {/* </Grid>  */}
 
-            {/* --------------------------------chart------------------------------------- */}
-            {/* <Grid container p={2}>
+        {/* --------------------------------chart------------------------------------- */}
+        {/* <Grid container p={2}>
               <Grid item lg={9}>
                 <Paper elevation={2} sx={{ pb: "5px" }}>
                   <Grid container>
@@ -921,8 +933,8 @@ function ComplaintHistory() {
               </Grid>
             </Grid> */}
 
-            {/* ------------------Status ----------------------*/}
-            {/* <Grid container component={Paper} ml={2} width={"990px"}>
+        {/* ------------------Status ----------------------*/}
+        {/* <Grid container component={Paper} ml={2} width={"990px"}>
               <Grid container>
                 <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
                   Forward
@@ -1031,8 +1043,8 @@ function ComplaintHistory() {
               </Grid>
             </Grid> */}
 
-            {/* --------------------------------Subject------------------------------------- */}
-            {/* <Grid
+        {/* --------------------------------Subject------------------------------------- */}
+        {/* <Grid
               container
               component={Paper}
               p={2}
@@ -1057,8 +1069,8 @@ function ComplaintHistory() {
                 <TextField fullWidth variant="outlined"></TextField>
               </Grid>
             </Grid> */}
-            {/* --------------------------------Remark------------------------------------- */}
-            {/* <Grid container component={Paper} p={2} m={2}>
+        {/* --------------------------------Remark------------------------------------- */}
+        {/* <Grid container component={Paper} p={2} m={2}>
               <Grid container>
                 <Typography ml={2} mb={2} fontSize={25} fontWeight={500}>
                   Message
@@ -1072,7 +1084,7 @@ function ComplaintHistory() {
                 />
               </Grid>
             </Grid> */}
-            {/* <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
+        {/* <Box width="100%" textAlign="end" mx={1} fullWidth mt={1}>
               <Button
                 component="label"
                 role={undefined}
@@ -1101,7 +1113,7 @@ function ComplaintHistory() {
                 UNABLE TO CLOSE
               </Button>
             </Box> */}
-          {/* </Grid> */}
+        {/* </Grid> */}
         {/* </Grid> */}
       </Modal>
       {/* ------------------------------Table for Desktop---------------------------- */}

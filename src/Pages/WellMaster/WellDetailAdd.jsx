@@ -180,18 +180,17 @@ function WellDetailAdd() {
           <Grid container spacing={2}>
             <Grid item lg={5}>
               <FormControl fullWidth size="small">
-                <InputLabel id="dropdown-label">Add Location</InputLabel>
+                <InputLabel id="dropdown-label">Location</InputLabel>
 
-          <Grid item lg={12} sx={{ display: 'flex' }} gap={2}> 
-            <FormControl fullWidth size="small">
-              <InputLabel id="dropdown-label">Add Location</InputLabel>
-
-              <Select labelId="location-select-label" id="location-select" label="Choose Option">
-                <MenuItem value="">Add location based on other fields</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField label="Add Installation" fullWidth size="small" />
-            <Grid item lg={2.7} xs={12}>
+                <Select labelId="location-select-label" id="location-select" label="Choose Option">
+                  <MenuItem value="">location based on other fields</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item lg={5}>
+              <TextField label="Add Installation" fullWidth size="small" />
+            </Grid>
+            <Grid item lg={2} xs={12}>
               <Button
                 sx={{
                   color: "white",
@@ -214,7 +213,7 @@ function WellDetailAdd() {
               <Table>
                 <TableBody>
                   <CustomTableRow>
-                    <CustomTableCell align="left">Add Location</CustomTableCell>
+                    <CustomTableCell align="left">Location</CustomTableCell>
                     <CustomTableCell align="left">Add Installation</CustomTableCell>
                     <CustomTableCell align="right">
                       <IconButton color="primary" onClick={handleEdit}>

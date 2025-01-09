@@ -57,8 +57,7 @@ export default function HistoryModal() {
     { label: 'Location', value: 'Site Alpha, Block B' },
     { label: 'Installation', value: 'Pump-450X' },
     { label: 'Description', value: 'Routine maintenance check required' },
-    { label: 'Status', value: 'Pending' },
-    { label: 'Time', value: `${showTime} PM` },
+    { label: 'Status', value: 'Pending [0 Days : 0 Hr : 0 min]' },
   ];
 
   const StepIcon = () => {
@@ -217,7 +216,7 @@ export default function HistoryModal() {
                     }}
                   >
                     <Box>
-                      <Typography variant="h4"> Notification Details</Typography>
+                      <Typography variant="h4"> Notification History</Typography>
                     </Box>
                     <Box
                       position="absolute"

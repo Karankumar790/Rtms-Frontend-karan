@@ -44,7 +44,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityIcon from "@mui/icons-material/Visibility";  
 import Modal from "@mui/material/Modal";
 import { borderRadius } from "@mui/system";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
@@ -393,7 +393,7 @@ export default function BasicCard() {
     { label: "Reciever Name", value: "Anil" },
     { label: "Department", value: "Ground Department " },
     { label: "Description", value: "well number 10 is not working" },
-    { label: "Status", value: "Pending" },
+    { label: "Status", value: "Pending [0 Days : 0 Hr : 0 min]" },
   ];
 
   const StepIcon = () => {

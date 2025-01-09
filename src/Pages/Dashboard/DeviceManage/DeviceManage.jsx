@@ -22,7 +22,7 @@ import { deviceData } from "../../../apis/wellService";
 import { useSelector } from "react-redux";
 import PrintIcon from "@mui/icons-material/Print";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
+  
 
 // ----------------------Table for Moblie------------------------------
 
@@ -78,12 +78,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     height: "20px", // Set a specific height
     fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
-    textAlign: "center"
+    textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 16,
     textAlign: "center",
-    padding: "10px"
+    padding: "10px",
   },
 }));
 
@@ -134,11 +134,11 @@ function DeviceManage() {
     <div>
       <Grid
         container
-        sx={{ display: 'flex', justifyContent: "space-between" }}
+        sx={{ display: "flex", justifyContent: "space-between" }}
         pt={2}
         paddingBottom={2}
       >
-        <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1} >
+        <Grid item lg={6} md={6} sm={6} xs={12} display={"flex"} gap={1}>
           <Box sx={{ height: "50px", width: "50px" }}>
             <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
@@ -146,21 +146,25 @@ function DeviceManage() {
             <Typography variant="h4">Node Monitor</Typography>
           </Box>
         </Grid>
-        <Grid
-          item
-          sx={{ display: "flex", height: "3%", width: '3%' }}
-        >
-          <PrintIcon sx={{ height: "fit-content", width: 'fit-content', color: '#F34E41' }} />
+        <Grid item sx={{ display: "flex", height: "3%", width: "3%" }}>
+          <PrintIcon
+            sx={{
+              height: "fit-content",
+              width: "fit-content",
+              color: "#F34E41",
+            }}
+          />
         </Grid>
       </Grid>
-      <Grid item lg={12} display={"flex"} justifyContent={"space-between"} md={2} sm={2} xs={12} >
-        <Grid item lg={8} display={'flex'} gap={2} >
-
-          <TextField size="small"  sx={{width:'17rem'}}  label="Node Search"/>
-          <Button variant="contained" size="small" sx={{ backgroundColor: 'green' }}>
-            Search
-          </Button>
-        </Grid>
+      <Grid
+        item
+        lg={1}
+        display={"flex"}
+        justifyContent={"end"}
+        md={2}
+        sm={2}
+        xs={12}
+      >
         <Link to="/dashboard/simulator">
           <Button
             variant="contained"
@@ -201,44 +205,19 @@ function DeviceManage() {
             <Table aria-label="customized table" stickyHeader>
               <TableHead>
                 <TableRow>
-                  <StyledTableCell  >
-                    Client ID{" "}
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Node ID{" "}
-                  </StyledTableCell>
+                  <StyledTableCell>Client ID </StyledTableCell>
+                  <StyledTableCell>Node ID </StyledTableCell>
 
-                  <StyledTableCell  >
-                    Network
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Time (s)
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Battery
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Solar 
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Port {" "} 1
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Port {" "} 2
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Port {" "} 3
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Port {" "} 4
-                  </StyledTableCell>
-                  <StyledTableCell  >
-                    Port {" "} 5
-                  </StyledTableCell>
-                  
-                  <StyledTableCell  >
-                    View
-                  </StyledTableCell>
+                  <StyledTableCell>Network</StyledTableCell>
+                  <StyledTableCell>Time (s)</StyledTableCell>
+                  <StyledTableCell>Battery (%)</StyledTableCell>
+                  <StyledTableCell>Solar (V)</StyledTableCell>
+                  <StyledTableCell>Port1 </StyledTableCell>
+                  <StyledTableCell>Port2</StyledTableCell>
+                  <StyledTableCell>Port3</StyledTableCell>
+                  <StyledTableCell>Port4</StyledTableCell>
+                  <StyledTableCell>Port5</StyledTableCell>
+                  <StyledTableCell>View</StyledTableCell>
                   {/* <StyledTableCell  >
                     E
                   </StyledTableCell>
@@ -285,46 +264,30 @@ function DeviceManage() {
                   </TableRow>
                 ) : (
                   deviceDataList?.map((device) => (
-                    <StyledTableRow key={device._id} >
+                    <StyledTableRow key={device._id}>
                       <StyledTableCell component="th" scope="row">
                         1
                       </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.NodeAdd}
-                      </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.NodeAdd}
-                      </StyledTableCell>
-                      <StyledTableCell ></StyledTableCell>
-                      <StyledTableCell >1 min</StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.P1}
-                      </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.P2}
-                      </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.P3}
-                      </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.Bat}
-                      </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.Solar}
-                      </StyledTableCell>
-                      <StyledTableCell >
-                        {device.data.Solar}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                      <IconButton
-                      sx={{
-                        color: "grey",
-                        "&:hover": { color: "darkred" },
-                        marginRight: "5px",
-                      }}
-                    >
-                      <VisibilityIcon fontSize="large" />
-                    </IconButton>
+                      <StyledTableCell>{device.data.NodeAdd}</StyledTableCell>
+                      <StyledTableCell>{device.data.NodeAdd}</StyledTableCell>
+                      <StyledTableCell></StyledTableCell>
+                      <StyledTableCell>1 min</StyledTableCell>
+                      <StyledTableCell>{device.data.P1}</StyledTableCell>
+                      <StyledTableCell>{device.data.P2}</StyledTableCell>
+                      <StyledTableCell>{device.data.P3}</StyledTableCell>
+                      <StyledTableCell>{device.data.Bat}</StyledTableCell>
+                      <StyledTableCell>{device.data.Solar}</StyledTableCell>
+                      <StyledTableCell>{device.data.Solar}</StyledTableCell>
+                      <StyledTableCell sx={{ width: "10%" }}>
+                        <IconButton
+                          sx={{
+                            color: "grey",
+                            "&:hover": { color: "darkred" },
+                            marginRight: "5px",
+                          }}
+                        >
+                          <VisibilityIcon fontSize="large" />
+                        </IconButton>
                       </StyledTableCell>
                       {/* <StyledTableCell >
                         {device.data.Solar}
