@@ -397,7 +397,7 @@ function ComplaintHistory() {
               type="date"
               size="small"
               label="End Date"
-              value={selectedDate2}
+              value={""}
               onChange={handleDateChange2}
               InputLabelProps={{
                 shrink: true, // Ensures the label is always visible
