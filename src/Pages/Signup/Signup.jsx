@@ -176,6 +176,7 @@ function Signup() {
       try {
         const response = await getPosition();  // Your API call
         if (Array.isArray(response.data)) {
+          console.log(response) 
           setPosition(response.data);
         } else {
           setPosition([]);  // Set to empty array if data is not in array format
@@ -367,6 +368,9 @@ function Signup() {
                       </FormControl>
                     </Box>
 
+                    {console.log(position)}
+
+
 
                     {/* Position dropdown  */}
                     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -386,9 +390,9 @@ function Signup() {
                           }}
                           label="Position"
                         >
-                          {position.map((value, index) => (
+                          {/* {position?.map((value, index) => (
                             <MenuItem key={index}>{value}</MenuItem>
-                          ))}
+                          ))} */}
                         </Select>
                       </FormControl>
                     </Box>

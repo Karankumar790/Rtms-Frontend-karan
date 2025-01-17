@@ -342,7 +342,7 @@ const WellMaster = () => {
             height: "fit-content",
             color: '#F34E41',
           }} />
-        </Grid>
+        </Grid>ana
       </Grid>
 
       <div><WellDetailAdd /></div>
