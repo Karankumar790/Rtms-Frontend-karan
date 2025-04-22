@@ -64,16 +64,3 @@ export const addWellNum = async (formData) => {
     return catchError(error);
   }
 };
-
-// GET SELECTED  WELL INFO 
-export const getWellDetails = async (location,installationName,wellType, wellNumber,organizationName) => {
-  try {
-    const response = await axios.get(
-`      ${WELL_API}/get-WellDetails?location=${location}&installation=${installationName}&wellType=${wellType}&wellNumber=${wellNumber}&organizationName=${organizationName}`
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error); 
-    throw error; 
-  }
-};
