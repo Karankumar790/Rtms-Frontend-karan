@@ -12,7 +12,6 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

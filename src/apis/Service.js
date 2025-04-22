@@ -233,11 +233,16 @@ export const departmentDropdown = async (formData) => {
 };
 
 //add department by owner
-export const addDepartment = async (formData) => {
+export const addDepartment = async (formData, authToken) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-department`,
-      formData
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`, // Pass the token in the header
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -246,11 +251,16 @@ export const addDepartment = async (formData) => {
 };
 
 //update department
-export const UpdateDepartment = async (formData) => {
+export const UpdateDepartment = async (formData, authToken) => {
   try {
     const response = await axios.put(
       `${ORGANIZATION_API}/update-department`,
-      formData
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`, // Pass the token in the header
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -259,11 +269,16 @@ export const UpdateDepartment = async (formData) => {
 };
 
 //delete department
-export const DeleteDepartment = async (formData) => {
+export const DeleteDepartment = async (formdata,authToken) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/delete-department`,
-      formData
+      formdata,
+      {
+        headers : {
+          Authorization: `Bearer ${authToken}`,
+        }
+      }
     );
     return response.data;
   } catch (error) {
@@ -272,26 +287,34 @@ export const DeleteDepartment = async (formData) => {
 };
 
 //Delete Position
-export const deletePosition = async (formData) => {
+export const deletePosition = async (formData,authToken) => {
   try {
-
     const response = await axios.post(
       `${ORGANIZATION_API}/delete-position`,
-      formData
+      formData,
+      {
+        headers : {
+          Authorization: `Bearer ${authToken}`,
+        }
+      }
     );
     return response.data;
   } catch (error) {
     return catchError(error);
-
   }
 };
 
 //Add Position on the basic of department
-export const addPosition = async (formData) => {
+export const addPosition = async (formData,authToken) => {
   try {
     const response = await axios.post(
       `${ORGANIZATION_API}/add-position`,
-      formData
+      formData,
+      {
+        headers : {
+          Authorization : `Bearer ${authToken}`,
+        }
+      }
     );
     return response.data;
   } catch (error) {
@@ -300,11 +323,16 @@ export const addPosition = async (formData) => {
 };
 
 //update Position
-export const updatePosition = async (formData) => {
+export const updatePosition = async (formData,authToken) => {
   try {
     const response = await axios.put(
       `${ORGANIZATION_API}/update-position`,
-      formData
+      formData,
+      {
+        headers : {
+          Authorization : `Bearer ${authToken}`,
+        }
+      }
     );
     return response.data;
   } catch (error) {
@@ -313,10 +341,16 @@ export const updatePosition = async (formData) => {
 };
 
 // https://rtms-backend.onrender.com/api/v1/organization/get-positions?organizationName=Foxboro.in.co&departmentName=Finance
-export const getPosition = async (organizationName, departmentName) => {
+export const getPosition = async (organizationName, departmentName,authToken) => {
   try {
+    console.log("Authorization Tokenbbb:", authToken); // Log the token
     const response = await axios.get(
-      `${ORGANIZATION_API}/get-positions?organizationName=${organizationName}&departmentName=${departmentName}`
+      `${ORGANIZATION_API}/get-positions?organizationName=${organizationName}&departmentName=${departmentName}`,
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`, // Attach the Bearer token to the headers
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -352,7 +386,10 @@ export const updateApprovalChain = async (formData) => {
 
 export const deleteApprovalChain = async (formData) => {
   try {
-    const response = await axios.post(`${ORGANIZATION_API}/delete-approval-chain`, formData); // No need for 'data' wrapper
+    const response = await axios.post(
+      `${ORGANIZATION_API}/delete-approval-chain`,
+      formData
+    ); // No need for 'data' wrapper
     return response.data;
   } catch (error) {
     return catchError(error); // Handle errors appropriately
@@ -411,5 +448,28 @@ export const updateOrganizationData = async (formData) => {
     return response.data;
   } catch (error) {
     return catchError(error);
+  }
+};
+
+// all users data api
+export const getUsersByOrganization = async (organizationName) => {
+  try {
+    const response = await axios.get(
+      `${USER_API}/get-UsersByOrganization/:organizationName?organizationName=${organizationName}`
+    );
+    return response.data;
+  } catch (error) {
+    return catchError(error);
+  }
+};
+
+// This function fetches all owners by admin ID
+export const getAllOwnersByAdmin = async (adminID) => {
+  try {
+    const response = await axios.get(`${USER_API}/get-OwnersByAdmin`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching owners by admin:", error);
+    return catchError;
   }
 };

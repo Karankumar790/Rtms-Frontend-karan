@@ -1,11 +1,17 @@
 import {
+  Autocomplete,
   Button,
   Card,
   CardContent,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControl,
   Grid,
   IconButton,
   InputLabel,
+  ListItemIcon,
   MenuItem,
   Select,
   TextField,
@@ -20,8 +26,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box, padding } from "@mui/system";
+import { Box, padding, shadows } from "@mui/system";
 import AssetsIcon from "@mui/icons-material/AccountBalance";
+import PersonIcon from "@mui/icons-material/Person";
+import LinkIcon from "@mui/icons-material/Link";
+import AddIcon from "@mui/icons-material/Add";
 import { useSelector } from "react-redux";
 import {
   Edit as EditIcon,
@@ -49,7 +58,9 @@ import OrgMessageForward from "../ManageAsset.jsx/OrgMessageForward";
 
 function ManageAsset() {
   const organizationName = useSelector((state) => state.auth.organization);
-  const inputRefDepartment = useRef(null);
+  const organizationId = useSelector((state) => state.auth.organizationId);
+  // console.log(organizationId,"........................")
+  const authToken = useSelector((state) => state.auth.authToken);
   const [DepartmentLoading, setDepartmentLoading] = useState(true);
   const [departments, setDepartments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -58,12 +69,13 @@ function ManageAsset() {
   const [selectedPositionDepartment, setSelectedPositionDepartment] =
     useState("");
   const [position, setPosition] = useState("");
+  const [positions, setPositions] = useState("");
   const [positionRows, setPositionRows] = useState([]);
   const [positionLoading, setPositionLoading] = useState(true);
   const [isEditingPosition, setIsEditingPosition] = useState(false);
   const [oldPosition, setOldPosition] = useState(null);
   const [approvalChainLoading, setApprovalChainLoading] = useState(true);
-  const [approvalChains, setApprovalChains] = useState(""); // For Action
+  // const [approvalChains, setApprovalChains] = useState("");
   const [level1, setLevel1] = useState(""); // For Level-1
   const [level2, setLevel2] = useState(""); // For Level-2
   const [approvalChainRows, setApprovalChainRows] = useState([]);
@@ -71,15 +83,15 @@ function ManageAsset() {
     useState("");
   const [isEditMode, setIsEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
-
-  // New state variables for old values
   const [oldAction, setOldAction] = useState("");
   const [oldLevel1, setOldLevel1] = useState("");
   const [oldLevel2, setOldLevel2] = useState("");
-
+  const [selectedLevelDepartment, setSelectedLevelDepartment] = useState("");
+  const [positionsForApp, setPositionsForApp] = useState([]);
   //organization Data Add
   const [formData, setFormData] = useState({
     OrganizationName: "",
+    organizationId: "",
     organizationlogo: "",
     subtitlename: "",
     address: "",
@@ -99,6 +111,16 @@ function ManageAsset() {
   const [isEditOrganization, setIsEditOrganization] = useState(false);
   const [organiatioLoading, setOrganiationLoading] = useState(false);
   const [file, setFile] = useState(null);
+  // Options for the dropdown
+  // const actions = [
+  //   "User Registration",
+  //   "Well Setting",
+  //   "Node Configuration",
+  //   "Device Registration",
+  //   "Close Complain",
+  //   "Close Notification",
+  //   "Delete User",
+  // ];
 
   // Function to initiate Updating department
   const handleEditClick = (index) => {
@@ -106,7 +128,6 @@ function ManageAsset() {
     setIsEditing(true); // Set editing mode
     setEditingIndex(index); // Set index of the department being edited
   };
-
   //integration for add department and Update department
   const handleAddOrUpdateDepartment = async () => {
     const value = newDepartmentName.trim();
@@ -115,6 +136,10 @@ function ManageAsset() {
       return;
     }
     if (value) {
+      if (!authToken) {
+        toast.error("Unauthorized: No token provided");
+        return;
+      }
       try {
         const formData = {
           organizationName: organizationName,
@@ -123,7 +148,7 @@ function ManageAsset() {
           const oldDepartmentName = departments[editingIndex];
           formData.oldDepartmentName = oldDepartmentName;
           formData.newDepartmentName = value;
-          const result = await UpdateDepartment(formData);
+          const result = await UpdateDepartment(formData, authToken);
           if (result && result.success) {
             const updatedDepartments = [...departments];
             updatedDepartments[editingIndex] = value;
@@ -135,7 +160,7 @@ function ManageAsset() {
         } else {
           // Handle adding the department
           formData.departmentName = value;
-          const result = await addDepartment(formData);
+          const result = await addDepartment(formData, authToken);
           if (result && result.success) {
             setDepartments((prevDepartments) => [...prevDepartments, value]);
             toast.success(result.message || "Department added successfully");
@@ -158,20 +183,61 @@ function ManageAsset() {
     }
   };
 
+  // Delete Department
+  // const handleDeleteDepartment = async (departmentName) => {
+  //   if (!organizationName || !departmentName) {
+  //     toast.error("Organization name and department name are required");
+  //     return;
+  //   }
 
-// Delete Department
-const handleDeleteDepartment = async (departmentName) => {
-  if (!organizationName || !departmentName) {
+  //   try {
+  //     const response = await DeleteDepartment({
+  //       organizationName,
+  //       departmentName,
+  //     });
 
+  //     // Log the response for debugging
+  //     console.log("Delete Department Response:", response);
+
+  //     if (response && response.success) {
+  //       // Update the UI to remove the deleted department
+  //       setDepartments((prevDepartments) =>
+  //         prevDepartments.filter((dep) => dep !== departmentName)
+  //       );
+
+  //       // Optionally, also remove positions associated with this department from state
+  //       setPositionRows((prevRows) =>
+  //         prevRows.filter((row) => row.departmentName !== departmentName)
+  //       );
+
+  //       toast.success(`Department "${departmentName}" deleted successfully`);
+  //     } else {
+  //       toast.error(response.data.message || "Failed to delete department");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting department: ", error);
+  //     toast.error("Error: " + (error.response?.data?.message || error.message));
+  //   }
+  // };
+
+  const handleDeleteDepartment = async (departmentName) => {
+    if (!organizationName || !departmentName) {
       toast.error("Organization name and department name are required");
+      console.log(authToken, "auth is not defined ");
+      return;
+    }
+    if (!authToken) {
+      toast.error("Authorization token is missing");
       return;
     }
 
+    const formdata = {
+      organizationName,
+      departmentName,
+    };
+
     try {
-      const response = await DeleteDepartment({
-        organizationName,
-        departmentName,
-      });
+      const response = await DeleteDepartment(formdata, authToken);
 
       // Log the response for debugging
       console.log("Delete Department Response:", response);
@@ -197,10 +263,14 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
-
   const handlePositionSubmit = async () => {
     if (!selectedPositionDepartment || !position) {
       toast.error("Department and position are required");
+      return;
+    }
+
+    if (!authToken) {
+      toast.error("Authorization token is missing");
       return;
     }
 
@@ -215,7 +285,7 @@ const handleDeleteDepartment = async (departmentName) => {
       };
 
       if (isEditingPosition) {
-        result = await updatePosition(formData);
+        result = await updatePosition(formData, authToken);
         // Update the position in positionRows
         setPositionRows((prevRows) =>
           prevRows.map((row) => {
@@ -231,7 +301,7 @@ const handleDeleteDepartment = async (departmentName) => {
           })
         );
       } else {
-        result = await addPosition(formData);
+        result = await addPosition(formData, authToken);
         // Add the new position to positionRows
         setPositionRows((prevRows) => {
           const departmentExists = prevRows.some(
@@ -263,9 +333,9 @@ const handleDeleteDepartment = async (departmentName) => {
       if (result && result.success) {
         toast.success(
           result.message ||
-          (isEditingPosition
-            ? "Position updated successfully"
-            : "Position added successfully")
+            (isEditingPosition
+              ? "Position updated successfully"
+              : "Position added successfully")
         );
         setPosition(""); // Clear position input
         setSelectedPositionDepartment(""); // Clear department selection
@@ -295,13 +365,20 @@ const handleDeleteDepartment = async (departmentName) => {
       return;
     }
 
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      return;
+    }
+
+    const formdata = {
+      organizationName,
+      departmentName,
+      positionName,
+    };
+
     try {
       // Call the deletePosition API
-      const deletePositionResponse = await deletePosition({
-        organizationName,
-        departmentName,
-        positionName,
-      });
+      const deletePositionResponse = await deletePosition(formdata, authToken);
 
       if (deletePositionResponse && deletePositionResponse.success) {
         // Update the UI to remove the deleted position
@@ -332,18 +409,27 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
-  //ADD and Update approval chain on the base of department
+  // Reset form fields after submission
+  const resetForm = () => {
+    setSelectedApprovalDepartment("");
+    setApprovalChains("");
+    setLevel1("");
+    setLevel2("");
+    setIsEditMode(false);
+    setOldAction("");
+    setOldLevel1("");
+    setOldLevel2("");
+  };
+
   const handleApprovalChainSubmit = async () => {
-    // Validate required fields
-    if (!selectedApprovalDepartment || !approvalChains || !level1 || !level2) {
+    if (!selectedLevelDepartment || !level1 || !level2) {
       toast.error("All fields are required.");
       return;
     }
 
-    // Construct formData based on mode
     const formData = {
       organizationName,
-      departmentName: selectedApprovalDepartment,
+      departmentName: selectedLevelDepartment,
     };
 
     if (isEditMode) {
@@ -360,19 +446,54 @@ const handleDeleteDepartment = async (departmentName) => {
     }
 
     try {
-      let result;
-      if (isEditMode) {
-        result = await updateApprovalChain(formData);
-        console.log("Update Approval Chain Result:", result);
-        toast.success("Approval chain updated successfully!");
-      } else {
-        result = await addApprovalChain(formData);
-        console.log("Add Approval Chain Result:", result);
-        toast.success("Approval chain added successfully!");
-      }
+      const result = isEditMode
+        ? await updateApprovalChain(formData)
+        : await addApprovalChain(formData);
 
-      // Reset the form after submission
-      setSelectedApprovalDepartment("");
+      toast.success(
+        isEditMode
+          ? "Approval chain updated successfully!"
+          : "Approval chain added successfully!"
+      );
+
+      // Update state to reflect changes immediately
+      setApprovalChainRows((prevRows) => {
+        const updatedRows = [...prevRows];
+        const departmentIndex = updatedRows.findIndex(
+          (row) => row.departmentName === selectedLevelDepartment
+        );
+
+        if (isEditMode) {
+          // Update the existing chain in the department
+          updatedRows[departmentIndex].approvalChains = updatedRows[
+            departmentIndex
+          ].approvalChains.map((chain) =>
+            chain.action === oldAction &&
+            chain.level1 === oldLevel1 &&
+            chain.level2 === oldLevel2
+              ? { action: approvalChains, level1, level2 }
+              : chain
+          );
+        } else {
+          // Add the new chain to the department, or create a new department entry
+          if (departmentIndex > -1) {
+            updatedRows[departmentIndex].approvalChains.push({
+              action: approvalChains,
+              level1,
+              level2,
+            });
+          } else {
+            updatedRows.push({
+              departmentName: selectedLevelDepartment,
+              approvalChains: [{ action: approvalChains, level1, level2 }],
+            });
+          }
+        }
+        return updatedRows;
+      });
+
+      // Reset fields post-submit
+      setSelectedLevelDepartment("");
       setApprovalChains("");
       setLevel1("");
       setLevel2("");
@@ -388,14 +509,14 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
-  //update approvalchain
+  // Handle edit initiation for updating fields
   const handleApprovalChainEdit = (index, chainIndex) => {
     try {
       const approvalChainToEdit = approvalChainRows[index];
       const chain = approvalChainToEdit.approvalChains[chainIndex];
 
       // Set new values in the form fields
-      setSelectedApprovalDepartment(approvalChainToEdit.departmentName);
+      setSelectedLevelDepartment(approvalChainToEdit.departmentName);
       setApprovalChains(chain.action || "");
       setLevel1(chain.level1 || "");
       setLevel2(chain.level2 || "");
@@ -416,6 +537,31 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   };
 
+  const handleDepartmentChange = async (departmentName) => {
+    // setDepartmentLoading(true);
+    setDepartmentLoading(true);
+
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      setDepartmentLoading(false);
+      return;
+    }
+    try {
+      const response = await getPosition(
+        organizationName,
+        departmentName,
+        authToken  
+      );
+      if (response.success) {
+        setPositionsForApp(response.data);
+      } else {
+        setPositionsForApp([]);
+      }
+    } catch (error) {
+      console.error("Error fetching positions:", error);
+    }
+    setDepartmentLoading(false);
+  };
 
   //Delete Approval chain
   const handleDeleteApprovalChain = async (index) => {
@@ -486,6 +632,11 @@ const handleDeleteDepartment = async (departmentName) => {
     }
     // Fetch all Positions and their respective department
     setPositionLoading(true);
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      setDepartmentLoading(false);
+      return;
+    }
     try {
       const formData = { organizationName };
       const departmentResponse = await departmentDropdown(formData); // Fetch departments
@@ -498,7 +649,8 @@ const handleDeleteDepartment = async (departmentName) => {
           departmentList.map(async (department) => {
             const positionResponse = await getPosition(
               organizationName,
-              department
+              department,
+              authToken
             );
             return {
               departmentName: department,
@@ -572,7 +724,7 @@ const handleDeleteDepartment = async (departmentName) => {
       setLoading(true);
       const updatedFormData = { ...formData };
       const response = await organizationAddData(updatedFormData);
-      // console.log("jhdvchjdfjc", response);
+      console.log("jhdvchjdfjc", response);
       if (response.success) {
         toast.success(response.message || "Data saved successfully");
         setIsEditOrganization(true); // Switch to Update mode after saving
@@ -605,7 +757,6 @@ const handleDeleteDepartment = async (departmentName) => {
     }
   }, []);
 
-
   //HAndle Update Organization
   const handleUpdate = async () => {
     setLoading(true);
@@ -629,8 +780,10 @@ const handleDeleteDepartment = async (departmentName) => {
     setOrganiationLoading(true);
     try {
       const response = await getOrganizationData(organizationName);
+      console.log(response, "organizationdata  //////////////");
       setFormData({
         organizationName: response.data.organizationName || "",
+        organizationId: response.data.organizationId || "",
         organizationlogo: response.data.organizationlogo || "",
         subtitlename: response.data.subtitlename || "",
         address: response.data.address || "",
@@ -642,12 +795,13 @@ const handleDeleteDepartment = async (departmentName) => {
         fax: response.data.fax || "",
         email: response.data.email || "",
       });
+      // console.log(organizationlogo, "org logo...............");
       if (organizationlogo instanceof File) {
         formDataToUpdate.organizationlogo = organizationlogo;
       }
       setFormData(formDataToUpdate);
-      // console.log("hgdvdhc", data.organizationlogo);
-      // console.log("organization", response.data);
+      console.log("hgdvdhc..........", data.organizationlogo);
+      console.log("organization\\\\\\\\\\\\\\\\\\\\\\\\", response.data);
     } catch (error) {
       console.error("Error fetching organization data:", error);
     } finally {
@@ -658,7 +812,7 @@ const handleDeleteDepartment = async (departmentName) => {
   // -------------------Table------------------------
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#8C000B', // Customize background color
+      backgroundColor: "#8C000B", // Customize background color
       color: theme.palette.common.white,
       padding: "15px", // Increase padding
       height: "20px", // Set a specific height
@@ -690,20 +844,54 @@ const handleDeleteDepartment = async (departmentName) => {
     fetchOrganization();
   }, [organizationName]);
 
+  const [approvalChains, setApprovalChains] = useState("");
+  const [openModal, setOpenModal] = useState(false); // State to control modal visibility
+  const actions = ["User Registration", "Well Setting", "Add New Approval"]; // Options for the dropdown
+
+  // Open modal when "Add New Approval" is selected
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+    if (selectedValue === "Add New Approval") {
+      setOpenModal(true); // Open the modal
+    } else {
+      setApprovalChains(selectedValue); // Set selected value from dropdown
+    }
+  };
+
+  // Close modal
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  // Handle save of new approval
+  const handleSaveNewApproval = (newApproval) => {
+    setApprovalChains(newApproval); // Set the newly added approval chain
+    setOpenModal(false); // Close modal after saving
+  };
+
   return (
     <div>
       <Paper>
-        <Grid container gap={1} p={3}>
-          <IconButton>
-            <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
-          </IconButton>
-          <Typography variant="h4" mt={1}>
-            Organization: [ {organizationName ? organizationName : "N/A"} ]
-          </Typography>
+        <Grid container gap={1} p={2}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+            }}
+          >
+            <Box display="flex" gap={1}>
+              <IconButton>
+                <AssetsIcon sx={{ fontSize: 30, color: "green" }} />
+              </IconButton>
+              <Typography variant="h4" fontWeight={700} mt={1}>
+                {organizationName ? organizationName : "N/A"}
+              </Typography>
+              <Typography variant="h4" fontWeight={700} mt={1} ml={1}>[ID:{formData.organizationId}]</Typography>
+            </Box>
 
-
+          </Box>
           {/* Organization Logo (Top of Organization Name) */}
-          {isEditOrganization && formData.organizationlogo && (
+          {/* {isEditOrganization && formData.organizationlogo && (
             <Grid
               container
               justifyContent="flex-start"
@@ -729,19 +917,29 @@ const handleDeleteDepartment = async (departmentName) => {
                 }}
               />
             </Grid>
-          )}
-          <Grid container spacing={3}>
-            <Grid item md={10} sm={10} xs={12} lg={12} marginTop={4}>
-              <Grid container spacing={3}>
-                {/* Organization Logo Upload (Show only in Save mode) */}
-                {!isEditOrganization && (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    lg={12}
-                    sx={{ display: 'flex' }}
+          )} */}
+          <Grid container>
+            {/* <Grid container marginTop={3}> */}
+            <Grid container mt={3}>
+              {/* Organization Logo Upload (Show only in Save mode) */}
+              {!isEditOrganization && (
+                <Grid
+                  item
+                  lg={6}
+                  // bgcolor={"yellow"}
+                  // position='absolute'
+                  // width={"100%"}
+                  // sx={{ position:"absolute", transform:'translate(-50%,-50%)', top:'50%',left:"50%" }}
+                >
+                  <Box
+                    // bgcolor={'yellowgreen'}
+                    // width="450px"
+                    display="flex"
+                    alignItems="center"
+                    gap={2}
+                    position={"absolute"}
+                    right="1%"
+                    top="15%"
                   >
                     <Typography variant="h6">Organization Logo</Typography>
                     <span>
@@ -764,116 +962,136 @@ const handleDeleteDepartment = async (departmentName) => {
                         }}
                       />
                     )}
+                  </Box>
+                </Grid>
+              )}
+            </Grid>
+
+            <Grid container spacing={3} pr={5}>
+              {[
+                // { name: "organizationName", label: "Organization" },
+                { name: "subtitlename", label: "Display Name" },
+                { name: "address", label: "Address" },
+                { name: "city", label: "City" },
+                { name: "state", label: "State" },
+                { name: "country", label: "Country" },
+                { name: "pinCode", label: "Pin Code" },
+                { name: "phone", label: "Phone" },
+                { name: "fax", label: "Fax" },
+                { name: "email", label: "Email" },
+                { name: "business", label: "Business" },
+              ].map((field) => (
+                <Grid
+                  container
+                  key={field.name}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  xs={12}
+                  spacing={3}
+                  alignItems="center"
+                >
+                  {/* Label Section */}
+                  <Grid item lg={2} md={3} sm={3} xs={12}>
+                    <Typography variant="h6">{field.label}</Typography>
                   </Grid>
-                )}
-                {[
-                  { name: "organizationName", label: "Organization Display Name" },
-                  { name: "subtitlename", label: "Portal Display Name" },
-                  { name: "address", label: "Address" },
-                  { name: "city", label: "City" },
-                  { name: "state", label: "State" },
-                  { name: "country", label: "Country" },
-                  { name: "pinCode", label: "Pin Code" },
-                  { name: "phone", label: "Phone" },
-                  { name: "fax", label: "Fax" },
-                  { name: "email", label: "Email" },
-                ].map((field) => (
-                  <Grid item xs={12} sm={3} md={3} lg={12} key={field.name} spacing={3} sx={{ display: 'flex' }} gap={2} bgcolor={"red"}>
-                    <Typography variant="h6" sx={{ flexShrink: 0, width: '250px' }}>{field.label}</Typography>
-                    {field.name === "organizationName" ? (
-                      // Display organizationName as text instead of an input
-                      <Typography sx={{ flexShrink: 0, width: '250px', fontSize: '24px', fontWeight: 'bold' }}>
+
+                  {/* Input/Display Section */}
+                  {field.name === "organizationName" ? (
+                    <Grid item lg={6} md={9} sm={9} xs={12}>
+                      <Typography sx={{ fontSize: "20px" }}>
                         {formData[field.name]}
                       </Typography>
-                    ) : (
+                    </Grid>
+                  ) : (
+                    <Grid item lg={10} md={9} sm={9} xs={12}>
                       <TextField
                         type="text"
                         variant="outlined"
                         size="small"
-                        sx={{ height: '50%', width: '30%' }}
+                        fullWidth
                         name={field.name}
                         value={formData[field.name]}
                         onChange={handleInputChange}
-                        disabled={isEditOrganization} // Disable fields when editing
+                        disabled={isEditOrganization}
                       />
-                    )}
-                  </Grid>
-                ))}
+                    </Grid>
+                  )}
+                </Grid>
+              ))}
+
+              {/* Action Buttons */}
+              <Grid container mt={2} justifyContent={"end"}>
+                <Grid item>
+                  {isEditOrganization ? (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "blue",
+                        fontSize: "16px",
+                        width: "130px",
+                        "&:hover": { backgroundColor: "darkblue" },
+                      }}
+                      onClick={() => setIsEditOrganization(false)}
+                      disabled={loading}
+                    >
+                      {loading ? "UPDATING..." : "UPDATE"}
+                    </Button>
+                  ) : (
+                    <>
+                      <Button
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                          backgroundColor: "green",
+                          fontSize: "16px",
+                          width: "130px",
+                          "&:hover": { backgroundColor: "darkgreen" },
+                        }}
+                        onClick={handleSave}
+                        disabled={loading}
+                      >
+                        {loading ? "SAVING..." : "SAVE"}
+                      </Button>
+                    </>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            mt={2}
-            display={"flex"}
-            justifyContent={'end'}
-            gap={1}
-          >
-            <Box>
-              {isEditOrganization ? (
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "blue",
-                    "&:hover": { backgroundColor: "darkblue" },
-                    fontSize: "16px",
-                    width: "150px",
-                  }}
-                  onClick={() => setIsEditOrganization(false)}
-                  disabled={loading}
-                >
-                  {loading ? "UPDATING..." : "UPDATE"}
-                </Button>
-              ) : (
-                <div style={{ display: "flex", gap: "2rem" }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "green",
-                      "&:hover": { backgroundColor: "darkgreen" },
-                      fontSize: "16px",
-                      width: "150px",
-                    }}
-                    onClick={handleSave}
-                    disabled={loading}
-                  >
-                    {loading ? "SAVING..." : "SAVE"}
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "red",
-                      "&:hover": { backgroundColor: "darkred" },
-                      fontSize: "16px",
-                      width: "150px",
-                    }}
-                    onClick={handleCancel}
-                  >
-                    CANCEL
-                  </Button>
-                </div>
-              )}
-            </Box>
+
+            {/* </Grid> */}
           </Grid>
         </Grid>
       </Paper>
       {/* ------------Input textfield for table------------------- */}
-      <Card sx={{ my: 2 }}>
-        <CardContent>
-          <Grid container spacing={2} mt={0.1}>
-            {/* ------------------------ADD DEPARTMENT------------------------------ */}
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              gap={1}
-              display="flex"
-              flexDirection={"column"}
-            >
+
+      <Grid container mt={3}>
+        <Grid
+          container
+          sx={{ display: "flex", justifyContent: "space-between" }}
+        >
+          {/* ------------------------ADD DEPARTMENT------------------------------ */}
+          <Grid
+            item
+            lg={3.9}
+            md={6}
+            sm={8}
+            xs={12}
+            p={2}
+            gap={1}
+            display="flex"
+            flexDirection={"column"}
+            component={Paper}
+            boxShadow={4}
+          >
+            <Box display="flex" gap={1}>
+              <AssetsIcon />
               <Typography variant="h5">Add Department</Typography>
-              <Box display="flex" gap={1}>
+            </Box>
+            <Grid container spacing={1}>
+              <Grid item lg={9.5} md={10.5} sm={10} xs={12}>
                 <TextField
                   variant="outlined"
                   size="small"
@@ -882,35 +1100,40 @@ const handleDeleteDepartment = async (departmentName) => {
                   onChange={(e) => setNewDepartmentName(e.target.value)}
                   fullWidth
                 />
+              </Grid>
+              <Grid item lg={2.5} md={1} sm={1} xs={12}>
                 <Button
+                  fullWidth
                   variant="contained"
                   onClick={handleAddOrUpdateDepartment}
                   size="small"
                   sx={{
-                    backgroundColor: "green",
+                    // backgroundColor: "green",
+                    backgroundColor: isEditing ? "blue" : "green",
+                    fontSize: "16px",
+                    // width: "162px",
                     "&:hover": {
-                      backgroundColor: "darkgreen",
+                      backgroundColor: isEditing ? "darkorange" : "darkgreen",
                     },
                   }}
                 >
                   {isEditing ? "UPDATE" : "ADD"}{" "}
                 </Button>
-              </Box>
-              <Grid container>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
                 <TableContainer
-                  component={Paper}
-                  sx={{ maxHeight: 320, height: 600, overflowY: "auto"  }}
+                  sx={{ maxHeight: 320, height: 600, overflowY: "auto" }}
                 >
-                  <Table aria-label="customized table" stickyHeader >
-                    <TableHead>
-                      <TableRow sx={{msOverflowY:'scroll'}}>
-                        <StyledTableCell
-                          sx={{ fontSize: "18px", width: "15%" }}
-                        >
-                          Department
-                        </StyledTableCell>
-                      </TableRow>
-                    </TableHead>
+                  <Table aria-label="customized table" stickyHeader>
+                    {/* <TableHead>
+                    <TableRow sx={{ msOverflowY: "scroll" }}>
+                      <StyledTableCell sx={{ fontSize: "18px", width: "15%" }}>
+                        Department
+                      </StyledTableCell>
+                    </TableRow>
+                  </TableHead> */}
                     <TableBody>
                       {DepartmentLoading ? (
                         <TableRow>
@@ -920,22 +1143,22 @@ const handleDeleteDepartment = async (departmentName) => {
                         </TableRow>
                       ) : departments && departments.length > 0 ? (
                         departments.map((departmentName, index) => (
-                          <TableRow key={index}>
+                          <StyledTableRow key={index}>
                             <StyledTableCell>
                               <Box
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="space-between"
                               >
-                                <span>
-                                  {index + 1}. {departmentName}
+                                <span style={{ fontSize: "medium" }}>
+                                  {departmentName}
                                 </span>
                                 <Box display="flex">
                                   <IconButton
                                     onClick={() => handleEditClick(index)}
                                   >
                                     {" "}
-                                    <EditIcon fontSize="medium" />
+                                    <EditIcon fontSize="large" />
                                   </IconButton>{" "}
                                   <IconButton
                                     sx={{
@@ -947,16 +1170,23 @@ const handleDeleteDepartment = async (departmentName) => {
                                       handleDeleteDepartment(departmentName)
                                     }
                                   >
-                                    <DeleteForeverIcon fontSize="medium" />
+                                    <DeleteForeverIcon fontSize="large" />
                                   </IconButton>
                                 </Box>
                               </Box>
                             </StyledTableCell>
-                          </TableRow>
+                          </StyledTableRow>
                         ))
                       ) : (
                         <TableRow>
-                          <StyledTableCell colSpan={2}>
+                          <StyledTableCell
+                            style={{
+                              fontSize: "medium",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                            colSpan={2}
+                          >
                             No departments available
                           </StyledTableCell>
                         </TableRow>
@@ -966,59 +1196,63 @@ const handleDeleteDepartment = async (departmentName) => {
                 </TableContainer>
               </Grid>
             </Grid>
-            {/* ------------------------ADD POSITION------------------------------ */}
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              gap={1}
-              mt={2}
-              display="flex"
-              flexDirection={"column"}
-            >
-              <Typography variant="h5">Add Position</Typography>
-              <Box display="flex" gap={1}>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
-                  {DepartmentLoading ? (
-                    <div>Loading...</div>
-                  ) : (
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="demo-select-large-label">
-                        Department
-                      </InputLabel>
-                      <Select
-                        labelId="demo-select-small-label"
-                        id="demo-select-large"
-                        label="Department"
-                        value={selectedPositionDepartment}
-                        onChange={(e) =>
-                          setSelectedPositionDepartment(e.target.value)
-                        }
-                      >
-                        <MenuItem value="" disabled>
-                          Select a department
-                        </MenuItem>
-                        {departments && departments.length > 0 ? (
-                          departments.map((departmentName, index) => (
-                            <MenuItem
-                              key={departmentName}
-                              value={departmentName}
-                            >
-                              {index + 1}. {departmentName}
-                            </MenuItem>
-                          ))
-                        ) : (
-                          <MenuItem value="" disabled>
-                            No departments available
-                          </MenuItem>
-                        )}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Grid>
+          </Grid>
 
+          {/* ------------------------ADD POSITION------------------------------ */}
+          <Grid
+            item
+            lg={8}
+            md={5.9}
+            sm={8}
+            xs={12}
+            p={2}
+            gap={1}
+            display="flex"
+            flexDirection={"column"}
+            component={Paper}
+            boxShadow="4"
+          >
+            <Box display="flex" gap={1}>
+              <PersonIcon />
+              <Typography variant="h5">Add Position</Typography>
+            </Box>
+            <Grid container spacing={1}>
+              <Grid item lg={5.4} md={5.2} sm={5.5} xs={12}>
+                {DepartmentLoading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="demo-select-large-label">
+                      Department
+                    </InputLabel>
+                    <Select
+                      labelId="demo-select-small-label"
+                      id="demo-select-large"
+                      label="Department"
+                      value={selectedPositionDepartment}
+                      onChange={(e) =>
+                        setSelectedPositionDepartment(e.target.value)
+                      }
+                    >
+                      <MenuItem value="" disabled>
+                        Select a department
+                      </MenuItem>
+                      {departments && departments.length > 0 ? (
+                        departments.map((departmentName, index) => (
+                          <MenuItem key={departmentName} value={departmentName}>
+                            {departmentName}
+                          </MenuItem>
+                        ))
+                      ) : (
+                        <MenuItem value="" disabled>
+                          No departments available
+                        </MenuItem>
+                      )}
+                    </Select>
+                  </FormControl>
+                )}
+              </Grid>
+              <Grid item lg={5.4} md={5.3} sm={5.5} xs={12}>
                 <TextField
                   variant="outlined"
                   size="small"
@@ -1027,33 +1261,37 @@ const handleDeleteDepartment = async (departmentName) => {
                   onChange={(e) => setPosition(e.target.value)}
                   fullWidth
                 />
-
+              </Grid>
+              <Grid item lg={1.2} md={1} sm={1} xs={12}>
                 <Button
+                  fullWidth
                   variant="contained"
                   onClick={handlePositionSubmit}
                   size="small"
                   sx={{
                     backgroundColor: isEditingPosition ? "blue" : "green",
+                    fontSize: "16px",
+                    // width: "300px",
                     "&:hover": {
                       backgroundColor: isEditingPosition
-                        ? "darkblue"
+                        ? "darkorange"
                         : "darkgreen",
                     },
                   }}
                 >
                   {isEditingPosition ? "Update" : "Add"}
                 </Button>
-              </Box>
+              </Grid>
+            </Grid>
 
-              {/* Position Table */}
-              <Grid container>
-                <TableContainer
-                  component={Paper}
-                  sx={{ maxHeight: 320, height: 400, overflowY: 'scroll' }}
-                >
-                  <Table aria-label="customized table" stickyHeader>
-                    <TableHead>
-                      <TableRow sx={{overflowY: 'scroll' }}>
+            {/* Position Table */}
+            <Grid container>
+              <TableContainer
+                sx={{ maxHeight: 320, height: 400, overflowY: "scroll" }}
+              >
+                <Table aria-label="customized table" stickyHeader>
+                  {/* <TableHead>
+                      <TableRow sx={{ overflowY: "scroll" }}>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "15%" }}
                         >
@@ -1064,42 +1302,46 @@ const handleDeleteDepartment = async (departmentName) => {
                         >
                           Position
                         </StyledTableCell>
-
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {positionLoading ? (
-                        <TableRow>
-                          <StyledTableCell colSpan={2}>
-                            Loading...
+                    </TableHead> */}
+                  <TableBody>
+                    {positionLoading ? (
+                      <TableRow>
+                        <StyledTableCell colSpan={2}>
+                          Loading...
+                        </StyledTableCell>
+                      </TableRow>
+                    ) : departments && departments.length > 0 ? (
+                      positionRows.map((row, index) => (
+                        <StyledTableRow key={index}>
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            sx={{ width: "43%" }}
+                          >
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="space-between"
+                            >
+                              <span style={{ fontSize: "medium" }}>
+                                {row.departmentName}
+                              </span>
+                            </Box>
                           </StyledTableCell>
-                        </TableRow>
-                      ) : departments && departments.length > 0 ? (
-                        positionRows.map((row, index) => (
-                          <StyledTableRow key={index}>
-                            <StyledTableCell component="th" scope="row">
-                              <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="space-between"
-                              >
-                                <span>
-                                  {index + 1}. {row.departmentName}
-                                </span>
-                              </Box>
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              {row.positions.length > 0
-                                ? row.positions.map((position, posIndex) => (
+                          <StyledTableCell align="left" width={"52%"}>
+                            {row.positions.length > 0
+                              ? row.positions.map((position, posIndex) => (
                                   <div
                                     key={posIndex}
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
                                       justifyContent: "space-between",
+                                      fontSize: "medium",
                                     }}
                                   >
-                                    {posIndex + 1}. {position}
+                                    {position}
                                     <Box display="flex">
                                       <IconButton
                                         aria-label="edit"
@@ -1115,7 +1357,7 @@ const handleDeleteDepartment = async (departmentName) => {
                                           )
                                         }
                                       >
-                                        <EditIcon fontSize="small" />
+                                        <EditIcon fontSize="large" />
                                       </IconButton>
                                       <IconButton
                                         aria-label="delete"
@@ -1132,149 +1374,286 @@ const handleDeleteDepartment = async (departmentName) => {
                                           )
                                         }
                                       >
-                                        <DeleteForeverIcon fontSize="small" />
+                                        <DeleteForeverIcon fontSize="large" />
                                       </IconButton>
                                     </Box>
                                   </div>
                                 ))
-                                : "No positions available"}
-                            </StyledTableCell>
-                          </StyledTableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <StyledTableCell colSpan={2}>
-                            No Positions available
+                              : "No positions available"}
                           </StyledTableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid>
+                        </StyledTableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <StyledTableCell
+                          style={{
+                            fontSize: "large",
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                          colSpan={2}
+                        >
+                          No Positions available
+                        </StyledTableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
-            {/* ------------------------APPROVAL CHAIN------------------------------ */}
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              gap={1}
-              mt={2}
-              display="flex"
-              flexDirection="column"
-            >
-              <Typography variant="h5">Approval Chain</Typography>
-              <Box display="flex" gap={1}>
-                <Grid item lg={12} md={12} sm={12} xs={12}>
-                  {DepartmentLoading ? (
-                    <div>Loading...</div>
-                  ) : (
-                    <FormControl fullWidth size="small">
-                      <InputLabel id="department-select-label">
-                        Department
-                      </InputLabel>
-                      <Select
-                        labelId="department-select-label"
-                        id="department-select"
-                        label="Department"
-                        value={selectedApprovalDepartment}
-                        onChange={(e) =>
-                          setSelectedApprovalDepartment(e.target.value)
-                        }
-                      >
-                        <MenuItem value="" disabled>
-                          Select a department
-                        </MenuItem>
-                        {departments && departments.length > 0 ? (
-                          departments.map((departmentName, index) => (
-                            <MenuItem
-                              key={departmentName}
-                              value={departmentName}
-                            >
-                              {index + 1}. {departmentName}
-                            </MenuItem>
-                          ))
-                        ) : (
-                          <MenuItem value="" disabled>
-                            No departments available
-                          </MenuItem>
-                        )}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Grid>
+          </Grid>
+          {/* ------------------------APPROVAL CHAIN------------------------------ */}
+        </Grid>
+        <Grid
+          container
+          p={2}
+          gap={1}
+          mt={2}
+          display="flex"
+          flexDirection="column"
+          component={Paper}
+          boxShadow={4}
+        >
+          <Box display="flex" gap={1}>
+            <LinkIcon />
+            <Typography variant="h5">Approval Chain</Typography>
+          </Box>
+          <Grid container display="flex" spacing={1}>
+            <Grid item lg={2.3} mg={2.8} sm={5.5} xs={12}>
+              <FormControl fullWidth size="small" >
+                <InputLabel id="department-select-label  ">Approval List</InputLabel>
+                <Select
+                  value={approvalChains || ""} // Controlled value
+                  onChange={handleSelectChange} // Handle change
+                  label="Action"
+                  id="department-select  "
+                  labelId="department-select-label"
+                >
+                  {/* Render all options except "Add New Approval" */}
+                  {actions.slice(0, actions.length - 1).map((action, index) => (
+                    <MenuItem key={index} value={action}>
+                      {action}
+                    </MenuItem>
+                  ))}
 
-                <FormControl fullWidth size="small">
-                  <InputLabel id="demo-select-large-label">Action</InputLabel>
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-large"
-                    label="Action"
+                  {/* Render "Add New Approval" with Add Icon at the last position */}
+                  <MenuItem value="Add New Approval">
+                    Add New Approval
+                    <ListItemIcon sx={{ width: "70%", justifyContent: "end" }}>
+                      <AddIcon fontSize="small" />
+                    </ListItemIcon>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Modal for adding new approval */}
+              <Dialog open={openModal} onClose={handleCloseModal}>
+                <DialogTitle>Add New Approval</DialogTitle>
+                <DialogContent>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    label="Create New Approval"
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    onChange={(e) => setApprovalChains(e.target.value)} // Update the input value
                     value={approvalChains}
-                    onChange={(e) => setApprovalChains(e.target.value)}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseModal} color="primary">
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={() => handleSaveNewApproval(approvalChains)}
+                    color="primary"
+                    disabled={!approvalChains} // Disable if input is empty
+                  >
+                    Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+
+            <Grid item lg={2.3} mg={2.75} sm={5.5} xs={12}>
+              {DepartmentLoading ? (
+                <div>Loading...</div>
+              ) : (
+                <FormControl fullWidth size="small">
+                  <InputLabel id="department-select-label">
+                    Department
+                  </InputLabel>
+                  <Select
+                    labelId="department-select-label"
+                    id="department-select"
+                    label="Department"
+                    // value={selectedApprovalDepartment}
+
+                    // onChange={(e) =>
+                    //   setSelectedApprovalDepartment(e.target.value)
+                    // }
+                    value={selectedLevelDepartment}
+                    onChange={(e) => {
+                      setSelectedLevelDepartment(e.target.value);
+                      handleDepartmentChange(e.target.value); // Fetch positions when department changes
+                    }}
                   >
                     <MenuItem value="" disabled>
-                      Select an action
+                      Select a department
                     </MenuItem>
-                    {/* Assign value props to the MenuItems */}
-                    <MenuItem value="User Registration">
-                      User Registration
-                    </MenuItem>
-                    <MenuItem value="Well Setting">Well Setting</MenuItem>
-                    <MenuItem value="Node Configuration">
-                      Node Configuration
-                    </MenuItem>
-                    <MenuItem value="Device Registration">
-                      Device Registration
-                    </MenuItem>
-                    <MenuItem value="Close Complain">Close Complain</MenuItem>
-                    <MenuItem value="Close Notification">
-                      Close Notification
-                    </MenuItem>
-                    <MenuItem value="Delete User">Delete User</MenuItem>
+                    {departments && departments.length > 0 ? (
+                      departments.map((departmentName, index) => (
+                        <MenuItem key={departmentName} value={departmentName}>
+                          {departmentName}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem value="" disabled>
+                        No departments available
+                      </MenuItem>
+                    )}
                   </Select>
                 </FormControl>
-                <TextField
-                  variant="outlined"
-                  label="Level-1"
-                  size="small"
-                  value={level1}
-                  onChange={(e) => setLevel1(e.target.value)}
-                  fullWidth
-                />
-                <TextField
-                  variant="outlined"
-                  label="Level-2"
-                  size="small"
-                  value={level2}
-                  onChange={(e) => setLevel2(e.target.value)}
-                  fullWidth
-                />
-                <Button
-                  variant="contained"
-                  onClick={handleApprovalChainSubmit}
-                  size="small"
-                  sx={{
-                    backgroundColor: isEditMode ? "orange" : "green",
-                    "&:hover": {
-                      backgroundColor: isEditMode ? "darkorange" : "darkgreen",
-                    },
-                  }}
-                >
-                  {isEditMode ? "Update" : "Add"}
-                </Button>
-              </Box>
+              )}
+            </Grid>
 
-              {/* Approval Chain Table */}
-              <Grid container>
-                <TableContainer
-                  component={Paper}
-                  sx={{ maxHeight: 320, height: 400, overflow: "auto" }}
+            <Grid item lg={2.2} mg={2.8} sm={5.5} xs={12}>
+              <FormControl fullWidth size="small">
+                <InputLabel>Level 1</InputLabel>
+                <Select
+                  value={approvalChains || ""} // Controlled value
+                  onChange={handleSelectChange} // Handle change
+                  label="Action"
                 >
-                  <Table aria-label="customized table" stickyHeader>
-                    <TableHead>
+                  {/* Render all options except "Add New Approval" */}
+                  {/* {actions.slice(0, actions.length - 1).map((action, index) => (
+                    <MenuItem key={index} value={action}>
+                      {action}
+                    </MenuItem> */}
+                  {/* ))} */}
+                  {
+                    positionsForApp.map((value,index)=>(
+                      <MenuItem key={index} >
+                      {value}
+                    </MenuItem> 
+                    ))
+                  }
+
+                  {/* Render "Add New Approval" with Add Icon at the last position */}
+                  <MenuItem value="Add New Approval">
+                    Add New Approval
+                    <ListItemIcon sx={{ width: "70%", justifyContent: "end" }}>
+                      <AddIcon fontSize="small" />
+                    </ListItemIcon>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Modal for adding new approval */}
+              <Dialog open={openModal} onClose={handleCloseModal}>
+                <DialogTitle>Add New Approval</DialogTitle>
+                <DialogContent>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    label="Create New Approval"
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    onChange={(e) => setApprovalChains(e.target.value)} // Update the input value
+                    value={approvalChains}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseModal} color="primary">
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={() => handleSaveNewApproval(approvalChains)}
+                    color="primary"
+                    disabled={!approvalChains} // Disable if input is empty
+                  >
+                    Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Grid>
+
+            <Grid item lg={2.2} mg={2.75} sm={5.5} xs={12}>
+              <TextField
+                variant="outlined"
+                label="Department"
+                size="small"
+                select
+                value={level1}
+                onChange={(e) => setLevel1(e.target.value)}
+                fullWidth
+              >
+                {positionsForApp.length > 0 ? (
+                  positionsForApp.map((position, index) => (
+                    <MenuItem key={position} value={position}>
+                      {position}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value="" disabled>
+                    No positions available
+                  </MenuItem>
+                )}
+              </TextField>
+            </Grid>
+
+            <Grid item lg={2.2} mg={2.75} sm={5.5} xs={12}>
+              <TextField
+                variant="outlined"
+                label="Level-2"
+                size="small"
+                select
+                value={level2}
+                onChange={(e) => setLevel2(e.target.value)}
+                fullWidth
+              >
+                {positionsForApp.length > 0 ? (
+                  positionsForApp.map((position, index) => (
+                    <MenuItem key={position} value={position}>
+                      {position}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value="" disabled>
+                    No positions available
+                  </MenuItem>
+                )}
+              </TextField>
+            </Grid>
+
+            <Grid item lg={0.8} md={1} sm={1} xs={12}>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={handleApprovalChainSubmit}
+                size="small"
+                sx={{
+                  backgroundColor: isEditMode ? "blue" : "green",
+                  fontSize: "16px",
+                  "&:hover": {
+                    backgroundColor: isEditMode ? "darkorange" : "darkgreen",
+                  },
+                }}
+              >
+                {isEditMode ? "Update" : "Add"}
+              </Button>
+            </Grid>
+          </Grid>
+
+          {/* Approval Chain Table */}
+          <Grid container>
+            <TableContainer
+              sx={{ maxHeight: 320, height: 400, overflow: "auto" }}
+            >
+              <Table aria-label="customized table" stickyHeader>
+                {/* <TableHead>
                       <TableRow>
                         <StyledTableCell
                           sx={{ fontSize: "18px", width: "25%" }}
@@ -1303,88 +1682,99 @@ const handleDeleteDepartment = async (departmentName) => {
                           Actions
                         </StyledTableCell>
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {approvalChainLoading ? (
-                        <TableRow>
-                          <StyledTableCell colSpan={5}>
-                            Loading...
-                          </StyledTableCell>
-                        </TableRow>
-                      ) : approvalChainRows && approvalChainRows.length > 0 ? (
-                        approvalChainRows.map((row, index) => (
-                          <React.Fragment key={index}>
-                            {row.approvalChains?.map((chain, chainIndex) => (
-                              <StyledTableRow key={`${index}-${chainIndex}`}>
-                                {chainIndex === 0 && (
-                                  <StyledTableCell
-                                    rowSpan={row.approvalChains.length}
-                                  >
-                                    {index + 1}. {row.departmentName}
-                                  </StyledTableCell>
-                                )}
-                                <StyledTableCell>
-                                  {chainIndex + 1}. {chain.action || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell>
-                                  {chainIndex + 1}. {chain.level1 || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell>
-                                  {chainIndex + 1}. {chain.level2 || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                  <Box display="flex" justifyContent="center">
-                                    <IconButton
-                                      onClick={() =>
-                                        handleApprovalChainEdit(
-                                          index,
-                                          chainIndex
-                                        )
-                                      }
-                                    >
-                                      <EditIcon fontSize="medium" />
-                                    </IconButton>
-                                    <IconButton
-                                      onClick={() =>
-                                        handleDeleteApprovalChain(
-                                          index,
-                                          chainIndex
-                                        )
-                                      }
-                                      sx={{
-                                        color: "red",
-                                        "&:hover": { color: "darkred" },
-                                        marginLeft: "8px",
-                                      }}
-                                    >
-                                      <DeleteForeverIcon fontSize="medium" />
-                                    </IconButton>
-                                  </Box>
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            ))}
-                          </React.Fragment>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <StyledTableCell colSpan={5}>
-                            No Approval Chain Available
-                          </StyledTableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid>
-              {/*------------Button-------------- */}
-
-            </Grid>
-            <Grid container mt={2}>
-              <OrgMessageForward />
-            </Grid>
+                    </TableHead> */}
+                <TableBody>
+                  {approvalChainLoading ? (
+                    <TableRow>
+                      <StyledTableCell colSpan={5}>Loading...</StyledTableCell>
+                    </TableRow>
+                  ) : approvalChainRows && approvalChainRows.length > 0 ? (
+                    approvalChainRows.map((row, index) => (
+                      <React.Fragment key={index}>
+                        {row.approvalChains?.map((chain, chainIndex) => (
+                          <StyledTableRow key={`${index}-${chainIndex}`}>
+                            {chainIndex === 0 && (
+                              <StyledTableCell
+                                style={{ fontSize: "medium" }}
+                                rowSpan={row.approvalChains.length}
+                                width={"22%"}
+                              >
+                                {row.departmentName}
+                              </StyledTableCell>
+                            )}
+                            <StyledTableCell
+                              style={{ fontSize: "medium" }}
+                              width={"25%"}
+                            >
+                              {chain.action || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell
+                              style={{ fontSize: "medium" }}
+                              width={"21%"}
+                            >
+                              {chain.level1 || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell
+                              style={{ fontSize: "medium" }}
+                              width={"20%"}
+                            >
+                              {chain.level2 || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              style={{ fontSize: "medium" }}
+                            >
+                              <Box display="flex" justifyContent="center">
+                                <IconButton
+                                  onClick={() =>
+                                    handleApprovalChainEdit(index, chainIndex)
+                                  }
+                                >
+                                  <EditIcon fontSize="large" />
+                                </IconButton>
+                                <IconButton
+                                  onClick={() =>
+                                    handleDeleteApprovalChain(index, chainIndex)
+                                  }
+                                  sx={{
+                                    color: "red",
+                                    "&:hover": { color: "darkred" },
+                                    marginLeft: "8px",
+                                  }}
+                                >
+                                  <DeleteForeverIcon fontSize="large" />
+                                </IconButton>
+                              </Box>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        ))}
+                      </React.Fragment>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <StyledTableCell
+                        colSpan={5}
+                        style={{
+                          fontSize: "medium",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        No Approval Chain Available
+                      </StyledTableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
-        </CardContent>
-      </Card>
+          {/*------------Button-------------- */}
+        </Grid>
+
+        <Grid container mt={2}>
+          <OrgMessageForward />
+        </Grid>
+      </Grid>
     </div>
   );
 }

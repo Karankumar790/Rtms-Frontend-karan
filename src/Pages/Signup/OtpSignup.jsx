@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PageContainer from "../../components/HOC/PageContainer";
 import { Button, Grid, Paper, Typography } from "@mui/material";
@@ -13,6 +13,8 @@ import {
 
 export default function Otpsign() {
   const [emailOtpValue, setEmailOtpValue] = useState("");
+  const [timer, setTimers] = useState(200);
+  const [isExpired, setIsExpired] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -27,18 +29,31 @@ export default function Otpsign() {
     passportPhoto,
   } = useSelector((state) => state.registerAuth);
 
-  console.log(
-    "form value",
-    username,
-    email,
-    contactNumber,
-    employeeID,
-    organizationName,
-    department,
-    roleInRTMS,
-    idCardPhoto,
-    passportPhoto
-  );
+  // console.log(
+  //   "form value",
+  //   username,
+  //   email,
+  //   contactNumber,
+  //   employeeID,
+  //   organizationName,
+  //   department,
+  //   roleInRTMS,
+  //   idCardPhoto,
+  //   passportPhoto
+  // );
+
+  useEffect(() => {
+    if (timer > 0) {
+      const countdown = setInterval(() => {
+        setTimers((prevTimer) => prevTimer - 1);
+      }, 1000);
+
+      return () => clearInterval(countdown);
+    } else {
+      setIsExpired(true);
+      toast.error("OTP has expired. Please request a new one.");
+    }
+  }, [timer]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,6 +85,7 @@ export default function Otpsign() {
         toast.success(
           "Signup successful! Please wait for approval and check your status here."
         );
+        
 
         navigate("/popup");
 
@@ -84,10 +100,14 @@ export default function Otpsign() {
   };
 
   const handleResendOtp = async () => {
+    if (isExpired){
     try {
       const response = await sendOtpRegister({ email, contactNumber }); // Resend OTP API call
       if (response.success) {
         toast.success("OTP Resent Successfully!");
+        setEmailOtpValue("");
+        setTimers(200); // Reset timer to 5 minutes
+        setIsExpired(false);
       } else {
         toast.error("Failed to Resend OTP");
       }
@@ -95,7 +115,10 @@ export default function Otpsign() {
       console.error(error);
       toast.error("Error Resending OTP");
     }
-  };
+  }else {
+    toast.error("Please wait for the current OTP to expire.");
+  }
+};
 
   return (
     <PageContainer
@@ -114,7 +137,7 @@ export default function Otpsign() {
                     fontSize={"x-large"}
                     sx={{ color: "#0c1352", textAlign: "center" }}
                   >
-                    Enter OTP To Verify Mobile
+                    Enter OTP To Verify E-Mail
                   </Typography>
                 </Grid>
                 <Grid
@@ -130,6 +153,7 @@ export default function Otpsign() {
                     numInputs={6}
                     renderSeparator={<span>&nbsp; &nbsp;</span>}
                     renderInput={(props) => <input {...props} />}
+                    disabled={isExpired} // Disable input if expired
                   />
                 </Grid>
                 <Grid item xs={12} mt={3} textAlign="center">
@@ -139,6 +163,7 @@ export default function Otpsign() {
                     size="small"
                     sx={{ bgcolor: "#0c113b" }}
                     type="submit" // Changed to type="submit"
+                    disabled={isExpired}
                   >
                     <Typography>Submit</Typography>
                   </Button>
@@ -153,6 +178,14 @@ export default function Otpsign() {
                       Resend One-Time Password
                     </Typography>
                   </Link>
+                </Grid>
+                <Grid item xs={12} textAlign="center" py={1}>
+                  {isExpired && (
+                    <Typography color="red">OTP expired. Please resend.</Typography>
+                  )}
+                  <Typography color="gray">
+                    Time left: {Math.floor(timer / 60)}:{String(timer % 60).padStart(2, '0')}
+                  </Typography>
                 </Grid>
               </form>
             </Grid>

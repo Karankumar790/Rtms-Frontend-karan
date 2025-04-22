@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Button,
+  CircularProgress,
   Grid,
   IconButton,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -12,15 +15,14 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Box } from "@mui/system";
+import { Box, textAlign } from "@mui/system";
 import Network from "../../../../public/assets/NetworkWire2.jpg";
 import { Link } from "react-router-dom";
-import SettingsIcon from '@mui/icons-material/Settings';
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import StoreIcon from '@mui/icons-material/Store';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { deviceData } from "../../../apis/wellService";
+import { useSelector } from "react-redux";
+import PrintIcon from "@mui/icons-material/Print";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+  
 
 // ----------------------Table for Moblie------------------------------
 
@@ -74,11 +76,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     padding: "10px", // Increase padding
     height: "20px", // Set a specific height
-    fontSize: "16px", // Optionally adjust font size for header
+    fontSize: "18px", // Optionally adjust font size for header
     lineHeight: "1.5", // Adjust line height if needed
+    textAlign: "center",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
+    textAlign: "center",
+    padding: "10px",
   },
 }));
 
@@ -90,29 +95,41 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
+  padding: "5px",
 }));
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
-  // createData('3'),
-  // createData('4'),
-  // createData('5'),
-];
-
-
+const rows = [];
 
 function DeviceManage() {
+  const organizationName = useSelector((state) => state.auth.organization);
+  const [deviceDataList, setDeviceDataList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true); // Start loading
+        const data = await deviceData(organizationName);
+        if (data.success) {
+          setDeviceDataList(data.data);
+          localStorage.setItem("deviceDataList", JSON.stringify(data.data));
+        } else {
+          console.error("Failed to fetch data");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false); // End loading
+      }
+    };
+
+    fetchData();
+  }, [organizationName]);
+
   return (
     <div>
       <Grid
@@ -126,92 +143,107 @@ function DeviceManage() {
             <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">Node Manager</Typography>
+            <Typography variant="h4">Node Monitor</Typography>
           </Box>
         </Grid>
+        <Grid item sx={{ display: "flex", height: "3%", width: "3%" }}>
+          <PrintIcon
+            sx={{
+              height: "fit-content",
+              width: "fit-content",
+              color: "#F34E41",
+            }}
+          />
+        </Grid>
       </Grid>
-   
-   <Grid container display={'flex'} gap={9}>
-    <Box display={'flex'} gap={1}>
-      <TravelExploreIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography variant="h5">Browser</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <CloudUploadIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Upload</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <DownloadForOfflineIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Download</Typography>
-    </Box>
-    <Box display={'flex'} gap={1}>
-      <StoreIcon sx={{ color: 'black', fontSize: 30 }} />
-      <Typography  variant="h5">Firmware</Typography>
-    </Box>
-
-   </Grid>
-      {/* ------------------Table for Desktop--------------------------------- */}
       <Grid
-        container
-        mt={2}
-        md={12}
-        lg={12}
-        sm={5}
-        xs={4}
-        sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
+        item
+        lg={1}
+        display={"flex"}
+        justifyContent={"end"}
+        md={2}
+        sm={2}
+        xs={12}
       >
-        <TableContainer
-          component={Paper}
-          sx={{ maxHeight: 620, overflow: "auto" }}
+        <Link to="/dashboard/simulator">
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "green", // Change button color to green
+              "&:hover": {
+                backgroundColor: "darkgreen", // Optional: Change color on hover
+              },
+              fontSize: "16px",
+            }}
+            fullWidth
+          >
+            Simulator
+          </Button>
+        </Link>
+      </Grid>
+
+      {/* ------------------Table for Desktop--------------------------------- */}
+      <Paper sx={{ height: "75vh" }}>
+        <Grid
+          container
+          mt={2}
+          md={12}
+          lg={12}
+          sm={5}
+          xs={4}
+          sx={{ display: { sm: "none", xs: "none", md: "block", lg: "block" } }}
         >
-          <Table aria-label="customized table" stickyHeader>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Sr No.
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Device Name
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Cloud ID
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  LoRa ID
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Landmark
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Geolocation
-                </StyledTableCell>
-                <StyledTableCell sx={{ fontSize: "18px" }} align="left">
-                  Action
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
+               <Grid container display={"flex"}>
+        <Typography variant="h5" mt={2} sx={{ color: "darkgrey",mb:'10px'}}>
+          Real Time Engineering Data
+        </Typography>
+      </Grid>
+          <TableContainer
+            component={Paper}
+            sx={{ maxHeight: 620, overflow: "auto" }}
+          >
+            <Table aria-label="customized table" stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Client ID </StyledTableCell>
+                  <StyledTableCell>Node ID </StyledTableCell>
+
+                  <StyledTableCell>Network</StyledTableCell>
+                  <StyledTableCell>Time (s)</StyledTableCell>
+                  <StyledTableCell>Battery (%)</StyledTableCell>
+                  <StyledTableCell>Solar (V)</StyledTableCell>
+                  <StyledTableCell>Port1 </StyledTableCell>
+                  <StyledTableCell>Port2</StyledTableCell>
+                  <StyledTableCell>Port3</StyledTableCell>
+                  <StyledTableCell>Port4</StyledTableCell>
+                  <StyledTableCell>Port5</StyledTableCell>
+                  <StyledTableCell>View</StyledTableCell>
+                  {/* <StyledTableCell  >
+                    E
                   </StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left"></StyledTableCell>
-                  <StyledTableCell align="left">
-                  <Link to="/dashboard/virtual">
-                      <IconButton
-                        sx={{
-                          color: "grey",
-                          "&:hover": { color: "darkred" },
-                          marginRight: "5px",
-                        }}
-                      >
-                        <LocationOnIcon fontSize="large" />
-                      </IconButton>
-                    </Link>
+                  <StyledTableCell  >
+                    CRC
+                  </StyledTableCell>
+                  <StyledTableCell  >
+                    Action
+                  </StyledTableCell> */}
+                </TableRow>
+              </TableHead>
+              {/* <TableBody>
+                {deviceDataList?.map((device) => (
+                <StyledTableRow key={device._id} sx={{height: "80px"}}>
+                  <StyledTableCell component="th" scope="row">
+                    1
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{device.data.NodeAdd}</StyledTableCell>
+                  <StyledTableCell align="left"> {device.data.NodeAdd}</StyledTableCell>
+                  <StyledTableCell align="left"> {}</StyledTableCell>
+                  <StyledTableCell align="left"> 1 min</StyledTableCell>
+                  <StyledTableCell align="left"> {device.data.P1}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.P2}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.P3}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.Bat}</StyledTableCell>
+                  <StyledTableCell align="left">{device.data.Solar}
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     <Link to="/dashboard/Lora">
@@ -222,10 +254,71 @@ function DeviceManage() {
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+              </TableBody> */}
+              <TableBody>
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={11} align="center">
+                      <CircularProgress />
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  deviceDataList?.map((device) => (
+                    <StyledTableRow key={device._id}>
+                      <StyledTableCell component="th" scope="row">
+                        1
+                      </StyledTableCell>
+                      <StyledTableCell>{device.data.NodeAdd}</StyledTableCell>
+                      <StyledTableCell>{device.data.NodeAdd}</StyledTableCell>
+                      <StyledTableCell></StyledTableCell>
+                      <StyledTableCell>1 min</StyledTableCell>
+                      <StyledTableCell>{device.data.P1}</StyledTableCell>
+                      <StyledTableCell>{device.data.P2}</StyledTableCell>
+                      <StyledTableCell>{device.data.P3}</StyledTableCell>
+                      <StyledTableCell>{device.data.Bat}</StyledTableCell>
+                      <StyledTableCell>{device.data.Solar}</StyledTableCell>
+                      <StyledTableCell>{device.data.Solar}</StyledTableCell>
+                      <StyledTableCell sx={{ width: "10%" }}>
+                        <IconButton
+                          sx={{
+                            color: "grey",
+                            "&:hover": { color: "darkred" },
+                            marginRight: "5px",
+                          }}
+                        >
+                          <VisibilityIcon fontSize="large" />
+                        </IconButton>
+                      </StyledTableCell>
+                      {/* <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell>
+                      <StyledTableCell >
+                        {device.data.Solar}
+                      </StyledTableCell> */}
+                      {/* <StyledTableCell >
+                        <Link to="/dashboard/Lora">
+                          <IconButton
+                            sx={{
+                              color: "grey",
+                              "&:hover": { color: "darkred" },
+                              marginRight: "5px",
+                            }}
+                          >
+                            <SettingsIcon fontSize="large" />
+                          </IconButton>
+                        </Link>
+                      </StyledTableCell> */}
+                    </StyledTableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Paper>
 
       {/* ---------------------------Table for Moblie------------------------------------- */}
 

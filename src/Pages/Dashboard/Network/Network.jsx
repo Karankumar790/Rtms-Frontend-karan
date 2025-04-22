@@ -483,14 +483,7 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("1"),
-  createData("2"),
-  createData("3"),
-  createData("4"),
-  createData("5"),
-  createData("6"),
-  createData("7"),
-  createData("8"),
+ 
 ];
 
 
@@ -508,7 +501,7 @@ function DeviceManage() {
             <img src={Network} alt="img" height={"50px"} width={"50px"} />
           </Box>
           <Box>
-            <Typography variant="h4">IoT Gateway</Typography>
+            <Typography variant="h4">LoRa Gateway</Typography>
           </Box>
         </Grid>
       </Grid>

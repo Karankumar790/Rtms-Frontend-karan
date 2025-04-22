@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { IconButton } from "@mui/material";
-import { Box, } from "@mui/system";
-import { Link, } from "react-router-dom";
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 import HttpsIcon from "@mui/icons-material/Https";
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material";
 import EmailIcon from "@mui/icons-material/Email";
@@ -25,7 +25,7 @@ import Fade from "@mui/material/Fade";
 import OTPInput from "react-otp-input";
 import { createOrg, genrateOtpOrg } from "../../../apis/Service";
 import { toast } from "react-toastify";
-import PageContainer from "../../../components/HOC/PageContainer";
+// import PageContainer from "../../../components/HOC/PageContainer";
 
 export default function SuperAdmin() {
   const [formValues, setFormValues] = useState({
@@ -116,8 +116,8 @@ export default function SuperAdmin() {
   };
 
   return (
-    <div>
-      <PageContainer className="admin-bg-image ">
+    <div className="admin-bg-image " style={{height:'99vh'}}>
+      {/* <PageContainer > */}
         <FoxboroHeader />
         <Grid
           container
@@ -127,7 +127,7 @@ export default function SuperAdmin() {
           alignItems={"center"}
           p="5%"
         >
-          <Grid item padding={2} width={550} >
+          <Grid item padding={2} width={550}>
             <Card>
               <CardContent orientation="vertical">
                 <Grid item sx={{ textAlign: "center" }}>
@@ -287,12 +287,6 @@ export default function SuperAdmin() {
                           Create A New Customer
                         </Button>
                       </Grid>
-
-                      <Grid item mt={2} display={'flex'} justifyContent={'center'}>
-                        <Link to={'/checkOrganization'} style={{ textDecoration: 'none' }}>
-                          <Typography variant="h5" >Check Organization</Typography>
-                        </Link>
-                      </Grid>
                     </Grid>
                   </form>
                 </Grid>
@@ -381,10 +375,10 @@ export default function SuperAdmin() {
             </Fade>
           </Modal>
         </Grid>
-        <Grid >
+        <Grid>
           <FoxboroFooter />
         </Grid>
-      </PageContainer>
+      {/* </PageContainer> */}
     </div>
   );
 }
