@@ -778,7 +778,7 @@ const handleDeleteDepartment = async (departmentName) => {
                   { name: "fax", label: "Fax" },
                   { name: "email", label: "Email" },
                 ].map((field) => (
-                  <Grid item xs={12} sm={3} md={3} lg={12} key={field.name} spacing={3} sx={{ display: 'flex' }} gap={2}>
+                  <Grid item xs={12} sm={3} md={3} lg={12} key={field.name} spacing={3} sx={{ display: 'flex' }} gap={2} bgcolor={"red"}>
                     <Typography variant="h6" sx={{ flexShrink: 0, width: '250px' }}>{field.label}</Typography>
                     {field.name === "organizationName" ? (
                       // Display organizationName as text instead of an input
