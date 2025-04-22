@@ -37,6 +37,8 @@ function Signup() {
   const [departments, setDepartments] = useState("");
   const organizationName = useSelector((state) => state.auth.organization);
   const authToken = useSelector((state) => state.auth.authToken);
+  const [DepartmentLoading, setDepartmentLoading] = useState(true);
+  const [positionsForApp, setPositionsForApp] = useState([]);
   const [position, setPosition] = useState("");
   const [formValues, setFormValues] = useState({
     username: "",
@@ -74,6 +76,31 @@ function Signup() {
     }
   };
 
+  const handleDepartmentChange = async (departmentName) => {
+    // setDepartmentLoading(true);
+    setDepartmentLoading(true);
+
+    if (!authToken) {
+      toast.error("Authorization token is missing");
+      setDepartmentLoading(false);
+      return;
+    }
+    try {
+      const response = await getPosition(
+        organizationName,
+        departmentName,
+        authToken
+      );
+      if (response.success) {
+        setPositionsForApp(response.data);
+      } else {
+        setPositionsForApp([]);
+      }
+    } catch (error) {
+      console.error("Error fetching positions:", error);
+    }
+    setDepartmentLoading(false);
+  };
   // Integration for registration page
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -113,7 +140,7 @@ function Signup() {
     }
   };
 
-  //  
+  //
   // Fetch organizations only
   const fetchData = async () => {
     try {
@@ -171,24 +198,24 @@ function Signup() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchPositionData = async () => {
-      try {
-        const response = await getPosition();  // Your API call
-        if (Array.isArray(response.data)) {
-          console.log(response) 
-          setPosition(response.data);
-        } else {
-          setPosition([]);  // Set to empty array if data is not in array format
-        }
-      } catch (error) {
-        console.error("Error fetching positions:", error);
-        setPosition([]);  // Handle error by setting to empty array
-      }
-    };
-  
-    fetchPositionData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPositionData = async () => {
+  //     try {
+  //       const response = await getPosition(); // Your API call
+  //       if (Array.isArray(response.data)) {
+  //         console.log(response);
+  //         setPosition(response.data);
+  //       } else {
+  //         setPosition([]); // Set to empty array if data is not in array format
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching positions:", error);
+  //       setPosition([]); // Handle error by setting to empty array
+  //     }
+  //   };
+
+  //   fetchPositionData();
+  // }, []);
 
   return (
     <PageContainer className="bgImg" showheader="true" showfooter="true">
@@ -370,10 +397,8 @@ function Signup() {
 
                     {console.log(position)}
 
-
-
                     {/* Position dropdown  */}
-                    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                    {/* <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                       <AccountCircle sx={{ mr: 1 }} fontSize="large" />
                       <FormControl fullWidth variant="standard">
                         <InputLabel id="position-label">Position</InputLabel>
@@ -390,12 +415,12 @@ function Signup() {
                           }}
                           label="Position"
                         >
-                          {/* {position?.map((value, index) => (
+                          {positionsForApp?.map((value, index) => (
                             <MenuItem key={index}>{value}</MenuItem>
-                          ))} */}
+                          ))}
                         </Select>
                       </FormControl>
-                    </Box>
+                    </Box> */}
 
                     <Box
                       sx={{ display: "flex", flexDirection: "column", mb: 2 }}
